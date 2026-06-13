@@ -1,0 +1,184 @@
+vocab:
+  id: infisical-vocabulary
+  name: Infisical Vocabulary
+  description: >
+    Domain vocabulary for the Infisical secrets management platform, derived from the
+    Infisical REST API (OAS 3.0.3, 1273 paths, 1704 operations). Covers secrets
+    management, PKI, SSH, KMS, dynamic secrets, machine identities, and privileged
+    access management.
+  url: https://infisical.com/docs/api-reference/overview/introduction
+  version: "0.0.1"
+  created: 2026-06-13
+  modified: 2026-06-13
+
+tags:
+  - name: Secrets
+    description: Core secret CRUD — create, read, update, delete, and bulk-operations on secrets in projects.
+  - name: Folders
+    description: Hierarchical folder organisation within projects to namespace secrets.
+  - name: Secret Imports
+    description: Import secrets from one environment or path into another.
+  - name: Secret Rotations
+    description: Automated rotation policies that cycle secret values on a schedule.
+  - name: Secret Scanning
+    description: Detection and alerting for leaked or exposed secrets in source code.
+  - name: Secret Sharing
+    description: Secure, time-limited public share links for individual secret values.
+  - name: Secret Syncs
+    description: Push secrets to external destinations (AWS, GCP, Azure, Vercel, etc.).
+  - name: Dynamic Secrets
+    description: On-demand ephemeral credentials generated against external providers.
+  - name: Environments
+    description: Logical deployment environments (dev, staging, production) scoped per project.
+  - name: Projects
+    description: Organizational unit grouping environments, members, and secrets.
+  - name: Project Templates
+    description: Reusable project configuration blueprints.
+  - name: Organizations
+    description: Top-level tenant account grouping projects and members.
+  - name: Sub Organizations
+    description: Child organisations nested within a parent organisation.
+  - name: Identities
+    description: Machine identity principals used for non-human authentication.
+  - name: Universal Auth
+    description: Client-credential token exchange for machine identities.
+  - name: AWS Auth
+    description: AWS IAM-based machine identity authentication.
+  - name: Azure Auth
+    description: Azure managed-identity authentication.
+  - name: GCP Auth
+    description: Google Cloud service-account authentication.
+  - name: Kubernetes Auth
+    description: Kubernetes service-account token authentication.
+  - name: JWT Auth
+    description: Generic JWT-based machine identity authentication.
+  - name: OIDC Auth
+    description: OpenID Connect-based machine identity authentication.
+  - name: Token Auth
+    description: Static token-based machine identity authentication.
+  - name: LDAP Auth
+    description: LDAP directory-based authentication for machine identities.
+  - name: TLS Certificate Auth
+    description: Mutual-TLS certificate-based machine identity authentication.
+  - name: OCI Auth
+    description: Oracle Cloud Infrastructure instance-principal authentication.
+  - name: Alibaba Cloud Auth
+    description: Alibaba Cloud RAM role-based authentication.
+  - name: SPIFFE Auth
+    description: SPIFFE SVID-based workload identity authentication.
+  - name: SAML SSO
+    description: SAML 2.0 single sign-on configuration for human users.
+  - name: OIDC SSO
+    description: OIDC single sign-on configuration for human users.
+  - name: LDAP SSO
+    description: LDAP-backed single sign-on for human users.
+  - name: SCIM
+    description: SCIM 2.0 provisioning for automated user and group lifecycle management.
+  - name: Groups
+    description: Collections of users with shared project-level permissions.
+  - name: Organization Roles
+    description: Custom RBAC roles scoped to an organisation.
+  - name: Project Roles
+    description: Custom RBAC roles scoped to a project.
+  - name: Project Users
+    description: Human member assignments within a project.
+  - name: Project Groups
+    description: Group assignments within a project.
+  - name: Project Identities
+    description: Machine identity assignments within a project.
+  - name: Project Identity Membership
+    description: Fine-grained identity-to-project membership records.
+  - name: Organization Identity Membership
+    description: Fine-grained identity-to-organisation membership records.
+  - name: Identity Specific Privileges
+    description: Per-identity additional permissions beyond base role (v1).
+  - name: Identity Specific Privileges V2
+    description: Per-identity additional permissions beyond base role (v2, structured).
+  - name: KMS Keys
+    description: Customer-managed symmetric encryption keys in the Infisical KMS.
+  - name: KMS Encryption
+    description: Envelope encryption and decryption operations using KMS keys.
+  - name: KMS Signing
+    description: Asymmetric signing and verification operations using KMS keys.
+  - name: PKI Certificate Authorities
+    description: Internal CA hierarchy management — root and intermediate CAs.
+  - name: PKI Certificates
+    description: X.509 leaf certificate issuance, renewal, and revocation.
+  - name: PKI Certificate Templates
+    description: Reusable certificate issuance policies (SANs, TTL, key usage).
+  - name: PKI Certificate Profiles
+    description: Extended certificate profiles with advanced constraints.
+  - name: PKI Certificate Collections
+    description: Logical groupings of issued certificates for lifecycle tracking.
+  - name: PKI Certificate Policies
+    description: Governance policies governing which certificates can be issued.
+  - name: PKI ACME
+    description: ACME (RFC 8555) protocol support for automated certificate issuance.
+  - name: PKI Alerting
+    description: Expiry and revocation alert subscriptions.
+  - name: PKI Applications
+    description: Applications registered to consume PKI certificates.
+  - name: PKI Discovery
+    description: Passive discovery of certificates present in cloud infrastructure.
+  - name: PKI Installations
+    description: PKI agent installations on hosts for certificate delivery.
+  - name: PKI Signers
+    description: External signing integrations (e.g., HashiCorp Vault PKI).
+  - name: PKI Subscribers
+    description: Certificate subscriber entities that consume issued certificates.
+  - name: PKI Syncs
+    description: Synchronise certificate state to external stores (AWS ACM, etc.).
+  - name: SSH Certificate Authorities
+    description: SSH CA management for host and user certificate signing.
+  - name: SSH Certificate Templates
+    description: Policies governing SSH certificate issuance (principals, TTL).
+  - name: SSH Certificates
+    description: SSH user and host certificate issuance.
+  - name: SSH Hosts
+    description: Registered SSH hosts whose host keys are managed by Infisical.
+  - name: SSH Host Groups
+    description: Logical groups of SSH hosts for policy application.
+  - name: App Connections
+    description: Pre-configured connections to third-party services (AWS, GitHub, etc.).
+  - name: Integrations
+    description: Sync integrations to external secret stores (legacy integration API).
+  - name: Audit Logs
+    description: Immutable tamper-evident log of all actor events within a project or organisation.
+  - name: Event Subscriptions
+    description: Webhook subscriptions for audit-log events streamed in real time.
+  - name: Service Tokens
+    description: Legacy project-scoped service tokens (deprecated, prefer Universal Auth).
+
+concepts:
+  - term: secret
+    definition: A named key-value pair with optional metadata, stored encrypted at rest.
+  - term: environment
+    definition: A named deployment tier (e.g. dev, staging, prod) within a project.
+  - term: machine identity
+    definition: A non-human principal that authenticates via a supported auth method and receives a short-lived access token.
+  - term: access token
+    definition: A short-lived Bearer JWT issued to a machine identity after successful authentication.
+  - term: universal auth client secret
+    definition: A long-lived credential used in the Universal Auth client-credentials flow.
+  - term: dynamic secret
+    definition: Ephemeral credential generated on demand (e.g., a temporary database password) and auto-revoked after a TTL.
+  - term: secret rotation
+    definition: An automated policy that replaces a secret value on a schedule or trigger.
+  - term: folder
+    definition: A hierarchical path segment within a project environment used to organise secrets.
+  - term: secret import
+    definition: A directive that pulls secrets from a source path/environment into a target, with precedence ordering.
+  - term: secret sync
+    definition: A managed push of secrets to an external destination such as AWS Secrets Manager or GitHub Actions.
+  - term: KMS key
+    definition: A symmetric or asymmetric cryptographic key managed inside the Infisical KMS.
+  - term: certificate authority (CA)
+    definition: An internal CA root or intermediate that signs X.509 or SSH certificates.
+  - term: ACME
+    definition: Automated Certificate Management Environment protocol (RFC 8555) used for hands-free TLS certificate issuance.
+  - term: audit log
+    definition: An append-only record of an actor performing an action on a resource at a point in time.
+  - term: SCIM
+    definition: System for Cross-domain Identity Management; used to automate user provisioning from an IdP.
+  - term: app connection
+    definition: A stored, tested credential bundle for connecting Infisical to a third-party service.

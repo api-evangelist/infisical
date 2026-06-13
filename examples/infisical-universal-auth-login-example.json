@@ -1,0 +1,25 @@
+{
+  "title": "Universal Auth Login — Request Example",
+  "description": "Exchange a machine identity client ID and client secret for a short-lived access token using the Universal Auth method.",
+  "request": {
+    "method": "POST",
+    "url": "https://app.infisical.com/api/v1/auth/universal-auth/login",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "clientId": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
+      "clientSecret": "your-client-secret-here",
+      "organizationSlug": "my-org"
+    }
+  },
+  "response": {
+    "statusCode": 200,
+    "body": {
+      "accessToken": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...",
+      "expiresIn": 2592000,
+      "accessTokenMaxTTL": 2592000,
+      "tokenType": "Bearer"
+    }
+  }
+}

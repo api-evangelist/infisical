@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/infisical/json-schema/infisical-universal-auth-login.json",
+  "title": "Universal Auth Login",
+  "description": "JSON Schema for the Infisical universal auth login operation.",
+  "type": "object",
+  "properties": {
+    "clientId": {
+      "type": "string",
+      "description": "Your Machine Identity Client ID."
+    },
+    "clientSecret": {
+      "type": "string",
+      "description": "Your Machine Identity Client Secret."
+    },
+    "organizationSlug": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "description": "When set, this will scope the login session to the specified organization the machine identity has access to. If omitted, the session defaults to the organization where the machine identity was created in."
+    }
+  },
+  "required": [
+    "clientId",
+    "clientSecret"
+  ],
+  "additionalProperties": false
+}
