@@ -1,0 +1,107 @@
+name: Infisical FinOps
+description: >
+  FinOps Framework 1.0 FOCUS-aligned cost and usage model for Infisical
+  cloud-hosted secrets management. Costs are driven primarily by the number
+  of machine identities on paid plans. Self-hosted open-source deployments
+  incur infrastructure costs only.
+version: "1.0"
+url: https://infisical.com/pricing
+provider: Infisical
+currency: USD
+billing_model: per_identity_per_month
+cost_drivers:
+  - name: Machine Identities
+    description: >
+      The primary billing unit on the Pro plan. Each machine identity
+      (service account, CI/CD runner, developer, etc.) incurs a monthly
+      charge of $18.
+    unit: identity
+    price_per_unit: 18.00
+    billing_period: monthly
+    plans:
+      - Free
+      - Pro
+
+  - name: Self-Hosted Infrastructure
+    description: >
+      For self-hosted deployments, Infisical itself is free (MIT license).
+      Costs are entirely driven by the underlying infrastructure chosen
+      (VM instances, Kubernetes cluster, managed database, storage).
+    unit: infrastructure
+    price_per_unit: 0.00
+    billing_period: variable
+    notes: Compute, storage, and networking costs depend on hosting provider and configuration.
+
+  - name: Enterprise Contract
+    description: >
+      Enterprise plans are custom-priced based on identity count, required
+      SLA (99.99% uptime), infrastructure dedication, and premium support.
+    unit: custom
+    price_per_unit: custom
+    billing_period: annual
+    plans:
+      - Enterprise
+
+optimization_recommendations:
+  - recommendation: Audit unused machine identities
+    description: >
+      On the Pro plan, each identity costs $18/month. Regularly audit
+      and decommission unused or stale machine identities, service accounts,
+      and CI/CD runner identities to reduce monthly spend.
+    impact: high
+
+  - recommendation: Use temporary access provisioning
+    description: >
+      The Pro plan supports temporary access provisioning. Grant short-lived
+      access instead of permanent identities for one-off automation tasks to
+      avoid accumulating billable identities.
+    impact: medium
+
+  - recommendation: Evaluate self-hosting for high-identity workloads
+    description: >
+      For organizations with large numbers of identities, self-hosting
+      Infisical (MIT license, no per-identity fee) on cloud infrastructure
+      may reduce total cost compared to per-identity cloud pricing at scale.
+    impact: high
+
+  - recommendation: Start on Free plan for evaluation
+    description: >
+      The Free plan supports up to 5 identities, 3 projects, and 3 environments
+      at no cost. Use this tier to validate Infisical before committing to
+      Pro licensing.
+    impact: medium
+
+  - recommendation: Consolidate environments within projects
+    description: >
+      The Pro plan allows up to 12 environments per project. Design project
+      and environment structures to avoid unnecessary project sprawl, which
+      could complicate access management without reducing cost.
+    impact: low
+
+cost_allocation_tags:
+  - tag: project
+    description: Map Infisical project to cost center or application team
+  - tag: environment
+    description: Tag by environment (dev, staging, production) for chargeback
+  - tag: identity_type
+    description: Categorize identities by type (human, service, CI/CD) for usage reporting
+
+focus_alignment:
+  ChargeCategory: Usage
+  ServiceCategory: Security
+  ServiceName: Infisical Secrets Management
+  BillingCurrency: USD
+  PricingUnit: identity/month
+  SkuPriceDetails:
+    - SkuId: infisical-free
+      SkuName: Free Plan
+      UnitPrice: 0.00
+      Currency: USD
+    - SkuId: infisical-pro-per-identity
+      SkuName: Pro Plan Per Identity
+      UnitPrice: 18.00
+      Currency: USD
+    - SkuId: infisical-enterprise
+      SkuName: Enterprise Plan
+      UnitPrice: custom
+      Currency: USD

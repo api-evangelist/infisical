@@ -1,0 +1,84 @@
+name: Infisical API Rate Limits
+description: >
+  Rate limits for the Infisical Cloud REST API. Limits apply per machine
+  identity on cloud-hosted plans. Self-hosted deployments have no rate limits.
+  Enterprise customers may request custom rate limits.
+version: "0.1"
+url: https://infisical.com/docs/api-reference/overview/introduction
+notes:
+  - Rate limits apply to Infisical Cloud only; self-hosted instances are unlimited.
+  - Limits are enforced per machine identity (access token).
+  - Enterprise customers can request custom rate limits.
+  - HTTP 429 Too Many Requests is returned when limits are exceeded.
+plans:
+  - plan: Free
+    limits:
+      - type: Read Operations
+        description: GET and LIST requests (secrets, resources)
+        limit: 200
+        window: minute
+        unit: requests
+      - type: Write Operations
+        description: CREATE, UPDATE, and DELETE requests
+        limit: 90
+        window: minute
+        unit: requests
+      - type: Secret Operations
+        description: Combined secret read/write operations
+        limit: 120
+        window: minute
+        unit: requests
+      - type: Identity Creation
+        description: Machine identity creation requests
+        limit: 30
+        window: minute
+        unit: requests
+      - type: Project Creation
+        description: Project creation requests
+        limit: 30
+        window: minute
+        unit: requests
+
+  - plan: Pro
+    limits:
+      - type: Read Operations
+        description: GET and LIST requests (secrets, resources)
+        limit: 350
+        window: minute
+        unit: requests
+      - type: Write Operations
+        description: CREATE, UPDATE, and DELETE requests
+        limit: 200
+        window: minute
+        unit: requests
+      - type: Secret Operations
+        description: Combined secret read/write operations
+        limit: 300
+        window: minute
+        unit: requests
+      - type: Identity Creation
+        description: Machine identity creation requests
+        limit: 30
+        window: minute
+        unit: requests
+      - type: Project Creation
+        description: Project creation requests
+        limit: 30
+        window: minute
+        unit: requests
+
+  - plan: Enterprise
+    limits:
+      - type: All Operations
+        description: Custom rate limits negotiated with Infisical support
+        limit: custom
+        window: custom
+        unit: requests
+
+  - plan: Self-Hosted
+    limits:
+      - type: All Operations
+        description: No rate limits applied on self-hosted deployments
+        limit: unlimited
+        window: none
+        unit: requests
