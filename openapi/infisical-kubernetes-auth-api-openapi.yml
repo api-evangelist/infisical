@@ -1,0 +1,1267 @@
+openapi: 3.0.3
+info:
+  title: Infisical Admin Kubernetes Auth API
+  description: List of all available APIs that can be consumed
+  version: 0.0.1
+servers:
+- url: https://us.infisical.com
+  description: Production server (US)
+- url: https://eu.infisical.com
+  description: Production server (EU)
+- url: http://localhost:8080
+  description: Local server
+tags:
+- name: Kubernetes Auth
+paths:
+  /api/v1/auth/kubernetes-auth/login:
+    post:
+      operationId: loginWithKubernetesAuth
+      tags:
+      - Kubernetes Auth
+      description: Login with Kubernetes Auth for machine identity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                identityId:
+                  type: string
+                  description: The ID of the machine identity to login.
+                jwt:
+                  type: string
+                organizationSlug:
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                  description: When set, this will scope the login session to the specified organization the machine identity has access to. If omitted, the session defaults to the organization where the machine identity was created in.
+              required:
+              - identityId
+              - jwt
+              additionalProperties: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                  expiresIn:
+                    type: number
+                  accessTokenMaxTTL:
+                    type: number
+                  tokenType:
+                    type: string
+                    enum:
+                    - Bearer
+                required:
+                - accessToken
+                - expiresIn
+                - accessTokenMaxTTL
+                - tokenType
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v1/auth/kubernetes-auth/identities/{identityId}:
+    post:
+      operationId: attachKubernetesAuth
+      tags:
+      - Kubernetes Auth
+      description: Attach Kubernetes Auth configuration onto machine identity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                kubernetesHost:
+                  type: string
+                  minLength: 1
+                  nullable: true
+                  description: The host string, host:port pair, or URL to the base of the Kubernetes API server.
+                caCert:
+                  type: string
+                  description: The PEM-encoded CA certificate used to validate the Kubernetes API server's TLS certificate. Required when verifyTlsCertificate is true. Supplying a non-empty caCert always implies verifyTlsCertificate=true; explicitly setting the toggle to false in the same request is rejected.
+                verifyTlsCertificate:
+                  type: boolean
+                  description: Whether to verify the Kubernetes API server's TLS certificate against the configured CA certificate. When true, caCert is required. When false, the connection is still over HTTPS but the API server's certificate is not verified, and caCert must be empty. If omitted, defaults to true when caCert is provided and false otherwise.
+                tokenReviewerJwt:
+                  type: string
+                  description: Optional JWT token for accessing Kubernetes TokenReview API. If provided, this long-lived token will be used to validate service account tokens during authentication. If omitted, the client's own JWT will be used instead, which requires the client to have the system:auth-delegator ClusterRole binding.
+                tokenReviewMode:
+                  type: string
+                  enum:
+                  - api
+                  - gateway
+                  default: api
+                  description: 'The mode to use for token review. Must be one of: ''api'', ''gateway''. If gateway is selected, the gateway must be deployed in Kubernetes, and the gateway must have the system:auth-delegator ClusterRole binding.'
+                allowedNamespaces:
+                  type: string
+                  description: The comma-separated list of trusted namespaces that service accounts must belong to authenticate with Infisical.
+                allowedNames:
+                  type: string
+                  description: The comma-separated list of trusted service account names that can authenticate with Infisical.
+                allowedAudience:
+                  type: string
+                  description: The optional audience claim that the service account JWT token must have to authenticate with Infisical.
+                gatewayId:
+                  type: string
+                  format: uuid
+                  nullable: true
+                  description: The ID of the gateway to use when performing kubernetes API requests.
+                gatewayPoolId:
+                  type: string
+                  format: uuid
+                  nullable: true
+                accessTokenTrustedIps:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      ipAddress:
+                        type: string
+                    required:
+                    - ipAddress
+                    additionalProperties: false
+                  minItems: 1
+                  default:
+                  - ipAddress: 0.0.0.0/0
+                  - ipAddress: ::/0
+                  description: The IPs or CIDR ranges that access tokens can be used from.
+                accessTokenTTL:
+                  type: integer
+                  minimum: 0
+                  maximum: 315360000
+                  default: 2592000
+                  description: The lifetime for an access token in seconds.
+                accessTokenMaxTTL:
+                  type: integer
+                  minimum: 0
+                  maximum: 315360000
+                  default: 2592000
+                  description: The maximum lifetime for an access token in seconds.
+                accessTokenNumUsesLimit:
+                  type: integer
+                  minimum: 0
+                  default: 0
+                  description: The maximum number of times that an access token can be used.
+              required:
+              - kubernetesHost
+              - allowedNamespaces
+              - allowedNames
+              - allowedAudience
+              additionalProperties: false
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: identityId
+        required: true
+        description: The ID of the machine identity to attach the configuration onto.
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  identityKubernetesAuth:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      accessTokenTTL:
+                        type: number
+                        default: 7200
+                      accessTokenMaxTTL:
+                        type: number
+                        default: 7200
+                      accessTokenNumUsesLimit:
+                        type: number
+                        default: 0
+                      accessTokenTrustedIps: {}
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                      tokenReviewMode:
+                        type: string
+                        default: api
+                      identityId:
+                        type: string
+                        format: uuid
+                      kubernetesHost:
+                        type: string
+                        nullable: true
+                      allowedNamespaces:
+                        type: string
+                      allowedNames:
+                        type: string
+                      allowedAudience:
+                        type: string
+                      gatewayId:
+                        type: string
+                        format: uuid
+                        nullable: true
+                      gatewayPoolId:
+                        type: string
+                        format: uuid
+                        nullable: true
+                      verifyTlsCertificate:
+                        type: boolean
+                        default: false
+                      caCert:
+                        type: string
+                      tokenReviewerJwt:
+                        type: string
+                        nullable: true
+                    required:
+                    - id
+                    - createdAt
+                    - updatedAt
+                    - identityId
+                    - allowedNamespaces
+                    - allowedNames
+                    - allowedAudience
+                    - caCert
+                    additionalProperties: false
+                required:
+                - identityKubernetesAuth
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+    patch:
+      operationId: updateKubernetesAuth
+      tags:
+      - Kubernetes Auth
+      description: Update Kubernetes Auth configuration on machine identity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                kubernetesHost:
+                  type: string
+                  minLength: 1
+                  nullable: true
+                  description: The new host string, host:port pair, or URL to the base of the Kubernetes API server.
+                caCert:
+                  type: string
+                  description: The new PEM-encoded CA certificate used to validate the Kubernetes API server's TLS certificate. Required when verifyTlsCertificate is true. Supplying a non-empty caCert always implies verifyTlsCertificate=true; the update is rejected if the resulting effective state would store a CA together with verifyTlsCertificate=false.
+                verifyTlsCertificate:
+                  type: boolean
+                  description: Whether to verify the Kubernetes API server's TLS certificate against the configured CA certificate. When true, caCert is required. When false, the connection is still over HTTPS but the API server's certificate is not verified, and the resulting effective CA must be empty. If omitted while supplying a non-empty caCert in the same update, the toggle is auto-promoted to true; otherwise the stored value is preserved.
+                tokenReviewerJwt:
+                  type: string
+                  nullable: true
+                  description: Optional JWT token for accessing Kubernetes TokenReview API. If provided, this long-lived token will be used to validate service account tokens during authentication. If omitted, the client's own JWT will be used instead, which requires the client to have the system:auth-delegator ClusterRole binding.
+                tokenReviewMode:
+                  type: string
+                  enum:
+                  - api
+                  - gateway
+                  description: 'The mode to use for token review. Must be one of: ''api'', ''gateway''. If gateway is selected, the gateway must be deployed in Kubernetes, and the gateway must have the system:auth-delegator ClusterRole binding.'
+                allowedNamespaces:
+                  type: string
+                  description: The new comma-separated list of trusted namespaces that service accounts must belong to authenticate with Infisical.
+                allowedNames:
+                  type: string
+                  description: The new comma-separated list of trusted service account names that can authenticate with Infisical.
+                allowedAudience:
+                  type: string
+                  description: The new optional audience claim that the service account JWT token must have to authenticate with Infisical.
+                gatewayId:
+                  type: string
+                  format: uuid
+                  nullable: true
+                  description: The ID of the gateway to use when performing kubernetes API requests.
+                gatewayPoolId:
+                  type: string
+                  format: uuid
+                  nullable: true
+                accessTokenTrustedIps:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      ipAddress:
+                        type: string
+                    required:
+                    - ipAddress
+                    additionalProperties: false
+                  minItems: 1
+                  description: The new IPs or CIDR ranges that access tokens can be used from.
+                accessTokenTTL:
+                  type: integer
+                  minimum: 0
+                  maximum: 315360000
+                  description: The new lifetime for an acccess token in seconds.
+                accessTokenNumUsesLimit:
+                  type: integer
+                  minimum: 0
+                  description: The new maximum number of times that an access token can be used.
+                accessTokenMaxTTL:
+                  type: integer
+                  minimum: 0
+                  maximum: 315360000
+                  description: The new maximum lifetime for an acccess token in seconds.
+              additionalProperties: false
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: identityId
+        required: true
+        description: The ID of the machine identity to update the auth method for.
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  identityKubernetesAuth:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      accessTokenTTL:
+                        type: number
+                        default: 7200
+                      accessTokenMaxTTL:
+                        type: number
+                        default: 7200
+                      accessTokenNumUsesLimit:
+                        type: number
+                        default: 0
+                      accessTokenTrustedIps: {}
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                      tokenReviewMode:
+                        type: string
+                        default: api
+                      identityId:
+                        type: string
+                        format: uuid
+                      kubernetesHost:
+                        type: string
+                        nullable: true
+                      allowedNamespaces:
+                        type: string
+                      allowedNames:
+                        type: string
+                      allowedAudience:
+                        type: string
+                      gatewayId:
+                        type: string
+                        format: uuid
+                        nullable: true
+                      gatewayPoolId:
+                        type: string
+                        format: uuid
+                        nullable: true
+                      verifyTlsCertificate:
+                        type: boolean
+                        default: false
+                      caCert:
+                        type: string
+                      tokenReviewerJwt:
+                        type: string
+                        nullable: true
+                    required:
+                    - id
+                    - createdAt
+                    - updatedAt
+                    - identityId
+                    - allowedNamespaces
+                    - allowedNames
+                    - allowedAudience
+                    - caCert
+                    additionalProperties: false
+                required:
+                - identityKubernetesAuth
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+    get:
+      operationId: getKubernetesAuth
+      tags:
+      - Kubernetes Auth
+      description: Retrieve Kubernetes Auth configuration on machine identity
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: identityId
+        required: true
+        description: The ID of the machine identity to retrieve the auth method for.
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  identityKubernetesAuth:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      accessTokenTTL:
+                        type: number
+                        default: 7200
+                      accessTokenMaxTTL:
+                        type: number
+                        default: 7200
+                      accessTokenNumUsesLimit:
+                        type: number
+                        default: 0
+                      accessTokenTrustedIps: {}
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                      tokenReviewMode:
+                        type: string
+                        default: api
+                      identityId:
+                        type: string
+                        format: uuid
+                      kubernetesHost:
+                        type: string
+                        nullable: true
+                      allowedNamespaces:
+                        type: string
+                      allowedNames:
+                        type: string
+                      allowedAudience:
+                        type: string
+                      gatewayId:
+                        type: string
+                        format: uuid
+                        nullable: true
+                      gatewayPoolId:
+                        type: string
+                        format: uuid
+                        nullable: true
+                      verifyTlsCertificate:
+                        type: boolean
+                        default: false
+                      caCert:
+                        type: string
+                      tokenReviewerJwt:
+                        type: string
+                        nullable: true
+                    required:
+                    - id
+                    - createdAt
+                    - updatedAt
+                    - identityId
+                    - allowedNamespaces
+                    - allowedNames
+                    - allowedAudience
+                    - caCert
+                    additionalProperties: false
+                required:
+                - identityKubernetesAuth
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+    delete:
+      operationId: deleteKubernetesAuth
+      tags:
+      - Kubernetes Auth
+      description: Delete Kubernetes Auth configuration on machine identity
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: identityId
+        required: true
+        description: The ID of the machine identity to revoke the auth method for.
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  identityKubernetesAuth:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      accessTokenTTL:
+                        type: number
+                        default: 7200
+                      accessTokenMaxTTL:
+                        type: number
+                        default: 7200
+                      accessTokenNumUsesLimit:
+                        type: number
+                        default: 0
+                      accessTokenTrustedIps: {}
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                      tokenReviewMode:
+                        type: string
+                        default: api
+                      identityId:
+                        type: string
+                        format: uuid
+                      kubernetesHost:
+                        type: string
+                        nullable: true
+                      allowedNamespaces:
+                        type: string
+                      allowedNames:
+                        type: string
+                      allowedAudience:
+                        type: string
+                      gatewayId:
+                        type: string
+                        format: uuid
+                        nullable: true
+                      gatewayPoolId:
+                        type: string
+                        format: uuid
+                        nullable: true
+                      verifyTlsCertificate:
+                        type: boolean
+                        default: false
+                    required:
+                    - id
+                    - createdAt
+                    - updatedAt
+                    - identityId
+                    - allowedNamespaces
+                    - allowedNames
+                    - allowedAudience
+                    additionalProperties: false
+                required:
+                - identityKubernetesAuth
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: An access token in Infisical

@@ -1,0 +1,446 @@
+openapi: 3.0.3
+info:
+  title: Infisical Admin SSH Certificates API
+  description: List of all available APIs that can be consumed
+  version: 0.0.1
+servers:
+- url: https://us.infisical.com
+  description: Production server (US)
+- url: https://eu.infisical.com
+  description: Production server (EU)
+- url: http://localhost:8080
+  description: Local server
+tags:
+- name: SSH Certificates
+paths:
+  /api/v1/ssh/certificates/sign:
+    post:
+      tags:
+      - SSH Certificates
+      description: Sign SSH public key
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                certificateTemplateId:
+                  type: string
+                  minLength: 1
+                  description: The ID of the SSH certificate template to sign the SSH public key with.
+                publicKey:
+                  type: string
+                  description: The SSH public key to sign.
+                certType:
+                  type: string
+                  enum:
+                  - user
+                  - host
+                  default: user
+                  description: The type of certificate to issue. This can be one of user or host.
+                principals:
+                  type: array
+                  items:
+                    type: string
+                  minItems: 1
+                  description: The list of principals (usernames, hostnames) to include in the certificate.
+                ttl:
+                  type: string
+                  description: The time to live for the certificate such as 1m, 1h, 1d, ... If not specified, the default TTL for the template will be used.
+                keyId:
+                  type: string
+                  maxLength: 50
+                  description: The key ID to include in the certificate. If not specified, a default key ID will be generated.
+              required:
+              - certificateTemplateId
+              - publicKey
+              - principals
+              additionalProperties: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  serialNumber:
+                    type: string
+                    description: The serial number of the issued SSH certificate.
+                  signedKey:
+                    type: string
+                    description: The SSH certificate or signed SSH public key.
+                required:
+                - serialNumber
+                - signedKey
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v1/ssh/certificates/issue:
+    post:
+      tags:
+      - SSH Certificates
+      description: Issue SSH credentials (certificate + key)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                certificateTemplateId:
+                  type: string
+                  minLength: 1
+                  description: The ID of the SSH certificate template to issue the SSH credentials with.
+                keyAlgorithm:
+                  type: string
+                  enum:
+                  - RSA_2048
+                  - RSA_4096
+                  - EC_prime256v1
+                  - EC_secp384r1
+                  - ED25519
+                  default: ED25519
+                  description: The type of public key algorithm and size, in bits, of the key pair for the SSH CA.
+                certType:
+                  type: string
+                  enum:
+                  - user
+                  - host
+                  default: user
+                  description: The type of certificate to issue. This can be one of user or host.
+                principals:
+                  type: array
+                  items:
+                    type: string
+                  minItems: 1
+                  description: The list of principals (usernames, hostnames) to include in the certificate.
+                ttl:
+                  type: string
+                  description: The time to live for the certificate such as 1m, 1h, 1d, ... If not specified, the default TTL for the template will be used.
+                keyId:
+                  type: string
+                  maxLength: 50
+                  description: The key ID to include in the certificate. If not specified, a default key ID will be generated.
+              required:
+              - certificateTemplateId
+              - principals
+              additionalProperties: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  serialNumber:
+                    type: string
+                    description: The serial number of the issued SSH certificate.
+                  signedKey:
+                    type: string
+                    description: The SSH certificate or signed SSH public key.
+                  privateKey:
+                    type: string
+                    description: The private key corresponding to the issued SSH certificate.
+                  publicKey:
+                    type: string
+                    description: The public key of the issued SSH certificate.
+                  keyAlgorithm:
+                    type: string
+                    enum:
+                    - RSA_2048
+                    - RSA_4096
+                    - EC_prime256v1
+                    - EC_secp384r1
+                    - ED25519
+                    description: The type of public key algorithm and size, in bits, of the key pair for the SSH CA.
+                required:
+                - serialNumber
+                - signedKey
+                - privateKey
+                - publicKey
+                - keyAlgorithm
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: An access token in Infisical

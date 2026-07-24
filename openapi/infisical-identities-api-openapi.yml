@@ -1,0 +1,3496 @@
+openapi: 3.0.3
+info:
+  title: Infisical Admin Identities API
+  description: List of all available APIs that can be consumed
+  version: 0.0.1
+servers:
+- url: https://us.infisical.com
+  description: Production server (US)
+- url: https://eu.infisical.com
+  description: Production server (EU)
+- url: http://localhost:8080
+  description: Local server
+tags:
+- name: Identities
+paths:
+  /api/v1/projects/{projectId}/identities:
+    post:
+      operationId: createProjectMachineIdentity
+      tags:
+      - Identities
+      description: Create an identity in a project
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  description: The name of the identity to create.
+                hasDeleteProtection:
+                  type: boolean
+                  default: false
+                  description: Prevents deletion of the identity when enabled.
+                metadata:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      key:
+                        type: string
+                        minLength: 1
+                      value:
+                        type: string
+                        minLength: 1
+                    required:
+                    - key
+                    - value
+                    additionalProperties: false
+                  description: An optional array of key-value pairs to attach to the identity.
+              required:
+              - name
+              additionalProperties: false
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: projectId
+        required: true
+        description: The ID of the project to create the identity in
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  identity:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      name:
+                        type: string
+                      orgId:
+                        type: string
+                        format: uuid
+                      projectId:
+                        type: string
+                        nullable: true
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                      hasDeleteProtection:
+                        type: boolean
+                        default: false
+                      activeLockoutAuthMethods:
+                        type: array
+                        items:
+                          type: string
+                      authMethods:
+                        type: array
+                        items:
+                          type: string
+                      metadata:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            key:
+                              type: string
+                            value:
+                              type: string
+                            id:
+                              type: string
+                          required:
+                          - key
+                          - value
+                          - id
+                          additionalProperties: false
+                    required:
+                    - id
+                    - name
+                    - orgId
+                    - createdAt
+                    - updatedAt
+                    additionalProperties: false
+                required:
+                - identity
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+    get:
+      operationId: listProjectMachineIdentities
+      tags:
+      - Identities
+      description: List identities in a project
+      parameters:
+      - schema:
+          type: number
+          minimum: 0
+          default: 0
+        in: query
+        name: offset
+        required: false
+        description: The offset to start from. If you enter 10, it will start from the 10th identity.
+      - schema:
+          type: number
+          minimum: 1
+          maximum: 1000
+          default: 20
+        in: query
+        name: limit
+        required: false
+        description: The number of identities to return.
+      - schema:
+          type: string
+        in: query
+        name: search
+        required: false
+        description: The text string that identity names will be filtered by.
+      - schema:
+          type: string
+        in: path
+        name: projectId
+        required: true
+        description: The ID of the project
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  identities:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        name:
+                          type: string
+                        orgId:
+                          type: string
+                          format: uuid
+                        projectId:
+                          type: string
+                          nullable: true
+                        createdAt:
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          type: string
+                          format: date-time
+                        hasDeleteProtection:
+                          type: boolean
+                          default: false
+                        activeLockoutAuthMethods:
+                          type: array
+                          items:
+                            type: string
+                        authMethods:
+                          type: array
+                          items:
+                            type: string
+                        metadata:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              key:
+                                type: string
+                              value:
+                                type: string
+                              id:
+                                type: string
+                            required:
+                            - key
+                            - value
+                            - id
+                            additionalProperties: false
+                      required:
+                      - id
+                      - name
+                      - orgId
+                      - createdAt
+                      - updatedAt
+                      additionalProperties: false
+                  totalCount:
+                    type: number
+                required:
+                - identities
+                - totalCount
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v1/projects/{projectId}/identities/{identityId}:
+    patch:
+      operationId: updateProjectMachineIdentity
+      tags:
+      - Identities
+      description: Update an identity in a project
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  description: The new name of the identity.
+                hasDeleteProtection:
+                  type: boolean
+                  description: Prevents deletion of the identity when enabled.
+                metadata:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      key:
+                        type: string
+                        minLength: 1
+                      value:
+                        type: string
+                        minLength: 1
+                    required:
+                    - key
+                    - value
+                    additionalProperties: false
+                  description: An optional array of key-value pairs to attach to the identity.
+              additionalProperties: false
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: projectId
+        required: true
+        description: The ID of the project
+      - schema:
+          type: string
+        in: path
+        name: identityId
+        required: true
+        description: The ID of the machine identity to update.
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  identity:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      name:
+                        type: string
+                      orgId:
+                        type: string
+                        format: uuid
+                      projectId:
+                        type: string
+                        nullable: true
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                      hasDeleteProtection:
+                        type: boolean
+                        default: false
+                      activeLockoutAuthMethods:
+                        type: array
+                        items:
+                          type: string
+                      authMethods:
+                        type: array
+                        items:
+                          type: string
+                      metadata:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            key:
+                              type: string
+                            value:
+                              type: string
+                            id:
+                              type: string
+                          required:
+                          - key
+                          - value
+                          - id
+                          additionalProperties: false
+                    required:
+                    - id
+                    - name
+                    - orgId
+                    - createdAt
+                    - updatedAt
+                    additionalProperties: false
+                required:
+                - identity
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+    delete:
+      operationId: deleteProjectMachineIdentity
+      tags:
+      - Identities
+      description: Delete an identity from a project
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: projectId
+        required: true
+        description: The ID of the project
+      - schema:
+          type: string
+        in: path
+        name: identityId
+        required: true
+        description: The ID of the machine identity to delete.
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  identity:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      name:
+                        type: string
+                      orgId:
+                        type: string
+                        format: uuid
+                      projectId:
+                        type: string
+                        nullable: true
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                      hasDeleteProtection:
+                        type: boolean
+                        default: false
+                      activeLockoutAuthMethods:
+                        type: array
+                        items:
+                          type: string
+                      authMethods:
+                        type: array
+                        items:
+                          type: string
+                      metadata:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            key:
+                              type: string
+                            value:
+                              type: string
+                            id:
+                              type: string
+                          required:
+                          - key
+                          - value
+                          - id
+                          additionalProperties: false
+                    required:
+                    - id
+                    - name
+                    - orgId
+                    - createdAt
+                    - updatedAt
+                    additionalProperties: false
+                required:
+                - identity
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+    get:
+      operationId: getProjectMachineIdentityById
+      tags:
+      - Identities
+      description: Get an identity by ID in a project
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: projectId
+        required: true
+        description: The ID of the project
+      - schema:
+          type: string
+        in: path
+        name: identityId
+        required: true
+        description: The ID of the machine identity to get details.
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  identity:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      name:
+                        type: string
+                      orgId:
+                        type: string
+                        format: uuid
+                      projectId:
+                        type: string
+                        nullable: true
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                      hasDeleteProtection:
+                        type: boolean
+                        default: false
+                      activeLockoutAuthMethods:
+                        type: array
+                        items:
+                          type: string
+                      authMethods:
+                        type: array
+                        items:
+                          type: string
+                      metadata:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            key:
+                              type: string
+                            value:
+                              type: string
+                            id:
+                              type: string
+                          required:
+                          - key
+                          - value
+                          - id
+                          additionalProperties: false
+                    required:
+                    - id
+                    - name
+                    - orgId
+                    - createdAt
+                    - updatedAt
+                    additionalProperties: false
+                required:
+                - identity
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v1/identities:
+    post:
+      operationId: createMachineIdentity
+      tags:
+      - Identities
+      description: Create machine identity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The name of the identity to create.
+                organizationId:
+                  type: string
+                  description: The organization ID to which the identity belongs.
+                role:
+                  type: string
+                  minLength: 1
+                  default: no-access
+                  description: The role of the identity. Possible values are 'no-access', 'member', and 'admin'.
+                hasDeleteProtection:
+                  type: boolean
+                  default: false
+                  description: Prevents deletion of the identity when enabled.
+                metadata:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      key:
+                        type: string
+                        minLength: 1
+                      value:
+                        type: string
+                        minLength: 1
+                    required:
+                    - key
+                    - value
+                    additionalProperties: false
+              required:
+              - name
+              - organizationId
+              additionalProperties: false
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  identity:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      name:
+                        type: string
+                      authMethod:
+                        type: string
+                        nullable: true
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                      hasDeleteProtection:
+                        type: boolean
+                        default: false
+                      orgId:
+                        type: string
+                        format: uuid
+                      projectId:
+                        type: string
+                        nullable: true
+                      authMethods:
+                        type: array
+                        items:
+                          type: string
+                      metadata:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                            key:
+                              type: string
+                            value:
+                              type: string
+                          required:
+                          - id
+                          - key
+                          - value
+                          additionalProperties: false
+                    required:
+                    - id
+                    - name
+                    - createdAt
+                    - updatedAt
+                    - orgId
+                    - authMethods
+                    - metadata
+                    additionalProperties: false
+                required:
+                - identity
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+    get:
+      operationId: listMachineIdentities
+      tags:
+      - Identities
+      description: List machine identities
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: orgId
+        required: true
+        description: The ID of the organization to list identities.
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  identities:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        role:
+                          type: string
+                        roleId:
+                          type: string
+                          format: uuid
+                          nullable: true
+                        orgId:
+                          type: string
+                          format: uuid
+                        createdAt:
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          type: string
+                          format: date-time
+                        identityId:
+                          type: string
+                          format: uuid
+                        lastLoginAuthMethod:
+                          type: string
+                          nullable: true
+                        lastLoginTime:
+                          type: string
+                          format: date-time
+                          nullable: true
+                        customRole:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              format: uuid
+                            name:
+                              type: string
+                            slug:
+                              type: string
+                            permissions: {}
+                            description:
+                              type: string
+                              nullable: true
+                          required:
+                          - id
+                          - name
+                          - slug
+                          additionalProperties: false
+                        identity:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            id:
+                              type: string
+                              format: uuid
+                            hasDeleteProtection:
+                              type: boolean
+                              default: false
+                            authMethods:
+                              type: array
+                              items:
+                                type: string
+                          required:
+                          - name
+                          - id
+                          - authMethods
+                          additionalProperties: false
+                      required:
+                      - id
+                      - role
+                      - orgId
+                      - createdAt
+                      - updatedAt
+                      - identityId
+                      - identity
+                      additionalProperties: false
+                  totalCount:
+                    type: number
+                required:
+                - identities
+                - totalCount
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v1/identities/{identityId}:
+    patch:
+      operationId: updateMachineIdentity
+      tags:
+      - Identities
+      description: Update machine identity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The new name of the identity.
+                role:
+                  type: string
+                  minLength: 1
+                  description: The new role of the identity.
+                hasDeleteProtection:
+                  type: boolean
+                  description: Prevents deletion of the identity when enabled.
+                metadata:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      key:
+                        type: string
+                        minLength: 1
+                      value:
+                        type: string
+                        minLength: 1
+                    required:
+                    - key
+                    - value
+                    additionalProperties: false
+              additionalProperties: false
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: identityId
+        required: true
+        description: The ID of the machine identity to update.
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  identity:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      name:
+                        type: string
+                      authMethod:
+                        type: string
+                        nullable: true
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                      hasDeleteProtection:
+                        type: boolean
+                        default: false
+                      orgId:
+                        type: string
+                        format: uuid
+                      projectId:
+                        type: string
+                        nullable: true
+                      metadata:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                            key:
+                              type: string
+                            value:
+                              type: string
+                          required:
+                          - id
+                          - key
+                          - value
+                          additionalProperties: false
+                    required:
+                    - id
+                    - name
+                    - createdAt
+                    - updatedAt
+                    - orgId
+                    - metadata
+                    additionalProperties: false
+                required:
+                - identity
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+    delete:
+      operationId: deleteMachineIdentity
+      tags:
+      - Identities
+      description: Delete machine identity
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: identityId
+        required: true
+        description: The ID of the machine identity to delete.
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  identity:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      name:
+                        type: string
+                      authMethod:
+                        type: string
+                        nullable: true
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                      hasDeleteProtection:
+                        type: boolean
+                        default: false
+                      orgId:
+                        type: string
+                        format: uuid
+                      projectId:
+                        type: string
+                        nullable: true
+                    required:
+                    - id
+                    - name
+                    - createdAt
+                    - updatedAt
+                    - orgId
+                    additionalProperties: false
+                required:
+                - identity
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+    get:
+      operationId: getMachineIdentityById
+      tags:
+      - Identities
+      description: Get a machine identity by id
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: identityId
+        required: true
+        description: The ID of the machine identity to get details.
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  identity:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      role:
+                        type: string
+                      roleId:
+                        type: string
+                        format: uuid
+                        nullable: true
+                      orgId:
+                        type: string
+                        format: uuid
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                      identityId:
+                        type: string
+                        format: uuid
+                      lastLoginAuthMethod:
+                        type: string
+                        nullable: true
+                      lastLoginTime:
+                        type: string
+                        format: date-time
+                        nullable: true
+                      metadata:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              minLength: 1
+                            key:
+                              type: string
+                              minLength: 1
+                            value:
+                              type: string
+                              minLength: 1
+                          required:
+                          - id
+                          - key
+                          - value
+                          additionalProperties: false
+                      customRole:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                            format: uuid
+                          name:
+                            type: string
+                          slug:
+                            type: string
+                          permissions: {}
+                          description:
+                            type: string
+                            nullable: true
+                        required:
+                        - id
+                        - name
+                        - slug
+                        additionalProperties: false
+                      identity:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          id:
+                            type: string
+                            format: uuid
+                          hasDeleteProtection:
+                            type: boolean
+                            default: false
+                          orgId:
+                            type: string
+                            format: uuid
+                          authMethods:
+                            type: array
+                            items:
+                              type: string
+                          activeLockoutAuthMethods:
+                            type: array
+                            items:
+                              type: string
+                        required:
+                        - name
+                        - id
+                        - orgId
+                        - authMethods
+                        - activeLockoutAuthMethods
+                        additionalProperties: false
+                    required:
+                    - id
+                    - role
+                    - orgId
+                    - createdAt
+                    - updatedAt
+                    - identityId
+                    - identity
+                    additionalProperties: false
+                required:
+                - identity
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v1/identities/search:
+    post:
+      operationId: searchMachineIdentities
+      tags:
+      - Identities
+      description: Search machine identities
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                orderBy:
+                  type: string
+                  enum:
+                  - name
+                  - role
+                  default: name
+                  description: The column to order identities by.
+                orderDirection:
+                  type: string
+                  enum:
+                  - asc
+                  - desc
+                  default: asc
+                  description: The direction to order identities in.
+                limit:
+                  type: number
+                  maximum: 100
+                  default: 50
+                  description: The number of identities to return.
+                offset:
+                  type: number
+                  default: 0
+                  description: The offset to start from. If you enter 10, it will start from the 10th identity.
+                search:
+                  type: object
+                  properties:
+                    name:
+                      anyOf:
+                      - type: string
+                        maxLength: 255
+                      - type: object
+                        properties:
+                          $eq:
+                            type: string
+                            maxLength: 255
+                          $contains:
+                            type: string
+                            maxLength: 255
+                          $in:
+                            type: array
+                            items:
+                              type: string
+                              maxLength: 255
+                        additionalProperties: false
+                      description: The name of the identity to filter by.
+                    role:
+                      anyOf:
+                      - type: string
+                        maxLength: 255
+                      - type: object
+                        properties:
+                          $eq:
+                            type: string
+                            maxLength: 255
+                          $in:
+                            type: array
+                            items:
+                              type: string
+                              maxLength: 255
+                        additionalProperties: false
+                      description: The organizational role of the identity to filter by.
+                    $or:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            anyOf:
+                            - type: string
+                              maxLength: 255
+                            - type: object
+                              properties:
+                                $eq:
+                                  type: string
+                                  maxLength: 255
+                                $contains:
+                                  type: string
+                                  maxLength: 255
+                                $in:
+                                  type: array
+                                  items:
+                                    type: string
+                                    maxLength: 255
+                              additionalProperties: false
+                            description: The name of the identity to filter by.
+                          role:
+                            anyOf:
+                            - type: string
+                              maxLength: 255
+                            - type: object
+                              properties:
+                                $eq:
+                                  type: string
+                                  maxLength: 255
+                                $in:
+                                  type: array
+                                  items:
+                                    type: string
+                                    maxLength: 255
+                              additionalProperties: false
+                            description: The organizational role of the identity to filter by.
+                        additionalProperties: false
+                        description: The filters to apply to the search.
+                      maxItems: 5
+                  additionalProperties: false
+                  description: The filters to apply to the search.
+              additionalProperties: false
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  identities:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        role:
+                          type: string
+                        roleId:
+                          type: string
+                          format: uuid
+                          nullable: true
+                        orgId:
+                          type: string
+                          format: uuid
+                        createdAt:
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          type: string
+                          format: date-time
+                        identityId:
+                          type: string
+                          format: uuid
+                        lastLoginAuthMethod:
+                          type: string
+                          nullable: true
+                        lastLoginTime:
+                          type: string
+                          format: date-time
+                          nullable: true
+                        customRole:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              format: uuid
+                            name:
+                              type: string
+                            slug:
+                              type: string
+                            permissions: {}
+                            description:
+                              type: string
+                              nullable: true
+                          required:
+                          - id
+                          - name
+                          - slug
+                          additionalProperties: false
+                        identity:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            id:
+                              type: string
+                              format: uuid
+                            hasDeleteProtection:
+                              type: boolean
+                              default: false
+                            orgId:
+                              type: string
+                              format: uuid
+                            authMethods:
+                              type: array
+                              items:
+                                type: string
+                            activeLockoutAuthMethods:
+                              type: array
+                              items:
+                                type: string
+                          required:
+                          - name
+                          - id
+                          - orgId
+                          - authMethods
+                          - activeLockoutAuthMethods
+                          additionalProperties: false
+                      required:
+                      - id
+                      - role
+                      - orgId
+                      - createdAt
+                      - updatedAt
+                      - identityId
+                      - identity
+                      additionalProperties: false
+                  totalCount:
+                    type: number
+                required:
+                - identities
+                - totalCount
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v2/identities/search:
+    post:
+      operationId: searchMachineIdentitiesV2
+      tags:
+      - Identities
+      description: Search machine identities across organization and/or project scopes. Returns identities the caller has access to, each annotated with all roles assigned to that membership.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                scope:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                    - organization
+                    - project
+                  minItems: 1
+                  default:
+                  - organization
+                  description: Array of scopes to search across. Accepts 'organization' to include organization-level identities and/or 'project' to include identities from projects the caller has access to. Defaults to ['organization'].
+                orderBy:
+                  type: string
+                  enum:
+                  - name
+                  - role
+                  - lastLogin
+                  default: name
+                  description: The column to order identities by.
+                orderDirection:
+                  type: string
+                  enum:
+                  - asc
+                  - desc
+                  default: asc
+                  description: The direction to order identities in.
+                limit:
+                  type: integer
+                  minimum: 1
+                  maximum: 100
+                  default: 50
+                  description: The number of identities to return.
+                offset:
+                  type: integer
+                  minimum: 0
+                  default: 0
+                  description: The offset to start from. If you enter 10, it will start from the 10th identity.
+                search:
+                  type: object
+                  properties:
+                    name:
+                      anyOf:
+                      - type: string
+                        maxLength: 255
+                      - type: object
+                        properties:
+                          $eq:
+                            type: string
+                            maxLength: 255
+                          $contains:
+                            type: string
+                            maxLength: 255
+                          $in:
+                            type: array
+                            items:
+                              type: string
+                              maxLength: 255
+                        additionalProperties: false
+                      description: The name of the identity to filter by.
+                    role:
+                      anyOf:
+                      - type: string
+                        maxLength: 255
+                      - type: object
+                        properties:
+                          $eq:
+                            type: string
+                            maxLength: 255
+                          $contains:
+                            type: string
+                            maxLength: 255
+                          $in:
+                            type: array
+                            items:
+                              type: string
+                              maxLength: 255
+                        additionalProperties: false
+                      description: The role to filter by. Matches against the role name or slug for custom roles and the role type for predefined roles.
+                    $or:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            anyOf:
+                            - type: string
+                              maxLength: 255
+                            - type: object
+                              properties:
+                                $eq:
+                                  type: string
+                                  maxLength: 255
+                                $contains:
+                                  type: string
+                                  maxLength: 255
+                                $in:
+                                  type: array
+                                  items:
+                                    type: string
+                                    maxLength: 255
+                              additionalProperties: false
+                            description: The name of the identity to filter by.
+                          role:
+                            anyOf:
+                            - type: string
+                              maxLength: 255
+                            - type: object
+                              properties:
+                                $eq:
+                                  type: string
+                                  maxLength: 255
+                                $contains:
+                                  type: string
+                                  maxLength: 255
+                                $in:
+                                  type: array
+                                  items:
+                                    type: string
+                                    maxLength: 255
+                              additionalProperties: false
+                            description: The role to filter by. Matches against the role name or slug for custom roles and the role type for predefined roles.
+                        additionalProperties: false
+                        description: The filters to apply to the search.
+                      maxItems: 5
+                  additionalProperties: false
+                  description: The filters to apply to the search.
+              additionalProperties: false
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  identities:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        identityId:
+                          type: string
+                        scope:
+                          type: string
+                          enum:
+                          - organization
+                          - project
+                        orgId:
+                          type: string
+                        projectId:
+                          type: string
+                          nullable: true
+                        project:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                            name:
+                              type: string
+                            slug:
+                              type: string
+                            type:
+                              type: string
+                          required:
+                          - id
+                          - name
+                          - slug
+                          - type
+                          additionalProperties: false
+                          nullable: true
+                        createdAt:
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          type: string
+                          format: date-time
+                        lastLoginAuthMethod:
+                          type: string
+                          nullable: true
+                        lastLoginTime:
+                          type: string
+                          format: date-time
+                          nullable: true
+                        roles:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              role:
+                                type: string
+                              customRoleId:
+                                type: string
+                                nullable: true
+                              customRoleName:
+                                type: string
+                                nullable: true
+                              customRoleSlug:
+                                type: string
+                                nullable: true
+                              customRoleDescription:
+                                type: string
+                                nullable: true
+                              isTemporary:
+                                type: boolean
+                              temporaryMode:
+                                type: string
+                                nullable: true
+                              temporaryRange:
+                                type: string
+                                nullable: true
+                              temporaryAccessStartTime:
+                                type: string
+                                format: date-time
+                                nullable: true
+                              temporaryAccessEndTime:
+                                type: string
+                                format: date-time
+                                nullable: true
+                            required:
+                            - id
+                            - role
+                            - isTemporary
+                            additionalProperties: false
+                        identity:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            id:
+                              type: string
+                              format: uuid
+                            hasDeleteProtection:
+                              type: boolean
+                              default: false
+                            orgId:
+                              type: string
+                              format: uuid
+                            authMethods:
+                              type: array
+                              items:
+                                type: string
+                            activeLockoutAuthMethods:
+                              type: array
+                              items:
+                                type: string
+                          required:
+                          - name
+                          - id
+                          - orgId
+                          - authMethods
+                          - activeLockoutAuthMethods
+                          additionalProperties: false
+                      required:
+                      - id
+                      - identityId
+                      - scope
+                      - orgId
+                      - createdAt
+                      - updatedAt
+                      - roles
+                      - identity
+                      additionalProperties: false
+                  totalCount:
+                    type: number
+                required:
+                - identities
+                - totalCount
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v2/identities/search/count:
+    post:
+      operationId: countMachineIdentitiesV2
+      tags:
+      - Identities
+      description: Return per-scope counts of machine identities matching the given search filter. The response contains a count for every scope passed in the request body (zero when the caller has no access to that scope).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                scope:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                    - organization
+                    - project
+                  minItems: 1
+                  default:
+                  - organization
+                  - project
+                  description: Array of scopes to count. Returns a count for each requested scope. Accepts 'organization' and/or 'project'.
+                search:
+                  type: object
+                  properties:
+                    name:
+                      anyOf:
+                      - type: string
+                        maxLength: 255
+                      - type: object
+                        properties:
+                          $eq:
+                            type: string
+                            maxLength: 255
+                          $contains:
+                            type: string
+                            maxLength: 255
+                          $in:
+                            type: array
+                            items:
+                              type: string
+                              maxLength: 255
+                        additionalProperties: false
+                      description: The name of the identity to filter by.
+                    role:
+                      anyOf:
+                      - type: string
+                        maxLength: 255
+                      - type: object
+                        properties:
+                          $eq:
+                            type: string
+                            maxLength: 255
+                          $contains:
+                            type: string
+                            maxLength: 255
+                          $in:
+                            type: array
+                            items:
+                              type: string
+                              maxLength: 255
+                        additionalProperties: false
+                      description: The role to filter by. Matches against the role name or slug for custom roles and the role type for predefined roles.
+                    $or:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            anyOf:
+                            - type: string
+                              maxLength: 255
+                            - type: object
+                              properties:
+                                $eq:
+                                  type: string
+                                  maxLength: 255
+                                $contains:
+                                  type: string
+                                  maxLength: 255
+                                $in:
+                                  type: array
+                                  items:
+                                    type: string
+                                    maxLength: 255
+                              additionalProperties: false
+                            description: The name of the identity to filter by.
+                          role:
+                            anyOf:
+                            - type: string
+                              maxLength: 255
+                            - type: object
+                              properties:
+                                $eq:
+                                  type: string
+                                  maxLength: 255
+                                $contains:
+                                  type: string
+                                  maxLength: 255
+                                $in:
+                                  type: array
+                                  items:
+                                    type: string
+                                    maxLength: 255
+                              additionalProperties: false
+                            description: The role to filter by. Matches against the role name or slug for custom roles and the role type for predefined roles.
+                        additionalProperties: false
+                        description: The filters to apply when counting.
+                      maxItems: 5
+                  additionalProperties: false
+                  description: The filters to apply when counting.
+              additionalProperties: false
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  counts:
+                    type: object
+                    properties:
+                      organization:
+                        type: number
+                      project:
+                        type: number
+                    additionalProperties: false
+                required:
+                - counts
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: An access token in Infisical

@@ -1,0 +1,1056 @@
+openapi: 3.0.3
+info:
+  title: Infisical Admin Sub Organizations API
+  description: List of all available APIs that can be consumed
+  version: 0.0.1
+servers:
+- url: https://us.infisical.com
+  description: Production server (US)
+- url: https://eu.infisical.com
+  description: Production server (EU)
+- url: http://localhost:8080
+  description: Local server
+tags:
+- name: Sub Organizations
+paths:
+  /api/v1/sub-organizations:
+    post:
+      operationId: createSubOrganization
+      tags:
+      - Sub Organizations
+      description: Create a sub organization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                  description: The display name of the sub-organization (e.g. 'Acme Corp'). Allows alphanumeric characters, spaces, dashes, and underscores.
+                slug:
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                  description: Optional. The slug of the sub-organization (e.g. 'acme-corp'). If not provided, it is auto-generated from the name. Must be lowercase with hyphens only.
+              required:
+              - name
+              additionalProperties: false
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  organization:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      name:
+                        type: string
+                      slug:
+                        type: string
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                      parentOrgId:
+                        type: string
+                        format: uuid
+                        nullable: true
+                    required:
+                    - id
+                    - name
+                    - slug
+                    - createdAt
+                    - updatedAt
+                    additionalProperties: false
+                required:
+                - organization
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+    get:
+      operationId: listSubOrganizations
+      tags:
+      - Sub Organizations
+      description: List of sub organizations
+      parameters:
+      - schema:
+          type: number
+          minimum: 1
+          maximum: 1000
+          default: 25
+        in: query
+        name: limit
+        required: false
+        description: The number of sub organizations to return.
+      - schema:
+          type: number
+          minimum: 0
+          default: 0
+        in: query
+        name: offset
+        required: false
+        description: The offset to start from. If you enter 10, it will start from the 10th sub organization.
+      - schema:
+          type: string
+        in: query
+        name: search
+        required: false
+        description: Optional. Filter sub organizations by name (case-insensitive substring match).
+      - schema:
+          type: string
+          enum:
+          - name
+          default: name
+        in: query
+        name: orderBy
+        required: false
+        description: The field to order sub organizations by. Currently only 'name' is supported.
+      - schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          default: asc
+        in: query
+        name: orderDirection
+        required: false
+        description: The direction to order sub organizations. Either 'asc' or 'desc'.
+      - schema:
+          type: string
+          enum:
+          - 'true'
+          - 'false'
+        in: query
+        name: isAccessible
+        required: false
+        description: Filter to only return sub organizations that the actor has access to.
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  organizations:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        name:
+                          type: string
+                        slug:
+                          type: string
+                        createdAt:
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          type: string
+                          format: date-time
+                        parentOrgId:
+                          type: string
+                          format: uuid
+                          nullable: true
+                      required:
+                      - id
+                      - name
+                      - slug
+                      - createdAt
+                      - updatedAt
+                      additionalProperties: false
+                  totalCount:
+                    type: number
+                required:
+                - organizations
+                - totalCount
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v1/sub-organizations/{subOrgId}:
+    patch:
+      operationId: updateSubOrganization
+      tags:
+      - Sub Organizations
+      description: Update a sub organization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                  description: Optional. The display name of the sub-organization. When only the name is provided (no slug), both name and slug are updated.
+                slug:
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                  description: Optional. The slug of the sub-organization. Can be updated independently when both name and slug are provided.
+              additionalProperties: false
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: subOrgId
+        required: true
+        description: The id of the sub organization to update.
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  organization:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      name:
+                        type: string
+                      slug:
+                        type: string
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                      parentOrgId:
+                        type: string
+                        format: uuid
+                        nullable: true
+                    required:
+                    - id
+                    - name
+                    - slug
+                    - createdAt
+                    - updatedAt
+                    additionalProperties: false
+                required:
+                - organization
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+    delete:
+      operationId: deleteSubOrganization
+      tags:
+      - Sub Organizations
+      description: Delete a sub organization
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: subOrgId
+        required: true
+        description: The id of the sub organization to delete.
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  organization:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      name:
+                        type: string
+                      slug:
+                        type: string
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                      parentOrgId:
+                        type: string
+                        format: uuid
+                        nullable: true
+                    required:
+                    - id
+                    - name
+                    - slug
+                    - createdAt
+                    - updatedAt
+                    additionalProperties: false
+                required:
+                - organization
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v1/sub-organizations/{subOrgId}/memberships:
+    post:
+      operationId: createSubOrganizationMembership
+      tags:
+      - Sub Organizations
+      description: Join a sub organization
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: subOrgId
+        required: true
+        description: The id of the sub organization to create a membership in.
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  organization:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      name:
+                        type: string
+                      slug:
+                        type: string
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                      parentOrgId:
+                        type: string
+                        format: uuid
+                        nullable: true
+                    required:
+                    - id
+                    - name
+                    - slug
+                    - createdAt
+                    - updatedAt
+                    additionalProperties: false
+                required:
+                - organization
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: An access token in Infisical

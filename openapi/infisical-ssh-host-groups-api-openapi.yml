@@ -1,0 +1,1910 @@
+openapi: 3.0.3
+info:
+  title: Infisical Admin SSH Host Groups API
+  description: List of all available APIs that can be consumed
+  version: 0.0.1
+servers:
+- url: https://us.infisical.com
+  description: Production server (US)
+- url: https://eu.infisical.com
+  description: Production server (EU)
+- url: http://localhost:8080
+  description: Local server
+tags:
+- name: SSH Host Groups
+paths:
+  /api/v1/ssh/host-groups/{sshHostGroupId}:
+    get:
+      tags:
+      - SSH Host Groups
+      description: Get SSH Host Group
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: sshHostGroupId
+        required: true
+        description: The ID of the SSH host group to get.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  projectId:
+                    type: string
+                  name:
+                    type: string
+                  loginMappings:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        loginUser:
+                          type: string
+                        allowedPrincipals:
+                          type: object
+                          properties:
+                            usernames:
+                              type: array
+                              items:
+                                type: string
+                            groups:
+                              type: array
+                              items:
+                                type: string
+                          additionalProperties: false
+                      required:
+                      - loginUser
+                      - allowedPrincipals
+                      additionalProperties: false
+                required:
+                - id
+                - projectId
+                - name
+                - loginMappings
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+    patch:
+      tags:
+      - SSH Host Groups
+      description: Update SSH Host Group
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                  description: The name of the SSH host group to update to.
+                loginMappings:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      loginUser:
+                        type: string
+                      allowedPrincipals:
+                        type: object
+                        properties:
+                          usernames:
+                            type: array
+                            items:
+                              type: string
+                          groups:
+                            type: array
+                            items:
+                              type: string
+                        additionalProperties: false
+                    required:
+                    - loginUser
+                    - allowedPrincipals
+                    additionalProperties: false
+                  description: A list of default login mappings to include on each host in the SSH host group. Each login mapping contains a login user and a list of corresponding allowed principals being usernames of users in the Infisical SSH project.
+              additionalProperties: false
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: sshHostGroupId
+        required: true
+        description: The ID of the SSH host group to update.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  projectId:
+                    type: string
+                  name:
+                    type: string
+                  loginMappings:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        loginUser:
+                          type: string
+                        allowedPrincipals:
+                          type: object
+                          properties:
+                            usernames:
+                              type: array
+                              items:
+                                type: string
+                            groups:
+                              type: array
+                              items:
+                                type: string
+                          additionalProperties: false
+                      required:
+                      - loginUser
+                      - allowedPrincipals
+                      additionalProperties: false
+                required:
+                - id
+                - projectId
+                - name
+                - loginMappings
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+    delete:
+      tags:
+      - SSH Host Groups
+      description: Delete SSH Host Group
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: sshHostGroupId
+        required: true
+        description: The ID of the SSH host group to delete.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  projectId:
+                    type: string
+                  name:
+                    type: string
+                  loginMappings:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        loginUser:
+                          type: string
+                        allowedPrincipals:
+                          type: object
+                          properties:
+                            usernames:
+                              type: array
+                              items:
+                                type: string
+                            groups:
+                              type: array
+                              items:
+                                type: string
+                          additionalProperties: false
+                      required:
+                      - loginUser
+                      - allowedPrincipals
+                      additionalProperties: false
+                required:
+                - id
+                - projectId
+                - name
+                - loginMappings
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v1/ssh/host-groups:
+    post:
+      tags:
+      - SSH Host Groups
+      description: Create SSH Host Group
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                projectId:
+                  type: string
+                  description: The ID of the project to create the SSH host group in.
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                  description: The name of the SSH host group.
+                loginMappings:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      loginUser:
+                        type: string
+                      allowedPrincipals:
+                        type: object
+                        properties:
+                          usernames:
+                            type: array
+                            items:
+                              type: string
+                          groups:
+                            type: array
+                            items:
+                              type: string
+                        additionalProperties: false
+                    required:
+                    - loginUser
+                    - allowedPrincipals
+                    additionalProperties: false
+                  default: []
+                  description: A list of default login mappings to include on each host in the SSH host group. Each login mapping contains a login user and a list of corresponding allowed principals being usernames of users in the Infisical SSH project.
+              required:
+              - projectId
+              - name
+              additionalProperties: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  projectId:
+                    type: string
+                  name:
+                    type: string
+                  loginMappings:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        loginUser:
+                          type: string
+                        allowedPrincipals:
+                          type: object
+                          properties:
+                            usernames:
+                              type: array
+                              items:
+                                type: string
+                            groups:
+                              type: array
+                              items:
+                                type: string
+                          additionalProperties: false
+                      required:
+                      - loginUser
+                      - allowedPrincipals
+                      additionalProperties: false
+                required:
+                - id
+                - projectId
+                - name
+                - loginMappings
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v1/ssh/host-groups/{sshHostGroupId}/hosts:
+    get:
+      tags:
+      - SSH Host Groups
+      description: Get SSH Hosts in a Host Group
+      parameters:
+      - schema:
+          type: string
+          enum:
+          - group-members
+          - non-group-members
+        in: query
+        name: filter
+        required: false
+        description: The filter to apply to the SSH hosts in the SSH host group.
+      - schema:
+          type: string
+        in: path
+        name: sshHostGroupId
+        required: true
+        description: The ID of the SSH host group to get.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  hosts:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        hostname:
+                          type: string
+                        alias:
+                          type: string
+                          nullable: true
+                        isPartOfGroup:
+                          type: boolean
+                        joinedGroupAt:
+                          type: string
+                          format: date-time
+                          nullable: true
+                      required:
+                      - id
+                      - hostname
+                      - isPartOfGroup
+                      - joinedGroupAt
+                      additionalProperties: false
+                  totalCount:
+                    type: number
+                required:
+                - hosts
+                - totalCount
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v1/ssh/host-groups/{sshHostGroupId}/hosts/{hostId}:
+    post:
+      tags:
+      - SSH Host Groups
+      description: Add an SSH Host to a Host Group
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: sshHostGroupId
+        required: true
+        description: The ID of the SSH host group to add the host to.
+      - schema:
+          type: string
+        in: path
+        name: hostId
+        required: true
+        description: The ID of the SSH host to add to the SSH host group.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  projectId:
+                    type: string
+                  hostname:
+                    type: string
+                  alias:
+                    type: string
+                    nullable: true
+                  userCertTtl:
+                    type: string
+                  hostCertTtl:
+                    type: string
+                  userSshCaId:
+                    type: string
+                    format: uuid
+                  hostSshCaId:
+                    type: string
+                    format: uuid
+                  loginMappings:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        loginUser:
+                          type: string
+                        allowedPrincipals:
+                          type: object
+                          properties:
+                            usernames:
+                              type: array
+                              items:
+                                type: string
+                            groups:
+                              type: array
+                              items:
+                                type: string
+                          additionalProperties: false
+                      required:
+                      - loginUser
+                      - allowedPrincipals
+                      additionalProperties: false
+                required:
+                - id
+                - projectId
+                - hostname
+                - userCertTtl
+                - hostCertTtl
+                - userSshCaId
+                - hostSshCaId
+                - loginMappings
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+    delete:
+      tags:
+      - SSH Host Groups
+      description: Remove an SSH Host from a Host Group
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: sshHostGroupId
+        required: true
+        description: The ID of the SSH host group to delete the host from.
+      - schema:
+          type: string
+        in: path
+        name: hostId
+        required: true
+        description: The ID of the SSH host to delete from the SSH host group.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  projectId:
+                    type: string
+                  hostname:
+                    type: string
+                  alias:
+                    type: string
+                    nullable: true
+                  userCertTtl:
+                    type: string
+                  hostCertTtl:
+                    type: string
+                  userSshCaId:
+                    type: string
+                    format: uuid
+                  hostSshCaId:
+                    type: string
+                    format: uuid
+                  loginMappings:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        loginUser:
+                          type: string
+                        allowedPrincipals:
+                          type: object
+                          properties:
+                            usernames:
+                              type: array
+                              items:
+                                type: string
+                            groups:
+                              type: array
+                              items:
+                                type: string
+                          additionalProperties: false
+                      required:
+                      - loginUser
+                      - allowedPrincipals
+                      additionalProperties: false
+                required:
+                - id
+                - projectId
+                - hostname
+                - userCertTtl
+                - hostCertTtl
+                - userSshCaId
+                - hostSshCaId
+                - loginMappings
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v1/projects/{projectId}/ssh-host-groups:
+    get:
+      operationId: listProjectSshHostGroups
+      tags:
+      - SSH Host Groups
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: projectId
+        required: true
+        description: The ID of the project to list SSH host groups for.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  groups:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        projectId:
+                          type: string
+                        name:
+                          type: string
+                        loginMappings:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              loginUser:
+                                type: string
+                              allowedPrincipals:
+                                type: object
+                                properties:
+                                  usernames:
+                                    type: array
+                                    items:
+                                      type: string
+                                  groups:
+                                    type: array
+                                    items:
+                                      type: string
+                                additionalProperties: false
+                            required:
+                            - loginUser
+                            - allowedPrincipals
+                            additionalProperties: false
+                        hostCount:
+                          type: number
+                      required:
+                      - id
+                      - projectId
+                      - name
+                      - loginMappings
+                      - hostCount
+                      additionalProperties: false
+                required:
+                - groups
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v2/workspace/{projectId}/ssh-host-groups:
+    get:
+      tags:
+      - SSH Host Groups
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: projectId
+        required: true
+        description: The ID of the project to list SSH host groups for.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  groups:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        projectId:
+                          type: string
+                        name:
+                          type: string
+                        loginMappings:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              loginUser:
+                                type: string
+                              allowedPrincipals:
+                                type: object
+                                properties:
+                                  usernames:
+                                    type: array
+                                    items:
+                                      type: string
+                                  groups:
+                                    type: array
+                                    items:
+                                      type: string
+                                additionalProperties: false
+                            required:
+                            - loginUser
+                            - allowedPrincipals
+                            additionalProperties: false
+                        hostCount:
+                          type: number
+                      required:
+                      - id
+                      - projectId
+                      - name
+                      - loginMappings
+                      - hostCount
+                      additionalProperties: false
+                required:
+                - groups
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: An access token in Infisical

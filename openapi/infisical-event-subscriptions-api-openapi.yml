@@ -1,0 +1,71 @@
+openapi: 3.0.3
+info:
+  title: Infisical Admin Event Subscriptions API
+  description: List of all available APIs that can be consumed
+  version: 0.0.1
+servers:
+- url: https://us.infisical.com
+  description: Production server (US)
+- url: https://eu.infisical.com
+  description: Production server (EU)
+- url: http://localhost:8080
+  description: Local server
+tags:
+- name: Event Subscriptions
+paths:
+  /api/v1/events/subscribe/project-events:
+    post:
+      operationId: subscribeToProjectEvents
+      tags:
+      - Event Subscriptions
+      description: Subscribe to project events
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                projectId:
+                  type: string
+                  description: The ID of the project to subscribe to events for.
+                register:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      event:
+                        type: string
+                        enum:
+                        - secret:create
+                        - secret:update
+                        - secret:delete
+                        - secret:import-mutation
+                      conditions:
+                        type: object
+                        properties:
+                          secretPath:
+                            type: string
+                            default: /
+                          environmentSlug:
+                            type: string
+                        additionalProperties: false
+                    required:
+                    - event
+                    additionalProperties: false
+                  minItems: 1
+                  maxItems: 10
+              required:
+              - projectId
+              - register
+              additionalProperties: false
+      responses:
+        '200':
+          description: Default Response
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: An access token in Infisical

@@ -1,0 +1,1312 @@
+openapi: 3.0.3
+info:
+  title: Infisical Admin SSH Certificate Templates API
+  description: List of all available APIs that can be consumed
+  version: 0.0.1
+servers:
+- url: https://us.infisical.com
+  description: Production server (US)
+- url: https://eu.infisical.com
+  description: Production server (EU)
+- url: http://localhost:8080
+  description: Local server
+tags:
+- name: SSH Certificate Templates
+paths:
+  /api/v1/ssh/certificate-templates/{certificateTemplateId}:
+    get:
+      tags:
+      - SSH Certificate Templates
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: certificateTemplateId
+        required: true
+        description: The ID of the SSH certificate template to get.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  sshCaId:
+                    type: string
+                    format: uuid
+                  status:
+                    type: string
+                  name:
+                    type: string
+                  ttl:
+                    type: string
+                  maxTTL:
+                    type: string
+                  allowedUsers:
+                    type: array
+                    items:
+                      type: string
+                  allowedHosts:
+                    type: array
+                    items:
+                      type: string
+                  allowCustomKeyIds:
+                    type: boolean
+                  allowUserCertificates:
+                    type: boolean
+                  allowHostCertificates:
+                    type: boolean
+                required:
+                - id
+                - sshCaId
+                - status
+                - name
+                - ttl
+                - maxTTL
+                - allowedUsers
+                - allowedHosts
+                - allowCustomKeyIds
+                - allowUserCertificates
+                - allowHostCertificates
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+    patch:
+      tags:
+      - SSH Certificate Templates
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum:
+                  - active
+                  - disabled
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 36
+                  description: The name of the certificate template.
+                ttl:
+                  type: string
+                  description: The default time to live for issued certificates such as 1m, 1h, 1d, 1y, ...
+                maxTTL:
+                  type: string
+                  description: The maximum time to live for issued certificates such as 1m, 1h, 1d, 1y, ...
+                allowedUsers:
+                  type: array
+                  items:
+                    type: string
+                  description: The list of allowed users for certificates issued under this template.
+                allowedHosts:
+                  type: array
+                  items:
+                    type: string
+                  description: The list of allowed hosts for certificates issued under this template.
+                allowUserCertificates:
+                  type: boolean
+                  description: Whether or not to allow user certificates to be issued under this template.
+                allowHostCertificates:
+                  type: boolean
+                  description: Whether or not to allow host certificates to be issued under this template.
+                allowCustomKeyIds:
+                  type: boolean
+                  description: Whether or not to allow custom key IDs for certificates issued under this template.
+              additionalProperties: false
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: certificateTemplateId
+        required: true
+        description: The ID of the SSH certificate template to update.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  sshCaId:
+                    type: string
+                    format: uuid
+                  status:
+                    type: string
+                  name:
+                    type: string
+                  ttl:
+                    type: string
+                  maxTTL:
+                    type: string
+                  allowedUsers:
+                    type: array
+                    items:
+                      type: string
+                  allowedHosts:
+                    type: array
+                    items:
+                      type: string
+                  allowCustomKeyIds:
+                    type: boolean
+                  allowUserCertificates:
+                    type: boolean
+                  allowHostCertificates:
+                    type: boolean
+                required:
+                - id
+                - sshCaId
+                - status
+                - name
+                - ttl
+                - maxTTL
+                - allowedUsers
+                - allowedHosts
+                - allowCustomKeyIds
+                - allowUserCertificates
+                - allowHostCertificates
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+    delete:
+      tags:
+      - SSH Certificate Templates
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: certificateTemplateId
+        required: true
+        description: The ID of the SSH certificate template to delete.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  sshCaId:
+                    type: string
+                    format: uuid
+                  status:
+                    type: string
+                  name:
+                    type: string
+                  ttl:
+                    type: string
+                  maxTTL:
+                    type: string
+                  allowedUsers:
+                    type: array
+                    items:
+                      type: string
+                  allowedHosts:
+                    type: array
+                    items:
+                      type: string
+                  allowCustomKeyIds:
+                    type: boolean
+                  allowUserCertificates:
+                    type: boolean
+                  allowHostCertificates:
+                    type: boolean
+                required:
+                - id
+                - sshCaId
+                - status
+                - name
+                - ttl
+                - maxTTL
+                - allowedUsers
+                - allowedHosts
+                - allowCustomKeyIds
+                - allowUserCertificates
+                - allowHostCertificates
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v1/ssh/certificate-templates:
+    post:
+      tags:
+      - SSH Certificate Templates
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sshCaId:
+                  type: string
+                  description: The ID of the SSH CA to associate the certificate template with.
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 36
+                  description: The name of the certificate template.
+                ttl:
+                  type: string
+                  default: 1h
+                  description: The default time to live for issued certificates such as 1m, 1h, 1d, 1y, ...
+                maxTTL:
+                  type: string
+                  default: 30d
+                  description: The maximum time to live for issued certificates such as 1m, 1h, 1d, 1y, ...
+                allowedUsers:
+                  type: array
+                  items:
+                    type: string
+                  description: The list of allowed users for certificates issued under this template.
+                allowedHosts:
+                  type: array
+                  items:
+                    type: string
+                  description: The list of allowed hosts for certificates issued under this template.
+                allowUserCertificates:
+                  type: boolean
+                  description: Whether or not to allow user certificates to be issued under this template.
+                allowHostCertificates:
+                  type: boolean
+                  description: Whether or not to allow host certificates to be issued under this template.
+                allowCustomKeyIds:
+                  type: boolean
+                  description: Whether or not to allow custom key IDs for certificates issued under this template.
+              required:
+              - sshCaId
+              - name
+              - allowedUsers
+              - allowedHosts
+              - allowUserCertificates
+              - allowHostCertificates
+              - allowCustomKeyIds
+              additionalProperties: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  sshCaId:
+                    type: string
+                    format: uuid
+                  status:
+                    type: string
+                  name:
+                    type: string
+                  ttl:
+                    type: string
+                  maxTTL:
+                    type: string
+                  allowedUsers:
+                    type: array
+                    items:
+                      type: string
+                  allowedHosts:
+                    type: array
+                    items:
+                      type: string
+                  allowCustomKeyIds:
+                    type: boolean
+                  allowUserCertificates:
+                    type: boolean
+                  allowHostCertificates:
+                    type: boolean
+                required:
+                - id
+                - sshCaId
+                - status
+                - name
+                - ttl
+                - maxTTL
+                - allowedUsers
+                - allowedHosts
+                - allowCustomKeyIds
+                - allowUserCertificates
+                - allowHostCertificates
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v1/projects/{projectId}/ssh-certificate-templates:
+    get:
+      operationId: listProjectSshCertificateTemplates
+      tags:
+      - SSH Certificate Templates
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: projectId
+        required: true
+        description: The ID of the project to list SSH certificate templates for.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  certificateTemplates:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        sshCaId:
+                          type: string
+                          format: uuid
+                        status:
+                          type: string
+                        name:
+                          type: string
+                        ttl:
+                          type: string
+                        maxTTL:
+                          type: string
+                        allowedUsers:
+                          type: array
+                          items:
+                            type: string
+                        allowedHosts:
+                          type: array
+                          items:
+                            type: string
+                        allowCustomKeyIds:
+                          type: boolean
+                        allowUserCertificates:
+                          type: boolean
+                        allowHostCertificates:
+                          type: boolean
+                      required:
+                      - id
+                      - sshCaId
+                      - status
+                      - name
+                      - ttl
+                      - maxTTL
+                      - allowedUsers
+                      - allowedHosts
+                      - allowCustomKeyIds
+                      - allowUserCertificates
+                      - allowHostCertificates
+                      additionalProperties: false
+                required:
+                - certificateTemplates
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v2/workspace/{projectId}/ssh-certificate-templates:
+    get:
+      tags:
+      - SSH Certificate Templates
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: projectId
+        required: true
+        description: The ID of the project to list SSH certificate templates for.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  certificateTemplates:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        sshCaId:
+                          type: string
+                          format: uuid
+                        status:
+                          type: string
+                        name:
+                          type: string
+                        ttl:
+                          type: string
+                        maxTTL:
+                          type: string
+                        allowedUsers:
+                          type: array
+                          items:
+                            type: string
+                        allowedHosts:
+                          type: array
+                          items:
+                            type: string
+                        allowCustomKeyIds:
+                          type: boolean
+                        allowUserCertificates:
+                          type: boolean
+                        allowHostCertificates:
+                          type: boolean
+                      required:
+                      - id
+                      - sshCaId
+                      - status
+                      - name
+                      - ttl
+                      - maxTTL
+                      - allowedUsers
+                      - allowedHosts
+                      - allowCustomKeyIds
+                      - allowUserCertificates
+                      - allowHostCertificates
+                      additionalProperties: false
+                required:
+                - certificateTemplates
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: An access token in Infisical

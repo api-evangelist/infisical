@@ -1,0 +1,3934 @@
+openapi: 3.0.3
+info:
+  title: Infisical Admin Project Groups API
+  description: List of all available APIs that can be consumed
+  version: 0.0.1
+servers:
+- url: https://us.infisical.com
+  description: Production server (US)
+- url: https://eu.infisical.com
+  description: Production server (EU)
+- url: http://localhost:8080
+  description: Local server
+tags:
+- name: Project Groups
+paths:
+  /api/v1/projects/{projectId}/groups/{groupIdOrName}:
+    post:
+      operationId: addGroupToProject
+      tags:
+      - Project Groups
+      description: 'Deprecated: Use POST /api/v1/projects/:projectId/memberships/groups/:groupId instead. Add group to project.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                role:
+                  type: string
+                  minLength: 1
+                  default: no-access
+                  description: The role for the group to assume in the project.
+                roles:
+                  type: array
+                  items:
+                    anyOf:
+                    - type: object
+                      properties:
+                        role:
+                          type: string
+                        isTemporary:
+                          type: boolean
+                          enum:
+                          - false
+                          default: false
+                      required:
+                      - role
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        role:
+                          type: string
+                        isTemporary:
+                          type: boolean
+                          enum:
+                          - true
+                        temporaryMode:
+                          type: string
+                          enum:
+                          - relative
+                        temporaryRange:
+                          type: string
+                        temporaryAccessStartTime:
+                          type: string
+                          format: date-time
+                      required:
+                      - role
+                      - isTemporary
+                      - temporaryMode
+                      - temporaryRange
+                      - temporaryAccessStartTime
+                      additionalProperties: false
+              additionalProperties: false
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: projectId
+        required: true
+        description: The ID of the project to add the group to.
+      - schema:
+          type: string
+        in: path
+        name: groupIdOrName
+        required: true
+        description: The ID or name of the group to add to the project.
+      deprecated: true
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  groupMembership:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      projectId:
+                        type: string
+                      groupId:
+                        type: string
+                        format: uuid
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                    required:
+                    - id
+                    - projectId
+                    - groupId
+                    - createdAt
+                    - updatedAt
+                    additionalProperties: false
+                required:
+                - groupMembership
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v1/projects/{projectId}/groups/{groupId}:
+    patch:
+      operationId: updateProjectGroup
+      tags:
+      - Project Groups
+      description: 'Deprecated: Use PATCH /api/v1/projects/:projectId/memberships/groups/:groupId instead. Update group in project.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                roles:
+                  type: array
+                  items:
+                    anyOf:
+                    - type: object
+                      properties:
+                        role:
+                          type: string
+                        isTemporary:
+                          type: boolean
+                          enum:
+                          - false
+                          default: false
+                      required:
+                      - role
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        role:
+                          type: string
+                        isTemporary:
+                          type: boolean
+                          enum:
+                          - true
+                        temporaryMode:
+                          type: string
+                          enum:
+                          - relative
+                        temporaryRange:
+                          type: string
+                        temporaryAccessStartTime:
+                          type: string
+                          format: date-time
+                      required:
+                      - role
+                      - isTemporary
+                      - temporaryMode
+                      - temporaryRange
+                      - temporaryAccessStartTime
+                      additionalProperties: false
+                  minItems: 1
+                  description: A list of roles to update the group to.
+              required:
+              - roles
+              additionalProperties: false
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: projectId
+        required: true
+        description: The ID of the project to update the group in.
+      - schema:
+          type: string
+        in: path
+        name: groupId
+        required: true
+        description: The ID of the group to update in the project.
+      deprecated: true
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  roles:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        role:
+                          type: string
+                        projectMembershipId:
+                          type: string
+                          format: uuid
+                        customRoleId:
+                          type: string
+                          format: uuid
+                          nullable: true
+                        isTemporary:
+                          type: boolean
+                          default: false
+                        temporaryMode:
+                          type: string
+                          nullable: true
+                        temporaryRange:
+                          type: string
+                          nullable: true
+                        temporaryAccessStartTime:
+                          type: string
+                          format: date-time
+                          nullable: true
+                        temporaryAccessEndTime:
+                          type: string
+                          format: date-time
+                          nullable: true
+                        createdAt:
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          type: string
+                          format: date-time
+                      required:
+                      - id
+                      - role
+                      - projectMembershipId
+                      - createdAt
+                      - updatedAt
+                      additionalProperties: false
+                required:
+                - roles
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+    delete:
+      operationId: removeGroupFromProject
+      tags:
+      - Project Groups
+      description: 'Deprecated: Use DELETE /api/v1/projects/:projectId/memberships/groups/:groupId instead. Remove group from project.'
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: projectId
+        required: true
+        description: The ID of the project to delete the group from.
+      - schema:
+          type: string
+        in: path
+        name: groupId
+        required: true
+        description: The ID of the group to delete from the project.
+      deprecated: true
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  groupMembership:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      projectId:
+                        type: string
+                      groupId:
+                        type: string
+                        format: uuid
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                    required:
+                    - id
+                    - projectId
+                    - groupId
+                    - createdAt
+                    - updatedAt
+                    additionalProperties: false
+                required:
+                - groupMembership
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+    get:
+      operationId: getProjectGroup
+      tags:
+      - Project Groups
+      description: 'Deprecated: Use GET /api/v1/projects/:projectId/memberships/groups/:groupId instead. Return project group.'
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: projectId
+        required: true
+      - schema:
+          type: string
+        in: path
+        name: groupId
+        required: true
+      deprecated: true
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  groupMembership:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      groupId:
+                        type: string
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                      roles:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                            role:
+                              type: string
+                            customRoleId:
+                              type: string
+                              nullable: true
+                            customRoleName:
+                              type: string
+                              nullable: true
+                            customRoleSlug:
+                              type: string
+                              nullable: true
+                            isTemporary:
+                              type: boolean
+                            temporaryMode:
+                              type: string
+                              nullable: true
+                            temporaryRange:
+                              type: string
+                              nullable: true
+                            temporaryAccessStartTime:
+                              type: string
+                              format: date-time
+                              nullable: true
+                            temporaryAccessEndTime:
+                              type: string
+                              format: date-time
+                              nullable: true
+                          required:
+                          - id
+                          - role
+                          - isTemporary
+                          additionalProperties: false
+                      group:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          id:
+                            type: string
+                            format: uuid
+                          slug:
+                            type: string
+                        required:
+                        - name
+                        - id
+                        - slug
+                        additionalProperties: false
+                    required:
+                    - id
+                    - groupId
+                    - createdAt
+                    - updatedAt
+                    - roles
+                    - group
+                    additionalProperties: false
+                required:
+                - groupMembership
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v1/projects/{projectId}/groups:
+    get:
+      operationId: listProjectGroups
+      tags:
+      - Project Groups
+      description: 'Deprecated: Use GET /api/v1/projects/:projectId/memberships/groups instead. Return list of groups in project.'
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: projectId
+        required: true
+        description: The ID of the project to list groups for.
+      deprecated: true
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  groupMemberships:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        groupId:
+                          type: string
+                        createdAt:
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          type: string
+                          format: date-time
+                        roles:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              role:
+                                type: string
+                              customRoleId:
+                                type: string
+                                nullable: true
+                              customRoleName:
+                                type: string
+                                nullable: true
+                              customRoleSlug:
+                                type: string
+                                nullable: true
+                              isTemporary:
+                                type: boolean
+                              temporaryMode:
+                                type: string
+                                nullable: true
+                              temporaryRange:
+                                type: string
+                                nullable: true
+                              temporaryAccessStartTime:
+                                type: string
+                                format: date-time
+                                nullable: true
+                              temporaryAccessEndTime:
+                                type: string
+                                format: date-time
+                                nullable: true
+                            required:
+                            - id
+                            - role
+                            - isTemporary
+                            additionalProperties: false
+                        group:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              format: uuid
+                            name:
+                              type: string
+                            slug:
+                              type: string
+                            orgId:
+                              type: string
+                              format: uuid
+                          required:
+                          - id
+                          - name
+                          - slug
+                          additionalProperties: false
+                      required:
+                      - id
+                      - groupId
+                      - createdAt
+                      - updatedAt
+                      - roles
+                      - group
+                      additionalProperties: false
+                required:
+                - groupMemberships
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v1/projects/{projectId}/memberships/groups:
+    get:
+      operationId: listProjectGroupMemberships
+      tags:
+      - Project Groups
+      description: List project group memberships.
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: projectId
+        required: true
+        description: The ID of the project to list groups for.
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  groupMemberships:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        groupId:
+                          type: string
+                          format: uuid
+                        projectId:
+                          type: string
+                          format: uuid
+                        group:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              format: uuid
+                            name:
+                              type: string
+                            slug:
+                              type: string
+                            orgId:
+                              type: string
+                              format: uuid
+                          required:
+                          - id
+                          - name
+                          - slug
+                          additionalProperties: false
+                        roles:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              role:
+                                type: string
+                              customRoleId:
+                                type: string
+                                nullable: true
+                              customRoleName:
+                                type: string
+                                nullable: true
+                              customRoleSlug:
+                                type: string
+                                nullable: true
+                              isTemporary:
+                                type: boolean
+                              temporaryMode:
+                                type: string
+                                nullable: true
+                              temporaryRange:
+                                type: string
+                                nullable: true
+                              temporaryAccessStartTime:
+                                type: string
+                                format: date-time
+                                nullable: true
+                              temporaryAccessEndTime:
+                                type: string
+                                format: date-time
+                                nullable: true
+                              createdAt:
+                                type: string
+                                format: date-time
+                              updatedAt:
+                                type: string
+                                format: date-time
+                            required:
+                            - id
+                            - role
+                            - isTemporary
+                            additionalProperties: false
+                        createdAt:
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          type: string
+                          format: date-time
+                      required:
+                      - id
+                      - groupId
+                      - projectId
+                      - group
+                      - roles
+                      - createdAt
+                      - updatedAt
+                      additionalProperties: false
+                required:
+                - groupMemberships
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v1/projects/{projectId}/memberships/groups/{groupId}:
+    post:
+      operationId: createProjectGroupMembership
+      tags:
+      - Project Groups
+      description: Add a group from the organization to the project by creating a project group membership.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                role:
+                  type: string
+                  minLength: 1
+                  default: no-access
+                roles:
+                  type: array
+                  items:
+                    anyOf:
+                    - type: object
+                      properties:
+                        role:
+                          type: string
+                        isTemporary:
+                          type: boolean
+                          enum:
+                          - false
+                          default: false
+                      required:
+                      - role
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        role:
+                          type: string
+                        isTemporary:
+                          type: boolean
+                          enum:
+                          - true
+                        temporaryMode:
+                          type: string
+                          enum:
+                          - relative
+                        temporaryRange:
+                          type: string
+                        temporaryAccessStartTime:
+                          type: string
+                          format: date-time
+                      required:
+                      - role
+                      - isTemporary
+                      - temporaryMode
+                      - temporaryRange
+                      - temporaryAccessStartTime
+                      additionalProperties: false
+              additionalProperties: false
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: projectId
+        required: true
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: groupId
+        required: true
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  groupMembership:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      groupId:
+                        type: string
+                        format: uuid
+                      projectId:
+                        type: string
+                        format: uuid
+                      group:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                            format: uuid
+                          name:
+                            type: string
+                          slug:
+                            type: string
+                          orgId:
+                            type: string
+                            format: uuid
+                        required:
+                        - id
+                        - name
+                        - slug
+                        additionalProperties: false
+                      roles:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                            role:
+                              type: string
+                            customRoleId:
+                              type: string
+                              nullable: true
+                            customRoleName:
+                              type: string
+                              nullable: true
+                            customRoleSlug:
+                              type: string
+                              nullable: true
+                            isTemporary:
+                              type: boolean
+                            temporaryMode:
+                              type: string
+                              nullable: true
+                            temporaryRange:
+                              type: string
+                              nullable: true
+                            temporaryAccessStartTime:
+                              type: string
+                              format: date-time
+                              nullable: true
+                            temporaryAccessEndTime:
+                              type: string
+                              format: date-time
+                              nullable: true
+                            createdAt:
+                              type: string
+                              format: date-time
+                            updatedAt:
+                              type: string
+                              format: date-time
+                          required:
+                          - id
+                          - role
+                          - isTemporary
+                          additionalProperties: false
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                    required:
+                    - id
+                    - groupId
+                    - projectId
+                    - group
+                    - roles
+                    - createdAt
+                    - updatedAt
+                    additionalProperties: false
+                required:
+                - groupMembership
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+    get:
+      operationId: getProjectGroupMembership
+      tags:
+      - Project Groups
+      description: Get project group membership by group ID.
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: projectId
+        required: true
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: groupId
+        required: true
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  groupMembership:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      groupId:
+                        type: string
+                        format: uuid
+                      projectId:
+                        type: string
+                        format: uuid
+                      group:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                            format: uuid
+                          name:
+                            type: string
+                          slug:
+                            type: string
+                          orgId:
+                            type: string
+                            format: uuid
+                        required:
+                        - id
+                        - name
+                        - slug
+                        additionalProperties: false
+                      roles:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                            role:
+                              type: string
+                            customRoleId:
+                              type: string
+                              nullable: true
+                            customRoleName:
+                              type: string
+                              nullable: true
+                            customRoleSlug:
+                              type: string
+                              nullable: true
+                            isTemporary:
+                              type: boolean
+                            temporaryMode:
+                              type: string
+                              nullable: true
+                            temporaryRange:
+                              type: string
+                              nullable: true
+                            temporaryAccessStartTime:
+                              type: string
+                              format: date-time
+                              nullable: true
+                            temporaryAccessEndTime:
+                              type: string
+                              format: date-time
+                              nullable: true
+                            createdAt:
+                              type: string
+                              format: date-time
+                            updatedAt:
+                              type: string
+                              format: date-time
+                          required:
+                          - id
+                          - role
+                          - isTemporary
+                          additionalProperties: false
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                    required:
+                    - id
+                    - groupId
+                    - projectId
+                    - group
+                    - roles
+                    - createdAt
+                    - updatedAt
+                    additionalProperties: false
+                required:
+                - groupMembership
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+    patch:
+      operationId: updateProjectGroupMembership
+      tags:
+      - Project Groups
+      description: Update project group membership roles.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                roles:
+                  type: array
+                  items:
+                    anyOf:
+                    - type: object
+                      properties:
+                        role:
+                          type: string
+                        isTemporary:
+                          type: boolean
+                          enum:
+                          - false
+                          default: false
+                      required:
+                      - role
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        role:
+                          type: string
+                        isTemporary:
+                          type: boolean
+                          enum:
+                          - true
+                        temporaryMode:
+                          type: string
+                          enum:
+                          - relative
+                        temporaryRange:
+                          type: string
+                        temporaryAccessStartTime:
+                          type: string
+                          format: date-time
+                      required:
+                      - role
+                      - isTemporary
+                      - temporaryMode
+                      - temporaryRange
+                      - temporaryAccessStartTime
+                      additionalProperties: false
+                  minItems: 1
+                  description: A list of roles to update the group to.
+              required:
+              - roles
+              additionalProperties: false
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: projectId
+        required: true
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: groupId
+        required: true
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  roles:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        role:
+                          type: string
+                        projectMembershipId:
+                          type: string
+                          format: uuid
+                        customRoleId:
+                          type: string
+                          format: uuid
+                          nullable: true
+                        isTemporary:
+                          type: boolean
+                          default: false
+                        temporaryMode:
+                          type: string
+                          nullable: true
+                        temporaryRange:
+                          type: string
+                          nullable: true
+                        temporaryAccessStartTime:
+                          type: string
+                          format: date-time
+                          nullable: true
+                        temporaryAccessEndTime:
+                          type: string
+                          format: date-time
+                          nullable: true
+                        createdAt:
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          type: string
+                          format: date-time
+                      required:
+                      - id
+                      - role
+                      - projectMembershipId
+                      - createdAt
+                      - updatedAt
+                      additionalProperties: false
+                required:
+                - roles
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+    delete:
+      operationId: removeProjectGroupMembership
+      tags:
+      - Project Groups
+      description: Remove group from project.
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: projectId
+        required: true
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: groupId
+        required: true
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  groupMembership:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      groupId:
+                        type: string
+                        format: uuid
+                      projectId:
+                        type: string
+                        format: uuid
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                    required:
+                    - id
+                    - groupId
+                    - projectId
+                    - createdAt
+                    - updatedAt
+                    additionalProperties: false
+                required:
+                - groupMembership
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v2/workspace/{projectId}/groups/{groupIdOrName}:
+    post:
+      tags:
+      - Project Groups
+      description: Add group to project
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                role:
+                  type: string
+                  minLength: 1
+                  default: no-access
+                  description: The role for the group to assume in the project.
+                roles:
+                  type: array
+                  items:
+                    anyOf:
+                    - type: object
+                      properties:
+                        role:
+                          type: string
+                        isTemporary:
+                          type: boolean
+                          enum:
+                          - false
+                          default: false
+                      required:
+                      - role
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        role:
+                          type: string
+                        isTemporary:
+                          type: boolean
+                          enum:
+                          - true
+                        temporaryMode:
+                          type: string
+                          enum:
+                          - relative
+                        temporaryRange:
+                          type: string
+                        temporaryAccessStartTime:
+                          type: string
+                          format: date-time
+                      required:
+                      - role
+                      - isTemporary
+                      - temporaryMode
+                      - temporaryRange
+                      - temporaryAccessStartTime
+                      additionalProperties: false
+              additionalProperties: false
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: projectId
+        required: true
+        description: The ID of the project to add the group to.
+      - schema:
+          type: string
+        in: path
+        name: groupIdOrName
+        required: true
+        description: The ID or name of the group to add to the project.
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  groupMembership:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      projectId:
+                        type: string
+                      groupId:
+                        type: string
+                        format: uuid
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                    required:
+                    - id
+                    - projectId
+                    - groupId
+                    - createdAt
+                    - updatedAt
+                    additionalProperties: false
+                required:
+                - groupMembership
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v2/workspace/{projectId}/groups/{groupId}:
+    patch:
+      tags:
+      - Project Groups
+      description: Update group in project
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                roles:
+                  type: array
+                  items:
+                    anyOf:
+                    - type: object
+                      properties:
+                        role:
+                          type: string
+                        isTemporary:
+                          type: boolean
+                          enum:
+                          - false
+                          default: false
+                      required:
+                      - role
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        role:
+                          type: string
+                        isTemporary:
+                          type: boolean
+                          enum:
+                          - true
+                        temporaryMode:
+                          type: string
+                          enum:
+                          - relative
+                        temporaryRange:
+                          type: string
+                        temporaryAccessStartTime:
+                          type: string
+                          format: date-time
+                      required:
+                      - role
+                      - isTemporary
+                      - temporaryMode
+                      - temporaryRange
+                      - temporaryAccessStartTime
+                      additionalProperties: false
+                  minItems: 1
+                  description: A list of roles to update the group to.
+              required:
+              - roles
+              additionalProperties: false
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: projectId
+        required: true
+        description: The ID of the project to update the group in.
+      - schema:
+          type: string
+        in: path
+        name: groupId
+        required: true
+        description: The ID of the group to update in the project.
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  roles:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        role:
+                          type: string
+                        projectMembershipId:
+                          type: string
+                          format: uuid
+                        customRoleId:
+                          type: string
+                          format: uuid
+                          nullable: true
+                        isTemporary:
+                          type: boolean
+                          default: false
+                        temporaryMode:
+                          type: string
+                          nullable: true
+                        temporaryRange:
+                          type: string
+                          nullable: true
+                        temporaryAccessStartTime:
+                          type: string
+                          format: date-time
+                          nullable: true
+                        temporaryAccessEndTime:
+                          type: string
+                          format: date-time
+                          nullable: true
+                        createdAt:
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          type: string
+                          format: date-time
+                      required:
+                      - id
+                      - role
+                      - projectMembershipId
+                      - createdAt
+                      - updatedAt
+                      additionalProperties: false
+                required:
+                - roles
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+    delete:
+      tags:
+      - Project Groups
+      description: Remove group from project
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: projectId
+        required: true
+        description: The ID of the project to delete the group from.
+      - schema:
+          type: string
+        in: path
+        name: groupId
+        required: true
+        description: The ID of the group to delete from the project.
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  groupMembership:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      projectId:
+                        type: string
+                      groupId:
+                        type: string
+                        format: uuid
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                    required:
+                    - id
+                    - projectId
+                    - groupId
+                    - createdAt
+                    - updatedAt
+                    additionalProperties: false
+                required:
+                - groupMembership
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+    get:
+      tags:
+      - Project Groups
+      description: Return project group
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: projectId
+        required: true
+      - schema:
+          type: string
+        in: path
+        name: groupId
+        required: true
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  groupMembership:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      groupId:
+                        type: string
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                      roles:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                            role:
+                              type: string
+                            customRoleId:
+                              type: string
+                              nullable: true
+                            customRoleName:
+                              type: string
+                              nullable: true
+                            customRoleSlug:
+                              type: string
+                              nullable: true
+                            isTemporary:
+                              type: boolean
+                            temporaryMode:
+                              type: string
+                              nullable: true
+                            temporaryRange:
+                              type: string
+                              nullable: true
+                            temporaryAccessStartTime:
+                              type: string
+                              format: date-time
+                              nullable: true
+                            temporaryAccessEndTime:
+                              type: string
+                              format: date-time
+                              nullable: true
+                          required:
+                          - id
+                          - role
+                          - isTemporary
+                          additionalProperties: false
+                      group:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          id:
+                            type: string
+                            format: uuid
+                          slug:
+                            type: string
+                        required:
+                        - name
+                        - id
+                        - slug
+                        additionalProperties: false
+                    required:
+                    - id
+                    - groupId
+                    - createdAt
+                    - updatedAt
+                    - roles
+                    - group
+                    additionalProperties: false
+                required:
+                - groupMembership
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v2/workspace/{projectId}/groups:
+    get:
+      tags:
+      - Project Groups
+      description: Return list of groups in project
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: projectId
+        required: true
+        description: The ID of the project to list groups for.
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  groupMemberships:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        groupId:
+                          type: string
+                        createdAt:
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          type: string
+                          format: date-time
+                        roles:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              role:
+                                type: string
+                              customRoleId:
+                                type: string
+                                nullable: true
+                              customRoleName:
+                                type: string
+                                nullable: true
+                              customRoleSlug:
+                                type: string
+                                nullable: true
+                              isTemporary:
+                                type: boolean
+                              temporaryMode:
+                                type: string
+                                nullable: true
+                              temporaryRange:
+                                type: string
+                                nullable: true
+                              temporaryAccessStartTime:
+                                type: string
+                                format: date-time
+                                nullable: true
+                              temporaryAccessEndTime:
+                                type: string
+                                format: date-time
+                                nullable: true
+                            required:
+                            - id
+                            - role
+                            - isTemporary
+                            additionalProperties: false
+                        group:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            id:
+                              type: string
+                              format: uuid
+                            slug:
+                              type: string
+                          required:
+                          - name
+                          - id
+                          - slug
+                          additionalProperties: false
+                      required:
+                      - id
+                      - groupId
+                      - createdAt
+                      - updatedAt
+                      - roles
+                      - group
+                      additionalProperties: false
+                required:
+                - groupMemberships
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v2/workspace/{projectId}/groups/{groupId}/users:
+    get:
+      tags:
+      - Project Groups
+      description: Return project group users
+      parameters:
+      - schema:
+          type: number
+          minimum: 0
+          maximum: 100
+          default: 0
+        in: query
+        name: offset
+        required: false
+        description: The offset to start from. If you enter 10, it will start from the 10th user.
+      - schema:
+          type: number
+          minimum: 1
+          maximum: 100
+          default: 10
+        in: query
+        name: limit
+        required: false
+        description: The number of users to return.
+      - schema:
+          type: string
+        in: query
+        name: username
+        required: false
+        description: The username to search for.
+      - schema:
+          type: string
+        in: query
+        name: search
+        required: false
+        description: The text string that user email or name will be filtered by.
+      - schema:
+          type: string
+          enum:
+          - existingMembers
+          - nonMembers
+        in: query
+        name: filter
+        required: false
+        description: Whether to filter the list of returned users. 'existingMembers' will only return existing users in the group, 'nonMembers' will only return users not in the group, undefined will return all users in the organization.
+      - schema:
+          type: string
+        in: path
+        name: projectId
+        required: true
+        description: The ID of the project the group belongs to.
+      - schema:
+          type: string
+        in: path
+        name: groupId
+        required: true
+        description: The ID of the group to list users for.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  users:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        email:
+                          type: string
+                          nullable: true
+                        username:
+                          type: string
+                        firstName:
+                          type: string
+                          nullable: true
+                        lastName:
+                          type: string
+                          nullable: true
+                        id:
+                          type: string
+                          format: uuid
+                        isPartOfGroup:
+                          type: boolean
+                        joinedGroupAt:
+                          type: string
+                          format: date-time
+                          nullable: true
+                      required:
+                      - username
+                      - id
+                      - isPartOfGroup
+                      - joinedGroupAt
+                      additionalProperties: false
+                  totalCount:
+                    type: number
+                required:
+                - users
+                - totalCount
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: An access token in Infisical

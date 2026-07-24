@@ -1,0 +1,3248 @@
+openapi: 3.0.3
+info:
+  title: Infisical Admin Organization Roles API
+  description: List of all available APIs that can be consumed
+  version: 0.0.1
+servers:
+- url: https://us.infisical.com
+  description: Production server (US)
+- url: https://eu.infisical.com
+  description: Production server (EU)
+- url: http://localhost:8080
+  description: Local server
+tags:
+- name: Organization Roles
+paths:
+  /api/v1/organization/roles:
+    post:
+      tags:
+      - Organization Roles
+      description: Create an organization role
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                slug:
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                  description: The slug of the role.
+                name:
+                  type: string
+                  minLength: 1
+                  description: The name of the role.
+                description:
+                  type: string
+                  nullable: true
+                  description: The description for the role.
+                permissions:
+                  type: array
+                  items:
+                    anyOf:
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - workspace
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - create
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - create
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - project
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - create
+                            - request-access
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - create
+                              - request-access
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - role
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - create
+                            - edit
+                            - delete
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - create
+                              - edit
+                              - delete
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - sub-organization
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - create
+                            - edit
+                            - delete
+                            - direct-access
+                            - link-group
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - create
+                              - edit
+                              - delete
+                              - direct-access
+                              - link-group
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - member
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - create
+                            - edit
+                            - delete
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - create
+                              - edit
+                              - delete
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - settings
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - create
+                            - edit
+                            - delete
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - create
+                              - edit
+                              - delete
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - incident-contact
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - create
+                            - edit
+                            - delete
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - create
+                              - edit
+                              - delete
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - sso
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - create
+                            - edit
+                            - delete
+                            - bypass-sso-enforcement
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - create
+                              - edit
+                              - delete
+                              - bypass-sso-enforcement
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - scim
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - create
+                            - edit
+                            - delete
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - create
+                              - edit
+                              - delete
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - github-org-sync
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - create
+                            - edit
+                            - delete
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - create
+                              - edit
+                              - delete
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - github-org-sync-manual
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - create
+                            - edit
+                            - delete
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - create
+                              - edit
+                              - delete
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - ldap
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - create
+                            - edit
+                            - delete
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - create
+                              - edit
+                              - delete
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - groups
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - create
+                            - edit
+                            - delete
+                            - grant-privileges
+                            - add-identities
+                            - add-members
+                            - remove-members
+                            - remove-identities
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - create
+                              - edit
+                              - delete
+                              - grant-privileges
+                              - add-identities
+                              - add-members
+                              - remove-members
+                              - remove-identities
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - secret-scanning
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - create
+                            - edit
+                            - delete
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - create
+                              - edit
+                              - delete
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - billing
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - manage-billing
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - manage-billing
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - identity
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - create
+                            - edit
+                            - delete
+                            - grant-privileges
+                            - revoke-auth
+                            - create-token
+                            - get-token
+                            - delete-token
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - create
+                              - edit
+                              - delete
+                              - grant-privileges
+                              - revoke-auth
+                              - create-token
+                              - get-token
+                              - delete-token
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - kms
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - create
+                            - edit
+                            - delete
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - create
+                              - edit
+                              - delete
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - audit-logs
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - project-templates
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - create
+                            - edit
+                            - delete
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - create
+                              - edit
+                              - delete
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - app-connections
+                          description: The entity this permission pertains to.
+                        inverted:
+                          type: boolean
+                          description: Whether rule allows or forbids.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - create
+                            - edit
+                            - delete
+                            - connect
+                            - rotate-credentials
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - create
+                              - edit
+                              - delete
+                              - connect
+                              - rotate-credentials
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                        conditions:
+                          type: object
+                          properties:
+                            connectionId:
+                              anyOf:
+                              - type: string
+                              - type: object
+                                properties:
+                                  $eq:
+                                    type: string
+                                    minLength: 1
+                                  $ne:
+                                    type: string
+                                    minLength: 1
+                                  $in:
+                                    type: array
+                                    items:
+                                      type: string
+                                      minLength: 1
+                                additionalProperties: false
+                          additionalProperties: false
+                          description: When specified, only matching conditions will be allowed to access given resource.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - organization-admin-console
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - access-all-projects
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - access-all-projects
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - secret-share
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - manage-settings
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - manage-settings
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - kmip
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - proxy
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - proxy
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - machine-identity-auth-template
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - list-templates
+                            - edit-templates
+                            - create-templates
+                            - delete-templates
+                            - unlink-templates
+                            - attach-templates
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - list-templates
+                              - edit-templates
+                              - create-templates
+                              - delete-templates
+                              - unlink-templates
+                              - attach-templates
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - gateway
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - create-gateways
+                            - list-gateways
+                            - edit-gateways
+                            - delete-gateways
+                            - attach-gateways
+                            - revoke-gateway-access
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - create-gateways
+                              - list-gateways
+                              - edit-gateways
+                              - delete-gateways
+                              - attach-gateways
+                              - revoke-gateway-access
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - gateway-pool
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - create-gateway-pools
+                            - list-gateway-pools
+                            - edit-gateway-pools
+                            - delete-gateway-pools
+                            - attach-gateway-pools
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - create-gateway-pools
+                              - list-gateway-pools
+                              - edit-gateway-pools
+                              - delete-gateway-pools
+                              - attach-gateway-pools
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - relay
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - create-relays
+                            - list-relays
+                            - edit-relays
+                            - delete-relays
+                            - revoke-relay-access
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - create-relays
+                              - list-relays
+                              - edit-relays
+                              - delete-relays
+                              - revoke-relay-access
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - kmip-server
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - create-kmip-servers
+                            - list-kmip-servers
+                            - edit-kmip-servers
+                            - delete-kmip-servers
+                            - revoke-kmip-server-access
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - create-kmip-servers
+                              - list-kmip-servers
+                              - edit-kmip-servers
+                              - delete-kmip-servers
+                              - revoke-kmip-server-access
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - email-domains
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - create
+                            - verify-domain
+                            - delete
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - create
+                              - verify-domain
+                              - delete
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - certificate-manager
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - manage-instance
+                            - manage-settings
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - manage-instance
+                              - manage-settings
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - honey-tokens
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - setup
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - setup
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - oauth-clients
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - create
+                            - edit
+                            - delete
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - create
+                              - edit
+                              - delete
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                  description: The permissions assigned to the role.
+              required:
+              - slug
+              - name
+              - permissions
+              additionalProperties: false
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  role:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      name:
+                        type: string
+                      description:
+                        type: string
+                        nullable: true
+                      slug:
+                        type: string
+                      permissions:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            subject:
+                              anyOf:
+                              - type: string
+                                minLength: 1
+                              - type: array
+                                items:
+                                  type: string
+                            action:
+                              anyOf:
+                              - type: string
+                                minLength: 1
+                              - type: array
+                                items:
+                                  type: string
+                            conditions: {}
+                            inverted:
+                              type: boolean
+                          required:
+                          - action
+                          additionalProperties: false
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                      orgId:
+                        type: string
+                        format: uuid
+                    required:
+                    - id
+                    - name
+                    - slug
+                    - permissions
+                    - createdAt
+                    - updatedAt
+                    - orgId
+                    additionalProperties: false
+                required:
+                - role
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+    get:
+      tags:
+      - Organization Roles
+      description: List organization roles
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  roles:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        name:
+                          type: string
+                        description:
+                          type: string
+                          nullable: true
+                        slug:
+                          type: string
+                        createdAt:
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          type: string
+                          format: date-time
+                        orgId:
+                          type: string
+                          format: uuid
+                      required:
+                      - id
+                      - name
+                      - slug
+                      - createdAt
+                      - updatedAt
+                      - orgId
+                      additionalProperties: false
+                required:
+                - roles
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v1/organization/roles/{roleId}:
+    get:
+      tags:
+      - Organization Roles
+      description: Get an organization role
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: roleId
+        required: true
+        description: The ID of the role to get.
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  role:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      name:
+                        type: string
+                      description:
+                        type: string
+                        nullable: true
+                      slug:
+                        type: string
+                      permissions:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            subject:
+                              anyOf:
+                              - type: string
+                                minLength: 1
+                              - type: array
+                                items:
+                                  type: string
+                            action:
+                              anyOf:
+                              - type: string
+                                minLength: 1
+                              - type: array
+                                items:
+                                  type: string
+                            conditions: {}
+                            inverted:
+                              type: boolean
+                          required:
+                          - action
+                          additionalProperties: false
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                      orgId:
+                        type: string
+                        format: uuid
+                    required:
+                    - id
+                    - name
+                    - slug
+                    - permissions
+                    - createdAt
+                    - updatedAt
+                    - orgId
+                    additionalProperties: false
+                required:
+                - role
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+    patch:
+      tags:
+      - Organization Roles
+      description: Update an organization role
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                slug:
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                  description: The slug of the role.
+                name:
+                  type: string
+                  description: The name of the role.
+                description:
+                  type: string
+                  nullable: true
+                  description: The description for the role.
+                permissions:
+                  type: array
+                  items:
+                    anyOf:
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - workspace
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - create
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - create
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - project
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - create
+                            - request-access
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - create
+                              - request-access
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - role
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - create
+                            - edit
+                            - delete
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - create
+                              - edit
+                              - delete
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - sub-organization
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - create
+                            - edit
+                            - delete
+                            - direct-access
+                            - link-group
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - create
+                              - edit
+                              - delete
+                              - direct-access
+                              - link-group
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - member
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - create
+                            - edit
+                            - delete
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - create
+                              - edit
+                              - delete
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - settings
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - create
+                            - edit
+                            - delete
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - create
+                              - edit
+                              - delete
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - incident-contact
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - create
+                            - edit
+                            - delete
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - create
+                              - edit
+                              - delete
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - sso
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - create
+                            - edit
+                            - delete
+                            - bypass-sso-enforcement
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - create
+                              - edit
+                              - delete
+                              - bypass-sso-enforcement
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - scim
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - create
+                            - edit
+                            - delete
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - create
+                              - edit
+                              - delete
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - github-org-sync
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - create
+                            - edit
+                            - delete
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - create
+                              - edit
+                              - delete
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - github-org-sync-manual
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - create
+                            - edit
+                            - delete
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - create
+                              - edit
+                              - delete
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - ldap
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - create
+                            - edit
+                            - delete
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - create
+                              - edit
+                              - delete
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - groups
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - create
+                            - edit
+                            - delete
+                            - grant-privileges
+                            - add-identities
+                            - add-members
+                            - remove-members
+                            - remove-identities
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - create
+                              - edit
+                              - delete
+                              - grant-privileges
+                              - add-identities
+                              - add-members
+                              - remove-members
+                              - remove-identities
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - secret-scanning
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - create
+                            - edit
+                            - delete
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - create
+                              - edit
+                              - delete
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - billing
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - manage-billing
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - manage-billing
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - identity
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - create
+                            - edit
+                            - delete
+                            - grant-privileges
+                            - revoke-auth
+                            - create-token
+                            - get-token
+                            - delete-token
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - create
+                              - edit
+                              - delete
+                              - grant-privileges
+                              - revoke-auth
+                              - create-token
+                              - get-token
+                              - delete-token
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - kms
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - create
+                            - edit
+                            - delete
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - create
+                              - edit
+                              - delete
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - audit-logs
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - project-templates
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - create
+                            - edit
+                            - delete
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - create
+                              - edit
+                              - delete
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - app-connections
+                          description: The entity this permission pertains to.
+                        inverted:
+                          type: boolean
+                          description: Whether rule allows or forbids.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - create
+                            - edit
+                            - delete
+                            - connect
+                            - rotate-credentials
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - create
+                              - edit
+                              - delete
+                              - connect
+                              - rotate-credentials
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                        conditions:
+                          type: object
+                          properties:
+                            connectionId:
+                              anyOf:
+                              - type: string
+                              - type: object
+                                properties:
+                                  $eq:
+                                    type: string
+                                    minLength: 1
+                                  $ne:
+                                    type: string
+                                    minLength: 1
+                                  $in:
+                                    type: array
+                                    items:
+                                      type: string
+                                      minLength: 1
+                                additionalProperties: false
+                          additionalProperties: false
+                          description: When specified, only matching conditions will be allowed to access given resource.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - organization-admin-console
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - access-all-projects
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - access-all-projects
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - secret-share
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - manage-settings
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - manage-settings
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - kmip
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - proxy
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - proxy
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - machine-identity-auth-template
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - list-templates
+                            - edit-templates
+                            - create-templates
+                            - delete-templates
+                            - unlink-templates
+                            - attach-templates
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - list-templates
+                              - edit-templates
+                              - create-templates
+                              - delete-templates
+                              - unlink-templates
+                              - attach-templates
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - gateway
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - create-gateways
+                            - list-gateways
+                            - edit-gateways
+                            - delete-gateways
+                            - attach-gateways
+                            - revoke-gateway-access
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - create-gateways
+                              - list-gateways
+                              - edit-gateways
+                              - delete-gateways
+                              - attach-gateways
+                              - revoke-gateway-access
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - gateway-pool
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - create-gateway-pools
+                            - list-gateway-pools
+                            - edit-gateway-pools
+                            - delete-gateway-pools
+                            - attach-gateway-pools
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - create-gateway-pools
+                              - list-gateway-pools
+                              - edit-gateway-pools
+                              - delete-gateway-pools
+                              - attach-gateway-pools
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - relay
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - create-relays
+                            - list-relays
+                            - edit-relays
+                            - delete-relays
+                            - revoke-relay-access
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - create-relays
+                              - list-relays
+                              - edit-relays
+                              - delete-relays
+                              - revoke-relay-access
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - kmip-server
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - create-kmip-servers
+                            - list-kmip-servers
+                            - edit-kmip-servers
+                            - delete-kmip-servers
+                            - revoke-kmip-server-access
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - create-kmip-servers
+                              - list-kmip-servers
+                              - edit-kmip-servers
+                              - delete-kmip-servers
+                              - revoke-kmip-server-access
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - email-domains
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - create
+                            - verify-domain
+                            - delete
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - create
+                              - verify-domain
+                              - delete
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - certificate-manager
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - manage-instance
+                            - manage-settings
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - manage-instance
+                              - manage-settings
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - honey-tokens
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - setup
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - setup
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - oauth-clients
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - create
+                            - edit
+                            - delete
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - create
+                              - edit
+                              - delete
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                  description: The permissions assigned to the role.
+              additionalProperties: false
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: roleId
+        required: true
+        description: The ID of the role to update.
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  role:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      name:
+                        type: string
+                      description:
+                        type: string
+                        nullable: true
+                      slug:
+                        type: string
+                      permissions:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            subject:
+                              anyOf:
+                              - type: string
+                                minLength: 1
+                              - type: array
+                                items:
+                                  type: string
+                            action:
+                              anyOf:
+                              - type: string
+                                minLength: 1
+                              - type: array
+                                items:
+                                  type: string
+                            conditions: {}
+                            inverted:
+                              type: boolean
+                          required:
+                          - action
+                          additionalProperties: false
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                      orgId:
+                        type: string
+                        format: uuid
+                    required:
+                    - id
+                    - name
+                    - slug
+                    - permissions
+                    - createdAt
+                    - updatedAt
+                    - orgId
+                    additionalProperties: false
+                required:
+                - role
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+    delete:
+      tags:
+      - Organization Roles
+      description: Delete an organization role
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: roleId
+        required: true
+        description: The ID of the role to delete.
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  role:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      name:
+                        type: string
+                      description:
+                        type: string
+                        nullable: true
+                      slug:
+                        type: string
+                      permissions:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            subject:
+                              anyOf:
+                              - type: string
+                                minLength: 1
+                              - type: array
+                                items:
+                                  type: string
+                            action:
+                              anyOf:
+                              - type: string
+                                minLength: 1
+                              - type: array
+                                items:
+                                  type: string
+                            conditions: {}
+                            inverted:
+                              type: boolean
+                          required:
+                          - action
+                          additionalProperties: false
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                      orgId:
+                        type: string
+                        format: uuid
+                    required:
+                    - id
+                    - name
+                    - slug
+                    - permissions
+                    - createdAt
+                    - updatedAt
+                    - orgId
+                    additionalProperties: false
+                required:
+                - role
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v1/organization/roles/slug/{roleSlug}:
+    get:
+      tags:
+      - Organization Roles
+      description: Get an organization role by slug
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: roleSlug
+        required: true
+        description: The slug of the role to get details.
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  role:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      name:
+                        type: string
+                      description:
+                        type: string
+                        nullable: true
+                      slug:
+                        type: string
+                      permissions:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            subject:
+                              anyOf:
+                              - type: string
+                                minLength: 1
+                              - type: array
+                                items:
+                                  type: string
+                            action:
+                              anyOf:
+                              - type: string
+                                minLength: 1
+                              - type: array
+                                items:
+                                  type: string
+                            conditions: {}
+                            inverted:
+                              type: boolean
+                          required:
+                          - action
+                          additionalProperties: false
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                      orgId:
+                        type: string
+                        format: uuid
+                    required:
+                    - id
+                    - name
+                    - slug
+                    - permissions
+                    - createdAt
+                    - updatedAt
+                    - orgId
+                    additionalProperties: false
+                required:
+                - role
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: An access token in Infisical

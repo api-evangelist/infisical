@@ -1,0 +1,2617 @@
+openapi: 3.0.3
+info:
+  title: Infisical Admin PKI Alerting API
+  description: List of all available APIs that can be consumed
+  version: 0.0.1
+servers:
+- url: https://us.infisical.com
+  description: Production server (US)
+- url: https://eu.infisical.com
+  description: Production server (EU)
+- url: http://localhost:8080
+  description: Local server
+tags:
+- name: PKI Alerting
+paths:
+  /api/v1/projects/{projectId}/pki-alerts:
+    get:
+      operationId: listProjectPkiAlerts
+      tags:
+      - PKI Alerting
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: projectId
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  alerts:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        createdAt:
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          type: string
+                          format: date-time
+                        projectId:
+                          type: string
+                        pkiCollectionId:
+                          type: string
+                          format: uuid
+                        name:
+                          type: string
+                        alertBeforeDays:
+                          type: number
+                        recipientEmails:
+                          type: string
+                      required:
+                      - id
+                      - createdAt
+                      - updatedAt
+                      - projectId
+                      - pkiCollectionId
+                      - name
+                      - alertBeforeDays
+                      - recipientEmails
+                      additionalProperties: false
+                required:
+                - alerts
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v1/cert-manager/alerts:
+    post:
+      operationId: createPkiAlertV1
+      tags:
+      - PKI Alerting
+      description: Create a new PKI alert
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+                description:
+                  type: string
+                  maxLength: 1000
+                eventType:
+                  type: string
+                  enum:
+                  - expiration
+                  - renewal
+                  - issuance
+                  - revocation
+                alertBefore:
+                  type: string
+                filters:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      field:
+                        type: string
+                        enum:
+                        - profile_name
+                        - common_name
+                        - san
+                        - include_cas
+                      operator:
+                        type: string
+                        enum:
+                        - equals
+                        - matches
+                        - contains
+                        - starts_with
+                        - ends_with
+                      value:
+                        anyOf:
+                        - type: string
+                        - type: array
+                          items:
+                            type: string
+                        - type: boolean
+                    required:
+                    - field
+                    - operator
+                    - value
+                    additionalProperties: false
+                enabled:
+                  type: boolean
+                  default: true
+                notificationConfig:
+                  type: object
+                  properties:
+                    enableDailyNotification:
+                      type: boolean
+                      default: false
+                  additionalProperties: false
+                  nullable: true
+                channels:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      channelType:
+                        type: string
+                        enum:
+                        - email
+                        - webhook
+                        - slack
+                        - pagerduty
+                      config:
+                        anyOf:
+                        - type: object
+                          properties:
+                            recipients:
+                              type: array
+                              items:
+                                type: string
+                                format: email
+                              minItems: 1
+                              maxItems: 10
+                          required:
+                          - recipients
+                          additionalProperties: false
+                        - type: object
+                          properties:
+                            url:
+                              type: string
+                              format: uri
+                            signingSecret:
+                              type: string
+                              maxLength: 256
+                              nullable: true
+                          required:
+                          - url
+                          additionalProperties: false
+                        - type: object
+                          properties:
+                            webhookUrl:
+                              type: string
+                              format: uri
+                          required:
+                          - webhookUrl
+                          additionalProperties: false
+                        - type: object
+                          properties:
+                            integrationKey:
+                              type: string
+                          required:
+                          - integrationKey
+                          additionalProperties: false
+                      enabled:
+                        type: boolean
+                        default: true
+                    required:
+                    - channelType
+                    - config
+                    additionalProperties: false
+                  minItems: 1
+                  maxItems: 10
+                applicationId:
+                  type: string
+                  format: uuid
+                  description: Optional Application this alert is scoped to
+              required:
+              - name
+              - eventType
+              - filters
+              - channels
+              additionalProperties: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  alert:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      name:
+                        type: string
+                      description:
+                        type: string
+                        nullable: true
+                      eventType:
+                        type: string
+                        enum:
+                        - expiration
+                        - renewal
+                        - issuance
+                        - revocation
+                      alertBefore:
+                        type: string
+                      filters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            field:
+                              type: string
+                              enum:
+                              - profile_name
+                              - common_name
+                              - san
+                              - include_cas
+                            operator:
+                              type: string
+                              enum:
+                              - equals
+                              - matches
+                              - contains
+                              - starts_with
+                              - ends_with
+                            value:
+                              anyOf:
+                              - type: string
+                              - type: array
+                                items:
+                                  type: string
+                              - type: boolean
+                          required:
+                          - field
+                          - operator
+                          - value
+                          additionalProperties: false
+                      enabled:
+                        type: boolean
+                      applicationId:
+                        type: string
+                        format: uuid
+                        nullable: true
+                      notificationConfig:
+                        type: object
+                        properties:
+                          enableDailyNotification:
+                            type: boolean
+                            default: false
+                        additionalProperties: false
+                        nullable: true
+                      channels:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              format: uuid
+                            channelType:
+                              type: string
+                              enum:
+                              - email
+                              - webhook
+                              - slack
+                              - pagerduty
+                            config:
+                              type: object
+                              additionalProperties: {}
+                            enabled:
+                              type: boolean
+                            createdAt:
+                              type: string
+                              format: date-time
+                            updatedAt:
+                              type: string
+                              format: date-time
+                          required:
+                          - id
+                          - channelType
+                          - config
+                          - enabled
+                          - createdAt
+                          - updatedAt
+                          additionalProperties: false
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                    required:
+                    - id
+                    - name
+                    - description
+                    - eventType
+                    - filters
+                    - enabled
+                    - applicationId
+                    - notificationConfig
+                    - channels
+                    - createdAt
+                    - updatedAt
+                    additionalProperties: false
+                required:
+                - alert
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+    get:
+      operationId: listPkiAlertsV1
+      tags:
+      - PKI Alerting
+      description: List PKI alerts for a project
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+        in: query
+        name: applicationId
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: search
+        required: false
+      - schema:
+          type: string
+          enum:
+          - expiration
+          - renewal
+          - issuance
+          - revocation
+        in: query
+        name: eventType
+        required: false
+      - schema:
+          type: boolean
+        in: query
+        name: enabled
+        required: false
+      - schema:
+          type: number
+          minimum: 1
+          maximum: 100
+          default: 20
+        in: query
+        name: limit
+        required: false
+      - schema:
+          type: number
+          minimum: 0
+          default: 0
+        in: query
+        name: offset
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  alerts:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        name:
+                          type: string
+                        description:
+                          type: string
+                          nullable: true
+                        eventType:
+                          type: string
+                          enum:
+                          - expiration
+                          - renewal
+                          - issuance
+                          - revocation
+                        alertBefore:
+                          type: string
+                        filters:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              field:
+                                type: string
+                                enum:
+                                - profile_name
+                                - common_name
+                                - san
+                                - include_cas
+                              operator:
+                                type: string
+                                enum:
+                                - equals
+                                - matches
+                                - contains
+                                - starts_with
+                                - ends_with
+                              value:
+                                anyOf:
+                                - type: string
+                                - type: array
+                                  items:
+                                    type: string
+                                - type: boolean
+                            required:
+                            - field
+                            - operator
+                            - value
+                            additionalProperties: false
+                        enabled:
+                          type: boolean
+                        applicationId:
+                          type: string
+                          format: uuid
+                          nullable: true
+                        notificationConfig:
+                          type: object
+                          properties:
+                            enableDailyNotification:
+                              type: boolean
+                              default: false
+                          additionalProperties: false
+                          nullable: true
+                        channels:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                                format: uuid
+                              channelType:
+                                type: string
+                                enum:
+                                - email
+                                - webhook
+                                - slack
+                                - pagerduty
+                              config:
+                                type: object
+                                additionalProperties: {}
+                              enabled:
+                                type: boolean
+                              createdAt:
+                                type: string
+                                format: date-time
+                              updatedAt:
+                                type: string
+                                format: date-time
+                            required:
+                            - id
+                            - channelType
+                            - config
+                            - enabled
+                            - createdAt
+                            - updatedAt
+                            additionalProperties: false
+                        lastRun:
+                          type: object
+                          properties:
+                            timestamp:
+                              type: string
+                              format: date-time
+                            status:
+                              type: string
+                              enum:
+                              - success
+                              - failed
+                            error:
+                              type: string
+                              nullable: true
+                          required:
+                          - timestamp
+                          - status
+                          - error
+                          additionalProperties: false
+                          nullable: true
+                        createdAt:
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          type: string
+                          format: date-time
+                      required:
+                      - id
+                      - name
+                      - description
+                      - eventType
+                      - filters
+                      - enabled
+                      - applicationId
+                      - notificationConfig
+                      - channels
+                      - lastRun
+                      - createdAt
+                      - updatedAt
+                      additionalProperties: false
+                  total:
+                    type: number
+                required:
+                - alerts
+                - total
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v1/cert-manager/alerts/{alertId}:
+    get:
+      operationId: getPkiAlertV1
+      tags:
+      - PKI Alerting
+      description: Get a PKI alert by ID
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: alertId
+        required: true
+        description: Alert ID
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  alert:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      name:
+                        type: string
+                      description:
+                        type: string
+                        nullable: true
+                      eventType:
+                        type: string
+                        enum:
+                        - expiration
+                        - renewal
+                        - issuance
+                        - revocation
+                      alertBefore:
+                        type: string
+                      filters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            field:
+                              type: string
+                              enum:
+                              - profile_name
+                              - common_name
+                              - san
+                              - include_cas
+                            operator:
+                              type: string
+                              enum:
+                              - equals
+                              - matches
+                              - contains
+                              - starts_with
+                              - ends_with
+                            value:
+                              anyOf:
+                              - type: string
+                              - type: array
+                                items:
+                                  type: string
+                              - type: boolean
+                          required:
+                          - field
+                          - operator
+                          - value
+                          additionalProperties: false
+                      enabled:
+                        type: boolean
+                      applicationId:
+                        type: string
+                        format: uuid
+                        nullable: true
+                      notificationConfig:
+                        type: object
+                        properties:
+                          enableDailyNotification:
+                            type: boolean
+                            default: false
+                        additionalProperties: false
+                        nullable: true
+                      channels:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              format: uuid
+                            channelType:
+                              type: string
+                              enum:
+                              - email
+                              - webhook
+                              - slack
+                              - pagerduty
+                            config:
+                              type: object
+                              additionalProperties: {}
+                            enabled:
+                              type: boolean
+                            createdAt:
+                              type: string
+                              format: date-time
+                            updatedAt:
+                              type: string
+                              format: date-time
+                          required:
+                          - id
+                          - channelType
+                          - config
+                          - enabled
+                          - createdAt
+                          - updatedAt
+                          additionalProperties: false
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                    required:
+                    - id
+                    - name
+                    - description
+                    - eventType
+                    - filters
+                    - enabled
+                    - applicationId
+                    - notificationConfig
+                    - channels
+                    - createdAt
+                    - updatedAt
+                    additionalProperties: false
+                required:
+                - alert
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+    patch:
+      operationId: updatePkiAlertV1
+      tags:
+      - PKI Alerting
+      description: Update a PKI alert
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+                description:
+                  type: string
+                  maxLength: 1000
+                eventType:
+                  type: string
+                  enum:
+                  - expiration
+                  - renewal
+                  - issuance
+                  - revocation
+                alertBefore:
+                  type: string
+                filters:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      field:
+                        type: string
+                        enum:
+                        - profile_name
+                        - common_name
+                        - san
+                        - include_cas
+                      operator:
+                        type: string
+                        enum:
+                        - equals
+                        - matches
+                        - contains
+                        - starts_with
+                        - ends_with
+                      value:
+                        anyOf:
+                        - type: string
+                        - type: array
+                          items:
+                            type: string
+                        - type: boolean
+                    required:
+                    - field
+                    - operator
+                    - value
+                    additionalProperties: false
+                enabled:
+                  type: boolean
+                  default: true
+                notificationConfig:
+                  type: object
+                  properties:
+                    enableDailyNotification:
+                      type: boolean
+                      default: false
+                  additionalProperties: false
+                  nullable: true
+                channels:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      channelType:
+                        type: string
+                        enum:
+                        - email
+                        - webhook
+                        - slack
+                        - pagerduty
+                      config:
+                        anyOf:
+                        - type: object
+                          properties:
+                            recipients:
+                              type: array
+                              items:
+                                type: string
+                                format: email
+                              minItems: 1
+                              maxItems: 10
+                          required:
+                          - recipients
+                          additionalProperties: false
+                        - type: object
+                          properties:
+                            url:
+                              type: string
+                              format: uri
+                            signingSecret:
+                              type: string
+                              maxLength: 256
+                              nullable: true
+                          required:
+                          - url
+                          additionalProperties: false
+                        - type: object
+                          properties:
+                            webhookUrl:
+                              type: string
+                              format: uri
+                          required:
+                          - webhookUrl
+                          additionalProperties: false
+                        - type: object
+                          properties:
+                            integrationKey:
+                              type: string
+                          required:
+                          - integrationKey
+                          additionalProperties: false
+                      enabled:
+                        type: boolean
+                        default: true
+                    required:
+                    - channelType
+                    - config
+                    additionalProperties: false
+                  minItems: 1
+                  maxItems: 10
+              additionalProperties: false
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: alertId
+        required: true
+        description: Alert ID
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  alert:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      name:
+                        type: string
+                      description:
+                        type: string
+                        nullable: true
+                      eventType:
+                        type: string
+                        enum:
+                        - expiration
+                        - renewal
+                        - issuance
+                        - revocation
+                      alertBefore:
+                        type: string
+                      filters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            field:
+                              type: string
+                              enum:
+                              - profile_name
+                              - common_name
+                              - san
+                              - include_cas
+                            operator:
+                              type: string
+                              enum:
+                              - equals
+                              - matches
+                              - contains
+                              - starts_with
+                              - ends_with
+                            value:
+                              anyOf:
+                              - type: string
+                              - type: array
+                                items:
+                                  type: string
+                              - type: boolean
+                          required:
+                          - field
+                          - operator
+                          - value
+                          additionalProperties: false
+                      enabled:
+                        type: boolean
+                      applicationId:
+                        type: string
+                        format: uuid
+                        nullable: true
+                      notificationConfig:
+                        type: object
+                        properties:
+                          enableDailyNotification:
+                            type: boolean
+                            default: false
+                        additionalProperties: false
+                        nullable: true
+                      channels:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              format: uuid
+                            channelType:
+                              type: string
+                              enum:
+                              - email
+                              - webhook
+                              - slack
+                              - pagerduty
+                            config:
+                              type: object
+                              additionalProperties: {}
+                            enabled:
+                              type: boolean
+                            createdAt:
+                              type: string
+                              format: date-time
+                            updatedAt:
+                              type: string
+                              format: date-time
+                          required:
+                          - id
+                          - channelType
+                          - config
+                          - enabled
+                          - createdAt
+                          - updatedAt
+                          additionalProperties: false
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                    required:
+                    - id
+                    - name
+                    - description
+                    - eventType
+                    - filters
+                    - enabled
+                    - applicationId
+                    - notificationConfig
+                    - channels
+                    - createdAt
+                    - updatedAt
+                    additionalProperties: false
+                required:
+                - alert
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+    delete:
+      operationId: deletePkiAlertV1
+      tags:
+      - PKI Alerting
+      description: Delete a PKI alert
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: alertId
+        required: true
+        description: Alert ID
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  alert:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      name:
+                        type: string
+                      description:
+                        type: string
+                        nullable: true
+                      eventType:
+                        type: string
+                        enum:
+                        - expiration
+                        - renewal
+                        - issuance
+                        - revocation
+                      alertBefore:
+                        type: string
+                      filters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            field:
+                              type: string
+                              enum:
+                              - profile_name
+                              - common_name
+                              - san
+                              - include_cas
+                            operator:
+                              type: string
+                              enum:
+                              - equals
+                              - matches
+                              - contains
+                              - starts_with
+                              - ends_with
+                            value:
+                              anyOf:
+                              - type: string
+                              - type: array
+                                items:
+                                  type: string
+                              - type: boolean
+                          required:
+                          - field
+                          - operator
+                          - value
+                          additionalProperties: false
+                      enabled:
+                        type: boolean
+                      applicationId:
+                        type: string
+                        format: uuid
+                        nullable: true
+                      notificationConfig:
+                        type: object
+                        properties:
+                          enableDailyNotification:
+                            type: boolean
+                            default: false
+                        additionalProperties: false
+                        nullable: true
+                      channels:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              format: uuid
+                            channelType:
+                              type: string
+                              enum:
+                              - email
+                              - webhook
+                              - slack
+                              - pagerduty
+                            config:
+                              type: object
+                              additionalProperties: {}
+                            enabled:
+                              type: boolean
+                            createdAt:
+                              type: string
+                              format: date-time
+                            updatedAt:
+                              type: string
+                              format: date-time
+                          required:
+                          - id
+                          - channelType
+                          - config
+                          - enabled
+                          - createdAt
+                          - updatedAt
+                          additionalProperties: false
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                    required:
+                    - id
+                    - name
+                    - description
+                    - eventType
+                    - filters
+                    - enabled
+                    - applicationId
+                    - notificationConfig
+                    - channels
+                    - createdAt
+                    - updatedAt
+                    additionalProperties: false
+                required:
+                - alert
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v1/cert-manager/alerts/{alertId}/certificates:
+    get:
+      tags:
+      - PKI Alerting
+      description: List certificates that match an alert's filter rules
+      parameters:
+      - schema:
+          type: number
+          minimum: 1
+          maximum: 100
+          default: 20
+        in: query
+        name: limit
+        required: false
+      - schema:
+          type: number
+          minimum: 0
+          default: 0
+        in: query
+        name: offset
+        required: false
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: alertId
+        required: true
+        description: Alert ID
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  certificates:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        serialNumber:
+                          type: string
+                        commonName:
+                          type: string
+                        san:
+                          type: array
+                          items:
+                            type: string
+                        profileName:
+                          type: string
+                          nullable: true
+                        enrollmentType:
+                          type: string
+                          nullable: true
+                        notBefore:
+                          type: string
+                          format: date-time
+                        notAfter:
+                          type: string
+                          format: date-time
+                        status:
+                          type: string
+                      required:
+                      - id
+                      - serialNumber
+                      - commonName
+                      - san
+                      - profileName
+                      - enrollmentType
+                      - notBefore
+                      - notAfter
+                      - status
+                      additionalProperties: false
+                  total:
+                    type: number
+                required:
+                - certificates
+                - total
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v1/cert-manager/alerts/preview/certificates:
+    post:
+      operationId: previewPkiAlertCertificatesV1
+      tags:
+      - PKI Alerting
+      description: Preview certificates that would match the given filter rules
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filters:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      field:
+                        type: string
+                        enum:
+                        - profile_name
+                        - common_name
+                        - san
+                        - include_cas
+                      operator:
+                        type: string
+                        enum:
+                        - equals
+                        - matches
+                        - contains
+                        - starts_with
+                        - ends_with
+                      value:
+                        anyOf:
+                        - type: string
+                        - type: array
+                          items:
+                            type: string
+                        - type: boolean
+                    required:
+                    - field
+                    - operator
+                    - value
+                    additionalProperties: false
+                alertBefore:
+                  type: string
+                  description: Alert timing (e.g., '30d', '1w'). Required for expiration previews, omit for other event types.
+                limit:
+                  type: number
+                  minimum: 1
+                  maximum: 100
+                  default: 20
+                offset:
+                  type: number
+                  minimum: 0
+                  default: 0
+              required:
+              - filters
+              additionalProperties: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  certificates:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        serialNumber:
+                          type: string
+                        commonName:
+                          type: string
+                        san:
+                          type: array
+                          items:
+                            type: string
+                        profileName:
+                          type: string
+                          nullable: true
+                        enrollmentType:
+                          type: string
+                          nullable: true
+                        notBefore:
+                          type: string
+                          format: date-time
+                        notAfter:
+                          type: string
+                          format: date-time
+                        status:
+                          type: string
+                      required:
+                      - id
+                      - serialNumber
+                      - commonName
+                      - san
+                      - profileName
+                      - enrollmentType
+                      - notBefore
+                      - notAfter
+                      - status
+                      additionalProperties: false
+                  total:
+                    type: number
+                required:
+                - certificates
+                - total
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v2/workspace/{projectId}/pki-alerts:
+    get:
+      tags:
+      - PKI Alerting
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: projectId
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  alerts:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        createdAt:
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          type: string
+                          format: date-time
+                        projectId:
+                          type: string
+                        pkiCollectionId:
+                          type: string
+                          format: uuid
+                        name:
+                          type: string
+                        alertBeforeDays:
+                          type: number
+                        recipientEmails:
+                          type: string
+                      required:
+                      - id
+                      - createdAt
+                      - updatedAt
+                      - projectId
+                      - pkiCollectionId
+                      - name
+                      - alertBeforeDays
+                      - recipientEmails
+                      additionalProperties: false
+                required:
+                - alerts
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: An access token in Infisical

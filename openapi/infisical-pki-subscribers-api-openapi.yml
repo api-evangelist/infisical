@@ -1,0 +1,2725 @@
+openapi: 3.0.3
+info:
+  title: Infisical Admin PKI Subscribers API
+  description: List of all available APIs that can be consumed
+  version: 0.0.1
+servers:
+- url: https://us.infisical.com
+  description: Production server (US)
+- url: https://eu.infisical.com
+  description: Production server (EU)
+- url: http://localhost:8080
+  description: Local server
+tags:
+- name: PKI Subscribers
+paths:
+  /api/v1/projects/{projectId}/pki-subscribers:
+    get:
+      operationId: listProjectPkiSubscribers
+      tags:
+      - PKI Subscribers
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: projectId
+        required: true
+        description: The ID of the project to list PKI subscribers for.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  subscribers:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        projectId:
+                          type: string
+                        caId:
+                          type: string
+                          format: uuid
+                          nullable: true
+                        name:
+                          type: string
+                        commonName:
+                          type: string
+                        status:
+                          type: string
+                        subjectAlternativeNames:
+                          type: array
+                          items:
+                            type: string
+                        ttl:
+                          type: string
+                          nullable: true
+                        keyUsages:
+                          type: array
+                          items:
+                            type: string
+                        extendedKeyUsages:
+                          type: array
+                          items:
+                            type: string
+                        lastOperationStatus:
+                          type: string
+                          nullable: true
+                        lastOperationMessage:
+                          type: string
+                          nullable: true
+                        lastOperationAt:
+                          type: string
+                          format: date-time
+                          nullable: true
+                        enableAutoRenewal:
+                          type: boolean
+                          default: false
+                        autoRenewalPeriodInDays:
+                          type: number
+                          nullable: true
+                        lastAutoRenewAt:
+                          type: string
+                          format: date-time
+                          nullable: true
+                        properties:
+                          nullable: true
+                        supportsImmediateCertIssuance:
+                          type: boolean
+                      required:
+                      - id
+                      - projectId
+                      - name
+                      - commonName
+                      - status
+                      - subjectAlternativeNames
+                      - keyUsages
+                      - extendedKeyUsages
+                      additionalProperties: false
+                required:
+                - subscribers
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v1/pki/subscribers/{subscriberName}:
+    get:
+      operationId: getPkiSubscriber
+      tags:
+      - PKI Subscribers
+      description: Get PKI Subscriber
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: projectId
+        required: true
+        description: The ID of the project to get the PKI subscriber for.
+      - schema:
+          type: string
+        in: path
+        name: subscriberName
+        required: true
+        description: The name of the PKI subscriber to get.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  projectId:
+                    type: string
+                  caId:
+                    type: string
+                    format: uuid
+                    nullable: true
+                  name:
+                    type: string
+                  commonName:
+                    type: string
+                  status:
+                    type: string
+                  subjectAlternativeNames:
+                    type: array
+                    items:
+                      type: string
+                  ttl:
+                    type: string
+                    nullable: true
+                  keyUsages:
+                    type: array
+                    items:
+                      type: string
+                  extendedKeyUsages:
+                    type: array
+                    items:
+                      type: string
+                  lastOperationStatus:
+                    type: string
+                    nullable: true
+                  lastOperationMessage:
+                    type: string
+                    nullable: true
+                  lastOperationAt:
+                    type: string
+                    format: date-time
+                    nullable: true
+                  enableAutoRenewal:
+                    type: boolean
+                    default: false
+                  autoRenewalPeriodInDays:
+                    type: number
+                    nullable: true
+                  lastAutoRenewAt:
+                    type: string
+                    format: date-time
+                    nullable: true
+                  properties:
+                    nullable: true
+                  supportsImmediateCertIssuance:
+                    type: boolean
+                required:
+                - id
+                - projectId
+                - name
+                - commonName
+                - status
+                - subjectAlternativeNames
+                - keyUsages
+                - extendedKeyUsages
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+    patch:
+      operationId: updatePkiSubscriber
+      tags:
+      - PKI Subscribers
+      description: Update PKI Subscriber
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                projectId:
+                  type: string
+                  description: The ID of the project to update the PKI subscriber in.
+                caId:
+                  type: string
+                  format: uuid
+                  minLength: 1
+                  description: The ID of the CA that will issue certificates for the PKI subscriber to update to.
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                  description: The name of the PKI subscriber to update to.
+                commonName:
+                  type: string
+                  minLength: 1
+                  description: The common name (CN) to be used on certificates issued for this subscriber to update to.
+                status:
+                  type: string
+                  enum:
+                  - active
+                  - disabled
+                  description: The status of the PKI subscriber to update to. This can be one of active or disabled.
+                subjectAlternativeNames:
+                  type: array
+                  items:
+                    type: string
+                  description: A comma-delimited list of Subject Alternative Names (SANs) to be used on certificates issued for this subscriber; these can be host names or email addresses.
+                ttl:
+                  type: string
+                  description: The time to live for the certificates issued for this subscriber such as 1m, 1h, 1d, 1y, ...
+                keyUsages:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                    - digitalSignature
+                    - keyEncipherment
+                    - nonRepudiation
+                    - dataEncipherment
+                    - keyAgreement
+                    - keyCertSign
+                    - cRLSign
+                    - encipherOnly
+                    - decipherOnly
+                  description: The key usage extension to be used on certificates issued for this subscriber to update to.
+                extendedKeyUsages:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                    - clientAuth
+                    - serverAuth
+                    - codeSigning
+                    - emailProtection
+                    - timeStamping
+                    - ocspSigning
+                  description: The extended key usage extension to be used on certificates issued for this subscriber to update to.
+                enableAutoRenewal:
+                  type: boolean
+                  description: Whether or not to enable auto renewal for the PKI subscriber.
+                autoRenewalPeriodInDays:
+                  type: number
+                  minimum: 1
+                  description: The period in days to auto renew the PKI subscriber's certificates.
+                properties:
+                  type: object
+                  properties:
+                    azureTemplateType:
+                      type: string
+                      description: Azure ADCS Certificate Template Type
+                    organization:
+                      type: string
+                      minLength: 1
+                      maxLength: 64
+                      allOf:
+                      - pattern: ^[^,=+<>#;\\"\/\r\n\t]*$
+                      - pattern: ^[^\\s\\-_.]+.*[^\\s\\-_.]+$|^[^\\s\\-_.]{1}$
+                      description: Organization (O) - Maximum 64 characters, no special DN characters
+                    organizationalUnit:
+                      type: string
+                      minLength: 1
+                      maxLength: 64
+                      allOf:
+                      - pattern: ^[^,=+<>#;\\"\/\r\n\t]*$
+                      - pattern: ^[^\\s\\-_.]+.*[^\\s\\-_.]+$|^[^\\s\\-_.]{1}$
+                      description: Organizational Unit (OU) - Maximum 64 characters, no special DN characters
+                    country:
+                      type: string
+                      minLength: 2
+                      maxLength: 2
+                      pattern: ^[A-Z]{2}$
+                      description: Country (C) - Two uppercase letter country code (e.g., US, CA, GB)
+                    state:
+                      type: string
+                      minLength: 1
+                      maxLength: 64
+                      allOf:
+                      - pattern: ^[^,=+<>#;\\"\/\r\n\t]*$
+                      - pattern: ^[^\\s\\-_.]+.*[^\\s\\-_.]+$|^[^\\s\\-_.]{1}$
+                      description: State/Province (ST) - Maximum 64 characters, no special DN characters
+                    locality:
+                      type: string
+                      minLength: 1
+                      maxLength: 64
+                      allOf:
+                      - pattern: ^[^,=+<>#;\\"\/\r\n\t]*$
+                      - pattern: ^[^\\s\\-_.]+.*[^\\s\\-_.]+$|^[^\\s\\-_.]{1}$
+                      description: Locality (L) - Maximum 64 characters, no special DN characters
+                    emailAddress:
+                      type: string
+                      format: email
+                      minLength: 6
+                      maxLength: 64
+                      description: Email Address - Valid email format between 6 and 64 characters
+                  additionalProperties: false
+                  description: Additional subscriber properties and subject fields
+              required:
+              - projectId
+              additionalProperties: false
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: subscriberName
+        required: true
+        description: The name of the PKI subscriber to update.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  projectId:
+                    type: string
+                  caId:
+                    type: string
+                    format: uuid
+                    nullable: true
+                  name:
+                    type: string
+                  commonName:
+                    type: string
+                  status:
+                    type: string
+                  subjectAlternativeNames:
+                    type: array
+                    items:
+                      type: string
+                  ttl:
+                    type: string
+                    nullable: true
+                  keyUsages:
+                    type: array
+                    items:
+                      type: string
+                  extendedKeyUsages:
+                    type: array
+                    items:
+                      type: string
+                  lastOperationStatus:
+                    type: string
+                    nullable: true
+                  lastOperationMessage:
+                    type: string
+                    nullable: true
+                  lastOperationAt:
+                    type: string
+                    format: date-time
+                    nullable: true
+                  enableAutoRenewal:
+                    type: boolean
+                    default: false
+                  autoRenewalPeriodInDays:
+                    type: number
+                    nullable: true
+                  lastAutoRenewAt:
+                    type: string
+                    format: date-time
+                    nullable: true
+                  properties:
+                    nullable: true
+                  supportsImmediateCertIssuance:
+                    type: boolean
+                required:
+                - id
+                - projectId
+                - name
+                - commonName
+                - status
+                - subjectAlternativeNames
+                - keyUsages
+                - extendedKeyUsages
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+    delete:
+      tags:
+      - PKI Subscribers
+      description: Delete PKI Subscriber
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                projectId:
+                  type: string
+                  description: The ID of the project of the PKI subscriber to delete.
+              required:
+              - projectId
+              additionalProperties: false
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: subscriberName
+        required: true
+        description: The name of the PKI subscriber to delete.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  projectId:
+                    type: string
+                  caId:
+                    type: string
+                    format: uuid
+                    nullable: true
+                  name:
+                    type: string
+                  commonName:
+                    type: string
+                  status:
+                    type: string
+                  subjectAlternativeNames:
+                    type: array
+                    items:
+                      type: string
+                  ttl:
+                    type: string
+                    nullable: true
+                  keyUsages:
+                    type: array
+                    items:
+                      type: string
+                  extendedKeyUsages:
+                    type: array
+                    items:
+                      type: string
+                  lastOperationStatus:
+                    type: string
+                    nullable: true
+                  lastOperationMessage:
+                    type: string
+                    nullable: true
+                  lastOperationAt:
+                    type: string
+                    format: date-time
+                    nullable: true
+                  enableAutoRenewal:
+                    type: boolean
+                    default: false
+                  autoRenewalPeriodInDays:
+                    type: number
+                    nullable: true
+                  lastAutoRenewAt:
+                    type: string
+                    format: date-time
+                    nullable: true
+                  properties:
+                    nullable: true
+                  supportsImmediateCertIssuance:
+                    type: boolean
+                required:
+                - id
+                - projectId
+                - name
+                - commonName
+                - status
+                - subjectAlternativeNames
+                - keyUsages
+                - extendedKeyUsages
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v1/pki/subscribers:
+    post:
+      operationId: createPkiSubscriber
+      tags:
+      - PKI Subscribers
+      description: Create PKI Subscriber
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                projectId:
+                  type: string
+                  description: The ID of the project to create the PKI subscriber in.
+                caId:
+                  type: string
+                  format: uuid
+                  minLength: 1
+                  description: The ID of the CA that will issue certificates for the PKI subscriber.
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                  description: The name of the PKI subscriber.
+                commonName:
+                  type: string
+                  minLength: 1
+                  description: The common name (CN) to be used on certificates issued for this subscriber.
+                status:
+                  type: string
+                  enum:
+                  - active
+                  - disabled
+                  default: active
+                  description: The status of the PKI subscriber. This can be one of active or disabled.
+                ttl:
+                  type: string
+                  description: The time to live for the certificates issued for this subscriber such as 1m, 1h, 1d, 1y, ...
+                subjectAlternativeNames:
+                  type: array
+                  items:
+                    type: string
+                  default: []
+                  description: A list of Subject Alternative Names (SANs) to be used on certificates issued for this subscriber; these can be host names or email addresses.
+                keyUsages:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                    - digitalSignature
+                    - keyEncipherment
+                    - nonRepudiation
+                    - dataEncipherment
+                    - keyAgreement
+                    - keyCertSign
+                    - cRLSign
+                    - encipherOnly
+                    - decipherOnly
+                  default:
+                  - digitalSignature
+                  - keyEncipherment
+                  description: The key usage extension to be used on certificates issued for this subscriber.
+                extendedKeyUsages:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                    - clientAuth
+                    - serverAuth
+                    - codeSigning
+                    - emailProtection
+                    - timeStamping
+                    - ocspSigning
+                  default: []
+                  description: The extended key usage extension to be used on certificates issued for this subscriber.
+                enableAutoRenewal:
+                  type: boolean
+                  description: Whether or not to enable auto renewal for the PKI subscriber.
+                autoRenewalPeriodInDays:
+                  type: number
+                  minimum: 1
+                  description: The period in days to auto renew the PKI subscriber's certificates.
+                properties:
+                  type: object
+                  properties:
+                    azureTemplateType:
+                      type: string
+                      description: Azure ADCS Certificate Template Type
+                    organization:
+                      type: string
+                      minLength: 1
+                      maxLength: 64
+                      allOf:
+                      - pattern: ^[^,=+<>#;\\"\/\r\n\t]*$
+                      - pattern: ^[^\\s\\-_.]+.*[^\\s\\-_.]+$|^[^\\s\\-_.]{1}$
+                      description: Organization (O) - Maximum 64 characters, no special DN characters
+                    organizationalUnit:
+                      type: string
+                      minLength: 1
+                      maxLength: 64
+                      allOf:
+                      - pattern: ^[^,=+<>#;\\"\/\r\n\t]*$
+                      - pattern: ^[^\\s\\-_.]+.*[^\\s\\-_.]+$|^[^\\s\\-_.]{1}$
+                      description: Organizational Unit (OU) - Maximum 64 characters, no special DN characters
+                    country:
+                      type: string
+                      minLength: 2
+                      maxLength: 2
+                      pattern: ^[A-Z]{2}$
+                      description: Country (C) - Two uppercase letter country code (e.g., US, CA, GB)
+                    state:
+                      type: string
+                      minLength: 1
+                      maxLength: 64
+                      allOf:
+                      - pattern: ^[^,=+<>#;\\"\/\r\n\t]*$
+                      - pattern: ^[^\\s\\-_.]+.*[^\\s\\-_.]+$|^[^\\s\\-_.]{1}$
+                      description: State/Province (ST) - Maximum 64 characters, no special DN characters
+                    locality:
+                      type: string
+                      minLength: 1
+                      maxLength: 64
+                      allOf:
+                      - pattern: ^[^,=+<>#;\\"\/\r\n\t]*$
+                      - pattern: ^[^\\s\\-_.]+.*[^\\s\\-_.]+$|^[^\\s\\-_.]{1}$
+                      description: Locality (L) - Maximum 64 characters, no special DN characters
+                    emailAddress:
+                      type: string
+                      format: email
+                      minLength: 6
+                      maxLength: 64
+                      description: Email Address - Valid email format between 6 and 64 characters
+                  additionalProperties: false
+                  description: Additional subscriber properties and subject fields
+              required:
+              - projectId
+              - caId
+              - name
+              - commonName
+              additionalProperties: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  projectId:
+                    type: string
+                  caId:
+                    type: string
+                    format: uuid
+                    nullable: true
+                  name:
+                    type: string
+                  commonName:
+                    type: string
+                  status:
+                    type: string
+                  subjectAlternativeNames:
+                    type: array
+                    items:
+                      type: string
+                  ttl:
+                    type: string
+                    nullable: true
+                  keyUsages:
+                    type: array
+                    items:
+                      type: string
+                  extendedKeyUsages:
+                    type: array
+                    items:
+                      type: string
+                  lastOperationStatus:
+                    type: string
+                    nullable: true
+                  lastOperationMessage:
+                    type: string
+                    nullable: true
+                  lastOperationAt:
+                    type: string
+                    format: date-time
+                    nullable: true
+                  enableAutoRenewal:
+                    type: boolean
+                    default: false
+                  autoRenewalPeriodInDays:
+                    type: number
+                    nullable: true
+                  lastAutoRenewAt:
+                    type: string
+                    format: date-time
+                    nullable: true
+                  properties:
+                    nullable: true
+                  supportsImmediateCertIssuance:
+                    type: boolean
+                required:
+                - id
+                - projectId
+                - name
+                - commonName
+                - status
+                - subjectAlternativeNames
+                - keyUsages
+                - extendedKeyUsages
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v1/pki/subscribers/{subscriberName}/order-certificate:
+    post:
+      operationId: orderPkiSubscriberCertificate
+      tags:
+      - PKI Subscribers
+      description: Order certificate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                projectId:
+                  type: string
+                  description: The ID of the project of the PKI subscriber to issue the certificate for.
+              required:
+              - projectId
+              additionalProperties: false
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: subscriberName
+        required: true
+        description: The name of the PKI subscriber to issue the certificate for.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                required:
+                - message
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v1/pki/subscribers/{subscriberName}/issue-certificate:
+    post:
+      operationId: issuePkiSubscriberCertificate
+      tags:
+      - PKI Subscribers
+      description: Issue certificate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                projectId:
+                  type: string
+                  description: The ID of the project of the PKI subscriber to issue the certificate for.
+              required:
+              - projectId
+              additionalProperties: false
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: subscriberName
+        required: true
+        description: The name of the PKI subscriber to issue the certificate for.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  certificate:
+                    type: string
+                    description: The issued certificate.
+                  issuingCaCertificate:
+                    type: string
+                    description: The certificate of the issuing CA.
+                  certificateChain:
+                    type: string
+                    description: The certificate chain of the issued certificate.
+                  privateKey:
+                    type: string
+                    description: The private key of the issued certificate.
+                  serialNumber:
+                    type: string
+                    description: The serial number of the issued certificate.
+                required:
+                - certificate
+                - issuingCaCertificate
+                - certificateChain
+                - privateKey
+                - serialNumber
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v1/pki/subscribers/{subscriberName}/sign-certificate:
+    post:
+      operationId: signPkiSubscriberCertificate
+      tags:
+      - PKI Subscribers
+      description: Sign certificate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                projectId:
+                  type: string
+                  description: The ID of the project of the PKI subscriber to sign the certificate for.
+                csr:
+                  type: string
+                  minLength: 1
+                  maxLength: 3000
+                  description: The CSR to be used to sign the certificate.
+              required:
+              - projectId
+              - csr
+              additionalProperties: false
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: subscriberName
+        required: true
+        description: The name of the PKI subscriber to sign the certificate for.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  certificate:
+                    type: string
+                    description: The signed certificate.
+                  issuingCaCertificate:
+                    type: string
+                    description: The certificate of the issuing CA.
+                  certificateChain:
+                    type: string
+                    description: The certificate chain of the signed certificate.
+                  serialNumber:
+                    type: string
+                    description: The serial number of the issued certificate.
+                required:
+                - certificate
+                - issuingCaCertificate
+                - certificateChain
+                - serialNumber
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v1/pki/subscribers/{subscriberName}/latest-certificate-bundle:
+    get:
+      operationId: getPkiSubscriberLatestCertificateBundle
+      tags:
+      - PKI Subscribers
+      description: Get latest certificate bundle of a subscriber
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: projectId
+        required: true
+        description: The ID of the project to get the active certificate bundle for.
+      - schema:
+          type: string
+        in: path
+        name: subscriberName
+        required: true
+        description: The name of the PKI subscriber to get the active certificate bundle for.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  certificate:
+                    type: string
+                    description: The active certificate for the subscriber.
+                  certificateChain:
+                    type: string
+                    nullable: true
+                    description: The certificate chain of the active certificate for the subscriber.
+                  privateKey:
+                    type: string
+                    description: The private key of the active certificate for the subscriber.
+                  serialNumber:
+                    type: string
+                    description: The serial number of the active certificate for the subscriber.
+                required:
+                - certificate
+                - certificateChain
+                - privateKey
+                - serialNumber
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v1/pki/subscribers/{subscriberName}/certificates:
+    get:
+      operationId: listPkiSubscriberCertificates
+      tags:
+      - PKI Subscribers
+      description: List PKI Subscriber certificates
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: projectId
+        required: true
+        description: The ID of the project of the PKI subscriber to list the certificates for.
+      - schema:
+          type: number
+          minimum: 0
+          maximum: 100
+          default: 0
+        in: query
+        name: offset
+        required: false
+        description: The offset to start from.
+      - schema:
+          type: number
+          minimum: 1
+          maximum: 100
+          default: 25
+        in: query
+        name: limit
+        required: false
+        description: The number of certificates to return.
+      - schema:
+          type: string
+        in: path
+        name: subscriberName
+        required: true
+        description: The name of the PKI subscriber to get.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  certificates:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        createdAt:
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          type: string
+                          format: date-time
+                        caId:
+                          type: string
+                          format: uuid
+                          nullable: true
+                        status:
+                          type: string
+                        serialNumber:
+                          type: string
+                        friendlyName:
+                          type: string
+                        commonName:
+                          type: string
+                        notBefore:
+                          type: string
+                          format: date-time
+                        notAfter:
+                          type: string
+                          format: date-time
+                        revokedAt:
+                          type: string
+                          format: date-time
+                          nullable: true
+                        revocationReason:
+                          type: number
+                          nullable: true
+                        altNames:
+                          type: string
+                          nullable: true
+                        caCertId:
+                          type: string
+                          format: uuid
+                          nullable: true
+                        certificateTemplateId:
+                          type: string
+                          format: uuid
+                          nullable: true
+                        keyUsages:
+                          type: array
+                          items:
+                            type: string
+                          nullable: true
+                        extendedKeyUsages:
+                          type: array
+                          items:
+                            type: string
+                          nullable: true
+                        projectId:
+                          type: string
+                        pkiSubscriberId:
+                          type: string
+                          format: uuid
+                          nullable: true
+                        profileId:
+                          type: string
+                          format: uuid
+                          nullable: true
+                        renewBeforeDays:
+                          type: number
+                          nullable: true
+                        renewedFromCertificateId:
+                          type: string
+                          format: uuid
+                          nullable: true
+                        renewedByCertificateId:
+                          type: string
+                          format: uuid
+                          nullable: true
+                        renewalError:
+                          type: string
+                          nullable: true
+                        keyAlgorithm:
+                          type: string
+                          nullable: true
+                        signatureAlgorithm:
+                          type: string
+                          nullable: true
+                        subjectOrganization:
+                          type: string
+                          nullable: true
+                        subjectOrganizationalUnit:
+                          type: string
+                          nullable: true
+                        subjectCountry:
+                          type: string
+                          nullable: true
+                        subjectState:
+                          type: string
+                          nullable: true
+                        subjectLocality:
+                          type: string
+                          nullable: true
+                        fingerprintSha256:
+                          type: string
+                          nullable: true
+                        fingerprintSha1:
+                          type: string
+                          nullable: true
+                        isCA:
+                          type: boolean
+                          nullable: true
+                        pathLength:
+                          type: number
+                          nullable: true
+                        source:
+                          type: string
+                          nullable: true
+                        discoveryMetadata:
+                          nullable: true
+                        externalMetadata:
+                          nullable: true
+                        applicationId:
+                          type: string
+                          format: uuid
+                          nullable: true
+                      required:
+                      - id
+                      - createdAt
+                      - updatedAt
+                      - status
+                      - serialNumber
+                      - friendlyName
+                      - commonName
+                      - notBefore
+                      - notAfter
+                      - projectId
+                      additionalProperties: false
+                  totalCount:
+                    type: number
+                required:
+                - certificates
+                - totalCount
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+  /api/v2/workspace/{projectId}/pki-subscribers:
+    get:
+      tags:
+      - PKI Subscribers
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: projectId
+        required: true
+        description: The ID of the project to list PKI subscribers for.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  subscribers:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        projectId:
+                          type: string
+                        caId:
+                          type: string
+                          format: uuid
+                          nullable: true
+                        name:
+                          type: string
+                        commonName:
+                          type: string
+                        status:
+                          type: string
+                        subjectAlternativeNames:
+                          type: array
+                          items:
+                            type: string
+                        ttl:
+                          type: string
+                          nullable: true
+                        keyUsages:
+                          type: array
+                          items:
+                            type: string
+                        extendedKeyUsages:
+                          type: array
+                          items:
+                            type: string
+                        lastOperationStatus:
+                          type: string
+                          nullable: true
+                        lastOperationMessage:
+                          type: string
+                          nullable: true
+                        lastOperationAt:
+                          type: string
+                          format: date-time
+                          nullable: true
+                        enableAutoRenewal:
+                          type: boolean
+                          default: false
+                        autoRenewalPeriodInDays:
+                          type: number
+                          nullable: true
+                        lastAutoRenewAt:
+                          type: string
+                          format: date-time
+                          nullable: true
+                        properties:
+                          nullable: true
+                        supportsImmediateCertIssuance:
+                          type: boolean
+                      required:
+                      - id
+                      - projectId
+                      - name
+                      - commonName
+                      - status
+                      - subjectAlternativeNames
+                      - keyUsages
+                      - extendedKeyUsages
+                      additionalProperties: false
+                required:
+                - subscribers
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: An access token in Infisical

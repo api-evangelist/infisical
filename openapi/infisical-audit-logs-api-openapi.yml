@@ -1,0 +1,1027 @@
+openapi: 3.0.3
+info:
+  title: Infisical Admin Audit Logs API
+  description: List of all available APIs that can be consumed
+  version: 0.0.1
+servers:
+- url: https://us.infisical.com
+  description: Production server (US)
+- url: https://eu.infisical.com
+  description: Production server (EU)
+- url: http://localhost:8080
+  description: Local server
+tags:
+- name: Audit Logs
+paths:
+  /api/v1/organization/audit-logs:
+    get:
+      operationId: listOrganizationAuditLogs
+      tags:
+      - Audit Logs
+      description: Get all audit logs for an organization
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: projectId
+        required: false
+        description: Optionally filter logs by project ID. If not provided, logs from the entire organization will be returned.
+      - schema:
+          type: string
+        in: query
+        name: environment
+        required: false
+        description: The environment to filter logs by. If not provided, logs from all environments will be returned. Note that the projectId parameter must also be provided.
+      - schema:
+          type: string
+          enum:
+          - platform
+          - kmipClient
+          - user
+          - service
+          - identity
+          - scimClient
+          - acmeProfile
+          - acmeAccount
+          - estAccount
+          - scepAccount
+          - unknownUser
+          - gateway
+          - relay
+          - kmipServer
+        in: query
+        name: actorType
+        required: false
+        description: The type of actor to filter audit logs by. Must be provided when the actor parameter targets a non-user actor type (e.g. identity, kmipClient).
+      - schema:
+          type: string
+        in: query
+        name: secretPath
+        required: false
+        description: The path of the secret to query audit logs for. Note that the projectId parameter must also be provided.
+      - schema:
+          type: string
+        in: query
+        name: secretKey
+        required: false
+        description: The key of the secret to query audit logs for. Note that the projectId parameter must also be provided.
+      - schema:
+          allOf:
+          - anyOf:
+            - not: {}
+            - type: string
+          - anyOf:
+            - not: {}
+            - type: array
+              items:
+                type: string
+                enum:
+                - get-secrets
+                - get-secret
+                - reveal-secret
+                - create-secret
+                - create-secrets
+                - update-secret
+                - update-secrets
+                - move-secrets
+                - duplicate-secret
+                - delete-secret
+                - delete-secrets
+                - redact-secret-version-value
+                - get-project-key
+                - authorize-integration
+                - update-integration-auth
+                - unauthorize-integration
+                - create-integration
+                - delete-integration
+                - manual-sync-integration
+                - add-trusted-ip
+                - update-trusted-ip
+                - delete-trusted-ip
+                - create-service-token
+                - delete-service-token
+                - create-sub-organization
+                - update-sub-organization
+                - delete-sub-organization
+                - join-sub-organization
+                - create-identity
+                - update-identity
+                - delete-identity
+                - create-identity-org-membership
+                - update-identity-org-membership
+                - delete-identity-org-membership
+                - create-identity-project-membership
+                - update-identity-project-membership
+                - delete-identity-project-membership
+                - machine-identity-auth-template-create
+                - machine-identity-auth-template-update
+                - machine-identity-auth-template-delete
+                - login-identity-universal-auth
+                - login-identity-universal-auth-failed
+                - add-identity-universal-auth
+                - update-identity-universal-auth
+                - get-identity-universal-auth
+                - revoke-identity-universal-auth
+                - create-token-identity-token-auth
+                - update-token-identity-token-auth
+                - get-tokens-identity-token-auth
+                - get-token-identity-token-auth
+                - add-identity-token-auth
+                - update-identity-token-auth
+                - get-identity-token-auth
+                - revoke-identity-token-auth
+                - login-identity-kubernetes-auth
+                - login-identity-kubernetes-auth-failed
+                - add-identity-kubernetes-auth
+                - update-identity-kubernetes-auth
+                - get-identity-kubernetes-auth
+                - revoke-identity-kubernetes-auth
+                - login-identity-oidc-auth
+                - login-identity-oidc-auth-failed
+                - add-identity-oidc-auth
+                - update-identity-oidc-auth
+                - get-identity-oidc-auth
+                - revoke-identity-oidc-auth
+                - login-identity-jwt-auth
+                - login-identity-jwt-auth-failed
+                - add-identity-jwt-auth
+                - update-identity-jwt-auth
+                - get-identity-jwt-auth
+                - revoke-identity-jwt-auth
+                - login-identity-spiffe-auth
+                - login-identity-spiffe-auth-failed
+                - add-identity-spiffe-auth
+                - update-identity-spiffe-auth
+                - get-identity-spiffe-auth
+                - revoke-identity-spiffe-auth
+                - refresh-identity-spiffe-auth-bundle
+                - create-identity-universal-auth-client-secret
+                - revoke-identity-universal-auth-client-secret
+                - clear-identity-universal-auth-lockouts
+                - clear-identity-ldap-auth-lockouts
+                - get-identity-universal-auth-client-secret
+                - get-identity-universal-auth-client-secret-by-id
+                - login-identity-gcp-auth
+                - login-identity-gcp-auth-failed
+                - add-identity-gcp-auth
+                - update-identity-gcp-auth
+                - revoke-identity-gcp-auth
+                - get-identity-gcp-auth
+                - login-identity-alicloud-auth
+                - login-identity-alicloud-auth-failed
+                - add-identity-alicloud-auth
+                - update-identity-alicloud-auth
+                - revoke-identity-alicloud-auth
+                - get-identity-alicloud-auth
+                - login-identity-tls-cert-auth
+                - login-identity-tls-cert-auth-failed
+                - add-identity-tls-cert-auth
+                - update-identity-tls-cert-auth
+                - revoke-identity-tls-cert-auth
+                - get-identity-tls-cert-auth
+                - login-identity-aws-auth
+                - login-identity-aws-auth-failed
+                - add-identity-aws-auth
+                - update-identity-aws-auth
+                - revoke-identity-aws-auth
+                - get-identity-aws-auth
+                - login-identity-oci-auth
+                - login-identity-oci-auth-failed
+                - add-identity-oci-auth
+                - update-identity-oci-auth
+                - revoke-identity-oci-auth
+                - get-identity-oci-auth
+                - login-identity-azure-auth
+                - login-identity-azure-auth-failed
+                - add-identity-azure-auth
+                - update-identity-azure-auth
+                - get-identity-azure-auth
+                - revoke-identity-azure-auth
+                - login-identity-ldap-auth
+                - login-identity-ldap-auth-failed
+                - add-identity-ldap-auth
+                - update-identity-ldap-auth
+                - get-identity-ldap-auth
+                - revoke-identity-ldap-auth
+                - create-environment
+                - update-environment
+                - delete-environment
+                - restore-environment
+                - get-environment
+                - add-project-member
+                - add-project-members
+                - remove-project-member
+                - get-project-member-permission-audit
+                - get-project-identity-permission-audit
+                - create-folder
+                - update-folder
+                - delete-folder
+                - create-webhook
+                - update-webhook-status
+                - delete-webhook
+                - webhook-triggered
+                - get-secret-imports
+                - get-secret-import
+                - create-secret-import
+                - update-secret-import
+                - delete-secret-import
+                - update-user-project-role
+                - update-user-project-denied-permissions
+                - add-project-group
+                - update-project-group
+                - remove-project-group
+                - secret-approval-merged
+                - secret-approval-request
+                - secret-approval-closed
+                - secret-approval-reopened
+                - secret-approval-request-review
+                - sign-ssh-key
+                - issue-ssh-creds
+                - create-ssh-certificate-authority
+                - get-ssh-certificate-authority
+                - update-ssh-certificate-authority
+                - delete-ssh-certificate-authority
+                - get-ssh-certificate-authority-certificate-templates
+                - create-ssh-certificate-template
+                - update-ssh-certificate-template
+                - delete-ssh-certificate-template
+                - get-ssh-certificate-template
+                - get-azure-ad-templates
+                - get-ssh-host
+                - create-ssh-host
+                - update-ssh-host
+                - delete-ssh-host
+                - issue-ssh-host-user-cert
+                - issue-ssh-host-host-cert
+                - get-ssh-host-group
+                - create-ssh-host-group
+                - update-ssh-host-group
+                - delete-ssh-host-group
+                - get-ssh-host-group-hosts
+                - add-host-to-ssh-host-group
+                - remove-host-from-ssh-host-group
+                - create-certificate-authority
+                - get-certificate-authority
+                - get-certificate-authorities
+                - update-certificate-authority
+                - delete-certificate-authority
+                - renew-certificate-authority
+                - export-cert-manager-project
+                - get-certificate-authority-csr
+                - get-certificate-authority-certs
+                - get-certificate-authority-cert
+                - sign-intermediate
+                - import-certificate-authority-cert
+                - get-certificate-authority-crls
+                - generate-ca-certificate
+                - install-ca-cert-venafi
+                - install-ca-cert-adcs
+                - create-ca-signing-config
+                - get-ca-signing-config
+                - update-ca-signing-config
+                - get-ca-auto-renewal-config
+                - update-ca-auto-renewal-config
+                - issue-cert
+                - import-cert
+                - sign-cert
+                - get-ca-certificate-templates
+                - get-cert
+                - delete-cert
+                - revoke-cert
+                - assign-cert-to-application
+                - get-cert-body
+                - get-cert-private-key
+                - get-cert-bundle
+                - export-cert-pkcs12
+                - create-pki-alert
+                - get-pki-alert
+                - update-pki-alert
+                - delete-pki-alert
+                - create-certificate-inventory-view
+                - update-certificate-inventory-view
+                - delete-certificate-inventory-view
+                - create-pki-collection
+                - get-pki-collection
+                - update-pki-collection
+                - delete-pki-collection
+                - get-pki-collection-items
+                - add-pki-collection-item
+                - delete-pki-collection-item
+                - create-pki-subscriber
+                - update-pki-subscriber
+                - delete-pki-subscriber
+                - get-pki-subscriber
+                - issue-pki-subscriber-cert
+                - sign-pki-subscriber-cert
+                - automated-renew-subscriber-cert
+                - automated-renew-certificate
+                - automated-renew-certificate-failed
+                - list-pki-subscriber-certs
+                - get-subscriber-active-cert-bundle
+                - create-kms
+                - update-kms
+                - delete-kms
+                - get-kms
+                - update-project-kms
+                - get-project-kms-backup
+                - load-project-kms-backup
+                - org-admin-accessed-project
+                - org-admin-bypassed-sso
+                - user-login
+                - select-organization
+                - select-sub-organization
+                - create-certificate-policy
+                - update-certificate-policy
+                - delete-certificate-policy
+                - get-certificate-policy
+                - list-certificate-policies
+                - create-certificate-template-est-config
+                - update-certificate-template-est-config
+                - get-certificate-template-est-config
+                - create-certificate-profile
+                - update-certificate-profile
+                - delete-certificate-profile
+                - get-certificate-profile
+                - list-certificate-profiles
+                - create-pki-application
+                - update-pki-application
+                - delete-pki-application
+                - get-pki-application
+                - list-pki-applications
+                - attach-pki-application-profiles
+                - detach-pki-application-profile
+                - add-pki-application-member
+                - update-pki-application-member-role
+                - remove-pki-application-member
+                - list-pki-application-members
+                - get-pki-application-enrollment
+                - set-pki-application-api-enrollment
+                - clear-pki-application-api-enrollment
+                - set-pki-application-est-enrollment
+                - clear-pki-application-est-enrollment
+                - set-pki-application-acme-enrollment
+                - clear-pki-application-acme-enrollment
+                - reveal-pki-application-acme-eab-secret
+                - rotate-pki-application-acme-eab-secret
+                - set-pki-application-scep-enrollment
+                - clear-pki-application-scep-enrollment
+                - get-cert-manager-instance-state
+                - set-cert-manager-active-project
+                - invite-cert-manager-users
+                - update-cert-manager-user
+                - remove-cert-manager-user
+                - remove-cert-manager-users-batch
+                - add-cert-manager-identity
+                - update-cert-manager-identity
+                - remove-cert-manager-identity
+                - add-cert-manager-group
+                - update-cert-manager-group
+                - remove-cert-manager-group
+                - issue-certificate-from-profile
+                - sign-certificate-from-profile
+                - order-certificate-from-profile
+                - renew-certificate
+                - get-certificate-profile-latest-active-bundle
+                - update-certificate-renewal-config
+                - update-certificate-metadata
+                - update-certificate-cleanup-config
+                - certificate-cleanup-completed
+                - disable-certificate-renewal-config
+                - create-certificate-request
+                - get-certificate-request
+                - get-certificate-from-request
+                - list-certificate-requests
+                - trigger-certificate-request-validation
+                - cancel-certificate-request
+                - attempt-create-slack-integration
+                - attempt-reinstall-slack-integration
+                - get-project-slack-config
+                - update-project-slack-config
+                - get-slack-integration
+                - update-slack-integration
+                - delete-slack-integration
+                - get-project-workflow-integration-config
+                - update-project-workflow-integration-config
+                - get-project-ssh-config
+                - update-project-ssh-config
+                - integration-synced
+                - create-cmek
+                - update-cmek
+                - delete-cmek
+                - get-cmeks
+                - get-cmek
+                - cmek-encrypt
+                - cmek-decrypt
+                - cmek-sign
+                - cmek-verify
+                - cmek-list-signing-algorithms
+                - cmek-get-public-key
+                - cmek-get-private-key
+                - cmek-bulk-export-private-keys
+                - cmek-bulk-import-keys
+                - update-external-group-org-role-mapping
+                - get-external-group-org-role-mapping
+                - create-group
+                - update-group
+                - delete-group
+                - link-group-to-sub-org
+                - update-group-org-membership
+                - unlink-group-from-sub-org
+                - add-user-to-group
+                - remove-user-from-group
+                - add-identity-to-group
+                - remove-identity-from-group
+                - add-group-to-project
+                - update-group-project-membership
+                - remove-group-from-project
+                - get-project-templates
+                - get-project-template
+                - create-project-template
+                - update-project-template
+                - delete-project-template
+                - get-app-connections
+                - get-available-app-connections-details
+                - get-app-connection
+                - create-app-connection
+                - update-app-connection
+                - delete-app-connection
+                - get-app-connection-usage
+                - migrate-app-connection
+                - rotate-app-connection-credentials
+                - create-github-app
+                - delete-github-app
+                - create-shared-secret
+                - create-secret-request
+                - delete-shared-secret
+                - read-shared-secret
+                - get-secret-syncs
+                - get-secret-sync
+                - create-secret-sync
+                - update-secret-sync
+                - delete-secret-sync
+                - secret-sync-sync-secrets
+                - secret-sync-import-secrets
+                - secret-sync-remove-secrets
+                - get-pki-syncs
+                - get-pki-sync
+                - get-pki-sync-certificates
+                - create-pki-sync
+                - update-pki-sync
+                - delete-pki-sync
+                - pki-sync-sync-certificates
+                - pki-sync-import-certificates
+                - pki-sync-remove-certificates
+                - pki-sync-set-default-certificate
+                - pki-sync-clear-default-certificate
+                - oidc-group-membership-mapping-assign-user
+                - oidc-group-membership-mapping-remove-user
+                - create-kmip-client
+                - update-kmip-client
+                - delete-kmip-client
+                - get-kmip-client
+                - get-kmip-clients
+                - create-kmip-client-certificate
+                - setup-kmip
+                - get-kmip
+                - register-kmip-server
+                - kmip-operation-create
+                - kmip-operation-get
+                - kmip-operation-destroy
+                - kmip-operation-get-attributes
+                - kmip-operation-activate
+                - kmip-operation-revoke
+                - kmip-operation-locate
+                - kmip-operation-register
+                - get-secret-rotations
+                - get-secret-rotation
+                - get-secret-rotation-generated-credentials
+                - create-secret-rotation
+                - update-secret-rotation
+                - delete-secret-rotation
+                - move-secret-rotation
+                - secret-rotation-rotate-secrets
+                - reconcile-secret-rotation
+                - secret-rotation-check-credentials
+                - project-access-request
+                - microsoft-teams-workflow-integration-create
+                - microsoft-teams-workflow-integration-delete
+                - microsoft-teams-workflow-integration-update
+                - microsoft-teams-workflow-integration-check-installation-status
+                - microsoft-teams-workflow-integration-get-teams
+                - microsoft-teams-workflow-integration-get
+                - microsoft-teams-workflow-integration-list
+                - project-assume-privileges-session-start
+                - project-assume-privileges-session-end
+                - get-project-pit-commits
+                - get-project-pit-commit-changes
+                - get-project-pit-commit-count
+                - pit-rollback-commit
+                - pit-revert-commit
+                - pit-get-folder-state
+                - pit-compare-folder-states
+                - pit-process-new-commit-raw
+                - secret-scanning-data-source-list
+                - secret-scanning-data-source-create
+                - secret-scanning-data-source-update
+                - secret-scanning-data-source-delete
+                - secret-scanning-data-source-get
+                - secret-scanning-data-source-trigger-scan
+                - secret-scanning-data-source-scan
+                - secret-scanning-resource-list
+                - secret-scanning-scan-list
+                - secret-scanning-finding-list
+                - secret-scanning-finding-update
+                - secret-scanning-config-get
+                - secret-scanning-config-update
+                - update-org
+                - create-project
+                - update-project
+                - delete-project
+                - create-project-role
+                - update-project-role
+                - delete-project-role
+                - list-project-roles
+                - get-project-role
+                - create-org-role
+                - update-org-role
+                - delete-org-role
+                - create-secret-reminder
+                - get-secret-reminder
+                - delete-secret-reminder
+                - dashboard-list-secrets
+                - dashboard-get-secret-value
+                - dashboard-get-secret-version-value
+                - view-insights-auth-methods
+                - view-insights-secrets-management-calendar
+                - view-insights-secrets-management-access-volume
+                - view-insights-secrets-management-access-locations
+                - view-insights-secrets-management-summary
+                - view-insights-secrets-duplication
+                - view-insights-pam-summary
+                - view-insights-pam-session-activity
+                - view-insights-pam-top-actors
+                - view-insights-pam-resource-breakdown
+                - view-insights-pam-rotation-calendar
+                - pam-session-credentials-get
+                - pam-session-start
+                - pam-session-logs-update
+                - pam-session-end
+                - pam-session-terminate
+                - pam-session-get
+                - pam-session-list
+                - pam-session-event-batch-upload
+                - pam-session-chunk-upload
+                - pam-session-upload-token-invalid
+                - pam-recording-config-update
+                - pam-recording-config-delete
+                - pam-recording-bucket-connection-test-failed
+                - pam-folder-create
+                - pam-folder-update
+                - pam-folder-delete
+                - pam-account-list
+                - pam-account-get
+                - pam-account-access
+                - pam-account-aws-console-url-generated
+                - pam-account-create
+                - pam-account-update
+                - pam-account-delete
+                - pam-account-credential-rotation
+                - pam-account-credential-rotation-failed
+                - pam-account-policy-create
+                - pam-account-policy-update
+                - pam-account-policy-delete
+                - pam-account-policy-list
+                - pam-account-policy-get
+                - pam-account-read-credentials
+                - pam-web-access-session-ticket-created
+                - pam-resource-list
+                - pam-resource-get
+                - pam-resource-create
+                - pam-resource-update
+                - pam-resource-delete
+                - pam-domain-list
+                - pam-domain-get
+                - pam-domain-create
+                - pam-domain-update
+                - pam-domain-delete
+                - pam-discovery-source-list
+                - pam-discovery-source-get
+                - pam-discovery-source-create
+                - pam-discovery-source-update
+                - pam-discovery-source-delete
+                - pam-discovery-scan
+                - pam-discovery-source-run-list
+                - pam-discovery-source-run-get
+                - pam-discovery-source-resource-list
+                - pam-discovery-source-account-list
+                - pam-resource-rotation-rule-list
+                - pam-resource-rotation-rule-create
+                - pam-resource-rotation-rule-update
+                - pam-resource-rotation-rule-delete
+                - pam-resource-rotation-rule-reorder
+                - approval-policy-create
+                - approval-policy-update
+                - approval-policy-delete
+                - approval-policy-list
+                - approval-policy-get
+                - approval-request-get
+                - approval-request-list
+                - approval-request-create
+                - approval-request-approve
+                - approval-request-reject
+                - approval-request-cancel
+                - approval-request-grant-list
+                - approval-request-grant-get
+                - approval-request-grant-revoke
+                - pam-access-policy-bypassed
+                - access-approval-request-create
+                - access-approval-request-review
+                - access-approval-request-revoke
+                - access-approval-request-update
+                - view-audit-logs
+                - create-acme-account
+                - retrieve-acme-account
+                - create-acme-order
+                - finalize-acme-order
+                - download-acme-certificate
+                - respond-to-acme-challenge
+                - pass-acme-challenge
+                - attempt-acme-challenge
+                - fail-acme-challenge
+                - mcp-endpoint-create
+                - mcp-endpoint-update
+                - mcp-endpoint-delete
+                - mcp-endpoint-get
+                - mcp-endpoint-list
+                - mcp-endpoint-list-tools
+                - mcp-endpoint-enable-tool
+                - mcp-endpoint-disable-tool
+                - mcp-endpoint-bulk-update-tools
+                - mcp-endpoint-oauth-client-register
+                - mcp-endpoint-oauth-authorize
+                - mcp-endpoint-connect
+                - mcp-endpoint-save-user-credential
+                - mcp-server-create
+                - mcp-server-update
+                - mcp-server-delete
+                - mcp-server-get
+                - mcp-server-list
+                - mcp-server-list-tools
+                - mcp-server-sync-tools
+                - mcp-activity-log-list
+                - create-dynamic-secret
+                - update-dynamic-secret
+                - delete-dynamic-secret
+                - get-dynamic-secret
+                - list-dynamic-secrets
+                - create-dynamic-secret-lease
+                - delete-dynamic-secret-lease
+                - renew-dynamic-secret-lease
+                - list-dynamic-secret-leases
+                - get-dynamic-secret-lease
+                - create-pki-discovery
+                - update-pki-discovery
+                - delete-pki-discovery
+                - get-pki-discovery
+                - get-pki-discoveries
+                - trigger-pki-discovery-scan
+                - get-pki-installation
+                - get-pki-installations
+                - update-pki-installation
+                - delete-pki-installation
+                - create-pki-signer
+                - update-pki-signer
+                - delete-pki-signer
+                - get-pki-signer
+                - get-pki-signers
+                - get-pki-signer-public-key
+                - get-pki-signing-operations
+                - pki-signer-sign
+                - enable-pki-signer
+                - disable-pki-signer
+                - reissue-pki-signer-certificate
+                - export-pki-signer-certificate
+                - update-pki-signer-approval-policy
+                - pki-signer-request-to-sign
+                - pki-signer-pre-approve-signing
+                - pki-signer-revoke-request
+                - add-pki-signer-member
+                - update-pki-signer-member
+                - remove-pki-signer-member
+                - scep-enrollment
+                - scep-renewal
+                - scep-dynamic-challenge-generated
+                - secret-validation-rule-create
+                - secret-validation-rule-update
+                - secret-validation-rule-delete
+                - external-migration-create
+                - external-migration-update
+                - external-migration-delete
+                - create-oauth-client
+                - update-oauth-client
+                - delete-oauth-client
+                - rotate-oauth-client-secret
+                - oauth-client-authorize
+                - create-email-domain
+                - verify-email-domain
+                - delete-email-domain
+                - gateway-create
+                - gateway-enrollment-token-create
+                - gateway-enroll
+                - resource-auth-method-login
+                - resource-auth-method-login-failed
+                - resource-auth-method-update
+                - resource-auth-method-revoke
+                - relay-create
+                - relay-update
+                - relay-delete
+                - relay-enrollment-token-create
+                - kmip-server-create
+                - kmip-server-update
+                - kmip-server-delete
+                - kmip-server-enrollment-token-create
+                - gateway-pool-create
+                - gateway-pool-update
+                - gateway-pool-delete
+                - gateway-pool-add-member
+                - gateway-pool-remove-member
+                - create-honey-token
+                - update-honey-token
+                - revoke-honey-token
+                - trigger-honey-token
+        in: query
+        name: eventType
+        required: false
+      - schema:
+          type: string
+          enum:
+          - web
+          - cli
+          - k8-operator
+          - terraform
+          - other
+          - InfisicalPythonSDK
+          - InfisicalNodeSDK
+        in: query
+        name: userAgentType
+        required: false
+        description: Choose which consuming application to export audit logs for.
+      - schema:
+          type: string
+        in: query
+        name: eventMetadata
+        required: false
+        description: Filter by event metadata key-value pairs. Formatted as `key1=value1,key2=value2`, with comma-separation.
+      - schema:
+          type: string
+          format: date-time
+        in: query
+        name: startDate
+        required: false
+        description: The date to start the export from.
+      - schema:
+          type: string
+          format: date-time
+        in: query
+        name: endDate
+        required: false
+        description: The date to end the export at.
+      - schema:
+          type: number
+          default: 0
+        in: query
+        name: offset
+        required: false
+        description: The offset to start from. If you enter 10, it will start from the 10th audit log.
+      - schema:
+          type: number
+          maximum: 1000
+          default: 20
+        in: query
+        name: limit
+        required: false
+        description: The number of audit logs to return.
+      - schema:
+          type: string
+        in: query
+        name: actor
+        required: false
+        description: The ID of a specific actor to filter audit logs by. For user actors this is the userId; for identity actors this is the identityId. When filtering non-user actor types, the actorType parameter must also be provided.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  auditLogs:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        ipAddress:
+                          type: string
+                          nullable: true
+                        userAgent:
+                          type: string
+                          nullable: true
+                        userAgentType:
+                          type: string
+                          nullable: true
+                        expiresAt:
+                          type: string
+                          format: date-time
+                          nullable: true
+                        createdAt:
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          type: string
+                          format: date-time
+                        orgId:
+                          type: string
+                          format: uuid
+                          nullable: true
+                        projectId:
+                          type: string
+                          nullable: true
+                        projectName:
+                          type: string
+                          nullable: true
+                        event:
+                          type: object
+                          properties:
+                            type:
+                              type: string
+                            metadata: {}
+                          required:
+                          - type
+                          additionalProperties: false
+                        actor:
+                          type: object
+                          properties:
+                            type:
+                              type: string
+                            metadata: {}
+                          required:
+                          - type
+                          additionalProperties: false
+                      required:
+                      - id
+                      - createdAt
+                      - updatedAt
+                      - event
+                      - actor
+                      additionalProperties: false
+                required:
+                - auditLogs
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: An access token in Infisical

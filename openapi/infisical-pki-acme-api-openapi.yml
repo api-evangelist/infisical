@@ -1,0 +1,801 @@
+openapi: 3.0.3
+info:
+  title: Infisical Admin PKI ACME API
+  description: List of all available APIs that can be consumed
+  version: 0.0.1
+servers:
+- url: https://us.infisical.com
+  description: Production server (US)
+- url: https://eu.infisical.com
+  description: Production server (EU)
+- url: http://localhost:8080
+  description: Local server
+tags:
+- name: PKI ACME
+paths:
+  /api/v1/cert-manager/acme/profiles/{profileId}/directory:
+    get:
+      tags:
+      - PKI ACME
+      description: ACME Directory - provides URLs for the client to make API calls to
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: profileId
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  newNonce:
+                    type: string
+                  newAccount:
+                    type: string
+                  newOrder:
+                    type: string
+                  revokeCert:
+                    type: string
+                  meta:
+                    type: object
+                    properties:
+                      termsOfService:
+                        type: string
+                      website:
+                        type: string
+                      caaIdentities:
+                        type: array
+                        items:
+                          type: string
+                      externalAccountRequired:
+                        type: boolean
+                    additionalProperties: false
+                required:
+                - newNonce
+                - newAccount
+                - newOrder
+                additionalProperties: false
+  /api/v1/cert-manager/acme/profiles/{profileId}/new-nonce:
+    get:
+      tags:
+      - PKI ACME
+      description: ACME New Nonce (GET) - generate a new nonce and return in Replay-Nonce header with 204 No Content
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: profileId
+        required: true
+      responses:
+        '204':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: string
+                minLength: 0
+                maxLength: 0
+  /api/v1/cert-manager/acme/profiles/{profileId}/new-account:
+    post:
+      tags:
+      - PKI ACME
+      description: ACME New Account - register a new account or find existing one
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                protected:
+                  type: string
+                payload:
+                  type: string
+                signature:
+                  type: string
+              required:
+              - protected
+              - payload
+              - signature
+              additionalProperties: false
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: profileId
+        required: true
+      responses:
+        '201':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  contact:
+                    type: array
+                    items:
+                      type: string
+                  orders:
+                    type: string
+                required:
+                - status
+                additionalProperties: false
+  /api/v1/cert-manager/acme/profiles/{profileId}/accounts/{accountId}:
+    post:
+      tags:
+      - PKI ACME
+      description: ACME Account Deactivation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                protected:
+                  type: string
+                payload:
+                  type: string
+                signature:
+                  type: string
+              required:
+              - protected
+              - payload
+              - signature
+              additionalProperties: false
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: profileId
+        required: true
+      - schema:
+          type: string
+        in: path
+        name: accountId
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                required:
+                - status
+                additionalProperties: false
+  /api/v1/cert-manager/acme/profiles/{profileId}/new-order:
+    post:
+      tags:
+      - PKI ACME
+      description: ACME New Order - apply for a new certificate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                protected:
+                  type: string
+                payload:
+                  type: string
+                signature:
+                  type: string
+              required:
+              - protected
+              - payload
+              - signature
+              additionalProperties: false
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: profileId
+        required: true
+      responses:
+        '201':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - pending
+                    - ready
+                    - processing
+                    - valid
+                    - invalid
+                  expires:
+                    type: string
+                  notBefore:
+                    type: string
+                  notAfter:
+                    type: string
+                  identifiers:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        value:
+                          type: string
+                      required:
+                      - type
+                      - value
+                      additionalProperties: false
+                  authorizations:
+                    type: array
+                    items:
+                      type: string
+                  finalize:
+                    type: string
+                  certificate:
+                    type: string
+                required:
+                - status
+                - identifiers
+                - authorizations
+                - finalize
+                additionalProperties: false
+  /api/v1/cert-manager/acme/profiles/{profileId}/orders/{orderId}:
+    post:
+      tags:
+      - PKI ACME
+      description: ACME Get Order - return status and details of the order
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                protected:
+                  type: string
+                payload:
+                  type: string
+                signature:
+                  type: string
+              required:
+              - protected
+              - payload
+              - signature
+              additionalProperties: false
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: profileId
+        required: true
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: orderId
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - pending
+                    - ready
+                    - processing
+                    - valid
+                    - invalid
+                  expires:
+                    type: string
+                  notBefore:
+                    type: string
+                  notAfter:
+                    type: string
+                  identifiers:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        value:
+                          type: string
+                      required:
+                      - type
+                      - value
+                      additionalProperties: false
+                  authorizations:
+                    type: array
+                    items:
+                      type: string
+                  finalize:
+                    type: string
+                  certificate:
+                    type: string
+                required:
+                - status
+                - identifiers
+                - authorizations
+                - finalize
+                additionalProperties: false
+  /api/v1/cert-manager/acme/profiles/{profileId}/orders/{orderId}/finalize:
+    post:
+      tags:
+      - PKI ACME
+      description: ACME Finalize Order - finalize cert order by providing CSR
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                protected:
+                  type: string
+                payload:
+                  type: string
+                signature:
+                  type: string
+              required:
+              - protected
+              - payload
+              - signature
+              additionalProperties: false
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: profileId
+        required: true
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: orderId
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - pending
+                    - ready
+                    - processing
+                    - valid
+                    - invalid
+                  expires:
+                    type: string
+                  notBefore:
+                    type: string
+                  notAfter:
+                    type: string
+                  identifiers:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        value:
+                          type: string
+                      required:
+                      - type
+                      - value
+                      additionalProperties: false
+                  authorizations:
+                    type: array
+                    items:
+                      type: string
+                  finalize:
+                    type: string
+                  certificate:
+                    type: string
+                required:
+                - status
+                - identifiers
+                - authorizations
+                - finalize
+                additionalProperties: false
+  /api/v1/cert-manager/acme/profiles/{profileId}/accounts/{accountId}/orders:
+    post:
+      tags:
+      - PKI ACME
+      description: ACME List Orders - get existing orders from current account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                protected:
+                  type: string
+                payload:
+                  type: string
+                signature:
+                  type: string
+              required:
+              - protected
+              - payload
+              - signature
+              additionalProperties: false
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: profileId
+        required: true
+      - schema:
+          type: string
+        in: path
+        name: accountId
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  orders:
+                    type: array
+                    items:
+                      type: string
+                required:
+                - orders
+                additionalProperties: false
+  /api/v1/cert-manager/acme/profiles/{profileId}/orders/{orderId}/certificate:
+    post:
+      tags:
+      - PKI ACME
+      description: ACME Download Certificate - download certificate when ready
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                protected:
+                  type: string
+                payload:
+                  type: string
+                signature:
+                  type: string
+              required:
+              - protected
+              - payload
+              - signature
+              additionalProperties: false
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: profileId
+        required: true
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: orderId
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v1/cert-manager/acme/profiles/{profileId}/authorizations/{authzId}:
+    post:
+      tags:
+      - PKI ACME
+      description: ACME Identifier Authorization - get authorization info (challenges)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                protected:
+                  type: string
+                payload:
+                  type: string
+                signature:
+                  type: string
+              required:
+              - protected
+              - payload
+              - signature
+              additionalProperties: false
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: profileId
+        required: true
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: authzId
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - pending
+                    - valid
+                    - invalid
+                    - deactivated
+                    - expired
+                    - revoked
+                  expires:
+                    type: string
+                  identifier:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                      value:
+                        type: string
+                    required:
+                    - type
+                    - value
+                    additionalProperties: false
+                  wildcard:
+                    type: boolean
+                  challenges:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          enum:
+                          - http-01
+                          - dns-01
+                          - tls-alpn-01
+                        url:
+                          type: string
+                        status:
+                          type: string
+                        token:
+                          type: string
+                        validated:
+                          type: string
+                      required:
+                      - type
+                      - url
+                      - status
+                      - token
+                      additionalProperties: false
+                required:
+                - status
+                - identifier
+                - challenges
+                additionalProperties: false
+  /api/v1/cert-manager/acme/profiles/{profileId}/authorizations/{authzId}/challenges/{challengeId}:
+    post:
+      tags:
+      - PKI ACME
+      description: ACME Respond to Challenge - let ACME server know challenge is ready
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: profileId
+        required: true
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: authzId
+        required: true
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: challengeId
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    enum:
+                    - http-01
+                    - dns-01
+                    - tls-alpn-01
+                  url:
+                    type: string
+                  status:
+                    type: string
+                  token:
+                    type: string
+                  validated:
+                    type: string
+                  error:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                      detail:
+                        type: string
+                      status:
+                        type: number
+                    required:
+                    - type
+                    - detail
+                    - status
+                    additionalProperties: false
+                required:
+                - type
+                - url
+                - status
+                - token
+                additionalProperties: false
+  /api/v1/cert-manager/acme/applications/{applicationId}/profiles/{profileId}/directory:
+    get:
+      tags:
+      - PKI ACME
+      description: ACME Directory - provides URLs for the client to make API calls to
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: applicationId
+        required: true
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: profileId
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  newNonce:
+                    type: string
+                  newAccount:
+                    type: string
+                  newOrder:
+                    type: string
+                  revokeCert:
+                    type: string
+                  meta:
+                    type: object
+                    properties:
+                      termsOfService:
+                        type: string
+                      website:
+                        type: string
+                      caaIdentities:
+                        type: array
+                        items:
+                          type: string
+                      externalAccountRequired:
+                        type: boolean
+                    additionalProperties: false
+                required:
+                - newNonce
+                - newAccount
+                - newOrder
+                additionalProperties: false
+  /api/v1/cert-manager/acme/applications/{applicationId}/profiles/{profileId}/new-account:
+    post:
+      tags:
+      - PKI ACME
+      description: ACME New Account - register a new account or find existing one
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                protected:
+                  type: string
+                payload:
+                  type: string
+                signature:
+                  type: string
+              required:
+              - protected
+              - payload
+              - signature
+              additionalProperties: false
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: applicationId
+        required: true
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: profileId
+        required: true
+      responses:
+        '201':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  contact:
+                    type: array
+                    items:
+                      type: string
+                  orders:
+                    type: string
+                required:
+                - status
+                additionalProperties: false
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: An access token in Infisical
