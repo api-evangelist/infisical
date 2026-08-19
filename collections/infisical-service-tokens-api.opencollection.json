@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin Service Tokens API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Service Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getServiceToken",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v2/service-token",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Return Infisical Token data"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,2343 @@
+{
+  "item": [
+    {
+      "id": "ce7ad216-d77a-46e6-88d6-2b8904b30e7c",
+      "name": "Kubernetes Auth",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6455ab3d-5c5f-4d98-8e6b-f7242da53f6f",
+          "name": "login With Kubernetes Auth",
+          "request": {
+            "name": "login With Kubernetes Auth",
+            "description": {
+              "content": "Login with Kubernetes Auth for machine identity",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "kubernetes-auth",
+                "login"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identityId\": \"<string>\",\n  \"jwt\": \"<string>\",\n  \"organizationSlug\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "54c2d074-3527-4db1-a77b-f89b1467a2be",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "kubernetes-auth",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identityId\": \"<string>\",\n  \"jwt\": \"<string>\",\n  \"organizationSlug\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accessToken\": \"string\",\n  \"expiresIn\": 235.20565872390375,\n  \"accessTokenMaxTTL\": 3999.3188904757794,\n  \"tokenType\": \"Bearer\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dec3fdeb-2f1a-48fe-9b99-e32298d89ae7",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "kubernetes-auth",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identityId\": \"<string>\",\n  \"jwt\": \"<string>\",\n  \"organizationSlug\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9e0dd65-e4df-41ed-b31e-b3c21f4b1b88",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "kubernetes-auth",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identityId\": \"<string>\",\n  \"jwt\": \"<string>\",\n  \"organizationSlug\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1ad0b385-b075-4fca-8a33-3be4b45f9e55",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "kubernetes-auth",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identityId\": \"<string>\",\n  \"jwt\": \"<string>\",\n  \"organizationSlug\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "14e43b21-41cf-491a-9b41-fdda0b657b3f",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "kubernetes-auth",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identityId\": \"<string>\",\n  \"jwt\": \"<string>\",\n  \"organizationSlug\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20fbab69-cae2-4c5f-bf54-8c0a436dc61f",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "kubernetes-auth",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identityId\": \"<string>\",\n  \"jwt\": \"<string>\",\n  \"organizationSlug\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1ecdaa4-1ade-49ce-81af-4df9cf16dd7b",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "kubernetes-auth",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identityId\": \"<string>\",\n  \"jwt\": \"<string>\",\n  \"organizationSlug\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "18cac156-b273-4e41-96c7-9cbdce83046b",
+          "name": "attach Kubernetes Auth",
+          "request": {
+            "name": "attach Kubernetes Auth",
+            "description": {
+              "content": "Attach Kubernetes Auth configuration onto machine identity",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "kubernetes-auth",
+                "identities",
+                ":identityId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "identityId",
+                  "description": "(Required) The ID of the machine identity to attach the configuration onto."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"kubernetesHost\": \"<string>\",\n  \"allowedNamespaces\": \"<string>\",\n  \"allowedNames\": \"<string>\",\n  \"allowedAudience\": \"<string>\",\n  \"caCert\": \"<string>\",\n  \"verifyTlsCertificate\": \"<boolean>\",\n  \"tokenReviewerJwt\": \"<string>\",\n  \"tokenReviewMode\": \"api\",\n  \"gatewayId\": \"<uuid>\",\n  \"gatewayPoolId\": \"<uuid>\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"0.0.0.0/0\"\n    },\n    {\n      \"ipAddress\": \"::/0\"\n    }\n  ],\n  \"accessTokenTTL\": 2592000,\n  \"accessTokenMaxTTL\": 2592000,\n  \"accessTokenNumUsesLimit\": 0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3b61977a-22f6-45e0-941c-4f15accb2682",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "kubernetes-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to attach the configuration onto."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kubernetesHost\": \"<string>\",\n  \"allowedNamespaces\": \"<string>\",\n  \"allowedNames\": \"<string>\",\n  \"allowedAudience\": \"<string>\",\n  \"caCert\": \"<string>\",\n  \"verifyTlsCertificate\": \"<boolean>\",\n  \"tokenReviewerJwt\": \"<string>\",\n  \"tokenReviewMode\": \"api\",\n  \"gatewayId\": \"<uuid>\",\n  \"gatewayPoolId\": \"<uuid>\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"0.0.0.0/0\"\n    },\n    {\n      \"ipAddress\": \"::/0\"\n    }\n  ],\n  \"accessTokenTTL\": 2592000,\n  \"accessTokenMaxTTL\": 2592000,\n  \"accessTokenNumUsesLimit\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"identityKubernetesAuth\": {\n    \"id\": \"94a495ca-cc0b-fa0a-4862-6878d2731175\",\n    \"createdAt\": \"1967-06-27T15:27:26.783Z\",\n    \"updatedAt\": \"1986-12-23T17:31:53.366Z\",\n    \"identityId\": \"e35f98ae-ac1a-afcd-b048-f6fa53427c38\",\n    \"allowedNamespaces\": \"string\",\n    \"allowedNames\": \"string\",\n    \"allowedAudience\": \"string\",\n    \"caCert\": \"string\",\n    \"accessTokenTTL\": 7200,\n    \"accessTokenMaxTTL\": 7200,\n    \"accessTokenNumUsesLimit\": 0,\n    \"accessTokenTrustedIps\": \"\",\n    \"tokenReviewMode\": \"api\",\n    \"kubernetesHost\": \"string\",\n    \"gatewayId\": \"899cac71-72da-9e3c-4ff7-e3a976e24055\",\n    \"gatewayPoolId\": \"4049fe8b-b9a4-ebf0-0fbc-bdbb2695207f\",\n    \"verifyTlsCertificate\": false,\n    \"tokenReviewerJwt\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "49fbbe5a-3e25-4969-8617-e5f8bfac926f",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "kubernetes-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to attach the configuration onto."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kubernetesHost\": \"<string>\",\n  \"allowedNamespaces\": \"<string>\",\n  \"allowedNames\": \"<string>\",\n  \"allowedAudience\": \"<string>\",\n  \"caCert\": \"<string>\",\n  \"verifyTlsCertificate\": \"<boolean>\",\n  \"tokenReviewerJwt\": \"<string>\",\n  \"tokenReviewMode\": \"api\",\n  \"gatewayId\": \"<uuid>\",\n  \"gatewayPoolId\": \"<uuid>\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"0.0.0.0/0\"\n    },\n    {\n      \"ipAddress\": \"::/0\"\n    }\n  ],\n  \"accessTokenTTL\": 2592000,\n  \"accessTokenMaxTTL\": 2592000,\n  \"accessTokenNumUsesLimit\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4fb5cb8b-7ecf-4fc4-b03a-81c6f28fa4e9",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "kubernetes-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to attach the configuration onto."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kubernetesHost\": \"<string>\",\n  \"allowedNamespaces\": \"<string>\",\n  \"allowedNames\": \"<string>\",\n  \"allowedAudience\": \"<string>\",\n  \"caCert\": \"<string>\",\n  \"verifyTlsCertificate\": \"<boolean>\",\n  \"tokenReviewerJwt\": \"<string>\",\n  \"tokenReviewMode\": \"api\",\n  \"gatewayId\": \"<uuid>\",\n  \"gatewayPoolId\": \"<uuid>\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"0.0.0.0/0\"\n    },\n    {\n      \"ipAddress\": \"::/0\"\n    }\n  ],\n  \"accessTokenTTL\": 2592000,\n  \"accessTokenMaxTTL\": 2592000,\n  \"accessTokenNumUsesLimit\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b37e47b0-531d-466b-ab58-3b42058242a5",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "kubernetes-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to attach the configuration onto."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kubernetesHost\": \"<string>\",\n  \"allowedNamespaces\": \"<string>\",\n  \"allowedNames\": \"<string>\",\n  \"allowedAudience\": \"<string>\",\n  \"caCert\": \"<string>\",\n  \"verifyTlsCertificate\": \"<boolean>\",\n  \"tokenReviewerJwt\": \"<string>\",\n  \"tokenReviewMode\": \"api\",\n  \"gatewayId\": \"<uuid>\",\n  \"gatewayPoolId\": \"<uuid>\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"0.0.0.0/0\"\n    },\n    {\n      \"ipAddress\": \"::/0\"\n    }\n  ],\n  \"accessTokenTTL\": 2592000,\n  \"accessTokenMaxTTL\": 2592000,\n  \"accessTokenNumUsesLimit\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2b0d3b42-d145-4e9b-96bd-c370964e2b10",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "kubernetes-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to attach the configuration onto."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kubernetesHost\": \"<string>\",\n  \"allowedNamespaces\": \"<string>\",\n  \"allowedNames\": \"<string>\",\n  \"allowedAudience\": \"<string>\",\n  \"caCert\": \"<string>\",\n  \"verifyTlsCertificate\": \"<boolean>\",\n  \"tokenReviewerJwt\": \"<string>\",\n  \"tokenReviewMode\": \"api\",\n  \"gatewayId\": \"<uuid>\",\n  \"gatewayPoolId\": \"<uuid>\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"0.0.0.0/0\"\n    },\n    {\n      \"ipAddress\": \"::/0\"\n    }\n  ],\n  \"accessTokenTTL\": 2592000,\n  \"accessTokenMaxTTL\": 2592000,\n  \"accessTokenNumUsesLimit\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a00156f-281f-43b4-b706-fe89492a801c",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "kubernetes-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to attach the configuration onto."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kubernetesHost\": \"<string>\",\n  \"allowedNamespaces\": \"<string>\",\n  \"allowedNames\": \"<string>\",\n  \"allowedAudience\": \"<string>\",\n  \"caCert\": \"<string>\",\n  \"verifyTlsCertificate\": \"<boolean>\",\n  \"tokenReviewerJwt\": \"<string>\",\n  \"tokenReviewMode\": \"api\",\n  \"gatewayId\": \"<uuid>\",\n  \"gatewayPoolId\": \"<uuid>\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"0.0.0.0/0\"\n    },\n    {\n      \"ipAddress\": \"::/0\"\n    }\n  ],\n  \"accessTokenTTL\": 2592000,\n  \"accessTokenMaxTTL\": 2592000,\n  \"accessTokenNumUsesLimit\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5cac8836-6a00-4abe-aced-b30c82fbf854",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "kubernetes-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to attach the configuration onto."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kubernetesHost\": \"<string>\",\n  \"allowedNamespaces\": \"<string>\",\n  \"allowedNames\": \"<string>\",\n  \"allowedAudience\": \"<string>\",\n  \"caCert\": \"<string>\",\n  \"verifyTlsCertificate\": \"<boolean>\",\n  \"tokenReviewerJwt\": \"<string>\",\n  \"tokenReviewMode\": \"api\",\n  \"gatewayId\": \"<uuid>\",\n  \"gatewayPoolId\": \"<uuid>\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"0.0.0.0/0\"\n    },\n    {\n      \"ipAddress\": \"::/0\"\n    }\n  ],\n  \"accessTokenTTL\": 2592000,\n  \"accessTokenMaxTTL\": 2592000,\n  \"accessTokenNumUsesLimit\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1dbf954a-7da9-4d0b-9cab-afad5a5b8b3c",
+          "name": "update Kubernetes Auth",
+          "request": {
+            "name": "update Kubernetes Auth",
+            "description": {
+              "content": "Update Kubernetes Auth configuration on machine identity",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "kubernetes-auth",
+                "identities",
+                ":identityId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "identityId",
+                  "description": "(Required) The ID of the machine identity to update the auth method for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"kubernetesHost\": \"<string>\",\n  \"caCert\": \"<string>\",\n  \"verifyTlsCertificate\": \"<boolean>\",\n  \"tokenReviewerJwt\": \"<string>\",\n  \"tokenReviewMode\": \"<string>\",\n  \"allowedNamespaces\": \"<string>\",\n  \"allowedNames\": \"<string>\",\n  \"allowedAudience\": \"<string>\",\n  \"gatewayId\": \"<uuid>\",\n  \"gatewayPoolId\": \"<uuid>\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"<string>\"\n    }\n  ],\n  \"accessTokenTTL\": \"<integer>\",\n  \"accessTokenNumUsesLimit\": \"<integer>\",\n  \"accessTokenMaxTTL\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7981f0f2-bc86-4835-b272-cc047b5a5c6c",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "kubernetes-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to update the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kubernetesHost\": \"<string>\",\n  \"caCert\": \"<string>\",\n  \"verifyTlsCertificate\": \"<boolean>\",\n  \"tokenReviewerJwt\": \"<string>\",\n  \"tokenReviewMode\": \"<string>\",\n  \"allowedNamespaces\": \"<string>\",\n  \"allowedNames\": \"<string>\",\n  \"allowedAudience\": \"<string>\",\n  \"gatewayId\": \"<uuid>\",\n  \"gatewayPoolId\": \"<uuid>\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"<string>\"\n    }\n  ],\n  \"accessTokenTTL\": \"<integer>\",\n  \"accessTokenNumUsesLimit\": \"<integer>\",\n  \"accessTokenMaxTTL\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"identityKubernetesAuth\": {\n    \"id\": \"94a495ca-cc0b-fa0a-4862-6878d2731175\",\n    \"createdAt\": \"1967-06-27T15:27:26.783Z\",\n    \"updatedAt\": \"1986-12-23T17:31:53.366Z\",\n    \"identityId\": \"e35f98ae-ac1a-afcd-b048-f6fa53427c38\",\n    \"allowedNamespaces\": \"string\",\n    \"allowedNames\": \"string\",\n    \"allowedAudience\": \"string\",\n    \"caCert\": \"string\",\n    \"accessTokenTTL\": 7200,\n    \"accessTokenMaxTTL\": 7200,\n    \"accessTokenNumUsesLimit\": 0,\n    \"accessTokenTrustedIps\": \"\",\n    \"tokenReviewMode\": \"api\",\n    \"kubernetesHost\": \"string\",\n    \"gatewayId\": \"899cac71-72da-9e3c-4ff7-e3a976e24055\",\n    \"gatewayPoolId\": \"4049fe8b-b9a4-ebf0-0fbc-bdbb2695207f\",\n    \"verifyTlsCertificate\": false,\n    \"tokenReviewerJwt\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a35740c-092b-4f36-821e-0f65b6ccd1c2",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "kubernetes-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to update the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kubernetesHost\": \"<string>\",\n  \"caCert\": \"<string>\",\n  \"verifyTlsCertificate\": \"<boolean>\",\n  \"tokenReviewerJwt\": \"<string>\",\n  \"tokenReviewMode\": \"<string>\",\n  \"allowedNamespaces\": \"<string>\",\n  \"allowedNames\": \"<string>\",\n  \"allowedAudience\": \"<string>\",\n  \"gatewayId\": \"<uuid>\",\n  \"gatewayPoolId\": \"<uuid>\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"<string>\"\n    }\n  ],\n  \"accessTokenTTL\": \"<integer>\",\n  \"accessTokenNumUsesLimit\": \"<integer>\",\n  \"accessTokenMaxTTL\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ffeaa3d-662f-485e-a614-63267a2859bd",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "kubernetes-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to update the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kubernetesHost\": \"<string>\",\n  \"caCert\": \"<string>\",\n  \"verifyTlsCertificate\": \"<boolean>\",\n  \"tokenReviewerJwt\": \"<string>\",\n  \"tokenReviewMode\": \"<string>\",\n  \"allowedNamespaces\": \"<string>\",\n  \"allowedNames\": \"<string>\",\n  \"allowedAudience\": \"<string>\",\n  \"gatewayId\": \"<uuid>\",\n  \"gatewayPoolId\": \"<uuid>\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"<string>\"\n    }\n  ],\n  \"accessTokenTTL\": \"<integer>\",\n  \"accessTokenNumUsesLimit\": \"<integer>\",\n  \"accessTokenMaxTTL\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "663438ba-288c-46ce-bcf4-df870fde2263",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "kubernetes-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to update the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kubernetesHost\": \"<string>\",\n  \"caCert\": \"<string>\",\n  \"verifyTlsCertificate\": \"<boolean>\",\n  \"tokenReviewerJwt\": \"<string>\",\n  \"tokenReviewMode\": \"<string>\",\n  \"allowedNamespaces\": \"<string>\",\n  \"allowedNames\": \"<string>\",\n  \"allowedAudience\": \"<string>\",\n  \"gatewayId\": \"<uuid>\",\n  \"gatewayPoolId\": \"<uuid>\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"<string>\"\n    }\n  ],\n  \"accessTokenTTL\": \"<integer>\",\n  \"accessTokenNumUsesLimit\": \"<integer>\",\n  \"accessTokenMaxTTL\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "adb8d6f7-dbf5-4e64-8db9-fe4fe350a251",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "kubernetes-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to update the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kubernetesHost\": \"<string>\",\n  \"caCert\": \"<string>\",\n  \"verifyTlsCertificate\": \"<boolean>\",\n  \"tokenReviewerJwt\": \"<string>\",\n  \"tokenReviewMode\": \"<string>\",\n  \"allowedNamespaces\": \"<string>\",\n  \"allowedNames\": \"<string>\",\n  \"allowedAudience\": \"<string>\",\n  \"gatewayId\": \"<uuid>\",\n  \"gatewayPoolId\": \"<uuid>\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"<string>\"\n    }\n  ],\n  \"accessTokenTTL\": \"<integer>\",\n  \"accessTokenNumUsesLimit\": \"<integer>\",\n  \"accessTokenMaxTTL\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10cc56d6-ac89-4d3f-9412-de360fdbee00",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "kubernetes-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to update the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kubernetesHost\": \"<string>\",\n  \"caCert\": \"<string>\",\n  \"verifyTlsCertificate\": \"<boolean>\",\n  \"tokenReviewerJwt\": \"<string>\",\n  \"tokenReviewMode\": \"<string>\",\n  \"allowedNamespaces\": \"<string>\",\n  \"allowedNames\": \"<string>\",\n  \"allowedAudience\": \"<string>\",\n  \"gatewayId\": \"<uuid>\",\n  \"gatewayPoolId\": \"<uuid>\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"<string>\"\n    }\n  ],\n  \"accessTokenTTL\": \"<integer>\",\n  \"accessTokenNumUsesLimit\": \"<integer>\",\n  \"accessTokenMaxTTL\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ff2f77e-e1e8-4db9-a9b6-5fa83c03c44c",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "kubernetes-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to update the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kubernetesHost\": \"<string>\",\n  \"caCert\": \"<string>\",\n  \"verifyTlsCertificate\": \"<boolean>\",\n  \"tokenReviewerJwt\": \"<string>\",\n  \"tokenReviewMode\": \"<string>\",\n  \"allowedNamespaces\": \"<string>\",\n  \"allowedNames\": \"<string>\",\n  \"allowedAudience\": \"<string>\",\n  \"gatewayId\": \"<uuid>\",\n  \"gatewayPoolId\": \"<uuid>\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"<string>\"\n    }\n  ],\n  \"accessTokenTTL\": \"<integer>\",\n  \"accessTokenNumUsesLimit\": \"<integer>\",\n  \"accessTokenMaxTTL\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4c30b6f6-b169-494e-b59e-9bdb4563e6fd",
+          "name": "get Kubernetes Auth",
+          "request": {
+            "name": "get Kubernetes Auth",
+            "description": {
+              "content": "Retrieve Kubernetes Auth configuration on machine identity",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "kubernetes-auth",
+                "identities",
+                ":identityId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "identityId",
+                  "description": "(Required) The ID of the machine identity to retrieve the auth method for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b78cb567-ae86-4213-8f56-2ae9d31a2e4a",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "kubernetes-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to retrieve the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"identityKubernetesAuth\": {\n    \"id\": \"94a495ca-cc0b-fa0a-4862-6878d2731175\",\n    \"createdAt\": \"1967-06-27T15:27:26.783Z\",\n    \"updatedAt\": \"1986-12-23T17:31:53.366Z\",\n    \"identityId\": \"e35f98ae-ac1a-afcd-b048-f6fa53427c38\",\n    \"allowedNamespaces\": \"string\",\n    \"allowedNames\": \"string\",\n    \"allowedAudience\": \"string\",\n    \"caCert\": \"string\",\n    \"accessTokenTTL\": 7200,\n    \"accessTokenMaxTTL\": 7200,\n    \"accessTokenNumUsesLimit\": 0,\n    \"accessTokenTrustedIps\": \"\",\n    \"tokenReviewMode\": \"api\",\n    \"kubernetesHost\": \"string\",\n    \"gatewayId\": \"899cac71-72da-9e3c-4ff7-e3a976e24055\",\n    \"gatewayPoolId\": \"4049fe8b-b9a4-ebf0-0fbc-bdbb2695207f\",\n    \"verifyTlsCertificate\": false,\n    \"tokenReviewerJwt\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f881a254-0245-4cb7-b999-fffbb935800a",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "kubernetes-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to retrieve the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d681527a-1c53-4254-b83e-4e98f9b206ae",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "kubernetes-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to retrieve the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "05dda34a-ae20-42b5-b263-9a9c76ee6e02",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "kubernetes-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to retrieve the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d223dc6-fa9b-4d00-82c2-93f04ba1493b",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "kubernetes-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to retrieve the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a64e00a-e9a8-4829-9da7-6e4157620c90",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "kubernetes-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to retrieve the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0fe60e0c-b6d3-404b-9533-86b9d0ac374f",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "kubernetes-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to retrieve the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dc0c5b76-d221-43db-b561-91a6ebdf9349",
+          "name": "delete Kubernetes Auth",
+          "request": {
+            "name": "delete Kubernetes Auth",
+            "description": {
+              "content": "Delete Kubernetes Auth configuration on machine identity",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "kubernetes-auth",
+                "identities",
+                ":identityId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "identityId",
+                  "description": "(Required) The ID of the machine identity to revoke the auth method for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1c5e0c54-4c1a-4077-b659-04154f00ab9f",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "kubernetes-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to revoke the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"identityKubernetesAuth\": {\n    \"id\": \"905f89df-f319-b978-65ae-1ed0fcc15d48\",\n    \"createdAt\": \"1983-03-21T22:48:20.584Z\",\n    \"updatedAt\": \"1963-06-05T22:36:17.458Z\",\n    \"identityId\": \"66358808-cddc-a4ad-b14b-74bb97b7571c\",\n    \"allowedNamespaces\": \"string\",\n    \"allowedNames\": \"string\",\n    \"allowedAudience\": \"string\",\n    \"accessTokenTTL\": 7200,\n    \"accessTokenMaxTTL\": 7200,\n    \"accessTokenNumUsesLimit\": 0,\n    \"accessTokenTrustedIps\": \"\",\n    \"tokenReviewMode\": \"api\",\n    \"kubernetesHost\": \"string\",\n    \"gatewayId\": \"32b33704-4367-c824-1f20-53dae2074ca8\",\n    \"gatewayPoolId\": \"d97b9944-12de-5445-9fc7-5ee2479db3c7\",\n    \"verifyTlsCertificate\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "74ed7179-c5a9-4f40-8355-c19fa7c77d24",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "kubernetes-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to revoke the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "077601ef-4936-4dfe-9ecc-e8324472545d",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "kubernetes-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to revoke the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "45525e7e-548b-4cd5-9855-832896bf08ae",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "kubernetes-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to revoke the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e54636e1-6ef4-4790-b277-e41e19eb03c1",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "kubernetes-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to revoke the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a505cc68-8b64-4e72-be1e-f058045b0950",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "kubernetes-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to revoke the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b03ac06-9d9e-4ab8-a1d0-6c52ce2f6b15",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "kubernetes-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to revoke the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://us.infisical.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ab103357-a899-42d8-8ff1-c628377e5f45",
+    "name": "Infisical Admin Kubernetes Auth API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "List of all available APIs that can be consumed",
+      "type": "text/plain"
+    }
+  }
+}

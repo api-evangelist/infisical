@@ -1,0 +1,2343 @@
+{
+  "item": [
+    {
+      "id": "f5978fdc-49ed-4835-8f53-8f8c42d2bccb",
+      "name": "GCP Auth",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "899e6014-e245-4931-9177-cb74d967ed1b",
+          "name": "login With Gcp Auth",
+          "request": {
+            "name": "login With Gcp Auth",
+            "description": {
+              "content": "Login with GCP Auth for machine identity",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "gcp-auth",
+                "login"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identityId\": \"<string>\",\n  \"jwt\": \"<string>\",\n  \"organizationSlug\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0acd35b6-0def-4d84-80c6-6dbb427bbd73",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "gcp-auth",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identityId\": \"<string>\",\n  \"jwt\": \"<string>\",\n  \"organizationSlug\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accessToken\": \"string\",\n  \"expiresIn\": 8846.193515688878,\n  \"accessTokenMaxTTL\": 7779.901086541479,\n  \"tokenType\": \"Bearer\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26afc191-6838-4101-a393-fe12e51cc712",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "gcp-auth",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identityId\": \"<string>\",\n  \"jwt\": \"<string>\",\n  \"organizationSlug\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e22ea315-dbed-476d-b9ce-7dc77c6b302d",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "gcp-auth",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identityId\": \"<string>\",\n  \"jwt\": \"<string>\",\n  \"organizationSlug\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "110c02b1-d69f-45dd-a2e9-2f7088c1034b",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "gcp-auth",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identityId\": \"<string>\",\n  \"jwt\": \"<string>\",\n  \"organizationSlug\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "415ea3d4-db96-4659-9c65-14a77b866051",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "gcp-auth",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identityId\": \"<string>\",\n  \"jwt\": \"<string>\",\n  \"organizationSlug\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98725286-8322-4b14-b3e7-fda9af062f26",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "gcp-auth",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identityId\": \"<string>\",\n  \"jwt\": \"<string>\",\n  \"organizationSlug\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1ac3fc1f-ac63-4e41-a1d8-c329da13af20",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "gcp-auth",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identityId\": \"<string>\",\n  \"jwt\": \"<string>\",\n  \"organizationSlug\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "19443a51-13ee-485c-a570-42f523b10d4d",
+          "name": "attach Gcp Auth",
+          "request": {
+            "name": "attach Gcp Auth",
+            "description": {
+              "content": "Attach GCP Auth configuration onto machine identity",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "gcp-auth",
+                "identities",
+                ":identityId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "identityId",
+                  "description": "(Required) The ID of the machine identity to attach the configuration onto."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"<string>\",\n  \"allowedServiceAccounts\": \"\",\n  \"allowedProjects\": \"\",\n  \"allowedZones\": \"\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"0.0.0.0/0\"\n    },\n    {\n      \"ipAddress\": \"::/0\"\n    }\n  ],\n  \"accessTokenTTL\": 2592000,\n  \"accessTokenMaxTTL\": 2592000,\n  \"accessTokenNumUsesLimit\": 0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9da07885-f7c3-4f0a-a678-a6c9206f6a30",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "gcp-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to attach the configuration onto."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"allowedServiceAccounts\": \"\",\n  \"allowedProjects\": \"\",\n  \"allowedZones\": \"\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"0.0.0.0/0\"\n    },\n    {\n      \"ipAddress\": \"::/0\"\n    }\n  ],\n  \"accessTokenTTL\": 2592000,\n  \"accessTokenMaxTTL\": 2592000,\n  \"accessTokenNumUsesLimit\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"identityGcpAuth\": {\n    \"id\": \"b9ba25aa-5797-e3d0-bc79-fa72128d02bc\",\n    \"createdAt\": \"1952-08-20T19:31:51.395Z\",\n    \"updatedAt\": \"1959-11-12T12:40:37.325Z\",\n    \"identityId\": \"c6cfe49a-b96b-eb3b-182f-aae2dea5dcf5\",\n    \"type\": \"string\",\n    \"accessTokenTTL\": 7200,\n    \"accessTokenMaxTTL\": 7200,\n    \"accessTokenNumUsesLimit\": 0,\n    \"accessTokenTrustedIps\": \"\",\n    \"allowedServiceAccounts\": \"string\",\n    \"allowedProjects\": \"string\",\n    \"allowedZones\": \"string\",\n    \"accessTokenPeriod\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f6ef6d46-5234-46af-aa51-3b071132f0e6",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "gcp-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to attach the configuration onto."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"allowedServiceAccounts\": \"\",\n  \"allowedProjects\": \"\",\n  \"allowedZones\": \"\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"0.0.0.0/0\"\n    },\n    {\n      \"ipAddress\": \"::/0\"\n    }\n  ],\n  \"accessTokenTTL\": 2592000,\n  \"accessTokenMaxTTL\": 2592000,\n  \"accessTokenNumUsesLimit\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f27c3f9c-29e8-48b0-b3d5-f8da845589b1",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "gcp-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to attach the configuration onto."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"allowedServiceAccounts\": \"\",\n  \"allowedProjects\": \"\",\n  \"allowedZones\": \"\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"0.0.0.0/0\"\n    },\n    {\n      \"ipAddress\": \"::/0\"\n    }\n  ],\n  \"accessTokenTTL\": 2592000,\n  \"accessTokenMaxTTL\": 2592000,\n  \"accessTokenNumUsesLimit\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c6cd71fa-2c66-4813-8662-37ce6ed47017",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "gcp-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to attach the configuration onto."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"allowedServiceAccounts\": \"\",\n  \"allowedProjects\": \"\",\n  \"allowedZones\": \"\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"0.0.0.0/0\"\n    },\n    {\n      \"ipAddress\": \"::/0\"\n    }\n  ],\n  \"accessTokenTTL\": 2592000,\n  \"accessTokenMaxTTL\": 2592000,\n  \"accessTokenNumUsesLimit\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "677c071e-9cd6-4029-81ce-94b4827cb410",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "gcp-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to attach the configuration onto."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"allowedServiceAccounts\": \"\",\n  \"allowedProjects\": \"\",\n  \"allowedZones\": \"\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"0.0.0.0/0\"\n    },\n    {\n      \"ipAddress\": \"::/0\"\n    }\n  ],\n  \"accessTokenTTL\": 2592000,\n  \"accessTokenMaxTTL\": 2592000,\n  \"accessTokenNumUsesLimit\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd88e3d4-74ed-4a96-93d7-07a270bb08e5",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "gcp-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to attach the configuration onto."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"allowedServiceAccounts\": \"\",\n  \"allowedProjects\": \"\",\n  \"allowedZones\": \"\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"0.0.0.0/0\"\n    },\n    {\n      \"ipAddress\": \"::/0\"\n    }\n  ],\n  \"accessTokenTTL\": 2592000,\n  \"accessTokenMaxTTL\": 2592000,\n  \"accessTokenNumUsesLimit\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33de1b1f-1f04-4dbb-a464-f3bd1e08207d",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "gcp-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to attach the configuration onto."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"allowedServiceAccounts\": \"\",\n  \"allowedProjects\": \"\",\n  \"allowedZones\": \"\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"0.0.0.0/0\"\n    },\n    {\n      \"ipAddress\": \"::/0\"\n    }\n  ],\n  \"accessTokenTTL\": 2592000,\n  \"accessTokenMaxTTL\": 2592000,\n  \"accessTokenNumUsesLimit\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b265364c-c8c5-4d7b-a478-4fee5aaa7fa6",
+          "name": "update Gcp Auth",
+          "request": {
+            "name": "update Gcp Auth",
+            "description": {
+              "content": "Update GCP Auth configuration on machine identity",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "gcp-auth",
+                "identities",
+                ":identityId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "identityId",
+                  "description": "(Required) The ID of the machine identity to update the auth method for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"<string>\",\n  \"allowedServiceAccounts\": \"\",\n  \"allowedProjects\": \"\",\n  \"allowedZones\": \"\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"<string>\"\n    }\n  ],\n  \"accessTokenTTL\": \"<integer>\",\n  \"accessTokenNumUsesLimit\": \"<integer>\",\n  \"accessTokenMaxTTL\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "66e35889-b9fe-41db-b2c5-468024896171",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "gcp-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to update the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"allowedServiceAccounts\": \"\",\n  \"allowedProjects\": \"\",\n  \"allowedZones\": \"\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"<string>\"\n    }\n  ],\n  \"accessTokenTTL\": \"<integer>\",\n  \"accessTokenNumUsesLimit\": \"<integer>\",\n  \"accessTokenMaxTTL\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"identityGcpAuth\": {\n    \"id\": \"b9ba25aa-5797-e3d0-bc79-fa72128d02bc\",\n    \"createdAt\": \"1952-08-20T19:31:51.395Z\",\n    \"updatedAt\": \"1959-11-12T12:40:37.325Z\",\n    \"identityId\": \"c6cfe49a-b96b-eb3b-182f-aae2dea5dcf5\",\n    \"type\": \"string\",\n    \"accessTokenTTL\": 7200,\n    \"accessTokenMaxTTL\": 7200,\n    \"accessTokenNumUsesLimit\": 0,\n    \"accessTokenTrustedIps\": \"\",\n    \"allowedServiceAccounts\": \"string\",\n    \"allowedProjects\": \"string\",\n    \"allowedZones\": \"string\",\n    \"accessTokenPeriod\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5343e741-e44e-40f2-9cbe-e4f7cc0b50d8",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "gcp-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to update the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"allowedServiceAccounts\": \"\",\n  \"allowedProjects\": \"\",\n  \"allowedZones\": \"\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"<string>\"\n    }\n  ],\n  \"accessTokenTTL\": \"<integer>\",\n  \"accessTokenNumUsesLimit\": \"<integer>\",\n  \"accessTokenMaxTTL\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19b9d8cc-cf63-4d44-a794-1df750dd2ef4",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "gcp-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to update the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"allowedServiceAccounts\": \"\",\n  \"allowedProjects\": \"\",\n  \"allowedZones\": \"\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"<string>\"\n    }\n  ],\n  \"accessTokenTTL\": \"<integer>\",\n  \"accessTokenNumUsesLimit\": \"<integer>\",\n  \"accessTokenMaxTTL\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce46ff56-6d9f-4990-8486-ccff7a79a155",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "gcp-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to update the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"allowedServiceAccounts\": \"\",\n  \"allowedProjects\": \"\",\n  \"allowedZones\": \"\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"<string>\"\n    }\n  ],\n  \"accessTokenTTL\": \"<integer>\",\n  \"accessTokenNumUsesLimit\": \"<integer>\",\n  \"accessTokenMaxTTL\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b09b86e-b996-4e37-b0b4-7b1b0a6fb221",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "gcp-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to update the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"allowedServiceAccounts\": \"\",\n  \"allowedProjects\": \"\",\n  \"allowedZones\": \"\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"<string>\"\n    }\n  ],\n  \"accessTokenTTL\": \"<integer>\",\n  \"accessTokenNumUsesLimit\": \"<integer>\",\n  \"accessTokenMaxTTL\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "49a6dfe8-90a7-4373-837e-e44f3869b591",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "gcp-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to update the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"allowedServiceAccounts\": \"\",\n  \"allowedProjects\": \"\",\n  \"allowedZones\": \"\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"<string>\"\n    }\n  ],\n  \"accessTokenTTL\": \"<integer>\",\n  \"accessTokenNumUsesLimit\": \"<integer>\",\n  \"accessTokenMaxTTL\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "46136318-abd3-48e4-a09c-81199e4e4ef9",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "gcp-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to update the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"allowedServiceAccounts\": \"\",\n  \"allowedProjects\": \"\",\n  \"allowedZones\": \"\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"<string>\"\n    }\n  ],\n  \"accessTokenTTL\": \"<integer>\",\n  \"accessTokenNumUsesLimit\": \"<integer>\",\n  \"accessTokenMaxTTL\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1a6751df-2a6d-4096-967f-759f90785e82",
+          "name": "get Gcp Auth",
+          "request": {
+            "name": "get Gcp Auth",
+            "description": {
+              "content": "Retrieve GCP Auth configuration on machine identity",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "gcp-auth",
+                "identities",
+                ":identityId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "identityId",
+                  "description": "(Required) The ID of the machine identity to retrieve the auth method for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6a5120ed-1977-48bd-a9e4-d02b93cc25e6",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "gcp-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to retrieve the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"identityGcpAuth\": {\n    \"id\": \"b9ba25aa-5797-e3d0-bc79-fa72128d02bc\",\n    \"createdAt\": \"1952-08-20T19:31:51.395Z\",\n    \"updatedAt\": \"1959-11-12T12:40:37.325Z\",\n    \"identityId\": \"c6cfe49a-b96b-eb3b-182f-aae2dea5dcf5\",\n    \"type\": \"string\",\n    \"accessTokenTTL\": 7200,\n    \"accessTokenMaxTTL\": 7200,\n    \"accessTokenNumUsesLimit\": 0,\n    \"accessTokenTrustedIps\": \"\",\n    \"allowedServiceAccounts\": \"string\",\n    \"allowedProjects\": \"string\",\n    \"allowedZones\": \"string\",\n    \"accessTokenPeriod\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1949570-c61d-4b76-9af2-bcdd24359c0c",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "gcp-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to retrieve the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4031acbb-5261-498f-a82c-d9bf0e029078",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "gcp-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to retrieve the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "00e306d0-2dc0-46e9-ba51-940d6b014ac5",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "gcp-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to retrieve the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "533335f3-b289-4223-9462-4463fbd4c837",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "gcp-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to retrieve the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "96851383-f20b-4b59-bce7-7b8b4f483446",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "gcp-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to retrieve the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6db90994-b51d-4b99-89c5-a874bdc9e6c0",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "gcp-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to retrieve the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "62ab437f-4edc-4590-ba11-7ee1d4013945",
+          "name": "delete Gcp Auth",
+          "request": {
+            "name": "delete Gcp Auth",
+            "description": {
+              "content": "Delete GCP Auth configuration on machine identity",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "gcp-auth",
+                "identities",
+                ":identityId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "identityId",
+                  "description": "(Required) The ID of the machine identity to revoke the auth method for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f94cc63b-8506-46ea-8c5f-e4b361b6938e",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "gcp-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to revoke the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"identityGcpAuth\": {\n    \"id\": \"b9ba25aa-5797-e3d0-bc79-fa72128d02bc\",\n    \"createdAt\": \"1952-08-20T19:31:51.395Z\",\n    \"updatedAt\": \"1959-11-12T12:40:37.325Z\",\n    \"identityId\": \"c6cfe49a-b96b-eb3b-182f-aae2dea5dcf5\",\n    \"type\": \"string\",\n    \"accessTokenTTL\": 7200,\n    \"accessTokenMaxTTL\": 7200,\n    \"accessTokenNumUsesLimit\": 0,\n    \"accessTokenTrustedIps\": \"\",\n    \"allowedServiceAccounts\": \"string\",\n    \"allowedProjects\": \"string\",\n    \"allowedZones\": \"string\",\n    \"accessTokenPeriod\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76162aa6-868d-49b3-995a-61d1dd9f9a10",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "gcp-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to revoke the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "152396a0-645a-4034-b0cd-7b7183ab4b71",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "gcp-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to revoke the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "989aca37-080e-4f29-8b83-91771e101dce",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "gcp-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to revoke the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f5e2c718-3b12-46f3-82e1-375dd34c36ce",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "gcp-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to revoke the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f71c9f7-c411-4835-a103-993b51f868bc",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "gcp-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to revoke the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15f29268-92f0-4dc6-b5a5-ef6a6b89fdb9",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "gcp-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to revoke the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://us.infisical.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "af95988e-61db-476d-a0d0-533fec9c74e0",
+    "name": "Infisical Admin GCP Auth API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "List of all available APIs that can be consumed",
+      "type": "text/plain"
+    }
+  }
+}

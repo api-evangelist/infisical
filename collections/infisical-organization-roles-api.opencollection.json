@@ -1,0 +1,148 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin Organization Roles API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Organization Roles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/v1/organization/roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/organization/roles",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List organization roles"
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/organization/roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/organization/roles",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create an organization role"
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/organization/roles/{roleId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/organization/roles/:roleId",
+            "params": [
+              {
+                "name": "roleId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the role to get."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get an organization role"
+        },
+        {
+          "info": {
+            "name": "PATCH /api/v1/organization/roles/{roleId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/organization/roles/:roleId",
+            "params": [
+              {
+                "name": "roleId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the role to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an organization role"
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/organization/roles/{roleId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/organization/roles/:roleId",
+            "params": [
+              {
+                "name": "roleId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the role to delete."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an organization role"
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/organization/roles/slug/{roleSlug}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/organization/roles/slug/:roleSlug",
+            "params": [
+              {
+                "name": "roleSlug",
+                "value": "",
+                "type": "path",
+                "description": "The slug of the role to get details."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get an organization role by slug"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

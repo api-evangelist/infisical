@@ -1,0 +1,253 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin Token Auth API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Token Auth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getTokenAuth",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/auth/token-auth/identities/:identityId",
+            "params": [
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the machine identity to retrieve the auth method for."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve Token Auth configuration on machine identity"
+        },
+        {
+          "info": {
+            "name": "attachTokenAuth",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/auth/token-auth/identities/:identityId",
+            "params": [
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the machine identity to attach the configuration onto."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Attach Token Auth configuration onto machine identity"
+        },
+        {
+          "info": {
+            "name": "updateTokenAuth",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/auth/token-auth/identities/:identityId",
+            "params": [
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the machine identity to update the auth method for."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Token Auth configuration on machine identity"
+        },
+        {
+          "info": {
+            "name": "deleteTokenAuth",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/auth/token-auth/identities/:identityId",
+            "params": [
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the machine identity to revoke the auth method for."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Token Auth configuration on machine identity"
+        },
+        {
+          "info": {
+            "name": "getTokenAuthTokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/auth/token-auth/identities/:identityId/tokens",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The offset to start from. If you enter 10, it will start from the 10th token."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of tokens to return."
+              },
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the machine identity to list token metadata for."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get tokens for machine identity with Token Auth"
+        },
+        {
+          "info": {
+            "name": "createTokenAuthToken",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/auth/token-auth/identities/:identityId/tokens",
+            "params": [
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the machine identity to create the token for."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create token for machine identity with Token Auth"
+        },
+        {
+          "info": {
+            "name": "getTokenAuthTokenById",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/auth/token-auth/tokens/:tokenId",
+            "params": [
+              {
+                "name": "tokenId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the token to get metadata for."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get token for machine identity with Token Auth"
+        },
+        {
+          "info": {
+            "name": "updateTokenAuthToken",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/auth/token-auth/tokens/:tokenId",
+            "params": [
+              {
+                "name": "tokenId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the token to update metadata for."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update token for machine identity with Token Auth"
+        },
+        {
+          "info": {
+            "name": "revokeTokenAuthToken",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/auth/token-auth/tokens/:tokenId/revoke",
+            "params": [
+              {
+                "name": "tokenId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the token to revoke."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Revoke token for machine identity with Token Auth"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

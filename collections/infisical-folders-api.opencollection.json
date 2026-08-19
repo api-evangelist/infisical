@@ -1,0 +1,628 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin Folders API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Folders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/v1/folders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/folders",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the project to list folders from."
+              },
+              {
+                "name": "environment",
+                "value": "",
+                "type": "query",
+                "description": "The slug of the environment to list folders from."
+              },
+              {
+                "name": "lastSecretModified",
+                "value": "",
+                "type": "query",
+                "description": "The timestamp used to filter folders with secrets modified after the specified date. The format for this timestamp is ISO 8601 (e.g. 2025-04-01T09:41:45-04:00)"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "The path to list folders from."
+              },
+              {
+                "name": "directory",
+                "value": "",
+                "type": "query",
+                "description": "The directory to list folders from. (Deprecated in favor of path)"
+              },
+              {
+                "name": "recursive",
+                "value": "",
+                "type": "query",
+                "description": "Whether or not to fetch all folders from the specified base path, and all of its subdirectories."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get folders"
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/folders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/folders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create folders"
+        },
+        {
+          "info": {
+            "name": "PATCH /api/v1/folders/{folderId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/folders/:folderId",
+            "params": [
+              {
+                "name": "folderId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the folder to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update folder"
+        },
+        {
+          "info": {
+            "name": "PATCH /api/v1/folders/batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/folders/batch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update folders by batch"
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/folders/{folderIdOrName}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/folders/:folderIdOrName",
+            "params": [
+              {
+                "name": "folderIdOrName",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the folder to delete."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a folder"
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/folders/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/folders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the folder to get details."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get folder by id"
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/workspace/{projectId}/tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/workspace/:projectId/tags",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to list tags from."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/workspace/{projectId}/tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/workspace/:projectId/tags",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to create the tag in."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/workspace/{projectId}/tags/{tagId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/workspace/:projectId/tags/:tagId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to get tags from."
+              },
+              {
+                "name": "tagId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the tag to get details."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PATCH /api/v1/workspace/{projectId}/tags/{tagId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/workspace/:projectId/tags/:tagId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to update the tag in."
+              },
+              {
+                "name": "tagId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the tag to get details."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/workspace/{projectId}/tags/{tagId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/workspace/:projectId/tags/:tagId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to delete the tag from."
+              },
+              {
+                "name": "tagId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the tag to delete."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/workspace/{projectId}/tags/slug/{tagSlug}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/workspace/:projectId/tags/slug/:tagSlug",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to get tags from."
+              },
+              {
+                "name": "tagSlug",
+                "value": "",
+                "type": "path",
+                "description": "The slug of the tag to get details."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "listSecretTags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId/tags",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to list tags from."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "createSecretTag",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId/tags",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to create the tag in."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "getSecretTagById",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId/tags/:tagId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to get tags from."
+              },
+              {
+                "name": "tagId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the tag to get details."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "updateSecretTag",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId/tags/:tagId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to update the tag in."
+              },
+              {
+                "name": "tagId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the tag to get details."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "deleteSecretTag",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId/tags/:tagId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to delete the tag from."
+              },
+              {
+                "name": "tagId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the tag to delete."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "getSecretTagBySlug",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId/tags/slug/:tagSlug",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to get tags from."
+              },
+              {
+                "name": "tagSlug",
+                "value": "",
+                "type": "path",
+                "description": "The slug of the tag to get details."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "listSecretFolders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v2/folders",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the project to list folders from."
+              },
+              {
+                "name": "environment",
+                "value": "",
+                "type": "query",
+                "description": "The slug of the environment to list folders from."
+              },
+              {
+                "name": "lastSecretModified",
+                "value": "",
+                "type": "query",
+                "description": "The timestamp used to filter folders with secrets modified after the specified date. The format for this timestamp is ISO 8601 (e.g. 2025-04-01T09:41:45-04:00)"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "The path to list folders from."
+              },
+              {
+                "name": "recursive",
+                "value": "",
+                "type": "query",
+                "description": "Whether or not to fetch all folders from the specified base path, and all of its subdirectories."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get folders"
+        },
+        {
+          "info": {
+            "name": "createSecretFolder",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v2/folders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create folders"
+        },
+        {
+          "info": {
+            "name": "updateSecretFolder",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v2/folders/:folderId",
+            "params": [
+              {
+                "name": "folderId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the folder to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update folder"
+        },
+        {
+          "info": {
+            "name": "updateSecretFoldersBatch",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v2/folders/batch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update folders by batch"
+        },
+        {
+          "info": {
+            "name": "deleteSecretFolder",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v2/folders/:folderIdOrName",
+            "params": [
+              {
+                "name": "folderIdOrName",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the folder to delete."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a folder"
+        },
+        {
+          "info": {
+            "name": "getSecretFolderById",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v2/folders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the folder to get details."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get folder by id"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

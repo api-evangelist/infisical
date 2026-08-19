@@ -1,0 +1,887 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin PKI Applications API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PKI Applications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "listPkiApplications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "applicationIds",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List applications."
+        },
+        {
+          "info": {
+            "name": "createPkiApplication",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an application."
+        },
+        {
+          "info": {
+            "name": "getPkiApplication",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications/:applicationId",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get an application by id."
+        },
+        {
+          "info": {
+            "name": "updatePkiApplication",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications/:applicationId",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an application."
+        },
+        {
+          "info": {
+            "name": "deletePkiApplication",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications/:applicationId",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete an application."
+        },
+        {
+          "info": {
+            "name": "getPkiApplicationByName",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications/by-name/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get an application by name."
+        },
+        {
+          "info": {
+            "name": "getPkiApplicationPermissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications/:applicationId/permissions",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the actor's effective resource permissions on this application."
+        },
+        {
+          "info": {
+            "name": "listPkiApplicationProfiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications/:applicationId/profiles",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List profiles attached to an application."
+        },
+        {
+          "info": {
+            "name": "attachPkiApplicationProfiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications/:applicationId/profiles",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Attach one or more profiles to an application."
+        },
+        {
+          "info": {
+            "name": "detachPkiApplicationProfile",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications/:applicationId/profiles/:profileId",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Detach a profile from an application."
+        },
+        {
+          "info": {
+            "name": "listPkiApplicationUserMembers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications/:applicationId/users",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List user members of an application."
+        },
+        {
+          "info": {
+            "name": "addPkiApplicationUserMembers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications/:applicationId/users",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add user members to an application by userId, email, or username. Only users who are already members of the project can be added."
+        },
+        {
+          "info": {
+            "name": "updatePkiApplicationUserMemberRole",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications/:applicationId/users/:userId",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the role of a user member on an application."
+        },
+        {
+          "info": {
+            "name": "removePkiApplicationUserMember",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications/:applicationId/users/:userId",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove a user from an application."
+        },
+        {
+          "info": {
+            "name": "listPkiApplicationIdentityMembers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications/:applicationId/identities",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List identity members of an application."
+        },
+        {
+          "info": {
+            "name": "addPkiApplicationIdentityMember",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications/:applicationId/identities/:identityId",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add an identity as a member of an application."
+        },
+        {
+          "info": {
+            "name": "updatePkiApplicationIdentityMemberRole",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications/:applicationId/identities/:identityId",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the role of an identity member on an application."
+        },
+        {
+          "info": {
+            "name": "removePkiApplicationIdentityMember",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications/:applicationId/identities/:identityId",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove an identity from an application."
+        },
+        {
+          "info": {
+            "name": "listPkiApplicationGroupMembers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications/:applicationId/groups",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List group members of an application."
+        },
+        {
+          "info": {
+            "name": "addPkiApplicationGroupMember",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications/:applicationId/groups/:groupId",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a group as a member of an application."
+        },
+        {
+          "info": {
+            "name": "updatePkiApplicationGroupMemberRole",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications/:applicationId/groups/:groupId",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the role of a group member on an application."
+        },
+        {
+          "info": {
+            "name": "removePkiApplicationGroupMember",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications/:applicationId/groups/:groupId",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove a group from an application."
+        },
+        {
+          "info": {
+            "name": "getPkiApplicationEnrollment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications/:applicationId/profiles/:profileId/enrollment",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the enrollment state for a profile on an application."
+        },
+        {
+          "info": {
+            "name": "setPkiApplicationApiEnrollment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications/:applicationId/profiles/:profileId/enrollment/api",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enable or update the API enrollment method for a profile on an application."
+        },
+        {
+          "info": {
+            "name": "clearPkiApplicationApiEnrollment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications/:applicationId/profiles/:profileId/enrollment/api",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Disable the API enrollment method for a profile on an application."
+        },
+        {
+          "info": {
+            "name": "setPkiApplicationEstEnrollment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications/:applicationId/profiles/:profileId/enrollment/est",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enable or update the EST enrollment method for a profile on an application."
+        },
+        {
+          "info": {
+            "name": "clearPkiApplicationEstEnrollment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications/:applicationId/profiles/:profileId/enrollment/est",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Disable the EST enrollment method for a profile on an application."
+        },
+        {
+          "info": {
+            "name": "setPkiApplicationAcmeEnrollment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications/:applicationId/profiles/:profileId/enrollment/acme",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enable or update the ACME enrollment method for a profile on an application."
+        },
+        {
+          "info": {
+            "name": "clearPkiApplicationAcmeEnrollment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications/:applicationId/profiles/:profileId/enrollment/acme",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Disable the ACME enrollment method for a profile on an application."
+        },
+        {
+          "info": {
+            "name": "revealPkiApplicationAcmeEabSecret",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications/:applicationId/profiles/:profileId/enrollment/acme/eab/reveal",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Reveal the ACME EAB secret for a profile on an application."
+        },
+        {
+          "info": {
+            "name": "rotatePkiApplicationAcmeEabSecret",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications/:applicationId/profiles/:profileId/enrollment/acme/eab/rotate",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Rotate the ACME EAB secret for a profile on an application."
+        },
+        {
+          "info": {
+            "name": "setPkiApplicationScepEnrollment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications/:applicationId/profiles/:profileId/enrollment/scep",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enable or update the SCEP enrollment method for a profile on an application."
+        },
+        {
+          "info": {
+            "name": "clearPkiApplicationScepEnrollment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications/:applicationId/profiles/:profileId/enrollment/scep",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Disable the SCEP enrollment method for a profile on an application."
+        },
+        {
+          "info": {
+            "name": "listPkiApplicationAlerts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications/:applicationId/alerts",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "eventType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "enabled",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List alerts for an application."
+        },
+        {
+          "info": {
+            "name": "createPkiApplicationAlert",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications/:applicationId/alerts",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an alert on an application."
+        },
+        {
+          "info": {
+            "name": "updatePkiApplicationAlert",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications/:applicationId/alerts/:alertId",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "alertId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an alert on an application."
+        },
+        {
+          "info": {
+            "name": "deletePkiApplicationAlert",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/cert-manager/applications/:applicationId/alerts/:alertId",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "alertId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete an alert from an application."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

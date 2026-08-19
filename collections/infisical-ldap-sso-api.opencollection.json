@@ -1,0 +1,79 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin LDAP SSO API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "LDAP SSO",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/v1/ldap/config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/ldap/config",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization to get the LDAP config for."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get LDAP config"
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/ldap/config",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/ldap/config",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create LDAP config"
+        },
+        {
+          "info": {
+            "name": "PATCH /api/v1/ldap/config",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/ldap/config",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update LDAP config"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

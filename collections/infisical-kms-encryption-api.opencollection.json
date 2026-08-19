@@ -1,0 +1,64 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin KMS Encryption API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "KMS Encryption",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "encryptWithKmsKey",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/kms/keys/:keyId/encrypt",
+            "params": [
+              {
+                "name": "keyId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the key to encrypt the data with."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Encrypt data with KMS key"
+        },
+        {
+          "info": {
+            "name": "decryptWithKmsKey",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/kms/keys/:keyId/decrypt",
+            "params": [
+              {
+                "name": "keyId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the key to decrypt the data with."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Decrypt data with KMS key"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1340 @@
+{
+  "item": [
+    {
+      "id": "b48262c1-98d2-4245-9a0e-f57d9b3a7f8d",
+      "name": "OIDC SSO",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f28c8e4c-389a-4c76-aa68-df00830fb3cb",
+          "name": "Get OIDC config",
+          "request": {
+            "name": "Get OIDC config",
+            "description": {
+              "content": "Get OIDC config",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "sso",
+                "oidc",
+                "config"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "organizationId",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the organization to get the OIDC config for."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "89703b5b-2da9-4dc3-93ab-5b3b798ee97f",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sso",
+                    "oidc",
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "organizationId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"b670533c-e48c-b238-0d20-d29605ecb863\",\n  \"configurationType\": \"string\",\n  \"isActive\": false,\n  \"orgId\": \"3d261c63-beab-c13f-6cbe-b785a3f2b6f8\",\n  \"clientId\": \"string\",\n  \"clientSecret\": \"string\",\n  \"issuer\": \"string\",\n  \"authorizationEndpoint\": \"string\",\n  \"jwksUri\": \"string\",\n  \"tokenEndpoint\": \"string\",\n  \"userinfoEndpoint\": \"string\",\n  \"discoveryURL\": \"string\",\n  \"allowedEmailDomains\": \"string\",\n  \"manageGroupMemberships\": false,\n  \"jwtSignatureAlgorithm\": \"RS256\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef8d7bc4-3afb-4512-b9b5-a9b394548acc",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sso",
+                    "oidc",
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "organizationId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fabe48e4-5d69-40a7-b256-31d20f9a567f",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sso",
+                    "oidc",
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "organizationId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "964c6875-685f-4f15-8795-8b67c5122044",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sso",
+                    "oidc",
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "organizationId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d46dc2b1-34bd-4eb7-b567-bc7fc67473d7",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sso",
+                    "oidc",
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "organizationId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4194d328-e09f-4e3b-9a9b-dc10f4f749cb",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sso",
+                    "oidc",
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "organizationId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bcb5c9c8-bbce-431f-be13-54a5aaa5c69c",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sso",
+                    "oidc",
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "organizationId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "72ca5393-9f97-4f61-8d69-bbbc1ef7cf39",
+          "name": "Update OIDC config",
+          "request": {
+            "name": "Update OIDC config",
+            "description": {
+              "content": "Update OIDC config",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "sso",
+                "oidc",
+                "config"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"organizationId\": \"<string>\",\n  \"allowedEmailDomains\": \"\",\n  \"discoveryURL\": \"<string>\",\n  \"configurationType\": \"<string>\",\n  \"issuer\": \"<string>\",\n  \"authorizationEndpoint\": \"<string>\",\n  \"jwksUri\": \"<string>\",\n  \"tokenEndpoint\": \"<string>\",\n  \"userinfoEndpoint\": \"<string>\",\n  \"clientId\": \"<string>\",\n  \"clientSecret\": \"<string>\",\n  \"isActive\": \"<boolean>\",\n  \"manageGroupMemberships\": \"<boolean>\",\n  \"jwtSignatureAlgorithm\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "22e1e3fc-d54d-4b36-a84f-af321993d263",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sso",
+                    "oidc",
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"organizationId\": \"<string>\",\n  \"allowedEmailDomains\": \"\",\n  \"discoveryURL\": \"<string>\",\n  \"configurationType\": \"<string>\",\n  \"issuer\": \"<string>\",\n  \"authorizationEndpoint\": \"<string>\",\n  \"jwksUri\": \"<string>\",\n  \"tokenEndpoint\": \"<string>\",\n  \"userinfoEndpoint\": \"<string>\",\n  \"clientId\": \"<string>\",\n  \"clientSecret\": \"<string>\",\n  \"isActive\": \"<boolean>\",\n  \"manageGroupMemberships\": \"<boolean>\",\n  \"jwtSignatureAlgorithm\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"7292db55-54c7-3b51-5b84-0bd9149ea8e9\",\n  \"configurationType\": \"string\",\n  \"orgId\": \"99bf8821-44ba-e291-c462-a175e0587393\",\n  \"isActive\": false,\n  \"issuer\": \"string\",\n  \"authorizationEndpoint\": \"string\",\n  \"discoveryURL\": \"string\",\n  \"jwksUri\": \"string\",\n  \"tokenEndpoint\": \"string\",\n  \"userinfoEndpoint\": \"string\",\n  \"allowedEmailDomains\": \"string\",\n  \"manageGroupMemberships\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fde1cac9-91a1-4480-82fc-91dc9fde332c",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sso",
+                    "oidc",
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"organizationId\": \"<string>\",\n  \"allowedEmailDomains\": \"\",\n  \"discoveryURL\": \"<string>\",\n  \"configurationType\": \"<string>\",\n  \"issuer\": \"<string>\",\n  \"authorizationEndpoint\": \"<string>\",\n  \"jwksUri\": \"<string>\",\n  \"tokenEndpoint\": \"<string>\",\n  \"userinfoEndpoint\": \"<string>\",\n  \"clientId\": \"<string>\",\n  \"clientSecret\": \"<string>\",\n  \"isActive\": \"<boolean>\",\n  \"manageGroupMemberships\": \"<boolean>\",\n  \"jwtSignatureAlgorithm\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2db6fc09-05a0-4171-86d7-0f50070a3fcb",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sso",
+                    "oidc",
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"organizationId\": \"<string>\",\n  \"allowedEmailDomains\": \"\",\n  \"discoveryURL\": \"<string>\",\n  \"configurationType\": \"<string>\",\n  \"issuer\": \"<string>\",\n  \"authorizationEndpoint\": \"<string>\",\n  \"jwksUri\": \"<string>\",\n  \"tokenEndpoint\": \"<string>\",\n  \"userinfoEndpoint\": \"<string>\",\n  \"clientId\": \"<string>\",\n  \"clientSecret\": \"<string>\",\n  \"isActive\": \"<boolean>\",\n  \"manageGroupMemberships\": \"<boolean>\",\n  \"jwtSignatureAlgorithm\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad555602-2e19-40db-b3f1-db8736d61e4d",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sso",
+                    "oidc",
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"organizationId\": \"<string>\",\n  \"allowedEmailDomains\": \"\",\n  \"discoveryURL\": \"<string>\",\n  \"configurationType\": \"<string>\",\n  \"issuer\": \"<string>\",\n  \"authorizationEndpoint\": \"<string>\",\n  \"jwksUri\": \"<string>\",\n  \"tokenEndpoint\": \"<string>\",\n  \"userinfoEndpoint\": \"<string>\",\n  \"clientId\": \"<string>\",\n  \"clientSecret\": \"<string>\",\n  \"isActive\": \"<boolean>\",\n  \"manageGroupMemberships\": \"<boolean>\",\n  \"jwtSignatureAlgorithm\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5187190c-66d3-4060-ae7b-531ed38cd5ee",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sso",
+                    "oidc",
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"organizationId\": \"<string>\",\n  \"allowedEmailDomains\": \"\",\n  \"discoveryURL\": \"<string>\",\n  \"configurationType\": \"<string>\",\n  \"issuer\": \"<string>\",\n  \"authorizationEndpoint\": \"<string>\",\n  \"jwksUri\": \"<string>\",\n  \"tokenEndpoint\": \"<string>\",\n  \"userinfoEndpoint\": \"<string>\",\n  \"clientId\": \"<string>\",\n  \"clientSecret\": \"<string>\",\n  \"isActive\": \"<boolean>\",\n  \"manageGroupMemberships\": \"<boolean>\",\n  \"jwtSignatureAlgorithm\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "44c895f0-ad47-4cb5-9912-d0f747e857d4",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sso",
+                    "oidc",
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"organizationId\": \"<string>\",\n  \"allowedEmailDomains\": \"\",\n  \"discoveryURL\": \"<string>\",\n  \"configurationType\": \"<string>\",\n  \"issuer\": \"<string>\",\n  \"authorizationEndpoint\": \"<string>\",\n  \"jwksUri\": \"<string>\",\n  \"tokenEndpoint\": \"<string>\",\n  \"userinfoEndpoint\": \"<string>\",\n  \"clientId\": \"<string>\",\n  \"clientSecret\": \"<string>\",\n  \"isActive\": \"<boolean>\",\n  \"manageGroupMemberships\": \"<boolean>\",\n  \"jwtSignatureAlgorithm\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f3e0e4e-6760-4a6c-ab89-b60a0a6fe81f",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sso",
+                    "oidc",
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"organizationId\": \"<string>\",\n  \"allowedEmailDomains\": \"\",\n  \"discoveryURL\": \"<string>\",\n  \"configurationType\": \"<string>\",\n  \"issuer\": \"<string>\",\n  \"authorizationEndpoint\": \"<string>\",\n  \"jwksUri\": \"<string>\",\n  \"tokenEndpoint\": \"<string>\",\n  \"userinfoEndpoint\": \"<string>\",\n  \"clientId\": \"<string>\",\n  \"clientSecret\": \"<string>\",\n  \"isActive\": \"<boolean>\",\n  \"manageGroupMemberships\": \"<boolean>\",\n  \"jwtSignatureAlgorithm\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ac72387a-dc14-4662-baa2-cbad2082f21a",
+          "name": "Create OIDC config",
+          "request": {
+            "name": "Create OIDC config",
+            "description": {
+              "content": "Create OIDC config",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "sso",
+                "oidc",
+                "config"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"configurationType\": \"<string>\",\n  \"clientId\": \"<string>\",\n  \"clientSecret\": \"<string>\",\n  \"isActive\": \"<boolean>\",\n  \"organizationId\": \"<string>\",\n  \"allowedEmailDomains\": \"\",\n  \"issuer\": \"\",\n  \"discoveryURL\": \"\",\n  \"authorizationEndpoint\": \"\",\n  \"jwksUri\": \"\",\n  \"tokenEndpoint\": \"\",\n  \"userinfoEndpoint\": \"\",\n  \"manageGroupMemberships\": false,\n  \"jwtSignatureAlgorithm\": \"RS256\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2feba6c3-2e84-4795-b258-ef9b64a4619b",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sso",
+                    "oidc",
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"configurationType\": \"<string>\",\n  \"clientId\": \"<string>\",\n  \"clientSecret\": \"<string>\",\n  \"isActive\": \"<boolean>\",\n  \"organizationId\": \"<string>\",\n  \"allowedEmailDomains\": \"\",\n  \"issuer\": \"\",\n  \"discoveryURL\": \"\",\n  \"authorizationEndpoint\": \"\",\n  \"jwksUri\": \"\",\n  \"tokenEndpoint\": \"\",\n  \"userinfoEndpoint\": \"\",\n  \"manageGroupMemberships\": false,\n  \"jwtSignatureAlgorithm\": \"RS256\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"1765e5a7-f0dd-ffe2-4c91-b9bb8b4a3101\",\n  \"configurationType\": \"string\",\n  \"orgId\": \"db7fb1e7-e90c-05cb-1a99-d0286f4730ad\",\n  \"isActive\": false,\n  \"issuer\": \"string\",\n  \"authorizationEndpoint\": \"string\",\n  \"discoveryURL\": \"string\",\n  \"jwksUri\": \"string\",\n  \"tokenEndpoint\": \"string\",\n  \"userinfoEndpoint\": \"string\",\n  \"allowedEmailDomains\": \"string\",\n  \"manageGroupMemberships\": false,\n  \"jwtSignatureAlgorithm\": \"RS256\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9029e799-0fb5-4620-bced-1db6b5c577a9",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sso",
+                    "oidc",
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"configurationType\": \"<string>\",\n  \"clientId\": \"<string>\",\n  \"clientSecret\": \"<string>\",\n  \"isActive\": \"<boolean>\",\n  \"organizationId\": \"<string>\",\n  \"allowedEmailDomains\": \"\",\n  \"issuer\": \"\",\n  \"discoveryURL\": \"\",\n  \"authorizationEndpoint\": \"\",\n  \"jwksUri\": \"\",\n  \"tokenEndpoint\": \"\",\n  \"userinfoEndpoint\": \"\",\n  \"manageGroupMemberships\": false,\n  \"jwtSignatureAlgorithm\": \"RS256\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "91ef96cb-5e8f-42f1-8150-3b39daaf512f",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sso",
+                    "oidc",
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"configurationType\": \"<string>\",\n  \"clientId\": \"<string>\",\n  \"clientSecret\": \"<string>\",\n  \"isActive\": \"<boolean>\",\n  \"organizationId\": \"<string>\",\n  \"allowedEmailDomains\": \"\",\n  \"issuer\": \"\",\n  \"discoveryURL\": \"\",\n  \"authorizationEndpoint\": \"\",\n  \"jwksUri\": \"\",\n  \"tokenEndpoint\": \"\",\n  \"userinfoEndpoint\": \"\",\n  \"manageGroupMemberships\": false,\n  \"jwtSignatureAlgorithm\": \"RS256\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3123cf26-6ca6-4a2e-b135-2b2175bdced6",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sso",
+                    "oidc",
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"configurationType\": \"<string>\",\n  \"clientId\": \"<string>\",\n  \"clientSecret\": \"<string>\",\n  \"isActive\": \"<boolean>\",\n  \"organizationId\": \"<string>\",\n  \"allowedEmailDomains\": \"\",\n  \"issuer\": \"\",\n  \"discoveryURL\": \"\",\n  \"authorizationEndpoint\": \"\",\n  \"jwksUri\": \"\",\n  \"tokenEndpoint\": \"\",\n  \"userinfoEndpoint\": \"\",\n  \"manageGroupMemberships\": false,\n  \"jwtSignatureAlgorithm\": \"RS256\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1a328b2-09d2-4167-b71d-4c6b9c0a11a3",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sso",
+                    "oidc",
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"configurationType\": \"<string>\",\n  \"clientId\": \"<string>\",\n  \"clientSecret\": \"<string>\",\n  \"isActive\": \"<boolean>\",\n  \"organizationId\": \"<string>\",\n  \"allowedEmailDomains\": \"\",\n  \"issuer\": \"\",\n  \"discoveryURL\": \"\",\n  \"authorizationEndpoint\": \"\",\n  \"jwksUri\": \"\",\n  \"tokenEndpoint\": \"\",\n  \"userinfoEndpoint\": \"\",\n  \"manageGroupMemberships\": false,\n  \"jwtSignatureAlgorithm\": \"RS256\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0cf59e32-b95e-4b27-92a3-84d54b51de9c",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sso",
+                    "oidc",
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"configurationType\": \"<string>\",\n  \"clientId\": \"<string>\",\n  \"clientSecret\": \"<string>\",\n  \"isActive\": \"<boolean>\",\n  \"organizationId\": \"<string>\",\n  \"allowedEmailDomains\": \"\",\n  \"issuer\": \"\",\n  \"discoveryURL\": \"\",\n  \"authorizationEndpoint\": \"\",\n  \"jwksUri\": \"\",\n  \"tokenEndpoint\": \"\",\n  \"userinfoEndpoint\": \"\",\n  \"manageGroupMemberships\": false,\n  \"jwtSignatureAlgorithm\": \"RS256\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9efd216a-cb3b-49ac-839e-d7766a757b62",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sso",
+                    "oidc",
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"configurationType\": \"<string>\",\n  \"clientId\": \"<string>\",\n  \"clientSecret\": \"<string>\",\n  \"isActive\": \"<boolean>\",\n  \"organizationId\": \"<string>\",\n  \"allowedEmailDomains\": \"\",\n  \"issuer\": \"\",\n  \"discoveryURL\": \"\",\n  \"authorizationEndpoint\": \"\",\n  \"jwksUri\": \"\",\n  \"tokenEndpoint\": \"\",\n  \"userinfoEndpoint\": \"\",\n  \"manageGroupMemberships\": false,\n  \"jwtSignatureAlgorithm\": \"RS256\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://us.infisical.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "85046d83-5f90-46e4-b8d5-280d0795edc9",
+    "name": "Infisical Admin OIDC SSO API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "List of all available APIs that can be consumed",
+      "type": "text/plain"
+    }
+  }
+}

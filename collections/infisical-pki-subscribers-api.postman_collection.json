@@ -1,0 +1,4738 @@
+{
+  "item": [
+    {
+      "id": "604fea35-dbf0-430e-b20b-44d46f105b74",
+      "name": "PKI Subscribers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c9621402-6842-44b9-832d-7a353d19fe74",
+          "name": "list Project Pki Subscribers",
+          "request": {
+            "name": "list Project Pki Subscribers",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "projects",
+                ":projectId",
+                "pki-subscribers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) The ID of the project to list PKI subscribers for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6b09ba21-ff60-4552-a2fb-9604cc754d81",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "projects",
+                    ":projectId",
+                    "pki-subscribers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) The ID of the project to list PKI subscribers for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"subscribers\": [\n    {\n      \"id\": \"c43878ef-5c25-db8b-8794-252d29b4fa92\",\n      \"projectId\": \"string\",\n      \"name\": \"string\",\n      \"commonName\": \"string\",\n      \"status\": \"string\",\n      \"subjectAlternativeNames\": [\n        \"string\",\n        \"string\"\n      ],\n      \"keyUsages\": [\n        \"string\",\n        \"string\"\n      ],\n      \"extendedKeyUsages\": [\n        \"string\",\n        \"string\"\n      ],\n      \"caId\": \"6cd4dbcf-ef5b-a062-7c34-0e80dc70cfc9\",\n      \"ttl\": \"string\",\n      \"lastOperationStatus\": \"string\",\n      \"lastOperationMessage\": \"string\",\n      \"lastOperationAt\": \"2018-10-11T14:16:42.328Z\",\n      \"enableAutoRenewal\": false,\n      \"autoRenewalPeriodInDays\": 8122.300860946755,\n      \"lastAutoRenewAt\": \"2021-09-09T14:47:30.016Z\",\n      \"properties\": {},\n      \"supportsImmediateCertIssuance\": true\n    },\n    {\n      \"id\": \"b2e7083b-4041-5da1-d449-0e7cfc82ed16\",\n      \"projectId\": \"string\",\n      \"name\": \"string\",\n      \"commonName\": \"string\",\n      \"status\": \"string\",\n      \"subjectAlternativeNames\": [\n        \"string\",\n        \"string\"\n      ],\n      \"keyUsages\": [\n        \"string\",\n        \"string\"\n      ],\n      \"extendedKeyUsages\": [\n        \"string\",\n        \"string\"\n      ],\n      \"caId\": \"7229672d-45d1-a613-fb8c-cb980cbca0ab\",\n      \"ttl\": \"string\",\n      \"lastOperationStatus\": \"string\",\n      \"lastOperationMessage\": \"string\",\n      \"lastOperationAt\": \"1954-08-10T01:08:15.252Z\",\n      \"enableAutoRenewal\": false,\n      \"autoRenewalPeriodInDays\": 9876.113559080772,\n      \"lastAutoRenewAt\": \"1955-07-15T03:58:27.613Z\",\n      \"properties\": {},\n      \"supportsImmediateCertIssuance\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ca62eb4-2449-4a00-ab20-6491c29a583d",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "projects",
+                    ":projectId",
+                    "pki-subscribers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) The ID of the project to list PKI subscribers for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f6c95892-d805-4718-8c70-809748d24449",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "projects",
+                    ":projectId",
+                    "pki-subscribers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) The ID of the project to list PKI subscribers for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cc7c5420-2c36-4487-8d11-615e4853531a",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "projects",
+                    ":projectId",
+                    "pki-subscribers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) The ID of the project to list PKI subscribers for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e74759c-4094-409d-b694-6dc85269da54",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "projects",
+                    ":projectId",
+                    "pki-subscribers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) The ID of the project to list PKI subscribers for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ea42ab5-4d08-4a21-ac31-447d6a280c46",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "projects",
+                    ":projectId",
+                    "pki-subscribers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) The ID of the project to list PKI subscribers for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "209c7683-38d8-4690-9e05-63b68e4e3642",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "projects",
+                    ":projectId",
+                    "pki-subscribers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) The ID of the project to list PKI subscribers for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9c381842-7783-4e16-bef6-9ef86e6bbb7a",
+          "name": "get Pki Subscriber",
+          "request": {
+            "name": "get Pki Subscriber",
+            "description": {
+              "content": "Get PKI Subscriber",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "pki",
+                "subscribers",
+                ":subscriberName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "projectId",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the project to get the PKI subscriber for."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriberName",
+                  "description": "(Required) The name of the PKI subscriber to get."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e5fa0edd-657b-4093-bf0a-b425f7991656",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to get."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"721140ad-504c-9ee2-765c-e5112c20c0f2\",\n  \"projectId\": \"string\",\n  \"name\": \"string\",\n  \"commonName\": \"string\",\n  \"status\": \"string\",\n  \"subjectAlternativeNames\": [\n    \"string\",\n    \"string\"\n  ],\n  \"keyUsages\": [\n    \"string\",\n    \"string\"\n  ],\n  \"extendedKeyUsages\": [\n    \"string\",\n    \"string\"\n  ],\n  \"caId\": \"9171fcdb-7ea7-ee93-e70b-8ef4663138dc\",\n  \"ttl\": \"string\",\n  \"lastOperationStatus\": \"string\",\n  \"lastOperationMessage\": \"string\",\n  \"lastOperationAt\": \"2006-09-29T15:21:21.413Z\",\n  \"enableAutoRenewal\": false,\n  \"autoRenewalPeriodInDays\": 6798.010515784704,\n  \"lastAutoRenewAt\": \"1999-10-25T00:10:14.285Z\",\n  \"properties\": {},\n  \"supportsImmediateCertIssuance\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6bf0359-90c2-4097-a9e9-5b175ceea205",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to get."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f8323c7-6285-4f74-a014-e464e7a6907a",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to get."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12c41825-23b1-44d0-9d03-619921235ffb",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to get."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "620ccf9a-820a-4bc2-bc51-ea13ff8c679e",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to get."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6153bd11-f08f-4e4b-8b9f-ca4666f17ef0",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to get."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9122fed6-8299-44f6-bd80-d21b610ed173",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to get."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7d816f31-12c4-4004-86a6-489a5f15058c",
+          "name": "update Pki Subscriber",
+          "request": {
+            "name": "update Pki Subscriber",
+            "description": {
+              "content": "Update PKI Subscriber",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "pki",
+                "subscribers",
+                ":subscriberName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriberName",
+                  "description": "(Required) The name of the PKI subscriber to update."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"projectId\": \"<string>\",\n  \"caId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"commonName\": \"<string>\",\n  \"status\": \"<string>\",\n  \"subjectAlternativeNames\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ttl\": \"<string>\",\n  \"keyUsages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"extendedKeyUsages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"enableAutoRenewal\": \"<boolean>\",\n  \"autoRenewalPeriodInDays\": \"<number>\",\n  \"properties\": {\n    \"azureTemplateType\": \"<string>\",\n    \"organization\": \"<string>\",\n    \"organizationalUnit\": \"<string>\",\n    \"country\": \"<string>\",\n    \"state\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"emailAddress\": \"<email>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7a43065d-7c2c-4894-97f3-b4e187eebe5a",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\",\n  \"caId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"commonName\": \"<string>\",\n  \"status\": \"<string>\",\n  \"subjectAlternativeNames\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ttl\": \"<string>\",\n  \"keyUsages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"extendedKeyUsages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"enableAutoRenewal\": \"<boolean>\",\n  \"autoRenewalPeriodInDays\": \"<number>\",\n  \"properties\": {\n    \"azureTemplateType\": \"<string>\",\n    \"organization\": \" \",\n    \"organizationalUnit\": \" \",\n    \"country\": \"<string>\",\n    \"state\": \" \",\n    \"locality\": \" \",\n    \"emailAddress\": \"<email>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"721140ad-504c-9ee2-765c-e5112c20c0f2\",\n  \"projectId\": \"string\",\n  \"name\": \"string\",\n  \"commonName\": \"string\",\n  \"status\": \"string\",\n  \"subjectAlternativeNames\": [\n    \"string\",\n    \"string\"\n  ],\n  \"keyUsages\": [\n    \"string\",\n    \"string\"\n  ],\n  \"extendedKeyUsages\": [\n    \"string\",\n    \"string\"\n  ],\n  \"caId\": \"9171fcdb-7ea7-ee93-e70b-8ef4663138dc\",\n  \"ttl\": \"string\",\n  \"lastOperationStatus\": \"string\",\n  \"lastOperationMessage\": \"string\",\n  \"lastOperationAt\": \"2006-09-29T15:21:21.413Z\",\n  \"enableAutoRenewal\": false,\n  \"autoRenewalPeriodInDays\": 6798.010515784704,\n  \"lastAutoRenewAt\": \"1999-10-25T00:10:14.285Z\",\n  \"properties\": {},\n  \"supportsImmediateCertIssuance\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e30eb948-1c1e-4b8c-a07b-e8dcaf96d794",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\",\n  \"caId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"commonName\": \"<string>\",\n  \"status\": \"<string>\",\n  \"subjectAlternativeNames\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ttl\": \"<string>\",\n  \"keyUsages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"extendedKeyUsages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"enableAutoRenewal\": \"<boolean>\",\n  \"autoRenewalPeriodInDays\": \"<number>\",\n  \"properties\": {\n    \"azureTemplateType\": \"<string>\",\n    \"organization\": \" \",\n    \"organizationalUnit\": \" \",\n    \"country\": \"<string>\",\n    \"state\": \" \",\n    \"locality\": \" \",\n    \"emailAddress\": \"<email>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c1d5958-d068-40a8-ad6b-3b99d9a7939f",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\",\n  \"caId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"commonName\": \"<string>\",\n  \"status\": \"<string>\",\n  \"subjectAlternativeNames\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ttl\": \"<string>\",\n  \"keyUsages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"extendedKeyUsages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"enableAutoRenewal\": \"<boolean>\",\n  \"autoRenewalPeriodInDays\": \"<number>\",\n  \"properties\": {\n    \"azureTemplateType\": \"<string>\",\n    \"organization\": \" \",\n    \"organizationalUnit\": \" \",\n    \"country\": \"<string>\",\n    \"state\": \" \",\n    \"locality\": \" \",\n    \"emailAddress\": \"<email>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c734c937-ce7a-4f7a-a3e5-15c56f058e23",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\",\n  \"caId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"commonName\": \"<string>\",\n  \"status\": \"<string>\",\n  \"subjectAlternativeNames\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ttl\": \"<string>\",\n  \"keyUsages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"extendedKeyUsages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"enableAutoRenewal\": \"<boolean>\",\n  \"autoRenewalPeriodInDays\": \"<number>\",\n  \"properties\": {\n    \"azureTemplateType\": \"<string>\",\n    \"organization\": \" \",\n    \"organizationalUnit\": \" \",\n    \"country\": \"<string>\",\n    \"state\": \" \",\n    \"locality\": \" \",\n    \"emailAddress\": \"<email>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "593e5b89-2ec3-4253-ab3f-1bb970720edd",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\",\n  \"caId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"commonName\": \"<string>\",\n  \"status\": \"<string>\",\n  \"subjectAlternativeNames\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ttl\": \"<string>\",\n  \"keyUsages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"extendedKeyUsages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"enableAutoRenewal\": \"<boolean>\",\n  \"autoRenewalPeriodInDays\": \"<number>\",\n  \"properties\": {\n    \"azureTemplateType\": \"<string>\",\n    \"organization\": \" \",\n    \"organizationalUnit\": \" \",\n    \"country\": \"<string>\",\n    \"state\": \" \",\n    \"locality\": \" \",\n    \"emailAddress\": \"<email>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b9b893a-5db3-4480-a820-6cbb01a1aba5",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\",\n  \"caId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"commonName\": \"<string>\",\n  \"status\": \"<string>\",\n  \"subjectAlternativeNames\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ttl\": \"<string>\",\n  \"keyUsages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"extendedKeyUsages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"enableAutoRenewal\": \"<boolean>\",\n  \"autoRenewalPeriodInDays\": \"<number>\",\n  \"properties\": {\n    \"azureTemplateType\": \"<string>\",\n    \"organization\": \" \",\n    \"organizationalUnit\": \" \",\n    \"country\": \"<string>\",\n    \"state\": \" \",\n    \"locality\": \" \",\n    \"emailAddress\": \"<email>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7c7b8ef-fdd5-4e75-b134-2b19d2b46559",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\",\n  \"caId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"commonName\": \"<string>\",\n  \"status\": \"<string>\",\n  \"subjectAlternativeNames\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ttl\": \"<string>\",\n  \"keyUsages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"extendedKeyUsages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"enableAutoRenewal\": \"<boolean>\",\n  \"autoRenewalPeriodInDays\": \"<number>\",\n  \"properties\": {\n    \"azureTemplateType\": \"<string>\",\n    \"organization\": \" \",\n    \"organizationalUnit\": \" \",\n    \"country\": \"<string>\",\n    \"state\": \" \",\n    \"locality\": \" \",\n    \"emailAddress\": \"<email>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5901755d-f0aa-43b0-9666-be14c4f983ab",
+          "name": "Delete PKI Subscriber",
+          "request": {
+            "name": "Delete PKI Subscriber",
+            "description": {
+              "content": "Delete PKI Subscriber",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "pki",
+                "subscribers",
+                ":subscriberName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriberName",
+                  "description": "(Required) The name of the PKI subscriber to delete."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"projectId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8dd197a8-07b6-465a-8862-192550a05c86",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"721140ad-504c-9ee2-765c-e5112c20c0f2\",\n  \"projectId\": \"string\",\n  \"name\": \"string\",\n  \"commonName\": \"string\",\n  \"status\": \"string\",\n  \"subjectAlternativeNames\": [\n    \"string\",\n    \"string\"\n  ],\n  \"keyUsages\": [\n    \"string\",\n    \"string\"\n  ],\n  \"extendedKeyUsages\": [\n    \"string\",\n    \"string\"\n  ],\n  \"caId\": \"9171fcdb-7ea7-ee93-e70b-8ef4663138dc\",\n  \"ttl\": \"string\",\n  \"lastOperationStatus\": \"string\",\n  \"lastOperationMessage\": \"string\",\n  \"lastOperationAt\": \"2006-09-29T15:21:21.413Z\",\n  \"enableAutoRenewal\": false,\n  \"autoRenewalPeriodInDays\": 6798.010515784704,\n  \"lastAutoRenewAt\": \"1999-10-25T00:10:14.285Z\",\n  \"properties\": {},\n  \"supportsImmediateCertIssuance\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e15ddd86-2fe2-4fb5-822e-218b5de2c543",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "29d1ad43-610c-45ed-a467-96a362de3685",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "50479d92-c01a-413f-936f-e5a0b08c1fd5",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "92e7ac07-eb00-42a1-a206-5f96bedb0d11",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b113359d-05b3-46e0-ac9a-8e50beba9493",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "74425ecb-5d50-44e1-95e3-992997b8ac9d",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "75481d40-4e2d-494a-9df3-0035f8fb0cb8",
+          "name": "create Pki Subscriber",
+          "request": {
+            "name": "create Pki Subscriber",
+            "description": {
+              "content": "Create PKI Subscriber",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "pki",
+                "subscribers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"projectId\": \"<string>\",\n  \"caId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"commonName\": \"<string>\",\n  \"status\": \"active\",\n  \"ttl\": \"<string>\",\n  \"keyUsages\": [\n    \"digitalSignature\",\n    \"keyEncipherment\"\n  ],\n  \"enableAutoRenewal\": \"<boolean>\",\n  \"autoRenewalPeriodInDays\": \"<number>\",\n  \"properties\": {\n    \"azureTemplateType\": \"<string>\",\n    \"organization\": \"<string>\",\n    \"organizationalUnit\": \"<string>\",\n    \"country\": \"<string>\",\n    \"state\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"emailAddress\": \"<email>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f133aa6e-7e37-49c3-bee6-f69e1b0b848c",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\",\n  \"caId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"commonName\": \"<string>\",\n  \"status\": \"active\",\n  \"ttl\": \"<string>\",\n  \"keyUsages\": [\n    \"digitalSignature\",\n    \"keyEncipherment\"\n  ],\n  \"enableAutoRenewal\": \"<boolean>\",\n  \"autoRenewalPeriodInDays\": \"<number>\",\n  \"properties\": {\n    \"azureTemplateType\": \"<string>\",\n    \"organization\": \" \",\n    \"organizationalUnit\": \" \",\n    \"country\": \"<string>\",\n    \"state\": \" \",\n    \"locality\": \" \",\n    \"emailAddress\": \"<email>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"721140ad-504c-9ee2-765c-e5112c20c0f2\",\n  \"projectId\": \"string\",\n  \"name\": \"string\",\n  \"commonName\": \"string\",\n  \"status\": \"string\",\n  \"subjectAlternativeNames\": [\n    \"string\",\n    \"string\"\n  ],\n  \"keyUsages\": [\n    \"string\",\n    \"string\"\n  ],\n  \"extendedKeyUsages\": [\n    \"string\",\n    \"string\"\n  ],\n  \"caId\": \"9171fcdb-7ea7-ee93-e70b-8ef4663138dc\",\n  \"ttl\": \"string\",\n  \"lastOperationStatus\": \"string\",\n  \"lastOperationMessage\": \"string\",\n  \"lastOperationAt\": \"2006-09-29T15:21:21.413Z\",\n  \"enableAutoRenewal\": false,\n  \"autoRenewalPeriodInDays\": 6798.010515784704,\n  \"lastAutoRenewAt\": \"1999-10-25T00:10:14.285Z\",\n  \"properties\": {},\n  \"supportsImmediateCertIssuance\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d8d6d88-55e3-4b4c-ab82-2b4d4cf8dbec",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\",\n  \"caId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"commonName\": \"<string>\",\n  \"status\": \"active\",\n  \"ttl\": \"<string>\",\n  \"keyUsages\": [\n    \"digitalSignature\",\n    \"keyEncipherment\"\n  ],\n  \"enableAutoRenewal\": \"<boolean>\",\n  \"autoRenewalPeriodInDays\": \"<number>\",\n  \"properties\": {\n    \"azureTemplateType\": \"<string>\",\n    \"organization\": \" \",\n    \"organizationalUnit\": \" \",\n    \"country\": \"<string>\",\n    \"state\": \" \",\n    \"locality\": \" \",\n    \"emailAddress\": \"<email>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43a502e5-c089-4eec-8002-2a58ce7eb548",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\",\n  \"caId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"commonName\": \"<string>\",\n  \"status\": \"active\",\n  \"ttl\": \"<string>\",\n  \"keyUsages\": [\n    \"digitalSignature\",\n    \"keyEncipherment\"\n  ],\n  \"enableAutoRenewal\": \"<boolean>\",\n  \"autoRenewalPeriodInDays\": \"<number>\",\n  \"properties\": {\n    \"azureTemplateType\": \"<string>\",\n    \"organization\": \" \",\n    \"organizationalUnit\": \" \",\n    \"country\": \"<string>\",\n    \"state\": \" \",\n    \"locality\": \" \",\n    \"emailAddress\": \"<email>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b2b69471-28f2-4985-ba34-5f4267b62cc9",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\",\n  \"caId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"commonName\": \"<string>\",\n  \"status\": \"active\",\n  \"ttl\": \"<string>\",\n  \"keyUsages\": [\n    \"digitalSignature\",\n    \"keyEncipherment\"\n  ],\n  \"enableAutoRenewal\": \"<boolean>\",\n  \"autoRenewalPeriodInDays\": \"<number>\",\n  \"properties\": {\n    \"azureTemplateType\": \"<string>\",\n    \"organization\": \" \",\n    \"organizationalUnit\": \" \",\n    \"country\": \"<string>\",\n    \"state\": \" \",\n    \"locality\": \" \",\n    \"emailAddress\": \"<email>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a08826f-1c36-4c23-842f-e5b9c48e7394",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\",\n  \"caId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"commonName\": \"<string>\",\n  \"status\": \"active\",\n  \"ttl\": \"<string>\",\n  \"keyUsages\": [\n    \"digitalSignature\",\n    \"keyEncipherment\"\n  ],\n  \"enableAutoRenewal\": \"<boolean>\",\n  \"autoRenewalPeriodInDays\": \"<number>\",\n  \"properties\": {\n    \"azureTemplateType\": \"<string>\",\n    \"organization\": \" \",\n    \"organizationalUnit\": \" \",\n    \"country\": \"<string>\",\n    \"state\": \" \",\n    \"locality\": \" \",\n    \"emailAddress\": \"<email>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aa8367f5-7fe4-4e2a-9b2e-57f5c2d18dd3",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\",\n  \"caId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"commonName\": \"<string>\",\n  \"status\": \"active\",\n  \"ttl\": \"<string>\",\n  \"keyUsages\": [\n    \"digitalSignature\",\n    \"keyEncipherment\"\n  ],\n  \"enableAutoRenewal\": \"<boolean>\",\n  \"autoRenewalPeriodInDays\": \"<number>\",\n  \"properties\": {\n    \"azureTemplateType\": \"<string>\",\n    \"organization\": \" \",\n    \"organizationalUnit\": \" \",\n    \"country\": \"<string>\",\n    \"state\": \" \",\n    \"locality\": \" \",\n    \"emailAddress\": \"<email>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca3a45e3-50ef-4f57-adaf-820a28322364",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\",\n  \"caId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"commonName\": \"<string>\",\n  \"status\": \"active\",\n  \"ttl\": \"<string>\",\n  \"keyUsages\": [\n    \"digitalSignature\",\n    \"keyEncipherment\"\n  ],\n  \"enableAutoRenewal\": \"<boolean>\",\n  \"autoRenewalPeriodInDays\": \"<number>\",\n  \"properties\": {\n    \"azureTemplateType\": \"<string>\",\n    \"organization\": \" \",\n    \"organizationalUnit\": \" \",\n    \"country\": \"<string>\",\n    \"state\": \" \",\n    \"locality\": \" \",\n    \"emailAddress\": \"<email>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9d9cd62f-8fb6-414f-83d4-29bb76d17436",
+          "name": "order Pki Subscriber Certificate",
+          "request": {
+            "name": "order Pki Subscriber Certificate",
+            "description": {
+              "content": "Order certificate",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "pki",
+                "subscribers",
+                ":subscriberName",
+                "order-certificate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriberName",
+                  "description": "(Required) The name of the PKI subscriber to issue the certificate for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"projectId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "65a72b9c-911a-4f37-97fe-15655a194e08",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName",
+                    "order-certificate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to issue the certificate for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1fee642f-bd83-4007-914a-08a750eaa4d4",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName",
+                    "order-certificate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to issue the certificate for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f493079-7251-4a45-9bed-6b8746ff329b",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName",
+                    "order-certificate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to issue the certificate for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "69cc8702-5c8f-48b4-a9b0-263f05a32475",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName",
+                    "order-certificate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to issue the certificate for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "04fc116e-62dc-4124-b6ba-f6bb8bb4967a",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName",
+                    "order-certificate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to issue the certificate for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d2c1572-e007-480e-9731-b3b764c5b844",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName",
+                    "order-certificate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to issue the certificate for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a4ee0f58-ba8e-4494-ba39-ac58202fa53f",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName",
+                    "order-certificate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to issue the certificate for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2bbc413f-320e-46bc-84b2-919592648ce3",
+          "name": "issue Pki Subscriber Certificate",
+          "request": {
+            "name": "issue Pki Subscriber Certificate",
+            "description": {
+              "content": "Issue certificate",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "pki",
+                "subscribers",
+                ":subscriberName",
+                "issue-certificate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriberName",
+                  "description": "(Required) The name of the PKI subscriber to issue the certificate for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"projectId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6264d180-6114-42ee-924a-09b3ce96dff9",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName",
+                    "issue-certificate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to issue the certificate for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"certificate\": \"string\",\n  \"issuingCaCertificate\": \"string\",\n  \"certificateChain\": \"string\",\n  \"privateKey\": \"string\",\n  \"serialNumber\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2832fea9-60aa-4e6b-b379-702de4265efb",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName",
+                    "issue-certificate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to issue the certificate for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "603acf72-c6ed-4f0a-a350-0473af6d37eb",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName",
+                    "issue-certificate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to issue the certificate for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8599443-1e67-4fbe-a643-23ddde657b00",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName",
+                    "issue-certificate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to issue the certificate for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54690c74-0c2f-4092-b259-c18f0f7bcf65",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName",
+                    "issue-certificate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to issue the certificate for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bdc1460f-56fe-4676-851c-a56168343d4b",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName",
+                    "issue-certificate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to issue the certificate for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9af56f71-6499-4a58-a9cd-36d7a4cb0e5c",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName",
+                    "issue-certificate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to issue the certificate for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "34f2fc3f-d843-4f18-bf68-a130ec09aea5",
+          "name": "sign Pki Subscriber Certificate",
+          "request": {
+            "name": "sign Pki Subscriber Certificate",
+            "description": {
+              "content": "Sign certificate",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "pki",
+                "subscribers",
+                ":subscriberName",
+                "sign-certificate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriberName",
+                  "description": "(Required) The name of the PKI subscriber to sign the certificate for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"projectId\": \"<string>\",\n  \"csr\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "507bbe35-445a-4f51-8cc0-4c6165d9ce66",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName",
+                    "sign-certificate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to sign the certificate for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\",\n  \"csr\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"certificate\": \"string\",\n  \"issuingCaCertificate\": \"string\",\n  \"certificateChain\": \"string\",\n  \"serialNumber\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "53b71e63-9f04-4258-a4ce-bb13ab82040d",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName",
+                    "sign-certificate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to sign the certificate for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\",\n  \"csr\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "22b8d7b9-e8f9-4a44-a237-3b2e02f7a622",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName",
+                    "sign-certificate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to sign the certificate for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\",\n  \"csr\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "90e03957-6eb1-4ebc-9a25-00467fa8fa37",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName",
+                    "sign-certificate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to sign the certificate for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\",\n  \"csr\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b2f4669-dd17-4d36-b65b-ecfe056b3df8",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName",
+                    "sign-certificate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to sign the certificate for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\",\n  \"csr\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5494b54e-968f-4971-8eb3-60bae926750e",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName",
+                    "sign-certificate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to sign the certificate for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\",\n  \"csr\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07cb4e2a-5262-48ca-a18c-5303030d963a",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName",
+                    "sign-certificate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to sign the certificate for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectId\": \"<string>\",\n  \"csr\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fca71d70-8d16-485f-8b83-a7764182581e",
+          "name": "get Pki Subscriber Latest Certificate Bundle",
+          "request": {
+            "name": "get Pki Subscriber Latest Certificate Bundle",
+            "description": {
+              "content": "Get latest certificate bundle of a subscriber",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "pki",
+                "subscribers",
+                ":subscriberName",
+                "latest-certificate-bundle"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "projectId",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the project to get the active certificate bundle for."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriberName",
+                  "description": "(Required) The name of the PKI subscriber to get the active certificate bundle for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ab2b439b-3bc8-4169-8cd2-837e04100010",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName",
+                    "latest-certificate-bundle"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to get the active certificate bundle for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"certificate\": \"string\",\n  \"certificateChain\": \"string\",\n  \"privateKey\": \"string\",\n  \"serialNumber\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7521901c-5758-4620-b39d-6c864b97a58c",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName",
+                    "latest-certificate-bundle"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to get the active certificate bundle for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2640e4a0-fdf9-411e-8bc2-06bb9398a67f",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName",
+                    "latest-certificate-bundle"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to get the active certificate bundle for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aeb9dbcb-4c41-436e-afc6-bf7c9cf6ea39",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName",
+                    "latest-certificate-bundle"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to get the active certificate bundle for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8bb9b354-5c1b-4a7a-bd5d-6efdee5a55f4",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName",
+                    "latest-certificate-bundle"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to get the active certificate bundle for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77c8f545-6520-4850-a3e5-3d80a725a495",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName",
+                    "latest-certificate-bundle"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to get the active certificate bundle for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b907a293-91a1-4523-9e34-188e2ecd329a",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName",
+                    "latest-certificate-bundle"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to get the active certificate bundle for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e98251a1-4c8c-4007-b28c-2fca4dfecfa8",
+          "name": "list Pki Subscriber Certificates",
+          "request": {
+            "name": "list Pki Subscriber Certificates",
+            "description": {
+              "content": "List PKI Subscriber certificates",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "pki",
+                "subscribers",
+                ":subscriberName",
+                "certificates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "projectId",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the project of the PKI subscriber to list the certificates for."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "The offset to start from."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "The number of certificates to return."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriberName",
+                  "description": "(Required) The name of the PKI subscriber to get."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2421936b-587f-4452-91cb-eb8c3ba89097",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName",
+                    "certificates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to get."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"certificates\": [\n    {\n      \"id\": \"4c7a033c-8900-8dd1-e620-f31dd6aa2f90\",\n      \"createdAt\": \"1961-04-08T21:55:24.741Z\",\n      \"updatedAt\": \"2002-02-24T04:30:17.062Z\",\n      \"status\": \"string\",\n      \"serialNumber\": \"string\",\n      \"friendlyName\": \"string\",\n      \"commonName\": \"string\",\n      \"notBefore\": \"1958-10-03T17:12:12.132Z\",\n      \"notAfter\": \"2023-06-17T22:57:29.671Z\",\n      \"projectId\": \"string\",\n      \"caId\": \"fc29e600-c880-ae79-f59a-52cd81682184\",\n      \"revokedAt\": \"1990-05-09T00:06:34.440Z\",\n      \"revocationReason\": 6397.3334390108075,\n      \"altNames\": \"string\",\n      \"caCertId\": \"67d88ae6-5c1b-958a-fcbe-59e23a718c1e\",\n      \"certificateTemplateId\": \"38d0eb2a-f2fa-00f8-dd03-3ec98dc491e4\",\n      \"keyUsages\": [\n        \"string\",\n        \"string\"\n      ],\n      \"extendedKeyUsages\": [\n        \"string\",\n        \"string\"\n      ],\n      \"pkiSubscriberId\": \"ae70261b-c275-52ea-36cb-1fc11877ded5\",\n      \"profileId\": \"28dc3a31-8bcb-8e0f-04c1-6207eeea2d38\",\n      \"renewBeforeDays\": 8442.189159813832,\n      \"renewedFromCertificateId\": \"2aeb1425-973d-dd06-0cf3-43934cf5fa93\",\n      \"renewedByCertificateId\": \"8ba6ea64-d6d3-0f93-4a0a-2eb43702317d\",\n      \"renewalError\": \"string\",\n      \"keyAlgorithm\": \"string\",\n      \"signatureAlgorithm\": \"string\",\n      \"subjectOrganization\": \"string\",\n      \"subjectOrganizationalUnit\": \"string\",\n      \"subjectCountry\": \"string\",\n      \"subjectState\": \"string\",\n      \"subjectLocality\": \"string\",\n      \"fingerprintSha256\": \"string\",\n      \"fingerprintSha1\": \"string\",\n      \"isCA\": false,\n      \"pathLength\": 1498.0172458119666,\n      \"source\": \"string\",\n      \"discoveryMetadata\": {},\n      \"externalMetadata\": {},\n      \"applicationId\": \"237bf2cf-6f5f-dbf0-63c6-9441bb6a1090\"\n    },\n    {\n      \"id\": \"2716023d-f0e4-7aa2-b62e-06540ad0a1cf\",\n      \"createdAt\": \"2024-07-21T15:16:39.494Z\",\n      \"updatedAt\": \"2002-01-12T05:36:46.822Z\",\n      \"status\": \"string\",\n      \"serialNumber\": \"string\",\n      \"friendlyName\": \"string\",\n      \"commonName\": \"string\",\n      \"notBefore\": \"1965-06-07T18:33:40.937Z\",\n      \"notAfter\": \"1961-10-26T20:49:17.133Z\",\n      \"projectId\": \"string\",\n      \"caId\": \"f74e2fae-b9a9-2f41-340b-fd5a79ca819f\",\n      \"revokedAt\": \"1971-09-17T20:43:50.010Z\",\n      \"revocationReason\": 1489.3801542697627,\n      \"altNames\": \"string\",\n      \"caCertId\": \"5320eae8-6c2d-7cdf-1970-39a18f51be31\",\n      \"certificateTemplateId\": \"062cc892-a153-cf0c-0302-09ca94913168\",\n      \"keyUsages\": [\n        \"string\",\n        \"string\"\n      ],\n      \"extendedKeyUsages\": [\n        \"string\",\n        \"string\"\n      ],\n      \"pkiSubscriberId\": \"7f09ca8f-e03d-aadd-c424-76260df0dc68\",\n      \"profileId\": \"94c5adf3-3bd9-9de1-9fd2-c567c64d3c40\",\n      \"renewBeforeDays\": 9287.70924766143,\n      \"renewedFromCertificateId\": \"a3b53534-1741-74bd-32f7-aeb9a9623020\",\n      \"renewedByCertificateId\": \"f9855872-c87c-2b0f-d416-b7785d5ce344\",\n      \"renewalError\": \"string\",\n      \"keyAlgorithm\": \"string\",\n      \"signatureAlgorithm\": \"string\",\n      \"subjectOrganization\": \"string\",\n      \"subjectOrganizationalUnit\": \"string\",\n      \"subjectCountry\": \"string\",\n      \"subjectState\": \"string\",\n      \"subjectLocality\": \"string\",\n      \"fingerprintSha256\": \"string\",\n      \"fingerprintSha1\": \"string\",\n      \"isCA\": true,\n      \"pathLength\": 9977.008793085331,\n      \"source\": \"string\",\n      \"discoveryMetadata\": {},\n      \"externalMetadata\": {},\n      \"applicationId\": \"e4496d82-05d6-5689-65bc-17f00169b80d\"\n    }\n  ],\n  \"totalCount\": 1943.2968342299716\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "35f9b938-88b3-4860-a1ca-59698cb835d5",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName",
+                    "certificates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to get."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71aad611-31d5-418a-b5fa-31aba5eaa68d",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName",
+                    "certificates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to get."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "194ceb83-8ebe-4036-8098-ffcb860bfb5f",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName",
+                    "certificates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to get."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e55b0b74-b75e-4aee-9df1-3bf5a7fdb938",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName",
+                    "certificates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to get."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "78d8839e-a204-4621-87c3-0f8d49d03e23",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName",
+                    "certificates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to get."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b543f9e6-477a-4a14-a774-da1c6ee76ec0",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pki",
+                    "subscribers",
+                    ":subscriberName",
+                    "certificates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberName",
+                      "description": "(Required) The name of the PKI subscriber to get."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "087e9d7a-6ff8-48f4-a69a-fbad870f3181",
+          "name": "/api/v2/workspace/:projectId/pki-subscribers",
+          "request": {
+            "name": "/api/v2/workspace/:projectId/pki-subscribers",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "workspace",
+                ":projectId",
+                "pki-subscribers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) The ID of the project to list PKI subscribers for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "39224018-7326-4a8a-94bd-714bb17503a7",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "workspace",
+                    ":projectId",
+                    "pki-subscribers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) The ID of the project to list PKI subscribers for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"subscribers\": [\n    {\n      \"id\": \"c43878ef-5c25-db8b-8794-252d29b4fa92\",\n      \"projectId\": \"string\",\n      \"name\": \"string\",\n      \"commonName\": \"string\",\n      \"status\": \"string\",\n      \"subjectAlternativeNames\": [\n        \"string\",\n        \"string\"\n      ],\n      \"keyUsages\": [\n        \"string\",\n        \"string\"\n      ],\n      \"extendedKeyUsages\": [\n        \"string\",\n        \"string\"\n      ],\n      \"caId\": \"6cd4dbcf-ef5b-a062-7c34-0e80dc70cfc9\",\n      \"ttl\": \"string\",\n      \"lastOperationStatus\": \"string\",\n      \"lastOperationMessage\": \"string\",\n      \"lastOperationAt\": \"2018-10-11T14:16:42.328Z\",\n      \"enableAutoRenewal\": false,\n      \"autoRenewalPeriodInDays\": 8122.300860946755,\n      \"lastAutoRenewAt\": \"2021-09-09T14:47:30.016Z\",\n      \"properties\": {},\n      \"supportsImmediateCertIssuance\": true\n    },\n    {\n      \"id\": \"b2e7083b-4041-5da1-d449-0e7cfc82ed16\",\n      \"projectId\": \"string\",\n      \"name\": \"string\",\n      \"commonName\": \"string\",\n      \"status\": \"string\",\n      \"subjectAlternativeNames\": [\n        \"string\",\n        \"string\"\n      ],\n      \"keyUsages\": [\n        \"string\",\n        \"string\"\n      ],\n      \"extendedKeyUsages\": [\n        \"string\",\n        \"string\"\n      ],\n      \"caId\": \"7229672d-45d1-a613-fb8c-cb980cbca0ab\",\n      \"ttl\": \"string\",\n      \"lastOperationStatus\": \"string\",\n      \"lastOperationMessage\": \"string\",\n      \"lastOperationAt\": \"1954-08-10T01:08:15.252Z\",\n      \"enableAutoRenewal\": false,\n      \"autoRenewalPeriodInDays\": 9876.113559080772,\n      \"lastAutoRenewAt\": \"1955-07-15T03:58:27.613Z\",\n      \"properties\": {},\n      \"supportsImmediateCertIssuance\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0db03793-6906-4d4c-8e17-807bac419036",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "workspace",
+                    ":projectId",
+                    "pki-subscribers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) The ID of the project to list PKI subscribers for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7984dfd4-7238-4663-983a-d185e4258b37",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "workspace",
+                    ":projectId",
+                    "pki-subscribers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) The ID of the project to list PKI subscribers for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d35f78ef-6427-486e-b443-230a3e756d0e",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "workspace",
+                    ":projectId",
+                    "pki-subscribers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) The ID of the project to list PKI subscribers for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8961d340-b420-404d-9251-73c855563fb0",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "workspace",
+                    ":projectId",
+                    "pki-subscribers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) The ID of the project to list PKI subscribers for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1934e902-5527-424a-b848-720232244a43",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "workspace",
+                    ":projectId",
+                    "pki-subscribers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) The ID of the project to list PKI subscribers for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a4317d9-85d9-422c-b254-ae86075c4c49",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "workspace",
+                    ":projectId",
+                    "pki-subscribers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) The ID of the project to list PKI subscribers for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://us.infisical.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a8af8adf-7915-4974-ab1a-0724718e15a6",
+    "name": "Infisical Admin PKI Subscribers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "List of all available APIs that can be consumed",
+      "type": "text/plain"
+    }
+  }
+}

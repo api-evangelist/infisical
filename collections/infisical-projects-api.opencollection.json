@@ -1,0 +1,478 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin Projects API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Projects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/v1/workspace/{workspaceId}/secret-snapshots",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/workspace/:workspaceId/secret-snapshots",
+            "params": [
+              {
+                "name": "environment",
+                "value": "",
+                "type": "query",
+                "description": "The environment to get snapshots from."
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "The secret path to get snapshots from."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The offset to start from. If you enter 10, it will start from the 10th snapshot."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of snapshots to return."
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to get snapshots from."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Return project secret snapshots ids"
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/projects/{projectId}/secret-snapshots",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId/secret-snapshots",
+            "params": [
+              {
+                "name": "environment",
+                "value": "",
+                "type": "query",
+                "description": "The environment to get snapshots from."
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "The secret path to get snapshots from."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The offset to start from. If you enter 10, it will start from the 10th snapshot."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of snapshots to return."
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to get snapshots from."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Return project secret snapshots ids"
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/workspace/{workspaceId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/workspace/:workspaceId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get project"
+        },
+        {
+          "info": {
+            "name": "PATCH /api/v1/workspace/{workspaceId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/workspace/:workspaceId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update project"
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/workspace/{workspaceId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/workspace/:workspaceId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to delete."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete project"
+        },
+        {
+          "info": {
+            "name": "listProjects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/projects",
+            "params": [
+              {
+                "name": "includeRoles",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List projects"
+        },
+        {
+          "info": {
+            "name": "createProject",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/projects",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new project"
+        },
+        {
+          "info": {
+            "name": "getProjectById",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get project"
+        },
+        {
+          "info": {
+            "name": "updateProject",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update project"
+        },
+        {
+          "info": {
+            "name": "deleteProject",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to delete."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete project"
+        },
+        {
+          "info": {
+            "name": "getProjectBySlug",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/projects/slug/:slug",
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug of the project to get."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get project details by slug"
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/projects/{projectId}/secret-validation-rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId/secret-validation-rules",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/projects/{projectId}/secret-validation-rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId/secret-validation-rules",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "PATCH /api/v1/projects/{projectId}/secret-validation-rules/{ruleId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId/secret-validation-rules/:ruleId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/projects/{projectId}/secret-validation-rules/{ruleId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId/secret-validation-rules/:ruleId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v2/workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v2/workspace",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new project"
+        },
+        {
+          "info": {
+            "name": "GET /api/v2/workspace/{slug}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v2/workspace/:slug",
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug of the project to get."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get project details by slug"
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v2/workspace/{slug}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v2/workspace/:slug",
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug of the project to delete."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete project"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,213 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin PKI Certificate Collections API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PKI Certificate Collections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "listProjectPkiCollections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId/pki-collections",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/pki/collections",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/collections",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create PKI collection"
+        },
+        {
+          "info": {
+            "name": "getPkiCollection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/collections/:collectionId",
+            "params": [
+              {
+                "name": "collectionId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the PKI collection to get."
+              }
+            ]
+          },
+          "docs": "Get PKI collection"
+        },
+        {
+          "info": {
+            "name": "updatePkiCollection",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/pki/collections/:collectionId",
+            "params": [
+              {
+                "name": "collectionId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the PKI collection to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update PKI collection"
+        },
+        {
+          "info": {
+            "name": "deletePkiCollection",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/pki/collections/:collectionId",
+            "params": [
+              {
+                "name": "collectionId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the PKI collection to delete."
+              }
+            ]
+          },
+          "docs": "Delete PKI collection"
+        },
+        {
+          "info": {
+            "name": "listPkiCollectionItems",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/collections/:collectionId/items",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of the PKI collection item to list."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The offset to start from."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to return."
+              },
+              {
+                "name": "collectionId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the PKI collection to list items from."
+              }
+            ]
+          },
+          "docs": "Get items in PKI collection"
+        },
+        {
+          "info": {
+            "name": "addItemToPkiCollection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/collections/:collectionId/items",
+            "params": [
+              {
+                "name": "collectionId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the PKI collection to add the item to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add item to PKI collection"
+        },
+        {
+          "info": {
+            "name": "removeItemFromPkiCollection",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/pki/collections/:collectionId/items/:collectionItemId",
+            "params": [
+              {
+                "name": "collectionId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the PKI collection to delete the item from."
+              },
+              {
+                "name": "collectionItemId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the PKI collection item to delete."
+              }
+            ]
+          },
+          "docs": "Remove item from PKI collection"
+        },
+        {
+          "info": {
+            "name": "GET /api/v2/workspace/{projectId}/pki-collections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v2/workspace/:projectId/pki-collections",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

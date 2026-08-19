@@ -1,0 +1,158 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin Identity Specific Privileges API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Identity Specific Privileges",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "POST /api/v1/additional-privilege/identity/permanent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/additional-privilege/identity/permanent",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a permanent or a non expiry specific privilege for identity."
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/additional-privilege/identity/temporary",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/additional-privilege/identity/temporary",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a temporary or a expiring specific privilege for identity."
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/additional-privilege/identity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/additional-privilege/identity",
+            "params": [
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the machine identity to list."
+              },
+              {
+                "name": "projectSlug",
+                "value": "",
+                "type": "query",
+                "description": "The slug of the project of the identity in."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List of a specific privilege of an identity in a project."
+        },
+        {
+          "info": {
+            "name": "PATCH /api/v1/additional-privilege/identity",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/additional-privilege/identity",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a specific privilege of an identity."
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/additional-privilege/identity",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/additional-privilege/identity",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a specific privilege of an identity."
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/additional-privilege/identity/{privilegeSlug}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/additional-privilege/identity/:privilegeSlug",
+            "params": [
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the machine identity to list."
+              },
+              {
+                "name": "projectSlug",
+                "value": "",
+                "type": "query",
+                "description": "The slug of the project of the identity in."
+              },
+              {
+                "name": "privilegeSlug",
+                "value": "",
+                "type": "path",
+                "description": "The slug of the privilege."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve details of a specific privilege by privilege slug."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

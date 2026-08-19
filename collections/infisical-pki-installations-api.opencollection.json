@@ -1,0 +1,122 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin PKI Installations API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PKI Installations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "listPkiInstallations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/installations",
+            "params": [
+              {
+                "name": "discoveryId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by discovery configuration ID"
+              },
+              {
+                "name": "certificateId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by certificate ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Pagination limit"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search filter for name, hostname, or IP address"
+              }
+            ]
+          },
+          "docs": "List PKI certificate installations for a project"
+        },
+        {
+          "info": {
+            "name": "getPkiInstallation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/installations/:installationId",
+            "params": [
+              {
+                "name": "installationId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the installation"
+              }
+            ]
+          },
+          "docs": "Get a PKI certificate installation by ID with linked certificates"
+        },
+        {
+          "info": {
+            "name": "updatePkiInstallation",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/cert-manager/installations/:installationId",
+            "params": [
+              {
+                "name": "installationId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the installation"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a PKI certificate installation"
+        },
+        {
+          "info": {
+            "name": "deletePkiInstallation",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/cert-manager/installations/:installationId",
+            "params": [
+              {
+                "name": "installationId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the installation"
+              }
+            ]
+          },
+          "docs": "Delete a PKI certificate installation"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

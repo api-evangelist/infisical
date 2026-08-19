@@ -1,0 +1,2343 @@
+{
+  "item": [
+    {
+      "id": "73868235-0ebc-477b-a952-f39bfaf4c531",
+      "name": "OIDC Auth",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8cf8ca08-b9df-498f-87ee-93d784ad1c28",
+          "name": "login With Oidc Auth",
+          "request": {
+            "name": "login With Oidc Auth",
+            "description": {
+              "content": "Login with OIDC Auth for machine identity",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "oidc-auth",
+                "login"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identityId\": \"<string>\",\n  \"jwt\": \"<string>\",\n  \"organizationSlug\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e0ba77a7-362f-42e5-bf46-90e279488e95",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "oidc-auth",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identityId\": \"<string>\",\n  \"jwt\": \"<string>\",\n  \"organizationSlug\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accessToken\": \"string\",\n  \"expiresIn\": 1679.259508390164,\n  \"accessTokenMaxTTL\": 9287.61053893971,\n  \"tokenType\": \"Bearer\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ace331a-1865-417b-a4ac-a2e37ea9bf51",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "oidc-auth",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identityId\": \"<string>\",\n  \"jwt\": \"<string>\",\n  \"organizationSlug\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f1006a53-5dda-4657-b0f2-db19d004e45e",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "oidc-auth",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identityId\": \"<string>\",\n  \"jwt\": \"<string>\",\n  \"organizationSlug\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f65e6716-b9ba-4ae9-a0c1-845b10d467cc",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "oidc-auth",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identityId\": \"<string>\",\n  \"jwt\": \"<string>\",\n  \"organizationSlug\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a231737-9045-417e-938d-93a942d031bd",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "oidc-auth",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identityId\": \"<string>\",\n  \"jwt\": \"<string>\",\n  \"organizationSlug\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0ffabe9-f832-4199-88c0-c5eeccbce5c6",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "oidc-auth",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identityId\": \"<string>\",\n  \"jwt\": \"<string>\",\n  \"organizationSlug\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7d9ea87d-9934-4b07-b7cf-72e6e5ff4a69",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "oidc-auth",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identityId\": \"<string>\",\n  \"jwt\": \"<string>\",\n  \"organizationSlug\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "353e4bc3-b9d2-408c-9bc2-9c68120ea0cd",
+          "name": "attach Oidc Auth",
+          "request": {
+            "name": "attach Oidc Auth",
+            "description": {
+              "content": "Attach OIDC Auth configuration onto machine identity",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "oidc-auth",
+                "identities",
+                ":identityId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "identityId",
+                  "description": "(Required) The ID of the machine identity to attach the configuration onto."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"oidcDiscoveryUrl\": \"<uri>\",\n  \"boundIssuer\": \"<string>\",\n  \"boundClaims\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"caCert\": \"\",\n  \"boundAudiences\": \"\",\n  \"claimMetadataMapping\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"boundSubject\": \"\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"0.0.0.0/0\"\n    },\n    {\n      \"ipAddress\": \"::/0\"\n    }\n  ],\n  \"accessTokenTTL\": 2592000,\n  \"accessTokenMaxTTL\": 2592000,\n  \"accessTokenNumUsesLimit\": 0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5cada476-3101-479c-933d-b035abedef24",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "oidc-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to attach the configuration onto."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"oidcDiscoveryUrl\": \"<uri>\",\n  \"boundIssuer\": \"<string>\",\n  \"boundClaims\": {\n    \"key_0\": \"<string>\"\n  },\n  \"caCert\": \"\",\n  \"boundAudiences\": \"\",\n  \"claimMetadataMapping\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"boundSubject\": \"\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"0.0.0.0/0\"\n    },\n    {\n      \"ipAddress\": \"::/0\"\n    }\n  ],\n  \"accessTokenTTL\": 2592000,\n  \"accessTokenMaxTTL\": 2592000,\n  \"accessTokenNumUsesLimit\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"identityOidcAuth\": {\n    \"id\": \"599711b0-6aad-bbc2-8175-3549b8390420\",\n    \"identityId\": \"0dcc538d-650e-6a29-ea81-254be2595416\",\n    \"oidcDiscoveryUrl\": \"string\",\n    \"boundIssuer\": \"string\",\n    \"boundAudiences\": \"string\",\n    \"createdAt\": \"2008-02-03T07:10:16.615Z\",\n    \"updatedAt\": \"1970-07-20T22:15:58.750Z\",\n    \"caCert\": \"string\",\n    \"accessTokenTTL\": 7200,\n    \"accessTokenMaxTTL\": 7200,\n    \"accessTokenNumUsesLimit\": 0,\n    \"accessTokenTrustedIps\": \"\",\n    \"boundClaims\": \"\",\n    \"claimMetadataMapping\": {},\n    \"boundSubject\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a201c0b-8fad-42a6-9221-801a28e95171",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "oidc-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to attach the configuration onto."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"oidcDiscoveryUrl\": \"<uri>\",\n  \"boundIssuer\": \"<string>\",\n  \"boundClaims\": {\n    \"key_0\": \"<string>\"\n  },\n  \"caCert\": \"\",\n  \"boundAudiences\": \"\",\n  \"claimMetadataMapping\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"boundSubject\": \"\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"0.0.0.0/0\"\n    },\n    {\n      \"ipAddress\": \"::/0\"\n    }\n  ],\n  \"accessTokenTTL\": 2592000,\n  \"accessTokenMaxTTL\": 2592000,\n  \"accessTokenNumUsesLimit\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f1061a5-7e4a-4585-bb21-d12034c5bbb7",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "oidc-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to attach the configuration onto."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"oidcDiscoveryUrl\": \"<uri>\",\n  \"boundIssuer\": \"<string>\",\n  \"boundClaims\": {\n    \"key_0\": \"<string>\"\n  },\n  \"caCert\": \"\",\n  \"boundAudiences\": \"\",\n  \"claimMetadataMapping\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"boundSubject\": \"\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"0.0.0.0/0\"\n    },\n    {\n      \"ipAddress\": \"::/0\"\n    }\n  ],\n  \"accessTokenTTL\": 2592000,\n  \"accessTokenMaxTTL\": 2592000,\n  \"accessTokenNumUsesLimit\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8171eda8-716d-405b-92b9-c801d8f9c58c",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "oidc-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to attach the configuration onto."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"oidcDiscoveryUrl\": \"<uri>\",\n  \"boundIssuer\": \"<string>\",\n  \"boundClaims\": {\n    \"key_0\": \"<string>\"\n  },\n  \"caCert\": \"\",\n  \"boundAudiences\": \"\",\n  \"claimMetadataMapping\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"boundSubject\": \"\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"0.0.0.0/0\"\n    },\n    {\n      \"ipAddress\": \"::/0\"\n    }\n  ],\n  \"accessTokenTTL\": 2592000,\n  \"accessTokenMaxTTL\": 2592000,\n  \"accessTokenNumUsesLimit\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b31d4e5-6d1c-482d-931f-cce81cb5bf14",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "oidc-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to attach the configuration onto."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"oidcDiscoveryUrl\": \"<uri>\",\n  \"boundIssuer\": \"<string>\",\n  \"boundClaims\": {\n    \"key_0\": \"<string>\"\n  },\n  \"caCert\": \"\",\n  \"boundAudiences\": \"\",\n  \"claimMetadataMapping\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"boundSubject\": \"\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"0.0.0.0/0\"\n    },\n    {\n      \"ipAddress\": \"::/0\"\n    }\n  ],\n  \"accessTokenTTL\": 2592000,\n  \"accessTokenMaxTTL\": 2592000,\n  \"accessTokenNumUsesLimit\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "41a5b6eb-df7d-4bcd-ac08-90dad4c53e53",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "oidc-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to attach the configuration onto."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"oidcDiscoveryUrl\": \"<uri>\",\n  \"boundIssuer\": \"<string>\",\n  \"boundClaims\": {\n    \"key_0\": \"<string>\"\n  },\n  \"caCert\": \"\",\n  \"boundAudiences\": \"\",\n  \"claimMetadataMapping\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"boundSubject\": \"\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"0.0.0.0/0\"\n    },\n    {\n      \"ipAddress\": \"::/0\"\n    }\n  ],\n  \"accessTokenTTL\": 2592000,\n  \"accessTokenMaxTTL\": 2592000,\n  \"accessTokenNumUsesLimit\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6a515ed-09ff-48f4-b712-a13b16254f3e",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "oidc-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to attach the configuration onto."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"oidcDiscoveryUrl\": \"<uri>\",\n  \"boundIssuer\": \"<string>\",\n  \"boundClaims\": {\n    \"key_0\": \"<string>\"\n  },\n  \"caCert\": \"\",\n  \"boundAudiences\": \"\",\n  \"claimMetadataMapping\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"boundSubject\": \"\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"0.0.0.0/0\"\n    },\n    {\n      \"ipAddress\": \"::/0\"\n    }\n  ],\n  \"accessTokenTTL\": 2592000,\n  \"accessTokenMaxTTL\": 2592000,\n  \"accessTokenNumUsesLimit\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cd608f10-f642-41cd-8377-49cc13c3d42e",
+          "name": "update Oidc Auth",
+          "request": {
+            "name": "update Oidc Auth",
+            "description": {
+              "content": "Update OIDC Auth configuration on machine identity",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "oidc-auth",
+                "identities",
+                ":identityId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "identityId",
+                  "description": "(Required) The ID of the machine identity to update the auth method for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"oidcDiscoveryUrl\": \"<uri>\",\n  \"caCert\": \"\",\n  \"boundIssuer\": \"<string>\",\n  \"boundAudiences\": \"\",\n  \"boundClaims\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"claimMetadataMapping\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  },\n  \"boundSubject\": \"\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"0.0.0.0/0\"\n    },\n    {\n      \"ipAddress\": \"::/0\"\n    }\n  ],\n  \"accessTokenTTL\": 2592000,\n  \"accessTokenMaxTTL\": 2592000,\n  \"accessTokenNumUsesLimit\": 0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b873e904-1876-4d36-91df-0da9bb5890a8",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "oidc-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to update the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"oidcDiscoveryUrl\": \"<uri>\",\n  \"caCert\": \"\",\n  \"boundIssuer\": \"<string>\",\n  \"boundAudiences\": \"\",\n  \"boundClaims\": {\n    \"key_0\": \"<string>\"\n  },\n  \"claimMetadataMapping\": {\n    \"key_0\": \"<string>\"\n  },\n  \"boundSubject\": \"\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"0.0.0.0/0\"\n    },\n    {\n      \"ipAddress\": \"::/0\"\n    }\n  ],\n  \"accessTokenTTL\": 2592000,\n  \"accessTokenMaxTTL\": 2592000,\n  \"accessTokenNumUsesLimit\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"identityOidcAuth\": {\n    \"id\": \"599711b0-6aad-bbc2-8175-3549b8390420\",\n    \"identityId\": \"0dcc538d-650e-6a29-ea81-254be2595416\",\n    \"oidcDiscoveryUrl\": \"string\",\n    \"boundIssuer\": \"string\",\n    \"boundAudiences\": \"string\",\n    \"createdAt\": \"2008-02-03T07:10:16.615Z\",\n    \"updatedAt\": \"1970-07-20T22:15:58.750Z\",\n    \"caCert\": \"string\",\n    \"accessTokenTTL\": 7200,\n    \"accessTokenMaxTTL\": 7200,\n    \"accessTokenNumUsesLimit\": 0,\n    \"accessTokenTrustedIps\": \"\",\n    \"boundClaims\": \"\",\n    \"claimMetadataMapping\": {},\n    \"boundSubject\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "690f0b24-8f89-4771-aa52-a7bad34baaa6",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "oidc-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to update the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"oidcDiscoveryUrl\": \"<uri>\",\n  \"caCert\": \"\",\n  \"boundIssuer\": \"<string>\",\n  \"boundAudiences\": \"\",\n  \"boundClaims\": {\n    \"key_0\": \"<string>\"\n  },\n  \"claimMetadataMapping\": {\n    \"key_0\": \"<string>\"\n  },\n  \"boundSubject\": \"\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"0.0.0.0/0\"\n    },\n    {\n      \"ipAddress\": \"::/0\"\n    }\n  ],\n  \"accessTokenTTL\": 2592000,\n  \"accessTokenMaxTTL\": 2592000,\n  \"accessTokenNumUsesLimit\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "343049ed-785b-4fb0-bb07-e7d22f3f4790",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "oidc-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to update the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"oidcDiscoveryUrl\": \"<uri>\",\n  \"caCert\": \"\",\n  \"boundIssuer\": \"<string>\",\n  \"boundAudiences\": \"\",\n  \"boundClaims\": {\n    \"key_0\": \"<string>\"\n  },\n  \"claimMetadataMapping\": {\n    \"key_0\": \"<string>\"\n  },\n  \"boundSubject\": \"\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"0.0.0.0/0\"\n    },\n    {\n      \"ipAddress\": \"::/0\"\n    }\n  ],\n  \"accessTokenTTL\": 2592000,\n  \"accessTokenMaxTTL\": 2592000,\n  \"accessTokenNumUsesLimit\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12321b28-be74-48cf-badd-90e1423d9c96",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "oidc-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to update the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"oidcDiscoveryUrl\": \"<uri>\",\n  \"caCert\": \"\",\n  \"boundIssuer\": \"<string>\",\n  \"boundAudiences\": \"\",\n  \"boundClaims\": {\n    \"key_0\": \"<string>\"\n  },\n  \"claimMetadataMapping\": {\n    \"key_0\": \"<string>\"\n  },\n  \"boundSubject\": \"\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"0.0.0.0/0\"\n    },\n    {\n      \"ipAddress\": \"::/0\"\n    }\n  ],\n  \"accessTokenTTL\": 2592000,\n  \"accessTokenMaxTTL\": 2592000,\n  \"accessTokenNumUsesLimit\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3edecbd3-6865-43c9-ab29-bdab805103c0",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "oidc-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to update the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"oidcDiscoveryUrl\": \"<uri>\",\n  \"caCert\": \"\",\n  \"boundIssuer\": \"<string>\",\n  \"boundAudiences\": \"\",\n  \"boundClaims\": {\n    \"key_0\": \"<string>\"\n  },\n  \"claimMetadataMapping\": {\n    \"key_0\": \"<string>\"\n  },\n  \"boundSubject\": \"\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"0.0.0.0/0\"\n    },\n    {\n      \"ipAddress\": \"::/0\"\n    }\n  ],\n  \"accessTokenTTL\": 2592000,\n  \"accessTokenMaxTTL\": 2592000,\n  \"accessTokenNumUsesLimit\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6f2ba53b-025c-4caa-8a97-9c69650861ef",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "oidc-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to update the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"oidcDiscoveryUrl\": \"<uri>\",\n  \"caCert\": \"\",\n  \"boundIssuer\": \"<string>\",\n  \"boundAudiences\": \"\",\n  \"boundClaims\": {\n    \"key_0\": \"<string>\"\n  },\n  \"claimMetadataMapping\": {\n    \"key_0\": \"<string>\"\n  },\n  \"boundSubject\": \"\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"0.0.0.0/0\"\n    },\n    {\n      \"ipAddress\": \"::/0\"\n    }\n  ],\n  \"accessTokenTTL\": 2592000,\n  \"accessTokenMaxTTL\": 2592000,\n  \"accessTokenNumUsesLimit\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ad6f69e-e63b-42e2-abcb-ab374e0245ea",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "oidc-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to update the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"oidcDiscoveryUrl\": \"<uri>\",\n  \"caCert\": \"\",\n  \"boundIssuer\": \"<string>\",\n  \"boundAudiences\": \"\",\n  \"boundClaims\": {\n    \"key_0\": \"<string>\"\n  },\n  \"claimMetadataMapping\": {\n    \"key_0\": \"<string>\"\n  },\n  \"boundSubject\": \"\",\n  \"accessTokenTrustedIps\": [\n    {\n      \"ipAddress\": \"0.0.0.0/0\"\n    },\n    {\n      \"ipAddress\": \"::/0\"\n    }\n  ],\n  \"accessTokenTTL\": 2592000,\n  \"accessTokenMaxTTL\": 2592000,\n  \"accessTokenNumUsesLimit\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ab82c1f7-9bb2-480d-8d61-f636004f03b1",
+          "name": "get Oidc Auth",
+          "request": {
+            "name": "get Oidc Auth",
+            "description": {
+              "content": "Retrieve OIDC Auth configuration on machine identity",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "oidc-auth",
+                "identities",
+                ":identityId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "identityId",
+                  "description": "(Required) The ID of the machine identity to retrieve the auth method for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d55490ba-a8f0-42e7-8bdf-d51f0a9055e1",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "oidc-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to retrieve the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"identityOidcAuth\": {\n    \"id\": \"599711b0-6aad-bbc2-8175-3549b8390420\",\n    \"identityId\": \"0dcc538d-650e-6a29-ea81-254be2595416\",\n    \"oidcDiscoveryUrl\": \"string\",\n    \"boundIssuer\": \"string\",\n    \"boundAudiences\": \"string\",\n    \"createdAt\": \"2008-02-03T07:10:16.615Z\",\n    \"updatedAt\": \"1970-07-20T22:15:58.750Z\",\n    \"caCert\": \"string\",\n    \"accessTokenTTL\": 7200,\n    \"accessTokenMaxTTL\": 7200,\n    \"accessTokenNumUsesLimit\": 0,\n    \"accessTokenTrustedIps\": \"\",\n    \"boundClaims\": \"\",\n    \"claimMetadataMapping\": {},\n    \"boundSubject\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "365ea9b0-07d2-48aa-8c71-78f258305877",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "oidc-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to retrieve the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ae0c51b-58e9-44de-aedd-f053c3cf946b",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "oidc-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to retrieve the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0de766d5-d9e5-4f0e-a477-d8a59d0da765",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "oidc-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to retrieve the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "64bf92b4-602f-4bf8-8c8f-ebbcd51c2aef",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "oidc-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to retrieve the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60ad4ee3-fee9-46e4-8d4f-a5778b28cae5",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "oidc-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to retrieve the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "41ba4ef1-fde7-4bab-9685-b2130f10855f",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "oidc-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to retrieve the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8c46d4fa-8405-4eaf-bbff-701486e2f5e4",
+          "name": "delete Oidc Auth",
+          "request": {
+            "name": "delete Oidc Auth",
+            "description": {
+              "content": "Delete OIDC Auth configuration on machine identity",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "oidc-auth",
+                "identities",
+                ":identityId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "identityId",
+                  "description": "(Required) The ID of the machine identity to revoke the auth method for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a2945120-2ee9-490b-9b8b-575f151fee9e",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "oidc-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to revoke the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"identityOidcAuth\": {\n    \"id\": \"d76673cb-cae0-11c4-d037-620a0a053402\",\n    \"identityId\": \"7b901c26-9227-19e2-99c6-644c15e8671f\",\n    \"oidcDiscoveryUrl\": \"string\",\n    \"boundIssuer\": \"string\",\n    \"boundAudiences\": \"string\",\n    \"createdAt\": \"1973-02-11T02:15:18.953Z\",\n    \"updatedAt\": \"1981-05-21T18:37:10.626Z\",\n    \"accessTokenTTL\": 7200,\n    \"accessTokenMaxTTL\": 7200,\n    \"accessTokenNumUsesLimit\": 0,\n    \"accessTokenTrustedIps\": \"\",\n    \"boundClaims\": \"\",\n    \"claimMetadataMapping\": {},\n    \"boundSubject\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ebdeacd-5cd1-4a78-a6e7-f31d5942e1b4",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "oidc-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to revoke the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9cc10a77-5a61-487e-bb63-1248e33c405d",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "oidc-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to revoke the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aafd5ab2-e48c-49f7-bfc1-557809880c64",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "oidc-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to revoke the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7d0d5d0-d290-446f-99be-a25b44c4720f",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "oidc-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to revoke the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "457c23ad-bf97-4acd-9a3d-51a80e7fabb8",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "oidc-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to revoke the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5dbc556-1401-4068-90f4-6f4962736ade",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "oidc-auth",
+                    "identities",
+                    ":identityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identityId",
+                      "description": "(Required) The ID of the machine identity to revoke the auth method for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://us.infisical.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "93aca0b6-e203-4f71-acda-0de73f7ec421",
+    "name": "Infisical Admin OIDC Auth API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "List of all available APIs that can be consumed",
+      "type": "text/plain"
+    }
+  }
+}

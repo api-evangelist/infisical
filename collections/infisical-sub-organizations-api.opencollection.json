@@ -1,0 +1,163 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin Sub Organizations API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sub Organizations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "listSubOrganizations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/sub-organizations",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of sub organizations to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The offset to start from. If you enter 10, it will start from the 10th sub organization."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Optional. Filter sub organizations by name (case-insensitive substring match)."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "The field to order sub organizations by. Currently only 'name' is supported."
+              },
+              {
+                "name": "orderDirection",
+                "value": "",
+                "type": "query",
+                "description": "The direction to order sub organizations. Either 'asc' or 'desc'."
+              },
+              {
+                "name": "isAccessible",
+                "value": "",
+                "type": "query",
+                "description": "Filter to only return sub organizations that the actor has access to."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List of sub organizations"
+        },
+        {
+          "info": {
+            "name": "createSubOrganization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/sub-organizations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a sub organization"
+        },
+        {
+          "info": {
+            "name": "updateSubOrganization",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/sub-organizations/:subOrgId",
+            "params": [
+              {
+                "name": "subOrgId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the sub organization to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a sub organization"
+        },
+        {
+          "info": {
+            "name": "deleteSubOrganization",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/sub-organizations/:subOrgId",
+            "params": [
+              {
+                "name": "subOrgId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the sub organization to delete."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a sub organization"
+        },
+        {
+          "info": {
+            "name": "createSubOrganizationMembership",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/sub-organizations/:subOrgId/memberships",
+            "params": [
+              {
+                "name": "subOrgId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the sub organization to create a membership in."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Join a sub organization"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,718 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin PKI Signers API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PKI Signers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "listSigners",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/signers",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List code signing signers for a project"
+        },
+        {
+          "info": {
+            "name": "createSigner",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/signers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a code signing signer"
+        },
+        {
+          "info": {
+            "name": "getSignerById",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/signers/:signerId",
+            "params": [
+              {
+                "name": "signerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a code signing signer by ID"
+        },
+        {
+          "info": {
+            "name": "updateSigner",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/cert-manager/signers/:signerId",
+            "params": [
+              {
+                "name": "signerId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a code signing signer"
+        },
+        {
+          "info": {
+            "name": "deleteSigner",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/cert-manager/signers/:signerId",
+            "params": [
+              {
+                "name": "signerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a code signing signer"
+        },
+        {
+          "info": {
+            "name": "getSignerPermissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/signers/:signerId/permissions",
+            "params": [
+              {
+                "name": "signerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the actor's effective resource permissions on this signer."
+        },
+        {
+          "info": {
+            "name": "updateSignerStatus",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/cert-manager/signers/:signerId/status",
+            "params": [
+              {
+                "name": "signerId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enable or disable a signer in a single endpoint"
+        },
+        {
+          "info": {
+            "name": "signData",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/signers/:signerId/sign",
+            "params": [
+              {
+                "name": "signerId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sign a pre-hashed digest with a code signing signer"
+        },
+        {
+          "info": {
+            "name": "getSignerPublicKey",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/signers/:signerId/public-key",
+            "params": [
+              {
+                "name": "signerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the public key for a code signing signer"
+        },
+        {
+          "info": {
+            "name": "reissueSignerCertificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/signers/:signerId/certificate/reissue",
+            "params": [
+              {
+                "name": "signerId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Re-issue the signer's certificate (optionally from a different CA)"
+        },
+        {
+          "info": {
+            "name": "exportSignerCertificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/signers/:signerId/certificate",
+            "params": [
+              {
+                "name": "signerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Export the signer's leaf certificate as PEM"
+        },
+        {
+          "info": {
+            "name": "getSignerApprovalPolicy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/signers/:signerId/approval-policy",
+            "params": [
+              {
+                "name": "signerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Read the signer's approval policy (steps, approvers, limits)"
+        },
+        {
+          "info": {
+            "name": "updateSignerApprovalPolicy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://us.infisical.com/api/v1/cert-manager/signers/:signerId/approval-policy",
+            "params": [
+              {
+                "name": "signerId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace the signer's approval policy (steps, approvers, limits)"
+        },
+        {
+          "info": {
+            "name": "listSignerRequests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/signers/:signerId/requests",
+            "params": [
+              {
+                "name": "statuses",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "signerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List signing approval requests for a signer"
+        },
+        {
+          "info": {
+            "name": "requestToSign",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/signers/:signerId/requests",
+            "params": [
+              {
+                "name": "signerId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Open a request to sign with this signer (operator self-serve)"
+        },
+        {
+          "info": {
+            "name": "preApproveSigning",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/signers/:signerId/requests/pre-approve",
+            "params": [
+              {
+                "name": "signerId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Pre-approve signing for a member (admin only)"
+        },
+        {
+          "info": {
+            "name": "revokeSignerRequest",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/signers/:signerId/requests/:requestId/revoke",
+            "params": [
+              {
+                "name": "signerId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Revoke a pending or active signing request"
+        },
+        {
+          "info": {
+            "name": "listSigningOperations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/signers/:signerId/operations",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "signerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List signing operations for a signer"
+        },
+        {
+          "info": {
+            "name": "listSignerUserMembers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/signers/:signerId/users",
+            "params": [
+              {
+                "name": "signerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List user members of a signer"
+        },
+        {
+          "info": {
+            "name": "addSignerUserMembers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/signers/:signerId/users",
+            "params": [
+              {
+                "name": "signerId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add user members to a signer"
+        },
+        {
+          "info": {
+            "name": "updateSignerUserRole",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/cert-manager/signers/:signerId/users/:userId",
+            "params": [
+              {
+                "name": "signerId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a user member's role on a signer"
+        },
+        {
+          "info": {
+            "name": "removeSignerUserMember",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/cert-manager/signers/:signerId/users/:userId",
+            "params": [
+              {
+                "name": "signerId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove a user from a signer"
+        },
+        {
+          "info": {
+            "name": "listSignerEffectiveUserMembers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/signers/:signerId/effective-users",
+            "params": [
+              {
+                "name": "signerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List users that can act on this signer either through a direct membership or through a group that's a signer member."
+        },
+        {
+          "info": {
+            "name": "listSignerIdentityMembers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/signers/:signerId/identities",
+            "params": [
+              {
+                "name": "signerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List machine identity members of a signer"
+        },
+        {
+          "info": {
+            "name": "addSignerIdentityMember",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/signers/:signerId/identities",
+            "params": [
+              {
+                "name": "signerId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a machine identity to a signer"
+        },
+        {
+          "info": {
+            "name": "updateSignerIdentityRole",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/cert-manager/signers/:signerId/identities/:identityId",
+            "params": [
+              {
+                "name": "signerId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a machine identity's role on a signer"
+        },
+        {
+          "info": {
+            "name": "removeSignerIdentityMember",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/cert-manager/signers/:signerId/identities/:identityId",
+            "params": [
+              {
+                "name": "signerId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove a machine identity from a signer"
+        },
+        {
+          "info": {
+            "name": "listSignerEffectiveIdentityMembers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/signers/:signerId/effective-identities",
+            "params": [
+              {
+                "name": "signerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List machine identities that can act on this signer either directly or via a group that's a signer member."
+        },
+        {
+          "info": {
+            "name": "listSignerGroupMembers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/signers/:signerId/groups",
+            "params": [
+              {
+                "name": "signerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List group members of a signer"
+        },
+        {
+          "info": {
+            "name": "addSignerGroupMember",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/signers/:signerId/groups",
+            "params": [
+              {
+                "name": "signerId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a group to a signer"
+        },
+        {
+          "info": {
+            "name": "updateSignerGroupRole",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/cert-manager/signers/:signerId/groups/:groupId",
+            "params": [
+              {
+                "name": "signerId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a group's role on a signer"
+        },
+        {
+          "info": {
+            "name": "removeSignerGroupMember",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/cert-manager/signers/:signerId/groups/:groupId",
+            "params": [
+              {
+                "name": "signerId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove a group from a signer"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

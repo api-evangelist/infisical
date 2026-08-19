@@ -1,0 +1,112 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin Project Templates API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Project Templates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/v1/project-templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/project-templates",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of project template to list."
+              }
+            ]
+          },
+          "docs": "List project templates for the current organization."
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/project-templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/project-templates",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a project template."
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/project-templates/{templateId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/project-templates/:templateId",
+            "params": [
+              {
+                "name": "templateId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a project template by ID."
+        },
+        {
+          "info": {
+            "name": "PATCH /api/v1/project-templates/{templateId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/project-templates/:templateId",
+            "params": [
+              {
+                "name": "templateId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project template to be updated."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a project template."
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/project-templates/{templateId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/project-templates/:templateId",
+            "params": [
+              {
+                "name": "templateId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project template to be deleted."
+              }
+            ]
+          },
+          "docs": "Delete a project template."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

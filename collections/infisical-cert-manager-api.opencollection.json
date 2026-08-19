@@ -1,0 +1,128 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin Cert Manager API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cert Manager",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getAzureAdcsTemplates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/azure-ad-cs/:caId/templates",
+            "params": [
+              {
+                "name": "caId",
+                "value": "",
+                "type": "path",
+                "description": "Azure AD CS CA ID"
+              }
+            ]
+          },
+          "docs": "Get available certificate templates from Azure AD CS CA"
+        },
+        {
+          "info": {
+            "name": "listAwsElasticLoadBalancers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/aws-elastic-load-balancer/load-balancers",
+            "params": [
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "region",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List AWS Elastic Load Balancers available for the specified connection and region."
+        },
+        {
+          "info": {
+            "name": "listAwsElasticLoadBalancerListeners",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/aws-elastic-load-balancer/listeners",
+            "params": [
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "region",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "loadBalancerArn",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List HTTPS/TLS listeners for the specified AWS Elastic Load Balancer."
+        },
+        {
+          "info": {
+            "name": "setAwsElbCertificateAsDefault",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/aws-elastic-load-balancer/:pkiSyncId/certificates/default",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set a certificate as the default for all listeners in this AWS ELB PKI Sync. This will trigger a sync immediately."
+        },
+        {
+          "info": {
+            "name": "clearAwsElbDefaultCertificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/aws-elastic-load-balancer/:pkiSyncId/certificates/default",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Clear the default certificate for this AWS ELB PKI Sync. No certificate will be set as the default on listeners. This will trigger a sync immediately."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

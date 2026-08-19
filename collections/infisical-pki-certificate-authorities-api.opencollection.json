@@ -1,0 +1,1650 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin PKI Certificate Authorities API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PKI Certificate Authorities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "listProjectCertificateAuthorities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId/cas",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "The status of the CA to filter by."
+              },
+              {
+                "name": "friendlyName",
+                "value": "",
+                "type": "query",
+                "description": "The friendly name of the CA to filter by."
+              },
+              {
+                "name": "commonName",
+                "value": "",
+                "type": "query",
+                "description": "The common name of the CA to filter by."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The offset to start from. If you enter 10, it will start from the 10th CA."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of CAs to return."
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "listInternalCertificateAuthoritiesV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/internal"
+          }
+        },
+        {
+          "info": {
+            "name": "createInternalCertificateAuthorityV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/internal",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "getInternalCertificateAuthorityV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/internal/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "updateInternalCertificateAuthorityV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/internal/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "deleteInternalCertificateAuthorityV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/internal/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "getCaCsr",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/internal/:caId/csr",
+            "params": [
+              {
+                "name": "caId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the CA to generate CSR from."
+              }
+            ]
+          },
+          "docs": "Get CA CSR"
+        },
+        {
+          "info": {
+            "name": "renewCaCertificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/internal/:caId/renew",
+            "params": [
+              {
+                "name": "caId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the CA to renew the CA certificate for."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Perform CA certificate renewal"
+        },
+        {
+          "info": {
+            "name": "getCaCertificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/internal/:caId/certificate",
+            "params": [
+              {
+                "name": "caId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the CA to get the certificate body and certificate chain from."
+              }
+            ]
+          },
+          "docs": "Get current CA cert and cert chain of a CA"
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/cert-manager/ca/internal/{caId}/certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/internal/:caId/certificate",
+            "params": [
+              {
+                "name": "caId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the CA to generate a certificate for."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate certificate for a Certificate Authority"
+        },
+        {
+          "info": {
+            "name": "getCaCertificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/internal/:caId/ca-certificates",
+            "params": [
+              {
+                "name": "caId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the CA to get the CA certificates for."
+              }
+            ]
+          },
+          "docs": "Get list of past and current CA certificates for a CA"
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/cert-manager/ca/internal/{caId}/certificate/{certId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/internal/:caId/certificate/:certId",
+            "params": [
+              {
+                "name": "caId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the CA to get the certificate body and certificate chain from."
+              },
+              {
+                "name": "certId",
+                "value": "",
+                "type": "path",
+                "description": "Certificate ID to retrieve"
+              }
+            ]
+          },
+          "docs": "Get a specific CA certificate by ID"
+        },
+        {
+          "info": {
+            "name": "signIntermediateCa",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/internal/:caId/sign-intermediate",
+            "params": [
+              {
+                "name": "caId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the CA to sign the intermediate certificate with."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create intermediate CA certificate from parent CA"
+        },
+        {
+          "info": {
+            "name": "importCaCertificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/internal/:caId/import-certificate",
+            "params": [
+              {
+                "name": "caId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the CA to import the certificate for."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Import certificate and chain to CA"
+        },
+        {
+          "info": {
+            "name": "getCaCrls",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/internal/:caId/crls",
+            "params": [
+              {
+                "name": "caId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the CA to get the certificate revocation lists (CRLs) for."
+              }
+            ]
+          },
+          "docs": "Get list of CRLs of the CA"
+        },
+        {
+          "info": {
+            "name": "getCaCertificateDer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/internal/:caId/certificates/:caCertId/der",
+            "params": [
+              {
+                "name": "caId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the CA to get the CA certificate from."
+              },
+              {
+                "name": "caCertId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the CA certificate to get."
+              }
+            ]
+          },
+          "docs": "Get DER-encoded certificate of CA"
+        },
+        {
+          "info": {
+            "name": "installCaCertificateVenafi",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/internal/:caId/install-certificate-venafi",
+            "params": [
+              {
+                "name": "caId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the CA to install the certificate for via Venafi."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Install a CA certificate via Venafi TLS Protect Cloud"
+        },
+        {
+          "info": {
+            "name": "installCaCertificateAdcs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/internal/:caId/install-certificate-adcs",
+            "params": [
+              {
+                "name": "caId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the CA to install the certificate for via Azure AD CS."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Install a CA certificate via Azure AD CS"
+        },
+        {
+          "info": {
+            "name": "getCaSigningConfig",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/internal/:caId/signing-config",
+            "params": [
+              {
+                "name": "caId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the CA to get the signing configuration for."
+              }
+            ]
+          },
+          "docs": "Get the signing configuration for a CA"
+        },
+        {
+          "info": {
+            "name": "createCaSigningConfig",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/internal/:caId/signing-config",
+            "params": [
+              {
+                "name": "caId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the CA to create a signing configuration for."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a signing configuration for a CA"
+        },
+        {
+          "info": {
+            "name": "updateCaSigningConfig",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/internal/:caId/signing-config",
+            "params": [
+              {
+                "name": "caId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the CA to update the signing configuration for."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the signing configuration for a CA"
+        },
+        {
+          "info": {
+            "name": "getCaAutoRenewalConfig",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/internal/:caId/auto-renewal",
+            "params": [
+              {
+                "name": "caId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the CA to get the auto-renewal configuration for."
+              }
+            ]
+          },
+          "docs": "Get auto-renewal configuration for a CA"
+        },
+        {
+          "info": {
+            "name": "updateCaAutoRenewalConfig",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/internal/:caId/auto-renewal",
+            "params": [
+              {
+                "name": "caId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the CA to update the auto-renewal configuration for."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update auto-renewal configuration for a CA"
+        },
+        {
+          "info": {
+            "name": "listAcmeCertificateAuthoritiesV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/acme"
+          }
+        },
+        {
+          "info": {
+            "name": "createAcmeCertificateAuthorityV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/acme",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "getAcmeCertificateAuthorityV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/acme/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "updateAcmeCertificateAuthorityV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/acme/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "deleteAcmeCertificateAuthorityV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/acme/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "listAzureAdCsCertificateAuthoritiesV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/azure-ad-cs"
+          }
+        },
+        {
+          "info": {
+            "name": "createAzureAdCsCertificateAuthorityV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/azure-ad-cs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "getAzureAdCsCertificateAuthorityV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/azure-ad-cs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "updateAzureAdCsCertificateAuthorityV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/azure-ad-cs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "deleteAzureAdCsCertificateAuthorityV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/azure-ad-cs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "listAwsPcaCertificateAuthoritiesV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/aws-pca"
+          }
+        },
+        {
+          "info": {
+            "name": "createAwsPcaCertificateAuthorityV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/aws-pca",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "getAwsPcaCertificateAuthorityV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/aws-pca/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "updateAwsPcaCertificateAuthorityV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/aws-pca/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "deleteAwsPcaCertificateAuthorityV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/aws-pca/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "listDigicertCertificateAuthoritiesV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/digicert"
+          }
+        },
+        {
+          "info": {
+            "name": "createDigicertCertificateAuthorityV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/digicert",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "getDigicertCertificateAuthorityV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/digicert/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "updateDigicertCertificateAuthorityV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/digicert/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "deleteDigicertCertificateAuthorityV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/digicert/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "listGodaddyCertificateAuthoritiesV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/godaddy"
+          }
+        },
+        {
+          "info": {
+            "name": "createGodaddyCertificateAuthorityV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/godaddy",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "getGodaddyCertificateAuthorityV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/godaddy/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "updateGodaddyCertificateAuthorityV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/godaddy/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "deleteGodaddyCertificateAuthorityV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/godaddy/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "listAwsAcmPublicCaCertificateAuthoritiesV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/aws-acm-public-ca"
+          }
+        },
+        {
+          "info": {
+            "name": "createAwsAcmPublicCaCertificateAuthorityV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/aws-acm-public-ca",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "getAwsAcmPublicCaCertificateAuthorityV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/aws-acm-public-ca/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "updateAwsAcmPublicCaCertificateAuthorityV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/aws-acm-public-ca/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "deleteAwsAcmPublicCaCertificateAuthorityV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/aws-acm-public-ca/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "listVenafiTppCertificateAuthoritiesV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/venafi-tpp"
+          }
+        },
+        {
+          "info": {
+            "name": "createVenafiTppCertificateAuthorityV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/venafi-tpp",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "getVenafiTppCertificateAuthorityV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/venafi-tpp/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "updateVenafiTppCertificateAuthorityV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/venafi-tpp/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "deleteVenafiTppCertificateAuthorityV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca/venafi-tpp/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "listCertificateAuthoritiesV1General",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/ca"
+          },
+          "docs": "Get Certificate Authorities"
+        },
+        {
+          "info": {
+            "name": "createCertificateAuthorityV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/ca",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create CA"
+        },
+        {
+          "info": {
+            "name": "getCertificateAuthorityV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/ca/:caId",
+            "params": [
+              {
+                "name": "caId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the CA to get."
+              }
+            ]
+          },
+          "docs": "Get CA"
+        },
+        {
+          "info": {
+            "name": "updateCertificateAuthorityV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/pki/ca/:caId",
+            "params": [
+              {
+                "name": "caId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the CA to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update CA"
+        },
+        {
+          "info": {
+            "name": "deleteCertificateAuthorityV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/pki/ca/:caId",
+            "params": [
+              {
+                "name": "caId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the CA to delete."
+              }
+            ]
+          },
+          "docs": "Delete CA"
+        },
+        {
+          "info": {
+            "name": "getCertificateAuthorityDerCertificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/ca/:caId/certificates/:caCertId/der",
+            "params": [
+              {
+                "name": "caId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the CA to get the CA certificate from."
+              },
+              {
+                "name": "caCertId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the CA certificate to get."
+              }
+            ]
+          },
+          "docs": "Get DER-encoded certificate of CA"
+        },
+        {
+          "info": {
+            "name": "getCertificateAuthorityCsr",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/ca/:caId/csr",
+            "params": [
+              {
+                "name": "caId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the CA to generate CSR from."
+              }
+            ]
+          },
+          "docs": "Get CA CSR"
+        },
+        {
+          "info": {
+            "name": "renewCertificateAuthority",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/ca/:caId/renew",
+            "params": [
+              {
+                "name": "caId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the CA to renew the CA certificate for."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Perform CA certificate renewal"
+        },
+        {
+          "info": {
+            "name": "listCertificateAuthorityCertificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/ca/:caId/ca-certificates",
+            "params": [
+              {
+                "name": "caId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the CA to get the CA certificates for."
+              }
+            ]
+          },
+          "docs": "Get list of past and current CA certificates for a CA"
+        },
+        {
+          "info": {
+            "name": "getCertificateAuthorityCertificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/ca/:caId/certificate",
+            "params": [
+              {
+                "name": "caId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the CA to get the certificate body and certificate chain from."
+              }
+            ]
+          },
+          "docs": "Get current CA cert and cert chain of a CA"
+        },
+        {
+          "info": {
+            "name": "signIntermediateCertificateAuthority",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/ca/:caId/sign-intermediate",
+            "params": [
+              {
+                "name": "caId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the CA to sign the intermediate certificate with."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create intermediate CA certificate from parent CA"
+        },
+        {
+          "info": {
+            "name": "importCertificateAuthorityCertificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/ca/:caId/import-certificate",
+            "params": [
+              {
+                "name": "caId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the CA to import the certificate for."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Import certificate and chain to CA"
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/pki/ca/internal",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/ca/internal",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/pki/ca/internal",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/ca/internal",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/pki/ca/internal/{caName}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/ca/internal/:caName",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "caName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PATCH /api/v1/pki/ca/internal/{caName}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/pki/ca/internal/:caName",
+            "params": [
+              {
+                "name": "caName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/pki/ca/internal/{caName}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/pki/ca/internal/:caName",
+            "params": [
+              {
+                "name": "caName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/pki/ca/acme",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/ca/acme",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/pki/ca/acme",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/ca/acme",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/pki/ca/acme/{caName}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/ca/acme/:caName",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "caName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PATCH /api/v1/pki/ca/acme/{caName}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/pki/ca/acme/:caName",
+            "params": [
+              {
+                "name": "caName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/pki/ca/acme/{caName}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/pki/ca/acme/:caName",
+            "params": [
+              {
+                "name": "caName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/pki/ca/azure-ad-cs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/ca/azure-ad-cs",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/pki/ca/azure-ad-cs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/ca/azure-ad-cs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/pki/ca/azure-ad-cs/{caName}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/ca/azure-ad-cs/:caName",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "caName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PATCH /api/v1/pki/ca/azure-ad-cs/{caName}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/pki/ca/azure-ad-cs/:caName",
+            "params": [
+              {
+                "name": "caName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/pki/ca/azure-ad-cs/{caName}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/pki/ca/azure-ad-cs/:caName",
+            "params": [
+              {
+                "name": "caName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "listCertificateAuthoritiesV2",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v2/pki/ca"
+          },
+          "docs": "Get Certificate Authorities"
+        },
+        {
+          "info": {
+            "name": "GET /api/v2/workspace/{slug}/cas",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v2/workspace/:slug/cas",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "The status of the CA to filter by."
+              },
+              {
+                "name": "friendlyName",
+                "value": "",
+                "type": "query",
+                "description": "The friendly name of the CA to filter by."
+              },
+              {
+                "name": "commonName",
+                "value": "",
+                "type": "query",
+                "description": "The common name of the CA to filter by."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The offset to start from. If you enter 10, it will start from the 10th CA."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of CAs to return."
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug of the project to list CAs for."
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,205 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin PKI Discovery API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PKI Discovery",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getPkiDiscoveryConfig",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/discovery-jobs/config"
+          },
+          "docs": "Get PKI discovery configuration limits and defaults"
+        },
+        {
+          "info": {
+            "name": "listPkiDiscoveries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/discovery-jobs",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Pagination limit"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search filter for name or description"
+              }
+            ]
+          },
+          "docs": "List PKI discovery configurations for a project"
+        },
+        {
+          "info": {
+            "name": "createPkiDiscovery",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/discovery-jobs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new PKI discovery configuration"
+        },
+        {
+          "info": {
+            "name": "getPkiDiscovery",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/discovery-jobs/:discoveryId",
+            "params": [
+              {
+                "name": "discoveryId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the discovery configuration"
+              }
+            ]
+          },
+          "docs": "Get a PKI discovery configuration by ID"
+        },
+        {
+          "info": {
+            "name": "updatePkiDiscovery",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/cert-manager/discovery-jobs/:discoveryId",
+            "params": [
+              {
+                "name": "discoveryId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the discovery configuration"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a PKI discovery configuration"
+        },
+        {
+          "info": {
+            "name": "deletePkiDiscovery",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/cert-manager/discovery-jobs/:discoveryId",
+            "params": [
+              {
+                "name": "discoveryId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the discovery configuration"
+              }
+            ]
+          },
+          "docs": "Delete a PKI discovery configuration"
+        },
+        {
+          "info": {
+            "name": "triggerPkiDiscoveryScan",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/discovery-jobs/:discoveryId/scan",
+            "params": [
+              {
+                "name": "discoveryId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the discovery configuration"
+              }
+            ]
+          },
+          "docs": "Trigger a manual PKI discovery scan"
+        },
+        {
+          "info": {
+            "name": "getPkiDiscoveryLatestScan",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/discovery-jobs/:discoveryId/latest-scan",
+            "params": [
+              {
+                "name": "discoveryId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the discovery configuration"
+              }
+            ]
+          },
+          "docs": "Get the latest scan for a PKI discovery configuration"
+        },
+        {
+          "info": {
+            "name": "listPkiDiscoveryScans",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/discovery-jobs/:discoveryId/scans",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Pagination limit"
+              },
+              {
+                "name": "discoveryId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the discovery configuration"
+              }
+            ]
+          },
+          "docs": "Get scan history for a PKI discovery configuration"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

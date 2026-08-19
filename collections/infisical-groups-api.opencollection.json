@@ -1,0 +1,549 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin Groups API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "listGroups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/groups"
+          }
+        },
+        {
+          "info": {
+            "name": "createGroup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/groups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "getGroupById",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group to fetch."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "updateGroup",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "deleteGroup",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group to delete."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "listGroupUsers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/groups/:id/users",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The offset to start from. If you enter 10, it will start from the 10th user."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of users to return."
+              },
+              {
+                "name": "username",
+                "value": "",
+                "type": "query",
+                "description": "The username to search for."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "The text string that user email or name will be filtered by."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Whether to filter the list of returned users. 'existingMembers' will only return existing users in the group, 'nonMembers' will only return users not in the group, undefined will return all users in the organization."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group to list users for."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "listGroupMachineIdentities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/groups/:id/machine-identities",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The offset to start from. If you enter 10, it will start from the 10th identity."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of identities to return."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "The text string that machine identity name will be filtered by."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Whether to filter the list of returned identities. 'assignedMachineIdentities' will only return identities assigned to the group, 'nonAssignedMachineIdentities' will only return identities not assigned to the group, undefined will return all identities in the organization."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group to list identities for."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "listGroupMembers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/groups/:id/members",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The offset to start from. If you enter 10, it will start from the 10th member."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of members to return."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "The text string that member email(in case of users) or name(in case of machine identities) will be filtered by."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "The column to order members by."
+              },
+              {
+                "name": "orderDirection",
+                "value": "",
+                "type": "query",
+                "description": "The direction to order members in."
+              },
+              {
+                "name": "memberTypeFilter",
+                "value": "",
+                "type": "query",
+                "description": "Filter members by type. Can be a single value ('users' or 'machineIdentities') or an array of values. If not specified, both users and machine identities will be returned."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group to list members for."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "listGroupProjects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/groups/:id/projects",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The offset to start from. If you enter 10, it will start from the 10th project."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of projects to return."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "The text string that project name or slug will be filtered by."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Whether to filter the list of returned projects. 'assignedProjects' will only return projects assigned to the group, 'unassignedProjects' will only return projects not assigned to the group, undefined will return all projects in the organization."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "The column to order projects by."
+              },
+              {
+                "name": "orderDirection",
+                "value": "",
+                "type": "query",
+                "description": "The direction to order projects in."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group to list projects for."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "addUserToGroup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/groups/:id/users/:username",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group to add the user to."
+              },
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The username of the user to add to the group."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "removeUserFromGroup",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/groups/:id/users/:username",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group to remove the user from."
+              },
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The username of the user to remove from the group."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "addMachineIdentityToGroup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/groups/:id/machine-identities/:machineIdentityId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group to add the machine identity to."
+              },
+              {
+                "name": "machineIdentityId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the machine identity to add to the group."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "removeMachineIdentityFromGroup",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/groups/:id/machine-identities/:machineIdentityId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group to remove the machine identity from."
+              },
+              {
+                "name": "machineIdentityId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the machine identity to remove from the group."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "listAvailableOrganizationGroups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/organization/available-groups"
+          },
+          "docs": "List available groups from parent org for linking to sub-organization"
+        },
+        {
+          "info": {
+            "name": "listOrganizationGroupMemberships",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/organizations/memberships/groups",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "roles",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orderDirection",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List organization group memberships"
+        },
+        {
+          "info": {
+            "name": "getOrganizationGroupMembership",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/organizations/memberships/groups/:groupId",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get organization group membership by group ID."
+        },
+        {
+          "info": {
+            "name": "createOrganizationGroupMembership",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/organizations/memberships/groups/:groupId",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group to link to the current organization"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create organization group membership (link group to current org). Sub-org only: links a parent-org group."
+        },
+        {
+          "info": {
+            "name": "updateOrganizationGroupMembership",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/organizations/memberships/groups/:groupId",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update organization group membership roles."
+        },
+        {
+          "info": {
+            "name": "deleteOrganizationGroupMembership",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/organizations/memberships/groups/:groupId",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Unlink a group from the current organization. Only applicable in sub-organizations where the group is linked; cannot be used in the organization that owns the group."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,752 @@
+{
+  "item": [
+    {
+      "id": "85f9992c-0f41-40f2-a65c-a17dc3981116",
+      "name": "Audit Logs",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fcdc22e9-a2b4-4b60-a8e8-8b590e367233",
+          "name": "list Organization Audit Logs",
+          "request": {
+            "name": "list Organization Audit Logs",
+            "description": {
+              "content": "Get all audit logs for an organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "organization",
+                "audit-logs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "projectId",
+                  "value": "<string>",
+                  "description": "Optionally filter logs by project ID. If not provided, logs from the entire organization will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "environment",
+                  "value": "<string>",
+                  "description": "The environment to filter logs by. If not provided, logs from all environments will be returned. Note that the projectId parameter must also be provided."
+                },
+                {
+                  "disabled": false,
+                  "key": "actorType",
+                  "value": "<string>",
+                  "description": "The type of actor to filter audit logs by. Must be provided when the actor parameter targets a non-user actor type (e.g. identity, kmipClient)."
+                },
+                {
+                  "disabled": false,
+                  "key": "secretPath",
+                  "value": "<string>",
+                  "description": "The path of the secret to query audit logs for. Note that the projectId parameter must also be provided."
+                },
+                {
+                  "disabled": false,
+                  "key": "secretKey",
+                  "value": "<string>",
+                  "description": "The key of the secret to query audit logs for. Note that the projectId parameter must also be provided."
+                },
+                {
+                  "disabled": false,
+                  "key": "userAgentType",
+                  "value": "<string>",
+                  "description": "Choose which consuming application to export audit logs for."
+                },
+                {
+                  "disabled": false,
+                  "key": "eventMetadata",
+                  "value": "<string>",
+                  "description": "Filter by event metadata key-value pairs. Formatted as `key1=value1,key2=value2`, with comma-separation."
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<dateTime>",
+                  "description": "The date to start the export from."
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<dateTime>",
+                  "description": "The date to end the export at."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "The offset to start from. If you enter 10, it will start from the 10th audit log."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "The number of audit logs to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "actor",
+                  "value": "<string>",
+                  "description": "The ID of a specific actor to filter audit logs by. For user actors this is the userId; for identity actors this is the identityId. When filtering non-user actor types, the actorType parameter must also be provided."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "734fa31a-c982-41c5-a305-094cc32d031e",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "organization",
+                    "audit-logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "environment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "actorType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "secretPath",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "secretKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "userAgentType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "eventMetadata",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "actor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"auditLogs\": [\n    {\n      \"id\": \"6d0a6f3c-21a4-16cc-f504-072debd4a2d4\",\n      \"createdAt\": \"2017-06-06T21:03:53.607Z\",\n      \"updatedAt\": \"1990-03-22T03:42:27.857Z\",\n      \"event\": {\n        \"type\": \"string\",\n        \"metadata\": \"\"\n      },\n      \"actor\": {\n        \"type\": \"string\",\n        \"metadata\": \"\"\n      },\n      \"ipAddress\": \"string\",\n      \"userAgent\": \"string\",\n      \"userAgentType\": \"string\",\n      \"expiresAt\": \"1952-12-01T16:29:15.040Z\",\n      \"orgId\": \"d48bdf04-e563-8990-d88d-838dfe6ac835\",\n      \"projectId\": \"string\",\n      \"projectName\": \"string\"\n    },\n    {\n      \"id\": \"47bc537d-8c9d-478c-1819-95094f929c9d\",\n      \"createdAt\": \"1961-04-29T13:30:46.046Z\",\n      \"updatedAt\": \"2000-01-22T09:11:47.745Z\",\n      \"event\": {\n        \"type\": \"string\",\n        \"metadata\": \"\"\n      },\n      \"actor\": {\n        \"type\": \"string\",\n        \"metadata\": \"\"\n      },\n      \"ipAddress\": \"string\",\n      \"userAgent\": \"string\",\n      \"userAgentType\": \"string\",\n      \"expiresAt\": \"2015-06-24T21:54:32.049Z\",\n      \"orgId\": \"6ece8550-d8e4-e008-3055-b40542da7544\",\n      \"projectId\": \"string\",\n      \"projectName\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "422af17c-17b9-4215-bbef-1020ee790952",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "organization",
+                    "audit-logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "environment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "actorType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "secretPath",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "secretKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "userAgentType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "eventMetadata",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "actor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "efa87527-5b06-4ae5-8077-2b721237f2e6",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "organization",
+                    "audit-logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "environment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "actorType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "secretPath",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "secretKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "userAgentType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "eventMetadata",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "actor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "550a47eb-c458-4684-b021-215a2a864792",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "organization",
+                    "audit-logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "environment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "actorType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "secretPath",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "secretKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "userAgentType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "eventMetadata",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "actor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "827e6b26-3436-4a85-a501-a9583420dbb9",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "organization",
+                    "audit-logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "environment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "actorType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "secretPath",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "secretKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "userAgentType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "eventMetadata",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "actor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc212b42-d7b8-4e23-a088-97b19fe604a3",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "organization",
+                    "audit-logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "environment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "actorType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "secretPath",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "secretKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "userAgentType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "eventMetadata",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "actor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "312ba11d-2652-403a-9f7a-38cc873e42f4",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "organization",
+                    "audit-logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "environment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "actorType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "secretPath",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "secretKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "userAgentType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "eventMetadata",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "actor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://us.infisical.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ccee21e7-5c93-4bd4-9b50-bab5853d8fe9",
+    "name": "Infisical Admin Audit Logs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "List of all available APIs that can be consumed",
+      "type": "text/plain"
+    }
+  }
+}

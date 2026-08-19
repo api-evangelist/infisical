@@ -1,0 +1,217 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin KMS Keys API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "KMS Keys",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "listKmsKeys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/kms/keys",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the project to list keys from."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The offset to start from. If you enter 10, it will start from the 10th key."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of keys to return."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "The column to order keys by."
+              },
+              {
+                "name": "orderDirection",
+                "value": "",
+                "type": "query",
+                "description": "The direction to order keys in."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "The text string to filter key names by."
+              }
+            ]
+          },
+          "docs": "List KMS keys"
+        },
+        {
+          "info": {
+            "name": "createKmsKey",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/kms/keys",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create KMS key"
+        },
+        {
+          "info": {
+            "name": "getKmsKeyById",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/kms/keys/:keyId",
+            "params": [
+              {
+                "name": "keyId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the KMS key to retrieve."
+              }
+            ]
+          },
+          "docs": "Get KMS key by ID"
+        },
+        {
+          "info": {
+            "name": "updateKmsKey",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/kms/keys/:keyId",
+            "params": [
+              {
+                "name": "keyId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the key to be updated."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update KMS key"
+        },
+        {
+          "info": {
+            "name": "deleteKmsKey",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/kms/keys/:keyId",
+            "params": [
+              {
+                "name": "keyId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the key to be deleted."
+              }
+            ]
+          },
+          "docs": "Delete KMS key"
+        },
+        {
+          "info": {
+            "name": "getKmsKeyByName",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/kms/keys/key-name/:keyName",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the project the key belongs to."
+              },
+              {
+                "name": "keyName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the KMS key to retrieve."
+              }
+            ]
+          },
+          "docs": "Get KMS key by name"
+        },
+        {
+          "info": {
+            "name": "getKmsKeyPrivateKey",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/kms/keys/:keyId/private-key",
+            "params": [
+              {
+                "name": "keyId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the key to export the private key or key material for."
+              }
+            ]
+          },
+          "docs": "Export the private key (or key material) for a KMS key. For asymmetric keys (sign/verify), the private key is returned. For symmetric keys (encrypt/decrypt), the key material is returned."
+        },
+        {
+          "info": {
+            "name": "bulkImportKmsKeys",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/kms/keys/bulk-import",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk import KMS keys with provided key material into a project."
+        },
+        {
+          "info": {
+            "name": "bulkExportKmsKeyPrivateKeys",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/kms/keys/bulk-export-private-keys",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk export multiple KMS keys. For asymmetric keys (sign/verify), both private and public keys are returned. For symmetric keys (encrypt/decrypt), the key material is returned."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

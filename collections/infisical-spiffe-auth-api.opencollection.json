@@ -1,0 +1,156 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin SPIFFE Auth API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SPIFFE Auth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "loginWithSpiffeAuth",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/auth/spiffe-auth/login",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Login with SPIFFE Auth (JWT-SVID) for machine identity"
+        },
+        {
+          "info": {
+            "name": "getSpiffeAuth",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/auth/spiffe-auth/identities/:identityId",
+            "params": [
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the machine identity to retrieve the auth method for."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve SPIFFE Auth configuration on machine identity"
+        },
+        {
+          "info": {
+            "name": "attachSpiffeAuth",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/auth/spiffe-auth/identities/:identityId",
+            "params": [
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the machine identity to attach the configuration onto."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Attach SPIFFE Auth configuration onto machine identity"
+        },
+        {
+          "info": {
+            "name": "updateSpiffeAuth",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/auth/spiffe-auth/identities/:identityId",
+            "params": [
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the machine identity to update the auth method for."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update SPIFFE Auth configuration on machine identity"
+        },
+        {
+          "info": {
+            "name": "deleteSpiffeAuth",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/auth/spiffe-auth/identities/:identityId",
+            "params": [
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the machine identity to revoke the auth method for."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete SPIFFE Auth configuration on machine identity"
+        },
+        {
+          "info": {
+            "name": "refreshSpiffeBundle",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/auth/spiffe-auth/identities/:identityId/refresh-bundle",
+            "params": [
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the machine identity to force-refresh the cached SPIFFE trust bundle for."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Force-refresh the cached SPIFFE trust bundle for a remote-configured machine identity"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,174 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin Identity Specific Privileges V2 API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Identity Specific Privileges V2",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "listIdentityProjectAdditionalPrivileges",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v2/identity-project-additional-privilege",
+            "params": [
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the machine identity to list."
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the project that the identity is in."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List privileges for the specified identity by project."
+        },
+        {
+          "info": {
+            "name": "createIdentityProjectAdditionalPrivilege",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v2/identity-project-additional-privilege",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Add an additional privilege for identity."
+        },
+        {
+          "info": {
+            "name": "getIdentityProjectAdditionalPrivilege",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v2/identity-project-additional-privilege/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the identity privilege."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve details of a specific privilege by id."
+        },
+        {
+          "info": {
+            "name": "updateIdentityProjectAdditionalPrivilege",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v2/identity-project-additional-privilege/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the identity privilege."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a specific identity privilege."
+        },
+        {
+          "info": {
+            "name": "deleteIdentityProjectAdditionalPrivilege",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v2/identity-project-additional-privilege/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the identity privilege."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete the specified identity privilege."
+        },
+        {
+          "info": {
+            "name": "getIdentityProjectAdditionalPrivilegeBySlug",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v2/identity-project-additional-privilege/slug/:privilegeSlug",
+            "params": [
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the machine identity to list."
+              },
+              {
+                "name": "projectSlug",
+                "value": "",
+                "type": "query",
+                "description": "The slug of the project of the identity in."
+              },
+              {
+                "name": "privilegeSlug",
+                "value": "",
+                "type": "path",
+                "description": "The slug of the privilege."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve details of a specific privilege by slug."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

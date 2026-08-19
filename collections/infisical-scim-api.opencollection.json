@@ -1,0 +1,42 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin SCIM API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SCIM",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "listExternalGroupOrgRoleMappings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/scim/group-org-role-mappings"
+          }
+        },
+        {
+          "info": {
+            "name": "updateExternalGroupOrgRoleMappings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://us.infisical.com/api/v1/scim/group-org-role-mappings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

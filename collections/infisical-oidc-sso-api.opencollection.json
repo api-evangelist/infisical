@@ -1,0 +1,79 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin OIDC SSO API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OIDC SSO",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/v1/sso/oidc/config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/sso/oidc/config",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization to get the OIDC config for."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get OIDC config"
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/sso/oidc/config",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/sso/oidc/config",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create OIDC config"
+        },
+        {
+          "info": {
+            "name": "PATCH /api/v1/sso/oidc/config",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/sso/oidc/config",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update OIDC config"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

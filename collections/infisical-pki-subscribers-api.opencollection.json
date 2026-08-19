@@ -1,0 +1,271 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin PKI Subscribers API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PKI Subscribers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "listProjectPkiSubscribers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId/pki-subscribers",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to list PKI subscribers for."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "getPkiSubscriber",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/subscribers/:subscriberName",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the project to get the PKI subscriber for."
+              },
+              {
+                "name": "subscriberName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the PKI subscriber to get."
+              }
+            ]
+          },
+          "docs": "Get PKI Subscriber"
+        },
+        {
+          "info": {
+            "name": "updatePkiSubscriber",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/pki/subscribers/:subscriberName",
+            "params": [
+              {
+                "name": "subscriberName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the PKI subscriber to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update PKI Subscriber"
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/pki/subscribers/{subscriberName}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/pki/subscribers/:subscriberName",
+            "params": [
+              {
+                "name": "subscriberName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the PKI subscriber to delete."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Delete PKI Subscriber"
+        },
+        {
+          "info": {
+            "name": "createPkiSubscriber",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/subscribers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create PKI Subscriber"
+        },
+        {
+          "info": {
+            "name": "orderPkiSubscriberCertificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/subscribers/:subscriberName/order-certificate",
+            "params": [
+              {
+                "name": "subscriberName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the PKI subscriber to issue the certificate for."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Order certificate"
+        },
+        {
+          "info": {
+            "name": "issuePkiSubscriberCertificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/subscribers/:subscriberName/issue-certificate",
+            "params": [
+              {
+                "name": "subscriberName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the PKI subscriber to issue the certificate for."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Issue certificate"
+        },
+        {
+          "info": {
+            "name": "signPkiSubscriberCertificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/subscribers/:subscriberName/sign-certificate",
+            "params": [
+              {
+                "name": "subscriberName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the PKI subscriber to sign the certificate for."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sign certificate"
+        },
+        {
+          "info": {
+            "name": "getPkiSubscriberLatestCertificateBundle",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/subscribers/:subscriberName/latest-certificate-bundle",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the project to get the active certificate bundle for."
+              },
+              {
+                "name": "subscriberName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the PKI subscriber to get the active certificate bundle for."
+              }
+            ]
+          },
+          "docs": "Get latest certificate bundle of a subscriber"
+        },
+        {
+          "info": {
+            "name": "listPkiSubscriberCertificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/subscribers/:subscriberName/certificates",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the project of the PKI subscriber to list the certificates for."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The offset to start from."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of certificates to return."
+              },
+              {
+                "name": "subscriberName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the PKI subscriber to get."
+              }
+            ]
+          },
+          "docs": "List PKI Subscriber certificates"
+        },
+        {
+          "info": {
+            "name": "GET /api/v2/workspace/{projectId}/pki-subscribers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v2/workspace/:projectId/pki-subscribers",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to list PKI subscribers for."
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

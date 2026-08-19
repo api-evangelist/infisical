@@ -1,0 +1,215 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin PKI Alerting API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PKI Alerting",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "listProjectPkiAlerts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId/pki-alerts",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "listPkiAlertsV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/alerts",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "eventType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "enabled",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List PKI alerts for a project"
+        },
+        {
+          "info": {
+            "name": "createPkiAlertV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/alerts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new PKI alert"
+        },
+        {
+          "info": {
+            "name": "getPkiAlertV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/alerts/:alertId",
+            "params": [
+              {
+                "name": "alertId",
+                "value": "",
+                "type": "path",
+                "description": "Alert ID"
+              }
+            ]
+          },
+          "docs": "Get a PKI alert by ID"
+        },
+        {
+          "info": {
+            "name": "updatePkiAlertV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/cert-manager/alerts/:alertId",
+            "params": [
+              {
+                "name": "alertId",
+                "value": "",
+                "type": "path",
+                "description": "Alert ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a PKI alert"
+        },
+        {
+          "info": {
+            "name": "deletePkiAlertV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/cert-manager/alerts/:alertId",
+            "params": [
+              {
+                "name": "alertId",
+                "value": "",
+                "type": "path",
+                "description": "Alert ID"
+              }
+            ]
+          },
+          "docs": "Delete a PKI alert"
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/cert-manager/alerts/{alertId}/certificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/alerts/:alertId/certificates",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "alertId",
+                "value": "",
+                "type": "path",
+                "description": "Alert ID"
+              }
+            ]
+          },
+          "docs": "List certificates that match an alert's filter rules"
+        },
+        {
+          "info": {
+            "name": "previewPkiAlertCertificatesV1",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/alerts/preview/certificates",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Preview certificates that would match the given filter rules"
+        },
+        {
+          "info": {
+            "name": "GET /api/v2/workspace/{projectId}/pki-alerts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v2/workspace/:projectId/pki-alerts",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

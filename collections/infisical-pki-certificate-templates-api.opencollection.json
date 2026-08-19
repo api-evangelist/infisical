@@ -1,0 +1,333 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin PKI Certificate Templates API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PKI Certificate Templates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "listProjectCertificateTemplates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId/certificate-templates",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/pki/certificate-templates/{certificateTemplateId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/certificate-templates/:certificateTemplateId",
+            "params": [
+              {
+                "name": "certificateTemplateId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the certificate template to get."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PATCH /api/v1/pki/certificate-templates/{certificateTemplateId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/pki/certificate-templates/:certificateTemplateId",
+            "params": [
+              {
+                "name": "certificateTemplateId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the certificate template to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/pki/certificate-templates/{certificateTemplateId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/pki/certificate-templates/:certificateTemplateId",
+            "params": [
+              {
+                "name": "certificateTemplateId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the certificate template to delete."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/pki/certificate-templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/certificate-templates",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/pki/certificate-templates/{certificateTemplateId}/est-config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/certificate-templates/:certificateTemplateId/est-config",
+            "params": [
+              {
+                "name": "certificateTemplateId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Certificate Template EST configuration"
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/pki/certificate-templates/{certificateTemplateId}/est-config",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/certificate-templates/:certificateTemplateId/est-config",
+            "params": [
+              {
+                "name": "certificateTemplateId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Certificate Template EST configuration"
+        },
+        {
+          "info": {
+            "name": "PATCH /api/v1/pki/certificate-templates/{certificateTemplateId}/est-config",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/pki/certificate-templates/:certificateTemplateId/est-config",
+            "params": [
+              {
+                "name": "certificateTemplateId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Certificate Template EST configuration"
+        },
+        {
+          "info": {
+            "name": "listPkiTemplates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v2/pki/certificate-templates",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "createPkiTemplate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v2/pki/certificate-templates",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "getPkiTemplate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v2/pki/certificate-templates/:templateName",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "templateName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "updatePkiTemplate",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v2/pki/certificate-templates/:templateName",
+            "params": [
+              {
+                "name": "templateName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "deletePkiTemplate",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v2/pki/certificate-templates/:templateName",
+            "params": [
+              {
+                "name": "templateName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "issueCertificateFromTemplate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v2/pki/certificate-templates/:templateName/issue-certificate",
+            "params": [
+              {
+                "name": "templateName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "signCertificateFromTemplate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v2/pki/certificate-templates/:templateName/sign-certificate",
+            "params": [
+              {
+                "name": "templateName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v2/workspace/{projectId}/certificate-templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v2/workspace/:projectId/certificate-templates",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

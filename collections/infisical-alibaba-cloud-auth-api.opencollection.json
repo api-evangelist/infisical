@@ -1,0 +1,133 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin Alibaba Cloud Auth API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Alibaba Cloud Auth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "loginWithAlicloudAuth",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/auth/alicloud-auth/login",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Login with Alibaba Cloud Auth for machine identity"
+        },
+        {
+          "info": {
+            "name": "getAlicloudAuth",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/auth/alicloud-auth/identities/:identityId",
+            "params": [
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the machine identity to retrieve the auth method for."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve Alibaba Cloud Auth configuration on machine identity"
+        },
+        {
+          "info": {
+            "name": "attachAlicloudAuth",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/auth/alicloud-auth/identities/:identityId",
+            "params": [
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the machine identity to attach the configuration onto."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Attach Alibaba Cloud Auth configuration onto machine identity"
+        },
+        {
+          "info": {
+            "name": "updateAlicloudAuth",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/auth/alicloud-auth/identities/:identityId",
+            "params": [
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the machine identity to update the auth method for."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Alibaba Cloud Auth configuration on machine identity"
+        },
+        {
+          "info": {
+            "name": "deleteAlicloudAuth",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/auth/alicloud-auth/identities/:identityId",
+            "params": [
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the machine identity to revoke the auth method for."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Alibaba Cloud Auth configuration on machine identity"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

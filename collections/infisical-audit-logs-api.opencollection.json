@@ -1,0 +1,108 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin Audit Logs API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Audit Logs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "listOrganizationAuditLogs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/organization/audit-logs",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "Optionally filter logs by project ID. If not provided, logs from the entire organization will be returned."
+              },
+              {
+                "name": "environment",
+                "value": "",
+                "type": "query",
+                "description": "The environment to filter logs by. If not provided, logs from all environments will be returned. Note that the projectId parameter must also be provided."
+              },
+              {
+                "name": "actorType",
+                "value": "",
+                "type": "query",
+                "description": "The type of actor to filter audit logs by. Must be provided when the actor parameter targets a non-user actor type (e.g. identity, kmipClient)."
+              },
+              {
+                "name": "secretPath",
+                "value": "",
+                "type": "query",
+                "description": "The path of the secret to query audit logs for. Note that the projectId parameter must also be provided."
+              },
+              {
+                "name": "secretKey",
+                "value": "",
+                "type": "query",
+                "description": "The key of the secret to query audit logs for. Note that the projectId parameter must also be provided."
+              },
+              {
+                "name": "eventType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "userAgentType",
+                "value": "",
+                "type": "query",
+                "description": "Choose which consuming application to export audit logs for."
+              },
+              {
+                "name": "eventMetadata",
+                "value": "",
+                "type": "query",
+                "description": "Filter by event metadata key-value pairs. Formatted as `key1=value1,key2=value2`, with comma-separation."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "The date to start the export from."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "The date to end the export at."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The offset to start from. If you enter 10, it will start from the 10th audit log."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of audit logs to return."
+              },
+              {
+                "name": "actor",
+                "value": "",
+                "type": "query",
+                "description": "The ID of a specific actor to filter audit logs by. For user actors this is the userId; for identity actors this is the identityId. When filtering non-user actor types, the actorType parameter must also be provided."
+              }
+            ]
+          },
+          "docs": "Get all audit logs for an organization"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

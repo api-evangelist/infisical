@@ -1,0 +1,2778 @@
+{
+  "item": [
+    {
+      "id": "aa606d1d-1aff-49cf-8d16-3fd0153cdb3f",
+      "name": "Identity Specific Privileges V2",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "70c2af88-970e-4ab3-90c2-9c4880858766",
+          "name": "create Identity Project Additional Privilege",
+          "request": {
+            "name": "create Identity Project Additional Privilege",
+            "description": {
+              "content": "Add an additional privilege for identity.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "identity-project-additional-privilege"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identityId\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"permissions\": [\n    {\n      \"subject\": \"<string>\",\n      \"action\": \"<string>\",\n      \"inverted\": \"<boolean>\",\n      \"conditions\": {\n        \"environment\": \"<string>\",\n        \"secretPath\": \"<string>\",\n        \"secretName\": \"<string>\",\n        \"secretTags\": {\n          \"$in\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"$all\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"eventType\": \"<string>\"\n      }\n    },\n    {\n      \"subject\": \"<string>\",\n      \"action\": \"<string>\",\n      \"inverted\": \"<boolean>\",\n      \"conditions\": {\n        \"environment\": \"<string>\",\n        \"secretPath\": \"<string>\",\n        \"secretName\": \"<string>\",\n        \"secretTags\": {\n          \"$in\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"$all\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"eventType\": \"<string>\"\n      }\n    }\n  ],\n  \"type\": {\n    \"isTemporary\": \"<boolean>\"\n  },\n  \"slug\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2dd02157-898a-4cc5-bc21-b1177c69a482",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identityId\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"permissions\": [\n    {\n      \"subject\": \"<string>\",\n      \"action\": \"<string>\",\n      \"inverted\": \"<boolean>\",\n      \"conditions\": {\n        \"environment\": \"<string>\",\n        \"secretPath\": \"<string>\",\n        \"secretName\": \"<string>\",\n        \"secretTags\": {\n          \"$in\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"$all\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"eventType\": \"<string>\"\n      }\n    },\n    {\n      \"subject\": \"<string>\",\n      \"action\": \"<string>\",\n      \"inverted\": \"<boolean>\",\n      \"conditions\": {\n        \"environment\": \"<string>\",\n        \"secretPath\": \"<string>\",\n        \"secretName\": \"<string>\",\n        \"secretTags\": {\n          \"$in\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"$all\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"eventType\": \"<string>\"\n      }\n    }\n  ],\n  \"type\": {\n    \"isTemporary\": \"<boolean>\"\n  },\n  \"slug\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"privilege\": {\n    \"id\": \"161dc687-f2eb-7034-fb2d-cd29ac4ade10\",\n    \"slug\": \"string\",\n    \"permissions\": [\n      {\n        \"action\": \"string\",\n        \"subject\": \"string\",\n        \"conditions\": \"\",\n        \"inverted\": true\n      },\n      {\n        \"action\": \"string\",\n        \"subject\": \"string\",\n        \"conditions\": \"\",\n        \"inverted\": true\n      }\n    ],\n    \"createdAt\": \"2012-04-11T13:45:07.312Z\",\n    \"updatedAt\": \"2019-06-28T15:16:36.273Z\",\n    \"isTemporary\": false,\n    \"temporaryMode\": \"string\",\n    \"temporaryRange\": \"string\",\n    \"temporaryAccessStartTime\": \"2025-12-29T23:48:41.241Z\",\n    \"temporaryAccessEndTime\": \"1974-11-14T07:05:21.050Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55561496-fa28-43ef-b89f-63d02cad04b9",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identityId\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"permissions\": [\n    {\n      \"subject\": \"<string>\",\n      \"action\": \"<string>\",\n      \"inverted\": \"<boolean>\",\n      \"conditions\": {\n        \"environment\": \"<string>\",\n        \"secretPath\": \"<string>\",\n        \"secretName\": \"<string>\",\n        \"secretTags\": {\n          \"$in\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"$all\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"eventType\": \"<string>\"\n      }\n    },\n    {\n      \"subject\": \"<string>\",\n      \"action\": \"<string>\",\n      \"inverted\": \"<boolean>\",\n      \"conditions\": {\n        \"environment\": \"<string>\",\n        \"secretPath\": \"<string>\",\n        \"secretName\": \"<string>\",\n        \"secretTags\": {\n          \"$in\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"$all\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"eventType\": \"<string>\"\n      }\n    }\n  ],\n  \"type\": {\n    \"isTemporary\": \"<boolean>\"\n  },\n  \"slug\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f6e0e04c-c49d-4027-a777-6c9c0984f188",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identityId\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"permissions\": [\n    {\n      \"subject\": \"<string>\",\n      \"action\": \"<string>\",\n      \"inverted\": \"<boolean>\",\n      \"conditions\": {\n        \"environment\": \"<string>\",\n        \"secretPath\": \"<string>\",\n        \"secretName\": \"<string>\",\n        \"secretTags\": {\n          \"$in\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"$all\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"eventType\": \"<string>\"\n      }\n    },\n    {\n      \"subject\": \"<string>\",\n      \"action\": \"<string>\",\n      \"inverted\": \"<boolean>\",\n      \"conditions\": {\n        \"environment\": \"<string>\",\n        \"secretPath\": \"<string>\",\n        \"secretName\": \"<string>\",\n        \"secretTags\": {\n          \"$in\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"$all\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"eventType\": \"<string>\"\n      }\n    }\n  ],\n  \"type\": {\n    \"isTemporary\": \"<boolean>\"\n  },\n  \"slug\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b95d596f-19fc-415d-8435-7bdd3206e291",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identityId\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"permissions\": [\n    {\n      \"subject\": \"<string>\",\n      \"action\": \"<string>\",\n      \"inverted\": \"<boolean>\",\n      \"conditions\": {\n        \"environment\": \"<string>\",\n        \"secretPath\": \"<string>\",\n        \"secretName\": \"<string>\",\n        \"secretTags\": {\n          \"$in\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"$all\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"eventType\": \"<string>\"\n      }\n    },\n    {\n      \"subject\": \"<string>\",\n      \"action\": \"<string>\",\n      \"inverted\": \"<boolean>\",\n      \"conditions\": {\n        \"environment\": \"<string>\",\n        \"secretPath\": \"<string>\",\n        \"secretName\": \"<string>\",\n        \"secretTags\": {\n          \"$in\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"$all\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"eventType\": \"<string>\"\n      }\n    }\n  ],\n  \"type\": {\n    \"isTemporary\": \"<boolean>\"\n  },\n  \"slug\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12be02ab-78b8-49ba-8c03-ea93feba8106",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identityId\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"permissions\": [\n    {\n      \"subject\": \"<string>\",\n      \"action\": \"<string>\",\n      \"inverted\": \"<boolean>\",\n      \"conditions\": {\n        \"environment\": \"<string>\",\n        \"secretPath\": \"<string>\",\n        \"secretName\": \"<string>\",\n        \"secretTags\": {\n          \"$in\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"$all\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"eventType\": \"<string>\"\n      }\n    },\n    {\n      \"subject\": \"<string>\",\n      \"action\": \"<string>\",\n      \"inverted\": \"<boolean>\",\n      \"conditions\": {\n        \"environment\": \"<string>\",\n        \"secretPath\": \"<string>\",\n        \"secretName\": \"<string>\",\n        \"secretTags\": {\n          \"$in\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"$all\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"eventType\": \"<string>\"\n      }\n    }\n  ],\n  \"type\": {\n    \"isTemporary\": \"<boolean>\"\n  },\n  \"slug\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1608dc8-5efd-488c-9820-4d6ca27518e6",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identityId\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"permissions\": [\n    {\n      \"subject\": \"<string>\",\n      \"action\": \"<string>\",\n      \"inverted\": \"<boolean>\",\n      \"conditions\": {\n        \"environment\": \"<string>\",\n        \"secretPath\": \"<string>\",\n        \"secretName\": \"<string>\",\n        \"secretTags\": {\n          \"$in\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"$all\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"eventType\": \"<string>\"\n      }\n    },\n    {\n      \"subject\": \"<string>\",\n      \"action\": \"<string>\",\n      \"inverted\": \"<boolean>\",\n      \"conditions\": {\n        \"environment\": \"<string>\",\n        \"secretPath\": \"<string>\",\n        \"secretName\": \"<string>\",\n        \"secretTags\": {\n          \"$in\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"$all\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"eventType\": \"<string>\"\n      }\n    }\n  ],\n  \"type\": {\n    \"isTemporary\": \"<boolean>\"\n  },\n  \"slug\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7f75c0c-9bc1-4921-b72a-31e136ef038a",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identityId\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"permissions\": [\n    {\n      \"subject\": \"<string>\",\n      \"action\": \"<string>\",\n      \"inverted\": \"<boolean>\",\n      \"conditions\": {\n        \"environment\": \"<string>\",\n        \"secretPath\": \"<string>\",\n        \"secretName\": \"<string>\",\n        \"secretTags\": {\n          \"$in\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"$all\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"eventType\": \"<string>\"\n      }\n    },\n    {\n      \"subject\": \"<string>\",\n      \"action\": \"<string>\",\n      \"inverted\": \"<boolean>\",\n      \"conditions\": {\n        \"environment\": \"<string>\",\n        \"secretPath\": \"<string>\",\n        \"secretName\": \"<string>\",\n        \"secretTags\": {\n          \"$in\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"$all\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"eventType\": \"<string>\"\n      }\n    }\n  ],\n  \"type\": {\n    \"isTemporary\": \"<boolean>\"\n  },\n  \"slug\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d0bc11a7-1f68-4e53-ab8d-1f8bc5b7fd91",
+          "name": "list Identity Project Additional Privileges",
+          "request": {
+            "name": "list Identity Project Additional Privileges",
+            "description": {
+              "content": "List privileges for the specified identity by project.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "identity-project-additional-privilege"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "identityId",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the machine identity to list."
+                },
+                {
+                  "disabled": false,
+                  "key": "projectId",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the project that the identity is in."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f1d422bd-3e0e-4c39-82ff-c860b3b8f8f1",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "identityId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"privileges\": [\n    {\n      \"id\": \"accf6c1e-07c0-94c5-bd53-8d49a59dd5ef\",\n      \"slug\": \"string\",\n      \"createdAt\": \"1978-12-06T21:59:46.921Z\",\n      \"updatedAt\": \"1951-03-24T12:14:11.334Z\",\n      \"isTemporary\": false,\n      \"temporaryMode\": \"string\",\n      \"temporaryRange\": \"string\",\n      \"temporaryAccessStartTime\": \"1958-12-15T13:11:04.720Z\",\n      \"temporaryAccessEndTime\": \"1993-05-01T12:32:17.435Z\"\n    },\n    {\n      \"id\": \"aeb12df8-df18-8cd0-99cb-5221fd40a304\",\n      \"slug\": \"string\",\n      \"createdAt\": \"1979-12-19T03:37:15.003Z\",\n      \"updatedAt\": \"2016-11-17T04:17:26.174Z\",\n      \"isTemporary\": false,\n      \"temporaryMode\": \"string\",\n      \"temporaryRange\": \"string\",\n      \"temporaryAccessStartTime\": \"2015-08-06T03:18:16.085Z\",\n      \"temporaryAccessEndTime\": \"1962-03-09T11:55:40.319Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6651dfbb-a9c2-4a4a-bb50-1fd3386fa72a",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "identityId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b5737f1f-a4f8-45ee-9eec-10ad411a4c3f",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "identityId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2dfe1022-a38f-4504-9032-33ae2a569ea2",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "identityId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1c35a003-1758-4a41-8105-7fb8276f19b7",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "identityId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe48f171-ec01-429b-ba98-673e0845c73e",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "identityId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48ef3fc2-9fb6-4cb9-98d6-042c702b8530",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "identityId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "projectId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0120c889-a269-4442-8e58-fb6bfec774a4",
+          "name": "update Identity Project Additional Privilege",
+          "request": {
+            "name": "update Identity Project Additional Privilege",
+            "description": {
+              "content": "Update a specific identity privilege.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "identity-project-additional-privilege",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the identity privilege."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"slug\": \"<string>\",\n  \"permissions\": [\n    {\n      \"subject\": \"<string>\",\n      \"action\": \"<string>\",\n      \"inverted\": \"<boolean>\",\n      \"conditions\": {\n        \"environment\": \"<string>\",\n        \"secretPath\": \"<string>\",\n        \"secretName\": \"<string>\",\n        \"secretTags\": {\n          \"$in\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"$all\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"eventType\": \"<string>\"\n      }\n    },\n    {\n      \"subject\": \"<string>\",\n      \"action\": \"<string>\",\n      \"inverted\": \"<boolean>\",\n      \"conditions\": {\n        \"environment\": \"<string>\",\n        \"secretPath\": \"<string>\",\n        \"secretName\": \"<string>\",\n        \"secretTags\": {\n          \"$in\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"$all\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"eventType\": \"<string>\"\n      }\n    }\n  ],\n  \"type\": {\n    \"isTemporary\": \"<boolean>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "380737ee-0b99-4a0c-8ead-a17d53485ac3",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the identity privilege."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"slug\": \"<string>\",\n  \"permissions\": [\n    {\n      \"subject\": \"<string>\",\n      \"action\": \"<string>\",\n      \"inverted\": \"<boolean>\",\n      \"conditions\": {\n        \"environment\": \"<string>\",\n        \"secretPath\": \"<string>\",\n        \"secretName\": \"<string>\",\n        \"secretTags\": {\n          \"$in\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"$all\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"eventType\": \"<string>\"\n      }\n    },\n    {\n      \"subject\": \"<string>\",\n      \"action\": \"<string>\",\n      \"inverted\": \"<boolean>\",\n      \"conditions\": {\n        \"environment\": \"<string>\",\n        \"secretPath\": \"<string>\",\n        \"secretName\": \"<string>\",\n        \"secretTags\": {\n          \"$in\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"$all\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"eventType\": \"<string>\"\n      }\n    }\n  ],\n  \"type\": {\n    \"isTemporary\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"privilege\": {\n    \"id\": \"161dc687-f2eb-7034-fb2d-cd29ac4ade10\",\n    \"slug\": \"string\",\n    \"permissions\": [\n      {\n        \"action\": \"string\",\n        \"subject\": \"string\",\n        \"conditions\": \"\",\n        \"inverted\": true\n      },\n      {\n        \"action\": \"string\",\n        \"subject\": \"string\",\n        \"conditions\": \"\",\n        \"inverted\": true\n      }\n    ],\n    \"createdAt\": \"2012-04-11T13:45:07.312Z\",\n    \"updatedAt\": \"2019-06-28T15:16:36.273Z\",\n    \"isTemporary\": false,\n    \"temporaryMode\": \"string\",\n    \"temporaryRange\": \"string\",\n    \"temporaryAccessStartTime\": \"2025-12-29T23:48:41.241Z\",\n    \"temporaryAccessEndTime\": \"1974-11-14T07:05:21.050Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac86b5ce-e48b-437b-a252-16c80a3df59f",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the identity privilege."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"slug\": \"<string>\",\n  \"permissions\": [\n    {\n      \"subject\": \"<string>\",\n      \"action\": \"<string>\",\n      \"inverted\": \"<boolean>\",\n      \"conditions\": {\n        \"environment\": \"<string>\",\n        \"secretPath\": \"<string>\",\n        \"secretName\": \"<string>\",\n        \"secretTags\": {\n          \"$in\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"$all\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"eventType\": \"<string>\"\n      }\n    },\n    {\n      \"subject\": \"<string>\",\n      \"action\": \"<string>\",\n      \"inverted\": \"<boolean>\",\n      \"conditions\": {\n        \"environment\": \"<string>\",\n        \"secretPath\": \"<string>\",\n        \"secretName\": \"<string>\",\n        \"secretTags\": {\n          \"$in\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"$all\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"eventType\": \"<string>\"\n      }\n    }\n  ],\n  \"type\": {\n    \"isTemporary\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "81d439b4-c4b2-407f-bc76-5bfda451e4ad",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the identity privilege."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"slug\": \"<string>\",\n  \"permissions\": [\n    {\n      \"subject\": \"<string>\",\n      \"action\": \"<string>\",\n      \"inverted\": \"<boolean>\",\n      \"conditions\": {\n        \"environment\": \"<string>\",\n        \"secretPath\": \"<string>\",\n        \"secretName\": \"<string>\",\n        \"secretTags\": {\n          \"$in\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"$all\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"eventType\": \"<string>\"\n      }\n    },\n    {\n      \"subject\": \"<string>\",\n      \"action\": \"<string>\",\n      \"inverted\": \"<boolean>\",\n      \"conditions\": {\n        \"environment\": \"<string>\",\n        \"secretPath\": \"<string>\",\n        \"secretName\": \"<string>\",\n        \"secretTags\": {\n          \"$in\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"$all\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"eventType\": \"<string>\"\n      }\n    }\n  ],\n  \"type\": {\n    \"isTemporary\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "853df6cd-d10e-499c-b5f0-5d1c8bd6d12b",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the identity privilege."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"slug\": \"<string>\",\n  \"permissions\": [\n    {\n      \"subject\": \"<string>\",\n      \"action\": \"<string>\",\n      \"inverted\": \"<boolean>\",\n      \"conditions\": {\n        \"environment\": \"<string>\",\n        \"secretPath\": \"<string>\",\n        \"secretName\": \"<string>\",\n        \"secretTags\": {\n          \"$in\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"$all\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"eventType\": \"<string>\"\n      }\n    },\n    {\n      \"subject\": \"<string>\",\n      \"action\": \"<string>\",\n      \"inverted\": \"<boolean>\",\n      \"conditions\": {\n        \"environment\": \"<string>\",\n        \"secretPath\": \"<string>\",\n        \"secretName\": \"<string>\",\n        \"secretTags\": {\n          \"$in\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"$all\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"eventType\": \"<string>\"\n      }\n    }\n  ],\n  \"type\": {\n    \"isTemporary\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b7afde9-4cd8-47a3-b1e5-d493f152ff8a",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the identity privilege."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"slug\": \"<string>\",\n  \"permissions\": [\n    {\n      \"subject\": \"<string>\",\n      \"action\": \"<string>\",\n      \"inverted\": \"<boolean>\",\n      \"conditions\": {\n        \"environment\": \"<string>\",\n        \"secretPath\": \"<string>\",\n        \"secretName\": \"<string>\",\n        \"secretTags\": {\n          \"$in\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"$all\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"eventType\": \"<string>\"\n      }\n    },\n    {\n      \"subject\": \"<string>\",\n      \"action\": \"<string>\",\n      \"inverted\": \"<boolean>\",\n      \"conditions\": {\n        \"environment\": \"<string>\",\n        \"secretPath\": \"<string>\",\n        \"secretName\": \"<string>\",\n        \"secretTags\": {\n          \"$in\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"$all\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"eventType\": \"<string>\"\n      }\n    }\n  ],\n  \"type\": {\n    \"isTemporary\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ec51645-ec17-453a-83ef-998f50f3ff40",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the identity privilege."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"slug\": \"<string>\",\n  \"permissions\": [\n    {\n      \"subject\": \"<string>\",\n      \"action\": \"<string>\",\n      \"inverted\": \"<boolean>\",\n      \"conditions\": {\n        \"environment\": \"<string>\",\n        \"secretPath\": \"<string>\",\n        \"secretName\": \"<string>\",\n        \"secretTags\": {\n          \"$in\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"$all\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"eventType\": \"<string>\"\n      }\n    },\n    {\n      \"subject\": \"<string>\",\n      \"action\": \"<string>\",\n      \"inverted\": \"<boolean>\",\n      \"conditions\": {\n        \"environment\": \"<string>\",\n        \"secretPath\": \"<string>\",\n        \"secretName\": \"<string>\",\n        \"secretTags\": {\n          \"$in\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"$all\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"eventType\": \"<string>\"\n      }\n    }\n  ],\n  \"type\": {\n    \"isTemporary\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9b07800-5bc6-47ef-8f30-5e83c9d49369",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the identity privilege."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"slug\": \"<string>\",\n  \"permissions\": [\n    {\n      \"subject\": \"<string>\",\n      \"action\": \"<string>\",\n      \"inverted\": \"<boolean>\",\n      \"conditions\": {\n        \"environment\": \"<string>\",\n        \"secretPath\": \"<string>\",\n        \"secretName\": \"<string>\",\n        \"secretTags\": {\n          \"$in\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"$all\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"eventType\": \"<string>\"\n      }\n    },\n    {\n      \"subject\": \"<string>\",\n      \"action\": \"<string>\",\n      \"inverted\": \"<boolean>\",\n      \"conditions\": {\n        \"environment\": \"<string>\",\n        \"secretPath\": \"<string>\",\n        \"secretName\": \"<string>\",\n        \"secretTags\": {\n          \"$in\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"$all\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"eventType\": \"<string>\"\n      }\n    }\n  ],\n  \"type\": {\n    \"isTemporary\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dbfc09f4-3142-49c0-82db-e3b0787af010",
+          "name": "delete Identity Project Additional Privilege",
+          "request": {
+            "name": "delete Identity Project Additional Privilege",
+            "description": {
+              "content": "Delete the specified identity privilege.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "identity-project-additional-privilege",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the identity privilege."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ffc1e336-cb5d-419a-82f8-bd266e006792",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the identity privilege."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"privilege\": {\n    \"id\": \"161dc687-f2eb-7034-fb2d-cd29ac4ade10\",\n    \"slug\": \"string\",\n    \"permissions\": [\n      {\n        \"action\": \"string\",\n        \"subject\": \"string\",\n        \"conditions\": \"\",\n        \"inverted\": true\n      },\n      {\n        \"action\": \"string\",\n        \"subject\": \"string\",\n        \"conditions\": \"\",\n        \"inverted\": true\n      }\n    ],\n    \"createdAt\": \"2012-04-11T13:45:07.312Z\",\n    \"updatedAt\": \"2019-06-28T15:16:36.273Z\",\n    \"isTemporary\": false,\n    \"temporaryMode\": \"string\",\n    \"temporaryRange\": \"string\",\n    \"temporaryAccessStartTime\": \"2025-12-29T23:48:41.241Z\",\n    \"temporaryAccessEndTime\": \"1974-11-14T07:05:21.050Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cddb03e5-8e3f-42b9-acc8-7b36ee3c9c07",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the identity privilege."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "074ce615-e6f7-4d4b-aab6-23759aaf864e",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the identity privilege."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "69ed13ca-b989-4caf-8b33-e8ccbb1cc2cb",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the identity privilege."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5aabd893-e73b-41d4-b532-44db6d9a88ed",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the identity privilege."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dcf4d899-a497-41bf-9c2e-a3f672765173",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the identity privilege."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48b70fbb-4aec-4579-990f-d8b67c35cf89",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the identity privilege."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d3465600-2329-4692-8d1e-2c59f9f76e73",
+          "name": "get Identity Project Additional Privilege",
+          "request": {
+            "name": "get Identity Project Additional Privilege",
+            "description": {
+              "content": "Retrieve details of a specific privilege by id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "identity-project-additional-privilege",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the identity privilege."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8eed44a1-1be4-4dda-9b7d-3b0ccb912cc6",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the identity privilege."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"privilege\": {\n    \"id\": \"161dc687-f2eb-7034-fb2d-cd29ac4ade10\",\n    \"slug\": \"string\",\n    \"permissions\": [\n      {\n        \"action\": \"string\",\n        \"subject\": \"string\",\n        \"conditions\": \"\",\n        \"inverted\": true\n      },\n      {\n        \"action\": \"string\",\n        \"subject\": \"string\",\n        \"conditions\": \"\",\n        \"inverted\": true\n      }\n    ],\n    \"createdAt\": \"2012-04-11T13:45:07.312Z\",\n    \"updatedAt\": \"2019-06-28T15:16:36.273Z\",\n    \"isTemporary\": false,\n    \"temporaryMode\": \"string\",\n    \"temporaryRange\": \"string\",\n    \"temporaryAccessStartTime\": \"2025-12-29T23:48:41.241Z\",\n    \"temporaryAccessEndTime\": \"1974-11-14T07:05:21.050Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0eb125fa-5eaa-4c33-b18a-46e7e75f0586",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the identity privilege."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7fe1307a-e536-416c-9723-5f83be4b160a",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the identity privilege."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa598c87-8e40-4f86-8c6e-59f6e0952087",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the identity privilege."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6810eec6-2197-4560-8a1e-3b12391d3dfc",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the identity privilege."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6cdc3ffb-5850-4702-a40b-4ef3c818e97b",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the identity privilege."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd0f5669-c842-4d4d-bfe2-d09f0038ea20",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the identity privilege."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9b742b75-4dbd-4750-aaa1-1e46d9d7fed4",
+          "name": "get Identity Project Additional Privilege By Slug",
+          "request": {
+            "name": "get Identity Project Additional Privilege By Slug",
+            "description": {
+              "content": "Retrieve details of a specific privilege by slug.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "identity-project-additional-privilege",
+                "slug",
+                ":privilegeSlug"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "identityId",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the machine identity to list."
+                },
+                {
+                  "disabled": false,
+                  "key": "projectSlug",
+                  "value": "<string>",
+                  "description": "(Required) The slug of the project of the identity in."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "privilegeSlug",
+                  "description": "(Required) The slug of the privilege."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3042582e-1bf6-4649-959e-d0af19bb2e32",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege",
+                    "slug",
+                    ":privilegeSlug"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "identityId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "projectSlug",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "privilegeSlug",
+                      "description": "(Required) The slug of the privilege."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"privilege\": {\n    \"id\": \"161dc687-f2eb-7034-fb2d-cd29ac4ade10\",\n    \"slug\": \"string\",\n    \"permissions\": [\n      {\n        \"action\": \"string\",\n        \"subject\": \"string\",\n        \"conditions\": \"\",\n        \"inverted\": true\n      },\n      {\n        \"action\": \"string\",\n        \"subject\": \"string\",\n        \"conditions\": \"\",\n        \"inverted\": true\n      }\n    ],\n    \"createdAt\": \"2012-04-11T13:45:07.312Z\",\n    \"updatedAt\": \"2019-06-28T15:16:36.273Z\",\n    \"isTemporary\": false,\n    \"temporaryMode\": \"string\",\n    \"temporaryRange\": \"string\",\n    \"temporaryAccessStartTime\": \"2025-12-29T23:48:41.241Z\",\n    \"temporaryAccessEndTime\": \"1974-11-14T07:05:21.050Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "072bbe25-321d-4cb1-a7b6-efe942d837bd",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege",
+                    "slug",
+                    ":privilegeSlug"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "identityId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "projectSlug",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "privilegeSlug",
+                      "description": "(Required) The slug of the privilege."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2f953e3d-c9e6-4875-9f53-30e3ea28d67a",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege",
+                    "slug",
+                    ":privilegeSlug"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "identityId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "projectSlug",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "privilegeSlug",
+                      "description": "(Required) The slug of the privilege."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a7d172e8-9057-47fc-9736-a12ec0356ff4",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege",
+                    "slug",
+                    ":privilegeSlug"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "identityId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "projectSlug",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "privilegeSlug",
+                      "description": "(Required) The slug of the privilege."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "72e73fed-77c8-4595-be37-83d37e9bf2bd",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege",
+                    "slug",
+                    ":privilegeSlug"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "identityId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "projectSlug",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "privilegeSlug",
+                      "description": "(Required) The slug of the privilege."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da311223-b5af-4ffd-b8dc-75b50f7f554b",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege",
+                    "slug",
+                    ":privilegeSlug"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "identityId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "projectSlug",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "privilegeSlug",
+                      "description": "(Required) The slug of the privilege."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f2a89938-4e40-4283-a9e4-d3d9168eed06",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "identity-project-additional-privilege",
+                    "slug",
+                    ":privilegeSlug"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "identityId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "projectSlug",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "privilegeSlug",
+                      "description": "(Required) The slug of the privilege."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://us.infisical.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7f2eff55-a0a6-4249-becf-abe4dec34e23",
+    "name": "Infisical Admin Identity Specific Privileges V2 API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "List of all available APIs that can be consumed",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,294 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin Universal Auth API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Universal Auth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "loginWithUniversalAuth",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/auth/universal-auth/login",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Login with Universal Auth for machine identity"
+        },
+        {
+          "info": {
+            "name": "getUniversalAuth",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/auth/universal-auth/identities/:identityId",
+            "params": [
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the machine identity to retrieve the auth method for."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve Universal Auth configuration on machine identity"
+        },
+        {
+          "info": {
+            "name": "attachUniversalAuth",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/auth/universal-auth/identities/:identityId",
+            "params": [
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the machine identity to attach the configuration onto."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Attach Universal Auth configuration onto machine identity"
+        },
+        {
+          "info": {
+            "name": "updateUniversalAuth",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/auth/universal-auth/identities/:identityId",
+            "params": [
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the machine identity to update the auth method for."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Universal Auth configuration on machine identity"
+        },
+        {
+          "info": {
+            "name": "deleteUniversalAuth",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/auth/universal-auth/identities/:identityId",
+            "params": [
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the machine identity to revoke the auth method for."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Universal Auth configuration on machine identity"
+        },
+        {
+          "info": {
+            "name": "listUniversalAuthClientSecrets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/auth/universal-auth/identities/:identityId/client-secrets",
+            "params": [
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the machine identity to list client secrets for."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List Universal Auth Client Secrets for machine identity"
+        },
+        {
+          "info": {
+            "name": "createUniversalAuthClientSecret",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/auth/universal-auth/identities/:identityId/client-secrets",
+            "params": [
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the machine identity to create a client secret for."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Universal Auth Client Secret for machine identity"
+        },
+        {
+          "info": {
+            "name": "getUniversalAuthClientSecret",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/auth/universal-auth/identities/:identityId/client-secrets/:clientSecretId",
+            "params": [
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the machine identity to get the client secret from."
+              },
+              {
+                "name": "clientSecretId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the client secret to get details."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Universal Auth Client Secret for machine identity"
+        },
+        {
+          "info": {
+            "name": "revokeUniversalAuthClientSecret",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/auth/universal-auth/identities/:identityId/client-secrets/:clientSecretId/revoke",
+            "params": [
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the machine identity to revoke the client secret from."
+              },
+              {
+                "name": "clientSecretId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the client secret to revoke."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Revoke Universal Auth Client Secrets for machine identity"
+        },
+        {
+          "info": {
+            "name": "clearUniversalAuthLockouts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/auth/universal-auth/identities/:identityId/clear-lockouts",
+            "params": [
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the machine identity to clear the client lockouts from."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Clear Universal Auth Lockouts for machine identity"
+        },
+        {
+          "info": {
+            "name": "renewIdentityAccessToken",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/auth/token/renew",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Renew machine identity access token"
+        },
+        {
+          "info": {
+            "name": "revokeIdentityAccessToken",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/auth/token/revoke",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Revoke machine identity access token"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

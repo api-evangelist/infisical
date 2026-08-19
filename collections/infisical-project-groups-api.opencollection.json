@@ -1,0 +1,502 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin Project Groups API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Project Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "addGroupToProject",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId/groups/:groupIdOrName",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to add the group to."
+              },
+              {
+                "name": "groupIdOrName",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the group to add to the project."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deprecated: Use POST /api/v1/projects/:projectId/memberships/groups/:groupId instead. Add group to project."
+        },
+        {
+          "info": {
+            "name": "getProjectGroup",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId/groups/:groupId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deprecated: Use GET /api/v1/projects/:projectId/memberships/groups/:groupId instead. Return project group."
+        },
+        {
+          "info": {
+            "name": "updateProjectGroup",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId/groups/:groupId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to update the group in."
+              },
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group to update in the project."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deprecated: Use PATCH /api/v1/projects/:projectId/memberships/groups/:groupId instead. Update group in project."
+        },
+        {
+          "info": {
+            "name": "removeGroupFromProject",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId/groups/:groupId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to delete the group from."
+              },
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group to delete from the project."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deprecated: Use DELETE /api/v1/projects/:projectId/memberships/groups/:groupId instead. Remove group from project."
+        },
+        {
+          "info": {
+            "name": "listProjectGroups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId/groups",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to list groups for."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deprecated: Use GET /api/v1/projects/:projectId/memberships/groups instead. Return list of groups in project."
+        },
+        {
+          "info": {
+            "name": "listProjectGroupMemberships",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId/memberships/groups",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to list groups for."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List project group memberships."
+        },
+        {
+          "info": {
+            "name": "getProjectGroupMembership",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId/memberships/groups/:groupId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get project group membership by group ID."
+        },
+        {
+          "info": {
+            "name": "createProjectGroupMembership",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId/memberships/groups/:groupId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Add a group from the organization to the project by creating a project group membership."
+        },
+        {
+          "info": {
+            "name": "updateProjectGroupMembership",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId/memberships/groups/:groupId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update project group membership roles."
+        },
+        {
+          "info": {
+            "name": "removeProjectGroupMembership",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId/memberships/groups/:groupId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Remove group from project."
+        },
+        {
+          "info": {
+            "name": "POST /api/v2/workspace/{projectId}/groups/{groupIdOrName}",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v2/workspace/:projectId/groups/:groupIdOrName",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to add the group to."
+              },
+              {
+                "name": "groupIdOrName",
+                "value": "",
+                "type": "path",
+                "description": "The ID or name of the group to add to the project."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Add group to project"
+        },
+        {
+          "info": {
+            "name": "GET /api/v2/workspace/{projectId}/groups/{groupId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v2/workspace/:projectId/groups/:groupId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Return project group"
+        },
+        {
+          "info": {
+            "name": "PATCH /api/v2/workspace/{projectId}/groups/{groupId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v2/workspace/:projectId/groups/:groupId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to update the group in."
+              },
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group to update in the project."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update group in project"
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v2/workspace/{projectId}/groups/{groupId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v2/workspace/:projectId/groups/:groupId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to delete the group from."
+              },
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group to delete from the project."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Remove group from project"
+        },
+        {
+          "info": {
+            "name": "GET /api/v2/workspace/{projectId}/groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v2/workspace/:projectId/groups",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to list groups for."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Return list of groups in project"
+        },
+        {
+          "info": {
+            "name": "GET /api/v2/workspace/{projectId}/groups/{groupId}/users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v2/workspace/:projectId/groups/:groupId/users",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The offset to start from. If you enter 10, it will start from the 10th user."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of users to return."
+              },
+              {
+                "name": "username",
+                "value": "",
+                "type": "query",
+                "description": "The username to search for."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "The text string that user email or name will be filtered by."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Whether to filter the list of returned users. 'existingMembers' will only return existing users in the group, 'nonMembers' will only return users not in the group, undefined will return all users in the organization."
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project the group belongs to."
+              },
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group to list users for."
+              }
+            ]
+          },
+          "docs": "Return project group users"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

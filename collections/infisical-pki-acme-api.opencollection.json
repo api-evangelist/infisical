@@ -1,0 +1,338 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin PKI ACME API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PKI ACME",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/v1/cert-manager/acme/profiles/{profileId}/directory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/acme/profiles/:profileId/directory",
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "ACME Directory - provides URLs for the client to make API calls to"
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/cert-manager/acme/profiles/{profileId}/new-nonce",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/acme/profiles/:profileId/new-nonce",
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "ACME New Nonce (GET) - generate a new nonce and return in Replay-Nonce header with 204 No Content"
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/cert-manager/acme/profiles/{profileId}/new-account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/acme/profiles/:profileId/new-account",
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "ACME New Account - register a new account or find existing one"
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/cert-manager/acme/profiles/{profileId}/accounts/{accountId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/acme/profiles/:profileId/accounts/:accountId",
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "ACME Account Deactivation"
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/cert-manager/acme/profiles/{profileId}/new-order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/acme/profiles/:profileId/new-order",
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "ACME New Order - apply for a new certificate"
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/cert-manager/acme/profiles/{profileId}/orders/{orderId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/acme/profiles/:profileId/orders/:orderId",
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "ACME Get Order - return status and details of the order"
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/cert-manager/acme/profiles/{profileId}/orders/{orderId}/finalize",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/acme/profiles/:profileId/orders/:orderId/finalize",
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "ACME Finalize Order - finalize cert order by providing CSR"
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/cert-manager/acme/profiles/{profileId}/accounts/{accountId}/orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/acme/profiles/:profileId/accounts/:accountId/orders",
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "ACME List Orders - get existing orders from current account"
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/cert-manager/acme/profiles/{profileId}/orders/{orderId}/certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/acme/profiles/:profileId/orders/:orderId/certificate",
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "ACME Download Certificate - download certificate when ready"
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/cert-manager/acme/profiles/{profileId}/authorizations/{authzId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/acme/profiles/:profileId/authorizations/:authzId",
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "authzId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "ACME Identifier Authorization - get authorization info (challenges)"
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/cert-manager/acme/profiles/{profileId}/authorizations/{authzId}/challenges/{challengeId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/acme/profiles/:profileId/authorizations/:authzId/challenges/:challengeId",
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "authzId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "challengeId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "ACME Respond to Challenge - let ACME server know challenge is ready"
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/cert-manager/acme/applications/{applicationId}/profiles/{profileId}/directory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/acme/applications/:applicationId/profiles/:profileId/directory",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "ACME Directory - provides URLs for the client to make API calls to"
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/cert-manager/acme/applications/{applicationId}/profiles/{profileId}/new-account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/acme/applications/:applicationId/profiles/:profileId/new-account",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "ACME New Account - register a new account or find existing one"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,168 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin SSH Certificate Authorities API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SSH Certificate Authorities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "POST /api/v1/ssh/ca",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/ssh/ca",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create SSH CA"
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/ssh/ca/{sshCaId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/ssh/ca/:sshCaId",
+            "params": [
+              {
+                "name": "sshCaId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the SSH CA to get."
+              }
+            ]
+          },
+          "docs": "Get SSH CA"
+        },
+        {
+          "info": {
+            "name": "PATCH /api/v1/ssh/ca/{sshCaId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/ssh/ca/:sshCaId",
+            "params": [
+              {
+                "name": "sshCaId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the SSH CA to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update SSH CA"
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/ssh/ca/{sshCaId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/ssh/ca/:sshCaId",
+            "params": [
+              {
+                "name": "sshCaId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the SSH CA to delete."
+              }
+            ]
+          },
+          "docs": "Delete SSH CA"
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/ssh/ca/{sshCaId}/public-key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/ssh/ca/:sshCaId/public-key",
+            "params": [
+              {
+                "name": "sshCaId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the SSH CA to get the public key for."
+              }
+            ]
+          },
+          "docs": "Get public key of SSH CA"
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/ssh/ca/{sshCaId}/certificate-templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/ssh/ca/:sshCaId/certificate-templates",
+            "params": [
+              {
+                "name": "sshCaId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the SSH CA to get the certificate templates for."
+              }
+            ]
+          },
+          "docs": "Get list of certificate templates for the SSH CA"
+        },
+        {
+          "info": {
+            "name": "listProjectSshCertificateAuthorities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId/ssh-cas",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to list SSH CAs for."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v2/workspace/{projectId}/ssh-cas",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v2/workspace/:projectId/ssh-cas",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to list SSH CAs for."
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,53 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin Organization Identity Membership API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Organization Identity Membership",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "listAvailableOrganizationIdentities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/organization/available-identities",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The offset to start from. If you enter 10, it will start from the 10th identity."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of identities to return."
+              },
+              {
+                "name": "identityName",
+                "value": "",
+                "type": "query",
+                "description": "The text string that identity membership names will be filtered by."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List available identities for org membership"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

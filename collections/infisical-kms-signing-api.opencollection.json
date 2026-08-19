@@ -1,0 +1,102 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin KMS Signing API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "KMS Signing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getKmsKeyPublicKey",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/kms/keys/:keyId/public-key",
+            "params": [
+              {
+                "name": "keyId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the key to get the public key for. The key must be for signing and verifying."
+              }
+            ]
+          },
+          "docs": "Get the public key for a KMS key that is used for signing and verifying data. This endpoint is only available for asymmetric keys."
+        },
+        {
+          "info": {
+            "name": "listKmsKeySigningAlgorithms",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/kms/keys/:keyId/signing-algorithms",
+            "params": [
+              {
+                "name": "keyId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the key to list the signing algorithms for. The key must be for signing and verifying."
+              }
+            ]
+          },
+          "docs": "List all available signing algorithms for a KMS key"
+        },
+        {
+          "info": {
+            "name": "signWithKmsKey",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/kms/keys/:keyId/sign",
+            "params": [
+              {
+                "name": "keyId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the key to sign the data with."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sign data with a KMS key."
+        },
+        {
+          "info": {
+            "name": "verifyWithKmsKey",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/kms/keys/:keyId/verify",
+            "params": [
+              {
+                "name": "keyId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the key to verify the data with."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Verify data signatures with a KMS key."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

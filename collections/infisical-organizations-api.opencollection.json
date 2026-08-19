@@ -1,0 +1,206 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin Organizations API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Organizations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "listOrgMemberships",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v2/organizations/:organizationId/memberships",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the organization to get memberships from."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Return organization user memberships"
+        },
+        {
+          "info": {
+            "name": "bulkDeleteOrgMemberships",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v2/organizations/:organizationId/memberships",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the organization to delete the memberships from."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Bulk delete organization user memberships"
+        },
+        {
+          "info": {
+            "name": "listOrgProjects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v2/organizations/:organizationId/workspaces",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the organization to get projects from."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Return projects in organization that user is apart of"
+        },
+        {
+          "info": {
+            "name": "updateOrgMembership",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v2/organizations/:organizationId/memberships/:membershipId",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the organization to update the membership for."
+              },
+              {
+                "name": "membershipId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the membership to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update organization user memberships"
+        },
+        {
+          "info": {
+            "name": "deleteOrgMembership",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v2/organizations/:organizationId/memberships/:membershipId",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the organization to delete the membership from."
+              },
+              {
+                "name": "membershipId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the membership to delete."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete organization user memberships"
+        },
+        {
+          "info": {
+            "name": "listOrgIdentityMemberships",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v2/organizations/:orgId/identity-memberships",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The offset to start from. If you enter 10, it will start from the 10th identity membership."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of identity memberships to return."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "The column to order identity memberships by."
+              },
+              {
+                "name": "orderDirection",
+                "value": "",
+                "type": "query",
+                "description": "The direction identity memberships will be sorted in."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "The text string that identity membership names will be filtered by."
+              },
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the organization to get identity memberships from."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Return organization identity memberships"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

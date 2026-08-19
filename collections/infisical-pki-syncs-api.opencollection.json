@@ -1,0 +1,2186 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin PKI Syncs API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PKI Syncs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "listPkiSyncOptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/options"
+          },
+          "docs": "List the available PKI Sync Options."
+        },
+        {
+          "info": {
+            "name": "listPkiSyncs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs",
+            "params": [
+              {
+                "name": "certificateId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List all the PKI Syncs for the specified project."
+        },
+        {
+          "info": {
+            "name": "getPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a PKI Sync by ID."
+        },
+        {
+          "info": {
+            "name": "listPkiSyncCertificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/:pkiSyncId/certificates",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List all certificates associated with a PKI Sync."
+        },
+        {
+          "info": {
+            "name": "addCertificatesToPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/:pkiSyncId/certificates",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add certificates to a PKI Sync."
+        },
+        {
+          "info": {
+            "name": "removeCertificatesFromPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/:pkiSyncId/certificates",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove certificates from a PKI Sync."
+        },
+        {
+          "info": {
+            "name": "listAzureKeyVaultPkiSyncs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/azure-key-vault"
+          },
+          "docs": "List the Azure Key Vault PKI Syncs for the specified project."
+        },
+        {
+          "info": {
+            "name": "createAzureKeyVaultPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/azure-key-vault",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Azure Key Vault PKI Sync for the specified project."
+        },
+        {
+          "info": {
+            "name": "getAzureKeyVaultPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/azure-key-vault/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the specified Azure Key Vault PKI Sync by ID."
+        },
+        {
+          "info": {
+            "name": "updateAzureKeyVaultPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/azure-key-vault/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the specified Azure Key Vault PKI Sync."
+        },
+        {
+          "info": {
+            "name": "deleteAzureKeyVaultPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/azure-key-vault/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete the specified Azure Key Vault PKI Sync."
+        },
+        {
+          "info": {
+            "name": "syncAzureKeyVaultPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/azure-key-vault/:pkiSyncId/sync",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Trigger a sync for the specified Azure Key Vault PKI Sync."
+        },
+        {
+          "info": {
+            "name": "removeAzureKeyVaultPkiSyncCertificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/azure-key-vault/:pkiSyncId/remove-certificates",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove certificates from the specified Azure Key Vault PKI Sync destination."
+        },
+        {
+          "info": {
+            "name": "listAwsCertificateManagerPkiSyncs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/aws-certificate-manager"
+          },
+          "docs": "List the AWS Certificate Manager PKI Syncs for the specified project."
+        },
+        {
+          "info": {
+            "name": "createAwsCertificateManagerPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/aws-certificate-manager",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a AWS Certificate Manager PKI Sync for the specified project."
+        },
+        {
+          "info": {
+            "name": "getAwsCertificateManagerPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/aws-certificate-manager/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the specified AWS Certificate Manager PKI Sync by ID."
+        },
+        {
+          "info": {
+            "name": "updateAwsCertificateManagerPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/aws-certificate-manager/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the specified AWS Certificate Manager PKI Sync."
+        },
+        {
+          "info": {
+            "name": "deleteAwsCertificateManagerPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/aws-certificate-manager/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete the specified AWS Certificate Manager PKI Sync."
+        },
+        {
+          "info": {
+            "name": "syncAwsCertificateManagerPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/aws-certificate-manager/:pkiSyncId/sync",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Trigger a sync for the specified AWS Certificate Manager PKI Sync."
+        },
+        {
+          "info": {
+            "name": "removeAwsCertificateManagerPkiSyncCertificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/aws-certificate-manager/:pkiSyncId/remove-certificates",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove certificates from the specified AWS Certificate Manager PKI Sync destination."
+        },
+        {
+          "info": {
+            "name": "listAwsSecretsManagerPkiSyncs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/aws-secrets-manager"
+          },
+          "docs": "List the AWS Secrets Manager PKI Syncs for the specified project."
+        },
+        {
+          "info": {
+            "name": "createAwsSecretsManagerPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/aws-secrets-manager",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a AWS Secrets Manager PKI Sync for the specified project."
+        },
+        {
+          "info": {
+            "name": "getAwsSecretsManagerPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/aws-secrets-manager/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the specified AWS Secrets Manager PKI Sync by ID."
+        },
+        {
+          "info": {
+            "name": "updateAwsSecretsManagerPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/aws-secrets-manager/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the specified AWS Secrets Manager PKI Sync."
+        },
+        {
+          "info": {
+            "name": "deleteAwsSecretsManagerPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/aws-secrets-manager/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete the specified AWS Secrets Manager PKI Sync."
+        },
+        {
+          "info": {
+            "name": "syncAwsSecretsManagerPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/aws-secrets-manager/:pkiSyncId/sync",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Trigger a sync for the specified AWS Secrets Manager PKI Sync."
+        },
+        {
+          "info": {
+            "name": "removeAwsSecretsManagerPkiSyncCertificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/aws-secrets-manager/:pkiSyncId/remove-certificates",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove certificates from the specified AWS Secrets Manager PKI Sync destination."
+        },
+        {
+          "info": {
+            "name": "listAwsElasticLoadBalancerPkiSyncs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/aws-elastic-load-balancer"
+          },
+          "docs": "List the AWS Elastic Load Balancer PKI Syncs for the specified project."
+        },
+        {
+          "info": {
+            "name": "createAwsElasticLoadBalancerPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/aws-elastic-load-balancer",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a AWS Elastic Load Balancer PKI Sync for the specified project."
+        },
+        {
+          "info": {
+            "name": "getAwsElasticLoadBalancerPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/aws-elastic-load-balancer/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the specified AWS Elastic Load Balancer PKI Sync by ID."
+        },
+        {
+          "info": {
+            "name": "updateAwsElasticLoadBalancerPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/aws-elastic-load-balancer/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the specified AWS Elastic Load Balancer PKI Sync."
+        },
+        {
+          "info": {
+            "name": "deleteAwsElasticLoadBalancerPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/aws-elastic-load-balancer/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete the specified AWS Elastic Load Balancer PKI Sync."
+        },
+        {
+          "info": {
+            "name": "syncAwsElasticLoadBalancerPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/aws-elastic-load-balancer/:pkiSyncId/sync",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Trigger a sync for the specified AWS Elastic Load Balancer PKI Sync."
+        },
+        {
+          "info": {
+            "name": "removeAwsElasticLoadBalancerPkiSyncCertificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/aws-elastic-load-balancer/:pkiSyncId/remove-certificates",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove certificates from the specified AWS Elastic Load Balancer PKI Sync destination."
+        },
+        {
+          "info": {
+            "name": "listChefPkiSyncs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/chef"
+          },
+          "docs": "List the Chef PKI Syncs for the specified project."
+        },
+        {
+          "info": {
+            "name": "createChefPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/chef",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Chef PKI Sync for the specified project."
+        },
+        {
+          "info": {
+            "name": "getChefPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/chef/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the specified Chef PKI Sync by ID."
+        },
+        {
+          "info": {
+            "name": "updateChefPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/chef/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the specified Chef PKI Sync."
+        },
+        {
+          "info": {
+            "name": "deleteChefPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/chef/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete the specified Chef PKI Sync."
+        },
+        {
+          "info": {
+            "name": "syncChefPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/chef/:pkiSyncId/sync",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Trigger a sync for the specified Chef PKI Sync."
+        },
+        {
+          "info": {
+            "name": "removeChefPkiSyncCertificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/chef/:pkiSyncId/remove-certificates",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove certificates from the specified Chef PKI Sync destination."
+        },
+        {
+          "info": {
+            "name": "listCloudflareCustomCertificatePkiSyncs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/cloudflare-custom-certificate"
+          },
+          "docs": "List the Cloudflare Custom SSL Certificate PKI Syncs for the specified project."
+        },
+        {
+          "info": {
+            "name": "createCloudflareCustomCertificatePkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/cloudflare-custom-certificate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Cloudflare Custom SSL Certificate PKI Sync for the specified project."
+        },
+        {
+          "info": {
+            "name": "getCloudflareCustomCertificatePkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/cloudflare-custom-certificate/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the specified Cloudflare Custom SSL Certificate PKI Sync by ID."
+        },
+        {
+          "info": {
+            "name": "updateCloudflareCustomCertificatePkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/cloudflare-custom-certificate/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the specified Cloudflare Custom SSL Certificate PKI Sync."
+        },
+        {
+          "info": {
+            "name": "deleteCloudflareCustomCertificatePkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/cloudflare-custom-certificate/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete the specified Cloudflare Custom SSL Certificate PKI Sync."
+        },
+        {
+          "info": {
+            "name": "syncCloudflareCustomCertificatePkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/cloudflare-custom-certificate/:pkiSyncId/sync",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Trigger a sync for the specified Cloudflare Custom SSL Certificate PKI Sync."
+        },
+        {
+          "info": {
+            "name": "removeCloudflareCustomCertificatePkiSyncCertificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/cloudflare-custom-certificate/:pkiSyncId/remove-certificates",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove certificates from the specified Cloudflare Custom SSL Certificate PKI Sync destination."
+        },
+        {
+          "info": {
+            "name": "listNetscalerPkiSyncs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/netscaler"
+          },
+          "docs": "List the NetScaler PKI Syncs for the specified project."
+        },
+        {
+          "info": {
+            "name": "createNetscalerPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/netscaler",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a NetScaler PKI Sync for the specified project."
+        },
+        {
+          "info": {
+            "name": "getNetscalerPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/netscaler/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the specified NetScaler PKI Sync by ID."
+        },
+        {
+          "info": {
+            "name": "updateNetscalerPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/netscaler/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the specified NetScaler PKI Sync."
+        },
+        {
+          "info": {
+            "name": "deleteNetscalerPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/netscaler/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete the specified NetScaler PKI Sync."
+        },
+        {
+          "info": {
+            "name": "syncNetscalerPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/netscaler/:pkiSyncId/sync",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Trigger a sync for the specified NetScaler PKI Sync."
+        },
+        {
+          "info": {
+            "name": "removeNetscalerPkiSyncCertificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/netscaler/:pkiSyncId/remove-certificates",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove certificates from the specified NetScaler PKI Sync destination."
+        },
+        {
+          "info": {
+            "name": "listF5BigIpPkiSyncs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/f5-big-ip"
+          },
+          "docs": "List the F5 BIG-IP PKI Syncs for the specified project."
+        },
+        {
+          "info": {
+            "name": "createF5BigIpPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/f5-big-ip",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a F5 BIG-IP PKI Sync for the specified project."
+        },
+        {
+          "info": {
+            "name": "getF5BigIpPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/f5-big-ip/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the specified F5 BIG-IP PKI Sync by ID."
+        },
+        {
+          "info": {
+            "name": "updateF5BigIpPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/f5-big-ip/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the specified F5 BIG-IP PKI Sync."
+        },
+        {
+          "info": {
+            "name": "deleteF5BigIpPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/f5-big-ip/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete the specified F5 BIG-IP PKI Sync."
+        },
+        {
+          "info": {
+            "name": "syncF5BigIpPkiSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/f5-big-ip/:pkiSyncId/sync",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Trigger a sync for the specified F5 BIG-IP PKI Sync."
+        },
+        {
+          "info": {
+            "name": "removeF5BigIpPkiSyncCertificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/syncs/f5-big-ip/:pkiSyncId/remove-certificates",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove certificates from the specified F5 BIG-IP PKI Sync destination."
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/pki/syncs/options",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/options"
+          },
+          "docs": "List the available PKI Sync Options."
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/pki/syncs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/syncs",
+            "params": [
+              {
+                "name": "certificateId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List all the PKI Syncs for the specified project."
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/pki/syncs/{pkiSyncId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a PKI Sync by ID."
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/pki/syncs/{pkiSyncId}/certificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/:pkiSyncId/certificates",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List all certificates associated with a PKI Sync."
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/pki/syncs/{pkiSyncId}/certificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/:pkiSyncId/certificates",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add certificates to a PKI Sync."
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/pki/syncs/{pkiSyncId}/certificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/:pkiSyncId/certificates",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove certificates from a PKI Sync."
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/pki/syncs/azure-key-vault",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/azure-key-vault"
+          },
+          "docs": "List the Azure Key Vault PKI Syncs for the specified project."
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/pki/syncs/azure-key-vault",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/azure-key-vault",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Azure Key Vault PKI Sync for the specified project."
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/pki/syncs/azure-key-vault/{pkiSyncId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/azure-key-vault/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the specified Azure Key Vault PKI Sync by ID."
+        },
+        {
+          "info": {
+            "name": "PATCH /api/v1/pki/syncs/azure-key-vault/{pkiSyncId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/azure-key-vault/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the specified Azure Key Vault PKI Sync."
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/pki/syncs/azure-key-vault/{pkiSyncId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/azure-key-vault/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete the specified Azure Key Vault PKI Sync."
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/pki/syncs/azure-key-vault/{pkiSyncId}/sync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/azure-key-vault/:pkiSyncId/sync",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Trigger a sync for the specified Azure Key Vault PKI Sync."
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/pki/syncs/azure-key-vault/{pkiSyncId}/remove-certificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/azure-key-vault/:pkiSyncId/remove-certificates",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove certificates from the specified Azure Key Vault PKI Sync destination."
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/pki/syncs/aws-certificate-manager",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/aws-certificate-manager"
+          },
+          "docs": "List the AWS Certificate Manager PKI Syncs for the specified project."
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/pki/syncs/aws-certificate-manager",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/aws-certificate-manager",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a AWS Certificate Manager PKI Sync for the specified project."
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/pki/syncs/aws-certificate-manager/{pkiSyncId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/aws-certificate-manager/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the specified AWS Certificate Manager PKI Sync by ID."
+        },
+        {
+          "info": {
+            "name": "PATCH /api/v1/pki/syncs/aws-certificate-manager/{pkiSyncId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/aws-certificate-manager/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the specified AWS Certificate Manager PKI Sync."
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/pki/syncs/aws-certificate-manager/{pkiSyncId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/aws-certificate-manager/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete the specified AWS Certificate Manager PKI Sync."
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/pki/syncs/aws-certificate-manager/{pkiSyncId}/sync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/aws-certificate-manager/:pkiSyncId/sync",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Trigger a sync for the specified AWS Certificate Manager PKI Sync."
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/pki/syncs/aws-certificate-manager/{pkiSyncId}/remove-certificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/aws-certificate-manager/:pkiSyncId/remove-certificates",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove certificates from the specified AWS Certificate Manager PKI Sync destination."
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/pki/syncs/aws-secrets-manager",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/aws-secrets-manager"
+          },
+          "docs": "List the AWS Secrets Manager PKI Syncs for the specified project."
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/pki/syncs/aws-secrets-manager",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/aws-secrets-manager",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a AWS Secrets Manager PKI Sync for the specified project."
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/pki/syncs/aws-secrets-manager/{pkiSyncId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/aws-secrets-manager/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the specified AWS Secrets Manager PKI Sync by ID."
+        },
+        {
+          "info": {
+            "name": "PATCH /api/v1/pki/syncs/aws-secrets-manager/{pkiSyncId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/aws-secrets-manager/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the specified AWS Secrets Manager PKI Sync."
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/pki/syncs/aws-secrets-manager/{pkiSyncId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/aws-secrets-manager/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete the specified AWS Secrets Manager PKI Sync."
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/pki/syncs/aws-secrets-manager/{pkiSyncId}/sync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/aws-secrets-manager/:pkiSyncId/sync",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Trigger a sync for the specified AWS Secrets Manager PKI Sync."
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/pki/syncs/aws-secrets-manager/{pkiSyncId}/remove-certificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/aws-secrets-manager/:pkiSyncId/remove-certificates",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove certificates from the specified AWS Secrets Manager PKI Sync destination."
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/pki/syncs/aws-elastic-load-balancer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/aws-elastic-load-balancer"
+          },
+          "docs": "List the AWS Elastic Load Balancer PKI Syncs for the specified project."
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/pki/syncs/aws-elastic-load-balancer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/aws-elastic-load-balancer",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a AWS Elastic Load Balancer PKI Sync for the specified project."
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/pki/syncs/aws-elastic-load-balancer/{pkiSyncId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/aws-elastic-load-balancer/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the specified AWS Elastic Load Balancer PKI Sync by ID."
+        },
+        {
+          "info": {
+            "name": "PATCH /api/v1/pki/syncs/aws-elastic-load-balancer/{pkiSyncId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/aws-elastic-load-balancer/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the specified AWS Elastic Load Balancer PKI Sync."
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/pki/syncs/aws-elastic-load-balancer/{pkiSyncId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/aws-elastic-load-balancer/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete the specified AWS Elastic Load Balancer PKI Sync."
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/pki/syncs/aws-elastic-load-balancer/{pkiSyncId}/sync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/aws-elastic-load-balancer/:pkiSyncId/sync",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Trigger a sync for the specified AWS Elastic Load Balancer PKI Sync."
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/pki/syncs/aws-elastic-load-balancer/{pkiSyncId}/remove-certificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/aws-elastic-load-balancer/:pkiSyncId/remove-certificates",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove certificates from the specified AWS Elastic Load Balancer PKI Sync destination."
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/pki/syncs/chef",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/chef"
+          },
+          "docs": "List the Chef PKI Syncs for the specified project."
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/pki/syncs/chef",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/chef",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Chef PKI Sync for the specified project."
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/pki/syncs/chef/{pkiSyncId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/chef/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the specified Chef PKI Sync by ID."
+        },
+        {
+          "info": {
+            "name": "PATCH /api/v1/pki/syncs/chef/{pkiSyncId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/chef/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the specified Chef PKI Sync."
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/pki/syncs/chef/{pkiSyncId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/chef/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete the specified Chef PKI Sync."
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/pki/syncs/chef/{pkiSyncId}/sync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/chef/:pkiSyncId/sync",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Trigger a sync for the specified Chef PKI Sync."
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/pki/syncs/chef/{pkiSyncId}/remove-certificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/chef/:pkiSyncId/remove-certificates",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove certificates from the specified Chef PKI Sync destination."
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/pki/syncs/cloudflare-custom-certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/cloudflare-custom-certificate"
+          },
+          "docs": "List the Cloudflare Custom SSL Certificate PKI Syncs for the specified project."
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/pki/syncs/cloudflare-custom-certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/cloudflare-custom-certificate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Cloudflare Custom SSL Certificate PKI Sync for the specified project."
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/pki/syncs/cloudflare-custom-certificate/{pkiSyncId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/cloudflare-custom-certificate/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the specified Cloudflare Custom SSL Certificate PKI Sync by ID."
+        },
+        {
+          "info": {
+            "name": "PATCH /api/v1/pki/syncs/cloudflare-custom-certificate/{pkiSyncId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/cloudflare-custom-certificate/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the specified Cloudflare Custom SSL Certificate PKI Sync."
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/pki/syncs/cloudflare-custom-certificate/{pkiSyncId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/cloudflare-custom-certificate/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete the specified Cloudflare Custom SSL Certificate PKI Sync."
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/pki/syncs/cloudflare-custom-certificate/{pkiSyncId}/sync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/cloudflare-custom-certificate/:pkiSyncId/sync",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Trigger a sync for the specified Cloudflare Custom SSL Certificate PKI Sync."
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/pki/syncs/cloudflare-custom-certificate/{pkiSyncId}/remove-certificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/cloudflare-custom-certificate/:pkiSyncId/remove-certificates",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove certificates from the specified Cloudflare Custom SSL Certificate PKI Sync destination."
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/pki/syncs/netscaler",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/netscaler"
+          },
+          "docs": "List the NetScaler PKI Syncs for the specified project."
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/pki/syncs/netscaler",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/netscaler",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a NetScaler PKI Sync for the specified project."
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/pki/syncs/netscaler/{pkiSyncId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/netscaler/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the specified NetScaler PKI Sync by ID."
+        },
+        {
+          "info": {
+            "name": "PATCH /api/v1/pki/syncs/netscaler/{pkiSyncId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/netscaler/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the specified NetScaler PKI Sync."
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/pki/syncs/netscaler/{pkiSyncId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/netscaler/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete the specified NetScaler PKI Sync."
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/pki/syncs/netscaler/{pkiSyncId}/sync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/netscaler/:pkiSyncId/sync",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Trigger a sync for the specified NetScaler PKI Sync."
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/pki/syncs/netscaler/{pkiSyncId}/remove-certificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/netscaler/:pkiSyncId/remove-certificates",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove certificates from the specified NetScaler PKI Sync destination."
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/pki/syncs/f5-big-ip",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/f5-big-ip"
+          },
+          "docs": "List the F5 BIG-IP PKI Syncs for the specified project."
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/pki/syncs/f5-big-ip",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/f5-big-ip",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a F5 BIG-IP PKI Sync for the specified project."
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/pki/syncs/f5-big-ip/{pkiSyncId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/f5-big-ip/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the specified F5 BIG-IP PKI Sync by ID."
+        },
+        {
+          "info": {
+            "name": "PATCH /api/v1/pki/syncs/f5-big-ip/{pkiSyncId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/f5-big-ip/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the specified F5 BIG-IP PKI Sync."
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/pki/syncs/f5-big-ip/{pkiSyncId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/f5-big-ip/:pkiSyncId",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete the specified F5 BIG-IP PKI Sync."
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/pki/syncs/f5-big-ip/{pkiSyncId}/sync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/f5-big-ip/:pkiSyncId/sync",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Trigger a sync for the specified F5 BIG-IP PKI Sync."
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/pki/syncs/f5-big-ip/{pkiSyncId}/remove-certificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/syncs/f5-big-ip/:pkiSyncId/remove-certificates",
+            "params": [
+              {
+                "name": "pkiSyncId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove certificates from the specified F5 BIG-IP PKI Sync destination."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

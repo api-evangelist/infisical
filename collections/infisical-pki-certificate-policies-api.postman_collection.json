@@ -1,0 +1,2039 @@
+{
+  "item": [
+    {
+      "id": "a0480418-39b8-4c95-a97a-77e8d8baeb82",
+      "name": "PKI Certificate Policies",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "701d731e-9d7a-4c9a-8d17-7e39396913e5",
+          "name": "create Certificate Policy",
+          "request": {
+            "name": "create Certificate Policy",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "cert-manager",
+                "certificate-policies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"subject\": [\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"sans\": [\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"keyUsages\": {\n    \"allowed\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"denied\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"extendedKeyUsages\": {\n    \"allowed\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"denied\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"algorithms\": {\n    \"signature\": [\n      \"<string>\"\n    ],\n    \"keyAlgorithm\": [\n      \"<string>\"\n    ]\n  },\n  \"validity\": {\n    \"max\": \"<string>\"\n  },\n  \"basicConstraints\": {\n    \"isCA\": \"<string>\",\n    \"maxPathLength\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "de34634f-f007-494a-968c-d9b1f16bde1d",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "cert-manager",
+                    "certificate-policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"subject\": [\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"sans\": [\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"keyUsages\": {\n    \"allowed\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"denied\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"extendedKeyUsages\": {\n    \"allowed\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"denied\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"algorithms\": {\n    \"signature\": [\n      \"<string>\"\n    ],\n    \"keyAlgorithm\": [\n      \"<string>\"\n    ]\n  },\n  \"validity\": {\n    \"max\": \"<string>\"\n  },\n  \"basicConstraints\": {\n    \"isCA\": \"<string>\",\n    \"maxPathLength\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"certificatePolicy\": {\n    \"id\": \"7eac4192-dfea-2b69-50fc-e07d95066770\",\n    \"name\": \"AxOojU\",\n    \"createdAt\": \"1988-10-27T07:27:30.048Z\",\n    \"updatedAt\": \"1953-10-23T03:01:59.425Z\",\n    \"description\": \"string\",\n    \"subject\": [\n      {\n        \"type\": \"state\",\n        \"allowed\": [\n          \"string\",\n          \"string\"\n        ],\n        \"required\": [\n          \"string\",\n          \"string\"\n        ],\n        \"denied\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"type\": \"common_name\",\n        \"allowed\": [\n          \"string\",\n          \"string\"\n        ],\n        \"required\": [\n          \"string\",\n          \"string\"\n        ],\n        \"denied\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ],\n    \"sans\": [\n      {\n        \"type\": \"dns_name\",\n        \"allowed\": [\n          \"string\",\n          \"string\"\n        ],\n        \"required\": [\n          \"string\",\n          \"string\"\n        ],\n        \"denied\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"type\": \"email\",\n        \"allowed\": [\n          \"string\",\n          \"string\"\n        ],\n        \"required\": [\n          \"string\",\n          \"string\"\n        ],\n        \"denied\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ],\n    \"keyUsages\": {\n      \"allowed\": [\n        \"encipher_only\",\n        \"decipher_only\"\n      ],\n      \"required\": [\n        \"crl_sign\",\n        \"digital_signature\"\n      ],\n      \"denied\": [\n        \"key_agreement\",\n        \"decipher_only\"\n      ]\n    },\n    \"extendedKeyUsages\": {\n      \"allowed\": [\n        \"client_auth\",\n        \"ocsp_signing\"\n      ],\n      \"required\": [\n        \"time_stamping\",\n        \"client_auth\"\n      ],\n      \"denied\": [\n        \"email_protection\",\n        \"ocsp_signing\"\n      ]\n    },\n    \"algorithms\": {\n      \"signature\": [\n        \"string\"\n      ],\n      \"keyAlgorithm\": [\n        \"string\"\n      ]\n    },\n    \"validity\": {\n      \"max\": \"08m\"\n    },\n    \"basicConstraints\": {\n      \"isCA\": \"required\",\n      \"maxPathLength\": 4731\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f4c79633-07df-4334-a4e5-7ceba50d9484",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "cert-manager",
+                    "certificate-policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"subject\": [\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"sans\": [\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"keyUsages\": {\n    \"allowed\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"denied\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"extendedKeyUsages\": {\n    \"allowed\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"denied\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"algorithms\": {\n    \"signature\": [\n      \"<string>\"\n    ],\n    \"keyAlgorithm\": [\n      \"<string>\"\n    ]\n  },\n  \"validity\": {\n    \"max\": \"<string>\"\n  },\n  \"basicConstraints\": {\n    \"isCA\": \"<string>\",\n    \"maxPathLength\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "931902e6-c812-48c6-b703-101416e4ee5f",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "cert-manager",
+                    "certificate-policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"subject\": [\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"sans\": [\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"keyUsages\": {\n    \"allowed\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"denied\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"extendedKeyUsages\": {\n    \"allowed\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"denied\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"algorithms\": {\n    \"signature\": [\n      \"<string>\"\n    ],\n    \"keyAlgorithm\": [\n      \"<string>\"\n    ]\n  },\n  \"validity\": {\n    \"max\": \"<string>\"\n  },\n  \"basicConstraints\": {\n    \"isCA\": \"<string>\",\n    \"maxPathLength\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e8812ecf-e2fb-4de8-9c5f-4b50947e9dd0",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "cert-manager",
+                    "certificate-policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"subject\": [\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"sans\": [\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"keyUsages\": {\n    \"allowed\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"denied\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"extendedKeyUsages\": {\n    \"allowed\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"denied\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"algorithms\": {\n    \"signature\": [\n      \"<string>\"\n    ],\n    \"keyAlgorithm\": [\n      \"<string>\"\n    ]\n  },\n  \"validity\": {\n    \"max\": \"<string>\"\n  },\n  \"basicConstraints\": {\n    \"isCA\": \"<string>\",\n    \"maxPathLength\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "867d7f15-dd12-48fc-845d-a9f88730b603",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "cert-manager",
+                    "certificate-policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"subject\": [\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"sans\": [\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"keyUsages\": {\n    \"allowed\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"denied\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"extendedKeyUsages\": {\n    \"allowed\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"denied\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"algorithms\": {\n    \"signature\": [\n      \"<string>\"\n    ],\n    \"keyAlgorithm\": [\n      \"<string>\"\n    ]\n  },\n  \"validity\": {\n    \"max\": \"<string>\"\n  },\n  \"basicConstraints\": {\n    \"isCA\": \"<string>\",\n    \"maxPathLength\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1791498-6fa4-4942-b8aa-ff9831e7ffa3",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "cert-manager",
+                    "certificate-policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"subject\": [\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"sans\": [\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"keyUsages\": {\n    \"allowed\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"denied\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"extendedKeyUsages\": {\n    \"allowed\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"denied\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"algorithms\": {\n    \"signature\": [\n      \"<string>\"\n    ],\n    \"keyAlgorithm\": [\n      \"<string>\"\n    ]\n  },\n  \"validity\": {\n    \"max\": \"<string>\"\n  },\n  \"basicConstraints\": {\n    \"isCA\": \"<string>\",\n    \"maxPathLength\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "096c7f23-82ed-4754-883c-d677f7d9240c",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "cert-manager",
+                    "certificate-policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"subject\": [\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"sans\": [\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"keyUsages\": {\n    \"allowed\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"denied\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"extendedKeyUsages\": {\n    \"allowed\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"denied\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"algorithms\": {\n    \"signature\": [\n      \"<string>\"\n    ],\n    \"keyAlgorithm\": [\n      \"<string>\"\n    ]\n  },\n  \"validity\": {\n    \"max\": \"<string>\"\n  },\n  \"basicConstraints\": {\n    \"isCA\": \"<string>\",\n    \"maxPathLength\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "903cb445-346c-4fc2-94d3-f3c4e2a8b35c",
+          "name": "list Certificate Policies",
+          "request": {
+            "name": "list Certificate Policies",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "cert-manager",
+                "certificate-policies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "de8e2913-4f43-440b-bb41-4b5d827162a7",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "cert-manager",
+                    "certificate-policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"certificatePolicies\": [\n    {\n      \"id\": \"8a034647-acdb-867b-e9b0-454d109f4458\",\n      \"name\": \"GHloX3Z\",\n      \"createdAt\": \"2010-02-09T18:59:17.680Z\",\n      \"updatedAt\": \"1999-04-03T16:42:08.907Z\",\n      \"description\": \"string\",\n      \"subject\": [\n        {\n          \"type\": \"state\",\n          \"allowed\": [\n            \"string\",\n            \"strin\"\n          ],\n          \"required\": [\n            \"string\",\n            \"string\"\n          ],\n          \"denied\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"type\": \"state\",\n          \"allowed\": [\n            \"string\",\n            \"string\"\n          ],\n          \"required\": [\n            \"string\",\n            \"string\"\n          ],\n          \"denied\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"sans\": [\n        {\n          \"type\": \"uri\",\n          \"allowed\": [\n            \"string\",\n            \"string\"\n          ],\n          \"required\": [\n            \"string\",\n            \"string\"\n          ],\n          \"denied\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"type\": \"dns_name\",\n          \"allowed\": [\n            \"string\",\n            \"string\"\n          ],\n          \"required\": [\n            \"stri\",\n            \"string\"\n          ],\n          \"denied\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"keyUsages\": {\n        \"allowed\": [\n          \"key_cert_sign\",\n          \"non_repudiation\"\n        ],\n        \"required\": [\n          \"data_encipherment\",\n          \"key_cert_sign\"\n        ],\n        \"denied\": [\n          \"non_repudiation\",\n          \"data_encipherment\"\n        ]\n      },\n      \"extendedKeyUsages\": {\n        \"allowed\": [\n          \"email_protection\",\n          \"ocsp_signing\"\n        ],\n        \"required\": [\n          \"email_protection\",\n          \"server_auth\"\n        ],\n        \"denied\": [\n          \"ocsp_signing\",\n          \"code_signing\"\n        ]\n      },\n      \"algorithms\": {\n        \"signature\": [\n          \"string\"\n        ],\n        \"keyAlgorithm\": [\n          \"string\"\n        ]\n      },\n      \"validity\": {\n        \"max\": \"31248926743m\"\n      },\n      \"basicConstraints\": {\n        \"isCA\": \"required\",\n        \"maxPathLength\": 402\n      }\n    },\n    {\n      \"id\": \"134ff8d5-5719-9565-bbb4-9c43c908a113\",\n      \"name\": \"U\",\n      \"createdAt\": \"2010-03-08T21:10:10.694Z\",\n      \"updatedAt\": \"1948-04-13T22:25:28.071Z\",\n      \"description\": \"string\",\n      \"subject\": [\n        {\n          \"type\": \"state\",\n          \"allowed\": [\n            \"string\",\n            \"string\"\n          ],\n          \"required\": [\n            \"string\",\n            \"st\"\n          ],\n          \"denied\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"type\": \"state\",\n          \"allowed\": [\n            \"string\",\n            \"string\"\n          ],\n          \"required\": [\n            \"string\",\n            \"string\"\n          ],\n          \"denied\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"sans\": [\n        {\n          \"type\": \"ip_address\",\n          \"allowed\": [\n            \"string\",\n            \"string\"\n          ],\n          \"required\": [\n            \"string\",\n            \"string\"\n          ],\n          \"denied\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"type\": \"email\",\n          \"allowed\": [\n            \"string\",\n            \"string\"\n          ],\n          \"required\": [\n            \"string\",\n            \"string\"\n          ],\n          \"denied\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"keyUsages\": {\n        \"allowed\": [\n          \"decipher_only\",\n          \"non_repudiation\"\n        ],\n        \"required\": [\n          \"non_repudiation\",\n          \"crl_sign\"\n        ],\n        \"denied\": [\n          \"encipher_only\",\n          \"decipher_only\"\n        ]\n      },\n      \"extendedKeyUsages\": {\n        \"allowed\": [\n          \"client_auth\",\n          \"code_signing\"\n        ],\n        \"required\": [\n          \"email_protection\",\n          \"client_auth\"\n        ],\n        \"denied\": [\n          \"ocsp_signing\",\n          \"email_protection\"\n        ]\n      },\n      \"algorithms\": {\n        \"signature\": [\n          \"string\"\n        ],\n        \"keyAlgorithm\": [\n          \"string\"\n        ]\n      },\n      \"validity\": {\n        \"max\": \"23307703348d\"\n      },\n      \"basicConstraints\": {\n        \"isCA\": \"allowed\",\n        \"maxPathLength\": 41\n      }\n    }\n  ],\n  \"totalCount\": 5374.780561923638\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cdd1e0ae-1f0e-4648-9c33-9831c96d14a1",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "cert-manager",
+                    "certificate-policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93aed572-c903-4416-bece-1468fb3d16d7",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "cert-manager",
+                    "certificate-policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1bf73db-3825-485e-b05e-9e3e1b245c4d",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "cert-manager",
+                    "certificate-policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "35e945ba-e7c7-4987-ac29-d204c95e57d4",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "cert-manager",
+                    "certificate-policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7a870ffc-00d4-4141-99ff-82653408d434",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "cert-manager",
+                    "certificate-policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0208a7d3-7649-43f0-8f0d-d90b60fafb75",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "cert-manager",
+                    "certificate-policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "31b81da5-7670-4bb7-8d91-124b3276a9f6",
+          "name": "get Certificate Policy",
+          "request": {
+            "name": "get Certificate Policy",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "cert-manager",
+                "certificate-policies",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "applicationId",
+                  "value": "<uuid>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d05705c1-9fdc-4a98-9a4c-78fad5e34817",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "cert-manager",
+                    "certificate-policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "applicationId",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"certificatePolicy\": {\n    \"id\": \"7eac4192-dfea-2b69-50fc-e07d95066770\",\n    \"name\": \"AxOojU\",\n    \"createdAt\": \"1988-10-27T07:27:30.048Z\",\n    \"updatedAt\": \"1953-10-23T03:01:59.425Z\",\n    \"description\": \"string\",\n    \"subject\": [\n      {\n        \"type\": \"state\",\n        \"allowed\": [\n          \"string\",\n          \"string\"\n        ],\n        \"required\": [\n          \"string\",\n          \"string\"\n        ],\n        \"denied\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"type\": \"common_name\",\n        \"allowed\": [\n          \"string\",\n          \"string\"\n        ],\n        \"required\": [\n          \"string\",\n          \"string\"\n        ],\n        \"denied\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ],\n    \"sans\": [\n      {\n        \"type\": \"dns_name\",\n        \"allowed\": [\n          \"string\",\n          \"string\"\n        ],\n        \"required\": [\n          \"string\",\n          \"string\"\n        ],\n        \"denied\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"type\": \"email\",\n        \"allowed\": [\n          \"string\",\n          \"string\"\n        ],\n        \"required\": [\n          \"string\",\n          \"string\"\n        ],\n        \"denied\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ],\n    \"keyUsages\": {\n      \"allowed\": [\n        \"encipher_only\",\n        \"decipher_only\"\n      ],\n      \"required\": [\n        \"crl_sign\",\n        \"digital_signature\"\n      ],\n      \"denied\": [\n        \"key_agreement\",\n        \"decipher_only\"\n      ]\n    },\n    \"extendedKeyUsages\": {\n      \"allowed\": [\n        \"client_auth\",\n        \"ocsp_signing\"\n      ],\n      \"required\": [\n        \"time_stamping\",\n        \"client_auth\"\n      ],\n      \"denied\": [\n        \"email_protection\",\n        \"ocsp_signing\"\n      ]\n    },\n    \"algorithms\": {\n      \"signature\": [\n        \"string\"\n      ],\n      \"keyAlgorithm\": [\n        \"string\"\n      ]\n    },\n    \"validity\": {\n      \"max\": \"08m\"\n    },\n    \"basicConstraints\": {\n      \"isCA\": \"required\",\n      \"maxPathLength\": 4731\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a4fb90d4-219a-4bd0-a9ee-c51927b96976",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "cert-manager",
+                    "certificate-policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "applicationId",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "720a6a38-f62b-430d-aad3-010ab6344b10",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "cert-manager",
+                    "certificate-policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "applicationId",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "def6816e-7d4e-4b3c-9e8c-df3de2ea034b",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "cert-manager",
+                    "certificate-policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "applicationId",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6e84b0b-cd5d-4d57-94dd-6d6f6f4906ad",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "cert-manager",
+                    "certificate-policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "applicationId",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9c24bfbc-87bd-4fd5-9685-6f76fe28182e",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "cert-manager",
+                    "certificate-policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "applicationId",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12720359-bf9b-4910-acd4-3601f3958381",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "cert-manager",
+                    "certificate-policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "applicationId",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "49afef41-0963-4025-9c31-5e3b9d5484c5",
+          "name": "update Certificate Policy",
+          "request": {
+            "name": "update Certificate Policy",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "cert-manager",
+                "certificate-policies",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"subject\": [\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"sans\": [\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"keyUsages\": {\n    \"allowed\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"denied\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"extendedKeyUsages\": {\n    \"allowed\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"denied\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"algorithms\": {\n    \"signature\": [\n      \"<string>\"\n    ],\n    \"keyAlgorithm\": [\n      \"<string>\"\n    ]\n  },\n  \"validity\": {\n    \"max\": \"<string>\"\n  },\n  \"basicConstraints\": {\n    \"isCA\": \"<string>\",\n    \"maxPathLength\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "eaae46a8-f505-4cfb-8d5e-fd8e2f3a4efd",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "cert-manager",
+                    "certificate-policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"subject\": [\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"sans\": [\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"keyUsages\": {\n    \"allowed\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"denied\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"extendedKeyUsages\": {\n    \"allowed\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"denied\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"algorithms\": {\n    \"signature\": [\n      \"<string>\"\n    ],\n    \"keyAlgorithm\": [\n      \"<string>\"\n    ]\n  },\n  \"validity\": {\n    \"max\": \"<string>\"\n  },\n  \"basicConstraints\": {\n    \"isCA\": \"<string>\",\n    \"maxPathLength\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"certificatePolicy\": {\n    \"id\": \"7eac4192-dfea-2b69-50fc-e07d95066770\",\n    \"name\": \"AxOojU\",\n    \"createdAt\": \"1988-10-27T07:27:30.048Z\",\n    \"updatedAt\": \"1953-10-23T03:01:59.425Z\",\n    \"description\": \"string\",\n    \"subject\": [\n      {\n        \"type\": \"state\",\n        \"allowed\": [\n          \"string\",\n          \"string\"\n        ],\n        \"required\": [\n          \"string\",\n          \"string\"\n        ],\n        \"denied\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"type\": \"common_name\",\n        \"allowed\": [\n          \"string\",\n          \"string\"\n        ],\n        \"required\": [\n          \"string\",\n          \"string\"\n        ],\n        \"denied\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ],\n    \"sans\": [\n      {\n        \"type\": \"dns_name\",\n        \"allowed\": [\n          \"string\",\n          \"string\"\n        ],\n        \"required\": [\n          \"string\",\n          \"string\"\n        ],\n        \"denied\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"type\": \"email\",\n        \"allowed\": [\n          \"string\",\n          \"string\"\n        ],\n        \"required\": [\n          \"string\",\n          \"string\"\n        ],\n        \"denied\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ],\n    \"keyUsages\": {\n      \"allowed\": [\n        \"encipher_only\",\n        \"decipher_only\"\n      ],\n      \"required\": [\n        \"crl_sign\",\n        \"digital_signature\"\n      ],\n      \"denied\": [\n        \"key_agreement\",\n        \"decipher_only\"\n      ]\n    },\n    \"extendedKeyUsages\": {\n      \"allowed\": [\n        \"client_auth\",\n        \"ocsp_signing\"\n      ],\n      \"required\": [\n        \"time_stamping\",\n        \"client_auth\"\n      ],\n      \"denied\": [\n        \"email_protection\",\n        \"ocsp_signing\"\n      ]\n    },\n    \"algorithms\": {\n      \"signature\": [\n        \"string\"\n      ],\n      \"keyAlgorithm\": [\n        \"string\"\n      ]\n    },\n    \"validity\": {\n      \"max\": \"08m\"\n    },\n    \"basicConstraints\": {\n      \"isCA\": \"required\",\n      \"maxPathLength\": 4731\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "25fa3292-efab-4e32-9f33-7854d0596175",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "cert-manager",
+                    "certificate-policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"subject\": [\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"sans\": [\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"keyUsages\": {\n    \"allowed\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"denied\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"extendedKeyUsages\": {\n    \"allowed\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"denied\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"algorithms\": {\n    \"signature\": [\n      \"<string>\"\n    ],\n    \"keyAlgorithm\": [\n      \"<string>\"\n    ]\n  },\n  \"validity\": {\n    \"max\": \"<string>\"\n  },\n  \"basicConstraints\": {\n    \"isCA\": \"<string>\",\n    \"maxPathLength\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f1809101-2b1c-457c-8b47-557d54e50111",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "cert-manager",
+                    "certificate-policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"subject\": [\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"sans\": [\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"keyUsages\": {\n    \"allowed\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"denied\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"extendedKeyUsages\": {\n    \"allowed\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"denied\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"algorithms\": {\n    \"signature\": [\n      \"<string>\"\n    ],\n    \"keyAlgorithm\": [\n      \"<string>\"\n    ]\n  },\n  \"validity\": {\n    \"max\": \"<string>\"\n  },\n  \"basicConstraints\": {\n    \"isCA\": \"<string>\",\n    \"maxPathLength\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a57a6e5-eee2-4eef-9519-2ea0283a1d4c",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "cert-manager",
+                    "certificate-policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"subject\": [\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"sans\": [\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"keyUsages\": {\n    \"allowed\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"denied\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"extendedKeyUsages\": {\n    \"allowed\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"denied\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"algorithms\": {\n    \"signature\": [\n      \"<string>\"\n    ],\n    \"keyAlgorithm\": [\n      \"<string>\"\n    ]\n  },\n  \"validity\": {\n    \"max\": \"<string>\"\n  },\n  \"basicConstraints\": {\n    \"isCA\": \"<string>\",\n    \"maxPathLength\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f143897-f206-44f6-86c9-239c00000953",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "cert-manager",
+                    "certificate-policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"subject\": [\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"sans\": [\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"keyUsages\": {\n    \"allowed\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"denied\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"extendedKeyUsages\": {\n    \"allowed\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"denied\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"algorithms\": {\n    \"signature\": [\n      \"<string>\"\n    ],\n    \"keyAlgorithm\": [\n      \"<string>\"\n    ]\n  },\n  \"validity\": {\n    \"max\": \"<string>\"\n  },\n  \"basicConstraints\": {\n    \"isCA\": \"<string>\",\n    \"maxPathLength\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab76abeb-5aa3-4733-ae1a-ed5a583ae215",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "cert-manager",
+                    "certificate-policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"subject\": [\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"sans\": [\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"keyUsages\": {\n    \"allowed\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"denied\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"extendedKeyUsages\": {\n    \"allowed\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"denied\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"algorithms\": {\n    \"signature\": [\n      \"<string>\"\n    ],\n    \"keyAlgorithm\": [\n      \"<string>\"\n    ]\n  },\n  \"validity\": {\n    \"max\": \"<string>\"\n  },\n  \"basicConstraints\": {\n    \"isCA\": \"<string>\",\n    \"maxPathLength\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a95a1b36-8a0f-4c9b-a28f-ee7a42e4a76c",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "cert-manager",
+                    "certificate-policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"subject\": [\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"sans\": [\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"allowed\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"denied\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"keyUsages\": {\n    \"allowed\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"denied\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"extendedKeyUsages\": {\n    \"allowed\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"denied\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"algorithms\": {\n    \"signature\": [\n      \"<string>\"\n    ],\n    \"keyAlgorithm\": [\n      \"<string>\"\n    ]\n  },\n  \"validity\": {\n    \"max\": \"<string>\"\n  },\n  \"basicConstraints\": {\n    \"isCA\": \"<string>\",\n    \"maxPathLength\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2a6b5219-57ac-446d-af9e-a1c7d3c1e87f",
+          "name": "delete Certificate Policy",
+          "request": {
+            "name": "delete Certificate Policy",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "cert-manager",
+                "certificate-policies",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b9cc7a84-677f-4796-abcc-b34482d5be6b",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "cert-manager",
+                    "certificate-policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"certificatePolicy\": {\n    \"id\": \"7eac4192-dfea-2b69-50fc-e07d95066770\",\n    \"name\": \"AxOojU\",\n    \"createdAt\": \"1988-10-27T07:27:30.048Z\",\n    \"updatedAt\": \"1953-10-23T03:01:59.425Z\",\n    \"description\": \"string\",\n    \"subject\": [\n      {\n        \"type\": \"state\",\n        \"allowed\": [\n          \"string\",\n          \"string\"\n        ],\n        \"required\": [\n          \"string\",\n          \"string\"\n        ],\n        \"denied\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"type\": \"common_name\",\n        \"allowed\": [\n          \"string\",\n          \"string\"\n        ],\n        \"required\": [\n          \"string\",\n          \"string\"\n        ],\n        \"denied\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ],\n    \"sans\": [\n      {\n        \"type\": \"dns_name\",\n        \"allowed\": [\n          \"string\",\n          \"string\"\n        ],\n        \"required\": [\n          \"string\",\n          \"string\"\n        ],\n        \"denied\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"type\": \"email\",\n        \"allowed\": [\n          \"string\",\n          \"string\"\n        ],\n        \"required\": [\n          \"string\",\n          \"string\"\n        ],\n        \"denied\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ],\n    \"keyUsages\": {\n      \"allowed\": [\n        \"encipher_only\",\n        \"decipher_only\"\n      ],\n      \"required\": [\n        \"crl_sign\",\n        \"digital_signature\"\n      ],\n      \"denied\": [\n        \"key_agreement\",\n        \"decipher_only\"\n      ]\n    },\n    \"extendedKeyUsages\": {\n      \"allowed\": [\n        \"client_auth\",\n        \"ocsp_signing\"\n      ],\n      \"required\": [\n        \"time_stamping\",\n        \"client_auth\"\n      ],\n      \"denied\": [\n        \"email_protection\",\n        \"ocsp_signing\"\n      ]\n    },\n    \"algorithms\": {\n      \"signature\": [\n        \"string\"\n      ],\n      \"keyAlgorithm\": [\n        \"string\"\n      ]\n    },\n    \"validity\": {\n      \"max\": \"08m\"\n    },\n    \"basicConstraints\": {\n      \"isCA\": \"required\",\n      \"maxPathLength\": 4731\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a789cd87-1768-467d-aaad-ad0ee592dc68",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "cert-manager",
+                    "certificate-policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 400,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "109f16f1-c11c-48eb-9411-101de7f655fa",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "cert-manager",
+                    "certificate-policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 401,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c67fb82-a22f-4745-acf8-6d6f07470804",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "cert-manager",
+                    "certificate-policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 403,\n  \"message\": \"string\",\n  \"error\": \"string\",\n  \"details\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b28a480a-7ef5-466c-b963-ab303f1658a6",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "cert-manager",
+                    "certificate-policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40f1fb61-3f6f-4a4f-9a17-a10c39b84f0e",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "cert-manager",
+                    "certificate-policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 422,\n  \"error\": \"string\",\n  \"message\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d3d80cc1-803a-4fa9-9ab0-55ecec0990f2",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "cert-manager",
+                    "certificate-policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reqId\": \"string\",\n  \"statusCode\": 500,\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://us.infisical.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3cf4730c-93e4-4d22-b29b-2904034775c4",
+    "name": "Infisical Admin PKI Certificate Policies API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "List of all available APIs that can be consumed",
+      "type": "text/plain"
+    }
+  }
+}

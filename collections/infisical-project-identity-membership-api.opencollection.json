@@ -1,0 +1,135 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin Project Identity Membership API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Project Identity Membership",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getProjectIdentityMembershipById",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId/memberships/identities/:identityId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to get the identity membership for."
+              },
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the machine identity to get the membership for."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get project identity membership by identity ID"
+        },
+        {
+          "info": {
+            "name": "listProjectIdentityMemberships",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId/memberships/identities",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The offset to start from. If you enter 10, it will start from the 10th identity membership."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of identity memberships to return."
+              },
+              {
+                "name": "identityName",
+                "value": "",
+                "type": "query",
+                "description": "The text string that identity membership names will be filtered by."
+              },
+              {
+                "name": "roles",
+                "value": "",
+                "type": "query",
+                "description": "The role slugs to filter identity memberships by."
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to list identity memberships from."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List project identity memberships"
+        },
+        {
+          "info": {
+            "name": "listAvailableProjectIdentities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId/memberships/available-identities",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The offset to start from. If you enter 10, it will start from the 10th identity."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of identities to return."
+              },
+              {
+                "name": "identityName",
+                "value": "",
+                "type": "query",
+                "description": "The text string that identity membership names will be filtered by."
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to list available identities for."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List available identities for project membership"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

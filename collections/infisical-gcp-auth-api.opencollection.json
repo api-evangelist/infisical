@@ -1,0 +1,133 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin GCP Auth API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "GCP Auth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "loginWithGcpAuth",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/auth/gcp-auth/login",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Login with GCP Auth for machine identity"
+        },
+        {
+          "info": {
+            "name": "getGcpAuth",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/auth/gcp-auth/identities/:identityId",
+            "params": [
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the machine identity to retrieve the auth method for."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve GCP Auth configuration on machine identity"
+        },
+        {
+          "info": {
+            "name": "attachGcpAuth",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/auth/gcp-auth/identities/:identityId",
+            "params": [
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the machine identity to attach the configuration onto."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Attach GCP Auth configuration onto machine identity"
+        },
+        {
+          "info": {
+            "name": "updateGcpAuth",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/auth/gcp-auth/identities/:identityId",
+            "params": [
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the machine identity to update the auth method for."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update GCP Auth configuration on machine identity"
+        },
+        {
+          "info": {
+            "name": "deleteGcpAuth",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/auth/gcp-auth/identities/:identityId",
+            "params": [
+              {
+                "name": "identityId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the machine identity to revoke the auth method for."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete GCP Auth configuration on machine identity"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

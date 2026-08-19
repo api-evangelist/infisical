@@ -1,0 +1,366 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin Integrations API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/v1/workspace/{workspaceId}/integrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/workspace/:workspaceId/integrations",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to list integrations for."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List integrations for a project."
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/workspace/{workspaceId}/authorizations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/workspace/:workspaceId/authorizations",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to list integration auths for."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List integration auth objects for a workspace."
+        },
+        {
+          "info": {
+            "name": "listProjectIntegrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId/integrations",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to list integrations for."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List integrations for a project."
+        },
+        {
+          "info": {
+            "name": "listProjectIntegrationAuthorizations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId/authorizations",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to list integration auths for."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List integration auth objects for a project."
+        },
+        {
+          "info": {
+            "name": "createIntegration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/integration",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create an integration to sync secrets."
+        },
+        {
+          "info": {
+            "name": "getIntegration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/integration/:integrationId",
+            "params": [
+              {
+                "name": "integrationId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the integration object."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get an integration by integration id"
+        },
+        {
+          "info": {
+            "name": "updateIntegration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/integration/:integrationId",
+            "params": [
+              {
+                "name": "integrationId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the integration object."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an integration by integration id"
+        },
+        {
+          "info": {
+            "name": "deleteIntegration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/integration/:integrationId",
+            "params": [
+              {
+                "name": "shouldDeleteIntegrationSecrets",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "integrationId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the integration object."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Remove an integration using the integration object ID"
+        },
+        {
+          "info": {
+            "name": "syncIntegration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/integration/:integrationId/sync",
+            "params": [
+              {
+                "name": "integrationId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the integration object to manually sync."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Manually trigger sync of an integration by integration id"
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/integration-auth/integration-options",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/integration-auth/integration-options",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List of integrations available."
+        },
+        {
+          "info": {
+            "name": "getIntegrationAuth",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/integration-auth/:integrationAuthId",
+            "params": [
+              {
+                "name": "integrationAuthId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of integration authentication object."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get details of an integration authorization by auth object id."
+        },
+        {
+          "info": {
+            "name": "updateIntegrationAuth",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/integration-auth/:integrationAuthId",
+            "params": [
+              {
+                "name": "integrationAuthId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of integration authentication object to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update the integration authentication object required for syncing secrets."
+        },
+        {
+          "info": {
+            "name": "deleteIntegrationAuth",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/integration-auth/:integrationAuthId",
+            "params": [
+              {
+                "name": "integrationAuthId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of integration authentication object to delete."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Remove an integration auth object by object id."
+        },
+        {
+          "info": {
+            "name": "deleteIntegrationAuths",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/integration-auth",
+            "params": [
+              {
+                "name": "integration",
+                "value": "",
+                "type": "query",
+                "description": "The slug of the integration to be unauthorized."
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the project to delete the integration auth from."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Remove all integration's auth object from the project."
+        },
+        {
+          "info": {
+            "name": "createIntegrationAuth",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/integration-auth/access-token",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create the integration authentication object required for syncing secrets."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

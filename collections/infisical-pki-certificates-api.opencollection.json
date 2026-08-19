@@ -1,0 +1,573 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin PKI Certificates API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PKI Certificates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "searchProjectCertificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId/certificates/search",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search and filter certificates within a project."
+        },
+        {
+          "info": {
+            "name": "createCertificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/certificates",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "getCertificateRequest",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/certificates/certificate-requests/:requestId",
+            "params": [
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "triggerCertificateRequestValidation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/certificates/certificate-requests/:requestId/trigger-validation",
+            "params": [
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Manually ask the issuing CA to re-check validation for a pending certificate request"
+        },
+        {
+          "info": {
+            "name": "searchCertificateRequests",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/certificates/certificate-requests/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search and filter certificate requests."
+        },
+        {
+          "info": {
+            "name": "cancelCertificateRequest",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/certificates/certificate-requests/:requestId/cancel",
+            "params": [
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancel a pending certificate request."
+        },
+        {
+          "info": {
+            "name": "renewCertificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/certificates/:id/renew",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "updateCertificateRenewalConfig",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/cert-manager/certificates/:id/config",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "getCertificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/certificates/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the certificate to get."
+              }
+            ]
+          },
+          "docs": "Get certificate"
+        },
+        {
+          "info": {
+            "name": "updateCertificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/cert-manager/certificates/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the certificate to get."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update certificate"
+        },
+        {
+          "info": {
+            "name": "deleteCertificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/cert-manager/certificates/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the certificate to delete."
+              }
+            ]
+          },
+          "docs": "Delete certificate"
+        },
+        {
+          "info": {
+            "name": "getCertificatePrivateKey",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/certificates/:id/private-key",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the certificate to get."
+              }
+            ]
+          },
+          "docs": "Get certificate private key"
+        },
+        {
+          "info": {
+            "name": "getCertificateBundle",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/certificates/:id/bundle",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the certificate to get the certificate body and certificate chain for."
+              }
+            ]
+          },
+          "docs": "Get certificate bundle including the certificate, chain, and private key."
+        },
+        {
+          "info": {
+            "name": "importCertificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/certificates/import-certificate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Import certificate"
+        },
+        {
+          "info": {
+            "name": "revokeCertificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/certificates/:id/revoke",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the certificate to revoke."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Revoke"
+        },
+        {
+          "info": {
+            "name": "assignCertificateToApplication",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/cert-manager/certificates/:id/application",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assign a certificate to an Application. Only certificates that aren't already attached to an Application can be assigned; once attached the binding cannot be moved."
+        },
+        {
+          "info": {
+            "name": "getCertificateBody",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/certificates/:id/certificate",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the certificate to get the certificate body and certificate chain for."
+              }
+            ]
+          },
+          "docs": "Get certificate body of certificate"
+        },
+        {
+          "info": {
+            "name": "getCertificateCleanupConfig",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/cert-manager/certificate-cleanup"
+          },
+          "docs": "Get certificate cleanup configuration for a project"
+        },
+        {
+          "info": {
+            "name": "updateCertificateCleanupConfig",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://us.infisical.com/api/v1/cert-manager/certificate-cleanup",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create or update certificate cleanup configuration for a project"
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/pki/certificates/{serialNumber}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/certificates/:serialNumber",
+            "params": [
+              {
+                "name": "serialNumber",
+                "value": "",
+                "type": "path",
+                "description": "The serial number of the certificate to get."
+              }
+            ]
+          },
+          "docs": "Get certificate"
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/pki/certificates/{serialNumber}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/pki/certificates/:serialNumber",
+            "params": [
+              {
+                "name": "serialNumber",
+                "value": "",
+                "type": "path",
+                "description": "The serial number of the certificate to delete."
+              }
+            ]
+          },
+          "docs": "Delete certificate"
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/pki/certificates/{serialNumber}/private-key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/certificates/:serialNumber/private-key",
+            "params": [
+              {
+                "name": "serialNumber",
+                "value": "",
+                "type": "path",
+                "description": "The serial number of the certificate to get."
+              }
+            ]
+          },
+          "docs": "Get certificate private key"
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/pki/certificates/{serialNumber}/bundle",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/certificates/:serialNumber/bundle",
+            "params": [
+              {
+                "name": "serialNumber",
+                "value": "",
+                "type": "path",
+                "description": "The serial number of the certificate to get the certificate body and certificate chain for."
+              }
+            ]
+          },
+          "docs": "Get certificate bundle including the certificate, chain, and private key."
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/pki/certificates/issue-certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/certificates/issue-certificate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Issue certificate"
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/pki/certificates/import-certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/certificates/import-certificate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Import certificate"
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/pki/certificates/sign-certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/certificates/sign-certificate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sign certificate"
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/pki/certificates/{serialNumber}/revoke",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/pki/certificates/:serialNumber/revoke",
+            "params": [
+              {
+                "name": "serialNumber",
+                "value": "",
+                "type": "path",
+                "description": "The serial number of the certificate to revoke. The revoked certificate will be added to the certificate revocation list (CRL) of the CA."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Revoke"
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/pki/certificates/{serialNumber}/certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/pki/certificates/:serialNumber/certificate",
+            "params": [
+              {
+                "name": "serialNumber",
+                "value": "",
+                "type": "path",
+                "description": "The serial number of the certificate to get the certificate body and certificate chain for."
+              }
+            ]
+          },
+          "docs": "Get certificate body of certificate"
+        },
+        {
+          "info": {
+            "name": "POST /api/v3/pki/certificates/{certificateId}/renew",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v3/pki/certificates/:certificateId/renew",
+            "params": [
+              {
+                "name": "certificateId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "PATCH /api/v3/pki/certificates/{certificateId}/config",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v3/pki/certificates/:certificateId/config",
+            "params": [
+              {
+                "name": "certificateId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

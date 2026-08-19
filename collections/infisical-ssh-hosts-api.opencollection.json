@@ -1,0 +1,223 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infisical Admin SSH Hosts API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SSH Hosts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/v1/ssh/hosts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/ssh/hosts"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/ssh/hosts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/ssh/hosts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Register SSH Host"
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/ssh/hosts/{sshHostId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/ssh/hosts/:sshHostId",
+            "params": [
+              {
+                "name": "sshHostId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the SSH host to get."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PATCH /api/v1/ssh/hosts/{sshHostId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us.infisical.com/api/v1/ssh/hosts/:sshHostId",
+            "params": [
+              {
+                "name": "sshHostId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the SSH host to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update SSH Host"
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/ssh/hosts/{sshHostId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.infisical.com/api/v1/ssh/hosts/:sshHostId",
+            "params": [
+              {
+                "name": "sshHostId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the SSH host to delete."
+              }
+            ]
+          },
+          "docs": "Delete SSH Host"
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/ssh/hosts/{sshHostId}/issue-user-cert",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/ssh/hosts/:sshHostId/issue-user-cert",
+            "params": [
+              {
+                "name": "sshHostId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the SSH host to issue the SSH credentials for."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Issue SSH certificate for user"
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/ssh/hosts/{sshHostId}/issue-host-cert",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.infisical.com/api/v1/ssh/hosts/:sshHostId/issue-host-cert",
+            "params": [
+              {
+                "name": "sshHostId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the SSH host to issue the SSH certificate for."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Issue SSH certificate for host"
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/ssh/hosts/{sshHostId}/user-ca-public-key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/ssh/hosts/:sshHostId/user-ca-public-key",
+            "params": [
+              {
+                "name": "sshHostId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the SSH host to get the user SSH CA public key for."
+              }
+            ]
+          },
+          "docs": "Get public key of the user SSH CA linked to the host"
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/ssh/hosts/{sshHostId}/host-ca-public-key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/ssh/hosts/:sshHostId/host-ca-public-key",
+            "params": [
+              {
+                "name": "sshHostId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the SSH host to get the host SSH CA public key for."
+              }
+            ]
+          },
+          "docs": "Get public key of the host SSH CA linked to the host"
+        },
+        {
+          "info": {
+            "name": "listProjectSshHosts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v1/projects/:projectId/ssh-hosts",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to list SSH hosts for."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v2/workspace/{projectId}/ssh-hosts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.infisical.com/api/v2/workspace/:projectId/ssh-hosts",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project to list SSH hosts for."
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
