@@ -1,0 +1,437 @@
+slug: infisical
+provider: Infisical
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 46
+edges:
+- tag: SAML SSO
+  spec_file: infisical-saml-sso-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.9
+  evidence: GET /api/v1/sso/config, POST /api/v1/sso/config, PATCH /api/v1/sso/config
+  reason: Configuration of SAML single sign-on federation for the platform — squarely identity federation/access
+    management.
+- tag: Identities
+  spec_file: infisical-identities-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.88
+  evidence: createProjectMachineIdentity, listMachineIdentities, deleteMachineIdentity
+  reason: CRUD over machine (non-human) identities used to grant access to the secrets platform — squarely
+    identity and access management, not a business-domain 'identity' concept.
+- tag: AWS Auth
+  spec_file: infisical-aws-auth-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.85
+  evidence: POST /api/v1/auth/aws-auth/login  loginWithAwsAuth; POST /api/v1/auth/aws-auth/identities/{identityId}  attachAwsAuth
+  reason: Operations authenticate machine identities via AWS IAM and attach/update/delete that auth method
+    on an identity — issuance and stewardship of non-human identity credentials, which is Identity & Access
+    Management. Some chance the better fit is developer credential management, hence 0.85.
+- tag: OCI Auth
+  spec_file: infisical-oci-auth-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.85
+  evidence: POST /api/v1/auth/oci-auth/login loginWithOciAuth; attachOciAuth to /identities/{identityId}
+  reason: Operations authenticate machine identities via OCI and attach/manage that auth method on identities
+    — identity and access management, not a business-domain capability.
+- tag: OIDC Auth
+  spec_file: infisical-oidc-auth-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.85
+  evidence: loginWithOidcAuth; attachOidcAuth / updateOidcAuth on /auth/oidc-auth/identities/{identityId}
+  reason: OIDC-based authentication of identities and lifecycle of that credential method = IAM/federation.
+- tag: Organization Roles
+  spec_file: infisical-organization-roles-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.85
+  evidence: POST/GET/PATCH/DELETE /api/v1/organization/roles/{roleId}
+  reason: CRUD over organisation roles used to grant permissions in a secrets platform — role-based access
+    control, i.e. Identity & Access Management.
+- tag: SCIM
+  spec_file: infisical-scim-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.85
+  evidence: listExternalGroupOrgRoleMappings / updateExternalGroupOrgRoleMappings on /api/v1/scim/group-org-role-mappings
+  reason: SCIM directory group-to-role mapping drives automated user provisioning and entitlement assignment
+    — Identity & Access Management.
+- tag: SPIFFE Auth
+  spec_file: infisical-spiffe-auth-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.85
+  evidence: loginWithSpiffeAuth, attachSpiffeAuth, refreshSpiffeBundle on /api/v1/auth/spiffe-auth/identities/{identityId}
+  reason: Workload (machine) identity authentication method lifecycle — authentication and identity credential
+    management for non-human identities.
+- tag: TLS Certificate Auth
+  spec_file: infisical-tls-certificate-auth-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.85
+  evidence: POST /api/v1/auth/tls-cert-auth/login  loginWithTlsCertAuth ; POST /api/v1/auth/tls-cert-auth/identities/{identityId}  attachTlsCertAuth
+  reason: Authentication method configuration and login for machine identities via TLS client certificates
+    — identity and access management.
+- tag: Universal Auth
+  spec_file: infisical-universal-auth-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.85
+  evidence: POST /api/v1/auth/universal-auth/login  loginWithUniversalAuth ; createUniversalAuthClientSecret
+    ; clearUniversalAuthLockouts
+  reason: Machine identity login, client-secret lifecycle, token renew/revoke and lockout clearing are
+    core identity and access management operations.
+- tag: Identity Specific Privileges
+  spec_file: infisical-identity-specific-privileges-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.82
+  evidence: POST /api/v1/additional-privilege/identity/permanent and /temporary
+  reason: Grants permanent and temporary additional privileges to identities — privileged access / entitlement
+    administration within IAM.
+- tag: Identity Specific Privileges V2
+  spec_file: infisical-identity-specific-privileges-v2-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.82
+  evidence: createIdentityProjectAdditionalPrivilege, updateIdentityProjectAdditionalPrivilege
+  reason: 'Same privilege-grant surface at v2: managing per-identity project permissions is access management.'
+- tag: Project Groups
+  spec_file: infisical-project-groups-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.82
+  evidence: POST /api/v1/projects/{projectId}/groups/{groupIdOrName}  addGroupToProject; listProjectGroupMemberships
+  reason: Granting and revoking group access/roles to projects in a secrets platform is authorisation
+    and access administration — Identity & Access Management.
+- tag: Project Identities
+  spec_file: infisical-project-identities-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.82
+  evidence: POST /api/v1/projects/{projectId}/memberships/identities/{identityId}  createProjectIdentityMembership
+  reason: Machine identity membership and role assignment to projects — access provisioning for non-human
+    identities, squarely Identity & Access Management.
+- tag: Project Roles
+  spec_file: infisical-project-roles-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.82
+  evidence: createProjectRole / listProjectRoles / updateProjectRole / deleteProjectRole on /api/v2/workspace/{projectId}/roles
+  reason: CRUD over role definitions used to grant access within a secrets-management project — role-based
+    access control, i.e. Identity & Access Management, not a business 'role' concept.
+- tag: Project Users
+  spec_file: infisical-project-users-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.82
+  evidence: inviteProjectMembers, removeProjectMembers, updateProjectMembership, inviteCertManagerUsers
+  reason: Manages user memberships and invitations that confer access to secrets projects — access administration
+    (IAM), not HR employee records.
+- tag: Secrets
+  spec_file: infisical-secrets-api-openapi.yml
+  capability_id: BC-4210.60
+  capability_id_l1: BC-4210
+  capability_name: Configuration & Secrets Management
+  confidence: 0.82
+  evidence: GET /api/v3/secrets/raw ; POST /api/v3/secrets/raw/{secretName} ; POST /api/v3/secrets/move
+  reason: Core CRUD over secret values consumed by product services — the definition of configuration
+    and secrets management.
+- tag: Alibaba Cloud Auth
+  spec_file: infisical-alibaba-cloud-auth-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.8
+  evidence: loginWithAlicloudAuth; attachAlicloudAuth /api/v1/auth/alicloud-auth/identities/{identityId}
+  reason: Operations authenticate machine identities via an Alibaba Cloud trust source and attach/update/remove
+    that auth method on an identity — machine identity and access management, i.e. federated authentication
+    configuration.
+- tag: Azure Auth
+  spec_file: infisical-azure-auth-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.8
+  evidence: loginWithAzureAuth; attachAzureAuth; deleteAzureAuth on /identities/{identityId}
+  reason: Configures and exercises Azure-based authentication for machine identities, i.e. identity federation
+    and access credential lifecycle.
+- tag: Dynamic Secrets
+  spec_file: infisical-dynamic-secrets-api-openapi.yml
+  capability_id: BC-4210.60
+  capability_id_l1: BC-4210
+  capability_name: Configuration & Secrets Management
+  confidence: 0.8
+  evidence: POST /api/v1/dynamic-secrets; POST /api/v1/dynamic-secrets/leases/{leaseId}/renew
+  reason: Creation, listing and lease renewal/revocation of dynamically generated secrets consumed by
+    services — runtime secrets management as described in the vendor's 'centralized, end-to-end encrypted
+    vault for storing, syncing, and rotating secrets'.
+- tag: GCP Auth
+  spec_file: infisical-gcp-auth-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.8
+  evidence: loginWithGcpAuth; attachGcpAuth /api/v1/auth/gcp-auth/identities/{identityId}
+  reason: Google Cloud trust-based authentication for machine identities plus lifecycle of that auth method
+    on an identity — identity and access management.
+- tag: Groups
+  spec_file: infisical-groups-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.8
+  evidence: createGroup; addUserToGroup; addMachineIdentityToGroup; listGroupProjects
+  reason: Group creation and membership of users and machine identities, with group-to-project assignment
+    — access group administration, a core IAM function of this privileged-access platform.
+- tag: OIDC SSO
+  spec_file: infisical-oidc-sso-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.8
+  evidence: GET/PATCH/POST /api/v1/sso/oidc/config
+  reason: Configuration of OIDC single sign-on for the organisation is identity federation, squarely Identity
+    & Access Management. Tenant identity federation (BC-4230.50) is a plausible alternative reading but
+    this surface is the buyer's own IAM configuration.
+- tag: PKI Certificate Authorities
+  spec_file: infisical-pki-certificate-authorities-api-openapi.yml
+  capability_id: BC-620
+  capability_id_l1: BC-620
+  capability_name: Cybersecurity Management
+  confidence: 0.8
+  evidence: createInternalCertificateAuthorityV1, getCaCsr, renewCaCertificate, getCaCertificates
+  reason: Creation, renewal and certificate issuance for internal certificate authorities — clearly PKI/cryptographic
+    security management; no listed L2 matches certificate lifecycle exactly.
+- tag: PKI Certificates
+  spec_file: infisical-pki-certificates-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.8
+  evidence: POST /api/v1/cert-manager/certificates  createCertificate; POST /api/v1/cert-manager/certificates/{id}/renew  renewCertificate;
+    GET .../private-key  getCertificatePrivateKey
+  reason: Issuance, renewal, revocation and private-key retrieval of X.509 certificates is machine credential
+    lifecycle management — Identity & Access Management under Cybersecurity.
+- tag: Project Identity Membership
+  spec_file: infisical-project-identity-membership-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.8
+  evidence: GET /api/v1/projects/{projectId}/memberships/identities  listProjectIdentityMemberships; listAvailableProjectIdentities
+  reason: Read surface over identity-to-project access assignments; still an IAM capability (access review/visibility)
+    rather than any business-domain function.
+- tag: Token Auth
+  spec_file: infisical-token-auth-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.8
+  evidence: POST /api/v1/auth/token-auth/identities/{identityId}/tokens  createTokenAuthToken ; POST /api/v1/auth/token-auth/tokens/{tokenId}/revoke  revokeTokenAuthToken
+  reason: Issuance, update and revocation of authentication tokens bound to identities is identity and
+    access management.
+- tag: JWT Auth
+  spec_file: infisical-jwt-auth-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.78
+  evidence: loginWithJwtAuth, attachJwtAuth to /identities/{identityId}
+  reason: Authentication method attached to machine identities. Normally auth plumbing would be abstained,
+    but for this vendor the authenticated-access control surface is the product capability itself (IAM).
+- tag: Kubernetes Auth
+  spec_file: infisical-kubernetes-auth-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.78
+  evidence: loginWithKubernetesAuth, attachKubernetesAuth to /identities/{identityId}
+  reason: Binds Kubernetes service-account authentication to machine identities — workload identity/access
+    management for the secrets platform.
+- tag: LDAP Auth
+  spec_file: infisical-ldap-auth-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.78
+  evidence: loginWithLdapAuth, clearLdapAuthLockouts
+  reason: LDAP-based authentication bound to identities, including lockout administration — directory-backed
+    access management.
+- tag: SSH Hosts
+  spec_file: infisical-ssh-hosts-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.78
+  evidence: POST /api/v1/ssh/hosts/{sshHostId}/issue-user-cert ; GET /api/v1/ssh/hosts/{sshHostId}/user-ca-public-key
+  reason: Operations register SSH hosts and issue user/host certificates against a CA, i.e. certificate-based
+    access control to infrastructure — identity and access management, not a business-domain capability.
+- tag: Secret Syncs
+  spec_file: infisical-secret-syncs-api-openapi.yml
+  capability_id: BC-4210.60
+  capability_id_l1: BC-4210
+  capability_name: Configuration & Secrets Management
+  confidence: 0.78
+  evidence: POST /api/v1/secret-syncs/aws-parameter-store/{syncId}/sync-secrets  syncAwsParameterStoreSecretSync
+  reason: Synchronising secrets into runtime config stores such as AWS Parameter Store / Secrets Manager
+    is squarely configuration and secrets management.
+- tag: PKI ACME
+  spec_file: infisical-pki-acme-api-openapi.yml
+  capability_id: BC-620
+  capability_id_l1: BC-620
+  capability_name: Cybersecurity Management
+  confidence: 0.75
+  evidence: POST /api/v1/cert-manager/acme/profiles/{profileId}/new-order ... /orders/{orderId}/certificate
+  reason: ACME directory, account, order, authorization and challenge endpoints for automated certificate
+    issuance — a cybersecurity (PKI) capability; no listed L2 cleanly covers certificate lifecycle so
+    L1 only.
+- tag: PKI Certificate Profiles
+  spec_file: infisical-pki-certificate-profiles-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.75
+  evidence: POST /api/v1/pki/certificate-profiles, createCertificateProfile, revealCertificateProfileAcmeEabSecret
+  reason: PKI certificate profile definitions govern how machine/service certificates (credentials) are
+    issued — an identity & access / security capability. Cybersecurity Management with IAM sub-capability
+    is the closest honest fit; some ambiguity vs Security Architecture.
+- tag: PKI Subscribers
+  spec_file: infisical-pki-subscribers-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.75
+  evidence: POST /api/v1/pki/subscribers/{subscriberName}/issue-certificate  issuePkiSubscriberCertificate
+  reason: '''Subscribers'' here are PKI certificate subjects, not commercial subscribers — homograph.
+    Operations order, issue and sign certificates for them, i.e. machine credential issuance under Cybersecurity/IAM.'
+- tag: LDAP SSO
+  spec_file: infisical-ldap-sso-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.72
+  evidence: GET/POST/PATCH /api/v1/ldap/config
+  reason: Configuration of LDAP single sign-on for the organisation — identity federation, a core IAM
+    function. Thin operation detail lowers confidence slightly.
+- tag: PKI Certificate Templates
+  spec_file: infisical-pki-certificate-templates-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.72
+  evidence: POST /api/v2/pki/certificate-templates  createPkiTemplate; /api/v1/pki/certificate-templates/{certificateTemplateId}/est-config
+  reason: Templates controlling PKI certificate issuance policy — security/identity credential management.
+    Mapped to Cybersecurity Management, IAM.
+- tag: PKI Signers
+  spec_file: infisical-pki-signers-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.72
+  evidence: POST /api/v1/cert-manager/signers/{signerId}/sign  signData; GET .../public-key  getSignerPublicKey;
+    POST .../certificate/reissue
+  reason: Signing authorities/keys with permissions and approval policies are cryptographic credential
+    and access control mechanisms — Cybersecurity Management / IAM.
+- tag: Secret Imports
+  spec_file: infisical-secret-imports-api-openapi.yml
+  capability_id: BC-4210.60
+  capability_id_l1: BC-4210
+  capability_name: Configuration & Secrets Management
+  confidence: 0.72
+  evidence: POST /api/v2/secret-imports  createSecretImport ; GET /api/v2/secret-imports/secrets  getRawSecretsFromImports
+  reason: Managing imports of secrets between environments/folders is stewardship of runtime configuration
+    values and secrets consumed by services.
+- tag: Organization Identity Membership
+  spec_file: infisical-organization-identity-membership-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.7
+  evidence: GET /api/v1/organization/available-identities listAvailableOrganizationIdentities
+  reason: Single read operation listing identities available in the organisation — access/identity administration.
+    Thin evidence, so moderate confidence.
+- tag: Organizations
+  spec_file: infisical-organizations-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.7
+  evidence: listOrgMemberships, updateOrgMembership, deleteOrgMembership, listOrgIdentityMemberships
+  reason: Operations manage user and machine-identity memberships within an organisation — access administration.
+    Could alternatively be read as tenant management, hence moderate confidence.
+- tag: PKI Alerting
+  spec_file: infisical-pki-alerting-api-openapi.yml
+  capability_id: BC-620
+  capability_id_l1: BC-620
+  capability_name: Cybersecurity Management
+  confidence: 0.7
+  evidence: createPkiAlertV1, listPkiAlertsV1, GET /api/v1/cert-manager/alerts/{alertId}/certificates
+  reason: Alerts tied to PKI certificates (e.g. expiry notification) within the cert-manager surface —
+    cybersecurity/PKI operations rather than any business alerting domain. No precise L2 available.
+- tag: PKI Certificate Policies
+  spec_file: infisical-pki-certificate-policies-api-openapi.yml
+  capability_id: BC-620
+  capability_id_l1: BC-620
+  capability_name: Cybersecurity Management
+  confidence: 0.7
+  evidence: createCertificatePolicy, listCertificatePolicies on /api/v1/cert-manager/certificate-policies
+  reason: Technical certificate issuance policies within the cert manager — PKI security control configuration,
+    not enterprise policy management (BC-130.20).
+- tag: SSH Certificate Authorities
+  spec_file: infisical-ssh-certificate-authorities-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.7
+  evidence: POST /api/v1/ssh/ca, GET /api/v1/ssh/ca/{sshCaId}/public-key, listProjectSshCertificateAuthorities
+  reason: Manages SSH certificate authorities that issue credentials for host access; credential issuance
+    infrastructure supporting access management. Some ambiguity vs security architecture, hence moderate
+    confidence.
+- tag: SSH Certificates
+  spec_file: infisical-ssh-certificates-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.7
+  evidence: POST /api/v1/ssh/certificates/sign, POST /api/v1/ssh/certificates/issue
+  reason: Issues and signs short-lived SSH certificates used to authenticate access to hosts — credential
+    issuance within Identity & Access Management.
+- tag: Secret Rotations
+  spec_file: infisical-secret-rotations-api-openapi.yml
+  capability_id: BC-4210.60
+  capability_id_l1: BC-4210
+  capability_name: Configuration & Secrets Management
+  confidence: 0.7
+  evidence: POST /api/v2/secret-rotations/postgres-credentials/{rotationId}/rotate-secrets  rotatePostgreSQLCredentialsRotation
+  reason: Automated rotation of stored credentials/secrets used by services is secrets management; no
+    other candidate covers credential rotation as directly.
