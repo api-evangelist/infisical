@@ -1,84 +1,71 @@
-name: Infisical API Rate Limits
-description: >
-  Rate limits for the Infisical Cloud REST API. Limits apply per machine
-  identity on cloud-hosted plans. Self-hosted deployments have no rate limits.
-  Enterprise customers may request custom rate limits.
-version: "0.1"
-url: https://infisical.com/docs/api-reference/overview/introduction
-notes:
-  - Rate limits apply to Infisical Cloud only; self-hosted instances are unlimited.
-  - Limits are enforced per machine identity (access token).
-  - Enterprise customers can request custom rate limits.
-  - HTTP 429 Too Many Requests is returned when limits are exceeded.
-plans:
-  - plan: Free
-    limits:
-      - type: Read Operations
-        description: GET and LIST requests (secrets, resources)
-        limit: 200
-        window: minute
-        unit: requests
-      - type: Write Operations
-        description: CREATE, UPDATE, and DELETE requests
-        limit: 90
-        window: minute
-        unit: requests
-      - type: Secret Operations
-        description: Combined secret read/write operations
-        limit: 120
-        window: minute
-        unit: requests
-      - type: Identity Creation
-        description: Machine identity creation requests
-        limit: 30
-        window: minute
-        unit: requests
-      - type: Project Creation
-        description: Project creation requests
-        limit: 30
-        window: minute
-        unit: requests
-
-  - plan: Pro
-    limits:
-      - type: Read Operations
-        description: GET and LIST requests (secrets, resources)
-        limit: 350
-        window: minute
-        unit: requests
-      - type: Write Operations
-        description: CREATE, UPDATE, and DELETE requests
-        limit: 200
-        window: minute
-        unit: requests
-      - type: Secret Operations
-        description: Combined secret read/write operations
-        limit: 300
-        window: minute
-        unit: requests
-      - type: Identity Creation
-        description: Machine identity creation requests
-        limit: 30
-        window: minute
-        unit: requests
-      - type: Project Creation
-        description: Project creation requests
-        limit: 30
-        window: minute
-        unit: requests
-
-  - plan: Enterprise
-    limits:
-      - type: All Operations
-        description: Custom rate limits negotiated with Infisical support
-        limit: custom
-        window: custom
-        unit: requests
-
-  - plan: Self-Hosted
-    limits:
-      - type: All Operations
-        description: No rate limits applied on self-hosted deployments
-        limit: unlimited
-        window: none
-        unit: requests
+# Rate limits transcribed from the provider's own documentation — see provenance. Quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://infisical.com/docs/api-reference/overview/introduction
+sources:
+- https://infisical.com/docs/api-reference/overview/introduction
+provenance:
+  tool: planning/api-economics/harvest_ratelimits.py
+  run: 20260920T133210
+  grounding: every limit_text was found verbatim in the fetched page text
+published: true
+note: Limits apply to Infisical Cloud only; self-hosted instances have no limits. Custom limits for Enterprise.
+  No headers or status codes documented.
+limit_count: 8
+limits:
+- name: Read (Free Plan)
+  limit_text: 'Read : 200/minute'
+  limit: 200
+  window: minute
+  scope: account
+  plan: Free Plan
+  endpoint: GET and LIST operations
+- name: Write (Free Plan)
+  limit_text: 'Write : 90/minute'
+  limit: 90
+  window: minute
+  scope: account
+  plan: Free Plan
+  endpoint: CREATE, UPDATE, and DELETE operations
+- name: Secret (Free Plan)
+  limit_text: 'Secret : 120/minute'
+  limit: 120
+  window: minute
+  scope: account
+  plan: Free Plan
+  endpoint: secret management operations
+- name: Identity Creation (Free Plan)
+  limit_text: 'Identity Creation : 30/minute'
+  limit: 30
+  window: minute
+  scope: account
+  plan: Free Plan
+  endpoint: creating new identities
+- name: Project Creation (Free Plan)
+  limit_text: 'Project Creation : 30/minute'
+  limit: 30
+  window: minute
+  scope: account
+  plan: Free Plan
+  endpoint: creating new projects
+- name: Read (Pro Plan)
+  limit_text: 'Read : 350/minute'
+  limit: 350
+  window: minute
+  scope: account
+  plan: Pro Plan
+  endpoint: GET and LIST operations
+- name: Write (Pro Plan)
+  limit_text: 'Write : 200/minute'
+  limit: 200
+  window: minute
+  scope: account
+  plan: Pro Plan
+  endpoint: CREATE, UPDATE, and DELETE operations
+- name: Secret (Pro Plan)
+  limit_text: 'Secret : 300/minute'
+  limit: 300
+  window: minute
+  scope: account
+  plan: Pro Plan
+  endpoint: secret management operations
