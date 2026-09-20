@@ -1,97 +1,71 @@
-name: Infisical Plans and Pricing
-description: Pricing tiers for Infisical cloud-hosted secrets management platform. Self-hosted open-source deployments are available at no cost under the MIT license.
-version: "0.1"
-url: https://infisical.com/pricing
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://infisical.com/pricing
+sources:
+- https://infisical.com/pricing
+provenance:
+  tool: planning/api-economics/harvest_pricing.py
+  run: 20260920T120546
+  grounding: every price_text was found verbatim in the fetched page text
+audience: business-product
+pricing_basis: per-seat
+published: true
+note: Pricing page for Infisical's three products (Secrets Management, Certificate Management, Privileged
+  Access). Prices are per identity/user per month, billed annually (13% savings noted; monthly equivalents
+  shown as $23 and $46). Enterprise tiers are 'Custom'. Privileged Access Pro price rendered in page text
+  as animated digits ('$ 2 2 0 0 /user/month'), i.e. $20/user/month.
+plan_count: 8
+currency: USD
 plans:
-  - name: Free
-    description: >
-      No-cost plan for individuals and small teams getting started with
-      secrets management. Includes core platform features with limits on
-      identities, projects, environments, and integrations.
-    price: 0
-    unit: month
-    currency: USD
-    features:
-      - Up to 5 machine identities
-      - Up to 3 projects
-      - Up to 3 environments per project
-      - Up to 10 integrations
-      - Dashboard UI, API, CLI, SDKs
-      - Kubernetes Operator and Infisical Agent
-      - Webhooks
-      - Two-factor authentication (2FA)
-      - Secret referencing and overrides
-      - Secret scanning
-      - Secret sharing
-      - All native integrations (AWS, GitHub, GitLab, etc.)
-      - Community Slack support
-      - Self-hosting or cloud options
-
-  - name: Pro
-    description: >
-      Per-identity paid plan for growing teams requiring advanced access
-      controls, secret rotation, SAML SSO, audit logs, and higher API
-      rate limits.
-    price: 18
-    unit: identity/month
-    currency: USD
-    features:
-      - All Free plan features
-      - Unlimited projects
-      - Up to 12 environments per project
-      - Up to 50 integrations
-      - Secret versioning
-      - Point-in-time recovery
-      - Role-based access controls (RBAC)
-      - Secret rotation
-      - Temporary access provisioning
-      - SAML SSO
-      - IP allowlisting
-      - 90-day audit log retention
-      - Higher API rate limits
-      - Priority customer support
-
-  - name: Enterprise
-    description: >
-      Custom-priced plan for large organizations requiring dedicated
-      infrastructure, advanced identity federation, dynamic secrets,
-      custom rate limits, and compliance tooling including SOC2 and
-      PenTest reports.
-    price: custom
-    unit: custom
-    currency: USD
-    features:
-      - All Pro plan features
-      - Dedicated infrastructure
-      - Enterprise SCIM provisioning
-      - LDAP authentication
-      - Dynamic secrets
-      - AI security advisor
-      - Approval workflows and access requests
-      - Gateways
-      - Sub-organizations
-      - KMIP support
-      - KMS and HSM support
-      - Audit log streaming
-      - Custom audit log retention
-      - Custom API rate limits
-      - User groups and custom roles
-      - 99.99% SLA
-      - SOC2 and PenTest reports
-      - Dedicated support engineer
-
-  - name: Self-Hosted (Open Source)
-    description: >
-      MIT-licensed self-hosted deployment with no licensing cost. Full
-      feature access with no API rate limits. Suitable for organizations
-      requiring data residency or full infrastructure control.
-    price: 0
-    unit: none
-    currency: USD
-    features:
-      - Full platform features
-      - No API rate limits
-      - No licensing fee
-      - Self-managed infrastructure
-      - All integrations
-      - Community support via GitHub
+- name: Secrets Management – Free
+  price_text: $ 0
+  price: 0
+  currency: USD
+  period: month
+  unit: forever
+  included_quota: 5 identities, unlimited projects, 100+ integrations, Agent Proxy, Secret Sharing, 2FA
+- name: Secrets Management – Pro
+  price_text: $20
+  price: 20
+  currency: USD
+  period: month
+  unit: /identity/month
+  included_quota: Everything in Free, plus unlimited identities, Access Controls, Secret Rotation, SAML
+    SSO, 30-day Audit log retention
+- name: Secrets Management – Advanced
+  price_text: $40
+  price: 40
+  currency: USD
+  period: month
+  unit: /identity/month
+  included_quota: Everything in Pro, plus Dynamic Secrets, SOC 2 Type II, Higher Rate Limits, Custom Roles,
+    90-day Audit log retention
+- name: Secrets Management – Enterprise
+  price_text: Talk to an expert
+  period: none
+  included_quota: Everything in Advanced, plus SCIM, LDAP, 99.99% SLA, KMIP, custom rate limits
+- name: Certificate Management – Free
+  price_text: $ 0
+  price: 0
+  currency: USD
+  period: month
+  unit: /mo
+  included_quota: 1 CA, up to 10 active certificates, up to 5 SANs per certificate, API & ACME enrollment
+- name: Certificate Management – Enterprise
+  price_text: Talk to an expert
+  period: none
+  included_quota: Unlimited CAs, certificates & SANs, HSM integration, SSO/SCIM, 99.99% SLA
+- name: Privileged Access – Pro
+  price_text: $ 2 2 0 0 /user/month
+  currency: USD
+  period: month
+  unit: /user/month
+  included_quota: Up to 50 resources, access requests, approval workflows, 30-day audit/session retention
+- name: Privileged Access – Enterprise
+  price_text: Talk to an expert
+  period: none
+  included_quota: Everything in Pro, plus unlimited resources, SCIM, LDAP, Windows/RDP
+rate_limit_statements:
+- Rate limits API and request throughput limits. Advanced raises the standard limit; Enterprise sets a
+  custom limit for high-volume automation. Normal Normal Higher Custom
