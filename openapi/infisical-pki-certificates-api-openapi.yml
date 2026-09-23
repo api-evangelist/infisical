@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin PKI Certificates API
+  title: Infisical PKI Certificates API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -191,9 +191,10 @@ paths:
                           type: string
                           format: date-time
                         caId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         status:
                           type: string
                         serialNumber:
@@ -209,115 +210,143 @@ paths:
                           type: string
                           format: date-time
                         revokedAt:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         revocationReason:
-                          type: number
-                          nullable: true
+                          type:
+                          - number
+                          - 'null'
                         altNames:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         caCertId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         certificateTemplateId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         keyUsages:
-                          type: array
+                          type:
+                          - array
+                          - 'null'
                           items:
                             type: string
-                          nullable: true
                         extendedKeyUsages:
-                          type: array
+                          type:
+                          - array
+                          - 'null'
                           items:
                             type: string
-                          nullable: true
                         projectId:
                           type: string
                         pkiSubscriberId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         profileId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         renewBeforeDays:
-                          type: number
-                          nullable: true
+                          type:
+                          - number
+                          - 'null'
                         renewedFromCertificateId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         renewedByCertificateId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         renewalError:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         keyAlgorithm:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         signatureAlgorithm:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         subjectOrganization:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         subjectOrganizationalUnit:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         subjectCountry:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         subjectState:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         subjectLocality:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         fingerprintSha256:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         fingerprintSha1:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         isCA:
-                          type: boolean
-                          nullable: true
+                          type:
+                          - boolean
+                          - 'null'
                         pathLength:
-                          type: number
-                          nullable: true
+                          type:
+                          - number
+                          - 'null'
                         source:
-                          type: string
-                          nullable: true
-                        discoveryMetadata:
-                          nullable: true
-                        externalMetadata:
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
+                        discoveryMetadata: {}
+                        externalMetadata: {}
                         applicationId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         hasPrivateKey:
                           type: boolean
                         caName:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         profileName:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         enrollmentType:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         applicationName:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                       required:
                       - id
                       - createdAt
@@ -475,6 +504,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Search project certificates
+      x-summary-source: derived
   /api/v1/cert-manager/certificates:
     post:
       operationId: createCertificate
@@ -501,35 +532,41 @@ paths:
                   type: object
                   properties:
                     commonName:
-                      type: string
+                      type:
+                      - string
+                      - 'null'
                       minLength: 1
                       maxLength: 100
-                      nullable: true
                     organization:
-                      type: string
+                      type:
+                      - string
+                      - 'null'
                       minLength: 1
                       maxLength: 100
-                      nullable: true
                     organizationalUnit:
-                      type: string
+                      type:
+                      - string
+                      - 'null'
                       minLength: 1
                       maxLength: 100
-                      nullable: true
                     country:
-                      type: string
+                      type:
+                      - string
+                      - 'null'
                       minLength: 1
                       maxLength: 100
-                      nullable: true
                     state:
-                      type: string
+                      type:
+                      - string
+                      - 'null'
                       minLength: 1
                       maxLength: 100
-                      nullable: true
                     locality:
-                      type: string
+                      type:
+                      - string
+                      - 'null'
                       minLength: 1
                       maxLength: 100
-                      nullable: true
                     keyUsages:
                       type: array
                       items:
@@ -673,7 +710,9 @@ paths:
                 type: object
                 properties:
                   certificate:
-                    type: object
+                    type:
+                    - object
+                    - 'null'
                     properties:
                       certificate:
                         type: string
@@ -694,7 +733,6 @@ paths:
                     - serialNumber
                     - certificateId
                     additionalProperties: false
-                    nullable: true
                   certificateRequestId:
                     type: string
                   status:
@@ -850,6 +888,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create certificate
+      x-summary-source: derived
   /api/v1/cert-manager/certificates/certificate-requests/{requestId}:
     get:
       operationId: getCertificateRequest
@@ -880,43 +920,57 @@ paths:
                     - failed
                     - rejected
                   certificate:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   certificateId:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   privateKey:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   serialNumber:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   errorMessage:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   pendingMessage:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   commonName:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   organization:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   organizationalUnit:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   country:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   state:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   locality:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   basicConstraints:
-                    type: object
+                    type:
+                    - object
+                    - 'null'
                     properties:
                       isCA:
                         type: boolean
@@ -925,7 +979,6 @@ paths:
                     required:
                     - isCA
                     additionalProperties: false
-                    nullable: true
                   metadata:
                     type: array
                     items:
@@ -1093,6 +1146,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get certificate request
+      x-summary-source: derived
   /api/v1/cert-manager/certificates/certificate-requests/{requestId}/trigger-validation:
     post:
       operationId: triggerCertificateRequestValidation
@@ -1266,6 +1321,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Trigger certificate request validation
+      x-summary-source: derived
   /api/v1/cert-manager/certificates/certificate-requests/search:
     post:
       operationId: searchCertificateRequests
@@ -1362,32 +1419,41 @@ paths:
                           - failed
                           - rejected
                         commonName:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         altNames:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         profileId:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         profileName:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         caId:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         certificateId:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         approvalRequestId:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         errorMessage:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         pendingMessage:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         createdAt:
                           type: string
                           format: date-time
@@ -1395,7 +1461,9 @@ paths:
                           type: string
                           format: date-time
                         certificate:
-                          type: object
+                          type:
+                          - object
+                          - 'null'
                           properties:
                             id:
                               type: string
@@ -1408,7 +1476,6 @@ paths:
                           - serialNumber
                           - status
                           additionalProperties: false
-                          nullable: true
                       required:
                       - id
                       - status
@@ -1569,6 +1636,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Search certificate requests
+      x-summary-source: derived
   /api/v1/cert-manager/certificates/certificate-requests/{requestId}/cancel:
     post:
       operationId: cancelCertificateRequest
@@ -1602,8 +1671,9 @@ paths:
                   cancelled:
                     type: boolean
                   errorMessage:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                 required:
                 - status
                 - cancelled
@@ -1747,6 +1817,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Cancel certificate request
+      x-summary-source: derived
   /api/v1/cert-manager/certificates/{id}/renew:
     post:
       operationId: renewCertificate
@@ -1942,6 +2014,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Renew certificate
+      x-summary-source: derived
   /api/v1/cert-manager/certificates/{id}/config:
     patch:
       operationId: updateCertificateRenewalConfig
@@ -2121,12 +2195,13 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update certificate renewal config
+      x-summary-source: derived
   /api/v1/cert-manager/certificates/{id}:
     get:
       operationId: getCertificate
       tags:
       - PKI Certificates
-      description: Get certificate
       parameters:
       - schema:
           type: string
@@ -2155,9 +2230,10 @@ paths:
                         type: string
                         format: date-time
                       caId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       status:
                         type: string
                       serialNumber:
@@ -2173,99 +2249,123 @@ paths:
                         type: string
                         format: date-time
                       revokedAt:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       revocationReason:
-                        type: number
-                        nullable: true
+                        type:
+                        - number
+                        - 'null'
                       altNames:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       caCertId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       certificateTemplateId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       keyUsages:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: string
-                        nullable: true
                       extendedKeyUsages:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: string
-                        nullable: true
                       pkiSubscriberId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       profileId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       renewBeforeDays:
-                        type: number
-                        nullable: true
+                        type:
+                        - number
+                        - 'null'
                       renewedFromCertificateId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       renewedByCertificateId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       renewalError:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       keyAlgorithm:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       signatureAlgorithm:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       subjectOrganization:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       subjectOrganizationalUnit:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       subjectCountry:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       subjectState:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       subjectLocality:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       fingerprintSha256:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       fingerprintSha1:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       isCA:
-                        type: boolean
-                        nullable: true
+                        type:
+                        - boolean
+                        - 'null'
                       pathLength:
-                        type: number
-                        nullable: true
+                        type:
+                        - number
+                        - 'null'
                       source:
-                        type: string
-                        nullable: true
-                      discoveryMetadata:
-                        nullable: true
-                      externalMetadata:
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
+                      discoveryMetadata: {}
+                      externalMetadata: {}
                       applicationId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       subject:
                         type: object
                         properties:
@@ -2303,20 +2403,24 @@ paths:
                         - isCA
                         additionalProperties: false
                       caName:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       caType:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         enum:
                         - internal
                         - external
-                        nullable: true
                       profileName:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       applicationName:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       metadata:
                         type: array
                         items:
@@ -2482,11 +2586,12 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get certificate
+      x-summary-source: derived
     patch:
       operationId: updateCertificate
       tags:
       - PKI Certificates
-      description: Update certificate
       requestBody:
         required: true
         content:
@@ -2680,11 +2785,12 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update certificate
+      x-summary-source: derived
     delete:
       operationId: deleteCertificate
       tags:
       - PKI Certificates
-      description: Delete certificate
       parameters:
       - schema:
           type: string
@@ -2713,9 +2819,10 @@ paths:
                         type: string
                         format: date-time
                       caId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       status:
                         type: string
                       serialNumber:
@@ -2731,99 +2838,123 @@ paths:
                         type: string
                         format: date-time
                       revokedAt:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       revocationReason:
-                        type: number
-                        nullable: true
+                        type:
+                        - number
+                        - 'null'
                       altNames:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       caCertId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       certificateTemplateId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       keyUsages:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: string
-                        nullable: true
                       extendedKeyUsages:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: string
-                        nullable: true
                       pkiSubscriberId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       profileId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       renewBeforeDays:
-                        type: number
-                        nullable: true
+                        type:
+                        - number
+                        - 'null'
                       renewedFromCertificateId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       renewedByCertificateId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       renewalError:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       keyAlgorithm:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       signatureAlgorithm:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       subjectOrganization:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       subjectOrganizationalUnit:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       subjectCountry:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       subjectState:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       subjectLocality:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       fingerprintSha256:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       fingerprintSha1:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       isCA:
-                        type: boolean
-                        nullable: true
+                        type:
+                        - boolean
+                        - 'null'
                       pathLength:
-                        type: number
-                        nullable: true
+                        type:
+                        - number
+                        - 'null'
                       source:
-                        type: string
-                        nullable: true
-                      discoveryMetadata:
-                        nullable: true
-                      externalMetadata:
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
+                      discoveryMetadata: {}
+                      externalMetadata: {}
                       applicationId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                     required:
                     - id
                     - createdAt
@@ -2976,12 +3107,13 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete certificate
+      x-summary-source: derived
   /api/v1/cert-manager/certificates/{id}/private-key:
     get:
       operationId: getCertificatePrivateKey
       tags:
       - PKI Certificates
-      description: Get certificate private key
       parameters:
       - schema:
           type: string
@@ -3134,6 +3266,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get certificate private key
+      x-summary-source: derived
   /api/v1/cert-manager/certificates/{id}/bundle:
     get:
       operationId: getCertificateBundle
@@ -3159,12 +3293,14 @@ paths:
                     type: string
                     description: The certificate body of the certificate.
                   certificateChain:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     description: The certificate chain of the certificate.
                   privateKey:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     description: The private key of the certificate.
                   serialNumber:
                     type: string
@@ -3313,12 +3449,13 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get certificate bundle
+      x-summary-source: derived
   /api/v1/cert-manager/certificates/import-certificate:
     post:
       operationId: importCertificate
       tags:
       - PKI Certificates
-      description: Import certificate
       requestBody:
         required: true
         content:
@@ -3512,6 +3649,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Import certificate
+      x-summary-source: derived
   /api/v1/cert-manager/certificates/{id}/revoke:
     post:
       operationId: revokeCertificate
@@ -3708,6 +3847,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Revoke certificate
+      x-summary-source: derived
   /api/v1/cert-manager/certificates/{id}/application:
     post:
       operationId: assignCertificateToApplication
@@ -3755,9 +3896,10 @@ paths:
                         type: string
                         format: date-time
                       caId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       status:
                         type: string
                       serialNumber:
@@ -3773,99 +3915,123 @@ paths:
                         type: string
                         format: date-time
                       revokedAt:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       revocationReason:
-                        type: number
-                        nullable: true
+                        type:
+                        - number
+                        - 'null'
                       altNames:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       caCertId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       certificateTemplateId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       keyUsages:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: string
-                        nullable: true
                       extendedKeyUsages:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: string
-                        nullable: true
                       pkiSubscriberId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       profileId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       renewBeforeDays:
-                        type: number
-                        nullable: true
+                        type:
+                        - number
+                        - 'null'
                       renewedFromCertificateId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       renewedByCertificateId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       renewalError:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       keyAlgorithm:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       signatureAlgorithm:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       subjectOrganization:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       subjectOrganizationalUnit:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       subjectCountry:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       subjectState:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       subjectLocality:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       fingerprintSha256:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       fingerprintSha1:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       isCA:
-                        type: boolean
-                        nullable: true
+                        type:
+                        - boolean
+                        - 'null'
                       pathLength:
-                        type: number
-                        nullable: true
+                        type:
+                        - number
+                        - 'null'
                       source:
-                        type: string
-                        nullable: true
-                      discoveryMetadata:
-                        nullable: true
-                      externalMetadata:
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
+                      discoveryMetadata: {}
+                      externalMetadata: {}
                       applicationId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                     required:
                     - id
                     - createdAt
@@ -4018,6 +4184,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Assign certificate to application
+      x-summary-source: derived
   /api/v1/cert-manager/certificates/{id}/certificate:
     get:
       operationId: getCertificateBody
@@ -4043,8 +4211,9 @@ paths:
                     type: string
                     description: The certificate body of the certificate.
                   certificateChain:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     description: The certificate chain of the certificate.
                   serialNumber:
                     type: string
@@ -4192,6 +4361,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get certificate body
+      x-summary-source: derived
   /api/v1/cert-manager/certificate-cleanup:
     get:
       operationId: getCertificateCleanupConfig
@@ -4207,7 +4378,9 @@ paths:
                 type: object
                 properties:
                   config:
-                    type: object
+                    type:
+                    - object
+                    - 'null'
                     properties:
                       isEnabled:
                         type: boolean
@@ -4219,18 +4392,21 @@ paths:
                         type: boolean
                         default: true
                       lastRunStatus:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       lastRunAt:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       lastRunCertsDeleted:
                         type: number
                         default: 0
                       lastRunMessage:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       createdAt:
                         type: string
                         format: date-time
@@ -4241,7 +4417,6 @@ paths:
                     - createdAt
                     - updatedAt
                     additionalProperties: false
-                    nullable: true
                 required:
                 - config
                 additionalProperties: false
@@ -4383,6 +4558,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get certificate cleanup config
+      x-summary-source: derived
     put:
       operationId: updateCertificateCleanupConfig
       tags:
@@ -4428,18 +4605,21 @@ paths:
                         type: boolean
                         default: true
                       lastRunStatus:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       lastRunAt:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       lastRunCertsDeleted:
                         type: number
                         default: 0
                       lastRunMessage:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       createdAt:
                         type: string
                         format: date-time
@@ -4591,6 +4771,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update certificate cleanup config
+      x-summary-source: derived
   /api/v1/pki/certificates/{serialNumber}:
     get:
       tags:
@@ -4624,9 +4806,10 @@ paths:
                         type: string
                         format: date-time
                       caId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       status:
                         type: string
                       serialNumber:
@@ -4642,101 +4825,125 @@ paths:
                         type: string
                         format: date-time
                       revokedAt:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       revocationReason:
-                        type: number
-                        nullable: true
+                        type:
+                        - number
+                        - 'null'
                       altNames:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       caCertId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       certificateTemplateId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       keyUsages:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: string
-                        nullable: true
                       extendedKeyUsages:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: string
-                        nullable: true
                       projectId:
                         type: string
                       pkiSubscriberId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       profileId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       renewBeforeDays:
-                        type: number
-                        nullable: true
+                        type:
+                        - number
+                        - 'null'
                       renewedFromCertificateId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       renewedByCertificateId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       renewalError:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       keyAlgorithm:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       signatureAlgorithm:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       subjectOrganization:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       subjectOrganizationalUnit:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       subjectCountry:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       subjectState:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       subjectLocality:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       fingerprintSha256:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       fingerprintSha1:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       isCA:
-                        type: boolean
-                        nullable: true
+                        type:
+                        - boolean
+                        - 'null'
                       pathLength:
-                        type: number
-                        nullable: true
+                        type:
+                        - number
+                        - 'null'
                       source:
-                        type: string
-                        nullable: true
-                      discoveryMetadata:
-                        nullable: true
-                      externalMetadata:
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
+                      discoveryMetadata: {}
+                      externalMetadata: {}
                       applicationId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                     required:
                     - id
                     - createdAt
@@ -4890,6 +5097,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api pki certificates by serial number
+      x-summary-source: derived
+      operationId: getApiV1PkiCertificatesBySerialNumber
+      x-operation-id-source: derived
     delete:
       tags:
       - PKI Certificates
@@ -4922,9 +5133,10 @@ paths:
                         type: string
                         format: date-time
                       caId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       status:
                         type: string
                       serialNumber:
@@ -4940,101 +5152,125 @@ paths:
                         type: string
                         format: date-time
                       revokedAt:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       revocationReason:
-                        type: number
-                        nullable: true
+                        type:
+                        - number
+                        - 'null'
                       altNames:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       caCertId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       certificateTemplateId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       keyUsages:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: string
-                        nullable: true
                       extendedKeyUsages:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: string
-                        nullable: true
                       projectId:
                         type: string
                       pkiSubscriberId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       profileId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       renewBeforeDays:
-                        type: number
-                        nullable: true
+                        type:
+                        - number
+                        - 'null'
                       renewedFromCertificateId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       renewedByCertificateId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       renewalError:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       keyAlgorithm:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       signatureAlgorithm:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       subjectOrganization:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       subjectOrganizationalUnit:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       subjectCountry:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       subjectState:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       subjectLocality:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       fingerprintSha256:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       fingerprintSha1:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       isCA:
-                        type: boolean
-                        nullable: true
+                        type:
+                        - boolean
+                        - 'null'
                       pathLength:
-                        type: number
-                        nullable: true
+                        type:
+                        - number
+                        - 'null'
                       source:
-                        type: string
-                        nullable: true
-                      discoveryMetadata:
-                        nullable: true
-                      externalMetadata:
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
+                      discoveryMetadata: {}
+                      externalMetadata: {}
                       applicationId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                     required:
                     - id
                     - createdAt
@@ -5188,6 +5424,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete api pki certificates by serial number
+      x-summary-source: derived
+      operationId: deleteApiV1PkiCertificatesBySerialNumber
+      x-operation-id-source: derived
   /api/v1/pki/certificates/{serialNumber}/private-key:
     get:
       tags:
@@ -5345,6 +5585,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api pki certificates by serial number private key
+      x-summary-source: derived
+      operationId: getApiV1PkiCertificatesBySerialNumberPrivateKey
+      x-operation-id-source: derived
   /api/v1/pki/certificates/{serialNumber}/bundle:
     get:
       tags:
@@ -5369,12 +5613,14 @@ paths:
                     type: string
                     description: The certificate body of the certificate.
                   certificateChain:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     description: The certificate chain of the certificate.
                   privateKey:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     description: The private key of the certificate.
                   serialNumber:
                     type: string
@@ -5523,6 +5769,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api pki certificates by serial number bundle
+      x-summary-source: derived
+      operationId: getApiV1PkiCertificatesBySerialNumberBundle
+      x-operation-id-source: derived
   /api/v1/pki/certificates/issue-certificate:
     post:
       tags:
@@ -5763,6 +6013,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create api pki certificates issue certificate
+      x-summary-source: derived
+      operationId: postApiV1PkiCertificatesIssueCertificate
+      x-operation-id-source: derived
   /api/v1/pki/certificates/import-certificate:
     post:
       tags:
@@ -5963,6 +6217,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create api pki certificates import certificate
+      x-summary-source: derived
+      operationId: postApiV1PkiCertificatesImportCertificate
+      x-operation-id-source: derived
   /api/v1/pki/certificates/sign-certificate:
     post:
       tags:
@@ -6203,6 +6461,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create api pki certificates sign certificate
+      x-summary-source: derived
+      operationId: postApiV1PkiCertificatesSignCertificate
+      x-operation-id-source: derived
   /api/v1/pki/certificates/{serialNumber}/revoke:
     post:
       tags:
@@ -6398,6 +6660,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create api pki certificates by serial number revoke
+      x-summary-source: derived
+      operationId: postApiV1PkiCertificatesBySerialNumberRevoke
+      x-operation-id-source: derived
   /api/v1/pki/certificates/{serialNumber}/certificate:
     get:
       tags:
@@ -6422,8 +6688,9 @@ paths:
                     type: string
                     description: The certificate body of the certificate.
                   certificateChain:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     description: The certificate chain of the certificate.
                   serialNumber:
                     type: string
@@ -6571,6 +6838,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api pki certificates by serial number certificate
+      x-summary-source: derived
+      operationId: getApiV1PkiCertificatesBySerialNumberCertificate
+      x-operation-id-source: derived
   /api/v3/pki/certificates/{certificateId}/renew:
     post:
       tags:
@@ -6765,6 +7036,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create api pki certificates by certificate id renew
+      x-summary-source: derived
+      operationId: postApiV3PkiCertificatesByCertificateIdRenew
+      x-operation-id-source: derived
   /api/v3/pki/certificates/{certificateId}/config:
     patch:
       tags:
@@ -6943,6 +7218,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update api pki certificates by certificate id config
+      x-summary-source: derived
+      operationId: patchApiV3PkiCertificatesByCertificateIdConfig
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

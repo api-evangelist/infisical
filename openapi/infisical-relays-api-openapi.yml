@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin Relays API
+  title: Infisical Relays API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -36,25 +36,29 @@ paths:
                       type: string
                       format: date-time
                     orgId:
-                      type: string
+                      type:
+                      - string
+                      - 'null'
                       format: uuid
-                      nullable: true
                     identityId:
-                      type: string
+                      type:
+                      - string
+                      - 'null'
                       format: uuid
-                      nullable: true
                     name:
                       type: string
                     host:
                       type: string
                     heartbeat:
-                      type: string
+                      type:
+                      - string
+                      - 'null'
                       format: date-time
-                      nullable: true
                     healthAlertedAt:
-                      type: string
+                      type:
+                      - string
+                      - 'null'
                       format: date-time
-                      nullable: true
                     tokenVersion:
                       type: number
                       default: 0
@@ -205,6 +209,8 @@ paths:
                 additionalProperties: false
       tags:
       - Relays
+      summary: Get relays
+      x-summary-source: derived
 components:
   securitySchemes:
     bearerAuth:

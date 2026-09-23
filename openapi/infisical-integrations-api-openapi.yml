@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin Integrations API
+  title: Infisical Integrations API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -46,42 +46,52 @@ paths:
                         isActive:
                           type: boolean
                         url:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         app:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         appId:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         targetEnvironment:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         targetEnvironmentId:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         targetService:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         targetServiceId:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         owner:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         path:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         region:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         scope:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         integration:
                           type: string
-                        metadata:
-                          nullable: true
+                        metadata: {}
                         integrationAuthId:
                           type: string
                           format: uuid
@@ -98,18 +108,22 @@ paths:
                           type: string
                           format: date-time
                         lastUsed:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         isSynced:
-                          type: boolean
-                          nullable: true
+                          type:
+                          - boolean
+                          - 'null'
                         syncMessage:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         lastSyncJobId:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         environment:
                           type: object
                           properties:
@@ -275,6 +289,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api workspace by workspace id integrations
+      x-summary-source: derived
+      operationId: getApiV1WorkspaceByWorkspaceIdIntegrations
+      x-operation-id-source: derived
   /api/v1/workspace/{workspaceId}/authorizations:
     get:
       tags:
@@ -310,19 +328,22 @@ paths:
                         integration:
                           type: string
                         teamId:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         url:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         namespace:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         accountId:
-                          type: string
-                          nullable: true
-                        metadata:
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
+                        metadata: {}
                         createdAt:
                           type: string
                           format: date-time
@@ -477,6 +498,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api workspace by workspace id authorizations
+      x-summary-source: derived
+      operationId: getApiV1WorkspaceByWorkspaceIdAuthorizations
+      x-operation-id-source: derived
   /api/v1/projects/{projectId}/integrations:
     get:
       operationId: listProjectIntegrations
@@ -511,42 +536,52 @@ paths:
                         isActive:
                           type: boolean
                         url:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         app:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         appId:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         targetEnvironment:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         targetEnvironmentId:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         targetService:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         targetServiceId:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         owner:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         path:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         region:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         scope:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         integration:
                           type: string
-                        metadata:
-                          nullable: true
+                        metadata: {}
                         integrationAuthId:
                           type: string
                           format: uuid
@@ -563,18 +598,22 @@ paths:
                           type: string
                           format: date-time
                         lastUsed:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         isSynced:
-                          type: boolean
-                          nullable: true
+                          type:
+                          - boolean
+                          - 'null'
                         syncMessage:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         lastSyncJobId:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         environment:
                           type: object
                           properties:
@@ -740,6 +779,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List project integrations
+      x-summary-source: derived
   /api/v1/projects/{projectId}/authorizations:
     get:
       operationId: listProjectIntegrationAuthorizations
@@ -776,19 +817,22 @@ paths:
                         integration:
                           type: string
                         teamId:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         url:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         namespace:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         accountId:
-                          type: string
-                          nullable: true
-                        metadata:
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
+                        metadata: {}
                         createdAt:
                           type: string
                           format: date-time
@@ -943,6 +987,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List project integration authorizations
+      x-summary-source: derived
   /api/v1/integration:
     post:
       operationId: createIntegration
@@ -1146,42 +1192,52 @@ paths:
                       isActive:
                         type: boolean
                       url:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       app:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       appId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       targetEnvironment:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       targetEnvironmentId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       targetService:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       targetServiceId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       owner:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       path:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       region:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       scope:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       integration:
                         type: string
-                      metadata:
-                        nullable: true
+                      metadata: {}
                       integrationAuthId:
                         type: string
                         format: uuid
@@ -1198,18 +1254,22 @@ paths:
                         type: string
                         format: date-time
                       lastUsed:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       isSynced:
-                        type: boolean
-                        nullable: true
+                        type:
+                        - boolean
+                        - 'null'
                       syncMessage:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       lastSyncJobId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       environment:
                         type: object
                         properties:
@@ -1375,6 +1435,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create integration
+      x-summary-source: derived
   /api/v1/integration/{integrationId}:
     patch:
       operationId: updateIntegration
@@ -1561,42 +1623,52 @@ paths:
                       isActive:
                         type: boolean
                       url:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       app:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       appId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       targetEnvironment:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       targetEnvironmentId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       targetService:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       targetServiceId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       owner:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       path:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       region:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       scope:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       integration:
                         type: string
-                      metadata:
-                        nullable: true
+                      metadata: {}
                       integrationAuthId:
                         type: string
                         format: uuid
@@ -1613,18 +1685,22 @@ paths:
                         type: string
                         format: date-time
                       lastUsed:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       isSynced:
-                        type: boolean
-                        nullable: true
+                        type:
+                        - boolean
+                        - 'null'
                       syncMessage:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       lastSyncJobId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       environment:
                         type: object
                         properties:
@@ -1790,6 +1866,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update integration
+      x-summary-source: derived
     get:
       operationId: getIntegration
       tags:
@@ -1821,42 +1899,52 @@ paths:
                       isActive:
                         type: boolean
                       url:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       app:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       appId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       targetEnvironment:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       targetEnvironmentId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       targetService:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       targetServiceId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       owner:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       path:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       region:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       scope:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       integration:
                         type: string
-                      metadata:
-                        nullable: true
+                      metadata: {}
                       integrationAuthId:
                         type: string
                         format: uuid
@@ -1873,18 +1961,22 @@ paths:
                         type: string
                         format: date-time
                       lastUsed:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       isSynced:
-                        type: boolean
-                        nullable: true
+                        type:
+                        - boolean
+                        - 'null'
                       syncMessage:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       lastSyncJobId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       environment:
                         type: object
                         properties:
@@ -2050,6 +2142,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get integration
+      x-summary-source: derived
     delete:
       operationId: deleteIntegration
       tags:
@@ -2089,42 +2183,52 @@ paths:
                       isActive:
                         type: boolean
                       url:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       app:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       appId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       targetEnvironment:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       targetEnvironmentId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       targetService:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       targetServiceId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       owner:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       path:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       region:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       scope:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       integration:
                         type: string
-                      metadata:
-                        nullable: true
+                      metadata: {}
                       integrationAuthId:
                         type: string
                         format: uuid
@@ -2141,18 +2245,22 @@ paths:
                         type: string
                         format: date-time
                       lastUsed:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       isSynced:
-                        type: boolean
-                        nullable: true
+                        type:
+                        - boolean
+                        - 'null'
                       syncMessage:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       lastSyncJobId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                     required:
                     - id
                     - isActive
@@ -2303,6 +2411,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete integration
+      x-summary-source: derived
   /api/v1/integration/{integrationId}/sync:
     post:
       operationId: syncIntegration
@@ -2335,42 +2445,52 @@ paths:
                       isActive:
                         type: boolean
                       url:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       app:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       appId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       targetEnvironment:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       targetEnvironmentId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       targetService:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       targetServiceId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       owner:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       path:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       region:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       scope:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       integration:
                         type: string
-                      metadata:
-                        nullable: true
+                      metadata: {}
                       integrationAuthId:
                         type: string
                         format: uuid
@@ -2387,18 +2507,22 @@ paths:
                         type: string
                         format: date-time
                       lastUsed:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       isSynced:
-                        type: boolean
-                        nullable: true
+                        type:
+                        - boolean
+                        - 'null'
                       syncMessage:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       lastSyncJobId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                     required:
                     - id
                     - isActive
@@ -2549,6 +2673,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Sync integration
+      x-summary-source: derived
   /api/v1/integration-auth/integration-options:
     get:
       tags:
@@ -2734,6 +2860,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api integration auth integration options
+      x-summary-source: derived
+      operationId: getApiV1IntegrationAuthIntegrationOptions
+      x-operation-id-source: derived
   /api/v1/integration-auth/{integrationAuthId}:
     get:
       operationId: getIntegrationAuth
@@ -2768,19 +2898,22 @@ paths:
                       integration:
                         type: string
                       teamId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       url:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       namespace:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       accountId:
-                        type: string
-                        nullable: true
-                      metadata:
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
+                      metadata: {}
                       createdAt:
                         type: string
                         format: date-time
@@ -2935,6 +3068,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get integration auth
+      x-summary-source: derived
     patch:
       operationId: updateIntegrationAuth
       tags:
@@ -3033,19 +3168,22 @@ paths:
                       integration:
                         type: string
                       teamId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       url:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       namespace:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       accountId:
-                        type: string
-                        nullable: true
-                      metadata:
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
+                      metadata: {}
                       createdAt:
                         type: string
                         format: date-time
@@ -3200,6 +3338,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update integration auth
+      x-summary-source: derived
     delete:
       operationId: deleteIntegrationAuth
       tags:
@@ -3233,19 +3373,22 @@ paths:
                       integration:
                         type: string
                       teamId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       url:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       namespace:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       accountId:
-                        type: string
-                        nullable: true
-                      metadata:
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
+                      metadata: {}
                       createdAt:
                         type: string
                         format: date-time
@@ -3400,6 +3543,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete integration auth
+      x-summary-source: derived
   /api/v1/integration-auth:
     delete:
       operationId: deleteIntegrationAuths
@@ -3442,19 +3587,22 @@ paths:
                         integration:
                           type: string
                         teamId:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         url:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         namespace:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         accountId:
-                          type: string
-                          nullable: true
-                        metadata:
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
+                        metadata: {}
                         createdAt:
                           type: string
                           format: date-time
@@ -3609,6 +3757,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete integration auths
+      x-summary-source: derived
   /api/v1/integration-auth/access-token:
     post:
       operationId: createIntegrationAuth
@@ -3671,19 +3821,22 @@ paths:
                       integration:
                         type: string
                       teamId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       url:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       namespace:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       accountId:
-                        type: string
-                        nullable: true
-                      metadata:
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
+                      metadata: {}
                       createdAt:
                         type: string
                         format: date-time
@@ -3838,6 +3991,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create integration auth
+      x-summary-source: derived
 components:
   securitySchemes:
     bearerAuth:

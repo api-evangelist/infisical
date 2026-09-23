@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin SSH Hosts API
+  title: Infisical SSH Hosts API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -35,8 +35,9 @@ paths:
                     hostname:
                       type: string
                     alias:
-                      type: string
-                      nullable: true
+                      type:
+                      - string
+                      - 'null'
                     userCertTtl:
                       type: string
                     hostCertTtl:
@@ -224,6 +225,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api ssh hosts
+      x-summary-source: derived
+      operationId: getApiV1SshHosts
+      x-operation-id-source: derived
     post:
       tags:
       - SSH Hosts
@@ -307,8 +312,9 @@ paths:
                   hostname:
                     type: string
                   alias:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   userCertTtl:
                     type: string
                   hostCertTtl:
@@ -496,6 +502,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create api ssh hosts
+      x-summary-source: derived
+      operationId: postApiV1SshHosts
+      x-operation-id-source: derived
   /api/v1/ssh/hosts/{sshHostId}:
     get:
       tags:
@@ -523,8 +533,9 @@ paths:
                   hostname:
                     type: string
                   alias:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   userCertTtl:
                     type: string
                   hostCertTtl:
@@ -712,6 +723,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api ssh hosts by ssh host id
+      x-summary-source: derived
+      operationId: getApiV1SshHostsBySshHostId
+      x-operation-id-source: derived
     patch:
       tags:
       - SSH Hosts
@@ -786,8 +801,9 @@ paths:
                   hostname:
                     type: string
                   alias:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   userCertTtl:
                     type: string
                   hostCertTtl:
@@ -975,6 +991,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update api ssh hosts by ssh host id
+      x-summary-source: derived
+      operationId: patchApiV1SshHostsBySshHostId
+      x-operation-id-source: derived
     delete:
       tags:
       - SSH Hosts
@@ -1002,8 +1022,9 @@ paths:
                   hostname:
                     type: string
                   alias:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   userCertTtl:
                     type: string
                   hostCertTtl:
@@ -1191,6 +1212,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete api ssh hosts by ssh host id
+      x-summary-source: derived
+      operationId: deleteApiV1SshHostsBySshHostId
+      x-operation-id-source: derived
   /api/v1/ssh/hosts/{sshHostId}/issue-user-cert:
     post:
       tags:
@@ -1390,6 +1415,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create api ssh hosts by ssh host id issue user cert
+      x-summary-source: derived
+      operationId: postApiV1SshHostsBySshHostIdIssueUserCert
+      x-operation-id-source: derived
   /api/v1/ssh/hosts/{sshHostId}/issue-host-cert:
     post:
       tags:
@@ -1571,6 +1600,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create api ssh hosts by ssh host id issue host cert
+      x-summary-source: derived
+      operationId: postApiV1SshHostsBySshHostIdIssueHostCert
+      x-operation-id-source: derived
   /api/v1/ssh/hosts/{sshHostId}/user-ca-public-key:
     get:
       tags:
@@ -1729,6 +1762,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api ssh hosts by ssh host id user ca public key
+      x-summary-source: derived
+      operationId: getApiV1SshHostsBySshHostIdUserCaPublicKey
+      x-operation-id-source: derived
   /api/v1/ssh/hosts/{sshHostId}/host-ca-public-key:
     get:
       tags:
@@ -1887,6 +1924,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api ssh hosts by ssh host id host ca public key
+      x-summary-source: derived
+      operationId: getApiV1SshHostsBySshHostIdHostCaPublicKey
+      x-operation-id-source: derived
   /api/v1/projects/{projectId}/ssh-hosts:
     get:
       operationId: listProjectSshHosts
@@ -1920,8 +1961,9 @@ paths:
                         hostname:
                           type: string
                         alias:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         userCertTtl:
                           type: string
                         hostCertTtl:
@@ -2112,6 +2154,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List project ssh hosts
+      x-summary-source: derived
   /api/v2/workspace/{projectId}/ssh-hosts:
     get:
       tags:
@@ -2144,8 +2188,9 @@ paths:
                         hostname:
                           type: string
                         alias:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         userCertTtl:
                           type: string
                         hostCertTtl:
@@ -2336,6 +2381,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api workspace by project id ssh hosts
+      x-summary-source: derived
+      operationId: getApiV2WorkspaceByProjectIdSshHosts
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin PKI Certificate Collections API
+  title: Infisical PKI Certificate Collections API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -201,6 +201,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List project pki collections
+      x-summary-source: derived
   /api/v1/pki/collections:
     post:
       tags:
@@ -396,6 +398,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create api pki collections
+      x-summary-source: derived
+      operationId: postApiV1PkiCollections
+      x-operation-id-source: derived
   /api/v1/pki/collections/{collectionId}:
     get:
       operationId: getPkiCollection
@@ -578,6 +584,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get pki collection
+      x-summary-source: derived
     patch:
       operationId: updatePkiCollection
       tags:
@@ -773,6 +781,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update pki collection
+      x-summary-source: derived
     delete:
       operationId: deletePkiCollection
       tags:
@@ -954,6 +964,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete pki collection
+      x-summary-source: derived
   /api/v1/pki/collections/{collectionId}/items:
     get:
       operationId: listPkiCollectionItems
@@ -1189,6 +1201,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List pki collection items
+      x-summary-source: derived
     post:
       operationId: addItemToPkiCollection
       tags:
@@ -1396,6 +1410,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Add item to pki collection
+      x-summary-source: derived
   /api/v1/pki/collections/{collectionId}/items/{collectionItemId}:
     delete:
       operationId: removeItemFromPkiCollection
@@ -1590,6 +1606,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Remove item from pki collection
+      x-summary-source: derived
   /api/v2/workspace/{projectId}/pki-collections:
     get:
       tags:
@@ -1777,6 +1795,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api workspace by project id pki collections
+      x-summary-source: derived
+      operationId: getApiV2WorkspaceByProjectIdPkiCollections
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

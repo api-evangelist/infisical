@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin OCI Auth API
+  title: Infisical OCI Auth API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -220,6 +220,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Login with oci auth
+      x-summary-source: derived
   /api/v1/auth/oci-auth/identities/{identityId}:
     post:
       operationId: attachOciAuth
@@ -238,9 +240,10 @@ paths:
                   minLength: 1
                   description: The OCID of your tenancy.
                 allowedUsernames:
-                  type: string
+                  type:
+                  - string
+                  - 'null'
                   maxLength: 500
-                  nullable: true
                   description: The comma-separated list of trusted OCI account usernames that are allowed to authenticate with Infisical.
                 accessTokenTrustedIps:
                   type: array
@@ -324,8 +327,9 @@ paths:
                       tenancyOcid:
                         type: string
                       allowedUsernames:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       accessTokenPeriod:
                         type: number
                         default: 0
@@ -478,6 +482,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Attach oci auth
+      x-summary-source: derived
     patch:
       operationId: updateOciAuth
       tags:
@@ -495,9 +501,10 @@ paths:
                   minLength: 1
                   description: The OCID of your tenancy.
                 allowedUsernames:
-                  type: string
+                  type:
+                  - string
+                  - 'null'
                   maxLength: 500
-                  nullable: true
                   description: The comma-separated list of trusted OCI account usernames that are allowed to authenticate with Infisical.
                 accessTokenTrustedIps:
                   type: array
@@ -575,8 +582,9 @@ paths:
                       tenancyOcid:
                         type: string
                       allowedUsernames:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       accessTokenPeriod:
                         type: number
                         default: 0
@@ -729,6 +737,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update oci auth
+      x-summary-source: derived
     get:
       operationId: getOciAuth
       tags:
@@ -781,8 +791,9 @@ paths:
                       tenancyOcid:
                         type: string
                       allowedUsernames:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       accessTokenPeriod:
                         type: number
                         default: 0
@@ -935,6 +946,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get oci auth
+      x-summary-source: derived
     delete:
       operationId: deleteOciAuth
       tags:
@@ -987,8 +1000,9 @@ paths:
                       tenancyOcid:
                         type: string
                       allowedUsernames:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       accessTokenPeriod:
                         type: number
                         default: 0
@@ -1141,6 +1155,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete oci auth
+      x-summary-source: derived
 components:
   securitySchemes:
     bearerAuth:

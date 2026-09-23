@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin Project Templates API
+  title: Infisical Project Templates API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -52,8 +52,9 @@ paths:
                         name:
                           type: string
                         description:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         roles:
                           type: array
                           items:
@@ -97,7 +98,9 @@ paths:
                             - permissions
                             additionalProperties: false
                         environments:
-                          type: array
+                          type:
+                          - array
+                          - 'null'
                           items:
                             type: object
                             properties:
@@ -116,7 +119,6 @@ paths:
                             - slug
                             - position
                             additionalProperties: false
-                          nullable: true
                         orgId:
                           type: string
                           format: uuid
@@ -130,7 +132,9 @@ paths:
                           type: string
                           default: secret-manager
                         projectManagedIdentities:
-                          type: array
+                          type:
+                          - array
+                          - 'null'
                           items:
                             type: object
                             properties:
@@ -145,9 +149,10 @@ paths:
                             - name
                             - roles
                             additionalProperties: false
-                          nullable: true
                         users:
-                          type: array
+                          type:
+                          - array
+                          - 'null'
                           items:
                             type: object
                             properties:
@@ -162,9 +167,10 @@ paths:
                             - username
                             - roles
                             additionalProperties: false
-                          nullable: true
                         groups:
-                          type: array
+                          type:
+                          - array
+                          - 'null'
                           items:
                             type: object
                             properties:
@@ -178,9 +184,10 @@ paths:
                             - groupSlug
                             - roles
                             additionalProperties: false
-                          nullable: true
                         identities:
-                          type: array
+                          type:
+                          - array
+                          - 'null'
                           items:
                             type: object
                             properties:
@@ -198,7 +205,6 @@ paths:
                             - identityName
                             - roles
                             additionalProperties: false
-                          nullable: true
                       required:
                       - id
                       - name
@@ -353,6 +359,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api project templates
+      x-summary-source: derived
+      operationId: getApiV1ProjectTemplates
+      x-operation-id-source: derived
     post:
       tags:
       - Project Templates
@@ -3828,7 +3838,9 @@ paths:
                   - ai
                   description: The type of project template to be created.
                 environments:
-                  type: array
+                  type:
+                  - array
+                  - 'null'
                   items:
                     type: object
                     properties:
@@ -3847,7 +3859,6 @@ paths:
                     - slug
                     - position
                     additionalProperties: false
-                  nullable: true
                   description: The environments to be created when the template is applied to a project.
                 users:
                   type: array
@@ -3950,8 +3961,9 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       roles:
                         type: array
                         items:
@@ -3995,7 +4007,9 @@ paths:
                           - permissions
                           additionalProperties: false
                       environments:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: object
                           properties:
@@ -4014,7 +4028,6 @@ paths:
                           - slug
                           - position
                           additionalProperties: false
-                        nullable: true
                       orgId:
                         type: string
                         format: uuid
@@ -4028,7 +4041,9 @@ paths:
                         type: string
                         default: secret-manager
                       projectManagedIdentities:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: object
                           properties:
@@ -4043,9 +4058,10 @@ paths:
                           - name
                           - roles
                           additionalProperties: false
-                        nullable: true
                       users:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: object
                           properties:
@@ -4060,9 +4076,10 @@ paths:
                           - username
                           - roles
                           additionalProperties: false
-                        nullable: true
                       groups:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: object
                           properties:
@@ -4076,9 +4093,10 @@ paths:
                           - groupSlug
                           - roles
                           additionalProperties: false
-                        nullable: true
                       identities:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: object
                           properties:
@@ -4096,7 +4114,6 @@ paths:
                           - identityName
                           - roles
                           additionalProperties: false
-                        nullable: true
                     required:
                     - id
                     - name
@@ -4251,6 +4268,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create api project templates
+      x-summary-source: derived
+      operationId: postApiV1ProjectTemplates
+      x-operation-id-source: derived
   /api/v1/project-templates/{templateId}:
     get:
       tags:
@@ -4280,8 +4301,9 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       roles:
                         type: array
                         items:
@@ -4325,7 +4347,9 @@ paths:
                           - permissions
                           additionalProperties: false
                       environments:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: object
                           properties:
@@ -4344,7 +4368,6 @@ paths:
                           - slug
                           - position
                           additionalProperties: false
-                        nullable: true
                       orgId:
                         type: string
                         format: uuid
@@ -4358,7 +4381,9 @@ paths:
                         type: string
                         default: secret-manager
                       projectManagedIdentities:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: object
                           properties:
@@ -4373,9 +4398,10 @@ paths:
                           - name
                           - roles
                           additionalProperties: false
-                        nullable: true
                       users:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: object
                           properties:
@@ -4390,9 +4416,10 @@ paths:
                           - username
                           - roles
                           additionalProperties: false
-                        nullable: true
                       groups:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: object
                           properties:
@@ -4406,9 +4433,10 @@ paths:
                           - groupSlug
                           - roles
                           additionalProperties: false
-                        nullable: true
                       identities:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: object
                           properties:
@@ -4426,7 +4454,6 @@ paths:
                           - identityName
                           - roles
                           additionalProperties: false
-                        nullable: true
                     required:
                     - id
                     - name
@@ -4581,6 +4608,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api project templates by template id
+      x-summary-source: derived
+      operationId: getApiV1ProjectTemplatesByTemplateId
+      x-operation-id-source: derived
     patch:
       tags:
       - Project Templates
@@ -8044,7 +8075,9 @@ paths:
                     additionalProperties: false
                   description: The updated roles to be created when the template is applied to a project.
                 environments:
-                  type: array
+                  type:
+                  - array
+                  - 'null'
                   items:
                     type: object
                     properties:
@@ -8063,10 +8096,11 @@ paths:
                     - slug
                     - position
                     additionalProperties: false
-                  nullable: true
                   description: The updated environments to be created when the template is applied to a project.
                 users:
-                  type: array
+                  type:
+                  - array
+                  - 'null'
                   items:
                     type: object
                     properties:
@@ -8083,10 +8117,11 @@ paths:
                     - username
                     - roles
                     additionalProperties: false
-                  nullable: true
                   description: The updated users to be automatically added to projects created from this template. Each user is identified by username and assigned one or more roles.
                 groups:
-                  type: array
+                  type:
+                  - array
+                  - 'null'
                   items:
                     type: object
                     properties:
@@ -8103,10 +8138,11 @@ paths:
                     - groupSlug
                     - roles
                     additionalProperties: false
-                  nullable: true
                   description: The updated groups to be automatically added to projects created from this template. Each group is identified by slug and assigned one or more roles.
                 identities:
-                  type: array
+                  type:
+                  - array
+                  - 'null'
                   items:
                     type: object
                     properties:
@@ -8123,10 +8159,11 @@ paths:
                     - identityId
                     - roles
                     additionalProperties: false
-                  nullable: true
                   description: The updated organization-owned identities to be automatically added to projects created from this template. Each identity is identified by ID and assigned one or more roles.
                 projectManagedIdentities:
-                  type: array
+                  type:
+                  - array
+                  - 'null'
                   items:
                     type: object
                     properties:
@@ -8143,7 +8180,6 @@ paths:
                     - name
                     - roles
                     additionalProperties: false
-                  nullable: true
                   description: The updated project-owned identities to be automatically created for projects created from this template. Each identity is identified by name and assigned one or more roles.
               additionalProperties: false
       parameters:
@@ -8171,8 +8207,9 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       roles:
                         type: array
                         items:
@@ -8216,7 +8253,9 @@ paths:
                           - permissions
                           additionalProperties: false
                       environments:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: object
                           properties:
@@ -8235,7 +8274,6 @@ paths:
                           - slug
                           - position
                           additionalProperties: false
-                        nullable: true
                       orgId:
                         type: string
                         format: uuid
@@ -8249,7 +8287,9 @@ paths:
                         type: string
                         default: secret-manager
                       projectManagedIdentities:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: object
                           properties:
@@ -8264,9 +8304,10 @@ paths:
                           - name
                           - roles
                           additionalProperties: false
-                        nullable: true
                       users:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: object
                           properties:
@@ -8281,9 +8322,10 @@ paths:
                           - username
                           - roles
                           additionalProperties: false
-                        nullable: true
                       groups:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: object
                           properties:
@@ -8297,9 +8339,10 @@ paths:
                           - groupSlug
                           - roles
                           additionalProperties: false
-                        nullable: true
                       identities:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: object
                           properties:
@@ -8317,7 +8360,6 @@ paths:
                           - identityName
                           - roles
                           additionalProperties: false
-                        nullable: true
                     required:
                     - id
                     - name
@@ -8472,6 +8514,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update api project templates by template id
+      x-summary-source: derived
+      operationId: patchApiV1ProjectTemplatesByTemplateId
+      x-operation-id-source: derived
     delete:
       tags:
       - Project Templates
@@ -8501,8 +8547,9 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       roles:
                         type: array
                         items:
@@ -8546,7 +8593,9 @@ paths:
                           - permissions
                           additionalProperties: false
                       environments:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: object
                           properties:
@@ -8565,7 +8614,6 @@ paths:
                           - slug
                           - position
                           additionalProperties: false
-                        nullable: true
                       orgId:
                         type: string
                         format: uuid
@@ -8579,7 +8627,9 @@ paths:
                         type: string
                         default: secret-manager
                       projectManagedIdentities:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: object
                           properties:
@@ -8594,9 +8644,10 @@ paths:
                           - name
                           - roles
                           additionalProperties: false
-                        nullable: true
                       users:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: object
                           properties:
@@ -8611,9 +8662,10 @@ paths:
                           - username
                           - roles
                           additionalProperties: false
-                        nullable: true
                       groups:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: object
                           properties:
@@ -8627,9 +8679,10 @@ paths:
                           - groupSlug
                           - roles
                           additionalProperties: false
-                        nullable: true
                       identities:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: object
                           properties:
@@ -8647,7 +8700,6 @@ paths:
                           - identityName
                           - roles
                           additionalProperties: false
-                        nullable: true
                     required:
                     - id
                     - name
@@ -8802,6 +8854,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete api project templates by template id
+      x-summary-source: derived
+      operationId: deleteApiV1ProjectTemplatesByTemplateId
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

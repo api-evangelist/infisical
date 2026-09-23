@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin Organizations API
+  title: Infisical Organizations API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -50,67 +50,80 @@ paths:
                           type: string
                           default: invited
                         inviteEmail:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         userId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         orgId:
                           type: string
                           format: uuid
                         roleId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         projectFavorites:
-                          type: array
+                          type:
+                          - array
+                          - 'null'
                           items:
                             type: string
-                          nullable: true
                         isActive:
                           type: boolean
                           default: true
                         lastInvitedAt:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         lastLoginAuthMethod:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         lastLoginTime:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         user:
                           type: object
                           properties:
                             username:
                               type: string
                             email:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             isEmailVerified:
-                              type: boolean
+                              type:
+                              - boolean
+                              - 'null'
                               default: false
-                              nullable: true
                             firstName:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             lastName:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             authMethods:
-                              type: array
+                              type:
+                              - array
+                              - 'null'
                               items:
                                 type: string
-                              nullable: true
                             id:
                               type: string
                               format: uuid
                             publicKey:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                           required:
                           - username
                           - id
@@ -262,6 +275,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List org memberships
+      x-summary-source: derived
     delete:
       operationId: bulkDeleteOrgMemberships
       tags:
@@ -313,8 +328,9 @@ paths:
                           type: string
                           default: invited
                         inviteEmail:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         createdAt:
                           type: string
                           format: date-time
@@ -322,35 +338,41 @@ paths:
                           type: string
                           format: date-time
                         userId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         orgId:
                           type: string
                           format: uuid
                         roleId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         projectFavorites:
-                          type: array
+                          type:
+                          - array
+                          - 'null'
                           items:
                             type: string
-                          nullable: true
                         isActive:
                           type: boolean
                           default: true
                         lastInvitedAt:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         lastLoginAuthMethod:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         lastLoginTime:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                       required:
                       - id
                       - role
@@ -499,6 +521,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Bulk delete org memberships
+      x-summary-source: derived
   /api/v2/organizations/{organizationId}/workspaces:
     get:
       operationId: listOrgProjects
@@ -696,6 +720,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List org projects
+      x-summary-source: derived
   /api/v2/organizations/{organizationId}/memberships/{membershipId}:
     patch:
       operationId: updateOrgMembership
@@ -768,8 +794,9 @@ paths:
                         type: string
                         default: invited
                       inviteEmail:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       createdAt:
                         type: string
                         format: date-time
@@ -777,35 +804,41 @@ paths:
                         type: string
                         format: date-time
                       userId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       orgId:
                         type: string
                         format: uuid
                       roleId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       projectFavorites:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: string
-                        nullable: true
                       isActive:
                         type: boolean
                         default: true
                       lastInvitedAt:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       lastLoginAuthMethod:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       lastLoginTime:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                     required:
                     - id
                     - role
@@ -954,6 +987,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update org membership
+      x-summary-source: derived
     delete:
       operationId: deleteOrgMembership
       tags:
@@ -994,8 +1029,9 @@ paths:
                         type: string
                         default: invited
                       inviteEmail:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       createdAt:
                         type: string
                         format: date-time
@@ -1003,35 +1039,41 @@ paths:
                         type: string
                         format: date-time
                       userId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       orgId:
                         type: string
                         format: uuid
                       roleId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       projectFavorites:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: string
-                        nullable: true
                       isActive:
                         type: boolean
                         default: true
                       lastInvitedAt:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       lastLoginAuthMethod:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       lastLoginTime:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                     required:
                     - id
                     - role
@@ -1180,6 +1222,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete org membership
+      x-summary-source: derived
   /api/v2/organizations/{orgId}/identity-memberships:
     get:
       operationId: listOrgIdentityMemberships
@@ -1257,9 +1301,10 @@ paths:
                         role:
                           type: string
                         roleId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         orgId:
                           type: string
                           format: uuid
@@ -1273,12 +1318,14 @@ paths:
                           type: string
                           format: uuid
                         lastLoginAuthMethod:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         lastLoginTime:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         customRole:
                           type: object
                           properties:
@@ -1291,8 +1338,9 @@ paths:
                               type: string
                             permissions: {}
                             description:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                           required:
                           - id
                           - name
@@ -1472,6 +1520,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List org identity memberships
+      x-summary-source: derived
 components:
   securitySchemes:
     bearerAuth:

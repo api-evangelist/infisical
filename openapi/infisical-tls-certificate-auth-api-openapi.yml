@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin TLS Certificate Auth API
+  title: Infisical TLS Certificate Auth API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -199,6 +199,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Login with tls cert auth
+      x-summary-source: derived
   /api/v1/auth/tls-cert-auth/identities/{identityId}:
     post:
       operationId: attachTlsCertAuth
@@ -213,9 +215,10 @@ paths:
               type: object
               properties:
                 allowedCommonNames:
-                  type: string
+                  type:
+                  - string
+                  - 'null'
                   minLength: 1
-                  nullable: true
                   description: The comma-separated list of trusted common names that are allowed to authenticate with Infisical.
                 caCertificate:
                   type: string
@@ -300,8 +303,9 @@ paths:
                         type: string
                         format: uuid
                       allowedCommonNames:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       encryptedCaCertificate: {}
                     required:
                     - id
@@ -451,6 +455,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Attach tls cert auth
+      x-summary-source: derived
     patch:
       operationId: updateTlsCertAuth
       tags:
@@ -469,9 +475,10 @@ paths:
                   maxLength: 10240
                   description: The PEM-encoded CA certificate to validate client certificates.
                 allowedCommonNames:
-                  type: string
+                  type:
+                  - string
+                  - 'null'
                   minLength: 1
-                  nullable: true
                   description: The comma-separated list of trusted common names that are allowed to authenticate with Infisical.
                 accessTokenTrustedIps:
                   type: array
@@ -543,8 +550,9 @@ paths:
                         type: string
                         format: uuid
                       allowedCommonNames:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       encryptedCaCertificate: {}
                     required:
                     - id
@@ -694,6 +702,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update tls cert auth
+      x-summary-source: derived
     get:
       operationId: getTlsCertAuth
       tags:
@@ -742,8 +752,9 @@ paths:
                         type: string
                         format: uuid
                       allowedCommonNames:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       encryptedCaCertificate: {}
                       caCertificate:
                         type: string
@@ -896,6 +907,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get tls cert auth
+      x-summary-source: derived
     delete:
       operationId: deleteTlsCertAuth
       tags:
@@ -944,8 +957,9 @@ paths:
                         type: string
                         format: uuid
                       allowedCommonNames:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       encryptedCaCertificate: {}
                     required:
                     - id
@@ -1095,6 +1109,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete tls cert auth
+      x-summary-source: derived
 components:
   securitySchemes:
     bearerAuth:

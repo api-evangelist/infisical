@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin Audit Logs API
+  title: Infisical Audit Logs API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -824,18 +824,22 @@ paths:
                           type: string
                           format: uuid
                         ipAddress:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         userAgent:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         userAgentType:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         expiresAt:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         createdAt:
                           type: string
                           format: date-time
@@ -843,15 +847,18 @@ paths:
                           type: string
                           format: date-time
                         orgId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         projectId:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         projectName:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         event:
                           type: object
                           properties:
@@ -1018,6 +1025,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List organization audit logs
+      x-summary-source: derived
 components:
   securitySchemes:
     bearerAuth:

@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin Folders API
+  title: Infisical Folders API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -43,8 +43,9 @@ paths:
                   default: /
                   description: The directory of the folder to create. (Deprecated in favor of path)
                 description:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   description: An optional description label for the folder.
               required:
               - workspaceId
@@ -70,9 +71,10 @@ paths:
                       name:
                         type: string
                       version:
-                        type: number
+                        type:
+                        - number
+                        - 'null'
                         default: 1
-                        nullable: true
                       createdAt:
                         type: string
                         format: date-time
@@ -83,20 +85,24 @@ paths:
                         type: string
                         format: uuid
                       parentId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       isReserved:
-                        type: boolean
+                        type:
+                        - boolean
+                        - 'null'
                         default: false
-                        nullable: true
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       lastSecretModified:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       path:
                         type: string
                     required:
@@ -248,6 +254,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create api folders
+      x-summary-source: derived
+      operationId: postApiV1Folders
+      x-operation-id-source: derived
     get:
       tags:
       - Folders
@@ -314,9 +324,10 @@ paths:
                         name:
                           type: string
                         version:
-                          type: number
+                          type:
+                          - number
+                          - 'null'
                           default: 1
-                          nullable: true
                         createdAt:
                           type: string
                           format: date-time
@@ -327,20 +338,24 @@ paths:
                           type: string
                           format: uuid
                         parentId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         isReserved:
-                          type: boolean
+                          type:
+                          - boolean
+                          - 'null'
                           default: false
-                          nullable: true
                         description:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         lastSecretModified:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         relativePath:
                           type: string
                       required:
@@ -491,6 +506,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api folders
+      x-summary-source: derived
+      operationId: getApiV1Folders
+      x-operation-id-source: derived
   /api/v1/folders/{folderId}:
     patch:
       tags:
@@ -521,8 +540,9 @@ paths:
                   default: /
                   description: The new directory of the folder to update. (Deprecated in favor of path)
                 description:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   description: An optional description label for the folder.
               required:
               - workspaceId
@@ -555,9 +575,10 @@ paths:
                       name:
                         type: string
                       version:
-                        type: number
+                        type:
+                        - number
+                        - 'null'
                         default: 1
-                        nullable: true
                       createdAt:
                         type: string
                         format: date-time
@@ -568,20 +589,24 @@ paths:
                         type: string
                         format: uuid
                       parentId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       isReserved:
-                        type: boolean
+                        type:
+                        - boolean
+                        - 'null'
                         default: false
-                        nullable: true
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       lastSecretModified:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       path:
                         type: string
                     required:
@@ -733,6 +758,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update api folders by folder id
+      x-summary-source: derived
+      operationId: patchApiV1FoldersByFolderId
+      x-operation-id-source: derived
   /api/v1/folders/batch:
     patch:
       tags:
@@ -767,8 +796,9 @@ paths:
                         default: /
                         description: The path of the folder to update.
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                         description: An optional description label for the folder.
                     required:
                     - id
@@ -801,9 +831,10 @@ paths:
                         name:
                           type: string
                         version:
-                          type: number
+                          type:
+                          - number
+                          - 'null'
                           default: 1
-                          nullable: true
                         createdAt:
                           type: string
                           format: date-time
@@ -814,20 +845,24 @@ paths:
                           type: string
                           format: uuid
                         parentId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         isReserved:
-                          type: boolean
+                          type:
+                          - boolean
+                          - 'null'
                           default: false
-                          nullable: true
                         description:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         lastSecretModified:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                       required:
                       - id
                       - name
@@ -976,6 +1011,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update api folders batch
+      x-summary-source: derived
+      operationId: patchApiV1FoldersBatch
+      x-operation-id-source: derived
   /api/v1/folders/{folderIdOrName}:
     delete:
       tags:
@@ -1032,9 +1071,10 @@ paths:
                       name:
                         type: string
                       version:
-                        type: number
+                        type:
+                        - number
+                        - 'null'
                         default: 1
-                        nullable: true
                       createdAt:
                         type: string
                         format: date-time
@@ -1045,20 +1085,24 @@ paths:
                         type: string
                         format: uuid
                       parentId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       isReserved:
-                        type: boolean
+                        type:
+                        - boolean
+                        - 'null'
                         default: false
-                        nullable: true
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       lastSecretModified:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                     required:
                     - id
                     - name
@@ -1207,6 +1251,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete api folders by folder id or name
+      x-summary-source: derived
+      operationId: deleteApiV1FoldersByFolderIdOrName
+      x-operation-id-source: derived
   /api/v1/folders/{id}:
     get:
       tags:
@@ -1238,9 +1286,10 @@ paths:
                       name:
                         type: string
                       version:
-                        type: number
+                        type:
+                        - number
+                        - 'null'
                         default: 1
-                        nullable: true
                       createdAt:
                         type: string
                         format: date-time
@@ -1251,20 +1300,24 @@ paths:
                         type: string
                         format: uuid
                       parentId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       isReserved:
-                        type: boolean
+                        type:
+                        - boolean
+                        - 'null'
                         default: false
-                        nullable: true
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       lastSecretModified:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       environment:
                         type: object
                         properties:
@@ -1434,6 +1487,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api folders by id
+      x-summary-source: derived
+      operationId: getApiV1FoldersById
+      x-operation-id-source: derived
   /api/v1/workspace/{projectId}/tags:
     get:
       tags:
@@ -1464,8 +1521,9 @@ paths:
                         slug:
                           type: string
                         color:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         createdAt:
                           type: string
                           format: date-time
@@ -1473,9 +1531,10 @@ paths:
                           type: string
                           format: date-time
                         createdBy:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         projectId:
                           type: string
                         createdByActorType:
@@ -1629,6 +1688,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api workspace by project id tags
+      x-summary-source: derived
+      operationId: getApiV1WorkspaceByProjectIdTags
+      x-operation-id-source: derived
     post:
       tags:
       - Folders
@@ -1675,8 +1738,9 @@ paths:
                       slug:
                         type: string
                       color:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       createdAt:
                         type: string
                         format: date-time
@@ -1684,9 +1748,10 @@ paths:
                         type: string
                         format: date-time
                       createdBy:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       projectId:
                         type: string
                       createdByActorType:
@@ -1840,6 +1905,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create api workspace by project id tags
+      x-summary-source: derived
+      operationId: postApiV1WorkspaceByProjectIdTags
+      x-operation-id-source: derived
   /api/v1/workspace/{projectId}/tags/{tagId}:
     get:
       tags:
@@ -1874,8 +1943,9 @@ paths:
                       slug:
                         type: string
                       color:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       createdAt:
                         type: string
                         format: date-time
@@ -1883,9 +1953,10 @@ paths:
                         type: string
                         format: date-time
                       createdBy:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       projectId:
                         type: string
                       createdByActorType:
@@ -2042,6 +2113,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api workspace by project id tags by tag id
+      x-summary-source: derived
+      operationId: getApiV1WorkspaceByProjectIdTagsByTagId
+      x-operation-id-source: derived
     patch:
       tags:
       - Folders
@@ -2094,8 +2169,9 @@ paths:
                       slug:
                         type: string
                       color:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       createdAt:
                         type: string
                         format: date-time
@@ -2103,9 +2179,10 @@ paths:
                         type: string
                         format: date-time
                       createdBy:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       projectId:
                         type: string
                       createdByActorType:
@@ -2259,6 +2336,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update api workspace by project id tags by tag id
+      x-summary-source: derived
+      operationId: patchApiV1WorkspaceByProjectIdTagsByTagId
+      x-operation-id-source: derived
     delete:
       tags:
       - Folders
@@ -2292,8 +2373,9 @@ paths:
                       slug:
                         type: string
                       color:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       createdAt:
                         type: string
                         format: date-time
@@ -2301,9 +2383,10 @@ paths:
                         type: string
                         format: date-time
                       createdBy:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       projectId:
                         type: string
                       createdByActorType:
@@ -2457,6 +2540,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete api workspace by project id tags by tag id
+      x-summary-source: derived
+      operationId: deleteApiV1WorkspaceByProjectIdTagsByTagId
+      x-operation-id-source: derived
   /api/v1/workspace/{projectId}/tags/slug/{tagSlug}:
     get:
       tags:
@@ -2491,8 +2578,9 @@ paths:
                       slug:
                         type: string
                       color:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       createdAt:
                         type: string
                         format: date-time
@@ -2500,9 +2588,10 @@ paths:
                         type: string
                         format: date-time
                       createdBy:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       projectId:
                         type: string
                       createdByActorType:
@@ -2659,6 +2748,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api workspace by project id tags slug by tag slug
+      x-summary-source: derived
+      operationId: getApiV1WorkspaceByProjectIdTagsSlugByTagSlug
+      x-operation-id-source: derived
   /api/v1/projects/{projectId}/tags:
     get:
       operationId: listSecretTags
@@ -2690,8 +2783,9 @@ paths:
                         slug:
                           type: string
                         color:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         createdAt:
                           type: string
                           format: date-time
@@ -2699,9 +2793,10 @@ paths:
                           type: string
                           format: date-time
                         createdBy:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         projectId:
                           type: string
                         createdByActorType:
@@ -2855,6 +2950,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List secret tags
+      x-summary-source: derived
     post:
       operationId: createSecretTag
       tags:
@@ -2902,8 +2999,9 @@ paths:
                       slug:
                         type: string
                       color:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       createdAt:
                         type: string
                         format: date-time
@@ -2911,9 +3009,10 @@ paths:
                         type: string
                         format: date-time
                       createdBy:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       projectId:
                         type: string
                       createdByActorType:
@@ -3067,6 +3166,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create secret tag
+      x-summary-source: derived
   /api/v1/projects/{projectId}/tags/{tagId}:
     get:
       operationId: getSecretTagById
@@ -3102,8 +3203,9 @@ paths:
                       slug:
                         type: string
                       color:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       createdAt:
                         type: string
                         format: date-time
@@ -3111,9 +3213,10 @@ paths:
                         type: string
                         format: date-time
                       createdBy:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       projectId:
                         type: string
                       createdByActorType:
@@ -3270,6 +3373,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get secret tag by id
+      x-summary-source: derived
     patch:
       operationId: updateSecretTag
       tags:
@@ -3323,8 +3428,9 @@ paths:
                       slug:
                         type: string
                       color:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       createdAt:
                         type: string
                         format: date-time
@@ -3332,9 +3438,10 @@ paths:
                         type: string
                         format: date-time
                       createdBy:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       projectId:
                         type: string
                       createdByActorType:
@@ -3488,6 +3595,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update secret tag
+      x-summary-source: derived
     delete:
       operationId: deleteSecretTag
       tags:
@@ -3522,8 +3631,9 @@ paths:
                       slug:
                         type: string
                       color:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       createdAt:
                         type: string
                         format: date-time
@@ -3531,9 +3641,10 @@ paths:
                         type: string
                         format: date-time
                       createdBy:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       projectId:
                         type: string
                       createdByActorType:
@@ -3687,6 +3798,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete secret tag
+      x-summary-source: derived
   /api/v1/projects/{projectId}/tags/slug/{tagSlug}:
     get:
       operationId: getSecretTagBySlug
@@ -3722,8 +3835,9 @@ paths:
                       slug:
                         type: string
                       color:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       createdAt:
                         type: string
                         format: date-time
@@ -3731,9 +3845,10 @@ paths:
                         type: string
                         format: date-time
                       createdBy:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       projectId:
                         type: string
                       createdByActorType:
@@ -3890,6 +4005,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get secret tag by slug
+      x-summary-source: derived
   /api/v2/folders:
     post:
       operationId: createSecretFolder
@@ -3917,8 +4034,9 @@ paths:
                   default: /
                   description: The path of the folder to create.
                 description:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   description: An optional description label for the folder.
               required:
               - projectId
@@ -3944,9 +4062,10 @@ paths:
                       name:
                         type: string
                       version:
-                        type: number
+                        type:
+                        - number
+                        - 'null'
                         default: 1
-                        nullable: true
                       createdAt:
                         type: string
                         format: date-time
@@ -3957,20 +4076,24 @@ paths:
                         type: string
                         format: uuid
                       parentId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       isReserved:
-                        type: boolean
+                        type:
+                        - boolean
+                        - 'null'
                         default: false
-                        nullable: true
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       lastSecretModified:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       path:
                         type: string
                     required:
@@ -4122,6 +4245,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create secret folder
+      x-summary-source: derived
     get:
       operationId: listSecretFolders
       tags:
@@ -4183,9 +4308,10 @@ paths:
                         name:
                           type: string
                         version:
-                          type: number
+                          type:
+                          - number
+                          - 'null'
                           default: 1
-                          nullable: true
                         createdAt:
                           type: string
                           format: date-time
@@ -4196,20 +4322,24 @@ paths:
                           type: string
                           format: uuid
                         parentId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         isReserved:
-                          type: boolean
+                          type:
+                          - boolean
+                          - 'null'
                           default: false
-                          nullable: true
                         description:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         lastSecretModified:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         relativePath:
                           type: string
                       required:
@@ -4360,6 +4490,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List secret folders
+      x-summary-source: derived
   /api/v2/folders/{folderId}:
     patch:
       operationId: updateSecretFolder
@@ -4387,8 +4519,9 @@ paths:
                   default: /
                   description: The path of the folder to update.
                 description:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   description: An optional description label for the folder.
               required:
               - projectId
@@ -4421,9 +4554,10 @@ paths:
                       name:
                         type: string
                       version:
-                        type: number
+                        type:
+                        - number
+                        - 'null'
                         default: 1
-                        nullable: true
                       createdAt:
                         type: string
                         format: date-time
@@ -4434,20 +4568,24 @@ paths:
                         type: string
                         format: uuid
                       parentId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       isReserved:
-                        type: boolean
+                        type:
+                        - boolean
+                        - 'null'
                         default: false
-                        nullable: true
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       lastSecretModified:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       path:
                         type: string
                     required:
@@ -4599,6 +4737,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update secret folder
+      x-summary-source: derived
   /api/v2/folders/batch:
     patch:
       operationId: updateSecretFoldersBatch
@@ -4634,8 +4774,9 @@ paths:
                         default: /
                         description: The path of the folder to update.
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                         description: An optional description label for the folder.
                     required:
                     - id
@@ -4668,9 +4809,10 @@ paths:
                         name:
                           type: string
                         version:
-                          type: number
+                          type:
+                          - number
+                          - 'null'
                           default: 1
-                          nullable: true
                         createdAt:
                           type: string
                           format: date-time
@@ -4681,20 +4823,24 @@ paths:
                           type: string
                           format: uuid
                         parentId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         isReserved:
-                          type: boolean
+                          type:
+                          - boolean
+                          - 'null'
                           default: false
-                          nullable: true
                         description:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         lastSecretModified:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                       required:
                       - id
                       - name
@@ -4843,6 +4989,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update secret folders batch
+      x-summary-source: derived
   /api/v2/folders/{folderIdOrName}:
     delete:
       operationId: deleteSecretFolder
@@ -4900,9 +5048,10 @@ paths:
                       name:
                         type: string
                       version:
-                        type: number
+                        type:
+                        - number
+                        - 'null'
                         default: 1
-                        nullable: true
                       createdAt:
                         type: string
                         format: date-time
@@ -4913,20 +5062,24 @@ paths:
                         type: string
                         format: uuid
                       parentId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       isReserved:
-                        type: boolean
+                        type:
+                        - boolean
+                        - 'null'
                         default: false
-                        nullable: true
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       lastSecretModified:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                     required:
                     - id
                     - name
@@ -5075,6 +5228,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete secret folder
+      x-summary-source: derived
   /api/v2/folders/{id}:
     get:
       operationId: getSecretFolderById
@@ -5107,9 +5262,10 @@ paths:
                       name:
                         type: string
                       version:
-                        type: number
+                        type:
+                        - number
+                        - 'null'
                         default: 1
-                        nullable: true
                       createdAt:
                         type: string
                         format: date-time
@@ -5120,20 +5276,24 @@ paths:
                         type: string
                         format: uuid
                       parentId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       isReserved:
-                        type: boolean
+                        type:
+                        - boolean
+                        - 'null'
                         default: false
-                        nullable: true
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       lastSecretModified:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       environment:
                         type: object
                         properties:
@@ -5303,6 +5463,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get secret folder by id
+      x-summary-source: derived
 components:
   securitySchemes:
     bearerAuth:

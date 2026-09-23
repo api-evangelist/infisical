@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin OIDC SSO API
+  title: Infisical OIDC SSO API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -39,33 +39,40 @@ paths:
                     type: string
                     format: uuid
                   issuer:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   authorizationEndpoint:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   jwksUri:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   tokenEndpoint:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   userinfoEndpoint:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   configurationType:
                     type: string
                   discoveryURL:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   isActive:
                     type: boolean
                   orgId:
                     type: string
                     format: uuid
                   allowedEmailDomains:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   manageGroupMemberships:
                     type: boolean
                     default: false
@@ -222,6 +229,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api sso oidc config
+      x-summary-source: derived
+      operationId: getApiV1SsoOidcConfig
+      x-operation-id-source: derived
     patch:
       tags:
       - OIDC SSO
@@ -301,31 +312,38 @@ paths:
                     type: string
                     format: uuid
                   issuer:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   authorizationEndpoint:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   configurationType:
                     type: string
                   discoveryURL:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   jwksUri:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   tokenEndpoint:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   userinfoEndpoint:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   orgId:
                     type: string
                     format: uuid
                   allowedEmailDomains:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   isActive:
                     type: boolean
                   manageGroupMemberships:
@@ -475,6 +493,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update api sso oidc config
+      x-summary-source: derived
+      operationId: patchApiV1SsoOidcConfig
+      x-operation-id-source: derived
     post:
       tags:
       - OIDC SSO
@@ -566,33 +588,40 @@ paths:
                     type: string
                     format: uuid
                   issuer:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   authorizationEndpoint:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   configurationType:
                     type: string
                   discoveryURL:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   jwksUri:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   tokenEndpoint:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   userinfoEndpoint:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   orgId:
                     type: string
                     format: uuid
                   isActive:
                     type: boolean
                   allowedEmailDomains:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   manageGroupMemberships:
                     type: boolean
                     default: false
@@ -743,6 +772,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create api sso oidc config
+      x-summary-source: derived
+      operationId: postApiV1SsoOidcConfig
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

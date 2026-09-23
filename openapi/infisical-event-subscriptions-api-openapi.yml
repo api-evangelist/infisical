@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin Event Subscriptions API
+  title: Infisical Event Subscriptions API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -18,7 +18,6 @@ paths:
       operationId: subscribeToProjectEvents
       tags:
       - Event Subscriptions
-      description: Subscribe to project events
       requestBody:
         required: true
         content:
@@ -62,6 +61,8 @@ paths:
       responses:
         '200':
           description: Default Response
+      summary: Subscribe to project events
+      x-summary-source: derived
 components:
   securitySchemes:
     bearerAuth:

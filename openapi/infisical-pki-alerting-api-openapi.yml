@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin PKI Alerting API
+  title: Infisical PKI Alerting API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -208,6 +208,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List project pki alerts
+      x-summary-source: derived
   /api/v1/cert-manager/alerts:
     post:
       operationId: createPkiAlertV1
@@ -273,13 +275,14 @@ paths:
                   type: boolean
                   default: true
                 notificationConfig:
-                  type: object
+                  type:
+                  - object
+                  - 'null'
                   properties:
                     enableDailyNotification:
                       type: boolean
                       default: false
                   additionalProperties: false
-                  nullable: true
                 channels:
                   type: array
                   items:
@@ -315,9 +318,10 @@ paths:
                               type: string
                               format: uri
                             signingSecret:
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                               maxLength: 256
-                              nullable: true
                           required:
                           - url
                           additionalProperties: false
@@ -372,8 +376,9 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       eventType:
                         type: string
                         enum:
@@ -418,17 +423,19 @@ paths:
                       enabled:
                         type: boolean
                       applicationId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       notificationConfig:
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                         properties:
                           enableDailyNotification:
                             type: boolean
                             default: false
                         additionalProperties: false
-                        nullable: true
                       channels:
                         type: array
                         items:
@@ -623,6 +630,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create pki alert V1
+      x-summary-source: derived
     get:
       operationId: listPkiAlertsV1
       tags:
@@ -689,8 +698,9 @@ paths:
                         name:
                           type: string
                         description:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         eventType:
                           type: string
                           enum:
@@ -735,17 +745,19 @@ paths:
                         enabled:
                           type: boolean
                         applicationId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         notificationConfig:
-                          type: object
+                          type:
+                          - object
+                          - 'null'
                           properties:
                             enableDailyNotification:
                               type: boolean
                               default: false
                           additionalProperties: false
-                          nullable: true
                         channels:
                           type: array
                           items:
@@ -781,7 +793,9 @@ paths:
                             - updatedAt
                             additionalProperties: false
                         lastRun:
-                          type: object
+                          type:
+                          - object
+                          - 'null'
                           properties:
                             timestamp:
                               type: string
@@ -792,14 +806,14 @@ paths:
                               - success
                               - failed
                             error:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                           required:
                           - timestamp
                           - status
                           - error
                           additionalProperties: false
-                          nullable: true
                         createdAt:
                           type: string
                           format: date-time
@@ -964,6 +978,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List pki alerts V1
+      x-summary-source: derived
   /api/v1/cert-manager/alerts/{alertId}:
     get:
       operationId: getPkiAlertV1
@@ -995,8 +1011,9 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       eventType:
                         type: string
                         enum:
@@ -1041,17 +1058,19 @@ paths:
                       enabled:
                         type: boolean
                       applicationId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       notificationConfig:
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                         properties:
                           enableDailyNotification:
                             type: boolean
                             default: false
                         additionalProperties: false
-                        nullable: true
                       channels:
                         type: array
                         items:
@@ -1246,6 +1265,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get pki alert V1
+      x-summary-source: derived
     patch:
       operationId: updatePkiAlertV1
       tags:
@@ -1310,13 +1331,14 @@ paths:
                   type: boolean
                   default: true
                 notificationConfig:
-                  type: object
+                  type:
+                  - object
+                  - 'null'
                   properties:
                     enableDailyNotification:
                       type: boolean
                       default: false
                   additionalProperties: false
-                  nullable: true
                 channels:
                   type: array
                   items:
@@ -1352,9 +1374,10 @@ paths:
                               type: string
                               format: uri
                             signingSecret:
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                               maxLength: 256
-                              nullable: true
                           required:
                           - url
                           additionalProperties: false
@@ -1408,8 +1431,9 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       eventType:
                         type: string
                         enum:
@@ -1454,17 +1478,19 @@ paths:
                       enabled:
                         type: boolean
                       applicationId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       notificationConfig:
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                         properties:
                           enableDailyNotification:
                             type: boolean
                             default: false
                         additionalProperties: false
-                        nullable: true
                       channels:
                         type: array
                         items:
@@ -1659,6 +1685,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update pki alert V1
+      x-summary-source: derived
     delete:
       operationId: deletePkiAlertV1
       tags:
@@ -1689,8 +1717,9 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       eventType:
                         type: string
                         enum:
@@ -1735,17 +1764,19 @@ paths:
                       enabled:
                         type: boolean
                       applicationId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       notificationConfig:
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                         properties:
                           enableDailyNotification:
                             type: boolean
                             default: false
                         additionalProperties: false
-                        nullable: true
                       channels:
                         type: array
                         items:
@@ -1940,6 +1971,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete pki alert V1
+      x-summary-source: derived
   /api/v1/cert-manager/alerts/{alertId}/certificates:
     get:
       tags:
@@ -1993,11 +2026,13 @@ paths:
                           items:
                             type: string
                         profileName:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         enrollmentType:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         notBefore:
                           type: string
                           format: date-time
@@ -2161,6 +2196,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api cert manager alerts by alert id certificates
+      x-summary-source: derived
+      operationId: getApiV1CertManagerAlertsByAlertIdCertificates
+      x-operation-id-source: derived
   /api/v1/cert-manager/alerts/preview/certificates:
     post:
       operationId: previewPkiAlertCertificatesV1
@@ -2246,11 +2285,13 @@ paths:
                           items:
                             type: string
                         profileName:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         enrollmentType:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         notBefore:
                           type: string
                           format: date-time
@@ -2414,6 +2455,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Preview pki alert certificates V1
+      x-summary-source: derived
   /api/v2/workspace/{projectId}/pki-alerts:
     get:
       tags:
@@ -2608,6 +2651,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api workspace by project id pki alerts
+      x-summary-source: derived
+      operationId: getApiV2WorkspaceByProjectIdPkiAlerts
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

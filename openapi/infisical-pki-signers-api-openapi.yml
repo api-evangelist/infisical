@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin PKI Signers API
+  title: Infisical PKI Signers API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -45,10 +45,11 @@ paths:
                   minimum: 1
                   maximum: 3650
                 certificateRenewBeforeDays:
-                  type: integer
+                  type:
+                  - integer
+                  - 'null'
                   minimum: 1
                   maximum: 30
-                  nullable: true
                 keyAlgorithm:
                   type: string
                   enum:
@@ -98,9 +99,10 @@ paths:
                             type: integer
                             minimum: 1
                           name:
-                            type: string
+                            type:
+                            - string
+                            - 'null'
                             maxLength: 64
-                            nullable: true
                           requiredApprovals:
                             type: integer
                             minimum: 1
@@ -124,12 +126,14 @@ paths:
                       type: object
                       properties:
                         maxSignings:
-                          type: integer
+                          type:
+                          - integer
+                          - 'null'
                           minimum: 1
-                          nullable: true
                         maxWindowDuration:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                       additionalProperties: false
                   required:
                   - steps
@@ -151,23 +155,27 @@ paths:
                   name:
                     type: string
                   description:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   status:
                     type: string
                     default: active
                   certificateId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   approvalPolicyId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   lastSignedAt:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: date-time
-                    nullable: true
                   createdAt:
                     type: string
                     format: date-time
@@ -175,21 +183,26 @@ paths:
                     type: string
                     format: date-time
                   caId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   commonName:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   certificateTtlDays:
-                    type: number
-                    nullable: true
+                    type:
+                    - number
+                    - 'null'
                   certificateRenewBeforeDays:
-                    type: number
-                    nullable: true
+                    type:
+                    - number
+                    - 'null'
                   certificateFailureReason:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   keyAlgorithm:
                     type: string
                     default: RSA_2048
@@ -337,6 +350,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create signer
+      x-summary-source: derived
     get:
       operationId: listSigners
       tags:
@@ -382,23 +397,27 @@ paths:
                         name:
                           type: string
                         description:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         status:
                           type: string
                           default: active
                         certificateId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         approvalPolicyId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         lastSignedAt:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         createdAt:
                           type: string
                           format: date-time
@@ -406,37 +425,46 @@ paths:
                           type: string
                           format: date-time
                         caId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         commonName:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         certificateTtlDays:
-                          type: number
-                          nullable: true
+                          type:
+                          - number
+                          - 'null'
                         certificateRenewBeforeDays:
-                          type: number
-                          nullable: true
+                          type:
+                          - number
+                          - 'null'
                         certificateFailureReason:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         keyAlgorithm:
                           type: string
                           default: RSA_2048
                         certificateCommonName:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         certificateSerialNumber:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         certificateNotAfter:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         approvalPolicyName:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                       required:
                       - id
                       - name
@@ -587,6 +615,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List signers
+      x-summary-source: derived
   /api/v1/cert-manager/signers/{signerId}:
     get:
       operationId: getSignerById
@@ -614,23 +644,27 @@ paths:
                   name:
                     type: string
                   description:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   status:
                     type: string
                     default: active
                   certificateId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   approvalPolicyId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   lastSignedAt:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: date-time
-                    nullable: true
                   createdAt:
                     type: string
                     format: date-time
@@ -638,50 +672,63 @@ paths:
                     type: string
                     format: date-time
                   caId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   commonName:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   certificateTtlDays:
-                    type: number
-                    nullable: true
+                    type:
+                    - number
+                    - 'null'
                   certificateRenewBeforeDays:
-                    type: number
-                    nullable: true
+                    type:
+                    - number
+                    - 'null'
                   certificateFailureReason:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   keyAlgorithm:
                     type: string
                     default: RSA_2048
                   certificateCommonName:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   certificateSerialNumber:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   certificateNotAfter:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: date-time
-                    nullable: true
                   certificateNotBefore:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: date-time
-                    nullable: true
                   certificateKeyAlgorithm:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   certificateStatus:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   certificateCaId:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   approvalPolicyName:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                 required:
                 - id
                 - name
@@ -826,6 +873,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get signer by id
+      x-summary-source: derived
     patch:
       operationId: updateSigner
       tags:
@@ -843,14 +892,16 @@ paths:
                   minLength: 1
                   maxLength: 64
                 description:
-                  type: string
+                  type:
+                  - string
+                  - 'null'
                   maxLength: 256
-                  nullable: true
                 certificateRenewBeforeDays:
-                  type: integer
+                  type:
+                  - integer
+                  - 'null'
                   minimum: 1
                   maximum: 30
-                  nullable: true
               additionalProperties: false
       parameters:
       - schema:
@@ -873,23 +924,27 @@ paths:
                   name:
                     type: string
                   description:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   status:
                     type: string
                     default: active
                   certificateId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   approvalPolicyId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   lastSignedAt:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: date-time
-                    nullable: true
                   createdAt:
                     type: string
                     format: date-time
@@ -897,21 +952,26 @@ paths:
                     type: string
                     format: date-time
                   caId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   commonName:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   certificateTtlDays:
-                    type: number
-                    nullable: true
+                    type:
+                    - number
+                    - 'null'
                   certificateRenewBeforeDays:
-                    type: number
-                    nullable: true
+                    type:
+                    - number
+                    - 'null'
                   certificateFailureReason:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   keyAlgorithm:
                     type: string
                     default: RSA_2048
@@ -1059,6 +1119,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update signer
+      x-summary-source: derived
     delete:
       operationId: deleteSigner
       tags:
@@ -1085,23 +1147,27 @@ paths:
                   name:
                     type: string
                   description:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   status:
                     type: string
                     default: active
                   certificateId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   approvalPolicyId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   lastSignedAt:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: date-time
-                    nullable: true
                   createdAt:
                     type: string
                     format: date-time
@@ -1109,21 +1175,26 @@ paths:
                     type: string
                     format: date-time
                   caId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   commonName:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   certificateTtlDays:
-                    type: number
-                    nullable: true
+                    type:
+                    - number
+                    - 'null'
                   certificateRenewBeforeDays:
-                    type: number
-                    nullable: true
+                    type:
+                    - number
+                    - 'null'
                   certificateFailureReason:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   keyAlgorithm:
                     type: string
                     default: RSA_2048
@@ -1271,6 +1342,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete signer
+      x-summary-source: derived
   /api/v1/cert-manager/signers/{signerId}/permissions:
     get:
       operationId: getSignerPermissions
@@ -1305,14 +1378,17 @@ paths:
                             id:
                               type: string
                             actorUserId:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             actorIdentityId:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             actorGroupId:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             roles:
                               type: array
                               items:
@@ -1321,8 +1397,9 @@ paths:
                                   role:
                                     type: string
                                   customRoleSlug:
-                                    type: string
-                                    nullable: true
+                                    type:
+                                    - string
+                                    - 'null'
                                 required:
                                 - role
                                 additionalProperties: false
@@ -1475,6 +1552,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get signer permissions
+      x-summary-source: derived
   /api/v1/cert-manager/signers/{signerId}/status:
     patch:
       operationId: updateSignerStatus
@@ -1517,23 +1596,27 @@ paths:
                   name:
                     type: string
                   description:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   status:
                     type: string
                     default: active
                   certificateId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   approvalPolicyId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   lastSignedAt:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: date-time
-                    nullable: true
                   createdAt:
                     type: string
                     format: date-time
@@ -1541,21 +1624,26 @@ paths:
                     type: string
                     format: date-time
                   caId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   commonName:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   certificateTtlDays:
-                    type: number
-                    nullable: true
+                    type:
+                    - number
+                    - 'null'
                   certificateRenewBeforeDays:
-                    type: number
-                    nullable: true
+                    type:
+                    - number
+                    - 'null'
                   certificateFailureReason:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   keyAlgorithm:
                     type: string
                     default: RSA_2048
@@ -1703,6 +1791,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update signer status
+      x-summary-source: derived
   /api/v1/cert-manager/signers/{signerId}/sign:
     post:
       operationId: signData
@@ -1919,6 +2009,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Sign data
+      x-summary-source: derived
   /api/v1/cert-manager/signers/{signerId}/public-key:
     get:
       operationId: getSignerPublicKey
@@ -2086,6 +2178,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get signer public key
+      x-summary-source: derived
   /api/v1/cert-manager/signers/{signerId}/certificate/reissue:
     post:
       operationId: reissueSignerCertificate
@@ -2134,23 +2228,27 @@ paths:
                   name:
                     type: string
                   description:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   status:
                     type: string
                     default: active
                   certificateId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   approvalPolicyId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   lastSignedAt:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: date-time
-                    nullable: true
                   createdAt:
                     type: string
                     format: date-time
@@ -2158,21 +2256,26 @@ paths:
                     type: string
                     format: date-time
                   caId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   commonName:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   certificateTtlDays:
-                    type: number
-                    nullable: true
+                    type:
+                    - number
+                    - 'null'
                   certificateRenewBeforeDays:
-                    type: number
-                    nullable: true
+                    type:
+                    - number
+                    - 'null'
                   certificateFailureReason:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   keyAlgorithm:
                     type: string
                     default: RSA_2048
@@ -2320,6 +2423,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Reissue signer certificate
+      x-summary-source: derived
   /api/v1/cert-manager/signers/{signerId}/certificate:
     get:
       operationId: exportSignerCertificate
@@ -2490,6 +2595,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Export signer certificate
+      x-summary-source: derived
   /api/v1/cert-manager/signers/{signerId}/approval-policy:
     get:
       operationId: getSignerApprovalPolicy
@@ -2525,11 +2632,13 @@ paths:
                     type: object
                     properties:
                       maxSignings:
-                        type: number
-                        nullable: true
+                        type:
+                        - number
+                        - 'null'
                       maxWindowDuration:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                     required:
                     - maxSignings
                     - maxWindowDuration
@@ -2679,6 +2788,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get signer approval policy
+      x-summary-source: derived
     put:
       operationId: updateSignerApprovalPolicy
       tags:
@@ -2700,9 +2811,10 @@ paths:
                         type: integer
                         minimum: 1
                       name:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         maxLength: 64
-                        nullable: true
                       requiredApprovals:
                         type: integer
                         minimum: 1
@@ -2726,12 +2838,14 @@ paths:
                   type: object
                   properties:
                     maxSignings:
-                      type: integer
+                      type:
+                      - integer
+                      - 'null'
                       minimum: 1
-                      nullable: true
                     maxWindowDuration:
-                      type: string
-                      nullable: true
+                      type:
+                      - string
+                      - 'null'
                   additionalProperties: false
               required:
               - steps
@@ -2746,6 +2860,8 @@ paths:
       responses:
         '200':
           description: Default Response
+      summary: Update signer approval policy
+      x-summary-source: derived
   /api/v1/cert-manager/signers/{signerId}/requests:
     get:
       operationId: listSignerRequests
@@ -2782,6 +2898,8 @@ paths:
       responses:
         '200':
           description: Default Response
+      summary: List signer requests
+      x-summary-source: derived
     post:
       operationId: requestToSign
       tags:
@@ -2820,6 +2938,8 @@ paths:
       responses:
         '200':
           description: Default Response
+      summary: Request to sign
+      x-summary-source: derived
   /api/v1/cert-manager/signers/{signerId}/requests/pre-approve:
     post:
       operationId: preApproveSigning
@@ -2865,6 +2985,8 @@ paths:
       responses:
         '200':
           description: Default Response
+      summary: Pre approve signing
+      x-summary-source: derived
   /api/v1/cert-manager/signers/{signerId}/requests/{requestId}/revoke:
     post:
       operationId: revokeSignerRequest
@@ -2887,6 +3009,8 @@ paths:
       responses:
         '200':
           description: Default Response
+      summary: Revoke signer request
+      x-summary-source: derived
   /api/v1/cert-manager/signers/{signerId}/operations:
     get:
       operationId: listSigningOperations
@@ -2955,24 +3079,27 @@ paths:
                           type: string
                           format: uuid
                         actorName:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         approvalGrantId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
-                        clientMetadata:
-                          nullable: true
+                        clientMetadata: {}
                         errorMessage:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         createdAt:
                           type: string
                           format: date-time
                         actorMembershipId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                       required:
                       - id
                       - signerId
@@ -3129,6 +3256,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List signing operations
+      x-summary-source: derived
   /api/v1/cert-manager/signers/{signerId}/users:
     get:
       operationId: listSignerUserMembers
@@ -3162,23 +3291,27 @@ paths:
                           type: string
                           format: uuid
                         actorUserId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         actorIdentityId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         actorGroupId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         role:
                           type: string
                         customRoleId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         createdAt:
                           type: string
                           format: date-time
@@ -3186,27 +3319,33 @@ paths:
                           type: string
                           format: date-time
                         details:
-                          type: object
+                          type:
+                          - object
+                          - 'null'
                           properties:
                             name:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             email:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             username:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             authMethod:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             slug:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                           required:
                           - name
                           additionalProperties: false
-                          nullable: true
                       required:
                       - membershipId
                       - signerId
@@ -3355,6 +3494,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List signer user members
+      x-summary-source: derived
     post:
       operationId: addSignerUserMembers
       tags:
@@ -3414,23 +3555,27 @@ paths:
                           type: string
                           format: uuid
                         actorUserId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         actorIdentityId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         actorGroupId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         role:
                           type: string
                         customRoleId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         createdAt:
                           type: string
                           format: date-time
@@ -3438,27 +3583,33 @@ paths:
                           type: string
                           format: date-time
                         details:
-                          type: object
+                          type:
+                          - object
+                          - 'null'
                           properties:
                             name:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             email:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             username:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             authMethod:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             slug:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                           required:
                           - name
                           additionalProperties: false
-                          nullable: true
                       required:
                       - membershipId
                       - signerId
@@ -3617,6 +3768,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Add signer user members
+      x-summary-source: derived
   /api/v1/cert-manager/signers/{signerId}/users/{userId}:
     patch:
       operationId: updateSignerUserRole
@@ -3670,23 +3823,27 @@ paths:
                         type: string
                         format: uuid
                       actorUserId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       actorIdentityId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       actorGroupId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       role:
                         type: string
                       customRoleId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       createdAt:
                         type: string
                         format: date-time
@@ -3694,27 +3851,33 @@ paths:
                         type: string
                         format: date-time
                       details:
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                         properties:
                           name:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           email:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           username:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           authMethod:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           slug:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                         required:
                         - name
                         additionalProperties: false
-                        nullable: true
                     required:
                     - membershipId
                     - signerId
@@ -3863,6 +4026,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update signer user role
+      x-summary-source: derived
     delete:
       operationId: removeSignerUserMember
       tags:
@@ -4037,6 +4202,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Remove signer user member
+      x-summary-source: derived
   /api/v1/cert-manager/signers/{signerId}/effective-users:
     get:
       operationId: listSignerEffectiveUserMembers
@@ -4064,13 +4231,15 @@ paths:
                       type: object
                       properties:
                         actorUserId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         actorIdentityId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         role:
                           type: string
                         viaGroupIds:
@@ -4081,24 +4250,29 @@ paths:
                         isDirect:
                           type: boolean
                         details:
-                          type: object
+                          type:
+                          - object
+                          - 'null'
                           properties:
                             name:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             email:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             username:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             authMethod:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                           required:
                           - name
                           additionalProperties: false
-                          nullable: true
                       required:
                       - actorUserId
                       - actorIdentityId
@@ -4248,6 +4422,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List signer effective user members
+      x-summary-source: derived
   /api/v1/cert-manager/signers/{signerId}/identities:
     get:
       operationId: listSignerIdentityMembers
@@ -4281,23 +4457,27 @@ paths:
                           type: string
                           format: uuid
                         actorUserId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         actorIdentityId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         actorGroupId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         role:
                           type: string
                         customRoleId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         createdAt:
                           type: string
                           format: date-time
@@ -4305,27 +4485,33 @@ paths:
                           type: string
                           format: date-time
                         details:
-                          type: object
+                          type:
+                          - object
+                          - 'null'
                           properties:
                             name:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             email:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             username:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             authMethod:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             slug:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                           required:
                           - name
                           additionalProperties: false
-                          nullable: true
                       required:
                       - membershipId
                       - signerId
@@ -4474,6 +4660,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List signer identity members
+      x-summary-source: derived
     post:
       operationId: addSignerIdentityMember
       tags:
@@ -4521,23 +4709,27 @@ paths:
                     type: string
                     format: uuid
                   actorUserId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   actorIdentityId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   actorGroupId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   role:
                     type: string
                   customRoleId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   createdAt:
                     type: string
                     format: date-time
@@ -4545,27 +4737,33 @@ paths:
                     type: string
                     format: date-time
                   details:
-                    type: object
+                    type:
+                    - object
+                    - 'null'
                     properties:
                       name:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       email:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       username:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       authMethod:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       slug:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                     required:
                     - name
                     additionalProperties: false
-                    nullable: true
                 required:
                 - membershipId
                 - signerId
@@ -4711,6 +4909,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Add signer identity member
+      x-summary-source: derived
   /api/v1/cert-manager/signers/{signerId}/identities/{identityId}:
     patch:
       operationId: updateSignerIdentityRole
@@ -4764,23 +4964,27 @@ paths:
                         type: string
                         format: uuid
                       actorUserId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       actorIdentityId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       actorGroupId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       role:
                         type: string
                       customRoleId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       createdAt:
                         type: string
                         format: date-time
@@ -4788,27 +4992,33 @@ paths:
                         type: string
                         format: date-time
                       details:
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                         properties:
                           name:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           email:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           username:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           authMethod:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           slug:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                         required:
                         - name
                         additionalProperties: false
-                        nullable: true
                     required:
                     - membershipId
                     - signerId
@@ -4957,6 +5167,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update signer identity role
+      x-summary-source: derived
     delete:
       operationId: removeSignerIdentityMember
       tags:
@@ -5131,6 +5343,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Remove signer identity member
+      x-summary-source: derived
   /api/v1/cert-manager/signers/{signerId}/effective-identities:
     get:
       operationId: listSignerEffectiveIdentityMembers
@@ -5158,13 +5372,15 @@ paths:
                       type: object
                       properties:
                         actorUserId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         actorIdentityId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         role:
                           type: string
                         viaGroupIds:
@@ -5175,24 +5391,29 @@ paths:
                         isDirect:
                           type: boolean
                         details:
-                          type: object
+                          type:
+                          - object
+                          - 'null'
                           properties:
                             name:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             email:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             username:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             authMethod:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                           required:
                           - name
                           additionalProperties: false
-                          nullable: true
                       required:
                       - actorUserId
                       - actorIdentityId
@@ -5342,6 +5563,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List signer effective identity members
+      x-summary-source: derived
   /api/v1/cert-manager/signers/{signerId}/groups:
     get:
       operationId: listSignerGroupMembers
@@ -5375,23 +5598,27 @@ paths:
                           type: string
                           format: uuid
                         actorUserId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         actorIdentityId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         actorGroupId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         role:
                           type: string
                         customRoleId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         createdAt:
                           type: string
                           format: date-time
@@ -5399,27 +5626,33 @@ paths:
                           type: string
                           format: date-time
                         details:
-                          type: object
+                          type:
+                          - object
+                          - 'null'
                           properties:
                             name:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             email:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             username:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             authMethod:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             slug:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                           required:
                           - name
                           additionalProperties: false
-                          nullable: true
                       required:
                       - membershipId
                       - signerId
@@ -5568,6 +5801,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List signer group members
+      x-summary-source: derived
     post:
       operationId: addSignerGroupMember
       tags:
@@ -5615,23 +5850,27 @@ paths:
                     type: string
                     format: uuid
                   actorUserId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   actorIdentityId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   actorGroupId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   role:
                     type: string
                   customRoleId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   createdAt:
                     type: string
                     format: date-time
@@ -5639,27 +5878,33 @@ paths:
                     type: string
                     format: date-time
                   details:
-                    type: object
+                    type:
+                    - object
+                    - 'null'
                     properties:
                       name:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       email:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       username:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       authMethod:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       slug:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                     required:
                     - name
                     additionalProperties: false
-                    nullable: true
                 required:
                 - membershipId
                 - signerId
@@ -5805,6 +6050,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Add signer group member
+      x-summary-source: derived
   /api/v1/cert-manager/signers/{signerId}/groups/{groupId}:
     patch:
       operationId: updateSignerGroupRole
@@ -5858,23 +6105,27 @@ paths:
                         type: string
                         format: uuid
                       actorUserId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       actorIdentityId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       actorGroupId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       role:
                         type: string
                       customRoleId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       createdAt:
                         type: string
                         format: date-time
@@ -5882,27 +6133,33 @@ paths:
                         type: string
                         format: date-time
                       details:
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                         properties:
                           name:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           email:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           username:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           authMethod:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           slug:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                         required:
                         - name
                         additionalProperties: false
-                        nullable: true
                     required:
                     - membershipId
                     - signerId
@@ -6051,6 +6308,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update signer group role
+      x-summary-source: derived
     delete:
       operationId: removeSignerGroupMember
       tags:
@@ -6225,6 +6484,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Remove signer group member
+      x-summary-source: derived
 components:
   securitySchemes:
     bearerAuth:

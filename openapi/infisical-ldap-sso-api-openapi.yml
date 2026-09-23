@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin LDAP SSO API
+  title: Infisical LDAP SSO API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -217,6 +217,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api ldap config
+      x-summary-source: derived
+      operationId: getApiV1LdapConfig
+      x-operation-id-source: derived
     post:
       tags:
       - LDAP SSO
@@ -469,6 +473,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create api ldap config
+      x-summary-source: derived
+      operationId: postApiV1LdapConfig
+      x-operation-id-source: derived
     patch:
       tags:
       - LDAP SSO
@@ -709,6 +717,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update api ldap config
+      x-summary-source: derived
+      operationId: patchApiV1LdapConfig
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

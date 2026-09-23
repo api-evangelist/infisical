@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin SSH Certificates API
+  title: Infisical SSH Certificates API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -213,6 +213,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create api ssh certificates sign
+      x-summary-source: derived
+      operationId: postApiV1SshCertificatesSign
+      x-operation-id-source: derived
   /api/v1/ssh/certificates/issue:
     post:
       tags:
@@ -437,6 +441,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create api ssh certificates issue
+      x-summary-source: derived
+      operationId: postApiV1SshCertificatesIssue
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

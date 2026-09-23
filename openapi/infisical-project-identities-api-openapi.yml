@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin Project Identities API
+  title: Infisical Project Identities API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -263,6 +263,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create api projects by project id identity memberships by identity id
+      x-summary-source: derived
+      operationId: postApiV1ProjectsByProjectIdIdentityMembershipsByIdentityId
+      x-operation-id-source: derived
     patch:
       tags:
       - Project Identities
@@ -363,26 +367,31 @@ paths:
                           type: string
                           format: uuid
                         customRoleId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         isTemporary:
                           type: boolean
                           default: false
                         temporaryMode:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         temporaryRange:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         temporaryAccessStartTime:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         temporaryAccessEndTime:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         createdAt:
                           type: string
                           format: date-time
@@ -537,6 +546,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update api projects by project id identity memberships by identity id
+      x-summary-source: derived
+      operationId: patchApiV1ProjectsByProjectIdIdentityMembershipsByIdentityId
+      x-operation-id-source: derived
     delete:
       tags:
       - Project Identities
@@ -729,6 +742,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete api projects by project id identity memberships by identity id
+      x-summary-source: derived
+      operationId: deleteApiV1ProjectsByProjectIdIdentityMembershipsByIdentityId
+      x-operation-id-source: derived
     get:
       tags:
       - Project Identities
@@ -779,42 +796,51 @@ paths:
                             role:
                               type: string
                             customRoleId:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             customRoleName:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             customRoleSlug:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             isTemporary:
                               type: boolean
                             temporaryMode:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             temporaryRange:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             temporaryAccessStartTime:
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                               format: date-time
-                              nullable: true
                             temporaryAccessEndTime:
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                               format: date-time
-                              nullable: true
                           required:
                           - id
                           - role
                           - isTemporary
                           additionalProperties: false
                       lastLoginAuthMethod:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       lastLoginTime:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       identity:
                         type: object
                         properties:
@@ -824,8 +850,9 @@ paths:
                             type: string
                             format: uuid
                           projectId:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           orgId:
                             type: string
                             format: uuid
@@ -1000,6 +1027,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api projects by project id identity memberships by identity id
+      x-summary-source: derived
+      operationId: getApiV1ProjectsByProjectIdIdentityMembershipsByIdentityId
+      x-operation-id-source: derived
   /api/v1/projects/{projectId}/identity-memberships:
     get:
       tags:
@@ -1089,30 +1120,37 @@ paths:
                               role:
                                 type: string
                               customRoleId:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               customRoleName:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               customRoleSlug:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               isTemporary:
                                 type: boolean
                               temporaryMode:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               temporaryRange:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               temporaryAccessStartTime:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 format: date-time
-                                nullable: true
                               temporaryAccessEndTime:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 format: date-time
-                                nullable: true
                             required:
                             - id
                             - role
@@ -1127,8 +1165,9 @@ paths:
                               type: string
                               format: uuid
                             projectId:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             orgId:
                               type: string
                               format: uuid
@@ -1306,6 +1345,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api projects by project id identity memberships
+      x-summary-source: derived
+      operationId: getApiV1ProjectsByProjectIdIdentityMemberships
+      x-operation-id-source: derived
   /api/v1/projects/identity-memberships/{identityMembershipId}:
     get:
       tags:
@@ -1347,30 +1390,37 @@ paths:
                             role:
                               type: string
                             customRoleId:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             customRoleName:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             customRoleSlug:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             isTemporary:
                               type: boolean
                             temporaryMode:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             temporaryRange:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             temporaryAccessStartTime:
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                               format: date-time
-                              nullable: true
                             temporaryAccessEndTime:
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                               format: date-time
-                              nullable: true
                           required:
                           - id
                           - role
@@ -1554,12 +1604,15 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api projects identity memberships by identity membership id
+      x-summary-source: derived
+      operationId: getApiV1ProjectsIdentityMembershipsByIdentityMembershipId
+      x-operation-id-source: derived
   /api/v1/projects/{projectId}/memberships/identities/{identityId}:
     post:
       operationId: createProjectIdentityMembership
       tags:
       - Project Identities
-      description: Create project identity membership
       requestBody:
         required: true
         content:
@@ -1805,6 +1858,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create project identity membership
+      x-summary-source: derived
     patch:
       operationId: updateProjectIdentityMembership
       tags:
@@ -2057,6 +2112,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update project identity membership
+      x-summary-source: derived
     delete:
       operationId: deleteProjectIdentityMembership
       tags:
@@ -2250,6 +2307,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete project identity membership
+      x-summary-source: derived
   /api/v2/workspace/{projectId}/identity-memberships/{identityId}:
     post:
       tags:
@@ -2500,6 +2559,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create api workspace by project id identity memberships by identity id
+      x-summary-source: derived
+      operationId: postApiV2WorkspaceByProjectIdIdentityMembershipsByIdentityId
+      x-operation-id-source: derived
     patch:
       tags:
       - Project Identities
@@ -2600,26 +2663,31 @@ paths:
                           type: string
                           format: uuid
                         customRoleId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         isTemporary:
                           type: boolean
                           default: false
                         temporaryMode:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         temporaryRange:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         temporaryAccessStartTime:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         temporaryAccessEndTime:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         createdAt:
                           type: string
                           format: date-time
@@ -2774,6 +2842,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update api workspace by project id identity memberships by identity id
+      x-summary-source: derived
+      operationId: patchApiV2WorkspaceByProjectIdIdentityMembershipsByIdentityId
+      x-operation-id-source: derived
     delete:
       tags:
       - Project Identities
@@ -2966,6 +3038,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete api workspace by project id identity memberships by identity id
+      x-summary-source: derived
+      operationId: deleteApiV2WorkspaceByProjectIdIdentityMembershipsByIdentityId
+      x-operation-id-source: derived
     get:
       tags:
       - Project Identities
@@ -3016,30 +3092,37 @@ paths:
                             role:
                               type: string
                             customRoleId:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             customRoleName:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             customRoleSlug:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             isTemporary:
                               type: boolean
                             temporaryMode:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             temporaryRange:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             temporaryAccessStartTime:
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                               format: date-time
-                              nullable: true
                             temporaryAccessEndTime:
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                               format: date-time
-                              nullable: true
                           required:
                           - id
                           - role
@@ -3223,6 +3306,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api workspace by project id identity memberships by identity id
+      x-summary-source: derived
+      operationId: getApiV2WorkspaceByProjectIdIdentityMembershipsByIdentityId
+      x-operation-id-source: derived
   /api/v2/workspace/{projectId}/identity-memberships:
     get:
       tags:
@@ -3312,30 +3399,37 @@ paths:
                               role:
                                 type: string
                               customRoleId:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               customRoleName:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               customRoleSlug:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               isTemporary:
                                 type: boolean
                               temporaryMode:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               temporaryRange:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               temporaryAccessStartTime:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 format: date-time
-                                nullable: true
                               temporaryAccessEndTime:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 format: date-time
-                                nullable: true
                             required:
                             - id
                             - role
@@ -3522,6 +3616,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api workspace by project id identity memberships
+      x-summary-source: derived
+      operationId: getApiV2WorkspaceByProjectIdIdentityMemberships
+      x-operation-id-source: derived
   /api/v2/workspace/identity-memberships/{identityMembershipId}:
     get:
       tags:
@@ -3563,30 +3661,37 @@ paths:
                             role:
                               type: string
                             customRoleId:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             customRoleName:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             customRoleSlug:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             isTemporary:
                               type: boolean
                             temporaryMode:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             temporaryRange:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             temporaryAccessStartTime:
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                               format: date-time
-                              nullable: true
                             temporaryAccessEndTime:
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                               format: date-time
-                              nullable: true
                           required:
                           - id
                           - role
@@ -3770,6 +3875,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api workspace identity memberships by identity membership id
+      x-summary-source: derived
+      operationId: getApiV2WorkspaceIdentityMembershipsByIdentityMembershipId
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

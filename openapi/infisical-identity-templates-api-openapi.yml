@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin Identity Templates API
+  title: Infisical Identity Templates API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -237,6 +237,10 @@ paths:
                 additionalProperties: false
       tags:
       - Identity Templates
+      summary: Create api identity templates
+      x-summary-source: derived
+      operationId: postApiV1IdentityTemplates
+      x-operation-id-source: derived
     get:
       description: Get identity auth templates by authentication method
       parameters:
@@ -447,6 +451,10 @@ paths:
                 additionalProperties: false
       tags:
       - Identity Templates
+      summary: Get api identity templates
+      x-summary-source: derived
+      operationId: getApiV1IdentityTemplates
+      x-operation-id-source: derived
   /api/v1/identity-templates/{templateId}:
     patch:
       description: Update identity auth template
@@ -665,6 +673,10 @@ paths:
                 additionalProperties: false
       tags:
       - Identity Templates
+      summary: Update api identity templates by template id
+      x-summary-source: derived
+      operationId: patchApiV1IdentityTemplatesByTemplateId
+      x-operation-id-source: derived
     delete:
       description: Delete identity auth template
       parameters:
@@ -829,6 +841,10 @@ paths:
                 additionalProperties: false
       tags:
       - Identity Templates
+      summary: Delete api identity templates by template id
+      x-summary-source: derived
+      operationId: deleteApiV1IdentityTemplatesByTemplateId
+      x-operation-id-source: derived
     get:
       description: Get identity auth template by ID
       parameters:
@@ -1036,16 +1052,19 @@ paths:
                 additionalProperties: false
       tags:
       - Identity Templates
+      summary: Get api identity templates by template id
+      x-summary-source: derived
+      operationId: getApiV1IdentityTemplatesByTemplateId
+      x-operation-id-source: derived
   /api/v1/identity-templates/search:
     get:
       description: List identity auth templates
       parameters:
       - schema:
           type: number
-          exclusiveMinimum: true
-          minimum: 0
           maximum: 100
           default: 5
+          exclusiveMinimum: 0
         in: query
         name: limit
         required: false
@@ -1270,6 +1289,10 @@ paths:
                 additionalProperties: false
       tags:
       - Identity Templates
+      summary: Get api identity templates search
+      x-summary-source: derived
+      operationId: getApiV1IdentityTemplatesSearch
+      x-operation-id-source: derived
   /api/v1/identity-templates/{templateId}/usage:
     get:
       description: Get template usage by template ID
@@ -1439,6 +1462,10 @@ paths:
                 additionalProperties: false
       tags:
       - Identity Templates
+      summary: Get api identity templates by template id usage
+      x-summary-source: derived
+      operationId: getApiV1IdentityTemplatesByTemplateIdUsage
+      x-operation-id-source: derived
   /api/v1/identity-templates/{templateId}/delete-usage:
     post:
       description: Unlink identity auth template usage
@@ -1625,6 +1652,10 @@ paths:
                 additionalProperties: false
       tags:
       - Identity Templates
+      summary: Create api identity templates by template id delete usage
+      x-summary-source: derived
+      operationId: postApiV1IdentityTemplatesByTemplateIdDeleteUsage
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

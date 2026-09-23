@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin Environments API
+  title: Infisical Environments API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -62,21 +62,25 @@ paths:
                         type: string
                         format: date-time
                       deleteAfter:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       softDeletedAt:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       deletedByUserId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       deletedByIdentityId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                     required:
                     - id
                     - name
@@ -227,6 +231,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api workspace by workspace id environments by env id
+      x-summary-source: derived
+      operationId: getApiV1WorkspaceByWorkspaceIdEnvironmentsByEnvId
+      x-operation-id-source: derived
   /api/v1/workspace/environments/{envId}:
     get:
       tags:
@@ -270,21 +278,25 @@ paths:
                         type: string
                         format: date-time
                       deleteAfter:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       softDeletedAt:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       deletedByUserId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       deletedByIdentityId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                     required:
                     - id
                     - name
@@ -435,6 +447,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api workspace environments by env id
+      x-summary-source: derived
+      operationId: getApiV1WorkspaceEnvironmentsByEnvId
+      x-operation-id-source: derived
   /api/v1/workspace/{workspaceId}/environments:
     post:
       tags:
@@ -505,21 +521,25 @@ paths:
                         type: string
                         format: date-time
                       deleteAfter:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       softDeletedAt:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       deletedByUserId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       deletedByIdentityId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                     required:
                     - id
                     - name
@@ -672,6 +692,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create api workspace by workspace id environments
+      x-summary-source: derived
+      operationId: postApiV1WorkspaceByWorkspaceIdEnvironments
+      x-operation-id-source: derived
   /api/v1/workspace/{workspaceId}/environments/{id}:
     patch:
       tags:
@@ -744,21 +768,25 @@ paths:
                         type: string
                         format: date-time
                       deleteAfter:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       softDeletedAt:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       deletedByUserId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       deletedByIdentityId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                     required:
                     - id
                     - name
@@ -911,6 +939,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update api workspace by workspace id environments by id
+      x-summary-source: derived
+      operationId: patchApiV1WorkspaceByWorkspaceIdEnvironmentsById
+      x-operation-id-source: derived
     delete:
       tags:
       - Environments
@@ -963,21 +995,25 @@ paths:
                         type: string
                         format: date-time
                       deleteAfter:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       softDeletedAt:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       deletedByUserId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       deletedByIdentityId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                     required:
                     - id
                     - name
@@ -1130,6 +1166,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete api workspace by workspace id environments by id
+      x-summary-source: derived
+      operationId: deleteApiV1WorkspaceByWorkspaceIdEnvironmentsById
+      x-operation-id-source: derived
   /api/v1/projects/{projectId}/environments/{envId}:
     get:
       operationId: getEnvironmentById
@@ -1180,21 +1220,25 @@ paths:
                         type: string
                         format: date-time
                       deleteAfter:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       softDeletedAt:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       deletedByUserId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       deletedByIdentityId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                     required:
                     - id
                     - name
@@ -1345,12 +1389,13 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get environment by id
+      x-summary-source: derived
   /api/v1/projects/{projectId}/environments:
     post:
       operationId: createEnvironment
       tags:
       - Environments
-      description: Create environment
       requestBody:
         required: true
         content:
@@ -1416,21 +1461,25 @@ paths:
                         type: string
                         format: date-time
                       deleteAfter:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       softDeletedAt:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       deletedByUserId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       deletedByIdentityId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                     required:
                     - id
                     - name
@@ -1583,12 +1632,13 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create environment
+      x-summary-source: derived
   /api/v1/projects/{projectId}/environments/{id}:
     patch:
       operationId: updateEnvironment
       tags:
       - Environments
-      description: Update environment
       requestBody:
         required: true
         content:
@@ -1656,21 +1706,25 @@ paths:
                         type: string
                         format: date-time
                       deleteAfter:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       softDeletedAt:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       deletedByUserId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       deletedByIdentityId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                     required:
                     - id
                     - name
@@ -1823,11 +1877,12 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update environment
+      x-summary-source: derived
     delete:
       operationId: deleteEnvironment
       tags:
       - Environments
-      description: Delete environment
       parameters:
       - schema:
           type: string
@@ -1885,21 +1940,25 @@ paths:
                         type: string
                         format: date-time
                       deleteAfter:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       softDeletedAt:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       deletedByUserId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       deletedByIdentityId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                     required:
                     - id
                     - name
@@ -2052,6 +2111,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete environment
+      x-summary-source: derived
   /api/v1/projects/{projectId}/environments/{id}/restore:
     post:
       operationId: restoreEnvironment
@@ -2106,21 +2167,25 @@ paths:
                         type: string
                         format: date-time
                       deleteAfter:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       softDeletedAt:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       deletedByUserId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       deletedByIdentityId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                     required:
                     - id
                     - name
@@ -2273,6 +2338,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Restore environment
+      x-summary-source: derived
 components:
   securitySchemes:
     bearerAuth:

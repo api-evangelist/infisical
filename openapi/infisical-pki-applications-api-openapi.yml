@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin PKI Applications API
+  title: Infisical PKI Applications API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -58,8 +58,9 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       createdAt:
                         type: string
                         format: date-time
@@ -213,6 +214,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create pki application
+      x-summary-source: derived
     get:
       operationId: listPkiApplications
       tags:
@@ -272,8 +275,9 @@ paths:
                         name:
                           type: string
                         description:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         createdAt:
                           type: string
                           format: date-time
@@ -443,6 +447,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List pki applications
+      x-summary-source: derived
   /api/v1/cert-manager/applications/{applicationId}:
     get:
       operationId: getPkiApplication
@@ -473,8 +479,9 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       createdAt:
                         type: string
                         format: date-time
@@ -628,6 +635,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get pki application
+      x-summary-source: derived
     patch:
       operationId: updatePkiApplication
       tags:
@@ -645,9 +654,10 @@ paths:
                   minLength: 1
                   maxLength: 64
                 description:
-                  type: string
+                  type:
+                  - string
+                  - 'null'
                   maxLength: 256
-                  nullable: true
               additionalProperties: false
       parameters:
       - schema:
@@ -673,8 +683,9 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       createdAt:
                         type: string
                         format: date-time
@@ -828,6 +839,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update pki application
+      x-summary-source: derived
     delete:
       operationId: deletePkiApplication
       tags:
@@ -857,8 +870,9 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       createdAt:
                         type: string
                         format: date-time
@@ -1012,6 +1026,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete pki application
+      x-summary-source: derived
   /api/v1/cert-manager/applications/by-name/{name}:
     get:
       operationId: getPkiApplicationByName
@@ -1043,8 +1059,9 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       createdAt:
                         type: string
                         format: date-time
@@ -1198,6 +1215,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get pki application by name
+      x-summary-source: derived
   /api/v1/cert-manager/applications/{applicationId}/permissions:
     get:
       operationId: getPkiApplicationPermissions
@@ -1232,14 +1251,17 @@ paths:
                             id:
                               type: string
                             actorUserId:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             actorIdentityId:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             actorGroupId:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             roles:
                               type: array
                               items:
@@ -1248,8 +1270,9 @@ paths:
                                   role:
                                     type: string
                                   customRoleSlug:
-                                    type: string
-                                    nullable: true
+                                    type:
+                                    - string
+                                    - 'null'
                                 required:
                                 - role
                                 additionalProperties: false
@@ -1402,6 +1425,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get pki application permissions
+      x-summary-source: derived
   /api/v1/cert-manager/applications/{applicationId}/profiles:
     get:
       operationId: listPkiApplicationProfiles
@@ -1437,24 +1462,29 @@ paths:
                         profileSlug:
                           type: string
                         profileDescription:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         estConfigId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         apiConfigId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         acmeConfigId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         scepConfigId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         createdAt:
                           type: string
                           format: date-time
@@ -1609,6 +1639,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List pki application profiles
+      x-summary-source: derived
     post:
       operationId: attachPkiApplicationProfiles
       tags:
@@ -1659,24 +1691,29 @@ paths:
                         profileSlug:
                           type: string
                         profileDescription:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         estConfigId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         apiConfigId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         acmeConfigId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         scepConfigId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         createdAt:
                           type: string
                           format: date-time
@@ -1831,6 +1868,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Attach pki application profiles
+      x-summary-source: derived
   /api/v1/cert-manager/applications/{applicationId}/profiles/{profileId}:
     delete:
       operationId: detachPkiApplicationProfile
@@ -2006,6 +2045,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Detach pki application profile
+      x-summary-source: derived
   /api/v1/cert-manager/applications/{applicationId}/users:
     get:
       operationId: listPkiApplicationUserMembers
@@ -2039,23 +2080,27 @@ paths:
                           type: string
                           format: uuid
                         actorUserId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         actorIdentityId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         actorGroupId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         role:
                           type: string
                         customRoleId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         createdAt:
                           type: string
                           format: date-time
@@ -2063,27 +2108,33 @@ paths:
                           type: string
                           format: date-time
                         details:
-                          type: object
+                          type:
+                          - object
+                          - 'null'
                           properties:
                             name:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             email:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             username:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             authMethod:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             slug:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                           required:
                           - name
                           additionalProperties: false
-                          nullable: true
                       required:
                       - membershipId
                       - applicationId
@@ -2232,6 +2283,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List pki application user members
+      x-summary-source: derived
     post:
       operationId: addPkiApplicationUserMembers
       tags:
@@ -2288,23 +2341,27 @@ paths:
                           type: string
                           format: uuid
                         actorUserId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         actorIdentityId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         actorGroupId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         role:
                           type: string
                         customRoleId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         createdAt:
                           type: string
                           format: date-time
@@ -2312,27 +2369,33 @@ paths:
                           type: string
                           format: date-time
                         details:
-                          type: object
+                          type:
+                          - object
+                          - 'null'
                           properties:
                             name:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             email:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             username:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             authMethod:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             slug:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                           required:
                           - name
                           additionalProperties: false
-                          nullable: true
                       required:
                       - membershipId
                       - applicationId
@@ -2491,6 +2554,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Add pki application user members
+      x-summary-source: derived
   /api/v1/cert-manager/applications/{applicationId}/users/{userId}:
     patch:
       operationId: updatePkiApplicationUserMemberRole
@@ -2541,23 +2606,27 @@ paths:
                         type: string
                         format: uuid
                       actorUserId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       actorIdentityId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       actorGroupId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       role:
                         type: string
                       customRoleId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       createdAt:
                         type: string
                         format: date-time
@@ -2565,27 +2634,33 @@ paths:
                         type: string
                         format: date-time
                       details:
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                         properties:
                           name:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           email:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           username:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           authMethod:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           slug:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                         required:
                         - name
                         additionalProperties: false
-                        nullable: true
                     required:
                     - membershipId
                     - applicationId
@@ -2734,6 +2809,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update pki application user member role
+      x-summary-source: derived
     delete:
       operationId: removePkiApplicationUserMember
       tags:
@@ -2908,6 +2985,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Remove pki application user member
+      x-summary-source: derived
   /api/v1/cert-manager/applications/{applicationId}/identities:
     get:
       operationId: listPkiApplicationIdentityMembers
@@ -2941,23 +3020,27 @@ paths:
                           type: string
                           format: uuid
                         actorUserId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         actorIdentityId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         actorGroupId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         role:
                           type: string
                         customRoleId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         createdAt:
                           type: string
                           format: date-time
@@ -2965,27 +3048,33 @@ paths:
                           type: string
                           format: date-time
                         details:
-                          type: object
+                          type:
+                          - object
+                          - 'null'
                           properties:
                             name:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             email:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             username:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             authMethod:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             slug:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                           required:
                           - name
                           additionalProperties: false
-                          nullable: true
                       required:
                       - membershipId
                       - applicationId
@@ -3134,6 +3223,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List pki application identity members
+      x-summary-source: derived
   /api/v1/cert-manager/applications/{applicationId}/identities/{identityId}:
     post:
       operationId: addPkiApplicationIdentityMember
@@ -3184,23 +3275,27 @@ paths:
                         type: string
                         format: uuid
                       actorUserId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       actorIdentityId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       actorGroupId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       role:
                         type: string
                       customRoleId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       createdAt:
                         type: string
                         format: date-time
@@ -3208,27 +3303,33 @@ paths:
                         type: string
                         format: date-time
                       details:
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                         properties:
                           name:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           email:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           username:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           authMethod:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           slug:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                         required:
                         - name
                         additionalProperties: false
-                        nullable: true
                     required:
                     - membershipId
                     - applicationId
@@ -3377,6 +3478,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Add pki application identity member
+      x-summary-source: derived
     patch:
       operationId: updatePkiApplicationIdentityMemberRole
       tags:
@@ -3426,23 +3529,27 @@ paths:
                         type: string
                         format: uuid
                       actorUserId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       actorIdentityId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       actorGroupId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       role:
                         type: string
                       customRoleId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       createdAt:
                         type: string
                         format: date-time
@@ -3450,27 +3557,33 @@ paths:
                         type: string
                         format: date-time
                       details:
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                         properties:
                           name:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           email:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           username:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           authMethod:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           slug:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                         required:
                         - name
                         additionalProperties: false
-                        nullable: true
                     required:
                     - membershipId
                     - applicationId
@@ -3619,6 +3732,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update pki application identity member role
+      x-summary-source: derived
     delete:
       operationId: removePkiApplicationIdentityMember
       tags:
@@ -3793,6 +3908,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Remove pki application identity member
+      x-summary-source: derived
   /api/v1/cert-manager/applications/{applicationId}/groups:
     get:
       operationId: listPkiApplicationGroupMembers
@@ -3826,23 +3943,27 @@ paths:
                           type: string
                           format: uuid
                         actorUserId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         actorIdentityId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         actorGroupId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         role:
                           type: string
                         customRoleId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         createdAt:
                           type: string
                           format: date-time
@@ -3850,27 +3971,33 @@ paths:
                           type: string
                           format: date-time
                         details:
-                          type: object
+                          type:
+                          - object
+                          - 'null'
                           properties:
                             name:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             email:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             username:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             authMethod:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             slug:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                           required:
                           - name
                           additionalProperties: false
-                          nullable: true
                       required:
                       - membershipId
                       - applicationId
@@ -4019,6 +4146,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List pki application group members
+      x-summary-source: derived
   /api/v1/cert-manager/applications/{applicationId}/groups/{groupId}:
     post:
       operationId: addPkiApplicationGroupMember
@@ -4069,23 +4198,27 @@ paths:
                         type: string
                         format: uuid
                       actorUserId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       actorIdentityId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       actorGroupId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       role:
                         type: string
                       customRoleId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       createdAt:
                         type: string
                         format: date-time
@@ -4093,27 +4226,33 @@ paths:
                         type: string
                         format: date-time
                       details:
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                         properties:
                           name:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           email:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           username:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           authMethod:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           slug:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                         required:
                         - name
                         additionalProperties: false
-                        nullable: true
                     required:
                     - membershipId
                     - applicationId
@@ -4262,6 +4401,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Add pki application group member
+      x-summary-source: derived
     patch:
       operationId: updatePkiApplicationGroupMemberRole
       tags:
@@ -4311,23 +4452,27 @@ paths:
                         type: string
                         format: uuid
                       actorUserId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       actorIdentityId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       actorGroupId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       role:
                         type: string
                       customRoleId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       createdAt:
                         type: string
                         format: date-time
@@ -4335,27 +4480,33 @@ paths:
                         type: string
                         format: date-time
                       details:
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                         properties:
                           name:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           email:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           username:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           authMethod:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           slug:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                         required:
                         - name
                         additionalProperties: false
-                        nullable: true
                     required:
                     - membershipId
                     - applicationId
@@ -4504,6 +4655,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update pki application group member role
+      x-summary-source: derived
     delete:
       operationId: removePkiApplicationGroupMember
       tags:
@@ -4678,6 +4831,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Remove pki application group member
+      x-summary-source: derived
   /api/v1/cert-manager/applications/{applicationId}/profiles/{profileId}/enrollment:
     get:
       operationId: getPkiApplicationEnrollment
@@ -4712,7 +4867,9 @@ paths:
                     type: string
                     format: uuid
                   api:
-                    type: object
+                    type:
+                    - object
+                    - 'null'
                     properties:
                       id:
                         type: string
@@ -4720,16 +4877,18 @@ paths:
                       autoRenew:
                         type: boolean
                       renewBeforeDays:
-                        type: integer
-                        nullable: true
+                        type:
+                        - integer
+                        - 'null'
                     required:
                     - id
                     - autoRenew
                     - renewBeforeDays
                     additionalProperties: false
-                    nullable: true
                   est:
-                    type: object
+                    type:
+                    - object
+                    - 'null'
                     properties:
                       id:
                         type: string
@@ -4743,9 +4902,10 @@ paths:
                     - disableBootstrapCaValidation
                     - estEndpointUrl
                     additionalProperties: false
-                    nullable: true
                   acme:
-                    type: object
+                    type:
+                    - object
+                    - 'null'
                     properties:
                       id:
                         type: string
@@ -4762,9 +4922,10 @@ paths:
                     - skipEabBinding
                     - directoryUrl
                     additionalProperties: false
-                    nullable: true
                   scep:
-                    type: object
+                    type:
+                    - object
+                    - 'null'
                     properties:
                       id:
                         type: string
@@ -4779,16 +4940,19 @@ paths:
                       allowCertBasedRenewal:
                         type: boolean
                       dynamicChallengeExpiryMinutes:
-                        type: integer
-                        nullable: true
+                        type:
+                        - integer
+                        - 'null'
                       dynamicChallengeMaxPending:
-                        type: integer
-                        nullable: true
+                        type:
+                        - integer
+                        - 'null'
                       scepEndpointUrl:
                         type: string
                       challengeEndpointUrl:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       raCertificatePem:
                         type: string
                       raCertExpiresAt:
@@ -4806,7 +4970,6 @@ paths:
                     - raCertificatePem
                     - raCertExpiresAt
                     additionalProperties: false
-                    nullable: true
                   estConfigured:
                     type: boolean
                   acmeConfigured:
@@ -4962,6 +5125,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get pki application enrollment
+      x-summary-source: derived
   /api/v1/cert-manager/applications/{applicationId}/profiles/{profileId}/enrollment/api:
     put:
       operationId: setPkiApplicationApiEnrollment
@@ -5019,8 +5184,9 @@ paths:
                       autoRenew:
                         type: boolean
                       renewBeforeDays:
-                        type: integer
-                        nullable: true
+                        type:
+                        - integer
+                        - 'null'
                     required:
                     - id
                     - autoRenew
@@ -5169,6 +5335,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Set pki application api enrollment
+      x-summary-source: derived
     delete:
       operationId: clearPkiApplicationApiEnrollment
       tags:
@@ -5343,6 +5511,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Clear pki application api enrollment
+      x-summary-source: derived
   /api/v1/cert-manager/applications/{applicationId}/profiles/{profileId}/enrollment/est:
     put:
       operationId: setPkiApplicationEstEnrollment
@@ -5549,6 +5719,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Set pki application est enrollment
+      x-summary-source: derived
     delete:
       operationId: clearPkiApplicationEstEnrollment
       tags:
@@ -5723,6 +5895,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Clear pki application est enrollment
+      x-summary-source: derived
   /api/v1/cert-manager/applications/{applicationId}/profiles/{profileId}/enrollment/acme:
     put:
       operationId: setPkiApplicationAcmeEnrollment
@@ -5928,6 +6102,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Set pki application acme enrollment
+      x-summary-source: derived
     delete:
       operationId: clearPkiApplicationAcmeEnrollment
       tags:
@@ -6102,6 +6278,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Clear pki application acme enrollment
+      x-summary-source: derived
   /api/v1/cert-manager/applications/{applicationId}/profiles/{profileId}/enrollment/acme/eab/reveal:
     post:
       operationId: revealPkiApplicationAcmeEabSecret
@@ -6283,6 +6461,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Reveal pki application acme eab secret
+      x-summary-source: derived
   /api/v1/cert-manager/applications/{applicationId}/profiles/{profileId}/enrollment/acme/eab/rotate:
     post:
       operationId: rotatePkiApplicationAcmeEabSecret
@@ -6458,6 +6638,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Rotate pki application acme eab secret
+      x-summary-source: derived
   /api/v1/cert-manager/applications/{applicationId}/profiles/{profileId}/enrollment/scep:
     put:
       operationId: setPkiApplicationScepEnrollment
@@ -6678,6 +6860,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Set pki application scep enrollment
+      x-summary-source: derived
     delete:
       operationId: clearPkiApplicationScepEnrollment
       tags:
@@ -6852,6 +7036,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Clear pki application scep enrollment
+      x-summary-source: derived
   /api/v1/cert-manager/applications/{applicationId}/alerts:
     get:
       operationId: listPkiApplicationAlerts
@@ -6919,8 +7105,9 @@ paths:
                         name:
                           type: string
                         description:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         eventType:
                           type: string
                           enum:
@@ -6965,17 +7152,19 @@ paths:
                         enabled:
                           type: boolean
                         applicationId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         notificationConfig:
-                          type: object
+                          type:
+                          - object
+                          - 'null'
                           properties:
                             enableDailyNotification:
                               type: boolean
                               default: false
                           additionalProperties: false
-                          nullable: true
                         channels:
                           type: array
                           items:
@@ -7011,7 +7200,9 @@ paths:
                             - updatedAt
                             additionalProperties: false
                         lastRun:
-                          type: object
+                          type:
+                          - object
+                          - 'null'
                           properties:
                             timestamp:
                               type: string
@@ -7022,14 +7213,14 @@ paths:
                               - success
                               - failed
                             error:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                           required:
                           - timestamp
                           - status
                           - error
                           additionalProperties: false
-                          nullable: true
                         createdAt:
                           type: string
                           format: date-time
@@ -7194,6 +7385,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List pki application alerts
+      x-summary-source: derived
     post:
       operationId: createPkiApplicationAlert
       tags:
@@ -7258,13 +7451,14 @@ paths:
                   type: boolean
                   default: true
                 notificationConfig:
-                  type: object
+                  type:
+                  - object
+                  - 'null'
                   properties:
                     enableDailyNotification:
                       type: boolean
                       default: false
                   additionalProperties: false
-                  nullable: true
                 channels:
                   type: array
                   items:
@@ -7300,9 +7494,10 @@ paths:
                               type: string
                               format: uri
                             signingSecret:
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                               maxLength: 256
-                              nullable: true
                           required:
                           - url
                           additionalProperties: false
@@ -7360,8 +7555,9 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       eventType:
                         type: string
                         enum:
@@ -7406,17 +7602,19 @@ paths:
                       enabled:
                         type: boolean
                       applicationId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       notificationConfig:
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                         properties:
                           enableDailyNotification:
                             type: boolean
                             default: false
                         additionalProperties: false
-                        nullable: true
                       channels:
                         type: array
                         items:
@@ -7452,7 +7650,9 @@ paths:
                           - updatedAt
                           additionalProperties: false
                       lastRun:
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                         properties:
                           timestamp:
                             type: string
@@ -7463,14 +7663,14 @@ paths:
                             - success
                             - failed
                           error:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                         required:
                         - timestamp
                         - status
                         - error
                         additionalProperties: false
-                        nullable: true
                       createdAt:
                         type: string
                         format: date-time
@@ -7631,6 +7831,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create pki application alert
+      x-summary-source: derived
   /api/v1/cert-manager/applications/{applicationId}/alerts/{alertId}:
     patch:
       operationId: updatePkiApplicationAlert
@@ -7696,13 +7898,14 @@ paths:
                   type: boolean
                   default: true
                 notificationConfig:
-                  type: object
+                  type:
+                  - object
+                  - 'null'
                   properties:
                     enableDailyNotification:
                       type: boolean
                       default: false
                   additionalProperties: false
-                  nullable: true
                 channels:
                   type: array
                   items:
@@ -7738,9 +7941,10 @@ paths:
                               type: string
                               format: uri
                             signingSecret:
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                               maxLength: 256
-                              nullable: true
                           required:
                           - url
                           additionalProperties: false
@@ -7799,8 +8003,9 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       eventType:
                         type: string
                         enum:
@@ -7845,17 +8050,19 @@ paths:
                       enabled:
                         type: boolean
                       applicationId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       notificationConfig:
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                         properties:
                           enableDailyNotification:
                             type: boolean
                             default: false
                         additionalProperties: false
-                        nullable: true
                       channels:
                         type: array
                         items:
@@ -7891,7 +8098,9 @@ paths:
                           - updatedAt
                           additionalProperties: false
                       lastRun:
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                         properties:
                           timestamp:
                             type: string
@@ -7902,14 +8111,14 @@ paths:
                             - success
                             - failed
                           error:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                         required:
                         - timestamp
                         - status
                         - error
                         additionalProperties: false
-                        nullable: true
                       createdAt:
                         type: string
                         format: date-time
@@ -8070,6 +8279,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update pki application alert
+      x-summary-source: derived
     delete:
       operationId: deletePkiApplicationAlert
       tags:
@@ -8105,8 +8316,9 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       eventType:
                         type: string
                         enum:
@@ -8151,17 +8363,19 @@ paths:
                       enabled:
                         type: boolean
                       applicationId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       notificationConfig:
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                         properties:
                           enableDailyNotification:
                             type: boolean
                             default: false
                         additionalProperties: false
-                        nullable: true
                       channels:
                         type: array
                         items:
@@ -8197,7 +8411,9 @@ paths:
                           - updatedAt
                           additionalProperties: false
                       lastRun:
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                         properties:
                           timestamp:
                             type: string
@@ -8208,14 +8424,14 @@ paths:
                             - success
                             - failed
                           error:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                         required:
                         - timestamp
                         - status
                         - error
                         additionalProperties: false
-                        nullable: true
                       createdAt:
                         type: string
                         format: date-time
@@ -8376,6 +8592,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete pki application alert
+      x-summary-source: derived
 components:
   securitySchemes:
     bearerAuth:

@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin Project Groups API
+  title: Infisical Project Groups API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -261,6 +261,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Add group to project
+      x-summary-source: derived
   /api/v1/projects/{projectId}/groups/{groupId}:
     patch:
       operationId: updateProjectGroup
@@ -357,26 +359,31 @@ paths:
                           type: string
                           format: uuid
                         customRoleId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         isTemporary:
                           type: boolean
                           default: false
                         temporaryMode:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         temporaryRange:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         temporaryAccessStartTime:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         temporaryAccessEndTime:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         createdAt:
                           type: string
                           format: date-time
@@ -531,6 +538,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update project group
+      x-summary-source: derived
     delete:
       operationId: removeGroupFromProject
       tags:
@@ -725,6 +734,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Remove group from project
+      x-summary-source: derived
     get:
       operationId: getProjectGroup
       tags:
@@ -775,30 +786,37 @@ paths:
                             role:
                               type: string
                             customRoleId:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             customRoleName:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             customRoleSlug:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             isTemporary:
                               type: boolean
                             temporaryMode:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             temporaryRange:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             temporaryAccessStartTime:
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                               format: date-time
-                              nullable: true
                             temporaryAccessEndTime:
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                               format: date-time
-                              nullable: true
                           required:
                           - id
                           - role
@@ -968,6 +986,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get project group
+      x-summary-source: derived
   /api/v1/projects/{projectId}/groups:
     get:
       operationId: listProjectGroups
@@ -1017,30 +1037,37 @@ paths:
                               role:
                                 type: string
                               customRoleId:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               customRoleName:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               customRoleSlug:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               isTemporary:
                                 type: boolean
                               temporaryMode:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               temporaryRange:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               temporaryAccessStartTime:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 format: date-time
-                                nullable: true
                               temporaryAccessEndTime:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 format: date-time
-                                nullable: true
                             required:
                             - id
                             - role
@@ -1213,6 +1240,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List project groups
+      x-summary-source: derived
   /api/v1/projects/{projectId}/memberships/groups:
     get:
       operationId: listProjectGroupMemberships
@@ -1278,30 +1307,37 @@ paths:
                               role:
                                 type: string
                               customRoleId:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               customRoleName:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               customRoleSlug:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               isTemporary:
                                 type: boolean
                               temporaryMode:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               temporaryRange:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               temporaryAccessStartTime:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 format: date-time
-                                nullable: true
                               temporaryAccessEndTime:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 format: date-time
-                                nullable: true
                               createdAt:
                                 type: string
                                 format: date-time
@@ -1469,6 +1505,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List project group memberships
+      x-summary-source: derived
   /api/v1/projects/{projectId}/memberships/groups/{groupId}:
     post:
       operationId: createProjectGroupMembership
@@ -1589,30 +1627,37 @@ paths:
                             role:
                               type: string
                             customRoleId:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             customRoleName:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             customRoleSlug:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             isTemporary:
                               type: boolean
                             temporaryMode:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             temporaryRange:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             temporaryAccessStartTime:
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                               format: date-time
-                              nullable: true
                             temporaryAccessEndTime:
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                               format: date-time
-                              nullable: true
                             createdAt:
                               type: string
                               format: date-time
@@ -1780,6 +1825,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create project group membership
+      x-summary-source: derived
     get:
       operationId: getProjectGroupMembership
       tags:
@@ -1847,30 +1894,37 @@ paths:
                             role:
                               type: string
                             customRoleId:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             customRoleName:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             customRoleSlug:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             isTemporary:
                               type: boolean
                             temporaryMode:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             temporaryRange:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             temporaryAccessStartTime:
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                               format: date-time
-                              nullable: true
                             temporaryAccessEndTime:
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                               format: date-time
-                              nullable: true
                             createdAt:
                               type: string
                               format: date-time
@@ -2038,6 +2092,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get project group membership
+      x-summary-source: derived
     patch:
       operationId: updateProjectGroupMembership
       tags:
@@ -2131,26 +2187,31 @@ paths:
                           type: string
                           format: uuid
                         customRoleId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         isTemporary:
                           type: boolean
                           default: false
                         temporaryMode:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         temporaryRange:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         temporaryAccessStartTime:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         temporaryAccessEndTime:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         createdAt:
                           type: string
                           format: date-time
@@ -2305,6 +2366,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update project group membership
+      x-summary-source: derived
     delete:
       operationId: removeProjectGroupMembership
       tags:
@@ -2498,6 +2561,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Remove project group membership
+      x-summary-source: derived
   /api/v2/workspace/{projectId}/groups/{groupIdOrName}:
     post:
       tags:
@@ -2744,6 +2809,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create api workspace by project id groups by group id or name
+      x-summary-source: derived
+      operationId: postApiV2WorkspaceByProjectIdGroupsByGroupIdOrName
+      x-operation-id-source: derived
   /api/v2/workspace/{projectId}/groups/{groupId}:
     patch:
       tags:
@@ -2838,26 +2907,31 @@ paths:
                           type: string
                           format: uuid
                         customRoleId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         isTemporary:
                           type: boolean
                           default: false
                         temporaryMode:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         temporaryRange:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         temporaryAccessStartTime:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         temporaryAccessEndTime:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         createdAt:
                           type: string
                           format: date-time
@@ -3012,6 +3086,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update api workspace by project id groups by group id
+      x-summary-source: derived
+      operationId: patchApiV2WorkspaceByProjectIdGroupsByGroupId
+      x-operation-id-source: derived
     delete:
       tags:
       - Project Groups
@@ -3204,6 +3282,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete api workspace by project id groups by group id
+      x-summary-source: derived
+      operationId: deleteApiV2WorkspaceByProjectIdGroupsByGroupId
+      x-operation-id-source: derived
     get:
       tags:
       - Project Groups
@@ -3252,30 +3334,37 @@ paths:
                             role:
                               type: string
                             customRoleId:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             customRoleName:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             customRoleSlug:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             isTemporary:
                               type: boolean
                             temporaryMode:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             temporaryRange:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             temporaryAccessStartTime:
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                               format: date-time
-                              nullable: true
                             temporaryAccessEndTime:
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                               format: date-time
-                              nullable: true
                           required:
                           - id
                           - role
@@ -3445,6 +3534,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api workspace by project id groups by group id
+      x-summary-source: derived
+      operationId: getApiV2WorkspaceByProjectIdGroupsByGroupId
+      x-operation-id-source: derived
   /api/v2/workspace/{projectId}/groups:
     get:
       tags:
@@ -3492,30 +3585,37 @@ paths:
                               role:
                                 type: string
                               customRoleId:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               customRoleName:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               customRoleSlug:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               isTemporary:
                                 type: boolean
                               temporaryMode:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               temporaryRange:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               temporaryAccessStartTime:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 format: date-time
-                                nullable: true
                               temporaryAccessEndTime:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 format: date-time
-                                nullable: true
                             required:
                             - id
                             - role
@@ -3685,6 +3785,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api workspace by project id groups
+      x-summary-source: derived
+      operationId: getApiV2WorkspaceByProjectIdGroups
+      x-operation-id-source: derived
   /api/v2/workspace/{projectId}/groups/{groupId}/users:
     get:
       tags:
@@ -3756,25 +3860,29 @@ paths:
                       type: object
                       properties:
                         email:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         username:
                           type: string
                         firstName:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         lastName:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         id:
                           type: string
                           format: uuid
                         isPartOfGroup:
                           type: boolean
                         joinedGroupAt:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                       required:
                       - username
                       - id
@@ -3925,6 +4033,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api workspace by project id groups by group id users
+      x-summary-source: derived
+      operationId: getApiV2WorkspaceByProjectIdGroupsByGroupIdUsers
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

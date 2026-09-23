@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin Identities API
+  title: Infisical Identities API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -82,8 +82,9 @@ paths:
                         type: string
                         format: uuid
                       projectId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       createdAt:
                         type: string
                         format: date-time
@@ -265,6 +266,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create project machine identity
+      x-summary-source: derived
     get:
       operationId: listProjectMachineIdentities
       tags:
@@ -324,8 +327,9 @@ paths:
                           type: string
                           format: uuid
                         projectId:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         createdAt:
                           type: string
                           format: date-time
@@ -510,6 +514,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List project machine identities
+      x-summary-source: derived
   /api/v1/projects/{projectId}/identities/{identityId}:
     patch:
       operationId: updateProjectMachineIdentity
@@ -582,8 +588,9 @@ paths:
                         type: string
                         format: uuid
                       projectId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       createdAt:
                         type: string
                         format: date-time
@@ -765,6 +772,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update project machine identity
+      x-summary-source: derived
     delete:
       operationId: deleteProjectMachineIdentity
       tags:
@@ -805,8 +814,9 @@ paths:
                         type: string
                         format: uuid
                       projectId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       createdAt:
                         type: string
                         format: date-time
@@ -988,6 +998,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete project machine identity
+      x-summary-source: derived
     get:
       operationId: getProjectMachineIdentityById
       tags:
@@ -1028,8 +1040,9 @@ paths:
                         type: string
                         format: uuid
                       projectId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       createdAt:
                         type: string
                         format: date-time
@@ -1211,12 +1224,13 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get project machine identity by id
+      x-summary-source: derived
   /api/v1/identities:
     post:
       operationId: createMachineIdentity
       tags:
       - Identities
-      description: Create machine identity
       requestBody:
         required: true
         content:
@@ -1277,8 +1291,9 @@ paths:
                       name:
                         type: string
                       authMethod:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       createdAt:
                         type: string
                         format: date-time
@@ -1292,8 +1307,9 @@ paths:
                         type: string
                         format: uuid
                       projectId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       authMethods:
                         type: array
                         items:
@@ -1464,11 +1480,12 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create machine identity
+      x-summary-source: derived
     get:
       operationId: listMachineIdentities
       tags:
       - Identities
-      description: List machine identities
       parameters:
       - schema:
           type: string
@@ -1497,9 +1514,10 @@ paths:
                         role:
                           type: string
                         roleId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         orgId:
                           type: string
                           format: uuid
@@ -1513,12 +1531,14 @@ paths:
                           type: string
                           format: uuid
                         lastLoginAuthMethod:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         lastLoginTime:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         customRole:
                           type: object
                           properties:
@@ -1531,8 +1551,9 @@ paths:
                               type: string
                             permissions: {}
                             description:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                           required:
                           - id
                           - name
@@ -1711,12 +1732,13 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List machine identities
+      x-summary-source: derived
   /api/v1/identities/{identityId}:
     patch:
       operationId: updateMachineIdentity
       tags:
       - Identities
-      description: Update machine identity
       requestBody:
         required: true
         content:
@@ -1776,8 +1798,9 @@ paths:
                       name:
                         type: string
                       authMethod:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       createdAt:
                         type: string
                         format: date-time
@@ -1791,8 +1814,9 @@ paths:
                         type: string
                         format: uuid
                       projectId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       metadata:
                         type: array
                         items:
@@ -1958,11 +1982,12 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update machine identity
+      x-summary-source: derived
     delete:
       operationId: deleteMachineIdentity
       tags:
       - Identities
-      description: Delete machine identity
       parameters:
       - schema:
           type: string
@@ -1989,8 +2014,9 @@ paths:
                       name:
                         type: string
                       authMethod:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       createdAt:
                         type: string
                         format: date-time
@@ -2004,8 +2030,9 @@ paths:
                         type: string
                         format: uuid
                       projectId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                     required:
                     - id
                     - name
@@ -2154,6 +2181,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete machine identity
+      x-summary-source: derived
     get:
       operationId: getMachineIdentityById
       tags:
@@ -2185,9 +2214,10 @@ paths:
                       role:
                         type: string
                       roleId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       orgId:
                         type: string
                         format: uuid
@@ -2201,12 +2231,14 @@ paths:
                         type: string
                         format: uuid
                       lastLoginAuthMethod:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       lastLoginTime:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       metadata:
                         type: array
                         items:
@@ -2238,8 +2270,9 @@ paths:
                             type: string
                           permissions: {}
                           description:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                         required:
                         - id
                         - name
@@ -2424,12 +2457,13 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get machine identity by id
+      x-summary-source: derived
   /api/v1/identities/search:
     post:
       operationId: searchMachineIdentities
       tags:
       - Identities
-      description: Search machine identities
       requestBody:
         required: true
         content:
@@ -2565,9 +2599,10 @@ paths:
                         role:
                           type: string
                         roleId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         orgId:
                           type: string
                           format: uuid
@@ -2581,12 +2616,14 @@ paths:
                           type: string
                           format: uuid
                         lastLoginAuthMethod:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         lastLoginTime:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         customRole:
                           type: object
                           properties:
@@ -2599,8 +2636,9 @@ paths:
                               type: string
                             permissions: {}
                             description:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                           required:
                           - id
                           - name
@@ -2788,6 +2826,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Search machine identities
+      x-summary-source: derived
   /api/v2/identities/search:
     post:
       operationId: searchMachineIdentitiesV2
@@ -2955,10 +2995,13 @@ paths:
                         orgId:
                           type: string
                         projectId:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         project:
-                          type: object
+                          type:
+                          - object
+                          - 'null'
                           properties:
                             id:
                               type: string
@@ -2974,7 +3017,6 @@ paths:
                           - slug
                           - type
                           additionalProperties: false
-                          nullable: true
                         createdAt:
                           type: string
                           format: date-time
@@ -2982,12 +3024,14 @@ paths:
                           type: string
                           format: date-time
                         lastLoginAuthMethod:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         lastLoginTime:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         roles:
                           type: array
                           items:
@@ -2998,33 +3042,41 @@ paths:
                               role:
                                 type: string
                               customRoleId:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               customRoleName:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               customRoleSlug:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               customRoleDescription:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               isTemporary:
                                 type: boolean
                               temporaryMode:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               temporaryRange:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               temporaryAccessStartTime:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 format: date-time
-                                nullable: true
                               temporaryAccessEndTime:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 format: date-time
-                                nullable: true
                             required:
                             - id
                             - role
@@ -3213,6 +3265,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Search machine identities V2
+      x-summary-source: derived
   /api/v2/identities/search/count:
     post:
       operationId: countMachineIdentitiesV2
@@ -3487,6 +3541,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Count machine identities V2
+      x-summary-source: derived
 components:
   securitySchemes:
     bearerAuth:

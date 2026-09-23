@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin SSH Host Groups API
+  title: Infisical SSH Host Groups API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -207,6 +207,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api ssh host groups by ssh host group id
+      x-summary-source: derived
+      operationId: getApiV1SshHostGroupsBySshHostGroupId
+      x-operation-id-source: derived
     patch:
       tags:
       - SSH Host Groups
@@ -437,6 +441,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update api ssh host groups by ssh host group id
+      x-summary-source: derived
+      operationId: patchApiV1SshHostGroupsBySshHostGroupId
+      x-operation-id-source: derived
     delete:
       tags:
       - SSH Host Groups
@@ -630,6 +638,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete api ssh host groups by ssh host group id
+      x-summary-source: derived
+      operationId: deleteApiV1SshHostGroupsBySshHostGroupId
+      x-operation-id-source: derived
   /api/v1/ssh/host-groups:
     post:
       tags:
@@ -861,6 +873,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create api ssh host groups
+      x-summary-source: derived
+      operationId: postApiV1SshHostGroups
+      x-operation-id-source: derived
   /api/v1/ssh/host-groups/{sshHostGroupId}/hosts:
     get:
       tags:
@@ -901,14 +917,16 @@ paths:
                         hostname:
                           type: string
                         alias:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         isPartOfGroup:
                           type: boolean
                         joinedGroupAt:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                       required:
                       - id
                       - hostname
@@ -1059,6 +1077,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api ssh host groups by ssh host group id hosts
+      x-summary-source: derived
+      operationId: getApiV1SshHostGroupsBySshHostGroupIdHosts
+      x-operation-id-source: derived
   /api/v1/ssh/host-groups/{sshHostGroupId}/hosts/{hostId}:
     post:
       tags:
@@ -1093,8 +1115,9 @@ paths:
                   hostname:
                     type: string
                   alias:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   userCertTtl:
                     type: string
                   hostCertTtl:
@@ -1276,6 +1299,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create api ssh host groups by ssh host group id hosts by host id
+      x-summary-source: derived
+      operationId: postApiV1SshHostGroupsBySshHostGroupIdHostsByHostId
+      x-operation-id-source: derived
     delete:
       tags:
       - SSH Host Groups
@@ -1309,8 +1336,9 @@ paths:
                   hostname:
                     type: string
                   alias:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   userCertTtl:
                     type: string
                   hostCertTtl:
@@ -1492,6 +1520,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete api ssh host groups by ssh host group id hosts by host id
+      x-summary-source: derived
+      operationId: deleteApiV1SshHostGroupsBySshHostGroupIdHostsByHostId
+      x-operation-id-source: derived
   /api/v1/projects/{projectId}/ssh-host-groups:
     get:
       operationId: listProjectSshHostGroups
@@ -1697,6 +1729,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List project ssh host groups
+      x-summary-source: derived
   /api/v2/workspace/{projectId}/ssh-host-groups:
     get:
       tags:
@@ -1901,6 +1935,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api workspace by project id ssh host groups
+      x-summary-source: derived
+      operationId: getApiV2WorkspaceByProjectIdSshHostGroups
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

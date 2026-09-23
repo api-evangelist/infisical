@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin PKI Certificate Authorities API
+  title: Infisical PKI Certificate Authorities API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -95,9 +95,10 @@ paths:
                         name:
                           type: string
                         parentCaId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         type:
                           type: string
                         friendlyName:
@@ -117,22 +118,26 @@ paths:
                         dn:
                           type: string
                         serialNumber:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         maxPathLength:
-                          type: number
-                          nullable: true
+                          type:
+                          - number
+                          - 'null'
                         keyAlgorithm:
                           type: string
                         activeCaCertId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         crlDistributionPointUrls:
-                          type: array
+                          type:
+                          - array
+                          - 'null'
                           items:
                             type: string
-                          nullable: true
                         disableManagedCrlDistributionPointUrl:
                           type: boolean
                           default: false
@@ -301,6 +306,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List project certificate authorities
+      x-summary-source: derived
   /api/v1/cert-manager/ca/internal:
     get:
       operationId: listInternalCertificateAuthoritiesV1
@@ -377,9 +384,10 @@ paths:
                           type: string
                           description: The date and time when the CA expires in YYYY-MM-DDTHH:mm:ss.sssZ format.
                         maxPathLength:
-                          type: number
+                          type:
+                          - number
+                          - 'null'
                           minimum: -1
-                          nullable: true
                           description: The maximum number of intermediate CAs that may follow this CA in the certificate / CA chain. A maxPathLength of -1 implies no path limit on the chain.
                         keyAlgorithm:
                           type: string
@@ -407,19 +415,23 @@ paths:
                           - SLH-DSA-SHAKE-256s
                           description: The type of public key algorithm and size, in bits, of the key pair for the CA; when you create an intermediate CA, you must use a key algorithm supported by the parent CA.
                         dn:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         parentCaId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         serialNumber:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         activeCaCertId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         crlDistributionPointUrls:
                           type: array
                           items:
@@ -581,6 +593,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List internal certificate authorities V1
+      x-summary-source: derived
     post:
       operationId: createInternalCertificateAuthorityV1
       tags:
@@ -647,9 +661,10 @@ paths:
                       type: string
                       description: The date and time when the CA expires in YYYY-MM-DDTHH:mm:ss.sssZ format.
                     maxPathLength:
-                      type: number
+                      type:
+                      - number
+                      - 'null'
                       minimum: -1
-                      nullable: true
                       description: The maximum number of intermediate CAs that may follow this CA in the certificate / CA chain. A maxPathLength of -1 implies no path limit on the chain.
                     keyAlgorithm:
                       type: string
@@ -677,19 +692,23 @@ paths:
                       - SLH-DSA-SHAKE-256s
                       description: The type of public key algorithm and size, in bits, of the key pair for the CA; when you create an intermediate CA, you must use a key algorithm supported by the parent CA.
                     dn:
-                      type: string
-                      nullable: true
+                      type:
+                      - string
+                      - 'null'
                     parentCaId:
-                      type: string
+                      type:
+                      - string
+                      - 'null'
                       format: uuid
-                      nullable: true
                     serialNumber:
-                      type: string
-                      nullable: true
+                      type:
+                      - string
+                      - 'null'
                     activeCaCertId:
-                      type: string
+                      type:
+                      - string
+                      - 'null'
                       format: uuid
-                      nullable: true
                     crlDistributionPointUrls:
                       type: array
                       items:
@@ -780,9 +799,10 @@ paths:
                         type: string
                         description: The date and time when the CA expires in YYYY-MM-DDTHH:mm:ss.sssZ format.
                       maxPathLength:
-                        type: number
+                        type:
+                        - number
+                        - 'null'
                         minimum: -1
-                        nullable: true
                         description: The maximum number of intermediate CAs that may follow this CA in the certificate / CA chain. A maxPathLength of -1 implies no path limit on the chain.
                       keyAlgorithm:
                         type: string
@@ -810,19 +830,23 @@ paths:
                         - SLH-DSA-SHAKE-256s
                         description: The type of public key algorithm and size, in bits, of the key pair for the CA; when you create an intermediate CA, you must use a key algorithm supported by the parent CA.
                       dn:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       parentCaId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       serialNumber:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       activeCaCertId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       crlDistributionPointUrls:
                         type: array
                         items:
@@ -984,6 +1008,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create internal certificate authority V1
+      x-summary-source: derived
   /api/v1/cert-manager/ca/internal/{id}:
     get:
       operationId: getInternalCertificateAuthorityV1
@@ -1064,9 +1090,10 @@ paths:
                         type: string
                         description: The date and time when the CA expires in YYYY-MM-DDTHH:mm:ss.sssZ format.
                       maxPathLength:
-                        type: number
+                        type:
+                        - number
+                        - 'null'
                         minimum: -1
-                        nullable: true
                         description: The maximum number of intermediate CAs that may follow this CA in the certificate / CA chain. A maxPathLength of -1 implies no path limit on the chain.
                       keyAlgorithm:
                         type: string
@@ -1094,19 +1121,23 @@ paths:
                         - SLH-DSA-SHAKE-256s
                         description: The type of public key algorithm and size, in bits, of the key pair for the CA; when you create an intermediate CA, you must use a key algorithm supported by the parent CA.
                       dn:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       parentCaId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       serialNumber:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       activeCaCertId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       crlDistributionPointUrls:
                         type: array
                         items:
@@ -1268,6 +1299,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get internal certificate authority V1
+      x-summary-source: derived
     patch:
       operationId: updateInternalCertificateAuthorityV1
       tags:
@@ -1382,9 +1415,10 @@ paths:
                         type: string
                         description: The date and time when the CA expires in YYYY-MM-DDTHH:mm:ss.sssZ format.
                       maxPathLength:
-                        type: number
+                        type:
+                        - number
+                        - 'null'
                         minimum: -1
-                        nullable: true
                         description: The maximum number of intermediate CAs that may follow this CA in the certificate / CA chain. A maxPathLength of -1 implies no path limit on the chain.
                       keyAlgorithm:
                         type: string
@@ -1412,19 +1446,23 @@ paths:
                         - SLH-DSA-SHAKE-256s
                         description: The type of public key algorithm and size, in bits, of the key pair for the CA; when you create an intermediate CA, you must use a key algorithm supported by the parent CA.
                       dn:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       parentCaId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       serialNumber:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       activeCaCertId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       crlDistributionPointUrls:
                         type: array
                         items:
@@ -1586,6 +1624,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update internal certificate authority V1
+      x-summary-source: derived
     delete:
       operationId: deleteInternalCertificateAuthorityV1
       tags:
@@ -1665,9 +1705,10 @@ paths:
                         type: string
                         description: The date and time when the CA expires in YYYY-MM-DDTHH:mm:ss.sssZ format.
                       maxPathLength:
-                        type: number
+                        type:
+                        - number
+                        - 'null'
                         minimum: -1
-                        nullable: true
                         description: The maximum number of intermediate CAs that may follow this CA in the certificate / CA chain. A maxPathLength of -1 implies no path limit on the chain.
                       keyAlgorithm:
                         type: string
@@ -1695,19 +1736,23 @@ paths:
                         - SLH-DSA-SHAKE-256s
                         description: The type of public key algorithm and size, in bits, of the key pair for the CA; when you create an intermediate CA, you must use a key algorithm supported by the parent CA.
                       dn:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       parentCaId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       serialNumber:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       activeCaCertId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       crlDistributionPointUrls:
                         type: array
                         items:
@@ -1869,6 +1914,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete internal certificate authority V1
+      x-summary-source: derived
   /api/v1/cert-manager/ca/internal/{caId}/csr:
     get:
       operationId: getCaCsr
@@ -2034,6 +2081,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get ca csr
+      x-summary-source: derived
   /api/v1/cert-manager/ca/internal/{caId}/renew:
     post:
       operationId: renewCaCertificate
@@ -2230,6 +2279,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Renew ca certificate
+      x-summary-source: derived
   /api/v1/cert-manager/ca/internal/{caId}/certificate:
     post:
       tags:
@@ -2431,6 +2482,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create api cert manager ca internal by ca id certificate
+      x-summary-source: derived
+      operationId: postApiV1CertManagerCaInternalByCaIdCertificate
+      x-operation-id-source: derived
     get:
       operationId: getCaCertificate
       tags:
@@ -2607,6 +2662,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get ca certificate
+      x-summary-source: derived
   /api/v1/cert-manager/ca/internal/{caId}/ca-certificates:
     get:
       operationId: getCaCertificates
@@ -2790,6 +2847,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get ca certificates
+      x-summary-source: derived
   /api/v1/cert-manager/ca/internal/{caId}/certificate/{certId}:
     get:
       tags:
@@ -2981,6 +3040,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api cert manager ca internal by ca id certificate by cert id
+      x-summary-source: derived
+      operationId: getApiV1CertManagerCaInternalByCaIdCertificateByCertId
+      x-operation-id-source: derived
   /api/v1/cert-manager/ca/internal/{caId}/sign-intermediate:
     post:
       operationId: signIntermediateCa
@@ -3184,6 +3247,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Sign intermediate ca
+      x-summary-source: derived
   /api/v1/cert-manager/ca/internal/{caId}/import-certificate:
     post:
       operationId: importCaCertificate
@@ -3368,6 +3433,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Import ca certificate
+      x-summary-source: derived
   /api/v1/cert-manager/ca/internal/{caId}/crls:
     get:
       operationId: getCaCrls
@@ -3539,6 +3606,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get ca crls
+      x-summary-source: derived
   /api/v1/cert-manager/ca/internal/{caId}/certificates/{caCertId}/der:
     get:
       operationId: getCaCertificateDer
@@ -3702,6 +3771,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get ca certificate der
+      x-summary-source: derived
   /api/v1/cert-manager/ca/internal/{caId}/install-certificate-venafi:
     post:
       operationId: installCaCertificateVenafi
@@ -3881,6 +3952,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Install ca certificate venafi
+      x-summary-source: derived
   /api/v1/cert-manager/ca/internal/{caId}/install-certificate-adcs:
     post:
       operationId: installCaCertificateAdcs
@@ -4060,6 +4133,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Install ca certificate adcs
+      x-summary-source: derived
   /api/v1/cert-manager/ca/internal/{caId}/signing-config:
     post:
       operationId: createCaSigningConfig
@@ -4113,8 +4188,7 @@ paths:
                         format: uuid
                       validityPeriod:
                         type: integer
-                        exclusiveMinimum: true
-                        minimum: 0
+                        exclusiveMinimum: 0
                     required:
                     - applicationId
                     - issuingTemplateId
@@ -4141,8 +4215,7 @@ paths:
                         minLength: 1
                       validityPeriod:
                         type: integer
-                        exclusiveMinimum: true
-                        minimum: 0
+                        exclusiveMinimum: 0
                     required:
                     - template
                     additionalProperties: false
@@ -4175,18 +4248,20 @@ paths:
                   type:
                     type: string
                   parentCaId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   appConnectionId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
-                  destinationConfig:
-                    nullable: true
+                  destinationConfig: {}
                   lastExternalCertificateId:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   createdAt:
                     type: string
                     format: date-time
@@ -4338,6 +4413,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create ca signing config
+      x-summary-source: derived
     get:
       operationId: getCaSigningConfig
       tags:
@@ -4356,7 +4433,9 @@ paths:
           content:
             application/json:
               schema:
-                type: object
+                type:
+                - object
+                - 'null'
                 properties:
                   id:
                     type: string
@@ -4367,18 +4446,20 @@ paths:
                   type:
                     type: string
                   parentCaId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   appConnectionId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
-                  destinationConfig:
-                    nullable: true
+                  destinationConfig: {}
                   lastExternalCertificateId:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   createdAt:
                     type: string
                     format: date-time
@@ -4392,7 +4473,6 @@ paths:
                 - createdAt
                 - updatedAt
                 additionalProperties: false
-                nullable: true
         '400':
           description: Default Response
           content:
@@ -4531,6 +4611,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get ca signing config
+      x-summary-source: derived
     patch:
       operationId: updateCaSigningConfig
       tags:
@@ -4561,8 +4643,7 @@ paths:
                         format: uuid
                       validityPeriod:
                         type: integer
-                        exclusiveMinimum: true
-                        minimum: 0
+                        exclusiveMinimum: 0
                     required:
                     - applicationId
                     - issuingTemplateId
@@ -4574,8 +4655,7 @@ paths:
                         minLength: 1
                       validityPeriod:
                         type: integer
-                        exclusiveMinimum: true
-                        minimum: 0
+                        exclusiveMinimum: 0
                     required:
                     - template
                     additionalProperties: false
@@ -4604,18 +4684,20 @@ paths:
                   type:
                     type: string
                   parentCaId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   appConnectionId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
-                  destinationConfig:
-                    nullable: true
+                  destinationConfig: {}
                   lastExternalCertificateId:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   createdAt:
                     type: string
                     format: date-time
@@ -4767,6 +4849,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update ca signing config
+      x-summary-source: derived
   /api/v1/cert-manager/ca/internal/{caId}/auto-renewal:
     get:
       operationId: getCaAutoRenewalConfig
@@ -4791,18 +4875,22 @@ paths:
                   autoRenewalEnabled:
                     type: boolean
                   autoRenewalDaysBeforeExpiry:
-                    type: number
-                    nullable: true
+                    type:
+                    - number
+                    - 'null'
                   lastRenewalStatus:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   lastRenewalMessage:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   lastRenewalAt:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: date-time
-                    nullable: true
                 required:
                 - autoRenewalEnabled
                 - autoRenewalDaysBeforeExpiry
@@ -4948,6 +5036,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get ca auto renewal config
+      x-summary-source: derived
     patch:
       operationId: updateCaAutoRenewalConfig
       tags:
@@ -4985,18 +5075,22 @@ paths:
                   autoRenewalEnabled:
                     type: boolean
                   autoRenewalDaysBeforeExpiry:
-                    type: number
-                    nullable: true
+                    type:
+                    - number
+                    - 'null'
                   lastRenewalStatus:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   lastRenewalMessage:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   lastRenewalAt:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: date-time
-                    nullable: true
                 required:
                 - autoRenewalEnabled
                 - autoRenewalDaysBeforeExpiry
@@ -5142,6 +5236,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update ca auto renewal config
+      x-summary-source: derived
   /api/v1/cert-manager/ca/acme:
     get:
       operationId: listAcmeCertificateAuthoritiesV1
@@ -5371,6 +5467,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List acme certificate authorities V1
+      x-summary-source: derived
     post:
       operationId: createAcmeCertificateAuthorityV1
       tags:
@@ -5676,6 +5774,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create acme certificate authority V1
+      x-summary-source: derived
   /api/v1/cert-manager/ca/acme/{id}:
     get:
       operationId: getAcmeCertificateAuthorityV1
@@ -5909,6 +6009,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get acme certificate authority V1
+      x-summary-source: derived
     patch:
       operationId: updateAcmeCertificateAuthorityV1
       tags:
@@ -6216,6 +6318,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update acme certificate authority V1
+      x-summary-source: derived
     delete:
       operationId: deleteAcmeCertificateAuthorityV1
       tags:
@@ -6448,6 +6552,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete acme certificate authority V1
+      x-summary-source: derived
   /api/v1/cert-manager/ca/azure-ad-cs:
     get:
       operationId: listAzureAdCsCertificateAuthoritiesV1
@@ -6636,6 +6742,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List azure ad cs certificate authorities V1
+      x-summary-source: derived
     post:
       operationId: createAzureAdCsCertificateAuthorityV1
       tags:
@@ -6855,6 +6963,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create azure ad cs certificate authority V1
+      x-summary-source: derived
   /api/v1/cert-manager/ca/azure-ad-cs/{id}:
     get:
       operationId: getAzureAdCsCertificateAuthorityV1
@@ -7047,6 +7157,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get azure ad cs certificate authority V1
+      x-summary-source: derived
     patch:
       operationId: updateAzureAdCsCertificateAuthorityV1
       tags:
@@ -7268,6 +7380,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update azure ad cs certificate authority V1
+      x-summary-source: derived
     delete:
       operationId: deleteAzureAdCsCertificateAuthorityV1
       tags:
@@ -7459,6 +7573,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete azure ad cs certificate authority V1
+      x-summary-source: derived
   /api/v1/cert-manager/ca/aws-pca:
     get:
       operationId: listAwsPcaCertificateAuthoritiesV1
@@ -7686,6 +7802,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List aws pca certificate authorities V1
+      x-summary-source: derived
     post:
       operationId: createAwsPcaCertificateAuthorityV1
       tags:
@@ -7983,6 +8101,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create aws pca certificate authority V1
+      x-summary-source: derived
   /api/v1/cert-manager/ca/aws-pca/{id}:
     get:
       operationId: getAwsPcaCertificateAuthorityV1
@@ -8214,6 +8334,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get aws pca certificate authority V1
+      x-summary-source: derived
     patch:
       operationId: updateAwsPcaCertificateAuthorityV1
       tags:
@@ -8513,6 +8635,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update aws pca certificate authority V1
+      x-summary-source: derived
     delete:
       operationId: deleteAwsPcaCertificateAuthorityV1
       tags:
@@ -8743,6 +8867,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete aws pca certificate authority V1
+      x-summary-source: derived
   /api/v1/cert-manager/ca/digicert:
     get:
       operationId: listDigicertCertificateAuthoritiesV1
@@ -8785,9 +8911,8 @@ paths:
                           description: DigiCert App Connection ID
                         organizationId:
                           type: integer
-                          exclusiveMinimum: true
-                          minimum: 0
                           description: CertCentral Organization ID that will be listed on issued certificates
+                          exclusiveMinimum: 0
                         productNameId:
                           type: string
                           minLength: 1
@@ -8942,6 +9067,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List digicert certificate authorities V1
+      x-summary-source: derived
     post:
       operationId: createDigicertCertificateAuthorityV1
       tags:
@@ -8974,9 +9101,8 @@ paths:
                       description: DigiCert App Connection ID
                     organizationId:
                       type: integer
-                      exclusiveMinimum: true
-                      minimum: 0
                       description: CertCentral Organization ID that will be listed on issued certificates
+                      exclusiveMinimum: 0
                     productNameId:
                       type: string
                       minLength: 1
@@ -9026,9 +9152,8 @@ paths:
                         description: DigiCert App Connection ID
                       organizationId:
                         type: integer
-                        exclusiveMinimum: true
-                        minimum: 0
                         description: CertCentral Organization ID that will be listed on issued certificates
+                        exclusiveMinimum: 0
                       productNameId:
                         type: string
                         minLength: 1
@@ -9183,6 +9308,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create digicert certificate authority V1
+      x-summary-source: derived
   /api/v1/cert-manager/ca/digicert/{id}:
     get:
       operationId: getDigicertCertificateAuthorityV1
@@ -9229,9 +9356,8 @@ paths:
                         description: DigiCert App Connection ID
                       organizationId:
                         type: integer
-                        exclusiveMinimum: true
-                        minimum: 0
                         description: CertCentral Organization ID that will be listed on issued certificates
+                        exclusiveMinimum: 0
                       productNameId:
                         type: string
                         minLength: 1
@@ -9386,6 +9512,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get digicert certificate authority V1
+      x-summary-source: derived
     patch:
       operationId: updateDigicertCertificateAuthorityV1
       tags:
@@ -9418,9 +9546,8 @@ paths:
                       description: DigiCert App Connection ID
                     organizationId:
                       type: integer
-                      exclusiveMinimum: true
-                      minimum: 0
                       description: CertCentral Organization ID that will be listed on issued certificates
+                      exclusiveMinimum: 0
                     productNameId:
                       type: string
                       minLength: 1
@@ -9472,9 +9599,8 @@ paths:
                         description: DigiCert App Connection ID
                       organizationId:
                         type: integer
-                        exclusiveMinimum: true
-                        minimum: 0
                         description: CertCentral Organization ID that will be listed on issued certificates
+                        exclusiveMinimum: 0
                       productNameId:
                         type: string
                         minLength: 1
@@ -9629,6 +9755,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update digicert certificate authority V1
+      x-summary-source: derived
     delete:
       operationId: deleteDigicertCertificateAuthorityV1
       tags:
@@ -9674,9 +9802,8 @@ paths:
                         description: DigiCert App Connection ID
                       organizationId:
                         type: integer
-                        exclusiveMinimum: true
-                        minimum: 0
                         description: CertCentral Organization ID that will be listed on issued certificates
+                        exclusiveMinimum: 0
                       productNameId:
                         type: string
                         minLength: 1
@@ -9831,6 +9958,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete digicert certificate authority V1
+      x-summary-source: derived
   /api/v1/cert-manager/ca/godaddy:
     get:
       operationId: listGodaddyCertificateAuthoritiesV1
@@ -10025,6 +10154,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List godaddy certificate authorities V1
+      x-summary-source: derived
     post:
       operationId: createGodaddyCertificateAuthorityV1
       tags:
@@ -10256,6 +10387,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create godaddy certificate authority V1
+      x-summary-source: derived
   /api/v1/cert-manager/ca/godaddy/{id}:
     get:
       operationId: getGodaddyCertificateAuthorityV1
@@ -10454,6 +10587,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get godaddy certificate authority V1
+      x-summary-source: derived
     patch:
       operationId: updateGodaddyCertificateAuthorityV1
       tags:
@@ -10687,6 +10822,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update godaddy certificate authority V1
+      x-summary-source: derived
     delete:
       operationId: deleteGodaddyCertificateAuthorityV1
       tags:
@@ -10884,6 +11021,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete godaddy certificate authority V1
+      x-summary-source: derived
   /api/v1/cert-manager/ca/aws-acm-public-ca:
     get:
       operationId: listAwsAcmPublicCaCertificateAuthoritiesV1
@@ -11116,6 +11255,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List aws acm public ca certificate authorities V1
+      x-summary-source: derived
     post:
       operationId: createAwsAcmPublicCaCertificateAuthorityV1
       tags:
@@ -11423,6 +11564,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create aws acm public ca certificate authority V1
+      x-summary-source: derived
   /api/v1/cert-manager/ca/aws-acm-public-ca/{id}:
     get:
       operationId: getAwsAcmPublicCaCertificateAuthorityV1
@@ -11659,6 +11802,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get aws acm public ca certificate authority V1
+      x-summary-source: derived
     patch:
       operationId: updateAwsAcmPublicCaCertificateAuthorityV1
       tags:
@@ -11968,6 +12113,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update aws acm public ca certificate authority V1
+      x-summary-source: derived
     delete:
       operationId: deleteAwsAcmPublicCaCertificateAuthorityV1
       tags:
@@ -12203,6 +12350,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete aws acm public ca certificate authority V1
+      x-summary-source: derived
   /api/v1/cert-manager/ca/venafi-tpp:
     get:
       operationId: listVenafiTppCertificateAuthoritiesV1
@@ -12396,6 +12545,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List venafi tpp certificate authorities V1
+      x-summary-source: derived
     post:
       operationId: createVenafiTppCertificateAuthorityV1
       tags:
@@ -12625,6 +12776,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create venafi tpp certificate authority V1
+      x-summary-source: derived
   /api/v1/cert-manager/ca/venafi-tpp/{id}:
     get:
       operationId: getVenafiTppCertificateAuthorityV1
@@ -12822,6 +12975,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get venafi tpp certificate authority V1
+      x-summary-source: derived
     patch:
       operationId: updateVenafiTppCertificateAuthorityV1
       tags:
@@ -13053,6 +13208,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update venafi tpp certificate authority V1
+      x-summary-source: derived
     delete:
       operationId: deleteVenafiTppCertificateAuthorityV1
       tags:
@@ -13249,6 +13406,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete venafi tpp certificate authority V1
+      x-summary-source: derived
   /api/v1/cert-manager/ca:
     get:
       operationId: listCertificateAuthoritiesV1General
@@ -13330,9 +13489,10 @@ paths:
                                 type: string
                                 description: The date and time when the CA expires in YYYY-MM-DDTHH:mm:ss.sssZ format.
                               maxPathLength:
-                                type: number
+                                type:
+                                - number
+                                - 'null'
                                 minimum: -1
-                                nullable: true
                                 description: The maximum number of intermediate CAs that may follow this CA in the certificate / CA chain. A maxPathLength of -1 implies no path limit on the chain.
                               keyAlgorithm:
                                 type: string
@@ -13360,19 +13520,23 @@ paths:
                                 - SLH-DSA-SHAKE-256s
                                 description: The type of public key algorithm and size, in bits, of the key pair for the CA; when you create an intermediate CA, you must use a key algorithm supported by the parent CA.
                               dn:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               parentCaId:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 format: uuid
-                                nullable: true
                               serialNumber:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               activeCaCertId:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 format: uuid
-                                nullable: true
                               crlDistributionPointUrls:
                                 type: array
                                 items:
@@ -13616,9 +13780,8 @@ paths:
                                 description: DigiCert App Connection ID
                               organizationId:
                                 type: integer
-                                exclusiveMinimum: true
-                                minimum: 0
                                 description: CertCentral Organization ID that will be listed on issued certificates
+                                exclusiveMinimum: 0
                               productNameId:
                                 type: string
                                 minLength: 1
@@ -13942,6 +14105,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List certificate authorities V1 general
+      x-summary-source: derived
   /api/v1/pki/ca:
     post:
       operationId: createCertificateAuthorityV1
@@ -14066,9 +14231,10 @@ paths:
                       name:
                         type: string
                       parentCaId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       type:
                         type: string
                       friendlyName:
@@ -14088,22 +14254,26 @@ paths:
                       dn:
                         type: string
                       serialNumber:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       maxPathLength:
-                        type: number
-                        nullable: true
+                        type:
+                        - number
+                        - 'null'
                       keyAlgorithm:
                         type: string
                       activeCaCertId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       crlDistributionPointUrls:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: string
-                        nullable: true
                       disableManagedCrlDistributionPointUrl:
                         type: boolean
                         default: false
@@ -14272,6 +14442,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create certificate authority V1
+      x-summary-source: derived
   /api/v1/pki/ca/{caId}:
     get:
       operationId: getCertificateAuthorityV1
@@ -14315,9 +14487,10 @@ paths:
                       name:
                         type: string
                       parentCaId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       type:
                         type: string
                       friendlyName:
@@ -14337,22 +14510,26 @@ paths:
                       dn:
                         type: string
                       serialNumber:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       maxPathLength:
-                        type: number
-                        nullable: true
+                        type:
+                        - number
+                        - 'null'
                       keyAlgorithm:
                         type: string
                       activeCaCertId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       crlDistributionPointUrls:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: string
-                        nullable: true
                       disableManagedCrlDistributionPointUrl:
                         type: boolean
                         default: false
@@ -14521,6 +14698,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get certificate authority V1
+      x-summary-source: derived
     patch:
       operationId: updateCertificateAuthorityV1
       tags:
@@ -14580,9 +14759,10 @@ paths:
                       name:
                         type: string
                       parentCaId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       type:
                         type: string
                       friendlyName:
@@ -14602,22 +14782,26 @@ paths:
                       dn:
                         type: string
                       serialNumber:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       maxPathLength:
-                        type: number
-                        nullable: true
+                        type:
+                        - number
+                        - 'null'
                       keyAlgorithm:
                         type: string
                       activeCaCertId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       crlDistributionPointUrls:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: string
-                        nullable: true
                       disableManagedCrlDistributionPointUrl:
                         type: boolean
                         default: false
@@ -14786,6 +14970,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update certificate authority V1
+      x-summary-source: derived
     delete:
       operationId: deleteCertificateAuthorityV1
       tags:
@@ -14828,9 +15014,10 @@ paths:
                       name:
                         type: string
                       parentCaId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       type:
                         type: string
                       friendlyName:
@@ -14850,22 +15037,26 @@ paths:
                       dn:
                         type: string
                       serialNumber:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       maxPathLength:
-                        type: number
-                        nullable: true
+                        type:
+                        - number
+                        - 'null'
                       keyAlgorithm:
                         type: string
                       activeCaCertId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       crlDistributionPointUrls:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: string
-                        nullable: true
                       disableManagedCrlDistributionPointUrl:
                         type: boolean
                         default: false
@@ -15034,6 +15225,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete certificate authority V1
+      x-summary-source: derived
   /api/v1/pki/ca/{caId}/certificates/{caCertId}/der:
     get:
       operationId: getCertificateAuthorityDerCertificate
@@ -15197,6 +15390,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get certificate authority der certificate
+      x-summary-source: derived
   /api/v1/pki/ca/{caId}/csr:
     get:
       operationId: getCertificateAuthorityCsr
@@ -15362,6 +15557,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get certificate authority csr
+      x-summary-source: derived
   /api/v1/pki/ca/{caId}/renew:
     post:
       operationId: renewCertificateAuthority
@@ -15554,6 +15751,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Renew certificate authority
+      x-summary-source: derived
   /api/v1/pki/ca/{caId}/ca-certificates:
     get:
       operationId: listCertificateAuthorityCertificates
@@ -15733,6 +15932,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List certificate authority certificates
+      x-summary-source: derived
   /api/v1/pki/ca/{caId}/certificate:
     get:
       operationId: getCertificateAuthorityCertificate
@@ -15906,6 +16107,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get certificate authority certificate
+      x-summary-source: derived
   /api/v1/pki/ca/{caId}/sign-intermediate:
     post:
       operationId: signIntermediateCertificateAuthority
@@ -16109,6 +16312,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Sign intermediate certificate authority
+      x-summary-source: derived
   /api/v1/pki/ca/{caId}/import-certificate:
     post:
       operationId: importCertificateAuthorityCertificate
@@ -16293,6 +16498,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Import certificate authority certificate
+      x-summary-source: derived
   /api/v1/pki/ca/internal:
     get:
       tags:
@@ -16377,9 +16584,10 @@ paths:
                           type: string
                           description: The date and time when the CA expires in YYYY-MM-DDTHH:mm:ss.sssZ format.
                         maxPathLength:
-                          type: number
+                          type:
+                          - number
+                          - 'null'
                           minimum: -1
-                          nullable: true
                           description: The maximum number of intermediate CAs that may follow this CA in the certificate / CA chain. A maxPathLength of -1 implies no path limit on the chain.
                         keyAlgorithm:
                           type: string
@@ -16407,19 +16615,23 @@ paths:
                           - SLH-DSA-SHAKE-256s
                           description: The type of public key algorithm and size, in bits, of the key pair for the CA; when you create an intermediate CA, you must use a key algorithm supported by the parent CA.
                         dn:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         parentCaId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         serialNumber:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         activeCaCertId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         crlDistributionPointUrls:
                           type: array
                           items:
@@ -16582,6 +16794,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api pki ca internal
+      x-summary-source: derived
+      operationId: getApiV1PkiCaInternal
+      x-operation-id-source: derived
     post:
       tags:
       - PKI Certificate Authorities
@@ -16654,9 +16870,10 @@ paths:
                       type: string
                       description: The date and time when the CA expires in YYYY-MM-DDTHH:mm:ss.sssZ format.
                     maxPathLength:
-                      type: number
+                      type:
+                      - number
+                      - 'null'
                       minimum: -1
-                      nullable: true
                       description: The maximum number of intermediate CAs that may follow this CA in the certificate / CA chain. A maxPathLength of -1 implies no path limit on the chain.
                     keyAlgorithm:
                       type: string
@@ -16684,19 +16901,23 @@ paths:
                       - SLH-DSA-SHAKE-256s
                       description: The type of public key algorithm and size, in bits, of the key pair for the CA; when you create an intermediate CA, you must use a key algorithm supported by the parent CA.
                     dn:
-                      type: string
-                      nullable: true
+                      type:
+                      - string
+                      - 'null'
                     parentCaId:
-                      type: string
+                      type:
+                      - string
+                      - 'null'
                       format: uuid
-                      nullable: true
                     serialNumber:
-                      type: string
-                      nullable: true
+                      type:
+                      - string
+                      - 'null'
                     activeCaCertId:
-                      type: string
+                      type:
+                      - string
+                      - 'null'
                       format: uuid
-                      nullable: true
                     crlDistributionPointUrls:
                       type: array
                       items:
@@ -16791,9 +17012,10 @@ paths:
                         type: string
                         description: The date and time when the CA expires in YYYY-MM-DDTHH:mm:ss.sssZ format.
                       maxPathLength:
-                        type: number
+                        type:
+                        - number
+                        - 'null'
                         minimum: -1
-                        nullable: true
                         description: The maximum number of intermediate CAs that may follow this CA in the certificate / CA chain. A maxPathLength of -1 implies no path limit on the chain.
                       keyAlgorithm:
                         type: string
@@ -16821,19 +17043,23 @@ paths:
                         - SLH-DSA-SHAKE-256s
                         description: The type of public key algorithm and size, in bits, of the key pair for the CA; when you create an intermediate CA, you must use a key algorithm supported by the parent CA.
                       dn:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       parentCaId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       serialNumber:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       activeCaCertId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       crlDistributionPointUrls:
                         type: array
                         items:
@@ -16996,6 +17222,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create api pki ca internal
+      x-summary-source: derived
+      operationId: postApiV1PkiCaInternal
+      x-operation-id-source: derived
   /api/v1/pki/ca/internal/{caName}:
     get:
       tags:
@@ -17083,9 +17313,10 @@ paths:
                         type: string
                         description: The date and time when the CA expires in YYYY-MM-DDTHH:mm:ss.sssZ format.
                       maxPathLength:
-                        type: number
+                        type:
+                        - number
+                        - 'null'
                         minimum: -1
-                        nullable: true
                         description: The maximum number of intermediate CAs that may follow this CA in the certificate / CA chain. A maxPathLength of -1 implies no path limit on the chain.
                       keyAlgorithm:
                         type: string
@@ -17113,19 +17344,23 @@ paths:
                         - SLH-DSA-SHAKE-256s
                         description: The type of public key algorithm and size, in bits, of the key pair for the CA; when you create an intermediate CA, you must use a key algorithm supported by the parent CA.
                       dn:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       parentCaId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       serialNumber:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       activeCaCertId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       crlDistributionPointUrls:
                         type: array
                         items:
@@ -17288,6 +17523,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api pki ca internal by ca name
+      x-summary-source: derived
+      operationId: getApiV1PkiCaInternalByCaName
+      x-operation-id-source: derived
     patch:
       tags:
       - PKI Certificate Authorities
@@ -17397,9 +17636,10 @@ paths:
                         type: string
                         description: The date and time when the CA expires in YYYY-MM-DDTHH:mm:ss.sssZ format.
                       maxPathLength:
-                        type: number
+                        type:
+                        - number
+                        - 'null'
                         minimum: -1
-                        nullable: true
                         description: The maximum number of intermediate CAs that may follow this CA in the certificate / CA chain. A maxPathLength of -1 implies no path limit on the chain.
                       keyAlgorithm:
                         type: string
@@ -17427,19 +17667,23 @@ paths:
                         - SLH-DSA-SHAKE-256s
                         description: The type of public key algorithm and size, in bits, of the key pair for the CA; when you create an intermediate CA, you must use a key algorithm supported by the parent CA.
                       dn:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       parentCaId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       serialNumber:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       activeCaCertId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       crlDistributionPointUrls:
                         type: array
                         items:
@@ -17602,6 +17846,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update api pki ca internal by ca name
+      x-summary-source: derived
+      operationId: patchApiV1PkiCaInternalByCaName
+      x-operation-id-source: derived
     delete:
       tags:
       - PKI Certificate Authorities
@@ -17695,9 +17943,10 @@ paths:
                         type: string
                         description: The date and time when the CA expires in YYYY-MM-DDTHH:mm:ss.sssZ format.
                       maxPathLength:
-                        type: number
+                        type:
+                        - number
+                        - 'null'
                         minimum: -1
-                        nullable: true
                         description: The maximum number of intermediate CAs that may follow this CA in the certificate / CA chain. A maxPathLength of -1 implies no path limit on the chain.
                       keyAlgorithm:
                         type: string
@@ -17725,19 +17974,23 @@ paths:
                         - SLH-DSA-SHAKE-256s
                         description: The type of public key algorithm and size, in bits, of the key pair for the CA; when you create an intermediate CA, you must use a key algorithm supported by the parent CA.
                       dn:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       parentCaId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       serialNumber:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       activeCaCertId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       crlDistributionPointUrls:
                         type: array
                         items:
@@ -17900,6 +18153,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete api pki ca internal by ca name
+      x-summary-source: derived
+      operationId: deleteApiV1PkiCaInternalByCaName
+      x-operation-id-source: derived
   /api/v1/pki/ca/acme:
     get:
       tags:
@@ -18138,6 +18395,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api pki ca acme
+      x-summary-source: derived
+      operationId: getApiV1PkiCaAcme
+      x-operation-id-source: derived
     post:
       tags:
       - PKI Certificate Authorities
@@ -18454,6 +18715,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create api pki ca acme
+      x-summary-source: derived
+      operationId: postApiV1PkiCaAcme
+      x-operation-id-source: derived
   /api/v1/pki/ca/acme/{caName}:
     get:
       tags:
@@ -18695,6 +18960,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api pki ca acme by ca name
+      x-summary-source: derived
+      operationId: getApiV1PkiCaAcmeByCaName
+      x-operation-id-source: derived
     patch:
       tags:
       - PKI Certificate Authorities
@@ -19013,6 +19282,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update api pki ca acme by ca name
+      x-summary-source: derived
+      operationId: patchApiV1PkiCaAcmeByCaName
+      x-operation-id-source: derived
     delete:
       tags:
       - PKI Certificate Authorities
@@ -19260,6 +19533,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete api pki ca acme by ca name
+      x-summary-source: derived
+      operationId: deleteApiV1PkiCaAcmeByCaName
+      x-operation-id-source: derived
   /api/v1/pki/ca/azure-ad-cs:
     get:
       tags:
@@ -19457,6 +19734,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api pki ca azure ad cs
+      x-summary-source: derived
+      operationId: getApiV1PkiCaAzureAdCs
+      x-operation-id-source: derived
     post:
       tags:
       - PKI Certificate Authorities
@@ -19687,6 +19968,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create api pki ca azure ad cs
+      x-summary-source: derived
+      operationId: postApiV1PkiCaAzureAdCs
+      x-operation-id-source: derived
   /api/v1/pki/ca/azure-ad-cs/{caName}:
     get:
       tags:
@@ -19887,6 +20172,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api pki ca azure ad cs by ca name
+      x-summary-source: derived
+      operationId: getApiV1PkiCaAzureAdCsByCaName
+      x-operation-id-source: derived
     patch:
       tags:
       - PKI Certificate Authorities
@@ -20119,6 +20408,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update api pki ca azure ad cs by ca name
+      x-summary-source: derived
+      operationId: patchApiV1PkiCaAzureAdCsByCaName
+      x-operation-id-source: derived
     delete:
       tags:
       - PKI Certificate Authorities
@@ -20325,6 +20618,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete api pki ca azure ad cs by ca name
+      x-summary-source: derived
+      operationId: deleteApiV1PkiCaAzureAdCsByCaName
+      x-operation-id-source: derived
   /api/v2/pki/ca:
     get:
       operationId: listCertificateAuthoritiesV2
@@ -20408,9 +20705,10 @@ paths:
                                 type: string
                                 description: The date and time when the CA expires in YYYY-MM-DDTHH:mm:ss.sssZ format.
                               maxPathLength:
-                                type: number
+                                type:
+                                - number
+                                - 'null'
                                 minimum: -1
-                                nullable: true
                                 description: The maximum number of intermediate CAs that may follow this CA in the certificate / CA chain. A maxPathLength of -1 implies no path limit on the chain.
                               keyAlgorithm:
                                 type: string
@@ -20438,19 +20736,23 @@ paths:
                                 - SLH-DSA-SHAKE-256s
                                 description: The type of public key algorithm and size, in bits, of the key pair for the CA; when you create an intermediate CA, you must use a key algorithm supported by the parent CA.
                               dn:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               parentCaId:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 format: uuid
-                                nullable: true
                               serialNumber:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               activeCaCertId:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 format: uuid
-                                nullable: true
                               crlDistributionPointUrls:
                                 type: array
                                 items:
@@ -20706,9 +21008,8 @@ paths:
                                 description: DigiCert App Connection ID
                               organizationId:
                                 type: integer
-                                exclusiveMinimum: true
-                                minimum: 0
                                 description: CertCentral Organization ID that will be listed on issued certificates
+                                exclusiveMinimum: 0
                               productNameId:
                                 type: string
                                 minLength: 1
@@ -21042,6 +21343,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List certificate authorities V2
+      x-summary-source: derived
   /api/v2/workspace/{slug}/cas:
     get:
       tags:
@@ -21126,9 +21429,10 @@ paths:
                         name:
                           type: string
                         parentCaId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         type:
                           type: string
                         friendlyName:
@@ -21148,22 +21452,26 @@ paths:
                         dn:
                           type: string
                         serialNumber:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         maxPathLength:
-                          type: number
-                          nullable: true
+                          type:
+                          - number
+                          - 'null'
                         keyAlgorithm:
                           type: string
                         activeCaCertId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         crlDistributionPointUrls:
-                          type: array
+                          type:
+                          - array
+                          - 'null'
                           items:
                             type: string
-                          nullable: true
                         disableManagedCrlDistributionPointUrl:
                           type: boolean
                           default: false
@@ -21332,6 +21640,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api workspace by slug cas
+      x-summary-source: derived
+      operationId: getApiV2WorkspaceBySlugCas
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

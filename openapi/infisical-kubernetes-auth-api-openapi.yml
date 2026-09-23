@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin Kubernetes Auth API
+  title: Infisical Kubernetes Auth API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -202,6 +202,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Login with kubernetes auth
+      x-summary-source: derived
   /api/v1/auth/kubernetes-auth/identities/{identityId}:
     post:
       operationId: attachKubernetesAuth
@@ -216,9 +218,10 @@ paths:
               type: object
               properties:
                 kubernetesHost:
-                  type: string
+                  type:
+                  - string
+                  - 'null'
                   minLength: 1
-                  nullable: true
                   description: The host string, host:port pair, or URL to the base of the Kubernetes API server.
                 caCert:
                   type: string
@@ -246,14 +249,16 @@ paths:
                   type: string
                   description: The optional audience claim that the service account JWT token must have to authenticate with Infisical.
                 gatewayId:
-                  type: string
+                  type:
+                  - string
+                  - 'null'
                   format: uuid
-                  nullable: true
                   description: The ID of the gateway to use when performing kubernetes API requests.
                 gatewayPoolId:
-                  type: string
+                  type:
+                  - string
+                  - 'null'
                   format: uuid
-                  nullable: true
                 accessTokenTrustedIps:
                   type: array
                   items:
@@ -338,8 +343,9 @@ paths:
                         type: string
                         format: uuid
                       kubernetesHost:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       allowedNamespaces:
                         type: string
                       allowedNames:
@@ -347,21 +353,24 @@ paths:
                       allowedAudience:
                         type: string
                       gatewayId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       gatewayPoolId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       verifyTlsCertificate:
                         type: boolean
                         default: false
                       caCert:
                         type: string
                       tokenReviewerJwt:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                     required:
                     - id
                     - createdAt
@@ -513,6 +522,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Attach kubernetes auth
+      x-summary-source: derived
     patch:
       operationId: updateKubernetesAuth
       tags:
@@ -526,9 +537,10 @@ paths:
               type: object
               properties:
                 kubernetesHost:
-                  type: string
+                  type:
+                  - string
+                  - 'null'
                   minLength: 1
-                  nullable: true
                   description: The new host string, host:port pair, or URL to the base of the Kubernetes API server.
                 caCert:
                   type: string
@@ -537,8 +549,9 @@ paths:
                   type: boolean
                   description: Whether to verify the Kubernetes API server's TLS certificate against the configured CA certificate. When true, caCert is required. When false, the connection is still over HTTPS but the API server's certificate is not verified, and the resulting effective CA must be empty. If omitted while supplying a non-empty caCert in the same update, the toggle is auto-promoted to true; otherwise the stored value is preserved.
                 tokenReviewerJwt:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   description: Optional JWT token for accessing Kubernetes TokenReview API. If provided, this long-lived token will be used to validate service account tokens during authentication. If omitted, the client's own JWT will be used instead, which requires the client to have the system:auth-delegator ClusterRole binding.
                 tokenReviewMode:
                   type: string
@@ -556,14 +569,16 @@ paths:
                   type: string
                   description: The new optional audience claim that the service account JWT token must have to authenticate with Infisical.
                 gatewayId:
-                  type: string
+                  type:
+                  - string
+                  - 'null'
                   format: uuid
-                  nullable: true
                   description: The ID of the gateway to use when performing kubernetes API requests.
                 gatewayPoolId:
-                  type: string
+                  type:
+                  - string
+                  - 'null'
                   format: uuid
-                  nullable: true
                 accessTokenTrustedIps:
                   type: array
                   items:
@@ -637,8 +652,9 @@ paths:
                         type: string
                         format: uuid
                       kubernetesHost:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       allowedNamespaces:
                         type: string
                       allowedNames:
@@ -646,21 +662,24 @@ paths:
                       allowedAudience:
                         type: string
                       gatewayId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       gatewayPoolId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       verifyTlsCertificate:
                         type: boolean
                         default: false
                       caCert:
                         type: string
                       tokenReviewerJwt:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                     required:
                     - id
                     - createdAt
@@ -812,6 +831,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update kubernetes auth
+      x-summary-source: derived
     get:
       operationId: getKubernetesAuth
       tags:
@@ -863,8 +884,9 @@ paths:
                         type: string
                         format: uuid
                       kubernetesHost:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       allowedNamespaces:
                         type: string
                       allowedNames:
@@ -872,21 +894,24 @@ paths:
                       allowedAudience:
                         type: string
                       gatewayId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       gatewayPoolId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       verifyTlsCertificate:
                         type: boolean
                         default: false
                       caCert:
                         type: string
                       tokenReviewerJwt:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                     required:
                     - id
                     - createdAt
@@ -1038,6 +1063,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get kubernetes auth
+      x-summary-source: derived
     delete:
       operationId: deleteKubernetesAuth
       tags:
@@ -1089,8 +1116,9 @@ paths:
                         type: string
                         format: uuid
                       kubernetesHost:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       allowedNamespaces:
                         type: string
                       allowedNames:
@@ -1098,13 +1126,15 @@ paths:
                       allowedAudience:
                         type: string
                       gatewayId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       gatewayPoolId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       verifyTlsCertificate:
                         type: boolean
                         default: false
@@ -1258,6 +1288,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete kubernetes auth
+      x-summary-source: derived
 components:
   securitySchemes:
     bearerAuth:

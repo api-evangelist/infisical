@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin Azure Auth API
+  title: Infisical Azure Auth API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -202,6 +202,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Login with azure auth
+      x-summary-source: derived
   /api/v1/auth/azure-auth/identities/{identityId}:
     post:
       operationId: attachAzureAuth
@@ -462,6 +464,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Attach azure auth
+      x-summary-source: derived
     patch:
       operationId: updateAzureAuth
       tags:
@@ -712,6 +716,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update azure auth
+      x-summary-source: derived
     get:
       operationId: getAzureAuth
       tags:
@@ -918,6 +924,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get azure auth
+      x-summary-source: derived
     delete:
       operationId: deleteAzureAuth
       tags:
@@ -1124,6 +1132,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete azure auth
+      x-summary-source: derived
 components:
   securitySchemes:
     bearerAuth:

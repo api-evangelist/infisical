@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin Service Tokens API
+  title: Infisical Service Tokens API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -39,24 +39,29 @@ paths:
                     items:
                       type: string
                   lastUsed:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: date-time
-                    nullable: true
                   expiresAt:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: date-time
-                    nullable: true
                   secretHash:
                     type: string
                   encryptedKey:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   iv:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   tag:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   createdAt:
                     type: string
                     format: date-time
@@ -68,19 +73,21 @@ paths:
                   projectId:
                     type: string
                   expiryNotificationSent:
-                    type: boolean
+                    type:
+                    - boolean
+                    - 'null'
                     default: false
-                    nullable: true
                   workspace:
                     type: string
                   user:
                     type: object
                     properties:
                       authMethods:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: string
-                        nullable: true
                       id:
                         type: string
                         format: uuid
@@ -90,22 +97,25 @@ paths:
                       updatedAt:
                         type: string
                         format: date-time
-                      devices:
-                        nullable: true
+                      devices: {}
                       email:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       firstName:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       lastName:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       mfaMethods:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: string
-                        nullable: true
                       __v:
                         type: number
                         default: 0
@@ -273,6 +283,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get service token
+      x-summary-source: derived
 components:
   securitySchemes:
     bearerAuth:

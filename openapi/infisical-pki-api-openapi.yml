@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin Pki API
+  title: Infisical Pki API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -11,7 +11,7 @@ servers:
 - url: http://localhost:8080
   description: Local server
 tags:
-- name: Pki
+- name: PKI
 paths:
   /api/v1/pki/ca/azure-ad-cs/{caId}/templates:
     get:
@@ -197,7 +197,11 @@ paths:
                 - error
                 additionalProperties: false
       tags:
-      - Pki
+      - PKI
+      summary: Get api pki ca azure ad cs by ca id templates
+      x-summary-source: derived
+      operationId: getApiV1PkiCaAzureAdCsByCaIdTemplates
+      x-operation-id-source: derived
   /api/v1/pki/syncs/aws-elastic-load-balancer/load-balancers:
     get:
       description: List AWS Elastic Load Balancers available for the specified connection and region.
@@ -423,7 +427,11 @@ paths:
                 - error
                 additionalProperties: false
       tags:
-      - Pki
+      - PKI
+      summary: Get api pki syncs aws elastic load balancer load balancers
+      x-summary-source: derived
+      operationId: getApiV1PkiSyncsAwsElasticLoadBalancerLoadBalancers
+      x-operation-id-source: derived
   /api/v1/pki/syncs/aws-elastic-load-balancer/listeners:
     get:
       description: List HTTPS/TLS listeners for the specified AWS Elastic Load Balancer.
@@ -659,7 +667,11 @@ paths:
                 - error
                 additionalProperties: false
       tags:
-      - Pki
+      - PKI
+      summary: Get api pki syncs aws elastic load balancer listeners
+      x-summary-source: derived
+      operationId: getApiV1PkiSyncsAwsElasticLoadBalancerListeners
+      x-operation-id-source: derived
   /api/v1/pki/syncs/aws-elastic-load-balancer/{pkiSyncId}/certificates/default:
     post:
       description: Set a certificate as the default for all listeners in this AWS ELB PKI Sync. This will trigger a sync immediately.
@@ -835,7 +847,11 @@ paths:
                 - error
                 additionalProperties: false
       tags:
-      - Pki
+      - PKI
+      summary: Create api pki syncs aws elastic load balancer by pki sync id certificates…
+      x-summary-source: derived
+      operationId: postApiV1PkiSyncsAwsElasticLoadBalancerByPkiSyncIdCertificatesDefault
+      x-operation-id-source: derived
     delete:
       description: Clear the default certificate for this AWS ELB PKI Sync. No certificate will be set as the default on listeners. This will trigger a sync immediately.
       parameters:
@@ -997,7 +1013,11 @@ paths:
                 - error
                 additionalProperties: false
       tags:
-      - Pki
+      - PKI
+      summary: Delete api pki syncs aws elastic load balancer by pki sync id certificates…
+      x-summary-source: derived
+      operationId: deleteApiV1PkiSyncsAwsElasticLoadBalancerByPkiSyncIdCertificatesDefault
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

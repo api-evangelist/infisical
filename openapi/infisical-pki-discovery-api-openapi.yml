@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin PKI Discovery API
+  title: Infisical PKI Discovery API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -182,6 +182,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get pki discovery config
+      x-summary-source: derived
   /api/v1/cert-manager/discovery-jobs:
     post:
       operationId: createPkiDiscovery
@@ -263,8 +265,9 @@ paths:
                   name:
                     type: string
                   description:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   discoveryType:
                     type: string
                     default: network
@@ -273,28 +276,34 @@ paths:
                     type: boolean
                     default: false
                   scanIntervalDays:
-                    type: number
-                    nullable: true
+                    type:
+                    - number
+                    - 'null'
                   gatewayId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   isActive:
                     type: boolean
                     default: true
                   lastScanStatus:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   lastScanJobId:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   lastScanMessage:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   lastScannedAt:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: date-time
-                    nullable: true
                   createdAt:
                     type: string
                     format: date-time
@@ -302,9 +311,10 @@ paths:
                     type: string
                     format: date-time
                   gatewayPoolId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                 required:
                 - id
                 - name
@@ -449,6 +459,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create pki discovery
+      x-summary-source: derived
     get:
       operationId: listPkiDiscoveries
       tags:
@@ -497,8 +509,9 @@ paths:
                         name:
                           type: string
                         description:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         discoveryType:
                           type: string
                           default: network
@@ -507,28 +520,34 @@ paths:
                           type: boolean
                           default: false
                         scanIntervalDays:
-                          type: number
-                          nullable: true
+                          type:
+                          - number
+                          - 'null'
                         gatewayId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         isActive:
                           type: boolean
                           default: true
                         lastScanStatus:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         lastScanJobId:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         lastScanMessage:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         lastScannedAt:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         createdAt:
                           type: string
                           format: date-time
@@ -536,9 +555,10 @@ paths:
                           type: string
                           format: date-time
                         gatewayPoolId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         certificatesFound:
                           type: number
                         installationsFound:
@@ -695,6 +715,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List pki discoveries
+      x-summary-source: derived
   /api/v1/cert-manager/discovery-jobs/{discoveryId}:
     get:
       operationId: getPkiDiscovery
@@ -723,8 +745,9 @@ paths:
                   name:
                     type: string
                   description:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   discoveryType:
                     type: string
                     default: network
@@ -733,28 +756,34 @@ paths:
                     type: boolean
                     default: false
                   scanIntervalDays:
-                    type: number
-                    nullable: true
+                    type:
+                    - number
+                    - 'null'
                   gatewayId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   isActive:
                     type: boolean
                     default: true
                   lastScanStatus:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   lastScanJobId:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   lastScanMessage:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   lastScannedAt:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: date-time
-                    nullable: true
                   createdAt:
                     type: string
                     format: date-time
@@ -762,17 +791,20 @@ paths:
                     type: string
                     format: date-time
                   gatewayPoolId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   linkedInstallationsCount:
                     type: number
                   gatewayName:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   gatewayPoolName:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                 required:
                 - id
                 - name
@@ -917,6 +949,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get pki discovery
+      x-summary-source: derived
     patch:
       operationId: updatePkiDiscovery
       tags:
@@ -935,9 +969,10 @@ paths:
                   maxLength: 100
                   description: Name of the discovery configuration
                 description:
-                  type: string
+                  type:
+                  - string
+                  - 'null'
                   maxLength: 500
-                  nullable: true
                   description: Description of the discovery configuration
                 targetConfig:
                   type: object
@@ -961,20 +996,23 @@ paths:
                   type: boolean
                   description: Enable automatic scheduled scans
                 scanIntervalDays:
-                  type: number
+                  type:
+                  - number
+                  - 'null'
                   minimum: 1
                   maximum: 365
-                  nullable: true
                   description: Interval in days between automatic scans
                 gatewayId:
-                  type: string
+                  type:
+                  - string
+                  - 'null'
                   format: uuid
-                  nullable: true
                   description: Gateway ID for scanning private networks
                 gatewayPoolId:
-                  type: string
+                  type:
+                  - string
+                  - 'null'
                   format: uuid
-                  nullable: true
                   description: Gateway pool ID for scanning private networks
                 isActive:
                   type: boolean
@@ -1002,8 +1040,9 @@ paths:
                   name:
                     type: string
                   description:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   discoveryType:
                     type: string
                     default: network
@@ -1012,28 +1051,34 @@ paths:
                     type: boolean
                     default: false
                   scanIntervalDays:
-                    type: number
-                    nullable: true
+                    type:
+                    - number
+                    - 'null'
                   gatewayId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   isActive:
                     type: boolean
                     default: true
                   lastScanStatus:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   lastScanJobId:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   lastScanMessage:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   lastScannedAt:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: date-time
-                    nullable: true
                   createdAt:
                     type: string
                     format: date-time
@@ -1041,9 +1086,10 @@ paths:
                     type: string
                     format: date-time
                   gatewayPoolId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                 required:
                 - id
                 - name
@@ -1188,6 +1234,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update pki discovery
+      x-summary-source: derived
     delete:
       operationId: deletePkiDiscovery
       tags:
@@ -1215,8 +1263,9 @@ paths:
                   name:
                     type: string
                   description:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   discoveryType:
                     type: string
                     default: network
@@ -1225,28 +1274,34 @@ paths:
                     type: boolean
                     default: false
                   scanIntervalDays:
-                    type: number
-                    nullable: true
+                    type:
+                    - number
+                    - 'null'
                   gatewayId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   isActive:
                     type: boolean
                     default: true
                   lastScanStatus:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   lastScanJobId:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   lastScanMessage:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   lastScannedAt:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: date-time
-                    nullable: true
                   createdAt:
                     type: string
                     format: date-time
@@ -1254,9 +1309,10 @@ paths:
                     type: string
                     format: date-time
                   gatewayPoolId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                 required:
                 - id
                 - name
@@ -1401,6 +1457,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete pki discovery
+      x-summary-source: derived
   /api/v1/cert-manager/discovery-jobs/{discoveryId}/scan:
     post:
       operationId: triggerPkiDiscoveryScan
@@ -1566,6 +1624,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Trigger pki discovery scan
+      x-summary-source: derived
   /api/v1/cert-manager/discovery-jobs/{discoveryId}/latest-scan:
     get:
       operationId: getPkiDiscoveryLatestScan
@@ -1586,7 +1646,9 @@ paths:
           content:
             application/json:
               schema:
-                type: object
+                type:
+                - object
+                - 'null'
                 properties:
                   id:
                     type: string
@@ -1598,9 +1660,10 @@ paths:
                     type: string
                     format: date-time
                   completedAt:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: date-time
-                    nullable: true
                   status:
                     type: string
                   targetsScannedCount:
@@ -1613,8 +1676,9 @@ paths:
                     type: number
                     default: 0
                   errorMessage:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   createdAt:
                     type: string
                     format: date-time
@@ -1629,7 +1693,6 @@ paths:
                 - createdAt
                 - updatedAt
                 additionalProperties: false
-                nullable: true
         '400':
           description: Default Response
           content:
@@ -1768,6 +1831,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get pki discovery latest scan
+      x-summary-source: derived
   /api/v1/cert-manager/discovery-jobs/{discoveryId}/scans:
     get:
       operationId: listPkiDiscoveryScans
@@ -1822,9 +1887,10 @@ paths:
                           type: string
                           format: date-time
                         completedAt:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         status:
                           type: string
                         targetsScannedCount:
@@ -1837,8 +1903,9 @@ paths:
                           type: number
                           default: 0
                         errorMessage:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         createdAt:
                           type: string
                           format: date-time
@@ -1997,6 +2064,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List pki discovery scans
+      x-summary-source: derived
 components:
   securitySchemes:
     bearerAuth:

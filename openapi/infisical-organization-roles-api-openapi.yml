@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin Organization Roles API
+  title: Infisical Organization Roles API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -35,8 +35,9 @@ paths:
                   minLength: 1
                   description: The name of the role.
                 description:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   description: The description for the role.
                 permissions:
                   type: array
@@ -1016,8 +1017,9 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       slug:
                         type: string
                       permissions:
@@ -1204,6 +1206,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create api organization roles
+      x-summary-source: derived
+      operationId: postApiV1OrganizationRoles
+      x-operation-id-source: derived
     get:
       tags:
       - Organization Roles
@@ -1229,8 +1235,9 @@ paths:
                         name:
                           type: string
                         description:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         slug:
                           type: string
                         createdAt:
@@ -1391,6 +1398,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api organization roles
+      x-summary-source: derived
+      operationId: getApiV1OrganizationRoles
+      x-operation-id-source: derived
   /api/v1/organization/roles/{roleId}:
     get:
       tags:
@@ -1422,8 +1433,9 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       slug:
                         type: string
                       permissions:
@@ -1610,6 +1622,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api organization roles by role id
+      x-summary-source: derived
+      operationId: getApiV1OrganizationRolesByRoleId
+      x-operation-id-source: derived
     patch:
       tags:
       - Organization Roles
@@ -1630,8 +1646,9 @@ paths:
                   type: string
                   description: The name of the role.
                 description:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   description: The description for the role.
                 permissions:
                   type: array
@@ -2614,8 +2631,9 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       slug:
                         type: string
                       permissions:
@@ -2802,6 +2820,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update api organization roles by role id
+      x-summary-source: derived
+      operationId: patchApiV1OrganizationRolesByRoleId
+      x-operation-id-source: derived
     delete:
       tags:
       - Organization Roles
@@ -2832,8 +2854,9 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       slug:
                         type: string
                       permissions:
@@ -3020,6 +3043,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete api organization roles by role id
+      x-summary-source: derived
+      operationId: deleteApiV1OrganizationRolesByRoleId
+      x-operation-id-source: derived
   /api/v1/organization/roles/slug/{roleSlug}:
     get:
       tags:
@@ -3051,8 +3078,9 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       slug:
                         type: string
                       permissions:
@@ -3239,6 +3267,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api organization roles slug by role slug
+      x-summary-source: derived
+      operationId: getApiV1OrganizationRolesSlugByRoleSlug
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

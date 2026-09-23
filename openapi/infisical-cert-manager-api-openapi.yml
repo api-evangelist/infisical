@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin Cert Manager API
+  title: Infisical Cert Manager API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -193,6 +193,8 @@ paths:
                 additionalProperties: false
       tags:
       - Cert Manager
+      summary: Get azure adcs templates
+      x-summary-source: derived
   /api/v1/cert-manager/syncs/aws-elastic-load-balancer/load-balancers:
     get:
       operationId: listAwsElasticLoadBalancers
@@ -420,6 +422,8 @@ paths:
                 additionalProperties: false
       tags:
       - Cert Manager
+      summary: List aws elastic load balancers
+      x-summary-source: derived
   /api/v1/cert-manager/syncs/aws-elastic-load-balancer/listeners:
     get:
       operationId: listAwsElasticLoadBalancerListeners
@@ -657,6 +661,8 @@ paths:
                 additionalProperties: false
       tags:
       - Cert Manager
+      summary: List aws elastic load balancer listeners
+      x-summary-source: derived
   /api/v1/cert-manager/syncs/aws-elastic-load-balancer/{pkiSyncId}/certificates/default:
     post:
       operationId: setAwsElbCertificateAsDefault
@@ -834,6 +840,8 @@ paths:
                 additionalProperties: false
       tags:
       - Cert Manager
+      summary: Set aws elb certificate as default
+      x-summary-source: derived
     delete:
       operationId: clearAwsElbDefaultCertificate
       description: Clear the default certificate for this AWS ELB PKI Sync. No certificate will be set as the default on listeners. This will trigger a sync immediately.
@@ -997,6 +1005,8 @@ paths:
                 additionalProperties: false
       tags:
       - Cert Manager
+      summary: Clear aws elb default certificate
+      x-summary-source: derived
 components:
   securitySchemes:
     bearerAuth:

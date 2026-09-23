@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin Project Users API
+  title: Infisical Project Users API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -57,29 +57,35 @@ paths:
                             username:
                               type: string
                             email:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             isEmailVerified:
-                              type: boolean
+                              type:
+                              - boolean
+                              - 'null'
                               default: false
-                              nullable: true
                             firstName:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             lastName:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             authMethods:
-                              type: array
+                              type:
+                              - array
+                              - 'null'
                               items:
                                 type: string
-                              nullable: true
                             id:
                               type: string
                               format: uuid
                             publicKey:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                           required:
                           - username
                           - id
@@ -94,30 +100,37 @@ paths:
                               role:
                                 type: string
                               customRoleId:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               customRoleName:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               customRoleSlug:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               isTemporary:
                                 type: boolean
                               temporaryMode:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               temporaryRange:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               temporaryAccessStartTime:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 format: date-time
-                                nullable: true
                               temporaryAccessEndTime:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 format: date-time
-                                nullable: true
                             required:
                             - id
                             - role
@@ -272,6 +285,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api workspace by workspace id memberships
+      x-summary-source: derived
+      operationId: getApiV1WorkspaceByWorkspaceIdMemberships
+      x-operation-id-source: derived
   /api/v1/workspace/{workspaceId}/memberships/details:
     post:
       tags:
@@ -326,29 +343,35 @@ paths:
                           username:
                             type: string
                           email:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           isEmailVerified:
-                            type: boolean
+                            type:
+                            - boolean
+                            - 'null'
                             default: false
-                            nullable: true
                           firstName:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           lastName:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           authMethods:
-                            type: array
+                            type:
+                            - array
+                            - 'null'
                             items:
                               type: string
-                            nullable: true
                           id:
                             type: string
                             format: uuid
                           publicKey:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                         required:
                         - username
                         - id
@@ -363,30 +386,37 @@ paths:
                             role:
                               type: string
                             customRoleId:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             customRoleName:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             customRoleSlug:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             isTemporary:
                               type: boolean
                             temporaryMode:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             temporaryRange:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             temporaryAccessStartTime:
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                               format: date-time
-                              nullable: true
                             temporaryAccessEndTime:
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                               format: date-time
-                              nullable: true
                           required:
                           - id
                           - role
@@ -540,6 +570,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create api workspace by workspace id memberships details
+      x-summary-source: derived
+      operationId: postApiV1WorkspaceByWorkspaceIdMembershipsDetails
+      x-operation-id-source: derived
   /api/v1/workspace/{workspaceId}/memberships/{membershipId}:
     patch:
       tags:
@@ -634,26 +668,31 @@ paths:
                           type: string
                           format: uuid
                         customRoleId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         isTemporary:
                           type: boolean
                           default: false
                         temporaryMode:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         temporaryRange:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         temporaryAccessStartTime:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         temporaryAccessEndTime:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         createdAt:
                           type: string
                           format: date-time
@@ -808,6 +847,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update api workspace by workspace id memberships by membership id
+      x-summary-source: derived
+      operationId: patchApiV1WorkspaceByWorkspaceIdMembershipsByMembershipId
+      x-operation-id-source: derived
   /api/v1/projects/{projectId}/memberships:
     get:
       tags:
@@ -852,29 +895,35 @@ paths:
                             username:
                               type: string
                             email:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             isEmailVerified:
-                              type: boolean
+                              type:
+                              - boolean
+                              - 'null'
                               default: false
-                              nullable: true
                             firstName:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             lastName:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             authMethods:
-                              type: array
+                              type:
+                              - array
+                              - 'null'
                               items:
                                 type: string
-                              nullable: true
                             id:
                               type: string
                               format: uuid
                             publicKey:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                           required:
                           - username
                           - id
@@ -889,30 +938,37 @@ paths:
                               role:
                                 type: string
                               customRoleId:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               customRoleName:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               customRoleSlug:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               isTemporary:
                                 type: boolean
                               temporaryMode:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               temporaryRange:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               temporaryAccessStartTime:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 format: date-time
-                                nullable: true
                               temporaryAccessEndTime:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 format: date-time
-                                nullable: true
                             required:
                             - id
                             - role
@@ -1067,6 +1123,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api projects by project id memberships
+      x-summary-source: derived
+      operationId: getApiV1ProjectsByProjectIdMemberships
+      x-operation-id-source: derived
     post:
       operationId: inviteProjectMembers
       tags:
@@ -1283,6 +1343,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Invite project members
+      x-summary-source: derived
     delete:
       operationId: removeProjectMembers
       tags:
@@ -1493,6 +1555,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Remove project members
+      x-summary-source: derived
   /api/v1/projects/{projectId}/memberships/details:
     post:
       operationId: getProjectMembershipByUsername
@@ -1548,29 +1612,35 @@ paths:
                           username:
                             type: string
                           email:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           isEmailVerified:
-                            type: boolean
+                            type:
+                            - boolean
+                            - 'null'
                             default: false
-                            nullable: true
                           firstName:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           lastName:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           authMethods:
-                            type: array
+                            type:
+                            - array
+                            - 'null'
                             items:
                               type: string
-                            nullable: true
                           id:
                             type: string
                             format: uuid
                           publicKey:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                         required:
                         - username
                         - id
@@ -1585,30 +1655,37 @@ paths:
                             role:
                               type: string
                             customRoleId:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             customRoleName:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             customRoleSlug:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             isTemporary:
                               type: boolean
                             temporaryMode:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             temporaryRange:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             temporaryAccessStartTime:
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                               format: date-time
-                              nullable: true
                             temporaryAccessEndTime:
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                               format: date-time
-                              nullable: true
                           required:
                           - id
                           - role
@@ -1762,6 +1839,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get project membership by username
+      x-summary-source: derived
   /api/v1/projects/{projectId}/memberships/{membershipId}:
     patch:
       operationId: updateProjectMembership
@@ -1857,26 +1936,31 @@ paths:
                           type: string
                           format: uuid
                         customRoleId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         isTemporary:
                           type: boolean
                           default: false
                         temporaryMode:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         temporaryRange:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         temporaryAccessStartTime:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         temporaryAccessEndTime:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         createdAt:
                           type: string
                           format: date-time
@@ -2031,6 +2115,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update project membership
+      x-summary-source: derived
   /api/v1/cert-manager/access/users:
     get:
       operationId: listCertManagerUsers
@@ -2065,29 +2151,35 @@ paths:
                             username:
                               type: string
                             email:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             isEmailVerified:
-                              type: boolean
+                              type:
+                              - boolean
+                              - 'null'
                               default: false
-                              nullable: true
                             firstName:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             lastName:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             authMethods:
-                              type: array
+                              type:
+                              - array
+                              - 'null'
                               items:
                                 type: string
-                              nullable: true
                             id:
                               type: string
                               format: uuid
                             publicKey:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                           required:
                           - username
                           - id
@@ -2102,30 +2194,37 @@ paths:
                               role:
                                 type: string
                               customRoleId:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               customRoleName:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               customRoleSlug:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               isTemporary:
                                 type: boolean
                               temporaryMode:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               temporaryRange:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               temporaryAccessStartTime:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 format: date-time
-                                nullable: true
                               temporaryAccessEndTime:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 format: date-time
-                                nullable: true
                             required:
                             - id
                             - role
@@ -2279,6 +2378,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List cert manager users
+      x-summary-source: derived
     post:
       operationId: inviteCertManagerUsers
       tags:
@@ -2480,6 +2581,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Invite cert manager users
+      x-summary-source: derived
   /api/v2/workspace/{projectId}/memberships:
     post:
       tags:
@@ -2696,6 +2799,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create api workspace by project id memberships
+      x-summary-source: derived
+      operationId: postApiV2WorkspaceByProjectIdMemberships
+      x-operation-id-source: derived
     delete:
       tags:
       - Project Users
@@ -2905,6 +3012,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete api workspace by project id memberships
+      x-summary-source: derived
+      operationId: deleteApiV2WorkspaceByProjectIdMemberships
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin PKI Subscribers API
+  title: Infisical PKI Subscribers API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -44,9 +44,10 @@ paths:
                         projectId:
                           type: string
                         caId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         name:
                           type: string
                         commonName:
@@ -58,8 +59,9 @@ paths:
                           items:
                             type: string
                         ttl:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         keyUsages:
                           type: array
                           items:
@@ -69,27 +71,31 @@ paths:
                           items:
                             type: string
                         lastOperationStatus:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         lastOperationMessage:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         lastOperationAt:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         enableAutoRenewal:
                           type: boolean
                           default: false
                         autoRenewalPeriodInDays:
-                          type: number
-                          nullable: true
+                          type:
+                          - number
+                          - 'null'
                         lastAutoRenewAt:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
-                        properties:
-                          nullable: true
+                        properties: {}
                         supportsImmediateCertIssuance:
                           type: boolean
                       required:
@@ -243,6 +249,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List project pki subscribers
+      x-summary-source: derived
   /api/v1/pki/subscribers/{subscriberName}:
     get:
       operationId: getPkiSubscriber
@@ -276,9 +284,10 @@ paths:
                   projectId:
                     type: string
                   caId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   name:
                     type: string
                   commonName:
@@ -290,8 +299,9 @@ paths:
                     items:
                       type: string
                   ttl:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   keyUsages:
                     type: array
                     items:
@@ -301,27 +311,31 @@ paths:
                     items:
                       type: string
                   lastOperationStatus:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   lastOperationMessage:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   lastOperationAt:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: date-time
-                    nullable: true
                   enableAutoRenewal:
                     type: boolean
                     default: false
                   autoRenewalPeriodInDays:
-                    type: number
-                    nullable: true
+                    type:
+                    - number
+                    - 'null'
                   lastAutoRenewAt:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: date-time
-                    nullable: true
-                  properties:
-                    nullable: true
+                  properties: {}
                   supportsImmediateCertIssuance:
                     type: boolean
                 required:
@@ -472,6 +486,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get pki subscriber
+      x-summary-source: derived
     patch:
       operationId: updatePkiSubscriber
       tags:
@@ -625,9 +641,10 @@ paths:
                   projectId:
                     type: string
                   caId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   name:
                     type: string
                   commonName:
@@ -639,8 +656,9 @@ paths:
                     items:
                       type: string
                   ttl:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   keyUsages:
                     type: array
                     items:
@@ -650,27 +668,31 @@ paths:
                     items:
                       type: string
                   lastOperationStatus:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   lastOperationMessage:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   lastOperationAt:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: date-time
-                    nullable: true
                   enableAutoRenewal:
                     type: boolean
                     default: false
                   autoRenewalPeriodInDays:
-                    type: number
-                    nullable: true
+                    type:
+                    - number
+                    - 'null'
                   lastAutoRenewAt:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: date-time
-                    nullable: true
-                  properties:
-                    nullable: true
+                  properties: {}
                   supportsImmediateCertIssuance:
                     type: boolean
                 required:
@@ -821,6 +843,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update pki subscriber
+      x-summary-source: derived
     delete:
       tags:
       - PKI Subscribers
@@ -859,9 +883,10 @@ paths:
                   projectId:
                     type: string
                   caId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   name:
                     type: string
                   commonName:
@@ -873,8 +898,9 @@ paths:
                     items:
                       type: string
                   ttl:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   keyUsages:
                     type: array
                     items:
@@ -884,27 +910,31 @@ paths:
                     items:
                       type: string
                   lastOperationStatus:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   lastOperationMessage:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   lastOperationAt:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: date-time
-                    nullable: true
                   enableAutoRenewal:
                     type: boolean
                     default: false
                   autoRenewalPeriodInDays:
-                    type: number
-                    nullable: true
+                    type:
+                    - number
+                    - 'null'
                   lastAutoRenewAt:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: date-time
-                    nullable: true
-                  properties:
-                    nullable: true
+                  properties: {}
                   supportsImmediateCertIssuance:
                     type: boolean
                 required:
@@ -1055,6 +1085,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete api pki subscribers by subscriber name
+      x-summary-source: derived
+      operationId: deleteApiV1PkiSubscribersBySubscriberName
+      x-operation-id-source: derived
   /api/v1/pki/subscribers:
     post:
       operationId: createPkiSubscriber
@@ -1211,9 +1245,10 @@ paths:
                   projectId:
                     type: string
                   caId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   name:
                     type: string
                   commonName:
@@ -1225,8 +1260,9 @@ paths:
                     items:
                       type: string
                   ttl:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   keyUsages:
                     type: array
                     items:
@@ -1236,27 +1272,31 @@ paths:
                     items:
                       type: string
                   lastOperationStatus:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   lastOperationMessage:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   lastOperationAt:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: date-time
-                    nullable: true
                   enableAutoRenewal:
                     type: boolean
                     default: false
                   autoRenewalPeriodInDays:
-                    type: number
-                    nullable: true
+                    type:
+                    - number
+                    - 'null'
                   lastAutoRenewAt:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: date-time
-                    nullable: true
-                  properties:
-                    nullable: true
+                  properties: {}
                   supportsImmediateCertIssuance:
                     type: boolean
                 required:
@@ -1407,6 +1447,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create pki subscriber
+      x-summary-source: derived
   /api/v1/pki/subscribers/{subscriberName}/order-certificate:
     post:
       operationId: orderPkiSubscriberCertificate
@@ -1584,6 +1626,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Order pki subscriber certificate
+      x-summary-source: derived
   /api/v1/pki/subscribers/{subscriberName}/issue-certificate:
     post:
       operationId: issuePkiSubscriberCertificate
@@ -1778,6 +1822,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Issue pki subscriber certificate
+      x-summary-source: derived
   /api/v1/pki/subscribers/{subscriberName}/sign-certificate:
     post:
       operationId: signPkiSubscriberCertificate
@@ -1974,6 +2020,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Sign pki subscriber certificate
+      x-summary-source: derived
   /api/v1/pki/subscribers/{subscriberName}/latest-certificate-bundle:
     get:
       operationId: getPkiSubscriberLatestCertificateBundle
@@ -2005,8 +2053,9 @@ paths:
                     type: string
                     description: The active certificate for the subscriber.
                   certificateChain:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     description: The certificate chain of the active certificate for the subscriber.
                   privateKey:
                     type: string
@@ -2158,6 +2207,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get pki subscriber latest certificate bundle
+      x-summary-source: derived
   /api/v1/pki/subscribers/{subscriberName}/certificates:
     get:
       operationId: listPkiSubscriberCertificates
@@ -2218,9 +2269,10 @@ paths:
                           type: string
                           format: date-time
                         caId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         status:
                           type: string
                         serialNumber:
@@ -2236,101 +2288,125 @@ paths:
                           type: string
                           format: date-time
                         revokedAt:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         revocationReason:
-                          type: number
-                          nullable: true
+                          type:
+                          - number
+                          - 'null'
                         altNames:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         caCertId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         certificateTemplateId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         keyUsages:
-                          type: array
+                          type:
+                          - array
+                          - 'null'
                           items:
                             type: string
-                          nullable: true
                         extendedKeyUsages:
-                          type: array
+                          type:
+                          - array
+                          - 'null'
                           items:
                             type: string
-                          nullable: true
                         projectId:
                           type: string
                         pkiSubscriberId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         profileId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         renewBeforeDays:
-                          type: number
-                          nullable: true
+                          type:
+                          - number
+                          - 'null'
                         renewedFromCertificateId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         renewedByCertificateId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         renewalError:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         keyAlgorithm:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         signatureAlgorithm:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         subjectOrganization:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         subjectOrganizationalUnit:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         subjectCountry:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         subjectState:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         subjectLocality:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         fingerprintSha256:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         fingerprintSha1:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         isCA:
-                          type: boolean
-                          nullable: true
+                          type:
+                          - boolean
+                          - 'null'
                         pathLength:
-                          type: number
-                          nullable: true
+                          type:
+                          - number
+                          - 'null'
                         source:
-                          type: string
-                          nullable: true
-                        discoveryMetadata:
-                          nullable: true
-                        externalMetadata:
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
+                        discoveryMetadata: {}
+                        externalMetadata: {}
                         applicationId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                       required:
                       - id
                       - createdAt
@@ -2487,6 +2563,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List pki subscriber certificates
+      x-summary-source: derived
   /api/v2/workspace/{projectId}/pki-subscribers:
     get:
       tags:
@@ -2517,9 +2595,10 @@ paths:
                         projectId:
                           type: string
                         caId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         name:
                           type: string
                         commonName:
@@ -2531,8 +2610,9 @@ paths:
                           items:
                             type: string
                         ttl:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         keyUsages:
                           type: array
                           items:
@@ -2542,27 +2622,31 @@ paths:
                           items:
                             type: string
                         lastOperationStatus:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         lastOperationMessage:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         lastOperationAt:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         enableAutoRenewal:
                           type: boolean
                           default: false
                         autoRenewalPeriodInDays:
-                          type: number
-                          nullable: true
+                          type:
+                          - number
+                          - 'null'
                         lastAutoRenewAt:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
-                        properties:
-                          nullable: true
+                        properties: {}
                         supportsImmediateCertIssuance:
                           type: boolean
                       required:
@@ -2716,6 +2800,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api workspace by project id pki subscribers
+      x-summary-source: derived
+      operationId: getApiV2WorkspaceByProjectIdPkiSubscribers
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

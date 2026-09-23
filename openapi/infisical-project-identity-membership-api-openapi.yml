@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin Project Identity Membership API
+  title: Infisical Project Identity Membership API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -63,42 +63,51 @@ paths:
                             role:
                               type: string
                             customRoleId:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             customRoleName:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             customRoleSlug:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             isTemporary:
                               type: boolean
                             temporaryMode:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             temporaryRange:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             temporaryAccessStartTime:
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                               format: date-time
-                              nullable: true
                             temporaryAccessEndTime:
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                               format: date-time
-                              nullable: true
                           required:
                           - id
                           - role
                           - isTemporary
                           additionalProperties: false
                       lastLoginAuthMethod:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       lastLoginTime:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       identity:
                         type: object
                         properties:
@@ -111,8 +120,9 @@ paths:
                             type: string
                             format: uuid
                           projectId:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           authMethods:
                             type: array
                             items:
@@ -290,12 +300,13 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get project identity membership by id
+      x-summary-source: derived
   /api/v1/projects/{projectId}/memberships/identities:
     get:
       operationId: listProjectIdentityMemberships
       tags:
       - Project Identity Membership
-      description: List project identity memberships
       parameters:
       - schema:
           type: number
@@ -367,30 +378,37 @@ paths:
                               role:
                                 type: string
                               customRoleId:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               customRoleName:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               customRoleSlug:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               isTemporary:
                                 type: boolean
                               temporaryMode:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               temporaryRange:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               temporaryAccessStartTime:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 format: date-time
-                                nullable: true
                               temporaryAccessEndTime:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 format: date-time
-                                nullable: true
                             required:
                             - id
                             - role
@@ -408,8 +426,9 @@ paths:
                               type: string
                               format: uuid
                             projectId:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             authMethods:
                               type: array
                               items:
@@ -577,6 +596,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List project identity memberships
+      x-summary-source: derived
   /api/v1/projects/{projectId}/memberships/available-identities:
     get:
       operationId: listAvailableProjectIdentities
@@ -778,6 +799,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List available project identities
+      x-summary-source: derived
 components:
   securitySchemes:
     bearerAuth:

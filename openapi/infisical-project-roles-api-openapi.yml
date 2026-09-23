@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin Project Roles API
+  title: Infisical Project Roles API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -35,8 +35,9 @@ paths:
                   minLength: 1
                   description: The name of the role.
                 description:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   description: The description for the role.
                 permissions:
                   type: array
@@ -3494,8 +3495,9 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       slug:
                         type: string
                       permissions:
@@ -3681,6 +3683,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create api projects by project id roles
+      x-summary-source: derived
+      operationId: postApiV1ProjectsByProjectIdRoles
+      x-operation-id-source: derived
     get:
       tags:
       - Project Roles
@@ -3713,8 +3719,9 @@ paths:
                         name:
                           type: string
                         description:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         slug:
                           type: string
                         createdAt:
@@ -3874,6 +3881,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api projects by project id roles
+      x-summary-source: derived
+      operationId: getApiV1ProjectsByProjectIdRoles
+      x-operation-id-source: derived
   /api/v1/projects/{projectId}/roles/{roleId}:
     patch:
       tags:
@@ -3895,8 +3906,9 @@ paths:
                   type: string
                   description: The name of the role.
                 description:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   description: The description for the role.
                 permissions:
                   type: array
@@ -7356,8 +7368,9 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       slug:
                         type: string
                       permissions:
@@ -7543,6 +7556,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update api projects by project id roles by role id
+      x-summary-source: derived
+      operationId: patchApiV1ProjectsByProjectIdRolesByRoleId
+      x-operation-id-source: derived
     delete:
       tags:
       - Project Roles
@@ -7579,8 +7596,9 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       slug:
                         type: string
                       permissions:
@@ -7766,6 +7784,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete api projects by project id roles by role id
+      x-summary-source: derived
+      operationId: deleteApiV1ProjectsByProjectIdRolesByRoleId
+      x-operation-id-source: derived
   /api/v1/projects/{projectId}/roles/slug/{roleSlug}:
     get:
       tags:
@@ -7800,8 +7822,9 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       slug:
                         type: string
                       permissions:
@@ -7987,6 +8010,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api projects by project id roles slug by role slug
+      x-summary-source: derived
+      operationId: getApiV1ProjectsByProjectIdRolesSlugByRoleSlug
+      x-operation-id-source: derived
   /api/v2/workspace/{projectId}/roles:
     post:
       operationId: createProjectRole
@@ -8010,8 +8037,9 @@ paths:
                   minLength: 1
                   description: The name of the role.
                 description:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   description: The description for the role.
                 permissions:
                   type: array
@@ -11469,8 +11497,9 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       slug:
                         type: string
                       permissions:
@@ -11656,6 +11685,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create project role
+      x-summary-source: derived
     get:
       operationId: listProjectRoles
       tags:
@@ -11689,8 +11720,9 @@ paths:
                         name:
                           type: string
                         description:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         slug:
                           type: string
                         createdAt:
@@ -11850,6 +11882,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List project roles
+      x-summary-source: derived
   /api/v2/workspace/{projectId}/roles/{roleId}:
     patch:
       operationId: updateProjectRole
@@ -11872,8 +11906,9 @@ paths:
                   type: string
                   description: The name of the role.
                 description:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   description: The description for the role.
                 permissions:
                   type: array
@@ -15333,8 +15368,9 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       slug:
                         type: string
                       permissions:
@@ -15520,6 +15556,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update project role
+      x-summary-source: derived
     delete:
       operationId: deleteProjectRole
       tags:
@@ -15557,8 +15595,9 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       slug:
                         type: string
                       permissions:
@@ -15744,6 +15783,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete project role
+      x-summary-source: derived
   /api/v2/workspace/{projectId}/roles/slug/{roleSlug}:
     get:
       operationId: getProjectRoleBySlug
@@ -15779,8 +15820,9 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       slug:
                         type: string
                       permissions:
@@ -15966,6 +16008,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get project role by slug
+      x-summary-source: derived
 components:
   securitySchemes:
     bearerAuth:

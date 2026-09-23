@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin PKI Certificate Profiles API
+  title: Infisical PKI Certificate Profiles API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -77,14 +77,14 @@ paths:
                   - type: object
                     properties: {}
                     additionalProperties: false
-                  nullable: true
                 defaults:
-                  type: object
+                  type:
+                  - object
+                  - 'null'
                   properties:
                     ttlDays:
                       type: integer
-                      exclusiveMinimum: true
-                      minimum: 0
+                      exclusiveMinimum: 0
                     commonName:
                       type: string
                     keyAlgorithm:
@@ -182,7 +182,6 @@ paths:
                     locality:
                       type: string
                   additionalProperties: false
-                  nullable: true
               required:
               - certificatePolicyId
               - slug
@@ -202,27 +201,31 @@ paths:
                         type: string
                         format: uuid
                       caId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       certificatePolicyId:
                         type: string
                         format: uuid
                       slug:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       enrollmentType:
                         type: string
                       estConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       apiConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       createdAt:
                         type: string
                         format: date-time
@@ -230,9 +233,10 @@ paths:
                         type: string
                         format: date-time
                       acmeConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       issuerType:
                         type: string
                         default: ca
@@ -268,9 +272,10 @@ paths:
                         - type: object
                           properties: {}
                           additionalProperties: false
-                        nullable: true
                       defaults:
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                         properties:
                           ttlDays:
                             type: number
@@ -370,11 +375,11 @@ paths:
                           locality:
                             type: string
                         additionalProperties: false
-                        nullable: true
                       scepConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                     required:
                     - id
                     - certificatePolicyId
@@ -524,6 +529,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create certificate profile
+      x-summary-source: derived
     get:
       operationId: listCertificateProfiles
       tags:
@@ -596,27 +603,31 @@ paths:
                           type: string
                           format: uuid
                         caId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         certificatePolicyId:
                           type: string
                           format: uuid
                         slug:
                           type: string
                         description:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         enrollmentType:
                           type: string
                         estConfigId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         apiConfigId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         createdAt:
                           type: string
                           format: date-time
@@ -624,9 +635,10 @@ paths:
                           type: string
                           format: date-time
                         acmeConfigId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         issuerType:
                           type: string
                           default: ca
@@ -662,9 +674,10 @@ paths:
                           - type: object
                             properties: {}
                             additionalProperties: false
-                          nullable: true
                         defaults:
-                          type: object
+                          type:
+                          - object
+                          - 'null'
                           properties:
                             ttlDays:
                               type: number
@@ -764,11 +777,11 @@ paths:
                             locality:
                               type: string
                           additionalProperties: false
-                          nullable: true
                         scepConfigId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         certificateAuthority:
                           type: object
                           properties:
@@ -781,8 +794,9 @@ paths:
                             isExternal:
                               type: boolean
                             externalType:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                           required:
                           - id
                           - status
@@ -1039,6 +1053,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List certificate profiles
+      x-summary-source: derived
   /api/v1/cert-manager/certificate-profiles/{id}:
     get:
       operationId: getCertificateProfile
@@ -1066,27 +1082,31 @@ paths:
                         type: string
                         format: uuid
                       caId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       certificatePolicyId:
                         type: string
                         format: uuid
                       slug:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       enrollmentType:
                         type: string
                       estConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       apiConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       createdAt:
                         type: string
                         format: date-time
@@ -1094,9 +1114,10 @@ paths:
                         type: string
                         format: date-time
                       acmeConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       issuerType:
                         type: string
                         default: ca
@@ -1132,9 +1153,10 @@ paths:
                         - type: object
                           properties: {}
                           additionalProperties: false
-                        nullable: true
                       defaults:
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                         properties:
                           ttlDays:
                             type: number
@@ -1234,11 +1256,11 @@ paths:
                           locality:
                             type: string
                         additionalProperties: false
-                        nullable: true
                       scepConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       certificateAuthority:
                         type: object
                         properties:
@@ -1251,8 +1273,9 @@ paths:
                           isExternal:
                             type: boolean
                           externalType:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                         required:
                         - id
                         - status
@@ -1494,6 +1517,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get certificate profile
+      x-summary-source: derived
     patch:
       operationId: updateCertificateProfile
       tags:
@@ -1511,9 +1536,10 @@ paths:
                   maxLength: 255
                   pattern: ^[a-z0-9-]+$
                 description:
-                  type: string
+                  type:
+                  - string
+                  - 'null'
                   maxLength: 1000
-                  nullable: true
                 issuerType:
                   type: string
                   enum:
@@ -1551,14 +1577,14 @@ paths:
                   - type: object
                     properties: {}
                     additionalProperties: false
-                  nullable: true
                 defaults:
-                  type: object
+                  type:
+                  - object
+                  - 'null'
                   properties:
                     ttlDays:
                       type: integer
-                      exclusiveMinimum: true
-                      minimum: 0
+                      exclusiveMinimum: 0
                     commonName:
                       type: string
                     keyAlgorithm:
@@ -1656,7 +1682,6 @@ paths:
                     locality:
                       type: string
                   additionalProperties: false
-                  nullable: true
               additionalProperties: false
       parameters:
       - schema:
@@ -1680,27 +1705,31 @@ paths:
                         type: string
                         format: uuid
                       caId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       certificatePolicyId:
                         type: string
                         format: uuid
                       slug:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       enrollmentType:
                         type: string
                       estConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       apiConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       createdAt:
                         type: string
                         format: date-time
@@ -1708,9 +1737,10 @@ paths:
                         type: string
                         format: date-time
                       acmeConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       issuerType:
                         type: string
                         default: ca
@@ -1746,9 +1776,10 @@ paths:
                         - type: object
                           properties: {}
                           additionalProperties: false
-                        nullable: true
                       defaults:
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                         properties:
                           ttlDays:
                             type: number
@@ -1848,11 +1879,11 @@ paths:
                           locality:
                             type: string
                         additionalProperties: false
-                        nullable: true
                       scepConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                     required:
                     - id
                     - certificatePolicyId
@@ -2002,6 +2033,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update certificate profile
+      x-summary-source: derived
     delete:
       operationId: deleteCertificateProfile
       tags:
@@ -2028,27 +2061,31 @@ paths:
                         type: string
                         format: uuid
                       caId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       certificatePolicyId:
                         type: string
                         format: uuid
                       slug:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       enrollmentType:
                         type: string
                       estConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       apiConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       createdAt:
                         type: string
                         format: date-time
@@ -2056,9 +2093,10 @@ paths:
                         type: string
                         format: date-time
                       acmeConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       issuerType:
                         type: string
                         default: ca
@@ -2094,9 +2132,10 @@ paths:
                         - type: object
                           properties: {}
                           additionalProperties: false
-                        nullable: true
                       defaults:
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                         properties:
                           ttlDays:
                             type: number
@@ -2196,11 +2235,11 @@ paths:
                           locality:
                             type: string
                         additionalProperties: false
-                        nullable: true
                       scepConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                     required:
                     - id
                     - certificatePolicyId
@@ -2350,6 +2389,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete certificate profile
+      x-summary-source: derived
   /api/v1/cert-manager/certificate-profiles/slug/{slug}:
     get:
       operationId: getCertificateProfileBySlug
@@ -2377,27 +2418,31 @@ paths:
                         type: string
                         format: uuid
                       caId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       certificatePolicyId:
                         type: string
                         format: uuid
                       slug:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       enrollmentType:
                         type: string
                       estConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       apiConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       createdAt:
                         type: string
                         format: date-time
@@ -2405,9 +2450,10 @@ paths:
                         type: string
                         format: date-time
                       acmeConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       issuerType:
                         type: string
                         default: ca
@@ -2443,9 +2489,10 @@ paths:
                         - type: object
                           properties: {}
                           additionalProperties: false
-                        nullable: true
                       defaults:
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                         properties:
                           ttlDays:
                             type: number
@@ -2545,11 +2592,11 @@ paths:
                           locality:
                             type: string
                         additionalProperties: false
-                        nullable: true
                       scepConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                     required:
                     - id
                     - certificatePolicyId
@@ -2699,6 +2746,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get certificate profile by slug
+      x-summary-source: derived
   /api/v1/cert-manager/certificate-profiles/{id}/certificates:
     get:
       operationId: listCertificateProfileCertificates
@@ -2768,9 +2817,10 @@ paths:
                           type: string
                           format: date-time
                         revokedAt:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         createdAt:
                           type: string
                           format: date-time
@@ -2924,6 +2974,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List certificate profile certificates
+      x-summary-source: derived
   /api/v1/cert-manager/certificate-profiles/{id}/certificates/latest-active-bundle:
     get:
       operationId: getCertificateProfileLatestActiveBundle
@@ -2946,17 +2998,21 @@ paths:
                 type: object
                 properties:
                   certificate:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   certificateChain:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   privateKey:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   serialNumber:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                 required:
                 - certificate
                 - certificateChain
@@ -3101,6 +3157,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get certificate profile latest active bundle
+      x-summary-source: derived
   /api/v1/cert-manager/certificate-profiles/{id}/acme/eab-secret/reveal:
     get:
       operationId: revealCertificateProfileAcmeEabSecret
@@ -3267,6 +3325,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Reveal certificate profile acme eab secret
+      x-summary-source: derived
   /api/v1/pki/certificate-profiles:
     post:
       tags:
@@ -3330,14 +3390,14 @@ paths:
                   - type: object
                     properties: {}
                     additionalProperties: false
-                  nullable: true
                 defaults:
-                  type: object
+                  type:
+                  - object
+                  - 'null'
                   properties:
                     ttlDays:
                       type: integer
-                      exclusiveMinimum: true
-                      minimum: 0
+                      exclusiveMinimum: 0
                     commonName:
                       type: string
                     keyAlgorithm:
@@ -3435,7 +3495,6 @@ paths:
                     locality:
                       type: string
                   additionalProperties: false
-                  nullable: true
               required:
               - certificatePolicyId
               - slug
@@ -3457,27 +3516,31 @@ paths:
                       projectId:
                         type: string
                       caId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       certificatePolicyId:
                         type: string
                         format: uuid
                       slug:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       enrollmentType:
                         type: string
                       estConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       apiConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       createdAt:
                         type: string
                         format: date-time
@@ -3485,9 +3548,10 @@ paths:
                         type: string
                         format: date-time
                       acmeConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       issuerType:
                         type: string
                         default: ca
@@ -3523,9 +3587,10 @@ paths:
                         - type: object
                           properties: {}
                           additionalProperties: false
-                        nullable: true
                       defaults:
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                         properties:
                           ttlDays:
                             type: number
@@ -3625,11 +3690,11 @@ paths:
                           locality:
                             type: string
                         additionalProperties: false
-                        nullable: true
                       scepConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                     required:
                     - id
                     - projectId
@@ -3780,6 +3845,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create api pki certificate profiles
+      x-summary-source: derived
+      operationId: postApiV1PkiCertificateProfiles
+      x-operation-id-source: derived
     get:
       tags:
       - PKI Certificate Profiles
@@ -3853,27 +3922,31 @@ paths:
                         projectId:
                           type: string
                         caId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         certificatePolicyId:
                           type: string
                           format: uuid
                         slug:
                           type: string
                         description:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         enrollmentType:
                           type: string
                         estConfigId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         apiConfigId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         createdAt:
                           type: string
                           format: date-time
@@ -3881,9 +3954,10 @@ paths:
                           type: string
                           format: date-time
                         acmeConfigId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         issuerType:
                           type: string
                           default: ca
@@ -3919,9 +3993,10 @@ paths:
                           - type: object
                             properties: {}
                             additionalProperties: false
-                          nullable: true
                         defaults:
-                          type: object
+                          type:
+                          - object
+                          - 'null'
                           properties:
                             ttlDays:
                               type: number
@@ -4021,11 +4096,11 @@ paths:
                             locality:
                               type: string
                           additionalProperties: false
-                          nullable: true
                         scepConfigId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         certificateAuthority:
                           type: object
                           properties:
@@ -4038,8 +4113,9 @@ paths:
                             isExternal:
                               type: boolean
                             externalType:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                           required:
                           - id
                           - status
@@ -4297,6 +4373,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api pki certificate profiles
+      x-summary-source: derived
+      operationId: getApiV1PkiCertificateProfiles
+      x-operation-id-source: derived
   /api/v1/pki/certificate-profiles/{id}:
     get:
       tags:
@@ -4325,27 +4405,31 @@ paths:
                       projectId:
                         type: string
                       caId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       certificatePolicyId:
                         type: string
                         format: uuid
                       slug:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       enrollmentType:
                         type: string
                       estConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       apiConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       createdAt:
                         type: string
                         format: date-time
@@ -4353,9 +4437,10 @@ paths:
                         type: string
                         format: date-time
                       acmeConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       issuerType:
                         type: string
                         default: ca
@@ -4391,9 +4476,10 @@ paths:
                         - type: object
                           properties: {}
                           additionalProperties: false
-                        nullable: true
                       defaults:
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                         properties:
                           ttlDays:
                             type: number
@@ -4493,11 +4579,11 @@ paths:
                           locality:
                             type: string
                         additionalProperties: false
-                        nullable: true
                       scepConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       certificateAuthority:
                         type: object
                         properties:
@@ -4512,8 +4598,9 @@ paths:
                           isExternal:
                             type: boolean
                           externalType:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                         required:
                         - id
                         - projectId
@@ -4760,6 +4847,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api pki certificate profiles by id
+      x-summary-source: derived
+      operationId: getApiV1PkiCertificateProfilesById
+      x-operation-id-source: derived
     patch:
       tags:
       - PKI Certificate Profiles
@@ -4776,9 +4867,10 @@ paths:
                   maxLength: 255
                   pattern: ^[a-z0-9-]+$
                 description:
-                  type: string
+                  type:
+                  - string
+                  - 'null'
                   maxLength: 1000
-                  nullable: true
                 issuerType:
                   type: string
                   enum:
@@ -4816,14 +4908,14 @@ paths:
                   - type: object
                     properties: {}
                     additionalProperties: false
-                  nullable: true
                 defaults:
-                  type: object
+                  type:
+                  - object
+                  - 'null'
                   properties:
                     ttlDays:
                       type: integer
-                      exclusiveMinimum: true
-                      minimum: 0
+                      exclusiveMinimum: 0
                     commonName:
                       type: string
                     keyAlgorithm:
@@ -4921,7 +5013,6 @@ paths:
                     locality:
                       type: string
                   additionalProperties: false
-                  nullable: true
               additionalProperties: false
       parameters:
       - schema:
@@ -4947,27 +5038,31 @@ paths:
                       projectId:
                         type: string
                       caId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       certificatePolicyId:
                         type: string
                         format: uuid
                       slug:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       enrollmentType:
                         type: string
                       estConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       apiConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       createdAt:
                         type: string
                         format: date-time
@@ -4975,9 +5070,10 @@ paths:
                         type: string
                         format: date-time
                       acmeConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       issuerType:
                         type: string
                         default: ca
@@ -5013,9 +5109,10 @@ paths:
                         - type: object
                           properties: {}
                           additionalProperties: false
-                        nullable: true
                       defaults:
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                         properties:
                           ttlDays:
                             type: number
@@ -5115,11 +5212,11 @@ paths:
                           locality:
                             type: string
                         additionalProperties: false
-                        nullable: true
                       scepConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                     required:
                     - id
                     - projectId
@@ -5270,6 +5367,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update api pki certificate profiles by id
+      x-summary-source: derived
+      operationId: patchApiV1PkiCertificateProfilesById
+      x-operation-id-source: derived
     delete:
       tags:
       - PKI Certificate Profiles
@@ -5297,27 +5398,31 @@ paths:
                       projectId:
                         type: string
                       caId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       certificatePolicyId:
                         type: string
                         format: uuid
                       slug:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       enrollmentType:
                         type: string
                       estConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       apiConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       createdAt:
                         type: string
                         format: date-time
@@ -5325,9 +5430,10 @@ paths:
                         type: string
                         format: date-time
                       acmeConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       issuerType:
                         type: string
                         default: ca
@@ -5363,9 +5469,10 @@ paths:
                         - type: object
                           properties: {}
                           additionalProperties: false
-                        nullable: true
                       defaults:
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                         properties:
                           ttlDays:
                             type: number
@@ -5465,11 +5572,11 @@ paths:
                           locality:
                             type: string
                         additionalProperties: false
-                        nullable: true
                       scepConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                     required:
                     - id
                     - projectId
@@ -5620,6 +5727,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete api pki certificate profiles by id
+      x-summary-source: derived
+      operationId: deleteApiV1PkiCertificateProfilesById
+      x-operation-id-source: derived
   /api/v1/pki/certificate-profiles/slug/{slug}:
     get:
       tags:
@@ -5648,27 +5759,31 @@ paths:
                       projectId:
                         type: string
                       caId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       certificatePolicyId:
                         type: string
                         format: uuid
                       slug:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       enrollmentType:
                         type: string
                       estConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       apiConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       createdAt:
                         type: string
                         format: date-time
@@ -5676,9 +5791,10 @@ paths:
                         type: string
                         format: date-time
                       acmeConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       issuerType:
                         type: string
                         default: ca
@@ -5714,9 +5830,10 @@ paths:
                         - type: object
                           properties: {}
                           additionalProperties: false
-                        nullable: true
                       defaults:
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                         properties:
                           ttlDays:
                             type: number
@@ -5816,11 +5933,11 @@ paths:
                           locality:
                             type: string
                         additionalProperties: false
-                        nullable: true
                       scepConfigId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                     required:
                     - id
                     - projectId
@@ -5971,6 +6088,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api pki certificate profiles slug by slug
+      x-summary-source: derived
+      operationId: getApiV1PkiCertificateProfilesSlugBySlug
+      x-operation-id-source: derived
   /api/v1/pki/certificate-profiles/{id}/certificates:
     get:
       tags:
@@ -6039,9 +6160,10 @@ paths:
                           type: string
                           format: date-time
                         revokedAt:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         createdAt:
                           type: string
                           format: date-time
@@ -6195,6 +6317,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api pki certificate profiles by id certificates
+      x-summary-source: derived
+      operationId: getApiV1PkiCertificateProfilesByIdCertificates
+      x-operation-id-source: derived
   /api/v1/pki/certificate-profiles/{id}/certificates/latest-active-bundle:
     get:
       tags:
@@ -6216,17 +6342,21 @@ paths:
                 type: object
                 properties:
                   certificate:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   certificateChain:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   privateKey:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   serialNumber:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                 required:
                 - certificate
                 - certificateChain
@@ -6371,6 +6501,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api pki certificate profiles by id certificates latest active bundle
+      x-summary-source: derived
+      operationId: getApiV1PkiCertificateProfilesByIdCertificatesLatestActiveBundle
+      x-operation-id-source: derived
   /api/v1/pki/certificate-profiles/{id}/acme/eab-secret/reveal:
     get:
       tags:
@@ -6536,6 +6670,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api pki certificate profiles by id acme eab secret reveal
+      x-summary-source: derived
+      operationId: getApiV1PkiCertificateProfilesByIdAcmeEabSecretReveal
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

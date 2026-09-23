@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin LDAP Auth API
+  title: Infisical LDAP Auth API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -210,6 +210,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Login with ldap auth
+      x-summary-source: derived
   /api/v1/auth/ldap-auth/identities/{identityId}:
     post:
       operationId: attachLdapAuth
@@ -444,8 +446,7 @@ paths:
                         type: string
                       searchFilter:
                         type: string
-                      allowedFields:
-                        nullable: true
+                      allowedFields: {}
                       createdAt:
                         type: string
                         format: date-time
@@ -456,9 +457,10 @@ paths:
                         type: number
                         default: 0
                       templateId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       lockoutEnabled:
                         type: boolean
                         default: true
@@ -621,6 +623,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Attach ldap auth
+      x-summary-source: derived
     patch:
       operationId: updateLdapAuth
       tags:
@@ -757,8 +761,7 @@ paths:
                         type: string
                       searchFilter:
                         type: string
-                      allowedFields:
-                        nullable: true
+                      allowedFields: {}
                       createdAt:
                         type: string
                         format: date-time
@@ -769,9 +772,10 @@ paths:
                         type: number
                         default: 0
                       templateId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       lockoutEnabled:
                         type: boolean
                         default: true
@@ -934,6 +938,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update ldap auth
+      x-summary-source: derived
     get:
       operationId: getLdapAuth
       tags:
@@ -981,8 +987,7 @@ paths:
                         type: string
                       searchFilter:
                         type: string
-                      allowedFields:
-                        nullable: true
+                      allowedFields: {}
                       createdAt:
                         type: string
                         format: date-time
@@ -993,8 +998,9 @@ paths:
                         type: number
                         default: 0
                       templateId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       lockoutEnabled:
                         type: boolean
                         default: true
@@ -1165,6 +1171,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get ldap auth
+      x-summary-source: derived
     delete:
       operationId: deleteLdapAuth
       tags:
@@ -1212,8 +1220,7 @@ paths:
                         type: string
                       searchFilter:
                         type: string
-                      allowedFields:
-                        nullable: true
+                      allowedFields: {}
                       createdAt:
                         type: string
                         format: date-time
@@ -1224,9 +1231,10 @@ paths:
                         type: number
                         default: 0
                       templateId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       lockoutEnabled:
                         type: boolean
                         default: true
@@ -1389,6 +1397,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete ldap auth
+      x-summary-source: derived
   /api/v1/auth/ldap-auth/identities/{identityId}/clear-lockouts:
     post:
       operationId: clearLdapAuthLockouts
@@ -1555,6 +1565,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Clear ldap auth lockouts
+      x-summary-source: derived
 components:
   securitySchemes:
     bearerAuth:

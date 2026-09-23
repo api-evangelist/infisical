@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin Identity Specific Privileges API
+  title: Infisical Identity Specific Privileges API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -245,19 +245,23 @@ paths:
                         type: boolean
                         default: false
                       temporaryMode:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       temporaryRange:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       temporaryAccessStartTime:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       temporaryAccessEndTime:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       permissions:
                         type: array
                         items:
@@ -438,6 +442,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create api additional privilege identity permanent
+      x-summary-source: derived
+      operationId: postApiV1AdditionalPrivilegeIdentityPermanent
+      x-operation-id-source: derived
   /api/v1/additional-privilege/identity/temporary:
     post:
       tags:
@@ -685,19 +693,23 @@ paths:
                         type: boolean
                         default: false
                       temporaryMode:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       temporaryRange:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       temporaryAccessStartTime:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       temporaryAccessEndTime:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       permissions:
                         type: array
                         items:
@@ -878,6 +890,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create api additional privilege identity temporary
+      x-summary-source: derived
+      operationId: postApiV1AdditionalPrivilegeIdentityTemporary
+      x-operation-id-source: derived
   /api/v1/additional-privilege/identity:
     patch:
       tags:
@@ -1135,19 +1151,23 @@ paths:
                         type: boolean
                         default: false
                       temporaryMode:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       temporaryRange:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       temporaryAccessStartTime:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       temporaryAccessEndTime:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       permissions:
                         type: array
                         items:
@@ -1328,6 +1348,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update api additional privilege identity
+      x-summary-source: derived
+      operationId: patchApiV1AdditionalPrivilegeIdentity
+      x-operation-id-source: derived
     delete:
       tags:
       - Identity Specific Privileges
@@ -1381,19 +1405,23 @@ paths:
                         type: boolean
                         default: false
                       temporaryMode:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       temporaryRange:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       temporaryAccessStartTime:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       temporaryAccessEndTime:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       permissions:
                         type: array
                         items:
@@ -1574,6 +1602,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete api additional privilege identity
+      x-summary-source: derived
+      operationId: deleteApiV1AdditionalPrivilegeIdentity
+      x-operation-id-source: derived
     get:
       tags:
       - Identity Specific Privileges
@@ -1620,19 +1652,23 @@ paths:
                           type: boolean
                           default: false
                         temporaryMode:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         temporaryRange:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         temporaryAccessStartTime:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         temporaryAccessEndTime:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         permissions:
                           type: array
                           items:
@@ -1813,6 +1849,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api additional privilege identity
+      x-summary-source: derived
+      operationId: getApiV1AdditionalPrivilegeIdentity
+      x-operation-id-source: derived
   /api/v1/additional-privilege/identity/{privilegeSlug}:
     get:
       tags:
@@ -1865,19 +1905,23 @@ paths:
                         type: boolean
                         default: false
                       temporaryMode:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       temporaryRange:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       temporaryAccessStartTime:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       temporaryAccessEndTime:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       permissions:
                         type: array
                         items:
@@ -2058,6 +2102,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api additional privilege identity by privilege slug
+      x-summary-source: derived
+      operationId: getApiV1AdditionalPrivilegeIdentityByPrivilegeSlug
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

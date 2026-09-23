@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin PKI ACME API
+  title: Infisical PKI ACME API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -60,6 +60,10 @@ paths:
                 - newAccount
                 - newOrder
                 additionalProperties: false
+      summary: Get api cert manager acme profiles by profile id directory
+      x-summary-source: derived
+      operationId: getApiV1CertManagerAcmeProfilesByProfileIdDirectory
+      x-operation-id-source: derived
   /api/v1/cert-manager/acme/profiles/{profileId}/new-nonce:
     get:
       tags:
@@ -81,6 +85,10 @@ paths:
                 type: string
                 minLength: 0
                 maxLength: 0
+      summary: Get api cert manager acme profiles by profile id new nonce
+      x-summary-source: derived
+      operationId: getApiV1CertManagerAcmeProfilesByProfileIdNewNonce
+      x-operation-id-source: derived
   /api/v1/cert-manager/acme/profiles/{profileId}/new-account:
     post:
       tags:
@@ -130,6 +138,10 @@ paths:
                 required:
                 - status
                 additionalProperties: false
+      summary: Create api cert manager acme profiles by profile id new account
+      x-summary-source: derived
+      operationId: postApiV1CertManagerAcmeProfilesByProfileIdNewAccount
+      x-operation-id-source: derived
   /api/v1/cert-manager/acme/profiles/{profileId}/accounts/{accountId}:
     post:
       tags:
@@ -178,6 +190,10 @@ paths:
                 required:
                 - status
                 additionalProperties: false
+      summary: Create api cert manager acme profiles by profile id accounts by account id
+      x-summary-source: derived
+      operationId: postApiV1CertManagerAcmeProfilesByProfileIdAccountsByAccountId
+      x-operation-id-source: derived
   /api/v1/cert-manager/acme/profiles/{profileId}/new-order:
     post:
       tags:
@@ -257,6 +273,10 @@ paths:
                 - authorizations
                 - finalize
                 additionalProperties: false
+      summary: Create api cert manager acme profiles by profile id new order
+      x-summary-source: derived
+      operationId: postApiV1CertManagerAcmeProfilesByProfileIdNewOrder
+      x-operation-id-source: derived
   /api/v1/cert-manager/acme/profiles/{profileId}/orders/{orderId}:
     post:
       tags:
@@ -342,6 +362,10 @@ paths:
                 - authorizations
                 - finalize
                 additionalProperties: false
+      summary: Create api cert manager acme profiles by profile id orders by order id
+      x-summary-source: derived
+      operationId: postApiV1CertManagerAcmeProfilesByProfileIdOrdersByOrderId
+      x-operation-id-source: derived
   /api/v1/cert-manager/acme/profiles/{profileId}/orders/{orderId}/finalize:
     post:
       tags:
@@ -427,6 +451,10 @@ paths:
                 - authorizations
                 - finalize
                 additionalProperties: false
+      summary: Create api cert manager acme profiles by profile id orders by order id finalize
+      x-summary-source: derived
+      operationId: postApiV1CertManagerAcmeProfilesByProfileIdOrdersByOrderIdFinalize
+      x-operation-id-source: derived
   /api/v1/cert-manager/acme/profiles/{profileId}/accounts/{accountId}/orders:
     post:
       tags:
@@ -477,6 +505,10 @@ paths:
                 required:
                 - orders
                 additionalProperties: false
+      summary: Create api cert manager acme profiles by profile id accounts by account id…
+      x-summary-source: derived
+      operationId: postApiV1CertManagerAcmeProfilesByProfileIdAccountsByAccountIdOrders
+      x-operation-id-source: derived
   /api/v1/cert-manager/acme/profiles/{profileId}/orders/{orderId}/certificate:
     post:
       tags:
@@ -520,6 +552,10 @@ paths:
             application/json:
               schema:
                 type: string
+      summary: Create api cert manager acme profiles by profile id orders by order id…
+      x-summary-source: derived
+      operationId: postApiV1CertManagerAcmeProfilesByProfileIdOrdersByOrderIdCertificate
+      x-operation-id-source: derived
   /api/v1/cert-manager/acme/profiles/{profileId}/authorizations/{authzId}:
     post:
       tags:
@@ -618,6 +654,10 @@ paths:
                 - identifier
                 - challenges
                 additionalProperties: false
+      summary: Create api cert manager acme profiles by profile id authorizations by authz id
+      x-summary-source: derived
+      operationId: postApiV1CertManagerAcmeProfilesByProfileIdAuthorizationsByAuthzId
+      x-operation-id-source: derived
   /api/v1/cert-manager/acme/profiles/{profileId}/authorizations/{authzId}/challenges/{challengeId}:
     post:
       tags:
@@ -684,6 +724,10 @@ paths:
                 - status
                 - token
                 additionalProperties: false
+      summary: Create api cert manager acme profiles by profile id authorizations by authz id…
+      x-summary-source: derived
+      operationId: postApiV1CertManagerAcmeProfilesByProfileIdAuthorizationsByAuthzIdChallengesByChallengeId
+      x-operation-id-source: derived
   /api/v1/cert-manager/acme/applications/{applicationId}/profiles/{profileId}/directory:
     get:
       tags:
@@ -737,6 +781,10 @@ paths:
                 - newAccount
                 - newOrder
                 additionalProperties: false
+      summary: Get api cert manager acme applications by application id profiles by profile id…
+      x-summary-source: derived
+      operationId: getApiV1CertManagerAcmeApplicationsByApplicationIdProfilesByProfileIdDirectory
+      x-operation-id-source: derived
   /api/v1/cert-manager/acme/applications/{applicationId}/profiles/{profileId}/new-account:
     post:
       tags:
@@ -792,6 +840,10 @@ paths:
                 required:
                 - status
                 additionalProperties: false
+      summary: Create api cert manager acme applications by application id profiles by profile…
+      x-summary-source: derived
+      operationId: postApiV1CertManagerAcmeApplicationsByApplicationIdProfilesByProfileIdNewAccount
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

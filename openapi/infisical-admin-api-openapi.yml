@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Infisical Admin API
   description: List of all available APIs that can be consumed
@@ -53,20 +53,24 @@ paths:
                       username:
                         type: string
                       firstName:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       lastName:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       email:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       id:
                         type: string
                         format: uuid
                       superAdmin:
-                        type: boolean
-                        nullable: true
+                        type:
+                        - boolean
+                        - 'null'
                     required:
                     - username
                     - id
@@ -253,6 +257,10 @@ paths:
                 additionalProperties: false
       tags:
       - Admin
+      summary: Create api admin bootstrap
+      x-summary-source: derived
+      operationId: postApiV1AdminBootstrap
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin Projects API
+  title: Infisical Projects API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -77,9 +77,10 @@ paths:
                           type: string
                           format: uuid
                         parentFolderId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         createdAt:
                           type: string
                           format: date-time
@@ -234,6 +235,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api workspace by workspace id secret snapshots
+      x-summary-source: derived
+      operationId: getApiV1WorkspaceByWorkspaceIdSecretSnapshots
+      x-operation-id-source: derived
   /api/v1/projects/{projectId}/secret-snapshots:
     get:
       tags:
@@ -298,9 +303,10 @@ paths:
                           type: string
                           format: uuid
                         parentFolderId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         createdAt:
                           type: string
                           format: date-time
@@ -455,6 +461,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api projects by project id secret snapshots
+      x-summary-source: derived
+      operationId: getApiV1ProjectsByProjectIdSecretSnapshots
+      x-operation-id-source: derived
   /api/v1/workspace/{workspaceId}:
     get:
       tags:
@@ -485,19 +495,22 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       type:
                         type: string
                       defaultProduct:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       slug:
                         type: string
                       autoCapitalization:
-                        type: boolean
+                        type:
+                        - boolean
+                        - 'null'
                         default: false
-                        nullable: true
                       orgId:
                         type: string
                         format: uuid
@@ -511,22 +524,26 @@ paths:
                         type: number
                         default: 1
                       upgradeStatus:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       pitVersionLimit:
                         type: number
                         default: 10
                       kmsCertificateKeyId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       auditLogsRetentionDays:
-                        type: number
-                        nullable: true
+                        type:
+                        - number
+                        - 'null'
                       hasDeleteProtection:
-                        type: boolean
+                        type:
+                        - boolean
+                        - 'null'
                         default: false
-                        nullable: true
                       secretSharing:
                         type: boolean
                         default: true
@@ -534,13 +551,15 @@ paths:
                         type: boolean
                         default: false
                       secretDetectionIgnoreValues:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: string
-                        nullable: true
                       enforceEncryptedSecretManagerSecretMetadata:
-                        type: boolean
-                        nullable: true
+                        type:
+                        - boolean
+                        - 'null'
                       _id:
                         type: string
                       environments:
@@ -709,6 +728,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api workspace by workspace id
+      x-summary-source: derived
+      operationId: getApiV1WorkspaceByWorkspaceId
+      x-operation-id-source: derived
     delete:
       tags:
       - Projects
@@ -738,19 +761,22 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       type:
                         type: string
                       defaultProduct:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       slug:
                         type: string
                       autoCapitalization:
-                        type: boolean
+                        type:
+                        - boolean
+                        - 'null'
                         default: false
-                        nullable: true
                       orgId:
                         type: string
                         format: uuid
@@ -764,22 +790,26 @@ paths:
                         type: number
                         default: 1
                       upgradeStatus:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       pitVersionLimit:
                         type: number
                         default: 10
                       kmsCertificateKeyId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       auditLogsRetentionDays:
-                        type: number
-                        nullable: true
+                        type:
+                        - number
+                        - 'null'
                       hasDeleteProtection:
-                        type: boolean
+                        type:
+                        - boolean
+                        - 'null'
                         default: false
-                        nullable: true
                       secretSharing:
                         type: boolean
                         default: true
@@ -787,13 +817,15 @@ paths:
                         type: boolean
                         default: false
                       secretDetectionIgnoreValues:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: string
-                        nullable: true
                       enforceEncryptedSecretManagerSecretMetadata:
-                        type: boolean
-                        nullable: true
+                        type:
+                        - boolean
+                        - 'null'
                     required:
                     - id
                     - name
@@ -942,6 +974,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete api workspace by workspace id
+      x-summary-source: derived
+      operationId: deleteApiV1WorkspaceByWorkspaceId
+      x-operation-id-source: derived
     patch:
       tags:
       - Projects
@@ -1019,19 +1055,22 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       type:
                         type: string
                       defaultProduct:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       slug:
                         type: string
                       autoCapitalization:
-                        type: boolean
+                        type:
+                        - boolean
+                        - 'null'
                         default: false
-                        nullable: true
                       orgId:
                         type: string
                         format: uuid
@@ -1045,22 +1084,26 @@ paths:
                         type: number
                         default: 1
                       upgradeStatus:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       pitVersionLimit:
                         type: number
                         default: 10
                       kmsCertificateKeyId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       auditLogsRetentionDays:
-                        type: number
-                        nullable: true
+                        type:
+                        - number
+                        - 'null'
                       hasDeleteProtection:
-                        type: boolean
+                        type:
+                        - boolean
+                        - 'null'
                         default: false
-                        nullable: true
                       secretSharing:
                         type: boolean
                         default: true
@@ -1068,13 +1111,15 @@ paths:
                         type: boolean
                         default: false
                       secretDetectionIgnoreValues:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: string
-                        nullable: true
                       enforceEncryptedSecretManagerSecretMetadata:
-                        type: boolean
-                        nullable: true
+                        type:
+                        - boolean
+                        - 'null'
                     required:
                     - id
                     - name
@@ -1225,6 +1270,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update api workspace by workspace id
+      x-summary-source: derived
+      operationId: patchApiV1WorkspaceByWorkspaceId
+      x-operation-id-source: derived
   /api/v1/projects:
     post:
       operationId: createProject
@@ -1297,19 +1346,22 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       type:
                         type: string
                       defaultProduct:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       slug:
                         type: string
                       autoCapitalization:
-                        type: boolean
+                        type:
+                        - boolean
+                        - 'null'
                         default: false
-                        nullable: true
                       orgId:
                         type: string
                         format: uuid
@@ -1323,22 +1375,26 @@ paths:
                         type: number
                         default: 1
                       upgradeStatus:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       pitVersionLimit:
                         type: number
                         default: 10
                       kmsCertificateKeyId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       auditLogsRetentionDays:
-                        type: number
-                        nullable: true
+                        type:
+                        - number
+                        - 'null'
                       hasDeleteProtection:
-                        type: boolean
+                        type:
+                        - boolean
+                        - 'null'
                         default: false
-                        nullable: true
                       secretSharing:
                         type: boolean
                         default: true
@@ -1346,13 +1402,15 @@ paths:
                         type: boolean
                         default: false
                       secretDetectionIgnoreValues:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: string
-                        nullable: true
                       enforceEncryptedSecretManagerSecretMetadata:
-                        type: boolean
-                        nullable: true
+                        type:
+                        - boolean
+                        - 'null'
                       _id:
                         type: string
                       environments:
@@ -1399,17 +1457,21 @@ paths:
                                   id:
                                     type: string
                                   email:
-                                    type: string
-                                    nullable: true
+                                    type:
+                                    - string
+                                    - 'null'
                                   username:
-                                    type: string
-                                    nullable: true
+                                    type:
+                                    - string
+                                    - 'null'
                                   firstName:
-                                    type: string
-                                    nullable: true
+                                    type:
+                                    - string
+                                    - 'null'
                                   lastName:
-                                    type: string
-                                    nullable: true
+                                    type:
+                                    - string
+                                    - 'null'
                                 required:
                                 - type
                                 - id
@@ -1433,7 +1495,6 @@ paths:
                                 - id
                                 - name
                                 additionalProperties: false
-                              nullable: true
                           required:
                           - id
                           - name
@@ -1595,11 +1656,12 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create project
+      x-summary-source: derived
     get:
       operationId: listProjects
       tags:
       - Projects
-      description: List projects
       parameters:
       - schema:
           type: string
@@ -1643,19 +1705,22 @@ paths:
                         name:
                           type: string
                         description:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         type:
                           type: string
                         defaultProduct:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         slug:
                           type: string
                         autoCapitalization:
-                          type: boolean
+                          type:
+                          - boolean
+                          - 'null'
                           default: false
-                          nullable: true
                         orgId:
                           type: string
                           format: uuid
@@ -1669,22 +1734,26 @@ paths:
                           type: number
                           default: 1
                         upgradeStatus:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         pitVersionLimit:
                           type: number
                           default: 10
                         kmsCertificateKeyId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         auditLogsRetentionDays:
-                          type: number
-                          nullable: true
+                          type:
+                          - number
+                          - 'null'
                         hasDeleteProtection:
-                          type: boolean
+                          type:
+                          - boolean
+                          - 'null'
                           default: false
-                          nullable: true
                         secretSharing:
                           type: boolean
                           default: true
@@ -1692,13 +1761,15 @@ paths:
                           type: boolean
                           default: false
                         secretDetectionIgnoreValues:
-                          type: array
+                          type:
+                          - array
+                          - 'null'
                           items:
                             type: string
-                          nullable: true
                         enforceEncryptedSecretManagerSecretMetadata:
-                          type: boolean
-                          nullable: true
+                          type:
+                          - boolean
+                          - 'null'
                         _id:
                           type: string
                         environments:
@@ -1745,17 +1816,21 @@ paths:
                                     id:
                                       type: string
                                     email:
-                                      type: string
-                                      nullable: true
+                                      type:
+                                      - string
+                                      - 'null'
                                     username:
-                                      type: string
-                                      nullable: true
+                                      type:
+                                      - string
+                                      - 'null'
                                     firstName:
-                                      type: string
-                                      nullable: true
+                                      type:
+                                      - string
+                                      - 'null'
                                     lastName:
-                                      type: string
-                                      nullable: true
+                                      type:
+                                      - string
+                                      - 'null'
                                   required:
                                   - type
                                   - id
@@ -1779,7 +1854,6 @@ paths:
                                   - id
                                   - name
                                   additionalProperties: false
-                                nullable: true
                             required:
                             - id
                             - name
@@ -1799,8 +1873,9 @@ paths:
                               name:
                                 type: string
                               description:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               slug:
                                 type: string
                               permissions: {}
@@ -1976,6 +2051,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List projects
+      x-summary-source: derived
   /api/v1/projects/{projectId}:
     get:
       operationId: getProjectById
@@ -2007,19 +2084,22 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       type:
                         type: string
                       defaultProduct:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       slug:
                         type: string
                       autoCapitalization:
-                        type: boolean
+                        type:
+                        - boolean
+                        - 'null'
                         default: false
-                        nullable: true
                       orgId:
                         type: string
                         format: uuid
@@ -2033,22 +2113,26 @@ paths:
                         type: number
                         default: 1
                       upgradeStatus:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       pitVersionLimit:
                         type: number
                         default: 10
                       kmsCertificateKeyId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       auditLogsRetentionDays:
-                        type: number
-                        nullable: true
+                        type:
+                        - number
+                        - 'null'
                       hasDeleteProtection:
-                        type: boolean
+                        type:
+                        - boolean
+                        - 'null'
                         default: false
-                        nullable: true
                       secretSharing:
                         type: boolean
                         default: true
@@ -2056,13 +2140,15 @@ paths:
                         type: boolean
                         default: false
                       secretDetectionIgnoreValues:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: string
-                        nullable: true
                       enforceEncryptedSecretManagerSecretMetadata:
-                        type: boolean
-                        nullable: true
+                        type:
+                        - boolean
+                        - 'null'
                       _id:
                         type: string
                       environments:
@@ -2109,17 +2195,21 @@ paths:
                                   id:
                                     type: string
                                   email:
-                                    type: string
-                                    nullable: true
+                                    type:
+                                    - string
+                                    - 'null'
                                   username:
-                                    type: string
-                                    nullable: true
+                                    type:
+                                    - string
+                                    - 'null'
                                   firstName:
-                                    type: string
-                                    nullable: true
+                                    type:
+                                    - string
+                                    - 'null'
                                   lastName:
-                                    type: string
-                                    nullable: true
+                                    type:
+                                    - string
+                                    - 'null'
                                 required:
                                 - type
                                 - id
@@ -2143,7 +2233,6 @@ paths:
                                 - id
                                 - name
                                 additionalProperties: false
-                              nullable: true
                           required:
                           - id
                           - name
@@ -2303,11 +2392,12 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get project by id
+      x-summary-source: derived
     delete:
       operationId: deleteProject
       tags:
       - Projects
-      description: Delete project
       parameters:
       - schema:
           type: string
@@ -2333,19 +2423,22 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       type:
                         type: string
                       defaultProduct:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       slug:
                         type: string
                       autoCapitalization:
-                        type: boolean
+                        type:
+                        - boolean
+                        - 'null'
                         default: false
-                        nullable: true
                       orgId:
                         type: string
                         format: uuid
@@ -2359,22 +2452,26 @@ paths:
                         type: number
                         default: 1
                       upgradeStatus:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       pitVersionLimit:
                         type: number
                         default: 10
                       kmsCertificateKeyId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       auditLogsRetentionDays:
-                        type: number
-                        nullable: true
+                        type:
+                        - number
+                        - 'null'
                       hasDeleteProtection:
-                        type: boolean
+                        type:
+                        - boolean
+                        - 'null'
                         default: false
-                        nullable: true
                       secretSharing:
                         type: boolean
                         default: true
@@ -2382,13 +2479,15 @@ paths:
                         type: boolean
                         default: false
                       secretDetectionIgnoreValues:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: string
-                        nullable: true
                       enforceEncryptedSecretManagerSecretMetadata:
-                        type: boolean
-                        nullable: true
+                        type:
+                        - boolean
+                        - 'null'
                     required:
                     - id
                     - name
@@ -2537,11 +2636,12 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete project
+      x-summary-source: derived
     patch:
       operationId: updateProject
       tags:
       - Projects
-      description: Update project
       requestBody:
         required: true
         content:
@@ -2611,19 +2711,22 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       type:
                         type: string
                       defaultProduct:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       slug:
                         type: string
                       autoCapitalization:
-                        type: boolean
+                        type:
+                        - boolean
+                        - 'null'
                         default: false
-                        nullable: true
                       orgId:
                         type: string
                         format: uuid
@@ -2637,22 +2740,26 @@ paths:
                         type: number
                         default: 1
                       upgradeStatus:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       pitVersionLimit:
                         type: number
                         default: 10
                       kmsCertificateKeyId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       auditLogsRetentionDays:
-                        type: number
-                        nullable: true
+                        type:
+                        - number
+                        - 'null'
                       hasDeleteProtection:
-                        type: boolean
+                        type:
+                        - boolean
+                        - 'null'
                         default: false
-                        nullable: true
                       secretSharing:
                         type: boolean
                         default: true
@@ -2660,13 +2767,15 @@ paths:
                         type: boolean
                         default: false
                       secretDetectionIgnoreValues:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: string
-                        nullable: true
                       enforceEncryptedSecretManagerSecretMetadata:
-                        type: boolean
-                        nullable: true
+                        type:
+                        - boolean
+                        - 'null'
                     required:
                     - id
                     - name
@@ -2817,6 +2926,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update project
+      x-summary-source: derived
   /api/v1/projects/slug/{slug}:
     get:
       operationId: getProjectBySlug
@@ -2847,19 +2958,22 @@ paths:
                   name:
                     type: string
                   description:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   type:
                     type: string
                   defaultProduct:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   slug:
                     type: string
                   autoCapitalization:
-                    type: boolean
+                    type:
+                    - boolean
+                    - 'null'
                     default: false
-                    nullable: true
                   orgId:
                     type: string
                     format: uuid
@@ -2873,22 +2987,26 @@ paths:
                     type: number
                     default: 1
                   upgradeStatus:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   pitVersionLimit:
                     type: number
                     default: 10
                   kmsCertificateKeyId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   auditLogsRetentionDays:
-                    type: number
-                    nullable: true
+                    type:
+                    - number
+                    - 'null'
                   hasDeleteProtection:
-                    type: boolean
+                    type:
+                    - boolean
+                    - 'null'
                     default: false
-                    nullable: true
                   secretSharing:
                     type: boolean
                     default: true
@@ -2896,13 +3014,15 @@ paths:
                     type: boolean
                     default: false
                   secretDetectionIgnoreValues:
-                    type: array
+                    type:
+                    - array
+                    - 'null'
                     items:
                       type: string
-                    nullable: true
                   enforceEncryptedSecretManagerSecretMetadata:
-                    type: boolean
-                    nullable: true
+                    type:
+                    - boolean
+                    - 'null'
                   _id:
                     type: string
                   environments:
@@ -2949,17 +3069,21 @@ paths:
                               id:
                                 type: string
                               email:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               username:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               firstName:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               lastName:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                             required:
                             - type
                             - id
@@ -2983,7 +3107,6 @@ paths:
                             - id
                             - name
                             additionalProperties: false
-                          nullable: true
                       required:
                       - id
                       - name
@@ -3142,6 +3265,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get project by slug
+      x-summary-source: derived
   /api/v1/projects/{projectId}/secret-validation-rules:
     get:
       parameters:
@@ -3170,14 +3295,16 @@ paths:
                           name:
                             type: string
                           description:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           projectId:
                             type: string
                           envId:
-                            type: string
+                            type:
+                            - string
+                            - 'null'
                             format: uuid
-                            nullable: true
                           secretPath:
                             type: string
                           isActive:
@@ -3489,6 +3616,10 @@ paths:
                 additionalProperties: false
       tags:
       - Projects
+      summary: Get api projects by project id secret validation rules
+      x-summary-source: derived
+      operationId: getApiV1ProjectsByProjectIdSecretValidationRules
+      x-operation-id-source: derived
     post:
       requestBody:
         required: true
@@ -3502,9 +3633,10 @@ paths:
                   minLength: 1
                   maxLength: 100
                 description:
-                  type: string
+                  type:
+                  - string
+                  - 'null'
                   maxLength: 500
-                  nullable: true
                 environmentSlug:
                   type: string
                   minLength: 1
@@ -3691,14 +3823,16 @@ paths:
                         name:
                           type: string
                         description:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         projectId:
                           type: string
                         envId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         secretPath:
                           type: string
                         isActive:
@@ -4010,6 +4144,10 @@ paths:
                 additionalProperties: false
       tags:
       - Projects
+      summary: Create api projects by project id secret validation rules
+      x-summary-source: derived
+      operationId: postApiV1ProjectsByProjectIdSecretValidationRules
+      x-operation-id-source: derived
   /api/v1/projects/{projectId}/secret-validation-rules/{ruleId}:
     patch:
       requestBody:
@@ -4024,13 +4162,15 @@ paths:
                   minLength: 1
                   maxLength: 100
                 description:
-                  type: string
+                  type:
+                  - string
+                  - 'null'
                   maxLength: 500
-                  nullable: true
                 environmentSlug:
-                  type: string
+                  type:
+                  - string
+                  - 'null'
                   minLength: 1
-                  nullable: true
                 secretPath:
                   type: string
                   minLength: 1
@@ -4077,14 +4217,16 @@ paths:
                         name:
                           type: string
                         description:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         projectId:
                           type: string
                         envId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         secretPath:
                           type: string
                         isActive:
@@ -4396,6 +4538,10 @@ paths:
                 additionalProperties: false
       tags:
       - Projects
+      summary: Update api projects by project id secret validation rules by rule id
+      x-summary-source: derived
+      operationId: patchApiV1ProjectsByProjectIdSecretValidationRulesByRuleId
+      x-operation-id-source: derived
     delete:
       parameters:
       - schema:
@@ -4427,14 +4573,16 @@ paths:
                         name:
                           type: string
                         description:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         projectId:
                           type: string
                         envId:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: uuid
-                          nullable: true
                         secretPath:
                           type: string
                         isActive:
@@ -4746,6 +4894,10 @@ paths:
                 additionalProperties: false
       tags:
       - Projects
+      summary: Delete api projects by project id secret validation rules by rule id
+      x-summary-source: derived
+      operationId: deleteApiV1ProjectsByProjectIdSecretValidationRulesByRuleId
+      x-operation-id-source: derived
   /api/v2/workspace:
     post:
       tags:
@@ -4817,19 +4969,22 @@ paths:
                       name:
                         type: string
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       type:
                         type: string
                       defaultProduct:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       slug:
                         type: string
                       autoCapitalization:
-                        type: boolean
+                        type:
+                        - boolean
+                        - 'null'
                         default: false
-                        nullable: true
                       orgId:
                         type: string
                         format: uuid
@@ -4843,22 +4998,26 @@ paths:
                         type: number
                         default: 1
                       upgradeStatus:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       pitVersionLimit:
                         type: number
                         default: 10
                       kmsCertificateKeyId:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: uuid
-                        nullable: true
                       auditLogsRetentionDays:
-                        type: number
-                        nullable: true
+                        type:
+                        - number
+                        - 'null'
                       hasDeleteProtection:
-                        type: boolean
+                        type:
+                        - boolean
+                        - 'null'
                         default: false
-                        nullable: true
                       secretSharing:
                         type: boolean
                         default: true
@@ -4866,13 +5025,15 @@ paths:
                         type: boolean
                         default: false
                       secretDetectionIgnoreValues:
-                        type: array
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: string
-                        nullable: true
                       enforceEncryptedSecretManagerSecretMetadata:
-                        type: boolean
-                        nullable: true
+                        type:
+                        - boolean
+                        - 'null'
                       _id:
                         type: string
                       environments:
@@ -4892,8 +5053,9 @@ paths:
                           - id
                           additionalProperties: false
                       kmsSecretManagerKeyId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                     required:
                     - id
                     - name
@@ -5046,6 +5208,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create api workspace
+      x-summary-source: derived
+      operationId: postApiV2Workspace
+      x-operation-id-source: derived
   /api/v2/workspace/{slug}:
     delete:
       tags:
@@ -5075,19 +5241,22 @@ paths:
                   name:
                     type: string
                   description:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   type:
                     type: string
                   defaultProduct:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   slug:
                     type: string
                   autoCapitalization:
-                    type: boolean
+                    type:
+                    - boolean
+                    - 'null'
                     default: false
-                    nullable: true
                   orgId:
                     type: string
                     format: uuid
@@ -5101,22 +5270,26 @@ paths:
                     type: number
                     default: 1
                   upgradeStatus:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   pitVersionLimit:
                     type: number
                     default: 10
                   kmsCertificateKeyId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   auditLogsRetentionDays:
-                    type: number
-                    nullable: true
+                    type:
+                    - number
+                    - 'null'
                   hasDeleteProtection:
-                    type: boolean
+                    type:
+                    - boolean
+                    - 'null'
                     default: false
-                    nullable: true
                   secretSharing:
                     type: boolean
                     default: true
@@ -5124,13 +5297,15 @@ paths:
                     type: boolean
                     default: false
                   secretDetectionIgnoreValues:
-                    type: array
+                    type:
+                    - array
+                    - 'null'
                     items:
                       type: string
-                    nullable: true
                   enforceEncryptedSecretManagerSecretMetadata:
-                    type: boolean
-                    nullable: true
+                    type:
+                    - boolean
+                    - 'null'
                 required:
                 - id
                 - name
@@ -5278,6 +5453,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete api workspace by slug
+      x-summary-source: derived
+      operationId: deleteApiV2WorkspaceBySlug
+      x-operation-id-source: derived
     get:
       tags:
       - Projects
@@ -5306,19 +5485,22 @@ paths:
                   name:
                     type: string
                   description:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   type:
                     type: string
                   defaultProduct:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   slug:
                     type: string
                   autoCapitalization:
-                    type: boolean
+                    type:
+                    - boolean
+                    - 'null'
                     default: false
-                    nullable: true
                   orgId:
                     type: string
                     format: uuid
@@ -5332,22 +5514,26 @@ paths:
                     type: number
                     default: 1
                   upgradeStatus:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   pitVersionLimit:
                     type: number
                     default: 10
                   kmsCertificateKeyId:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uuid
-                    nullable: true
                   auditLogsRetentionDays:
-                    type: number
-                    nullable: true
+                    type:
+                    - number
+                    - 'null'
                   hasDeleteProtection:
-                    type: boolean
+                    type:
+                    - boolean
+                    - 'null'
                     default: false
-                    nullable: true
                   secretSharing:
                     type: boolean
                     default: true
@@ -5355,13 +5541,15 @@ paths:
                     type: boolean
                     default: false
                   secretDetectionIgnoreValues:
-                    type: array
+                    type:
+                    - array
+                    - 'null'
                     items:
                       type: string
-                    nullable: true
                   enforceEncryptedSecretManagerSecretMetadata:
-                    type: boolean
-                    nullable: true
+                    type:
+                    - boolean
+                    - 'null'
                   _id:
                     type: string
                   environments:
@@ -5381,8 +5569,9 @@ paths:
                       - id
                       additionalProperties: false
                   kmsSecretManagerKeyId:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                 required:
                 - id
                 - name
@@ -5532,6 +5721,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get api workspace by slug
+      x-summary-source: derived
+      operationId: getApiV2WorkspaceBySlug
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin Identity Specific Privileges V2 API
+  title: Infisical Identity Specific Privileges V2 API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -3527,19 +3527,23 @@ paths:
                         type: boolean
                         default: false
                       temporaryMode:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       temporaryRange:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       temporaryAccessStartTime:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       temporaryAccessEndTime:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       permissions:
                         type: array
                         items:
@@ -3719,6 +3723,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create identity project additional privilege
+      x-summary-source: derived
     get:
       operationId: listIdentityProjectAdditionalPrivileges
       tags:
@@ -3763,19 +3769,23 @@ paths:
                           type: boolean
                           default: false
                         temporaryMode:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         temporaryRange:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         temporaryAccessStartTime:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         temporaryAccessEndTime:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           format: date-time
-                          nullable: true
                         createdAt:
                           type: string
                           format: date-time
@@ -3929,6 +3939,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List identity project additional privileges
+      x-summary-source: derived
   /api/v2/identity-project-additional-privilege/{id}:
     patch:
       operationId: updateIdentityProjectAdditionalPrivilege
@@ -7443,19 +7455,23 @@ paths:
                         type: boolean
                         default: false
                       temporaryMode:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       temporaryRange:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       temporaryAccessStartTime:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       temporaryAccessEndTime:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       permissions:
                         type: array
                         items:
@@ -7635,6 +7651,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update identity project additional privilege
+      x-summary-source: derived
     delete:
       operationId: deleteIdentityProjectAdditionalPrivilege
       tags:
@@ -7669,19 +7687,23 @@ paths:
                         type: boolean
                         default: false
                       temporaryMode:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       temporaryRange:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       temporaryAccessStartTime:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       temporaryAccessEndTime:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       permissions:
                         type: array
                         items:
@@ -7861,6 +7883,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete identity project additional privilege
+      x-summary-source: derived
     get:
       operationId: getIdentityProjectAdditionalPrivilege
       tags:
@@ -7896,19 +7920,23 @@ paths:
                         type: boolean
                         default: false
                       temporaryMode:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       temporaryRange:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       temporaryAccessStartTime:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       temporaryAccessEndTime:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       permissions:
                         type: array
                         items:
@@ -8088,6 +8116,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get identity project additional privilege
+      x-summary-source: derived
   /api/v2/identity-project-additional-privilege/slug/{privilegeSlug}:
     get:
       operationId: getIdentityProjectAdditionalPrivilegeBySlug
@@ -8138,19 +8168,23 @@ paths:
                         type: boolean
                         default: false
                       temporaryMode:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       temporaryRange:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       temporaryAccessStartTime:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       temporaryAccessEndTime:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       permissions:
                         type: array
                         items:
@@ -8330,6 +8364,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get identity project additional privilege by slug
+      x-summary-source: derived
 components:
   securitySchemes:
     bearerAuth:

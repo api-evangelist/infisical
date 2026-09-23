@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Infisical Admin KMS Keys API
+  title: Infisical KMS Keys API
   description: List of all available APIs that can be consumed
   version: 0.0.1
 servers:
@@ -78,12 +78,14 @@ paths:
                         type: string
                         format: uuid
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       isDisabled:
-                        type: boolean
+                        type:
+                        - boolean
+                        - 'null'
                         default: false
-                        nullable: true
                       orgId:
                         type: string
                         format: uuid
@@ -96,13 +98,13 @@ paths:
                         type: string
                         format: date-time
                       projectId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       keyUsage:
                         type: string
                         default: encrypt-decrypt
-                      kmipMetadata:
-                        nullable: true
+                      kmipMetadata: {}
                       version:
                         type: number
                         default: 1
@@ -257,6 +259,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Create kms key
+      x-summary-source: derived
     get:
       operationId: listKmsKeys
       tags:
@@ -328,12 +332,14 @@ paths:
                           type: string
                           format: uuid
                         description:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         isDisabled:
-                          type: boolean
+                          type:
+                          - boolean
+                          - 'null'
                           default: false
-                          nullable: true
                         orgId:
                           type: string
                           format: uuid
@@ -346,13 +352,13 @@ paths:
                           type: string
                           format: date-time
                         projectId:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         keyUsage:
                           type: string
                           default: encrypt-decrypt
-                        kmipMetadata:
-                          nullable: true
+                        kmipMetadata: {}
                         version:
                           type: number
                           default: 1
@@ -510,6 +516,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: List kms keys
+      x-summary-source: derived
   /api/v1/kms/keys/{keyId}:
     patch:
       operationId: updateKmsKey
@@ -559,12 +567,14 @@ paths:
                         type: string
                         format: uuid
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       isDisabled:
-                        type: boolean
+                        type:
+                        - boolean
+                        - 'null'
                         default: false
-                        nullable: true
                       orgId:
                         type: string
                         format: uuid
@@ -577,13 +587,13 @@ paths:
                         type: string
                         format: date-time
                       projectId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       keyUsage:
                         type: string
                         default: encrypt-decrypt
-                      kmipMetadata:
-                        nullable: true
+                      kmipMetadata: {}
                       version:
                         type: number
                         default: 1
@@ -738,6 +748,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Update kms key
+      x-summary-source: derived
     delete:
       operationId: deleteKmsKey
       tags:
@@ -766,12 +778,14 @@ paths:
                         type: string
                         format: uuid
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       isDisabled:
-                        type: boolean
+                        type:
+                        - boolean
+                        - 'null'
                         default: false
-                        nullable: true
                       orgId:
                         type: string
                         format: uuid
@@ -784,13 +798,13 @@ paths:
                         type: string
                         format: date-time
                       projectId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       keyUsage:
                         type: string
                         default: encrypt-decrypt
-                      kmipMetadata:
-                        nullable: true
+                      kmipMetadata: {}
                       version:
                         type: number
                         default: 1
@@ -945,6 +959,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Delete kms key
+      x-summary-source: derived
     get:
       operationId: getKmsKeyById
       tags:
@@ -973,12 +989,14 @@ paths:
                         type: string
                         format: uuid
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       isDisabled:
-                        type: boolean
+                        type:
+                        - boolean
+                        - 'null'
                         default: false
-                        nullable: true
                       orgId:
                         type: string
                         format: uuid
@@ -991,13 +1009,13 @@ paths:
                         type: string
                         format: date-time
                       projectId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       keyUsage:
                         type: string
                         default: encrypt-decrypt
-                      kmipMetadata:
-                        nullable: true
+                      kmipMetadata: {}
                       version:
                         type: number
                         default: 1
@@ -1152,6 +1170,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get kms key by id
+      x-summary-source: derived
   /api/v1/kms/keys/key-name/{keyName}:
     get:
       operationId: getKmsKeyByName
@@ -1189,12 +1209,14 @@ paths:
                         type: string
                         format: uuid
                       description:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       isDisabled:
-                        type: boolean
+                        type:
+                        - boolean
+                        - 'null'
                         default: false
-                        nullable: true
                       orgId:
                         type: string
                         format: uuid
@@ -1207,13 +1229,13 @@ paths:
                         type: string
                         format: date-time
                       projectId:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       keyUsage:
                         type: string
                         default: encrypt-decrypt
-                      kmipMetadata:
-                        nullable: true
+                      kmipMetadata: {}
                       version:
                         type: number
                         default: 1
@@ -1368,6 +1390,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get kms key by name
+      x-summary-source: derived
   /api/v1/kms/keys/{keyId}/private-key:
     get:
       operationId: getKmsKeyPrivateKey
@@ -1533,6 +1557,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Get kms key private key
+      x-summary-source: derived
   /api/v1/kms/keys/bulk-import:
     post:
       operationId: bulkImportKmsKeys
@@ -1766,6 +1792,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Bulk import kms keys
+      x-summary-source: derived
   /api/v1/kms/keys/bulk-export-private-keys:
     post:
       operationId: bulkExportKmsKeyPrivateKeys
@@ -1963,6 +1991,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
+      summary: Bulk export kms key private keys
+      x-summary-source: derived
 components:
   securitySchemes:
     bearerAuth:
