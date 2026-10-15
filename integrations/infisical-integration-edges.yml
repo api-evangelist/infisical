@@ -2,6 +2,7 @@ generated: '2026-10-13'
 method: searched
 checked:
 - https://azuremarketplace.microsoft.com/
+- stripe/integrations/stripe-integration-edges.yml
 marketplace_apps: []
 edges:
 - partner_name: Microsoft Azure Marketplace
@@ -19,3 +20,22 @@ edges:
   seller_name: Infisical Inc.
   detected_by: sweep-cloud-marketplaces.py
   detected: '2026-10-13'
+- partner_name: Stripe (own)
+  partner: stripe
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://marketplace.stripe.com/apps/infisical
+  mirror_of: stripe/integrations/stripe-integration-edges.yml
+  apps:
+  - Infisical
+  listing_count: 1
+  detected: '2026-10-15'
+  detected_by: mirror-platform-listings.py
+  category: developer_tools
+source:
+- stripe/integrations/stripe-integration-edges.yml
