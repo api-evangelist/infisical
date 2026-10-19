@@ -15,6 +15,7 @@ tags:
 paths:
   /api/v1/admin/bootstrap:
     post:
+      operationId: adminBootstrap
       requestBody:
         required: true
         content:
@@ -257,10 +258,8 @@ paths:
                 additionalProperties: false
       tags:
       - Admin
-      summary: Create api admin bootstrap
+      summary: Admin bootstrap
       x-summary-source: derived
-      operationId: postApiV1AdminBootstrap
-      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

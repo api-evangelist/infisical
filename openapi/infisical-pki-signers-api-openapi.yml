@@ -62,6 +62,47 @@ paths:
                 certificateId:
                   type: string
                   format: uuid
+                certificate:
+                  type: object
+                  properties:
+                    keySource:
+                      type: string
+                      enum:
+                      - infisical
+                      - hsm
+                      default: infisical
+                    hsmConnectorId:
+                      type: string
+                      format: uuid
+                  additionalProperties: false
+                externalConfiguration:
+                  anyOf:
+                  - type: object
+                    properties:
+                      caType:
+                        type: string
+                        enum:
+                        - digicert
+                      reissueFromExternalOrderId:
+                        type: string
+                        minLength: 1
+                        description: Reissue into this existing DigiCert order instead of placing a new order (reuses the subscription slot).
+                    required:
+                    - caType
+                    additionalProperties: false
+                  - type: object
+                    properties:
+                      caType:
+                        type: string
+                        enum:
+                        - adcs
+                      template:
+                        type: string
+                        minLength: 1
+                        description: The AD CS certificate template this signer requests when issuing (e.g. a code-signing template).
+                    required:
+                    - caType
+                    additionalProperties: false
                 approvalPolicyId:
                   type: string
                   format: uuid
@@ -206,6 +247,7 @@ paths:
                   keyAlgorithm:
                     type: string
                     default: RSA_2048
+                  externalCaConfig: {}
                 required:
                 - id
                 - name
@@ -356,7 +398,7 @@ paths:
       operationId: listSigners
       tags:
       - PKI Signers
-      description: List code signing signers for a project
+      description: List code signing signers
       parameters:
       - schema:
           type: integer
@@ -448,6 +490,7 @@ paths:
                         keyAlgorithm:
                           type: string
                           default: RSA_2048
+                        externalCaConfig: {}
                         certificateCommonName:
                           type:
                           - string
@@ -695,6 +738,7 @@ paths:
                   keyAlgorithm:
                     type: string
                     default: RSA_2048
+                  externalCaConfig: {}
                   certificateCommonName:
                     type:
                     - string
@@ -717,6 +761,14 @@ paths:
                     type:
                     - string
                     - 'null'
+                  certificateKeySource:
+                    type:
+                    - string
+                    - 'null'
+                  certificateHsmConnectorId:
+                    type:
+                    - string
+                    - 'null'
                   certificateStatus:
                     type:
                     - string
@@ -729,6 +781,24 @@ paths:
                     type:
                     - string
                     - 'null'
+                  externalOrder:
+                    type:
+                    - object
+                    - 'null'
+                    properties:
+                      provider:
+                        type: string
+                      orderId:
+                        type: number
+                      status:
+                        type:
+                        - string
+                        - 'null'
+                    required:
+                    - provider
+                    - orderId
+                    - status
+                    additionalProperties: false
                 required:
                 - id
                 - name
@@ -975,6 +1045,7 @@ paths:
                   keyAlgorithm:
                     type: string
                     default: RSA_2048
+                  externalCaConfig: {}
                 required:
                 - id
                 - name
@@ -1198,6 +1269,7 @@ paths:
                   keyAlgorithm:
                     type: string
                     default: RSA_2048
+                  externalCaConfig: {}
                 required:
                 - id
                 - name
@@ -1554,6 +1626,291 @@ paths:
                 additionalProperties: false
       summary: Get signer permissions
       x-summary-source: derived
+  /api/v1/cert-manager/signers/{signerId}/issuance/check:
+    post:
+      operationId: checkSignerIssuance
+      tags:
+      - PKI Signers
+      description: Poll the upstream CA for a pending signer's certificate immediately instead of waiting for the next scheduled check.
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: signerId
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  name:
+                    type: string
+                  description:
+                    type:
+                    - string
+                    - 'null'
+                  status:
+                    type: string
+                    default: active
+                  certificateId:
+                    type:
+                    - string
+                    - 'null'
+                    format: uuid
+                  approvalPolicyId:
+                    type:
+                    - string
+                    - 'null'
+                    format: uuid
+                  lastSignedAt:
+                    type:
+                    - string
+                    - 'null'
+                    format: date-time
+                  createdAt:
+                    type: string
+                    format: date-time
+                  updatedAt:
+                    type: string
+                    format: date-time
+                  caId:
+                    type:
+                    - string
+                    - 'null'
+                    format: uuid
+                  commonName:
+                    type:
+                    - string
+                    - 'null'
+                  certificateTtlDays:
+                    type:
+                    - number
+                    - 'null'
+                  certificateRenewBeforeDays:
+                    type:
+                    - number
+                    - 'null'
+                  certificateFailureReason:
+                    type:
+                    - string
+                    - 'null'
+                  keyAlgorithm:
+                    type: string
+                    default: RSA_2048
+                  externalCaConfig: {}
+                  certificateCommonName:
+                    type:
+                    - string
+                    - 'null'
+                  certificateSerialNumber:
+                    type:
+                    - string
+                    - 'null'
+                  certificateNotAfter:
+                    type:
+                    - string
+                    - 'null'
+                    format: date-time
+                  certificateNotBefore:
+                    type:
+                    - string
+                    - 'null'
+                    format: date-time
+                  certificateKeyAlgorithm:
+                    type:
+                    - string
+                    - 'null'
+                  certificateKeySource:
+                    type:
+                    - string
+                    - 'null'
+                  certificateHsmConnectorId:
+                    type:
+                    - string
+                    - 'null'
+                  certificateStatus:
+                    type:
+                    - string
+                    - 'null'
+                  certificateCaId:
+                    type:
+                    - string
+                    - 'null'
+                  approvalPolicyName:
+                    type:
+                    - string
+                    - 'null'
+                  externalOrder:
+                    type:
+                    - object
+                    - 'null'
+                    properties:
+                      provider:
+                        type: string
+                      orderId:
+                        type: number
+                      status:
+                        type:
+                        - string
+                        - 'null'
+                    required:
+                    - provider
+                    - orderId
+                    - status
+                    additionalProperties: false
+                required:
+                - id
+                - name
+                - createdAt
+                - updatedAt
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: Check signer issuance
+      x-summary-source: derived
   /api/v1/cert-manager/signers/{signerId}/status:
     patch:
       operationId: updateSignerStatus
@@ -1647,6 +2004,7 @@ paths:
                   keyAlgorithm:
                     type: string
                     default: RSA_2048
+                  externalCaConfig: {}
                 required:
                 - id
                 - name
@@ -1822,6 +2180,7 @@ paths:
                   - ECDSA_SHA_512
                   - ECDSA_SHA_384
                   - ECDSA_SHA_256
+                  - ED25519
                   - ML_DSA_44
                   - ML_DSA_65
                   - ML_DSA_87
@@ -1834,13 +2193,29 @@ paths:
                     tool:
                       type: string
                       maxLength: 128
+                      description: The signing application. Compared against a 'signingApplication' scope on the approval.
+                    signingApplication:
+                      type: string
+                      maxLength: 128
+                      description: Alias of 'tool', matching the name this parameter has in an approval's scope.
                     hostname:
                       type: string
                       maxLength: 256
-                    reportedIp:
+                      description: The machine the sign call is made from.
+                    command:
+                      type: string
+                      maxLength: 32767
+                      description: The command line that issued the sign call.
+                    osUsername:
+                      type: string
+                      maxLength: 256
+                      description: The operating system account running the signing tool.
+                    signingApplicationHash:
                       type: string
                       maxLength: 64
+                      description: SHA-256 checksum of the signing application binary.
                   additionalProperties: false
+                  description: Context describing the signing situation. Values here are compared against any scope declared on the approval, and are recorded on the signing operation for audit.
               required:
               - data
               - signingAlgorithm
@@ -2185,7 +2560,7 @@ paths:
       operationId: reissueSignerCertificate
       tags:
       - PKI Signers
-      description: Re-issue the signer's certificate (optionally from a different CA)
+      description: Re-issue the signer's certificate (optionally from a different CA or with a different key source)
       requestBody:
         required: true
         content:
@@ -2204,6 +2579,57 @@ paths:
                   type: integer
                   minimum: 1
                   maximum: 3650
+                keyAlgorithm:
+                  type: string
+                  enum:
+                  - RSA_2048
+                  - RSA_3072
+                  - RSA_4096
+                  - EC_prime256v1
+                  - EC_secp384r1
+                  - EC_secp521r1
+                certificate:
+                  type: object
+                  properties:
+                    keySource:
+                      type: string
+                      enum:
+                      - infisical
+                      - hsm
+                    hsmConnectorId:
+                      type: string
+                      format: uuid
+                  required:
+                  - keySource
+                  additionalProperties: false
+                externalConfiguration:
+                  anyOf:
+                  - type: object
+                    properties:
+                      caType:
+                        type: string
+                        enum:
+                        - digicert
+                      reissueFromExternalOrderId:
+                        type: string
+                        minLength: 1
+                        description: Reissue into this existing DigiCert order instead of placing a new order (reuses the subscription slot).
+                    required:
+                    - caType
+                    additionalProperties: false
+                  - type: object
+                    properties:
+                      caType:
+                        type: string
+                        enum:
+                        - adcs
+                      template:
+                        type: string
+                        minLength: 1
+                        description: The AD CS certificate template this signer requests when issuing (e.g. a code-signing template).
+                    required:
+                    - caType
+                    additionalProperties: false
               required:
               - caId
               additionalProperties: false
@@ -2279,6 +2705,7 @@ paths:
                   keyAlgorithm:
                     type: string
                     default: RSA_2048
+                  externalCaConfig: {}
                 required:
                 - id
                 - name
@@ -2919,12 +3346,37 @@ paths:
                 requestedSignings:
                   type: integer
                   minimum: 1
-                requestedWindowStart:
+                requestedWindowDuration:
                   type: string
-                  format: date-time
-                requestedWindowEnd:
-                  type: string
-                  format: date-time
+                  description: How long the approval stays usable once it is granted, for example '4h'. The window starts when the request is approved.
+                scope:
+                  type: object
+                  properties:
+                    command:
+                      type: string
+                      maxLength: 32767
+                    signingApplication:
+                      type: string
+                      maxLength: 256
+                    signingApplicationHash:
+                      type: string
+                      maxLength: 64
+                    hostname:
+                      type: string
+                      maxLength: 256
+                    osUsername:
+                      type: string
+                      maxLength: 256
+                    ipAddress:
+                      type:
+                      - string
+                      - 'null'
+                      maxLength: 45
+                    dataHash:
+                      type: string
+                      maxLength: 64
+                  additionalProperties: false
+                  description: Optional parameters to scope this approval to (command, signingApplication, signingApplicationHash, hostname, osUsername, ipAddress, dataHash). Every value declared here must match at signing time or the sign call is denied; parameters left out are not restricted. A command must match exactly, apart from whitespace, so a different order of options is a different command. ipAddress is compared against the address the sign call arrives from and dataHash against the digest of the submitted payload, so those two hold even if a caller reports something else. A machine identity that declares a scope without naming ipAddress has it filled in with the address the request arrives from; send null to leave signing unrestricted by address.
               required:
               - justification
               additionalProperties: false
@@ -2966,12 +3418,35 @@ paths:
                 requestedSignings:
                   type: integer
                   minimum: 1
-                requestedWindowStart:
+                requestedWindowDuration:
                   type: string
-                  format: date-time
-                requestedWindowEnd:
-                  type: string
-                  format: date-time
+                  description: How long the approval stays usable once it is granted, for example '4h'. The window starts when the request is approved.
+                scope:
+                  type: object
+                  properties:
+                    command:
+                      type: string
+                      maxLength: 32767
+                    signingApplication:
+                      type: string
+                      maxLength: 256
+                    signingApplicationHash:
+                      type: string
+                      maxLength: 64
+                    hostname:
+                      type: string
+                      maxLength: 256
+                    osUsername:
+                      type: string
+                      maxLength: 256
+                    ipAddress:
+                      type: string
+                      maxLength: 45
+                    dataHash:
+                      type: string
+                      maxLength: 64
+                  additionalProperties: false
+                  description: Optional parameters to scope this approval to (command, signingApplication, signingApplicationHash, hostname, osUsername, ipAddress, dataHash). Every value declared here must match at signing time or the sign call is denied; parameters left out are not restricted. A command must match exactly, apart from whitespace, so a different order of options is a different command. ipAddress is compared against the address the sign call arrives from and dataHash against the digest of the submitted payload, so those two hold even if a caller reports something else. A machine identity that declares a scope without naming ipAddress has it filled in with the address the request arrives from; send null to leave signing unrestricted by address.
               required:
               - justification
               additionalProperties: false
@@ -3036,6 +3511,7 @@ paths:
       - schema:
           type: string
           enum:
+          - pending
           - success
           - failed
           - denied
@@ -3257,6 +3733,233 @@ paths:
                 - error
                 additionalProperties: false
       summary: List signing operations
+      x-summary-source: derived
+  /api/v1/cert-manager/signers/{signerId}/operations/{operationId}:
+    get:
+      operationId: getSigningOperation
+      tags:
+      - PKI Signers
+      description: Get a signing operation with its full client context
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: signerId
+        required: true
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: operationId
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  operation:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      signerId:
+                        type: string
+                        format: uuid
+                      status:
+                        type: string
+                      signingAlgorithm:
+                        type: string
+                      dataHash:
+                        type: string
+                      actorType:
+                        type: string
+                      actorId:
+                        type: string
+                        format: uuid
+                      actorName:
+                        type:
+                        - string
+                        - 'null'
+                      approvalGrantId:
+                        type:
+                        - string
+                        - 'null'
+                        format: uuid
+                      clientMetadata: {}
+                      errorMessage:
+                        type:
+                        - string
+                        - 'null'
+                      createdAt:
+                        type: string
+                        format: date-time
+                      actorMembershipId:
+                        type:
+                        - string
+                        - 'null'
+                        format: uuid
+                    required:
+                    - id
+                    - signerId
+                    - status
+                    - signingAlgorithm
+                    - dataHash
+                    - actorType
+                    - actorId
+                    - actorName
+                    - createdAt
+                    - actorMembershipId
+                    additionalProperties: false
+                  signerName:
+                    type: string
+                required:
+                - operation
+                - signerName
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: Get signing operation
       x-summary-source: derived
   /api/v1/cert-manager/signers/{signerId}/users:
     get:

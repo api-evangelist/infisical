@@ -1,0 +1,1421 @@
+openapi: 3.2.0
+info:
+  title: Infisical Agent Vault Proxies API
+  description: List of all available APIs that can be consumed
+  version: 0.0.1
+servers:
+- url: https://us.infisical.com
+  description: Production server (US)
+- url: https://eu.infisical.com
+  description: Production server (EU)
+- url: http://localhost:8080
+  description: Local server
+tags:
+- name: Agent Vault Proxies
+paths:
+  /api/v1/agent-vault/proxies:
+    get:
+      operationId: listAgentVaultProxies
+      tags:
+      - Agent Vault Proxies
+      description: List the organization's Agent Vault proxies
+      parameters:
+      - schema:
+          type: string
+          enum:
+          - name
+          - createdAt
+          default: createdAt
+        in: query
+        name: orderBy
+        required: false
+        description: 'What to sort proxies by: name or createdAt.'
+      - schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          default: desc
+        in: query
+        name: orderDirection
+        required: false
+        description: 'Which way to sort: asc or desc.'
+      - schema:
+          type: string
+          maxLength: 255
+          pattern: ^[^\x00-\x1f\x7f]*$
+        in: query
+        name: search
+        required: false
+        description: Match proxies by name.
+      - schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+        in: query
+        name: limit
+        required: false
+        description: The maximum number of proxies to return.
+      - schema:
+          type: integer
+          minimum: 0
+          maximum: 10000
+          default: 0
+        in: query
+        name: offset
+        required: false
+        description: How many proxies to skip.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  proxies:
+                    type: array
+                    items:
+                      anyOf:
+                      - type: object
+                        properties:
+                          id:
+                            type: string
+                            format: uuid
+                            description: The ID of the proxy.
+                          name:
+                            type: string
+                            description: The name of the proxy.
+                          heartbeat:
+                            type:
+                            - string
+                            - 'null'
+                            format: date-time
+                            description: When the proxy last checked in, or `null` if it never has.
+                          isHealthy:
+                            type: boolean
+                            description: Whether the proxy has checked in recently enough to be considered up.
+                          rootCaFingerprint:
+                            type:
+                            - string
+                            - 'null'
+                            description: The SHA-256 fingerprint of the proxy's certificate authority. Pin this if you want to verify the proxy an agent connects to.
+                          rootCaExpiresAt:
+                            type:
+                            - string
+                            - 'null'
+                            format: date-time
+                            description: When the proxy's certificate authority expires.
+                          trafficPolicy:
+                            type: string
+                            enum:
+                            - any-host
+                            - bundle-hosts
+                            description: Which hosts an agent may reach through this proxy. `any-host` lets every request out; `bundle-hosts` allows only hosts an access bundle covers, plus anything in `allowedHosts`, and refuses the rest with a 403.
+                          allowedHosts:
+                            type:
+                            - string
+                            - 'null'
+                            description: Hosts that stay reachable under the `bundle-hosts` traffic policy even though no access bundle covers them. Still intercepted, and given no credential.
+                          pollInterval:
+                            type: number
+                            description: How often, in seconds, the proxy refreshes its sessions and settings. Between 10 and 300.
+                          createdAt:
+                            type: string
+                            format: date-time
+                            description: When the proxy was registered.
+                        required:
+                        - id
+                        - name
+                        - heartbeat
+                        - isHealthy
+                        - rootCaFingerprint
+                        - rootCaExpiresAt
+                        - trafficPolicy
+                        - allowedHosts
+                        - pollInterval
+                        - createdAt
+                        additionalProperties: false
+                        title: Admin view
+                      - type: object
+                        properties:
+                          id:
+                            type: string
+                            format: uuid
+                            description: The ID of the proxy.
+                          name:
+                            type: string
+                            description: The name of the proxy.
+                          heartbeat:
+                            type:
+                            - string
+                            - 'null'
+                            format: date-time
+                            description: When the proxy last checked in, or `null` if it never has.
+                          isHealthy:
+                            type: boolean
+                            description: Whether the proxy has checked in recently enough to be considered up.
+                          rootCaFingerprint:
+                            type:
+                            - string
+                            - 'null'
+                            description: The SHA-256 fingerprint of the proxy's certificate authority. Pin this if you want to verify the proxy an agent connects to.
+                          rootCaExpiresAt:
+                            type:
+                            - string
+                            - 'null'
+                            format: date-time
+                            description: When the proxy's certificate authority expires.
+                        required:
+                        - id
+                        - name
+                        - heartbeat
+                        - isHealthy
+                        - rootCaFingerprint
+                        - rootCaExpiresAt
+                        additionalProperties: false
+                        title: Member view
+                  totalCount:
+                    type: number
+                required:
+                - proxies
+                - totalCount
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: List agent vault proxies
+      x-summary-source: derived
+    post:
+      operationId: createAgentVaultProxy
+      tags:
+      - Agent Vault Proxies
+      description: Register an Agent Vault proxy and issue its one-time enrollment token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                  description: The name of the proxy.
+                trafficPolicy:
+                  type: string
+                  enum:
+                  - any-host
+                  - bundle-hosts
+                  description: Which hosts an agent may reach through this proxy. `any-host` lets every request out; `bundle-hosts` allows only hosts an access bundle covers, plus anything in `allowedHosts`, and refuses the rest with a 403.
+                  default: any-host
+                allowedHosts:
+                  type:
+                  - string
+                  - 'null'
+                  maxLength: 1024
+                  description: Hosts that stay reachable under the `bundle-hosts` traffic policy even though no access bundle covers them. Still intercepted, and given no credential.
+                  default: null
+                pollInterval:
+                  type: integer
+                  minimum: 10
+                  maximum: 300
+                  description: How often, in seconds, the proxy refreshes its sessions and settings. Between 10 and 300.
+                  default: 60
+              required:
+              - name
+              additionalProperties: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  proxy:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                        description: The ID of the proxy.
+                      name:
+                        type: string
+                        description: The name of the proxy.
+                      heartbeat:
+                        type:
+                        - string
+                        - 'null'
+                        format: date-time
+                        description: When the proxy last checked in, or `null` if it never has.
+                      isHealthy:
+                        type: boolean
+                        description: Whether the proxy has checked in recently enough to be considered up.
+                      rootCaFingerprint:
+                        type:
+                        - string
+                        - 'null'
+                        description: The SHA-256 fingerprint of the proxy's certificate authority. Pin this if you want to verify the proxy an agent connects to.
+                      rootCaExpiresAt:
+                        type:
+                        - string
+                        - 'null'
+                        format: date-time
+                        description: When the proxy's certificate authority expires.
+                      trafficPolicy:
+                        type: string
+                        enum:
+                        - any-host
+                        - bundle-hosts
+                        description: Which hosts an agent may reach through this proxy. `any-host` lets every request out; `bundle-hosts` allows only hosts an access bundle covers, plus anything in `allowedHosts`, and refuses the rest with a 403.
+                      allowedHosts:
+                        type:
+                        - string
+                        - 'null'
+                        description: Hosts that stay reachable under the `bundle-hosts` traffic policy even though no access bundle covers them. Still intercepted, and given no credential.
+                      pollInterval:
+                        type: number
+                        description: How often, in seconds, the proxy refreshes its sessions and settings. Between 10 and 300.
+                      createdAt:
+                        type: string
+                        format: date-time
+                        description: When the proxy was registered.
+                    required:
+                    - id
+                    - name
+                    - heartbeat
+                    - isHealthy
+                    - rootCaFingerprint
+                    - rootCaExpiresAt
+                    - trafficPolicy
+                    - allowedHosts
+                    - pollInterval
+                    - createdAt
+                    additionalProperties: false
+                    title: Admin view
+                  token:
+                    type: string
+                    description: A one-time token the proxy enrolls with. Shown once, and valid for one hour.
+                  expiresAt:
+                    type: string
+                    format: date-time
+                required:
+                - proxy
+                - token
+                - expiresAt
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: Create agent vault proxy
+      x-summary-source: derived
+  /api/v1/agent-vault/proxies/{proxyId}:
+    patch:
+      operationId: updateAgentVaultProxy
+      tags:
+      - Agent Vault Proxies
+      description: Update an Agent Vault proxy's name or settings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                  description: The name of the proxy.
+                trafficPolicy:
+                  type: string
+                  enum:
+                  - any-host
+                  - bundle-hosts
+                  description: Which hosts an agent may reach through this proxy. `any-host` lets every request out; `bundle-hosts` allows only hosts an access bundle covers, plus anything in `allowedHosts`, and refuses the rest with a 403.
+                allowedHosts:
+                  type:
+                  - string
+                  - 'null'
+                  maxLength: 1024
+                  description: Hosts that stay reachable under the `bundle-hosts` traffic policy even though no access bundle covers them. Still intercepted, and given no credential.
+                pollInterval:
+                  type: integer
+                  minimum: 10
+                  maximum: 300
+                  description: How often, in seconds, the proxy refreshes its sessions and settings. Between 10 and 300.
+              additionalProperties: false
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: proxyId
+        required: true
+        description: The ID of the proxy.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  proxy:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                        description: The ID of the proxy.
+                      name:
+                        type: string
+                        description: The name of the proxy.
+                      heartbeat:
+                        type:
+                        - string
+                        - 'null'
+                        format: date-time
+                        description: When the proxy last checked in, or `null` if it never has.
+                      isHealthy:
+                        type: boolean
+                        description: Whether the proxy has checked in recently enough to be considered up.
+                      rootCaFingerprint:
+                        type:
+                        - string
+                        - 'null'
+                        description: The SHA-256 fingerprint of the proxy's certificate authority. Pin this if you want to verify the proxy an agent connects to.
+                      rootCaExpiresAt:
+                        type:
+                        - string
+                        - 'null'
+                        format: date-time
+                        description: When the proxy's certificate authority expires.
+                      trafficPolicy:
+                        type: string
+                        enum:
+                        - any-host
+                        - bundle-hosts
+                        description: Which hosts an agent may reach through this proxy. `any-host` lets every request out; `bundle-hosts` allows only hosts an access bundle covers, plus anything in `allowedHosts`, and refuses the rest with a 403.
+                      allowedHosts:
+                        type:
+                        - string
+                        - 'null'
+                        description: Hosts that stay reachable under the `bundle-hosts` traffic policy even though no access bundle covers them. Still intercepted, and given no credential.
+                      pollInterval:
+                        type: number
+                        description: How often, in seconds, the proxy refreshes its sessions and settings. Between 10 and 300.
+                      createdAt:
+                        type: string
+                        format: date-time
+                        description: When the proxy was registered.
+                    required:
+                    - id
+                    - name
+                    - heartbeat
+                    - isHealthy
+                    - rootCaFingerprint
+                    - rootCaExpiresAt
+                    - trafficPolicy
+                    - allowedHosts
+                    - pollInterval
+                    - createdAt
+                    additionalProperties: false
+                    title: Admin view
+                required:
+                - proxy
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: Update agent vault proxy
+      x-summary-source: derived
+    delete:
+      operationId: deleteAgentVaultProxy
+      tags:
+      - Agent Vault Proxies
+      description: Delete an Agent Vault proxy
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: proxyId
+        required: true
+        description: The ID of the proxy.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  proxy:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      name:
+                        type: string
+                    required:
+                    - id
+                    - name
+                    additionalProperties: false
+                required:
+                - proxy
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: Delete agent vault proxy
+      x-summary-source: derived
+  /api/v1/agent-vault/proxies/{proxyId}/token-auth/enrollment-token:
+    post:
+      operationId: reissueAgentVaultProxyEnrollmentToken
+      tags:
+      - Agent Vault Proxies
+      description: Issue a replacement enrollment token for an Agent Vault proxy
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: proxyId
+        required: true
+        description: The ID of the proxy.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    description: A one-time token the proxy enrolls with. Shown once, and valid for one hour.
+                  expiresAt:
+                    type: string
+                    format: date-time
+                required:
+                - token
+                - expiresAt
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: Reissue agent vault proxy enrollment token
+      x-summary-source: derived
+  /api/v1/agent-vault/proxies/{proxyId}/revoke:
+    post:
+      operationId: revokeAgentVaultProxyAccess
+      tags:
+      - Agent Vault Proxies
+      description: Revoke an Agent Vault proxy's access token
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: proxyId
+        required: true
+        description: The ID of the proxy.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  proxy:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                        description: The ID of the proxy.
+                      name:
+                        type: string
+                        description: The name of the proxy.
+                      heartbeat:
+                        type:
+                        - string
+                        - 'null'
+                        format: date-time
+                        description: When the proxy last checked in, or `null` if it never has.
+                      isHealthy:
+                        type: boolean
+                        description: Whether the proxy has checked in recently enough to be considered up.
+                      rootCaFingerprint:
+                        type:
+                        - string
+                        - 'null'
+                        description: The SHA-256 fingerprint of the proxy's certificate authority. Pin this if you want to verify the proxy an agent connects to.
+                      rootCaExpiresAt:
+                        type:
+                        - string
+                        - 'null'
+                        format: date-time
+                        description: When the proxy's certificate authority expires.
+                      trafficPolicy:
+                        type: string
+                        enum:
+                        - any-host
+                        - bundle-hosts
+                        description: Which hosts an agent may reach through this proxy. `any-host` lets every request out; `bundle-hosts` allows only hosts an access bundle covers, plus anything in `allowedHosts`, and refuses the rest with a 403.
+                      allowedHosts:
+                        type:
+                        - string
+                        - 'null'
+                        description: Hosts that stay reachable under the `bundle-hosts` traffic policy even though no access bundle covers them. Still intercepted, and given no credential.
+                      pollInterval:
+                        type: number
+                        description: How often, in seconds, the proxy refreshes its sessions and settings. Between 10 and 300.
+                      createdAt:
+                        type: string
+                        format: date-time
+                        description: When the proxy was registered.
+                    required:
+                    - id
+                    - name
+                    - heartbeat
+                    - isHealthy
+                    - rootCaFingerprint
+                    - rootCaExpiresAt
+                    - trafficPolicy
+                    - allowedHosts
+                    - pollInterval
+                    - createdAt
+                    additionalProperties: false
+                    title: Admin view
+                required:
+                - proxy
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: Revoke agent vault proxy access
+      x-summary-source: derived
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: An access token in Infisical

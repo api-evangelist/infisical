@@ -52,7 +52,7 @@ paths:
                   description: Search by SAN, CN, certificate ID, or serial number.
                 status:
                   type: string
-                  description: Filter by certificate status.
+                  description: Comma-separated list of certificate statuses to filter by. Supported values are active, renewed, expired and revoked. A certificate superseded by a renewal matches renewed rather than active until it expires or is revoked.
                 profileIds:
                   type: array
                   items:
@@ -329,6 +329,28 @@ paths:
                           - string
                           - 'null'
                           format: uuid
+                        keySource:
+                          type: string
+                          default: infisical
+                        hsmConnectorId:
+                          type:
+                          - string
+                          - 'null'
+                          format: uuid
+                        hsmKeyLabel:
+                          type:
+                          - string
+                          - 'null'
+                        hsmPublicKeySpki: {}
+                        subjectDomainComponents:
+                          type:
+                          - string
+                          - 'null'
+                        orderId:
+                          type: string
+                          format: uuid
+                          default: 00000000-0000-0000-0000-000000000000
+                        customExtensions: {}
                         hasPrivateKey:
                           type: boolean
                         caName:
@@ -535,38 +557,41 @@ paths:
                       type:
                       - string
                       - 'null'
-                      minLength: 1
-                      maxLength: 100
+                      maxLength: 255
                     organization:
                       type:
                       - string
                       - 'null'
-                      minLength: 1
-                      maxLength: 100
+                      maxLength: 255
                     organizationalUnit:
                       type:
                       - string
                       - 'null'
-                      minLength: 1
-                      maxLength: 100
+                      maxLength: 255
                     country:
                       type:
                       - string
                       - 'null'
-                      minLength: 1
-                      maxLength: 100
+                      maxLength: 255
                     state:
                       type:
                       - string
                       - 'null'
-                      minLength: 1
-                      maxLength: 100
+                      maxLength: 255
                     locality:
                       type:
                       - string
                       - 'null'
-                      minLength: 1
-                      maxLength: 100
+                      maxLength: 255
+                    domainComponents:
+                      type:
+                      - array
+                      - 'null'
+                      items:
+                        type: string
+                        minLength: 1
+                        maxLength: 255
+                      maxItems: 50
                     keyUsages:
                       type: array
                       items:
@@ -581,6 +606,7 @@ paths:
                         - crl_sign
                         - encipher_only
                         - decipher_only
+                      maxItems: 20
                     extendedKeyUsages:
                       type: array
                       items:
@@ -591,7 +617,10 @@ paths:
                         - code_signing
                         - email_protection
                         - ocsp_signing
+                        - smart_card_logon
                         - time_stamping
+                        - any_purpose
+                      maxItems: 20
                     altNames:
                       type: array
                       items:
@@ -604,13 +633,16 @@ paths:
                             - ip_address
                             - email
                             - uri
+                            - upn
                           value:
                             type: string
                             minLength: 1
+                            maxLength: 255
                         required:
                         - type
                         - value
                         additionalProperties: false
+                      maxItems: 100
                     signatureAlgorithm:
                       type: string
                       enum:
@@ -661,10 +693,7 @@ paths:
                       - SLH-DSA-SHAKE-256s
                     ttl:
                       type: string
-                    notBefore:
-                      type: string
-                    notAfter:
-                      type: string
+                      maxLength: 32
                     basicConstraints:
                       type: object
                       properties:
@@ -673,9 +702,32 @@ paths:
                         pathLength:
                           type: integer
                           minimum: 0
+                          maximum: 255
                       required:
                       - isCA
                       additionalProperties: false
+                    customExtensions:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          oid:
+                            type: string
+                            maxLength: 64
+                          value:
+                            type: string
+                            minLength: 1
+                            maxLength: 4096
+                          critical:
+                            type: boolean
+                        required:
+                        - oid
+                        additionalProperties: false
+                      maxItems: 10
+                    notBefore:
+                      type: string
+                    notAfter:
+                      type: string
                   additionalProperties: false
                 removeRootsFromChain:
                   anyOf:
@@ -967,6 +1019,12 @@ paths:
                     type:
                     - string
                     - 'null'
+                  domainComponents:
+                    type:
+                    - array
+                    - 'null'
+                    items:
+                      type: string
                   basicConstraints:
                     type:
                     - object
@@ -990,6 +1048,29 @@ paths:
                           type: string
                       required:
                       - key
+                      - value
+                      additionalProperties: false
+                  customExtensions:
+                    type:
+                    - array
+                    - 'null'
+                    items:
+                      type: object
+                      properties:
+                        oid:
+                          type: string
+                          maxLength: 64
+                        critical:
+                          type: boolean
+                        value:
+                          type: string
+                          maxLength: 4096
+                        displayValue:
+                          type: string
+                          maxLength: 4096
+                      required:
+                      - oid
+                      - critical
                       - value
                       additionalProperties: false
                   createdAt:
@@ -1824,6 +1905,7 @@ paths:
       operationId: renewCertificate
       tags:
       - PKI Certificates
+      description: Renew a certificate. The renewed certificate copies the one being renewed, then applies only the changes supplied here. Profile defaults are not applied.
       requestBody:
         required: true
         content:
@@ -1831,13 +1913,204 @@ paths:
             schema:
               anyOf:
               - not: {}
-              - type: object
+              - type:
+                - object
+                - 'null'
                 properties:
                   removeRootsFromChain:
                     anyOf:
                     - type: boolean
                     - type: string
                     default: false
+                    description: Whether to remove the root certificate from the returned certificate chain.
+                  renewalKeySource:
+                    type: string
+                    enum:
+                    - new
+                    - reuse
+                    - csr
+                    description: How the renewed certificate's key pair is handled. 'new' generates a fresh pair, 'reuse' keeps the current one so the renewed certificate carries the same public key, and 'csr' takes the key from a supplied signing request. Defaults to 'new'.
+                  csr:
+                    type: string
+                    minLength: 1
+                    maxLength: 4096
+                    description: A PEM-encoded certificate signing request to renew from. Its subject, key and extensions take precedence, so only TTL and basic constraints may be set alongside it.
+                  attributes:
+                    type: object
+                    properties:
+                      commonName:
+                        type:
+                        - string
+                        - 'null'
+                        maxLength: 255
+                      organization:
+                        type:
+                        - string
+                        - 'null'
+                        maxLength: 255
+                      organizationalUnit:
+                        type:
+                        - string
+                        - 'null'
+                        maxLength: 255
+                      country:
+                        type:
+                        - string
+                        - 'null'
+                        maxLength: 255
+                      state:
+                        type:
+                        - string
+                        - 'null'
+                        maxLength: 255
+                      locality:
+                        type:
+                        - string
+                        - 'null'
+                        maxLength: 255
+                      domainComponents:
+                        type:
+                        - array
+                        - 'null'
+                        items:
+                          type: string
+                          minLength: 1
+                          maxLength: 255
+                        maxItems: 50
+                      keyUsages:
+                        type: array
+                        items:
+                          type: string
+                          enum:
+                          - digital_signature
+                          - key_encipherment
+                          - non_repudiation
+                          - data_encipherment
+                          - key_agreement
+                          - key_cert_sign
+                          - crl_sign
+                          - encipher_only
+                          - decipher_only
+                        maxItems: 20
+                      extendedKeyUsages:
+                        type: array
+                        items:
+                          type: string
+                          enum:
+                          - client_auth
+                          - server_auth
+                          - code_signing
+                          - email_protection
+                          - ocsp_signing
+                          - smart_card_logon
+                          - time_stamping
+                          - any_purpose
+                        maxItems: 20
+                      altNames:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            type:
+                              type: string
+                              enum:
+                              - dns_name
+                              - ip_address
+                              - email
+                              - uri
+                              - upn
+                            value:
+                              type: string
+                              minLength: 1
+                              maxLength: 255
+                          required:
+                          - type
+                          - value
+                          additionalProperties: false
+                        maxItems: 100
+                      signatureAlgorithm:
+                        type: string
+                        enum:
+                        - RSA-SHA256
+                        - RSA-SHA384
+                        - RSA-SHA512
+                        - ECDSA-SHA256
+                        - ECDSA-SHA384
+                        - ECDSA-SHA512
+                        - ML-DSA-44
+                        - ML-DSA-65
+                        - ML-DSA-87
+                        - SLH-DSA-SHA2-128f
+                        - SLH-DSA-SHA2-128s
+                        - SLH-DSA-SHA2-192f
+                        - SLH-DSA-SHA2-192s
+                        - SLH-DSA-SHA2-256f
+                        - SLH-DSA-SHA2-256s
+                        - SLH-DSA-SHAKE-128f
+                        - SLH-DSA-SHAKE-128s
+                        - SLH-DSA-SHAKE-192f
+                        - SLH-DSA-SHAKE-192s
+                        - SLH-DSA-SHAKE-256f
+                        - SLH-DSA-SHAKE-256s
+                      keyAlgorithm:
+                        type: string
+                        enum:
+                        - RSA_2048
+                        - RSA_3072
+                        - RSA_4096
+                        - EC_prime256v1
+                        - EC_secp384r1
+                        - EC_secp521r1
+                        - ML-DSA-44
+                        - ML-DSA-65
+                        - ML-DSA-87
+                        - SLH-DSA-SHA2-128f
+                        - SLH-DSA-SHA2-128s
+                        - SLH-DSA-SHA2-192f
+                        - SLH-DSA-SHA2-192s
+                        - SLH-DSA-SHA2-256f
+                        - SLH-DSA-SHA2-256s
+                        - SLH-DSA-SHAKE-128f
+                        - SLH-DSA-SHAKE-128s
+                        - SLH-DSA-SHAKE-192f
+                        - SLH-DSA-SHAKE-192s
+                        - SLH-DSA-SHAKE-256f
+                        - SLH-DSA-SHAKE-256s
+                      ttl:
+                        type: string
+                        maxLength: 32
+                      basicConstraints:
+                        type: object
+                        properties:
+                          isCA:
+                            type: boolean
+                          pathLength:
+                            type: integer
+                            minimum: 0
+                            maximum: 255
+                        required:
+                        - isCA
+                        additionalProperties: false
+                      customExtensions:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            oid:
+                              type: string
+                              maxLength: 64
+                            value:
+                              type: string
+                              minLength: 1
+                              maxLength: 4096
+                            critical:
+                              type: boolean
+                          required:
+                          - oid
+                          additionalProperties: false
+                        maxItems: 10
+                    additionalProperties: false
+                    description: Certificate fields to change on renewal. Anything omitted is copied from the certificate being renewed. Profile defaults are not applied.
                 additionalProperties: false
       parameters:
       - schema:
@@ -1846,6 +2119,7 @@ paths:
         in: path
         name: id
         required: true
+        description: The ID of the certificate to renew.
       responses:
         '200':
           description: Default Response
@@ -2205,6 +2479,7 @@ paths:
       parameters:
       - schema:
           type: string
+          format: uuid
         in: path
         name: id
         required: true
@@ -2360,12 +2635,113 @@ paths:
                         - string
                         - 'null'
                       discoveryMetadata: {}
-                      externalMetadata: {}
+                      externalMetadata:
+                        anyOf:
+                        - type: object
+                          properties:
+                            type:
+                              type: string
+                              enum:
+                              - aws-acm-public-ca
+                            arn:
+                              type: string
+                            region:
+                              type: string
+                              enum:
+                              - us-east-1
+                              - us-east-2
+                              - us-west-1
+                              - us-west-2
+                              - us-gov-east-1
+                              - us-gov-west-1
+                              - af-south-1
+                              - ap-east-1
+                              - ap-south-1
+                              - ap-south-2
+                              - ap-northeast-1
+                              - ap-northeast-2
+                              - ap-northeast-3
+                              - ap-southeast-1
+                              - ap-southeast-2
+                              - ap-southeast-3
+                              - ap-southeast-4
+                              - ca-central-1
+                              - eu-central-1
+                              - eu-central-2
+                              - eu-west-1
+                              - eu-west-2
+                              - eu-west-3
+                              - eu-south-1
+                              - eu-south-2
+                              - eu-north-1
+                              - me-south-1
+                              - me-central-1
+                              - sa-east-1
+                            validationMethod:
+                              type: string
+                              enum:
+                              - DNS
+                          required:
+                          - type
+                          - arn
+                          - region
+                          - validationMethod
+                          additionalProperties: false
+                        - type: object
+                          properties:
+                            type:
+                              type: string
+                              enum:
+                              - digicert
+                            orderId:
+                              type: integer
+                              maximum: 9007199254740991
+                              exclusiveMinimum: -9007199254740991
+                          required:
+                          - type
+                          - orderId
+                          additionalProperties: false
+                        - type: object
+                          properties:
+                            type:
+                              type: string
+                              enum:
+                              - godaddy
+                            certificateId:
+                              type: string
+                              minLength: 1
+                          required:
+                          - type
+                          - certificateId
+                          additionalProperties: false
+                        description: Identifies this certificate at the provider that issued it, for certificates issued by or linked to an external certificate authority. Null for everything else.
                       applicationId:
                         type:
                         - string
                         - 'null'
                         format: uuid
+                      keySource:
+                        type: string
+                        default: infisical
+                      hsmConnectorId:
+                        type:
+                        - string
+                        - 'null'
+                        format: uuid
+                      hsmKeyLabel:
+                        type:
+                        - string
+                        - 'null'
+                      hsmPublicKeySpki: {}
+                      subjectDomainComponents:
+                        type:
+                        - string
+                        - 'null'
+                      orderId:
+                        type: string
+                        format: uuid
+                        default: 00000000-0000-0000-0000-000000000000
+                      customExtensions: {}
                       subject:
                         type: object
                         properties:
@@ -2381,6 +2757,10 @@ paths:
                             type: string
                           locality:
                             type: string
+                          domainComponents:
+                            type: array
+                            items:
+                              type: string
                         additionalProperties: false
                       fingerprints:
                         type: object
@@ -2421,6 +2801,15 @@ paths:
                         type:
                         - string
                         - 'null'
+                      hasPrivateKey:
+                        type: boolean
+                        description: Whether Infisical holds the private key for this certificate.
+                      latestRenewalCertificateId:
+                        type:
+                        - string
+                        - 'null'
+                        format: uuid
+                        description: The ID of the newest certificate that has replaced this one through renewal, or null if no newer replacement is available. Revoked certificates are never named, so this is null when this certificate has never been renewed and also when every renewal of it has since been revoked. Use this to follow renewals without walking the chain one certificate at a time.
                       metadata:
                         type: array
                         items:
@@ -2444,6 +2833,7 @@ paths:
                     - commonName
                     - notBefore
                     - notAfter
+                    - hasPrivateKey
                     additionalProperties: false
                 required:
                 - certificate
@@ -2619,6 +3009,7 @@ paths:
       parameters:
       - schema:
           type: string
+          format: uuid
         in: path
         name: id
         required: true
@@ -2791,9 +3182,11 @@ paths:
       operationId: deleteCertificate
       tags:
       - PKI Certificates
+      description: Delete certificate. Only expired, discovered, or imported certificates can be deleted.
       parameters:
       - schema:
           type: string
+          format: uuid
         in: path
         name: id
         required: true
@@ -2955,6 +3348,28 @@ paths:
                         - string
                         - 'null'
                         format: uuid
+                      keySource:
+                        type: string
+                        default: infisical
+                      hsmConnectorId:
+                        type:
+                        - string
+                        - 'null'
+                        format: uuid
+                      hsmKeyLabel:
+                        type:
+                        - string
+                        - 'null'
+                      hsmPublicKeySpki: {}
+                      subjectDomainComponents:
+                        type:
+                        - string
+                        - 'null'
+                      orderId:
+                        type: string
+                        format: uuid
+                        default: 00000000-0000-0000-0000-000000000000
+                      customExtensions: {}
                     required:
                     - id
                     - createdAt
@@ -3117,6 +3532,7 @@ paths:
       parameters:
       - schema:
           type: string
+          format: uuid
         in: path
         name: id
         required: true
@@ -3277,6 +3693,7 @@ paths:
       parameters:
       - schema:
           type: string
+          format: uuid
         in: path
         name: id
         required: true
@@ -3477,6 +3894,7 @@ paths:
                   description: Optional PEM-encoded chain of intermediate certificates.
                 friendlyName:
                   type: string
+                  maxLength: 255
                   description: A friendly name for the certificate.
                 pkiCollectionId:
                   type: string
@@ -3484,6 +3902,27 @@ paths:
                 applicationId:
                   type: string
                   format: uuid
+                profileId:
+                  type: string
+                  format: uuid
+                  description: The certificate profile that will manage this certificate's lifecycle. The certificate must satisfy the profile's certificate policy, or the request is rejected with a 400 naming the attributes that failed. Omit to track the certificate without renewal, reissue or revocation.
+                externalMetadata:
+                  anyOf:
+                  - type: object
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - digicert
+                      orderId:
+                        type: integer
+                        maximum: 9007199254740991
+                        exclusiveMinimum: -9007199254740991
+                    required:
+                    - type
+                    - orderId
+                    additionalProperties: false
+                  description: 'Identifies this certificate at the provider that issued it. Required when the chosen profile issues from an external certificate authority. For DigiCert, pass the CertCentral order ID as { type: "digicert", orderId: 2081714 }.'
               required:
               - certificatePem
               additionalProperties: false
@@ -3495,6 +3934,10 @@ paths:
               schema:
                 type: object
                 properties:
+                  certificateId:
+                    type: string
+                    format: uuid
+                    description: The ID of the imported certificate.
                   certificate:
                     type: string
                     description: The imported certificate.
@@ -3508,6 +3951,7 @@ paths:
                     type: string
                     description: The serial number of the imported certificate.
                 required:
+                - certificateId
                 - certificate
                 - serialNumber
                 additionalProperties: false
@@ -3686,7 +4130,7 @@ paths:
         in: path
         name: id
         required: true
-        description: The ID of the certificate to revoke.
+        description: The ID or SHA-1/SHA-256 thumbprint of the certificate to revoke. Thumbprint colons and casing are ignored.
       responses:
         '200':
           description: Default Response
@@ -4032,6 +4476,28 @@ paths:
                         - string
                         - 'null'
                         format: uuid
+                      keySource:
+                        type: string
+                        default: infisical
+                      hsmConnectorId:
+                        type:
+                        - string
+                        - 'null'
+                        format: uuid
+                      hsmKeyLabel:
+                        type:
+                        - string
+                        - 'null'
+                      hsmPublicKeySpki: {}
+                      subjectDomainComponents:
+                        type:
+                        - string
+                        - 'null'
+                      orderId:
+                        type: string
+                        format: uuid
+                        default: 00000000-0000-0000-0000-000000000000
+                      customExtensions: {}
                     required:
                     - id
                     - createdAt
@@ -4195,6 +4661,7 @@ paths:
       parameters:
       - schema:
           type: string
+          format: uuid
         in: path
         name: id
         required: true
@@ -4368,7 +4835,7 @@ paths:
       operationId: getCertificateCleanupConfig
       tags:
       - PKI Certificates
-      description: Get certificate cleanup configuration for a project
+      description: Get the certificate cleanup configuration
       responses:
         '200':
           description: Default Response
@@ -4564,7 +5031,7 @@ paths:
       operationId: updateCertificateCleanupConfig
       tags:
       - PKI Certificates
-      description: Create or update certificate cleanup configuration for a project
+      description: Create or update the certificate cleanup configuration
       requestBody:
         required: true
         content:
@@ -4944,6 +5411,28 @@ paths:
                         - string
                         - 'null'
                         format: uuid
+                      keySource:
+                        type: string
+                        default: infisical
+                      hsmConnectorId:
+                        type:
+                        - string
+                        - 'null'
+                        format: uuid
+                      hsmKeyLabel:
+                        type:
+                        - string
+                        - 'null'
+                      hsmPublicKeySpki: {}
+                      subjectDomainComponents:
+                        type:
+                        - string
+                        - 'null'
+                      orderId:
+                        type: string
+                        format: uuid
+                        default: 00000000-0000-0000-0000-000000000000
+                      customExtensions: {}
                     required:
                     - id
                     - createdAt
@@ -5104,7 +5593,7 @@ paths:
     delete:
       tags:
       - PKI Certificates
-      description: Delete certificate
+      description: Delete certificate. Only expired, discovered, or imported certificates can be deleted.
       parameters:
       - schema:
           type: string
@@ -5271,6 +5760,28 @@ paths:
                         - string
                         - 'null'
                         format: uuid
+                      keySource:
+                        type: string
+                        default: infisical
+                      hsmConnectorId:
+                        type:
+                        - string
+                        - 'null'
+                        format: uuid
+                      hsmKeyLabel:
+                        type:
+                        - string
+                        - 'null'
+                      hsmPublicKeySpki: {}
+                      subjectDomainComponents:
+                        type:
+                        - string
+                        - 'null'
+                      orderId:
+                        type: string
+                        format: uuid
+                        default: 00000000-0000-0000-0000-000000000000
+                      customExtensions: {}
                     required:
                     - id
                     - createdAt
@@ -5840,6 +6351,8 @@ paths:
                     - emailProtection
                     - timeStamping
                     - ocspSigning
+                    - smartCardLogon
+                    - anyExtendedKeyUsage
                   description: The extended key usage extension of the certificate.
               required:
               - commonName
@@ -6292,6 +6805,8 @@ paths:
                     - emailProtection
                     - timeStamping
                     - ocspSigning
+                    - smartCardLogon
+                    - anyExtendedKeyUsage
                   description: The extended key usage extension of the certificate.
               required:
               - csr

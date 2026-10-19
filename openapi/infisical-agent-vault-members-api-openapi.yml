@@ -1,0 +1,1613 @@
+openapi: 3.2.0
+info:
+  title: Infisical Agent Vault Members API
+  description: List of all available APIs that can be consumed
+  version: 0.0.1
+servers:
+- url: https://us.infisical.com
+  description: Production server (US)
+- url: https://eu.infisical.com
+  description: Production server (EU)
+- url: http://localhost:8080
+  description: Local server
+tags:
+- name: Agent Vault Members
+paths:
+  /api/v1/agent-vault/members:
+    get:
+      operationId: listAgentVaultMembers
+      tags:
+      - Agent Vault Members
+      description: List the users, groups and machine identities that are members of Agent Vault
+      parameters:
+      - schema:
+          type: string
+          enum:
+          - user
+          - machineIdentity
+          - group
+        in: query
+        name: actorType
+        required: false
+        description: List only users, only groups or only machine identities.
+      - schema:
+          type: string
+          maxLength: 255
+          pattern: ^[^\x00-\x1f\x7f]*$
+        in: query
+        name: search
+        required: false
+        description: Match members by name, username or email address.
+      - schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+        in: query
+        name: limit
+        required: false
+        description: The maximum number of members to return.
+      - schema:
+          type: integer
+          minimum: 0
+          maximum: 10000
+          default: 0
+        in: query
+        name: offset
+        required: false
+        description: How many members to skip.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  members:
+                    type: array
+                    items:
+                      anyOf:
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - user
+                            description: Whether this member is a user, a machine identity or a group.
+                          id:
+                            type: string
+                            format: uuid
+                            description: The ID of the user, machine identity or group.
+                          username:
+                            type: string
+                            description: The username of the user.
+                          email:
+                            type:
+                            - string
+                            - 'null'
+                            description: The email address of the user.
+                          firstName:
+                            type:
+                            - string
+                            - 'null'
+                            description: The first name of the user.
+                          lastName:
+                            type:
+                            - string
+                            - 'null'
+                            description: The last name of the user.
+                          isOrgMembershipPending:
+                            type: boolean
+                            description: Whether the user still has an unaccepted invitation to the organization.
+                          role:
+                            type: string
+                            description: 'The Agent Vault role: admin or member.'
+                          isActive:
+                            type: boolean
+                            description: Whether the member can currently reach Agent Vault.
+                          addedAt:
+                            type: string
+                            format: date-time
+                            description: When the member was added to Agent Vault.
+                        required:
+                        - type
+                        - id
+                        - username
+                        - email
+                        - firstName
+                        - lastName
+                        - isOrgMembershipPending
+                        - role
+                        - isActive
+                        - addedAt
+                        additionalProperties: false
+                        title: User
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - machineIdentity
+                            description: Whether this member is a user, a machine identity or a group.
+                          id:
+                            type: string
+                            format: uuid
+                            description: The ID of the user, machine identity or group.
+                          name:
+                            type: string
+                            description: The name of the machine identity.
+                          isManagedByAgentVault:
+                            type: boolean
+                            description: Whether Agent Vault created the machine identity. One it owns is deleted rather than removed.
+                          orgId:
+                            type:
+                            - string
+                            - 'null'
+                            format: uuid
+                            description: The ID of the organization the machine identity belongs to.
+                          role:
+                            type: string
+                            description: 'The Agent Vault role: admin or member.'
+                          isActive:
+                            type: boolean
+                            description: Whether the member can currently reach Agent Vault.
+                          addedAt:
+                            type: string
+                            format: date-time
+                            description: When the member was added to Agent Vault.
+                        required:
+                        - type
+                        - id
+                        - name
+                        - isManagedByAgentVault
+                        - orgId
+                        - role
+                        - isActive
+                        - addedAt
+                        additionalProperties: false
+                        title: Machine identity
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - group
+                            description: Whether this member is a user, a machine identity or a group.
+                          id:
+                            type: string
+                            format: uuid
+                            description: The ID of the user, machine identity or group.
+                          name:
+                            type: string
+                            description: The name of the group.
+                          role:
+                            type: string
+                            description: 'The Agent Vault role: admin or member.'
+                          isActive:
+                            type: boolean
+                            description: Whether the member can currently reach Agent Vault.
+                          addedAt:
+                            type: string
+                            format: date-time
+                            description: When the member was added to Agent Vault.
+                        required:
+                        - type
+                        - id
+                        - name
+                        - role
+                        - isActive
+                        - addedAt
+                        additionalProperties: false
+                        title: Group
+                  totalCount:
+                    type: number
+                required:
+                - members
+                - totalCount
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: List agent vault members
+      x-summary-source: derived
+    post:
+      operationId: addAgentVaultMembers
+      tags:
+      - Agent Vault Members
+      description: Give users, groups and machine identities access to Agent Vault, by id or by email
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userIds:
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+                  default: []
+                  description: The IDs of the users to act on.
+                machineIdentityIds:
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+                  default: []
+                  description: The IDs of the machine identities to act on.
+                groupIds:
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+                  default: []
+                  description: The IDs of the groups to act on.
+                emails:
+                  type: array
+                  items:
+                    type: string
+                    format: email
+                  default: []
+                  description: The email addresses of the users to give access to. Each must already be in the organization.
+                role:
+                  type: string
+                  enum:
+                  - admin
+                  - member
+                  description: 'The Agent Vault role: admin or member.'
+                  x-default: member
+              required:
+              - role
+              additionalProperties: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  members:
+                    type: array
+                    items:
+                      anyOf:
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - user
+                            description: Whether this member is a user, a machine identity or a group.
+                          id:
+                            type: string
+                            format: uuid
+                            description: The ID of the user, machine identity or group.
+                          role:
+                            type: string
+                            description: 'The Agent Vault role: admin or member.'
+                          addedAt:
+                            type: string
+                            format: date-time
+                            description: When the member was added to Agent Vault.
+                        required:
+                        - type
+                        - id
+                        - role
+                        - addedAt
+                        additionalProperties: false
+                        title: User
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - machineIdentity
+                            description: Whether this member is a user, a machine identity or a group.
+                          id:
+                            type: string
+                            format: uuid
+                            description: The ID of the user, machine identity or group.
+                          role:
+                            type: string
+                            description: 'The Agent Vault role: admin or member.'
+                          addedAt:
+                            type: string
+                            format: date-time
+                            description: When the member was added to Agent Vault.
+                        required:
+                        - type
+                        - id
+                        - role
+                        - addedAt
+                        additionalProperties: false
+                        title: Machine identity
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - group
+                            description: Whether this member is a user, a machine identity or a group.
+                          id:
+                            type: string
+                            format: uuid
+                            description: The ID of the user, machine identity or group.
+                          role:
+                            type: string
+                            description: 'The Agent Vault role: admin or member.'
+                          addedAt:
+                            type: string
+                            format: date-time
+                            description: When the member was added to Agent Vault.
+                        required:
+                        - type
+                        - id
+                        - role
+                        - addedAt
+                        additionalProperties: false
+                        title: Group
+                  skipped:
+                    type: array
+                    items:
+                      anyOf:
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - user
+                            description: Whether this member is a user, a machine identity or a group.
+                          id:
+                            type: string
+                            format: uuid
+                            description: The ID of the user, machine identity or group.
+                          identifier:
+                            type: string
+                            description: The ID or email address the request named, echoed back so a reply can be matched to it.
+                        required:
+                        - type
+                        - id
+                        - identifier
+                        additionalProperties: false
+                        title: User
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - machineIdentity
+                            description: Whether this member is a user, a machine identity or a group.
+                          id:
+                            type: string
+                            format: uuid
+                            description: The ID of the user, machine identity or group.
+                          identifier:
+                            type: string
+                            description: The ID or email address the request named, echoed back so a reply can be matched to it.
+                        required:
+                        - type
+                        - id
+                        - identifier
+                        additionalProperties: false
+                        title: Machine identity
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - group
+                            description: Whether this member is a user, a machine identity or a group.
+                          id:
+                            type: string
+                            format: uuid
+                            description: The ID of the user, machine identity or group.
+                          identifier:
+                            type: string
+                            description: The ID or email address the request named, echoed back so a reply can be matched to it.
+                        required:
+                        - type
+                        - id
+                        - identifier
+                        additionalProperties: false
+                        title: Group
+                    description: The requested members who already had access to Agent Vault and were left as they were.
+                required:
+                - members
+                - skipped
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: Add agent vault members
+      x-summary-source: derived
+    patch:
+      operationId: updateAgentVaultMemberRoles
+      tags:
+      - Agent Vault Members
+      description: Change the Agent Vault role of users, groups and machine identities. Name each one by ID; to add users by email, use Add members.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userIds:
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+                  default: []
+                  description: The IDs of the users to act on.
+                machineIdentityIds:
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+                  default: []
+                  description: The IDs of the machine identities to act on.
+                groupIds:
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+                  default: []
+                  description: The IDs of the groups to act on.
+                role:
+                  type: string
+                  enum:
+                  - admin
+                  - member
+                  description: 'The Agent Vault role: admin or member.'
+                  x-default: member
+              required:
+              - role
+              additionalProperties: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  members:
+                    type: array
+                    items:
+                      anyOf:
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - user
+                            description: Whether this member is a user, a machine identity or a group.
+                          id:
+                            type: string
+                            format: uuid
+                            description: The ID of the user, machine identity or group.
+                          role:
+                            type: string
+                            description: 'The Agent Vault role: admin or member.'
+                          addedAt:
+                            type: string
+                            format: date-time
+                            description: When the member was added to Agent Vault.
+                        required:
+                        - type
+                        - id
+                        - role
+                        - addedAt
+                        additionalProperties: false
+                        title: User
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - machineIdentity
+                            description: Whether this member is a user, a machine identity or a group.
+                          id:
+                            type: string
+                            format: uuid
+                            description: The ID of the user, machine identity or group.
+                          role:
+                            type: string
+                            description: 'The Agent Vault role: admin or member.'
+                          addedAt:
+                            type: string
+                            format: date-time
+                            description: When the member was added to Agent Vault.
+                        required:
+                        - type
+                        - id
+                        - role
+                        - addedAt
+                        additionalProperties: false
+                        title: Machine identity
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - group
+                            description: Whether this member is a user, a machine identity or a group.
+                          id:
+                            type: string
+                            format: uuid
+                            description: The ID of the user, machine identity or group.
+                          role:
+                            type: string
+                            description: 'The Agent Vault role: admin or member.'
+                          addedAt:
+                            type: string
+                            format: date-time
+                            description: When the member was added to Agent Vault.
+                        required:
+                        - type
+                        - id
+                        - role
+                        - addedAt
+                        additionalProperties: false
+                        title: Group
+                  skipped:
+                    type: array
+                    items:
+                      anyOf:
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - user
+                            description: Whether this member is a user, a machine identity or a group.
+                          id:
+                            type: string
+                            format: uuid
+                            description: The ID of the user, machine identity or group.
+                        required:
+                        - type
+                        - id
+                        additionalProperties: false
+                        title: User
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - machineIdentity
+                            description: Whether this member is a user, a machine identity or a group.
+                          id:
+                            type: string
+                            format: uuid
+                            description: The ID of the user, machine identity or group.
+                        required:
+                        - type
+                        - id
+                        additionalProperties: false
+                        title: Machine identity
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - group
+                            description: Whether this member is a user, a machine identity or a group.
+                          id:
+                            type: string
+                            format: uuid
+                            description: The ID of the user, machine identity or group.
+                        required:
+                        - type
+                        - id
+                        additionalProperties: false
+                        title: Group
+                    description: The requested members who did not have access to Agent Vault or already had the role, so nothing was changed.
+                required:
+                - members
+                - skipped
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: Update agent vault member roles
+      x-summary-source: derived
+    delete:
+      operationId: revokeAgentVaultMembers
+      tags:
+      - Agent Vault Members
+      description: Remove members from Agent Vault, and with them every bundle they hold
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userIds:
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+                  default: []
+                  description: The IDs of the users to act on.
+                machineIdentityIds:
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+                  default: []
+                  description: The IDs of the machine identities to act on.
+                groupIds:
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+                  default: []
+                  description: The IDs of the groups to act on.
+              additionalProperties: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  members:
+                    type: array
+                    items:
+                      anyOf:
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - user
+                            description: Whether this member is a user, a machine identity or a group.
+                          id:
+                            type: string
+                            format: uuid
+                            description: The ID of the user, machine identity or group.
+                        required:
+                        - type
+                        - id
+                        additionalProperties: false
+                        title: User
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - machineIdentity
+                            description: Whether this member is a user, a machine identity or a group.
+                          id:
+                            type: string
+                            format: uuid
+                            description: The ID of the user, machine identity or group.
+                        required:
+                        - type
+                        - id
+                        additionalProperties: false
+                        title: Machine identity
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - group
+                            description: Whether this member is a user, a machine identity or a group.
+                          id:
+                            type: string
+                            format: uuid
+                            description: The ID of the user, machine identity or group.
+                        required:
+                        - type
+                        - id
+                        additionalProperties: false
+                        title: Group
+                  skipped:
+                    type: array
+                    items:
+                      anyOf:
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - user
+                            description: Whether this member is a user, a machine identity or a group.
+                          id:
+                            type: string
+                            format: uuid
+                            description: The ID of the user, machine identity or group.
+                        required:
+                        - type
+                        - id
+                        additionalProperties: false
+                        title: User
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - machineIdentity
+                            description: Whether this member is a user, a machine identity or a group.
+                          id:
+                            type: string
+                            format: uuid
+                            description: The ID of the user, machine identity or group.
+                        required:
+                        - type
+                        - id
+                        additionalProperties: false
+                        title: Machine identity
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - group
+                            description: Whether this member is a user, a machine identity or a group.
+                          id:
+                            type: string
+                            format: uuid
+                            description: The ID of the user, machine identity or group.
+                        required:
+                        - type
+                        - id
+                        additionalProperties: false
+                        title: Group
+                    description: The requested members who did not have access to Agent Vault, so nothing was removed.
+                required:
+                - members
+                - skipped
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: Revoke agent vault members
+      x-summary-source: derived
+  /api/v1/agent-vault/members/available:
+    get:
+      operationId: listAvailableAgentVaultMembers
+      tags:
+      - Agent Vault Members
+      description: List the users, groups and machine identities in the organization that can be added to Agent Vault
+      parameters:
+      - schema:
+          type: string
+          enum:
+          - user
+          - machineIdentity
+          - group
+        in: query
+        name: actorType
+        required: false
+        description: List only users, only groups or only machine identities.
+      - schema:
+          type: string
+          maxLength: 255
+          pattern: ^[^\x00-\x1f\x7f]*$
+        in: query
+        name: search
+        required: false
+        description: Match candidates by name, username or email address.
+      - schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+        in: query
+        name: limit
+        required: false
+        description: The maximum number of candidates to return.
+      - schema:
+          type: integer
+          minimum: 0
+          maximum: 10000
+          default: 0
+        in: query
+        name: offset
+        required: false
+        description: How many candidates to skip.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  actors:
+                    type: array
+                    items:
+                      anyOf:
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - user
+                            description: Whether this member is a user, a machine identity or a group.
+                          id:
+                            type: string
+                            format: uuid
+                            description: The ID of the user, machine identity or group.
+                          username:
+                            type: string
+                            description: The username of the user.
+                          email:
+                            type:
+                            - string
+                            - 'null'
+                            description: The email address of the user.
+                          firstName:
+                            type:
+                            - string
+                            - 'null'
+                            description: The first name of the user.
+                          lastName:
+                            type:
+                            - string
+                            - 'null'
+                            description: The last name of the user.
+                          isOrgMembershipPending:
+                            type: boolean
+                            description: Whether the user still has an unaccepted invitation to the organization.
+                        required:
+                        - type
+                        - id
+                        - username
+                        - email
+                        - firstName
+                        - lastName
+                        - isOrgMembershipPending
+                        additionalProperties: false
+                        title: User
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - machineIdentity
+                            description: Whether this member is a user, a machine identity or a group.
+                          id:
+                            type: string
+                            format: uuid
+                            description: The ID of the user, machine identity or group.
+                          name:
+                            type: string
+                            description: The name of the machine identity.
+                          isManagedByAgentVault:
+                            type: boolean
+                            description: Whether Agent Vault created the machine identity. One it owns is deleted rather than removed.
+                          orgId:
+                            type:
+                            - string
+                            - 'null'
+                            format: uuid
+                            description: The ID of the organization the machine identity belongs to.
+                        required:
+                        - type
+                        - id
+                        - name
+                        - isManagedByAgentVault
+                        - orgId
+                        additionalProperties: false
+                        title: Machine identity
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - group
+                            description: Whether this member is a user, a machine identity or a group.
+                          id:
+                            type: string
+                            format: uuid
+                            description: The ID of the user, machine identity or group.
+                          name:
+                            type: string
+                            description: The name of the group.
+                        required:
+                        - type
+                        - id
+                        - name
+                        additionalProperties: false
+                        title: Group
+                  totalCount:
+                    type: number
+                required:
+                - actors
+                - totalCount
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: List available agent vault members
+      x-summary-source: derived
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: An access token in Infisical

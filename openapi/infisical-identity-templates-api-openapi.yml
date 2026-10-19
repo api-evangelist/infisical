@@ -21,44 +21,148 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  minLength: 1
-                  maxLength: 64
-                authMethod:
-                  type: string
-                  enum:
-                  - ldap
-                templateFields:
-                  type: object
-                  properties:
-                    url:
-                      type: string
-                      minLength: 1
-                    bindDN:
-                      type: string
-                      minLength: 1
-                    bindPass:
-                      type: string
-                      minLength: 1
-                    searchBase:
-                      type: string
-                      minLength: 1
-                    ldapCaCertificate:
-                      type: string
-                  required:
-                  - url
-                  - bindDN
-                  - bindPass
-                  - searchBase
-                  additionalProperties: false
-              required:
-              - name
-              - authMethod
-              - templateFields
-              additionalProperties: false
+              anyOf:
+              - type: object
+                properties:
+                  name:
+                    type: string
+                    minLength: 1
+                    maxLength: 64
+                  authMethod:
+                    type: string
+                    enum:
+                    - ldap
+                  templateFields:
+                    type: object
+                    properties:
+                      url:
+                        type: string
+                        minLength: 1
+                      bindDN:
+                        type: string
+                        minLength: 1
+                      bindPass:
+                        type: string
+                        minLength: 1
+                      searchBase:
+                        type: string
+                        minLength: 1
+                      ldapCaCertificate:
+                        type: string
+                    required:
+                    - url
+                    - bindDN
+                    - bindPass
+                    - searchBase
+                    additionalProperties: false
+                required:
+                - name
+                - authMethod
+                - templateFields
+                additionalProperties: false
+              - type: object
+                properties:
+                  name:
+                    type: string
+                    minLength: 1
+                    maxLength: 64
+                  authMethod:
+                    type: string
+                    enum:
+                    - kubernetes
+                  templateFields:
+                    type: object
+                    properties:
+                      tokenReviewMode:
+                        type: string
+                        enum:
+                        - api
+                        - gateway
+                        default: api
+                        description: 'The mode to use for token review. Must be one of: ''api'', ''gateway'''
+                      kubernetesHost:
+                        type:
+                        - string
+                        - 'null'
+                        minLength: 1
+                        maxLength: 255
+                        description: The host string, host:port pair, or URL to the base of the Kubernetes API server
+                      caCert:
+                        type: string
+                        maxLength: 102400
+                        description: The PEM-encoded CA certificate used to validate the Kubernetes API server's TLS certificate
+                      verifyTlsCertificate:
+                        type: boolean
+                        description: Whether to verify the Kubernetes API server's TLS certificate against the configured CA certificate
+                      tokenReviewerJwt:
+                        type: string
+                        maxLength: 65536
+                        description: Optional JWT token for accessing the Kubernetes TokenReview API
+                      gatewayId:
+                        type:
+                        - string
+                        - 'null'
+                        format: uuid
+                        description: The ID of the gateway to use when performing Kubernetes API requests
+                      gatewayPoolId:
+                        type:
+                        - string
+                        - 'null'
+                        format: uuid
+                        description: The ID of the gateway pool to use when performing Kubernetes API requests
+                      allowedAudience:
+                        type: string
+                        maxLength: 1000
+                        default: ''
+                        description: The optional audience claim that service account JWT tokens must have to authenticate with Infisical
+                    additionalProperties: false
+                required:
+                - name
+                - authMethod
+                - templateFields
+                additionalProperties: false
+              - type: object
+                properties:
+                  name:
+                    type: string
+                    minLength: 1
+                    maxLength: 64
+                  authMethod:
+                    type: string
+                    enum:
+                    - oidc
+                  templateFields:
+                    type: object
+                    properties:
+                      oidcDiscoveryUrl:
+                        type: string
+                        format: uri
+                        minLength: 1
+                        maxLength: 2048
+                        description: The URL used to retrieve the OpenID Connect configuration from the identity provider
+                      boundIssuer:
+                        type: string
+                        minLength: 1
+                        maxLength: 2048
+                        description: The unique identifier of the identity provider issuing the JWT
+                      boundAudiences:
+                        type: string
+                        maxLength: 2048
+                        default: ''
+                        description: The comma-separated list of intended recipients that JWT tokens must have in their aud claim
+                      caCert:
+                        type: string
+                        maxLength: 102400
+                        description: The PEM-encoded CA certificate used to validate the identity provider's TLS certificate
+                    required:
+                    - oidcDiscoveryUrl
+                    - boundIssuer
+                    additionalProperties: false
+                required:
+                - name
+                - authMethod
+                - templateFields
+                additionalProperties: false
       security:
       - bearerAuth: []
       responses:
@@ -67,36 +171,184 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: string
-                    format: uuid
-                  templateFields:
-                    type: object
-                    additionalProperties: {}
-                  orgId:
-                    type: string
-                    format: uuid
-                  name:
-                    type: string
-                  authMethod:
-                    type: string
-                  createdAt:
-                    type: string
-                    format: date-time
-                  updatedAt:
-                    type: string
-                    format: date-time
-                required:
-                - id
-                - templateFields
-                - orgId
-                - name
-                - authMethod
-                - createdAt
-                - updatedAt
-                additionalProperties: false
+                anyOf:
+                - type: object
+                  properties:
+                    id:
+                      type: string
+                      format: uuid
+                    templateFields:
+                      type: object
+                      properties:
+                        url:
+                          type: string
+                          minLength: 1
+                        bindDN:
+                          type: string
+                          minLength: 1
+                        searchBase:
+                          type: string
+                          minLength: 1
+                        ldapCaCertificate:
+                          type: string
+                        hasBindPass:
+                          type: boolean
+                          description: Whether a bind password is stored for this template
+                      required:
+                      - hasBindPass
+                      additionalProperties: false
+                    orgId:
+                      type: string
+                      format: uuid
+                    name:
+                      type: string
+                    authMethod:
+                      type: string
+                      enum:
+                      - ldap
+                    createdAt:
+                      type: string
+                      format: date-time
+                    updatedAt:
+                      type: string
+                      format: date-time
+                  required:
+                  - id
+                  - templateFields
+                  - orgId
+                  - name
+                  - authMethod
+                  - createdAt
+                  - updatedAt
+                  additionalProperties: false
+                - type: object
+                  properties:
+                    id:
+                      type: string
+                      format: uuid
+                    templateFields:
+                      type: object
+                      properties:
+                        tokenReviewMode:
+                          type: string
+                          enum:
+                          - api
+                          - gateway
+                          default: api
+                          description: 'The mode to use for token review. Must be one of: ''api'', ''gateway'''
+                        kubernetesHost:
+                          type:
+                          - string
+                          - 'null'
+                          minLength: 1
+                          maxLength: 255
+                          description: The host string, host:port pair, or URL to the base of the Kubernetes API server
+                        caCert:
+                          type: string
+                          maxLength: 102400
+                          description: The PEM-encoded CA certificate used to validate the Kubernetes API server's TLS certificate
+                        verifyTlsCertificate:
+                          type: boolean
+                          description: Whether to verify the Kubernetes API server's TLS certificate against the configured CA certificate
+                        gatewayId:
+                          type:
+                          - string
+                          - 'null'
+                          format: uuid
+                          description: The ID of the gateway to use when performing Kubernetes API requests
+                        gatewayPoolId:
+                          type:
+                          - string
+                          - 'null'
+                          format: uuid
+                          description: The ID of the gateway pool to use when performing Kubernetes API requests
+                        allowedAudience:
+                          type: string
+                          maxLength: 1000
+                          default: ''
+                          description: The optional audience claim that service account JWT tokens must have to authenticate with Infisical
+                        hasTokenReviewerJwt:
+                          type: boolean
+                          description: Whether a token reviewer JWT is stored for this template
+                      required:
+                      - hasTokenReviewerJwt
+                      additionalProperties: false
+                    orgId:
+                      type: string
+                      format: uuid
+                    name:
+                      type: string
+                    authMethod:
+                      type: string
+                      enum:
+                      - kubernetes
+                    createdAt:
+                      type: string
+                      format: date-time
+                    updatedAt:
+                      type: string
+                      format: date-time
+                  required:
+                  - id
+                  - templateFields
+                  - orgId
+                  - name
+                  - authMethod
+                  - createdAt
+                  - updatedAt
+                  additionalProperties: false
+                - type: object
+                  properties:
+                    id:
+                      type: string
+                      format: uuid
+                    templateFields:
+                      type: object
+                      properties:
+                        oidcDiscoveryUrl:
+                          type: string
+                          description: The URL used to retrieve the OpenID Connect configuration from the identity provider
+                        boundIssuer:
+                          type: string
+                          minLength: 1
+                          maxLength: 2048
+                          description: The unique identifier of the identity provider issuing the JWT
+                        boundAudiences:
+                          type: string
+                          default: ''
+                          description: The comma-separated list of intended recipients that JWT tokens must have in their aud claim
+                        caCert:
+                          type: string
+                          maxLength: 102400
+                          description: The PEM-encoded CA certificate used to validate the identity provider's TLS certificate
+                      required:
+                      - oidcDiscoveryUrl
+                      - boundIssuer
+                      additionalProperties: false
+                    orgId:
+                      type: string
+                      format: uuid
+                    name:
+                      type: string
+                    authMethod:
+                      type: string
+                      enum:
+                      - oidc
+                    createdAt:
+                      type: string
+                      format: date-time
+                    updatedAt:
+                      type: string
+                      format: date-time
+                  required:
+                  - id
+                  - templateFields
+                  - orgId
+                  - name
+                  - authMethod
+                  - createdAt
+                  - updatedAt
+                  additionalProperties: false
         '400':
           description: Default Response
           content:
@@ -248,6 +500,8 @@ paths:
           type: string
           enum:
           - ldap
+          - kubernetes
+          - oidc
         in: query
         name: authMethod
         required: true
@@ -261,56 +515,184 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    id:
-                      type: string
-                      format: uuid
-                    templateFields:
-                      type: object
-                      properties:
-                        url:
-                          type: string
-                          minLength: 1
-                        bindDN:
-                          type: string
-                          minLength: 1
-                        bindPass:
-                          type: string
-                          minLength: 1
-                        searchBase:
-                          type: string
-                          minLength: 1
-                        ldapCaCertificate:
-                          type: string
-                      required:
-                      - url
-                      - bindDN
-                      - bindPass
-                      - searchBase
-                      additionalProperties: false
-                    orgId:
-                      type: string
-                      format: uuid
-                    name:
-                      type: string
-                    authMethod:
-                      type: string
-                    createdAt:
-                      type: string
-                      format: date-time
-                    updatedAt:
-                      type: string
-                      format: date-time
-                  required:
-                  - id
-                  - templateFields
-                  - orgId
-                  - name
-                  - authMethod
-                  - createdAt
-                  - updatedAt
-                  additionalProperties: false
+                  anyOf:
+                  - type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      templateFields:
+                        type: object
+                        properties:
+                          url:
+                            type: string
+                            minLength: 1
+                          bindDN:
+                            type: string
+                            minLength: 1
+                          searchBase:
+                            type: string
+                            minLength: 1
+                          ldapCaCertificate:
+                            type: string
+                          hasBindPass:
+                            type: boolean
+                            description: Whether a bind password is stored for this template
+                        required:
+                        - hasBindPass
+                        additionalProperties: false
+                      orgId:
+                        type: string
+                        format: uuid
+                      name:
+                        type: string
+                      authMethod:
+                        type: string
+                        enum:
+                        - ldap
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                    required:
+                    - id
+                    - templateFields
+                    - orgId
+                    - name
+                    - authMethod
+                    - createdAt
+                    - updatedAt
+                    additionalProperties: false
+                  - type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      templateFields:
+                        type: object
+                        properties:
+                          tokenReviewMode:
+                            type: string
+                            enum:
+                            - api
+                            - gateway
+                            default: api
+                            description: 'The mode to use for token review. Must be one of: ''api'', ''gateway'''
+                          kubernetesHost:
+                            type:
+                            - string
+                            - 'null'
+                            minLength: 1
+                            maxLength: 255
+                            description: The host string, host:port pair, or URL to the base of the Kubernetes API server
+                          caCert:
+                            type: string
+                            maxLength: 102400
+                            description: The PEM-encoded CA certificate used to validate the Kubernetes API server's TLS certificate
+                          verifyTlsCertificate:
+                            type: boolean
+                            description: Whether to verify the Kubernetes API server's TLS certificate against the configured CA certificate
+                          gatewayId:
+                            type:
+                            - string
+                            - 'null'
+                            format: uuid
+                            description: The ID of the gateway to use when performing Kubernetes API requests
+                          gatewayPoolId:
+                            type:
+                            - string
+                            - 'null'
+                            format: uuid
+                            description: The ID of the gateway pool to use when performing Kubernetes API requests
+                          allowedAudience:
+                            type: string
+                            maxLength: 1000
+                            default: ''
+                            description: The optional audience claim that service account JWT tokens must have to authenticate with Infisical
+                          hasTokenReviewerJwt:
+                            type: boolean
+                            description: Whether a token reviewer JWT is stored for this template
+                        required:
+                        - hasTokenReviewerJwt
+                        additionalProperties: false
+                      orgId:
+                        type: string
+                        format: uuid
+                      name:
+                        type: string
+                      authMethod:
+                        type: string
+                        enum:
+                        - kubernetes
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                    required:
+                    - id
+                    - templateFields
+                    - orgId
+                    - name
+                    - authMethod
+                    - createdAt
+                    - updatedAt
+                    additionalProperties: false
+                  - type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      templateFields:
+                        type: object
+                        properties:
+                          oidcDiscoveryUrl:
+                            type: string
+                            description: The URL used to retrieve the OpenID Connect configuration from the identity provider
+                          boundIssuer:
+                            type: string
+                            minLength: 1
+                            maxLength: 2048
+                            description: The unique identifier of the identity provider issuing the JWT
+                          boundAudiences:
+                            type: string
+                            default: ''
+                            description: The comma-separated list of intended recipients that JWT tokens must have in their aud claim
+                          caCert:
+                            type: string
+                            maxLength: 102400
+                            description: The PEM-encoded CA certificate used to validate the identity provider's TLS certificate
+                        required:
+                        - oidcDiscoveryUrl
+                        - boundIssuer
+                        additionalProperties: false
+                      orgId:
+                        type: string
+                        format: uuid
+                      name:
+                        type: string
+                      authMethod:
+                        type: string
+                        enum:
+                        - oidc
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                    required:
+                    - id
+                    - templateFields
+                    - orgId
+                    - name
+                    - authMethod
+                    - createdAt
+                    - updatedAt
+                    additionalProperties: false
         '400':
           description: Default Response
           content:
@@ -486,6 +868,64 @@ paths:
                       minLength: 1
                     ldapCaCertificate:
                       type: string
+                    tokenReviewMode:
+                      type: string
+                      enum:
+                      - api
+                      - gateway
+                      default: api
+                      description: 'The mode to use for token review. Must be one of: ''api'', ''gateway'''
+                    kubernetesHost:
+                      type:
+                      - string
+                      - 'null'
+                      minLength: 1
+                      maxLength: 255
+                      description: The host string, host:port pair, or URL to the base of the Kubernetes API server
+                    caCert:
+                      type: string
+                      maxLength: 102400
+                      description: The PEM-encoded CA certificate used to validate the TLS certificate of the Kubernetes API server or identity provider
+                    verifyTlsCertificate:
+                      type: boolean
+                      description: Whether to verify the Kubernetes API server's TLS certificate against the configured CA certificate
+                    tokenReviewerJwt:
+                      type: string
+                      maxLength: 65536
+                      description: Optional JWT token for accessing the Kubernetes TokenReview API
+                    gatewayId:
+                      type:
+                      - string
+                      - 'null'
+                      format: uuid
+                      description: The ID of the gateway to use when performing Kubernetes API requests
+                    gatewayPoolId:
+                      type:
+                      - string
+                      - 'null'
+                      format: uuid
+                      description: The ID of the gateway pool to use when performing Kubernetes API requests
+                    allowedAudience:
+                      type: string
+                      maxLength: 1000
+                      default: ''
+                      description: The optional audience claim that service account JWT tokens must have to authenticate with Infisical
+                    oidcDiscoveryUrl:
+                      type: string
+                      format: uri
+                      minLength: 1
+                      maxLength: 2048
+                      description: The URL used to retrieve the OpenID Connect configuration from the identity provider
+                    boundIssuer:
+                      type: string
+                      minLength: 1
+                      maxLength: 2048
+                      description: The unique identifier of the identity provider issuing the JWT
+                    boundAudiences:
+                      type: string
+                      maxLength: 2048
+                      default: ''
+                      description: The comma-separated list of intended recipients that JWT tokens must have in their aud claim
                   additionalProperties: false
               additionalProperties: false
       parameters:
@@ -503,36 +943,184 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: string
-                    format: uuid
-                  templateFields:
-                    type: object
-                    additionalProperties: {}
-                  orgId:
-                    type: string
-                    format: uuid
-                  name:
-                    type: string
-                  authMethod:
-                    type: string
-                  createdAt:
-                    type: string
-                    format: date-time
-                  updatedAt:
-                    type: string
-                    format: date-time
-                required:
-                - id
-                - templateFields
-                - orgId
-                - name
-                - authMethod
-                - createdAt
-                - updatedAt
-                additionalProperties: false
+                anyOf:
+                - type: object
+                  properties:
+                    id:
+                      type: string
+                      format: uuid
+                    templateFields:
+                      type: object
+                      properties:
+                        url:
+                          type: string
+                          minLength: 1
+                        bindDN:
+                          type: string
+                          minLength: 1
+                        searchBase:
+                          type: string
+                          minLength: 1
+                        ldapCaCertificate:
+                          type: string
+                        hasBindPass:
+                          type: boolean
+                          description: Whether a bind password is stored for this template
+                      required:
+                      - hasBindPass
+                      additionalProperties: false
+                    orgId:
+                      type: string
+                      format: uuid
+                    name:
+                      type: string
+                    authMethod:
+                      type: string
+                      enum:
+                      - ldap
+                    createdAt:
+                      type: string
+                      format: date-time
+                    updatedAt:
+                      type: string
+                      format: date-time
+                  required:
+                  - id
+                  - templateFields
+                  - orgId
+                  - name
+                  - authMethod
+                  - createdAt
+                  - updatedAt
+                  additionalProperties: false
+                - type: object
+                  properties:
+                    id:
+                      type: string
+                      format: uuid
+                    templateFields:
+                      type: object
+                      properties:
+                        tokenReviewMode:
+                          type: string
+                          enum:
+                          - api
+                          - gateway
+                          default: api
+                          description: 'The mode to use for token review. Must be one of: ''api'', ''gateway'''
+                        kubernetesHost:
+                          type:
+                          - string
+                          - 'null'
+                          minLength: 1
+                          maxLength: 255
+                          description: The host string, host:port pair, or URL to the base of the Kubernetes API server
+                        caCert:
+                          type: string
+                          maxLength: 102400
+                          description: The PEM-encoded CA certificate used to validate the Kubernetes API server's TLS certificate
+                        verifyTlsCertificate:
+                          type: boolean
+                          description: Whether to verify the Kubernetes API server's TLS certificate against the configured CA certificate
+                        gatewayId:
+                          type:
+                          - string
+                          - 'null'
+                          format: uuid
+                          description: The ID of the gateway to use when performing Kubernetes API requests
+                        gatewayPoolId:
+                          type:
+                          - string
+                          - 'null'
+                          format: uuid
+                          description: The ID of the gateway pool to use when performing Kubernetes API requests
+                        allowedAudience:
+                          type: string
+                          maxLength: 1000
+                          default: ''
+                          description: The optional audience claim that service account JWT tokens must have to authenticate with Infisical
+                        hasTokenReviewerJwt:
+                          type: boolean
+                          description: Whether a token reviewer JWT is stored for this template
+                      required:
+                      - hasTokenReviewerJwt
+                      additionalProperties: false
+                    orgId:
+                      type: string
+                      format: uuid
+                    name:
+                      type: string
+                    authMethod:
+                      type: string
+                      enum:
+                      - kubernetes
+                    createdAt:
+                      type: string
+                      format: date-time
+                    updatedAt:
+                      type: string
+                      format: date-time
+                  required:
+                  - id
+                  - templateFields
+                  - orgId
+                  - name
+                  - authMethod
+                  - createdAt
+                  - updatedAt
+                  additionalProperties: false
+                - type: object
+                  properties:
+                    id:
+                      type: string
+                      format: uuid
+                    templateFields:
+                      type: object
+                      properties:
+                        oidcDiscoveryUrl:
+                          type: string
+                          description: The URL used to retrieve the OpenID Connect configuration from the identity provider
+                        boundIssuer:
+                          type: string
+                          minLength: 1
+                          maxLength: 2048
+                          description: The unique identifier of the identity provider issuing the JWT
+                        boundAudiences:
+                          type: string
+                          default: ''
+                          description: The comma-separated list of intended recipients that JWT tokens must have in their aud claim
+                        caCert:
+                          type: string
+                          maxLength: 102400
+                          description: The PEM-encoded CA certificate used to validate the identity provider's TLS certificate
+                      required:
+                      - oidcDiscoveryUrl
+                      - boundIssuer
+                      additionalProperties: false
+                    orgId:
+                      type: string
+                      format: uuid
+                    name:
+                      type: string
+                    authMethod:
+                      type: string
+                      enum:
+                      - oidc
+                    createdAt:
+                      type: string
+                      format: date-time
+                    updatedAt:
+                      type: string
+                      format: date-time
+                  required:
+                  - id
+                  - templateFields
+                  - orgId
+                  - name
+                  - authMethod
+                  - createdAt
+                  - updatedAt
+                  additionalProperties: false
         '400':
           description: Default Response
           content:
@@ -862,56 +1450,184 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: string
-                    format: uuid
-                  templateFields:
-                    type: object
-                    properties:
-                      url:
-                        type: string
-                        minLength: 1
-                      bindDN:
-                        type: string
-                        minLength: 1
-                      bindPass:
-                        type: string
-                        minLength: 1
-                      searchBase:
-                        type: string
-                        minLength: 1
-                      ldapCaCertificate:
-                        type: string
-                    required:
-                    - url
-                    - bindDN
-                    - bindPass
-                    - searchBase
-                    additionalProperties: false
-                  orgId:
-                    type: string
-                    format: uuid
-                  name:
-                    type: string
-                  authMethod:
-                    type: string
-                  createdAt:
-                    type: string
-                    format: date-time
-                  updatedAt:
-                    type: string
-                    format: date-time
-                required:
-                - id
-                - templateFields
-                - orgId
-                - name
-                - authMethod
-                - createdAt
-                - updatedAt
-                additionalProperties: false
+                anyOf:
+                - type: object
+                  properties:
+                    id:
+                      type: string
+                      format: uuid
+                    templateFields:
+                      type: object
+                      properties:
+                        url:
+                          type: string
+                          minLength: 1
+                        bindDN:
+                          type: string
+                          minLength: 1
+                        searchBase:
+                          type: string
+                          minLength: 1
+                        ldapCaCertificate:
+                          type: string
+                        hasBindPass:
+                          type: boolean
+                          description: Whether a bind password is stored for this template
+                      required:
+                      - hasBindPass
+                      additionalProperties: false
+                    orgId:
+                      type: string
+                      format: uuid
+                    name:
+                      type: string
+                    authMethod:
+                      type: string
+                      enum:
+                      - ldap
+                    createdAt:
+                      type: string
+                      format: date-time
+                    updatedAt:
+                      type: string
+                      format: date-time
+                  required:
+                  - id
+                  - templateFields
+                  - orgId
+                  - name
+                  - authMethod
+                  - createdAt
+                  - updatedAt
+                  additionalProperties: false
+                - type: object
+                  properties:
+                    id:
+                      type: string
+                      format: uuid
+                    templateFields:
+                      type: object
+                      properties:
+                        tokenReviewMode:
+                          type: string
+                          enum:
+                          - api
+                          - gateway
+                          default: api
+                          description: 'The mode to use for token review. Must be one of: ''api'', ''gateway'''
+                        kubernetesHost:
+                          type:
+                          - string
+                          - 'null'
+                          minLength: 1
+                          maxLength: 255
+                          description: The host string, host:port pair, or URL to the base of the Kubernetes API server
+                        caCert:
+                          type: string
+                          maxLength: 102400
+                          description: The PEM-encoded CA certificate used to validate the Kubernetes API server's TLS certificate
+                        verifyTlsCertificate:
+                          type: boolean
+                          description: Whether to verify the Kubernetes API server's TLS certificate against the configured CA certificate
+                        gatewayId:
+                          type:
+                          - string
+                          - 'null'
+                          format: uuid
+                          description: The ID of the gateway to use when performing Kubernetes API requests
+                        gatewayPoolId:
+                          type:
+                          - string
+                          - 'null'
+                          format: uuid
+                          description: The ID of the gateway pool to use when performing Kubernetes API requests
+                        allowedAudience:
+                          type: string
+                          maxLength: 1000
+                          default: ''
+                          description: The optional audience claim that service account JWT tokens must have to authenticate with Infisical
+                        hasTokenReviewerJwt:
+                          type: boolean
+                          description: Whether a token reviewer JWT is stored for this template
+                      required:
+                      - hasTokenReviewerJwt
+                      additionalProperties: false
+                    orgId:
+                      type: string
+                      format: uuid
+                    name:
+                      type: string
+                    authMethod:
+                      type: string
+                      enum:
+                      - kubernetes
+                    createdAt:
+                      type: string
+                      format: date-time
+                    updatedAt:
+                      type: string
+                      format: date-time
+                  required:
+                  - id
+                  - templateFields
+                  - orgId
+                  - name
+                  - authMethod
+                  - createdAt
+                  - updatedAt
+                  additionalProperties: false
+                - type: object
+                  properties:
+                    id:
+                      type: string
+                      format: uuid
+                    templateFields:
+                      type: object
+                      properties:
+                        oidcDiscoveryUrl:
+                          type: string
+                          description: The URL used to retrieve the OpenID Connect configuration from the identity provider
+                        boundIssuer:
+                          type: string
+                          minLength: 1
+                          maxLength: 2048
+                          description: The unique identifier of the identity provider issuing the JWT
+                        boundAudiences:
+                          type: string
+                          default: ''
+                          description: The comma-separated list of intended recipients that JWT tokens must have in their aud claim
+                        caCert:
+                          type: string
+                          maxLength: 102400
+                          description: The PEM-encoded CA certificate used to validate the identity provider's TLS certificate
+                      required:
+                      - oidcDiscoveryUrl
+                      - boundIssuer
+                      additionalProperties: false
+                    orgId:
+                      type: string
+                      format: uuid
+                    name:
+                      type: string
+                    authMethod:
+                      type: string
+                      enum:
+                      - oidc
+                    createdAt:
+                      type: string
+                      format: date-time
+                    updatedAt:
+                      type: string
+                      format: date-time
+                  required:
+                  - id
+                  - templateFields
+                  - orgId
+                  - name
+                  - authMethod
+                  - createdAt
+                  - updatedAt
+                  additionalProperties: false
         '400':
           description: Default Response
           content:
@@ -1093,56 +1809,184 @@ paths:
                   templates:
                     type: array
                     items:
-                      type: object
-                      properties:
-                        id:
-                          type: string
-                          format: uuid
-                        templateFields:
-                          type: object
-                          properties:
-                            url:
-                              type: string
-                              minLength: 1
-                            bindDN:
-                              type: string
-                              minLength: 1
-                            bindPass:
-                              type: string
-                              minLength: 1
-                            searchBase:
-                              type: string
-                              minLength: 1
-                            ldapCaCertificate:
-                              type: string
-                          required:
-                          - url
-                          - bindDN
-                          - bindPass
-                          - searchBase
-                          additionalProperties: false
-                        orgId:
-                          type: string
-                          format: uuid
-                        name:
-                          type: string
-                        authMethod:
-                          type: string
-                        createdAt:
-                          type: string
-                          format: date-time
-                        updatedAt:
-                          type: string
-                          format: date-time
-                      required:
-                      - id
-                      - templateFields
-                      - orgId
-                      - name
-                      - authMethod
-                      - createdAt
-                      - updatedAt
-                      additionalProperties: false
+                      anyOf:
+                      - type: object
+                        properties:
+                          id:
+                            type: string
+                            format: uuid
+                          templateFields:
+                            type: object
+                            properties:
+                              url:
+                                type: string
+                                minLength: 1
+                              bindDN:
+                                type: string
+                                minLength: 1
+                              searchBase:
+                                type: string
+                                minLength: 1
+                              ldapCaCertificate:
+                                type: string
+                              hasBindPass:
+                                type: boolean
+                                description: Whether a bind password is stored for this template
+                            required:
+                            - hasBindPass
+                            additionalProperties: false
+                          orgId:
+                            type: string
+                            format: uuid
+                          name:
+                            type: string
+                          authMethod:
+                            type: string
+                            enum:
+                            - ldap
+                          createdAt:
+                            type: string
+                            format: date-time
+                          updatedAt:
+                            type: string
+                            format: date-time
+                        required:
+                        - id
+                        - templateFields
+                        - orgId
+                        - name
+                        - authMethod
+                        - createdAt
+                        - updatedAt
+                        additionalProperties: false
+                      - type: object
+                        properties:
+                          id:
+                            type: string
+                            format: uuid
+                          templateFields:
+                            type: object
+                            properties:
+                              tokenReviewMode:
+                                type: string
+                                enum:
+                                - api
+                                - gateway
+                                default: api
+                                description: 'The mode to use for token review. Must be one of: ''api'', ''gateway'''
+                              kubernetesHost:
+                                type:
+                                - string
+                                - 'null'
+                                minLength: 1
+                                maxLength: 255
+                                description: The host string, host:port pair, or URL to the base of the Kubernetes API server
+                              caCert:
+                                type: string
+                                maxLength: 102400
+                                description: The PEM-encoded CA certificate used to validate the Kubernetes API server's TLS certificate
+                              verifyTlsCertificate:
+                                type: boolean
+                                description: Whether to verify the Kubernetes API server's TLS certificate against the configured CA certificate
+                              gatewayId:
+                                type:
+                                - string
+                                - 'null'
+                                format: uuid
+                                description: The ID of the gateway to use when performing Kubernetes API requests
+                              gatewayPoolId:
+                                type:
+                                - string
+                                - 'null'
+                                format: uuid
+                                description: The ID of the gateway pool to use when performing Kubernetes API requests
+                              allowedAudience:
+                                type: string
+                                maxLength: 1000
+                                default: ''
+                                description: The optional audience claim that service account JWT tokens must have to authenticate with Infisical
+                              hasTokenReviewerJwt:
+                                type: boolean
+                                description: Whether a token reviewer JWT is stored for this template
+                            required:
+                            - hasTokenReviewerJwt
+                            additionalProperties: false
+                          orgId:
+                            type: string
+                            format: uuid
+                          name:
+                            type: string
+                          authMethod:
+                            type: string
+                            enum:
+                            - kubernetes
+                          createdAt:
+                            type: string
+                            format: date-time
+                          updatedAt:
+                            type: string
+                            format: date-time
+                        required:
+                        - id
+                        - templateFields
+                        - orgId
+                        - name
+                        - authMethod
+                        - createdAt
+                        - updatedAt
+                        additionalProperties: false
+                      - type: object
+                        properties:
+                          id:
+                            type: string
+                            format: uuid
+                          templateFields:
+                            type: object
+                            properties:
+                              oidcDiscoveryUrl:
+                                type: string
+                                description: The URL used to retrieve the OpenID Connect configuration from the identity provider
+                              boundIssuer:
+                                type: string
+                                minLength: 1
+                                maxLength: 2048
+                                description: The unique identifier of the identity provider issuing the JWT
+                              boundAudiences:
+                                type: string
+                                default: ''
+                                description: The comma-separated list of intended recipients that JWT tokens must have in their aud claim
+                              caCert:
+                                type: string
+                                maxLength: 102400
+                                description: The PEM-encoded CA certificate used to validate the identity provider's TLS certificate
+                            required:
+                            - oidcDiscoveryUrl
+                            - boundIssuer
+                            additionalProperties: false
+                          orgId:
+                            type: string
+                            format: uuid
+                          name:
+                            type: string
+                          authMethod:
+                            type: string
+                            enum:
+                            - oidc
+                          createdAt:
+                            type: string
+                            format: date-time
+                          updatedAt:
+                            type: string
+                            format: date-time
+                        required:
+                        - id
+                        - templateFields
+                        - orgId
+                        - name
+                        - authMethod
+                        - createdAt
+                        - updatedAt
+                        additionalProperties: false
                   totalCount:
                     type: number
                 required:

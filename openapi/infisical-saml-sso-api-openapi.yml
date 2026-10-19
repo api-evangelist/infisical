@@ -15,6 +15,7 @@ tags:
 paths:
   /api/v1/sso/config:
     get:
+      operationId: getSamlConfig
       tags:
       - SAML SSO
       description: Get SAML config
@@ -206,11 +207,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
-      summary: Get api sso config
+      summary: Get saml config
       x-summary-source: derived
-      operationId: getApiV1SsoConfig
-      x-operation-id-source: derived
     post:
+      operationId: createSamlConfig
       tags:
       - SAML SSO
       description: Create SAML config
@@ -434,11 +434,10 @@ paths:
                 - message
                 - error
                 additionalProperties: false
-      summary: Create api sso config
+      summary: Create saml config
       x-summary-source: derived
-      operationId: postApiV1SsoConfig
-      x-operation-id-source: derived
     patch:
+      operationId: updateSamlConfig
       tags:
       - SAML SSO
       description: Update SAML config
@@ -657,10 +656,8 @@ paths:
                 - message
                 - error
                 additionalProperties: false
-      summary: Update api sso config
+      summary: Update saml config
       x-summary-source: derived
-      operationId: patchApiV1SsoConfig
-      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

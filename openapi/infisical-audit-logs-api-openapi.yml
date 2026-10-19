@@ -13,6 +13,412 @@ servers:
 tags:
 - name: Audit Logs
 paths:
+  /api/v1/organization/audit-log-settings:
+    get:
+      operationId: getOrganizationAuditLogSettings
+      tags:
+      - Audit Logs
+      description: Get which audit log event classes the organization records
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  auditLogSettings:
+                    type: object
+                    properties:
+                      eventClasses:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            eventClass:
+                              type: string
+                              enum:
+                              - management
+                              - authentication
+                              - authorization
+                              - data-access
+                              description: 'The audit log event class: management, authentication, data-access, or authorization.'
+                            isEnabled:
+                              type: boolean
+                              description: Whether events of this class are recorded.
+                          required:
+                          - eventClass
+                          - isEnabled
+                          additionalProperties: false
+                      shouldUseNewPrivilegeSystem:
+                        type: boolean
+                        description: Whether the organization is on the new privilege system. Permission denials (the authorization class) are only recorded on the new privilege system.
+                    required:
+                    - eventClasses
+                    - shouldUseNewPrivilegeSystem
+                    additionalProperties: false
+                required:
+                - auditLogSettings
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: Get organization audit log settings
+      x-summary-source: derived
+    put:
+      operationId: updateOrganizationAuditLogSettings
+      tags:
+      - Audit Logs
+      description: Update which audit log event classes the organization records. Requires the organization admin role.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                eventClasses:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      eventClass:
+                        type: string
+                        enum:
+                        - management
+                        - authentication
+                        - authorization
+                        - data-access
+                        description: 'The audit log event class: management, authentication, data-access, or authorization.'
+                      isEnabled:
+                        type: boolean
+                        description: Whether to record events of this class for the organization. This only covers organization-level events; each project has its own setting.
+                    required:
+                    - eventClass
+                    - isEnabled
+                    additionalProperties: false
+                  minItems: 1
+                  maxItems: 4
+                  description: Every event class except management and data-access, each exactly once. The request replaces the current settings. Management and data-access events are always recorded, so a request that includes either class is rejected. The authorization class can only be turned on for organizations on the new privilege system; otherwise the request is rejected.
+              required:
+              - eventClasses
+              additionalProperties: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  auditLogSettings:
+                    type: object
+                    properties:
+                      eventClasses:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            eventClass:
+                              type: string
+                              enum:
+                              - management
+                              - authentication
+                              - authorization
+                              - data-access
+                              description: 'The audit log event class: management, authentication, data-access, or authorization.'
+                            isEnabled:
+                              type: boolean
+                              description: Whether events of this class are recorded.
+                          required:
+                          - eventClass
+                          - isEnabled
+                          additionalProperties: false
+                      shouldUseNewPrivilegeSystem:
+                        type: boolean
+                        description: Whether the organization is on the new privilege system. Permission denials (the authorization class) are only recorded on the new privilege system.
+                    required:
+                    - eventClasses
+                    - shouldUseNewPrivilegeSystem
+                    additionalProperties: false
+                required:
+                - auditLogSettings
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: Update organization audit log settings
+      x-summary-source: derived
   /api/v1/organization/audit-logs:
     get:
       operationId: listOrganizationAuditLogs
@@ -49,6 +455,7 @@ paths:
           - gateway
           - relay
           - kmipServer
+          - agentVaultProxy
         in: query
         name: actorType
         required: false
@@ -70,6 +477,7 @@ paths:
           - anyOf:
             - not: {}
             - type: string
+              maxLength: 17586
           - anyOf:
             - not: {}
             - type: array
@@ -84,6 +492,7 @@ paths:
                 - update-secret
                 - update-secrets
                 - move-secrets
+                - search-secrets-by-value
                 - duplicate-secret
                 - delete-secret
                 - delete-secrets
@@ -107,6 +516,8 @@ paths:
                 - create-identity
                 - update-identity
                 - delete-identity
+                - update-user-org-membership
+                - delete-user-org-membership
                 - create-identity-org-membership
                 - update-identity-org-membership
                 - delete-identity-org-membership
@@ -216,6 +627,7 @@ paths:
                 - create-folder
                 - update-folder
                 - delete-folder
+                - move-folder
                 - create-webhook
                 - update-webhook-status
                 - delete-webhook
@@ -235,31 +647,8 @@ paths:
                 - secret-approval-closed
                 - secret-approval-reopened
                 - secret-approval-request-review
-                - sign-ssh-key
-                - issue-ssh-creds
-                - create-ssh-certificate-authority
-                - get-ssh-certificate-authority
-                - update-ssh-certificate-authority
-                - delete-ssh-certificate-authority
-                - get-ssh-certificate-authority-certificate-templates
-                - create-ssh-certificate-template
-                - update-ssh-certificate-template
-                - delete-ssh-certificate-template
-                - get-ssh-certificate-template
                 - get-azure-ad-templates
-                - get-ssh-host
-                - create-ssh-host
-                - update-ssh-host
-                - delete-ssh-host
-                - issue-ssh-host-user-cert
-                - issue-ssh-host-host-cert
-                - get-ssh-host-group
-                - create-ssh-host-group
-                - update-ssh-host-group
-                - delete-ssh-host-group
-                - get-ssh-host-group-hosts
-                - add-host-to-ssh-host-group
-                - remove-host-from-ssh-host-group
+                - get-adcs-templates
                 - create-certificate-authority
                 - get-certificate-authority
                 - get-certificate-authorities
@@ -316,6 +705,7 @@ paths:
                 - automated-renew-subscriber-cert
                 - automated-renew-certificate
                 - automated-renew-certificate-failed
+                - certificate-issuance-failed
                 - list-pki-subscriber-certs
                 - get-subscriber-active-cert-bundle
                 - create-kms
@@ -402,11 +792,10 @@ paths:
                 - delete-slack-integration
                 - get-project-workflow-integration-config
                 - update-project-workflow-integration-config
-                - get-project-ssh-config
-                - update-project-ssh-config
                 - integration-synced
                 - create-cmek
                 - update-cmek
+                - rotate-cmek
                 - delete-cmek
                 - get-cmeks
                 - get-cmek
@@ -414,6 +803,8 @@ paths:
                 - cmek-decrypt
                 - cmek-sign
                 - cmek-verify
+                - cmek-generate-mac
+                - cmek-verify-mac
                 - cmek-list-signing-algorithms
                 - cmek-get-public-key
                 - cmek-get-private-key
@@ -445,6 +836,10 @@ paths:
                 - create-app-connection
                 - update-app-connection
                 - delete-app-connection
+                - create-hsm-connector
+                - update-hsm-connector
+                - delete-hsm-connector
+                - test-hsm-connector
                 - get-app-connection-usage
                 - migrate-app-connection
                 - rotate-app-connection-credentials
@@ -471,10 +866,18 @@ paths:
                 - pki-sync-sync-certificates
                 - pki-sync-import-certificates
                 - pki-sync-remove-certificates
+                - pki-sync-health-check
+                - pki-sync-test-health-check
+                - pki-sync-link-certificates
+                - pki-sync-unlink-certificates
+                - pki-sync-skip-certificate
                 - pki-sync-set-default-certificate
                 - pki-sync-clear-default-certificate
                 - oidc-group-membership-mapping-assign-user
                 - oidc-group-membership-mapping-remove-user
+                - oidc-provisioned-placeholder-adopted
+                - sso-user-profile-synced
+                - sso-user-email-sync-skipped
                 - create-kmip-client
                 - update-kmip-client
                 - delete-kmip-client
@@ -484,6 +887,7 @@ paths:
                 - setup-kmip
                 - get-kmip
                 - register-kmip-server
+                - kmip-server-connect
                 - kmip-operation-create
                 - kmip-operation-get
                 - kmip-operation-destroy
@@ -513,6 +917,7 @@ paths:
                 - project-assume-privileges-session-start
                 - project-assume-privileges-session-end
                 - get-project-pit-commits
+                - get-project-pit-commit-authors
                 - get-project-pit-commit-changes
                 - get-project-pit-commit-count
                 - pit-rollback-commit
@@ -528,12 +933,15 @@ paths:
                 - secret-scanning-data-source-trigger-scan
                 - secret-scanning-data-source-scan
                 - secret-scanning-resource-list
+                - secret-scanning-resource-add
+                - secret-scanning-resource-remove
                 - secret-scanning-scan-list
                 - secret-scanning-finding-list
                 - secret-scanning-finding-update
                 - secret-scanning-config-get
                 - secret-scanning-config-update
                 - update-org
+                - enable-org-wide-secret-value-tracking
                 - create-project
                 - update-project
                 - delete-project
@@ -551,12 +959,25 @@ paths:
                 - dashboard-list-secrets
                 - dashboard-get-secret-value
                 - dashboard-get-secret-version-value
+                - search-secrets-by-metadata
                 - view-insights-auth-methods
                 - view-insights-secrets-management-calendar
                 - view-insights-secrets-management-access-volume
+                - view-insights-secrets-management-org-auth-method-distribution
                 - view-insights-secrets-management-access-locations
                 - view-insights-secrets-management-summary
                 - view-insights-secrets-duplication
+                - view-insights-org-secrets-duplication
+                - view-insights-secrets-management-counts
+                - view-insights-secrets-management-usage
+                - view-insights-secrets-management-project-warnings
+                - create-audit-report
+                - get-audit-reports
+                - get-audit-report
+                - delete-audit-report
+                - create-org-audit-report
+                - get-org-audit-reports
+                - delete-org-audit-report
                 - view-insights-pam-summary
                 - view-insights-pam-session-activity
                 - view-insights-pam-top-actors
@@ -564,61 +985,69 @@ paths:
                 - view-insights-pam-rotation-calendar
                 - pam-session-credentials-get
                 - pam-session-start
-                - pam-session-logs-update
                 - pam-session-end
                 - pam-session-terminate
-                - pam-session-get
-                - pam-session-list
-                - pam-session-event-batch-upload
                 - pam-session-chunk-upload
                 - pam-session-upload-token-invalid
-                - pam-recording-config-update
-                - pam-recording-config-delete
-                - pam-recording-bucket-connection-test-failed
+                - pam-account-template-create
+                - pam-account-template-update
+                - pam-account-template-delete
                 - pam-folder-create
                 - pam-folder-update
                 - pam-folder-delete
-                - pam-account-list
-                - pam-account-get
+                - org-admin-accessed-pam-folder
+                - pam-product-member-add
+                - pam-product-member-update
+                - pam-product-member-remove
+                - pam-folder-member-add
+                - pam-folder-member-update
+                - pam-folder-member-remove
+                - pam-account-member-add
+                - pam-account-member-update
+                - pam-account-member-remove
                 - pam-account-access
-                - pam-account-aws-console-url-generated
                 - pam-account-create
                 - pam-account-update
                 - pam-account-delete
-                - pam-account-credential-rotation
-                - pam-account-credential-rotation-failed
-                - pam-account-policy-create
-                - pam-account-policy-update
-                - pam-account-policy-delete
-                - pam-account-policy-list
-                - pam-account-policy-get
-                - pam-account-read-credentials
-                - pam-web-access-session-ticket-created
-                - pam-resource-list
-                - pam-resource-get
-                - pam-resource-create
-                - pam-resource-update
-                - pam-resource-delete
-                - pam-domain-list
-                - pam-domain-get
-                - pam-domain-create
-                - pam-domain-update
-                - pam-domain-delete
-                - pam-discovery-source-list
-                - pam-discovery-source-get
+                - pam-account-ssh-ca-create
+                - pam-account-credentials-view
                 - pam-discovery-source-create
                 - pam-discovery-source-update
                 - pam-discovery-source-delete
                 - pam-discovery-scan
-                - pam-discovery-source-run-list
-                - pam-discovery-source-run-get
-                - pam-discovery-source-resource-list
-                - pam-discovery-source-account-list
-                - pam-resource-rotation-rule-list
-                - pam-resource-rotation-rule-create
-                - pam-resource-rotation-rule-update
-                - pam-resource-rotation-rule-delete
-                - pam-resource-rotation-rule-reorder
+                - pam-discovered-account-import
+                - pam-account-rotate-credentials
+                - pam-account-heartbeat
+                - pam-account-set-rotation-account
+                - pam-web-access-session-ticket-created
+                - pam-access-request-create
+                - pam-access-request-review
+                - pam-access-grant-revoke
+                - pam-approval-config-update
+                - agent-vault-access-bundle-create
+                - agent-vault-access-bundle-update
+                - agent-vault-access-bundle-delete
+                - agent-vault-service-create
+                - agent-vault-service-update
+                - agent-vault-service-delete
+                - agent-vault-variable-create
+                - agent-vault-variable-update
+                - agent-vault-variable-delete
+                - agent-vault-variable-value-view
+                - agent-vault-member-add
+                - agent-vault-member-update
+                - agent-vault-member-remove
+                - agent-vault-access-bundle-member-add
+                - agent-vault-access-bundle-member-remove
+                - agent-vault-session-mint
+                - agent-vault-session-revoke
+                - agent-vault-proxy-register
+                - agent-vault-proxy-token-reissue
+                - agent-vault-proxy-enroll
+                - agent-vault-proxy-update
+                - agent-vault-proxy-revoke
+                - agent-vault-proxy-delete
+                - agent-vault-session-log-settings-update
                 - approval-policy-create
                 - approval-policy-update
                 - approval-policy-delete
@@ -648,32 +1077,15 @@ paths:
                 - pass-acme-challenge
                 - attempt-acme-challenge
                 - fail-acme-challenge
-                - mcp-endpoint-create
-                - mcp-endpoint-update
-                - mcp-endpoint-delete
-                - mcp-endpoint-get
-                - mcp-endpoint-list
-                - mcp-endpoint-list-tools
-                - mcp-endpoint-enable-tool
-                - mcp-endpoint-disable-tool
-                - mcp-endpoint-bulk-update-tools
-                - mcp-endpoint-oauth-client-register
-                - mcp-endpoint-oauth-authorize
-                - mcp-endpoint-connect
-                - mcp-endpoint-save-user-credential
-                - mcp-server-create
-                - mcp-server-update
-                - mcp-server-delete
-                - mcp-server-get
-                - mcp-server-list
-                - mcp-server-list-tools
-                - mcp-server-sync-tools
-                - mcp-activity-log-list
                 - create-dynamic-secret
                 - update-dynamic-secret
                 - delete-dynamic-secret
                 - get-dynamic-secret
                 - list-dynamic-secrets
+                - create-proxied-service
+                - update-proxied-service
+                - delete-proxied-service
+                - sign-agent-proxy-intermediate-ca
                 - create-dynamic-secret-lease
                 - delete-dynamic-secret-lease
                 - renew-dynamic-secret-lease
@@ -696,6 +1108,7 @@ paths:
                 - get-pki-signers
                 - get-pki-signer-public-key
                 - get-pki-signing-operations
+                - get-pki-signing-operation
                 - pki-signer-sign
                 - enable-pki-signer
                 - disable-pki-signer
@@ -717,19 +1130,25 @@ paths:
                 - external-migration-create
                 - external-migration-update
                 - external-migration-delete
+                - import-vault-secrets
                 - create-oauth-client
                 - update-oauth-client
                 - delete-oauth-client
                 - rotate-oauth-client-secret
                 - oauth-client-authorize
+                - oauth-client-token-exchange
                 - create-email-domain
                 - verify-email-domain
                 - delete-email-domain
                 - gateway-create
+                - gateway-update
+                - gateway-delete
                 - gateway-enrollment-token-create
                 - gateway-enroll
+                - gateway-connect
                 - resource-auth-method-login
                 - resource-auth-method-login-failed
+                - resource-auth-method-create
                 - resource-auth-method-update
                 - resource-auth-method-revoke
                 - relay-create
@@ -749,9 +1168,42 @@ paths:
                 - update-honey-token
                 - revoke-honey-token
                 - trigger-honey-token
+                - create-project-folder-grant
+                - delete-project-folder-grant
+                - create-secret-folder-access
+                - update-secret-folder-access
+                - delete-secret-folder-access
+                - create-alert
+                - update-alert
+                - delete-alert
+                - test-alert-channel
+                - permission-denied
+                - update-audit-log-settings
+              maxItems: 695
         in: query
         name: eventType
         required: false
+      - schema:
+          allOf:
+          - anyOf:
+            - not: {}
+            - type: string
+              maxLength: 51
+          - anyOf:
+            - not: {}
+            - type: array
+              items:
+                type: string
+                enum:
+                - management
+                - authentication
+                - authorization
+                - data-access
+              maxItems: 4
+        in: query
+        name: eventClass
+        required: false
+        description: Filter by event class, comma-separated for multiple values (management, authentication, authorization, data-access). Combined with eventType, only event types in both are returned. If the selected classes include secret events, the environment, secretPath, and secretKey filters drop every event whose metadata doesn't match, including events that aren't about secrets. If they don't, those filters are ignored.
       - schema:
           type: string
           enum:
@@ -864,9 +1316,17 @@ paths:
                           properties:
                             type:
                               type: string
+                            class:
+                              type: string
+                              enum:
+                              - management
+                              - authentication
+                              - authorization
+                              - data-access
                             metadata: {}
                           required:
                           - type
+                          - class
                           additionalProperties: false
                         actor:
                           type: object
@@ -1026,6 +1486,428 @@ paths:
                 - error
                 additionalProperties: false
       summary: List organization audit logs
+      x-summary-source: derived
+  /api/v1/projects/{projectId}/audit-log-settings:
+    get:
+      operationId: getProjectAuditLogSettings
+      tags:
+      - Audit Logs
+      description: Get which audit log event classes the project records
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: projectId
+        required: true
+        description: The ID of the project to get the audit log settings for.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  auditLogSettings:
+                    type: object
+                    properties:
+                      eventClasses:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            eventClass:
+                              type: string
+                              enum:
+                              - management
+                              - authentication
+                              - authorization
+                              - data-access
+                              description: 'The audit log event class: management, authentication, data-access, or authorization.'
+                            isEnabled:
+                              type: boolean
+                              description: Whether events of this class are recorded.
+                          required:
+                          - eventClass
+                          - isEnabled
+                          additionalProperties: false
+                      shouldUseNewPrivilegeSystem:
+                        type: boolean
+                        description: Whether the organization is on the new privilege system. Permission denials (the authorization class) are only recorded on the new privilege system.
+                    required:
+                    - eventClasses
+                    - shouldUseNewPrivilegeSystem
+                    additionalProperties: false
+                required:
+                - auditLogSettings
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: Get project audit log settings
+      x-summary-source: derived
+    put:
+      operationId: updateProjectAuditLogSettings
+      tags:
+      - Audit Logs
+      description: Update which audit log event classes the project records. Requires the project admin role.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                eventClasses:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      eventClass:
+                        type: string
+                        enum:
+                        - management
+                        - authentication
+                        - authorization
+                        - data-access
+                        description: 'The audit log event class: management, authentication, data-access, or authorization.'
+                      isEnabled:
+                        type: boolean
+                        description: Whether to record events of this class for the project. A project that has never saved a setting uses the default.
+                    required:
+                    - eventClass
+                    - isEnabled
+                    additionalProperties: false
+                  minItems: 1
+                  maxItems: 4
+                  description: Every event class except management and data-access, each exactly once. The request replaces the current settings. Management and data-access events are always recorded, so a request that includes either class is rejected. The authorization class can only be turned on for organizations on the new privilege system; otherwise the request is rejected.
+              required:
+              - eventClasses
+              additionalProperties: false
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: projectId
+        required: true
+        description: The ID of the project to update the audit log settings for.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  auditLogSettings:
+                    type: object
+                    properties:
+                      eventClasses:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            eventClass:
+                              type: string
+                              enum:
+                              - management
+                              - authentication
+                              - authorization
+                              - data-access
+                              description: 'The audit log event class: management, authentication, data-access, or authorization.'
+                            isEnabled:
+                              type: boolean
+                              description: Whether events of this class are recorded.
+                          required:
+                          - eventClass
+                          - isEnabled
+                          additionalProperties: false
+                      shouldUseNewPrivilegeSystem:
+                        type: boolean
+                        description: Whether the organization is on the new privilege system. Permission denials (the authorization class) are only recorded on the new privilege system.
+                    required:
+                    - eventClasses
+                    - shouldUseNewPrivilegeSystem
+                    additionalProperties: false
+                required:
+                - auditLogSettings
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: Update project audit log settings
       x-summary-source: derived
 components:
   securitySchemes:

@@ -33,10 +33,12 @@ paths:
                 username:
                   type: string
                   minLength: 1
+                  maxLength: 255
                   description: The username of the LDAP user to login.
                 password:
                   type: string
                   minLength: 1
+                  maxLength: 1024
                   description: The password of the LDAP user to login.
                 organizationSlug:
                   type: string
@@ -1015,8 +1017,6 @@ paths:
                         default: 30
                       bindDN:
                         type: string
-                      bindPass:
-                        type: string
                       ldapCaCertificate:
                         type: string
                     required:
@@ -1028,7 +1028,6 @@ paths:
                     - createdAt
                     - updatedAt
                     - bindDN
-                    - bindPass
                     additionalProperties: false
                 required:
                 - identityLdapAuth

@@ -110,17 +110,20 @@ paths:
                         type:
                         - string
                         - 'null'
+                      __v:
+                        type: number
+                        default: 0
+                      _id:
+                        type: string
                       mfaMethods:
                         type:
                         - array
                         - 'null'
                         items:
                           type: string
-                      __v:
-                        type: number
-                        default: 0
-                      _id:
-                        type: string
+                        default: null
+                        description: 'Deprecated: no longer used and always null. Use selectedMfaMethod instead.'
+                        deprecated: true
                     required:
                     - id
                     - createdAt

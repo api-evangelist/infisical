@@ -31,38 +31,82 @@ paths:
                   maxLength: 255
                 description:
                   type: string
-                  maxLength: 1000
+                  maxLength: 255
                 subject:
-                  type: array
+                  type:
+                  - array
+                  - 'null'
                   items:
-                    type: object
-                    properties:
-                      type:
-                        type: string
-                        enum:
-                        - common_name
-                        - organization
-                        - country
-                        - state
-                        - locality
-                        - organizational_unit
-                      allowed:
-                        type: array
-                        items:
+                    anyOf:
+                    - type: object
+                      properties:
+                        type:
                           type: string
+                          enum:
+                          - common_name
+                          - organization
+                          - country
+                          - state
+                          - locality
+                          - organizational_unit
+                        allowed:
+                          type: array
+                          items:
+                            type: string
+                            minLength: 1
+                            maxLength: 255
+                        required:
+                          type: array
+                          items:
+                            type: string
+                            minLength: 1
+                            maxLength: 255
+                        denied:
+                          type: array
+                          items:
+                            type: string
+                            minLength: 1
+                            maxLength: 255
                       required:
-                        type: array
-                        items:
+                      - type
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        type:
                           type: string
-                      denied:
-                        type: array
-                        items:
-                          type: string
-                    required:
-                    - type
-                    additionalProperties: false
+                          enum:
+                          - domain_component
+                        allowed:
+                          type: array
+                          items:
+                            type: string
+                            minLength: 1
+                            maxLength: 255
+                          maxItems: 25
+                          description: 'Domain component sequences that are permitted. Each entry is one sequence, its components comma-joined most specific first: "corp,example,com" matches DC=corp,DC=example,DC=com. A request matches a sequence only when its components line up position by position, so the same labels in another order do not match.'
+                        required:
+                          type: array
+                          items:
+                            type: string
+                            minLength: 1
+                            maxLength: 255
+                          maxItems: 25
+                          description: 'Domain component sequences that are required. Each entry is one sequence, its components comma-joined most specific first: "corp,example,com" matches DC=corp,DC=example,DC=com. A request matches a sequence only when its components line up position by position, so the same labels in another order do not match.'
+                        denied:
+                          type: array
+                          items:
+                            type: string
+                            minLength: 1
+                            maxLength: 255
+                          maxItems: 25
+                          description: Domain component sequences that are rejected, each comma-joined most specific first. A sequence is rejected wherever it appears in the chain, so "example,com" rejects DC=example,DC=com and DC=host,DC=example,DC=com alike.
+                      required:
+                      - type
+                      additionalProperties: false
                 sans:
-                  type: array
+                  type:
+                  - array
+                  - 'null'
                   items:
                     type: object
                     properties:
@@ -73,6 +117,7 @@ paths:
                         - ip_address
                         - email
                         - uri
+                        - upn
                       allowed:
                         type: array
                         items:
@@ -89,7 +134,9 @@ paths:
                     - type
                     additionalProperties: false
                 keyUsages:
-                  type: object
+                  type:
+                  - object
+                  - 'null'
                   properties:
                     allowed:
                       type: array
@@ -135,7 +182,9 @@ paths:
                         - decipher_only
                   additionalProperties: false
                 extendedKeyUsages:
-                  type: object
+                  type:
+                  - object
+                  - 'null'
                   properties:
                     allowed:
                       type: array
@@ -147,7 +196,9 @@ paths:
                         - code_signing
                         - email_protection
                         - ocsp_signing
+                        - smart_card_logon
                         - time_stamping
+                        - any_purpose
                     required:
                       type: array
                       items:
@@ -158,7 +209,9 @@ paths:
                         - code_signing
                         - email_protection
                         - ocsp_signing
+                        - smart_card_logon
                         - time_stamping
+                        - any_purpose
                     denied:
                       type: array
                       items:
@@ -169,10 +222,14 @@ paths:
                         - code_signing
                         - email_protection
                         - ocsp_signing
+                        - smart_card_logon
                         - time_stamping
+                        - any_purpose
                   additionalProperties: false
                 algorithms:
-                  type: object
+                  type:
+                  - object
+                  - 'null'
                   properties:
                     signature:
                       type: array
@@ -186,7 +243,9 @@ paths:
                       minItems: 1
                   additionalProperties: false
                 validity:
-                  type: object
+                  type:
+                  - object
+                  - 'null'
                   properties:
                     max:
                       type: string
@@ -206,6 +265,50 @@ paths:
                       type: integer
                       minimum: -1
                   additionalProperties: false
+                customExtensions:
+                  type:
+                  - array
+                  - 'null'
+                  items:
+                    type: object
+                    properties:
+                      oid:
+                        type: string
+                        maxLength: 64
+                      label:
+                        type: string
+                        minLength: 1
+                        maxLength: 64
+                      critical:
+                        type: string
+                        enum:
+                        - critical
+                        - not_critical
+                      allowed:
+                        type: array
+                        items:
+                          type: string
+                          minLength: 1
+                          maxLength: 4096
+                        description: Value patterns this extension may take, with * as a wildcard. Use * on its own to accept any value. Omit to place no allow-list constraint on the value.
+                      required:
+                        type: array
+                        items:
+                          type: string
+                          minLength: 1
+                          maxLength: 4096
+                        description: Value patterns this extension must match, with * as a wildcard. Setting any required pattern also makes the extension mandatory on every request.
+                      denied:
+                        type: array
+                        items:
+                          type: string
+                          minLength: 1
+                          maxLength: 4096
+                        description: Value patterns this extension must not take, with * as a wildcard. A denied match is rejected even when an allowed pattern also matches.
+                    required:
+                    - oid
+                    additionalProperties: false
+                  description: Rules for custom X.509 extensions, one per OID. Omit the field to leave custom extensions unconstrained; send an empty array to forbid them entirely.
               required:
               - name
               additionalProperties: false
@@ -236,35 +339,57 @@ paths:
                       subject:
                         type: array
                         items:
-                          type: object
-                          properties:
-                            type:
-                              type: string
-                              enum:
-                              - common_name
-                              - organization
-                              - country
-                              - state
-                              - locality
-                              - organizational_unit
-                            allowed:
-                              type: array
-                              items:
+                          anyOf:
+                          - type: object
+                            properties:
+                              type:
                                 type: string
-                                minLength: 1
+                                enum:
+                                - common_name
+                                - organization
+                                - country
+                                - state
+                                - locality
+                                - organizational_unit
+                              allowed:
+                                type: array
+                                items:
+                                  type: string
+                              required:
+                                type: array
+                                items:
+                                  type: string
+                              denied:
+                                type: array
+                                items:
+                                  type: string
                             required:
-                              type: array
-                              items:
+                            - type
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              type:
                                 type: string
-                                minLength: 1
-                            denied:
-                              type: array
-                              items:
-                                type: string
-                                minLength: 1
-                          required:
-                          - type
-                          additionalProperties: false
+                                enum:
+                                - domain_component
+                              allowed:
+                                type: array
+                                items:
+                                  type: string
+                                description: 'Domain component sequences that are permitted. Each entry is one sequence, its components comma-joined most specific first: "corp,example,com" matches DC=corp,DC=example,DC=com. A request matches a sequence only when its components line up position by position, so the same labels in another order do not match.'
+                              required:
+                                type: array
+                                items:
+                                  type: string
+                                description: 'Domain component sequences that are required. Each entry is one sequence, its components comma-joined most specific first: "corp,example,com" matches DC=corp,DC=example,DC=com. A request matches a sequence only when its components line up position by position, so the same labels in another order do not match.'
+                              denied:
+                                type: array
+                                items:
+                                  type: string
+                                description: Domain component sequences that are rejected, each comma-joined most specific first. A sequence is rejected wherever it appears in the chain, so "example,com" rejects DC=example,DC=com and DC=host,DC=example,DC=com alike.
+                            required:
+                            - type
+                            additionalProperties: false
                       sans:
                         type: array
                         items:
@@ -277,6 +402,7 @@ paths:
                               - ip_address
                               - email
                               - uri
+                              - upn
                             allowed:
                               type: array
                               items:
@@ -354,7 +480,9 @@ paths:
                               - code_signing
                               - email_protection
                               - ocsp_signing
+                              - smart_card_logon
                               - time_stamping
+                              - any_purpose
                           required:
                             type: array
                             items:
@@ -365,7 +493,9 @@ paths:
                               - code_signing
                               - email_protection
                               - ocsp_signing
+                              - smart_card_logon
                               - time_stamping
+                              - any_purpose
                           denied:
                             type: array
                             items:
@@ -376,7 +506,9 @@ paths:
                               - code_signing
                               - email_protection
                               - ocsp_signing
+                              - smart_card_logon
                               - time_stamping
+                              - any_purpose
                         additionalProperties: false
                       algorithms:
                         type: object
@@ -416,6 +548,47 @@ paths:
                             type: integer
                             minimum: -1
                         additionalProperties: false
+                      customExtensions:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            oid:
+                              type: string
+                              maxLength: 64
+                            label:
+                              type: string
+                              minLength: 1
+                              maxLength: 64
+                            critical:
+                              type: string
+                              enum:
+                              - critical
+                              - not_critical
+                            allowed:
+                              type: array
+                              items:
+                                type: string
+                                minLength: 1
+                                maxLength: 4096
+                              description: Value patterns this extension may take, with * as a wildcard. Use * on its own to accept any value. Omit to place no allow-list constraint on the value.
+                            required:
+                              type: array
+                              items:
+                                type: string
+                                minLength: 1
+                                maxLength: 4096
+                              description: Value patterns this extension must match, with * as a wildcard. Setting any required pattern also makes the extension mandatory on every request.
+                            denied:
+                              type: array
+                              items:
+                                type: string
+                                minLength: 1
+                                maxLength: 4096
+                              description: Value patterns this extension must not take, with * as a wildcard. A denied match is rejected even when an allowed pattern also matches.
+                          required:
+                          - oid
+                          additionalProperties: false
                       createdAt:
                         type: string
                         format: date-time
@@ -625,35 +798,57 @@ paths:
                         subject:
                           type: array
                           items:
-                            type: object
-                            properties:
-                              type:
-                                type: string
-                                enum:
-                                - common_name
-                                - organization
-                                - country
-                                - state
-                                - locality
-                                - organizational_unit
-                              allowed:
-                                type: array
-                                items:
+                            anyOf:
+                            - type: object
+                              properties:
+                                type:
                                   type: string
-                                  minLength: 1
+                                  enum:
+                                  - common_name
+                                  - organization
+                                  - country
+                                  - state
+                                  - locality
+                                  - organizational_unit
+                                allowed:
+                                  type: array
+                                  items:
+                                    type: string
+                                required:
+                                  type: array
+                                  items:
+                                    type: string
+                                denied:
+                                  type: array
+                                  items:
+                                    type: string
                               required:
-                                type: array
-                                items:
+                              - type
+                              additionalProperties: false
+                            - type: object
+                              properties:
+                                type:
                                   type: string
-                                  minLength: 1
-                              denied:
-                                type: array
-                                items:
-                                  type: string
-                                  minLength: 1
-                            required:
-                            - type
-                            additionalProperties: false
+                                  enum:
+                                  - domain_component
+                                allowed:
+                                  type: array
+                                  items:
+                                    type: string
+                                  description: 'Domain component sequences that are permitted. Each entry is one sequence, its components comma-joined most specific first: "corp,example,com" matches DC=corp,DC=example,DC=com. A request matches a sequence only when its components line up position by position, so the same labels in another order do not match.'
+                                required:
+                                  type: array
+                                  items:
+                                    type: string
+                                  description: 'Domain component sequences that are required. Each entry is one sequence, its components comma-joined most specific first: "corp,example,com" matches DC=corp,DC=example,DC=com. A request matches a sequence only when its components line up position by position, so the same labels in another order do not match.'
+                                denied:
+                                  type: array
+                                  items:
+                                    type: string
+                                  description: Domain component sequences that are rejected, each comma-joined most specific first. A sequence is rejected wherever it appears in the chain, so "example,com" rejects DC=example,DC=com and DC=host,DC=example,DC=com alike.
+                              required:
+                              - type
+                              additionalProperties: false
                         sans:
                           type: array
                           items:
@@ -666,6 +861,7 @@ paths:
                                 - ip_address
                                 - email
                                 - uri
+                                - upn
                               allowed:
                                 type: array
                                 items:
@@ -743,7 +939,9 @@ paths:
                                 - code_signing
                                 - email_protection
                                 - ocsp_signing
+                                - smart_card_logon
                                 - time_stamping
+                                - any_purpose
                             required:
                               type: array
                               items:
@@ -754,7 +952,9 @@ paths:
                                 - code_signing
                                 - email_protection
                                 - ocsp_signing
+                                - smart_card_logon
                                 - time_stamping
+                                - any_purpose
                             denied:
                               type: array
                               items:
@@ -765,7 +965,9 @@ paths:
                                 - code_signing
                                 - email_protection
                                 - ocsp_signing
+                                - smart_card_logon
                                 - time_stamping
+                                - any_purpose
                           additionalProperties: false
                         algorithms:
                           type: object
@@ -805,6 +1007,47 @@ paths:
                               type: integer
                               minimum: -1
                           additionalProperties: false
+                        customExtensions:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              oid:
+                                type: string
+                                maxLength: 64
+                              label:
+                                type: string
+                                minLength: 1
+                                maxLength: 64
+                              critical:
+                                type: string
+                                enum:
+                                - critical
+                                - not_critical
+                              allowed:
+                                type: array
+                                items:
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 4096
+                                description: Value patterns this extension may take, with * as a wildcard. Use * on its own to accept any value. Omit to place no allow-list constraint on the value.
+                              required:
+                                type: array
+                                items:
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 4096
+                                description: Value patterns this extension must match, with * as a wildcard. Setting any required pattern also makes the extension mandatory on every request.
+                              denied:
+                                type: array
+                                items:
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 4096
+                                description: Value patterns this extension must not take, with * as a wildcard. A denied match is rejected even when an allowed pattern also matches.
+                            required:
+                            - oid
+                            additionalProperties: false
                         createdAt:
                           type: string
                           format: date-time
@@ -1008,35 +1251,57 @@ paths:
                       subject:
                         type: array
                         items:
-                          type: object
-                          properties:
-                            type:
-                              type: string
-                              enum:
-                              - common_name
-                              - organization
-                              - country
-                              - state
-                              - locality
-                              - organizational_unit
-                            allowed:
-                              type: array
-                              items:
+                          anyOf:
+                          - type: object
+                            properties:
+                              type:
                                 type: string
-                                minLength: 1
+                                enum:
+                                - common_name
+                                - organization
+                                - country
+                                - state
+                                - locality
+                                - organizational_unit
+                              allowed:
+                                type: array
+                                items:
+                                  type: string
+                              required:
+                                type: array
+                                items:
+                                  type: string
+                              denied:
+                                type: array
+                                items:
+                                  type: string
                             required:
-                              type: array
-                              items:
+                            - type
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              type:
                                 type: string
-                                minLength: 1
-                            denied:
-                              type: array
-                              items:
-                                type: string
-                                minLength: 1
-                          required:
-                          - type
-                          additionalProperties: false
+                                enum:
+                                - domain_component
+                              allowed:
+                                type: array
+                                items:
+                                  type: string
+                                description: 'Domain component sequences that are permitted. Each entry is one sequence, its components comma-joined most specific first: "corp,example,com" matches DC=corp,DC=example,DC=com. A request matches a sequence only when its components line up position by position, so the same labels in another order do not match.'
+                              required:
+                                type: array
+                                items:
+                                  type: string
+                                description: 'Domain component sequences that are required. Each entry is one sequence, its components comma-joined most specific first: "corp,example,com" matches DC=corp,DC=example,DC=com. A request matches a sequence only when its components line up position by position, so the same labels in another order do not match.'
+                              denied:
+                                type: array
+                                items:
+                                  type: string
+                                description: Domain component sequences that are rejected, each comma-joined most specific first. A sequence is rejected wherever it appears in the chain, so "example,com" rejects DC=example,DC=com and DC=host,DC=example,DC=com alike.
+                            required:
+                            - type
+                            additionalProperties: false
                       sans:
                         type: array
                         items:
@@ -1049,6 +1314,7 @@ paths:
                               - ip_address
                               - email
                               - uri
+                              - upn
                             allowed:
                               type: array
                               items:
@@ -1126,7 +1392,9 @@ paths:
                               - code_signing
                               - email_protection
                               - ocsp_signing
+                              - smart_card_logon
                               - time_stamping
+                              - any_purpose
                           required:
                             type: array
                             items:
@@ -1137,7 +1405,9 @@ paths:
                               - code_signing
                               - email_protection
                               - ocsp_signing
+                              - smart_card_logon
                               - time_stamping
+                              - any_purpose
                           denied:
                             type: array
                             items:
@@ -1148,7 +1418,9 @@ paths:
                               - code_signing
                               - email_protection
                               - ocsp_signing
+                              - smart_card_logon
                               - time_stamping
+                              - any_purpose
                         additionalProperties: false
                       algorithms:
                         type: object
@@ -1188,6 +1460,47 @@ paths:
                             type: integer
                             minimum: -1
                         additionalProperties: false
+                      customExtensions:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            oid:
+                              type: string
+                              maxLength: 64
+                            label:
+                              type: string
+                              minLength: 1
+                              maxLength: 64
+                            critical:
+                              type: string
+                              enum:
+                              - critical
+                              - not_critical
+                            allowed:
+                              type: array
+                              items:
+                                type: string
+                                minLength: 1
+                                maxLength: 4096
+                              description: Value patterns this extension may take, with * as a wildcard. Use * on its own to accept any value. Omit to place no allow-list constraint on the value.
+                            required:
+                              type: array
+                              items:
+                                type: string
+                                minLength: 1
+                                maxLength: 4096
+                              description: Value patterns this extension must match, with * as a wildcard. Setting any required pattern also makes the extension mandatory on every request.
+                            denied:
+                              type: array
+                              items:
+                                type: string
+                                minLength: 1
+                                maxLength: 4096
+                              description: Value patterns this extension must not take, with * as a wildcard. A denied match is rejected even when an allowed pattern also matches.
+                          required:
+                          - oid
+                          additionalProperties: false
                       createdAt:
                         type: string
                         format: date-time
@@ -1360,38 +1673,82 @@ paths:
                   maxLength: 255
                 description:
                   type: string
-                  maxLength: 1000
+                  maxLength: 255
                 subject:
-                  type: array
+                  type:
+                  - array
+                  - 'null'
                   items:
-                    type: object
-                    properties:
-                      type:
-                        type: string
-                        enum:
-                        - common_name
-                        - organization
-                        - country
-                        - state
-                        - locality
-                        - organizational_unit
-                      allowed:
-                        type: array
-                        items:
+                    anyOf:
+                    - type: object
+                      properties:
+                        type:
                           type: string
+                          enum:
+                          - common_name
+                          - organization
+                          - country
+                          - state
+                          - locality
+                          - organizational_unit
+                        allowed:
+                          type: array
+                          items:
+                            type: string
+                            minLength: 1
+                            maxLength: 255
+                        required:
+                          type: array
+                          items:
+                            type: string
+                            minLength: 1
+                            maxLength: 255
+                        denied:
+                          type: array
+                          items:
+                            type: string
+                            minLength: 1
+                            maxLength: 255
                       required:
-                        type: array
-                        items:
+                      - type
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        type:
                           type: string
-                      denied:
-                        type: array
-                        items:
-                          type: string
-                    required:
-                    - type
-                    additionalProperties: false
+                          enum:
+                          - domain_component
+                        allowed:
+                          type: array
+                          items:
+                            type: string
+                            minLength: 1
+                            maxLength: 255
+                          maxItems: 25
+                          description: 'Domain component sequences that are permitted. Each entry is one sequence, its components comma-joined most specific first: "corp,example,com" matches DC=corp,DC=example,DC=com. A request matches a sequence only when its components line up position by position, so the same labels in another order do not match.'
+                        required:
+                          type: array
+                          items:
+                            type: string
+                            minLength: 1
+                            maxLength: 255
+                          maxItems: 25
+                          description: 'Domain component sequences that are required. Each entry is one sequence, its components comma-joined most specific first: "corp,example,com" matches DC=corp,DC=example,DC=com. A request matches a sequence only when its components line up position by position, so the same labels in another order do not match.'
+                        denied:
+                          type: array
+                          items:
+                            type: string
+                            minLength: 1
+                            maxLength: 255
+                          maxItems: 25
+                          description: Domain component sequences that are rejected, each comma-joined most specific first. A sequence is rejected wherever it appears in the chain, so "example,com" rejects DC=example,DC=com and DC=host,DC=example,DC=com alike.
+                      required:
+                      - type
+                      additionalProperties: false
                 sans:
-                  type: array
+                  type:
+                  - array
+                  - 'null'
                   items:
                     type: object
                     properties:
@@ -1402,6 +1759,7 @@ paths:
                         - ip_address
                         - email
                         - uri
+                        - upn
                       allowed:
                         type: array
                         items:
@@ -1418,7 +1776,9 @@ paths:
                     - type
                     additionalProperties: false
                 keyUsages:
-                  type: object
+                  type:
+                  - object
+                  - 'null'
                   properties:
                     allowed:
                       type: array
@@ -1464,7 +1824,9 @@ paths:
                         - decipher_only
                   additionalProperties: false
                 extendedKeyUsages:
-                  type: object
+                  type:
+                  - object
+                  - 'null'
                   properties:
                     allowed:
                       type: array
@@ -1476,7 +1838,9 @@ paths:
                         - code_signing
                         - email_protection
                         - ocsp_signing
+                        - smart_card_logon
                         - time_stamping
+                        - any_purpose
                     required:
                       type: array
                       items:
@@ -1487,7 +1851,9 @@ paths:
                         - code_signing
                         - email_protection
                         - ocsp_signing
+                        - smart_card_logon
                         - time_stamping
+                        - any_purpose
                     denied:
                       type: array
                       items:
@@ -1498,10 +1864,14 @@ paths:
                         - code_signing
                         - email_protection
                         - ocsp_signing
+                        - smart_card_logon
                         - time_stamping
+                        - any_purpose
                   additionalProperties: false
                 algorithms:
-                  type: object
+                  type:
+                  - object
+                  - 'null'
                   properties:
                     signature:
                       type: array
@@ -1515,7 +1885,9 @@ paths:
                       minItems: 1
                   additionalProperties: false
                 validity:
-                  type: object
+                  type:
+                  - object
+                  - 'null'
                   properties:
                     max:
                       type: string
@@ -1535,6 +1907,50 @@ paths:
                       type: integer
                       minimum: -1
                   additionalProperties: false
+                customExtensions:
+                  type:
+                  - array
+                  - 'null'
+                  items:
+                    type: object
+                    properties:
+                      oid:
+                        type: string
+                        maxLength: 64
+                      label:
+                        type: string
+                        minLength: 1
+                        maxLength: 64
+                      critical:
+                        type: string
+                        enum:
+                        - critical
+                        - not_critical
+                      allowed:
+                        type: array
+                        items:
+                          type: string
+                          minLength: 1
+                          maxLength: 4096
+                        description: Value patterns this extension may take, with * as a wildcard. Use * on its own to accept any value. Omit to place no allow-list constraint on the value.
+                      required:
+                        type: array
+                        items:
+                          type: string
+                          minLength: 1
+                          maxLength: 4096
+                        description: Value patterns this extension must match, with * as a wildcard. Setting any required pattern also makes the extension mandatory on every request.
+                      denied:
+                        type: array
+                        items:
+                          type: string
+                          minLength: 1
+                          maxLength: 4096
+                        description: Value patterns this extension must not take, with * as a wildcard. A denied match is rejected even when an allowed pattern also matches.
+                    required:
+                    - oid
+                    additionalProperties: false
+                  description: Rules for custom X.509 extensions, one per OID. Omit the field to leave custom extensions unconstrained; send an empty array to forbid them entirely.
               additionalProperties: false
       parameters:
       - schema:
@@ -1570,35 +1986,57 @@ paths:
                       subject:
                         type: array
                         items:
-                          type: object
-                          properties:
-                            type:
-                              type: string
-                              enum:
-                              - common_name
-                              - organization
-                              - country
-                              - state
-                              - locality
-                              - organizational_unit
-                            allowed:
-                              type: array
-                              items:
+                          anyOf:
+                          - type: object
+                            properties:
+                              type:
                                 type: string
-                                minLength: 1
+                                enum:
+                                - common_name
+                                - organization
+                                - country
+                                - state
+                                - locality
+                                - organizational_unit
+                              allowed:
+                                type: array
+                                items:
+                                  type: string
+                              required:
+                                type: array
+                                items:
+                                  type: string
+                              denied:
+                                type: array
+                                items:
+                                  type: string
                             required:
-                              type: array
-                              items:
+                            - type
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              type:
                                 type: string
-                                minLength: 1
-                            denied:
-                              type: array
-                              items:
-                                type: string
-                                minLength: 1
-                          required:
-                          - type
-                          additionalProperties: false
+                                enum:
+                                - domain_component
+                              allowed:
+                                type: array
+                                items:
+                                  type: string
+                                description: 'Domain component sequences that are permitted. Each entry is one sequence, its components comma-joined most specific first: "corp,example,com" matches DC=corp,DC=example,DC=com. A request matches a sequence only when its components line up position by position, so the same labels in another order do not match.'
+                              required:
+                                type: array
+                                items:
+                                  type: string
+                                description: 'Domain component sequences that are required. Each entry is one sequence, its components comma-joined most specific first: "corp,example,com" matches DC=corp,DC=example,DC=com. A request matches a sequence only when its components line up position by position, so the same labels in another order do not match.'
+                              denied:
+                                type: array
+                                items:
+                                  type: string
+                                description: Domain component sequences that are rejected, each comma-joined most specific first. A sequence is rejected wherever it appears in the chain, so "example,com" rejects DC=example,DC=com and DC=host,DC=example,DC=com alike.
+                            required:
+                            - type
+                            additionalProperties: false
                       sans:
                         type: array
                         items:
@@ -1611,6 +2049,7 @@ paths:
                               - ip_address
                               - email
                               - uri
+                              - upn
                             allowed:
                               type: array
                               items:
@@ -1688,7 +2127,9 @@ paths:
                               - code_signing
                               - email_protection
                               - ocsp_signing
+                              - smart_card_logon
                               - time_stamping
+                              - any_purpose
                           required:
                             type: array
                             items:
@@ -1699,7 +2140,9 @@ paths:
                               - code_signing
                               - email_protection
                               - ocsp_signing
+                              - smart_card_logon
                               - time_stamping
+                              - any_purpose
                           denied:
                             type: array
                             items:
@@ -1710,7 +2153,9 @@ paths:
                               - code_signing
                               - email_protection
                               - ocsp_signing
+                              - smart_card_logon
                               - time_stamping
+                              - any_purpose
                         additionalProperties: false
                       algorithms:
                         type: object
@@ -1750,6 +2195,47 @@ paths:
                             type: integer
                             minimum: -1
                         additionalProperties: false
+                      customExtensions:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            oid:
+                              type: string
+                              maxLength: 64
+                            label:
+                              type: string
+                              minLength: 1
+                              maxLength: 64
+                            critical:
+                              type: string
+                              enum:
+                              - critical
+                              - not_critical
+                            allowed:
+                              type: array
+                              items:
+                                type: string
+                                minLength: 1
+                                maxLength: 4096
+                              description: Value patterns this extension may take, with * as a wildcard. Use * on its own to accept any value. Omit to place no allow-list constraint on the value.
+                            required:
+                              type: array
+                              items:
+                                type: string
+                                minLength: 1
+                                maxLength: 4096
+                              description: Value patterns this extension must match, with * as a wildcard. Setting any required pattern also makes the extension mandatory on every request.
+                            denied:
+                              type: array
+                              items:
+                                type: string
+                                minLength: 1
+                                maxLength: 4096
+                              description: Value patterns this extension must not take, with * as a wildcard. A denied match is rejected even when an allowed pattern also matches.
+                          required:
+                          - oid
+                          additionalProperties: false
                       createdAt:
                         type: string
                         format: date-time
@@ -1943,35 +2429,57 @@ paths:
                       subject:
                         type: array
                         items:
-                          type: object
-                          properties:
-                            type:
-                              type: string
-                              enum:
-                              - common_name
-                              - organization
-                              - country
-                              - state
-                              - locality
-                              - organizational_unit
-                            allowed:
-                              type: array
-                              items:
+                          anyOf:
+                          - type: object
+                            properties:
+                              type:
                                 type: string
-                                minLength: 1
+                                enum:
+                                - common_name
+                                - organization
+                                - country
+                                - state
+                                - locality
+                                - organizational_unit
+                              allowed:
+                                type: array
+                                items:
+                                  type: string
+                              required:
+                                type: array
+                                items:
+                                  type: string
+                              denied:
+                                type: array
+                                items:
+                                  type: string
                             required:
-                              type: array
-                              items:
+                            - type
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              type:
                                 type: string
-                                minLength: 1
-                            denied:
-                              type: array
-                              items:
-                                type: string
-                                minLength: 1
-                          required:
-                          - type
-                          additionalProperties: false
+                                enum:
+                                - domain_component
+                              allowed:
+                                type: array
+                                items:
+                                  type: string
+                                description: 'Domain component sequences that are permitted. Each entry is one sequence, its components comma-joined most specific first: "corp,example,com" matches DC=corp,DC=example,DC=com. A request matches a sequence only when its components line up position by position, so the same labels in another order do not match.'
+                              required:
+                                type: array
+                                items:
+                                  type: string
+                                description: 'Domain component sequences that are required. Each entry is one sequence, its components comma-joined most specific first: "corp,example,com" matches DC=corp,DC=example,DC=com. A request matches a sequence only when its components line up position by position, so the same labels in another order do not match.'
+                              denied:
+                                type: array
+                                items:
+                                  type: string
+                                description: Domain component sequences that are rejected, each comma-joined most specific first. A sequence is rejected wherever it appears in the chain, so "example,com" rejects DC=example,DC=com and DC=host,DC=example,DC=com alike.
+                            required:
+                            - type
+                            additionalProperties: false
                       sans:
                         type: array
                         items:
@@ -1984,6 +2492,7 @@ paths:
                               - ip_address
                               - email
                               - uri
+                              - upn
                             allowed:
                               type: array
                               items:
@@ -2061,7 +2570,9 @@ paths:
                               - code_signing
                               - email_protection
                               - ocsp_signing
+                              - smart_card_logon
                               - time_stamping
+                              - any_purpose
                           required:
                             type: array
                             items:
@@ -2072,7 +2583,9 @@ paths:
                               - code_signing
                               - email_protection
                               - ocsp_signing
+                              - smart_card_logon
                               - time_stamping
+                              - any_purpose
                           denied:
                             type: array
                             items:
@@ -2083,7 +2596,9 @@ paths:
                               - code_signing
                               - email_protection
                               - ocsp_signing
+                              - smart_card_logon
                               - time_stamping
+                              - any_purpose
                         additionalProperties: false
                       algorithms:
                         type: object
@@ -2123,6 +2638,47 @@ paths:
                             type: integer
                             minimum: -1
                         additionalProperties: false
+                      customExtensions:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            oid:
+                              type: string
+                              maxLength: 64
+                            label:
+                              type: string
+                              minLength: 1
+                              maxLength: 64
+                            critical:
+                              type: string
+                              enum:
+                              - critical
+                              - not_critical
+                            allowed:
+                              type: array
+                              items:
+                                type: string
+                                minLength: 1
+                                maxLength: 4096
+                              description: Value patterns this extension may take, with * as a wildcard. Use * on its own to accept any value. Omit to place no allow-list constraint on the value.
+                            required:
+                              type: array
+                              items:
+                                type: string
+                                minLength: 1
+                                maxLength: 4096
+                              description: Value patterns this extension must match, with * as a wildcard. Setting any required pattern also makes the extension mandatory on every request.
+                            denied:
+                              type: array
+                              items:
+                                type: string
+                                minLength: 1
+                                maxLength: 4096
+                              description: Value patterns this extension must not take, with * as a wildcard. A denied match is rejected even when an allowed pattern also matches.
+                          required:
+                          - oid
+                          additionalProperties: false
                       createdAt:
                         type: string
                         format: date-time

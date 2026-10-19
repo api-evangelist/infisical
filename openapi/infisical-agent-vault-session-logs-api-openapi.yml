@@ -1,0 +1,478 @@
+openapi: 3.2.0
+info:
+  title: Infisical Agent Vault Session Logs API
+  description: List of all available APIs that can be consumed
+  version: 0.0.1
+servers:
+- url: https://us.infisical.com
+  description: Production server (US)
+- url: https://eu.infisical.com
+  description: Production server (EU)
+- url: http://localhost:8080
+  description: Local server
+tags:
+- name: Agent Vault Session Logs
+paths:
+  /api/v1/agent-vault/sessions/{sessionId}/logs:
+    get:
+      operationId: listAgentVaultSessionLogs
+      tags:
+      - Agent Vault Session Logs
+      description: Lists a session's logs newest first, as encrypted chunks of records. To decrypt them, follow Reading session logs through the API. To follow new logs as they arrive, use the endpoint that tails session logs. If Infisical can't read the bucket, the request fails with the error `AgentVaultSessionLogStorageUnavailable`.
+      parameters:
+      - schema:
+          type: string
+          maxLength: 8192
+        in: query
+        name: cursor
+        required: false
+        description: The `nextCursor` from the previous response. Leave it out to start from the newest logs.
+      - schema:
+          type: string
+          format: date-time
+        in: query
+        name: from
+        required: false
+        description: Return only chunks with records at or after this time. A chunk can also hold earlier records, so filter records by `ts`.
+      - schema:
+          type: string
+          format: date-time
+        in: query
+        name: to
+        required: false
+        description: Return only chunks with records at or before this time. A chunk can also hold later records, so filter records by `ts`.
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: sessionId
+        required: true
+        description: The ID of the session.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sessionLogs:
+                    type: object
+                    properties:
+                      enabled:
+                        type: boolean
+                        description: Whether session logs are on.
+                      isRecordable:
+                        type: boolean
+                        description: False if this session's requests can't be recorded.
+                      sessionKey:
+                        type:
+                        - string
+                        - 'null'
+                        description: The key that decrypts every chunk in this response, as base64. Null if the response has no chunks.
+                    required:
+                    - enabled
+                    - isRecordable
+                    - sessionKey
+                    additionalProperties: false
+                    description: Whether session logs are on, whether this session can be recorded, and the key that decrypts the chunks.
+                  chunks:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        chunkId:
+                          type: string
+                          description: The ID of the chunk.
+                        proxyId:
+                          type: string
+                          description: The ID of the proxy that uploaded the chunk.
+                        ciphertextBytes:
+                          type: number
+                          description: The size of the encrypted chunk in bytes.
+                        presignedGetUrl:
+                          type: string
+                          description: The URL to download the chunk from.
+                      required:
+                      - chunkId
+                      - proxyId
+                      - ciphertextBytes
+                      - presignedGetUrl
+                      additionalProperties: false
+                  nextCursor:
+                    type:
+                    - string
+                    - 'null'
+                    description: Pass this as `cursor` to get older logs. Null when there's nothing older. A page can have no chunks and still have a `nextCursor`.
+                required:
+                - sessionLogs
+                - chunks
+                - nextCursor
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: List agent vault session logs
+      x-summary-source: derived
+  /api/v1/agent-vault/sessions/{sessionId}/logs/tail:
+    get:
+      operationId: tailAgentVaultSessionLogs
+      tags:
+      - Agent Vault Session Logs
+      description: Lists chunks added since your last call. Call it every few seconds with the previous `nextCursor`. Any call can return a chunk you already have, so skip any whose `chunkId` and `proxyId` you've read. The chunks decrypt the same way as the ones from the endpoint that lists session logs. If the AWS connection for session logs can't be used, the request fails with the error `AgentVaultSessionLogStorageUnavailable`.
+      parameters:
+      - schema:
+          type: string
+          maxLength: 8192
+        in: query
+        name: cursor
+        required: false
+        description: The `nextCursor` from your last call. Leave it out on the first call to start from the most recent chunks.
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: sessionId
+        required: true
+        description: The ID of the session.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sessionLogs:
+                    type: object
+                    properties:
+                      enabled:
+                        type: boolean
+                        description: Whether session logs are on.
+                      isRecordable:
+                        type: boolean
+                        description: False if this session's requests can't be recorded.
+                      sessionKey:
+                        type:
+                        - string
+                        - 'null'
+                        description: The key that decrypts every chunk in this response, as base64. Null if the response has no chunks.
+                    required:
+                    - enabled
+                    - isRecordable
+                    - sessionKey
+                    additionalProperties: false
+                    description: Whether session logs are on, whether this session can be recorded, and the key that decrypts the chunks.
+                  chunks:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        chunkId:
+                          type: string
+                          description: The ID of the chunk.
+                        proxyId:
+                          type: string
+                          description: The ID of the proxy that uploaded the chunk.
+                        ciphertextBytes:
+                          type: number
+                          description: The size of the encrypted chunk in bytes.
+                        presignedGetUrl:
+                          type: string
+                          description: The URL to download the chunk from.
+                      required:
+                      - chunkId
+                      - proxyId
+                      - ciphertextBytes
+                      - presignedGetUrl
+                      additionalProperties: false
+                  nextCursor:
+                    type: string
+                    description: Pass this as `cursor` on your next call, a few seconds later.
+                required:
+                - sessionLogs
+                - chunks
+                - nextCursor
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: Tail agent vault session logs
+      x-summary-source: derived
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: An access token in Infisical

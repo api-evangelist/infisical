@@ -220,11 +220,23 @@ paths:
                   - 'null'
                   minLength: 1
                   description: The comma-separated list of trusted common names that are allowed to authenticate with Infisical.
+                allowedSubjectAltNames:
+                  type:
+                  - array
+                  - 'null'
+                  items:
+                    type: string
+                    minLength: 1
+                  description: The comma-separated list of trusted subject alternative names that are allowed to authenticate with Infisical. Prefix entries by type (URI:, DNS:, IP:, EMAIL:). Bare entries are treated as DNS names.
                 caCertificate:
                   type: string
                   minLength: 1
                   maxLength: 10240
                   description: The PEM-encoded CA certificate to validate client certificates.
+                verifyClientCertificateChain:
+                  type: boolean
+                  default: false
+                  description: When false (default), the CA certificate must be the direct issuer of the client's leaf certificate. When true, the CA certificate is treated as a trust anchor and the client-presented chain (leaf plus intermediates) is validated up to it, supporting issuers that rotate beneath a stable root such as SPIRE X.509-SVIDs.
                 accessTokenTrustedIps:
                   type: array
                   items:
@@ -307,12 +319,22 @@ paths:
                         - string
                         - 'null'
                       encryptedCaCertificate: {}
+                      allowedSubjectAltNames:
+                        type:
+                        - array
+                        - 'null'
+                        items:
+                          type: string
+                      verifyClientCertificateChain:
+                        type: boolean
+                        default: false
                     required:
                     - id
                     - createdAt
                     - updatedAt
                     - identityId
                     - encryptedCaCertificate
+                    - allowedSubjectAltNames
                     additionalProperties: false
                 required:
                 - identityTlsCertAuth
@@ -474,12 +496,23 @@ paths:
                   minLength: 1
                   maxLength: 10240
                   description: The PEM-encoded CA certificate to validate client certificates.
+                verifyClientCertificateChain:
+                  type: boolean
+                  description: When false (default), the CA certificate must be the direct issuer of the client's leaf certificate. When true, the CA certificate is treated as a trust anchor and the client-presented chain (leaf plus intermediates) is validated up to it, supporting issuers that rotate beneath a stable root such as SPIRE X.509-SVIDs.
                 allowedCommonNames:
                   type:
                   - string
                   - 'null'
                   minLength: 1
                   description: The comma-separated list of trusted common names that are allowed to authenticate with Infisical.
+                allowedSubjectAltNames:
+                  type:
+                  - array
+                  - 'null'
+                  items:
+                    type: string
+                    minLength: 1
+                  description: The comma-separated list of trusted subject alternative names that are allowed to authenticate with Infisical. Prefix entries by type (URI:, DNS:, IP:, EMAIL:). Bare entries are treated as DNS names.
                 accessTokenTrustedIps:
                   type: array
                   items:
@@ -554,12 +587,22 @@ paths:
                         - string
                         - 'null'
                       encryptedCaCertificate: {}
+                      allowedSubjectAltNames:
+                        type:
+                        - array
+                        - 'null'
+                        items:
+                          type: string
+                      verifyClientCertificateChain:
+                        type: boolean
+                        default: false
                     required:
                     - id
                     - createdAt
                     - updatedAt
                     - identityId
                     - encryptedCaCertificate
+                    - allowedSubjectAltNames
                     additionalProperties: false
                 required:
                 - identityTlsCertAuth
@@ -756,6 +799,15 @@ paths:
                         - string
                         - 'null'
                       encryptedCaCertificate: {}
+                      allowedSubjectAltNames:
+                        type:
+                        - array
+                        - 'null'
+                        items:
+                          type: string
+                      verifyClientCertificateChain:
+                        type: boolean
+                        default: false
                       caCertificate:
                         type: string
                     required:
@@ -764,6 +816,7 @@ paths:
                     - updatedAt
                     - identityId
                     - encryptedCaCertificate
+                    - allowedSubjectAltNames
                     - caCertificate
                     additionalProperties: false
                 required:
@@ -961,12 +1014,22 @@ paths:
                         - string
                         - 'null'
                       encryptedCaCertificate: {}
+                      allowedSubjectAltNames:
+                        type:
+                        - array
+                        - 'null'
+                        items:
+                          type: string
+                      verifyClientCertificateChain:
+                        type: boolean
+                        default: false
                     required:
                     - id
                     - createdAt
                     - updatedAt
                     - identityId
                     - encryptedCaCertificate
+                    - allowedSubjectAltNames
                     additionalProperties: false
                 required:
                 - identityTlsCertAuth

@@ -204,7 +204,7 @@ paths:
                   description: Name of the discovery configuration
                 description:
                   type: string
-                  maxLength: 500
+                  maxLength: 255
                   description: Description of the discovery configuration
                 discoveryType:
                   type: string
@@ -465,7 +465,7 @@ paths:
       operationId: listPkiDiscoveries
       tags:
       - PKI Discovery
-      description: List PKI discovery configurations for a project
+      description: List PKI discovery configurations
       parameters:
       - schema:
           type: number
@@ -972,7 +972,7 @@ paths:
                   type:
                   - string
                   - 'null'
-                  maxLength: 500
+                  maxLength: 255
                   description: Description of the discovery configuration
                 targetConfig:
                   type: object

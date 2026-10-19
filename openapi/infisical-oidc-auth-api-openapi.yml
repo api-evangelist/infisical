@@ -217,6 +217,10 @@ paths:
             schema:
               type: object
               properties:
+                templateId:
+                  type: string
+                  format: uuid
+                  description: The ID of the OIDC auth template to source identity provider settings from. When provided, the OIDC discovery URL, issuer, audiences, and CA certificate are taken from the template and cannot be set individually.
                 oidcDiscoveryUrl:
                   type: string
                   format: uri
@@ -224,7 +228,6 @@ paths:
                   description: The URL used to retrieve the OpenID Connect configuration from the identity provider.
                 caCert:
                   type: string
-                  default: ''
                   description: The PEM-encoded CA cert for establishing secure communication with the Identity Provider endpoints.
                 boundIssuer:
                   type: string
@@ -232,7 +235,6 @@ paths:
                   description: The unique identifier of the identity provider issuing the JWT.
                 boundAudiences:
                   type: string
-                  default: ''
                   description: The list of intended recipients.
                 boundClaims:
                   type: object
@@ -281,8 +283,6 @@ paths:
                   default: 0
                   description: The maximum number of times that an access token can be used.
               required:
-              - oidcDiscoveryUrl
-              - boundIssuer
               - boundClaims
               additionalProperties: false
       parameters:
@@ -333,6 +333,11 @@ paths:
                         type:
                         - string
                         - 'null'
+                      templateId:
+                        type:
+                        - string
+                        - 'null'
+                        format: uuid
                       createdAt:
                         type: string
                         format: date-time
@@ -569,6 +574,12 @@ paths:
                   minimum: 0
                   default: 0
                   description: The new maximum number of times that an access token can be used.
+                templateId:
+                  type:
+                  - string
+                  - 'null'
+                  format: uuid
+                  description: The ID of the OIDC auth template to link. While linked, identity provider settings are managed by the template and cannot be set individually. Pass null to unlink the template; the settings copied from it are kept.
               additionalProperties: false
       parameters:
       - schema:
@@ -618,6 +629,11 @@ paths:
                         type:
                         - string
                         - 'null'
+                      templateId:
+                        type:
+                        - string
+                        - 'null'
+                        format: uuid
                       createdAt:
                         type: string
                         format: date-time
@@ -832,6 +848,11 @@ paths:
                         type:
                         - string
                         - 'null'
+                      templateId:
+                        type:
+                        - string
+                        - 'null'
+                        format: uuid
                       createdAt:
                         type: string
                         format: date-time
@@ -1046,6 +1067,11 @@ paths:
                         type:
                         - string
                         - 'null'
+                      templateId:
+                        type:
+                        - string
+                        - 'null'
+                        format: uuid
                       createdAt:
                         type: string
                         format: date-time

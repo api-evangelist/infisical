@@ -1,0 +1,2320 @@
+openapi: 3.2.0
+info:
+  title: Infisical Agent Vault App Connections API
+  description: List of all available APIs that can be consumed
+  version: 0.0.1
+servers:
+- url: https://us.infisical.com
+  description: Production server (US)
+- url: https://eu.infisical.com
+  description: Production server (EU)
+- url: http://localhost:8080
+  description: Local server
+tags:
+- name: Agent Vault App Connections
+paths:
+  /api/v1/agent-vault/app-connections/aws:
+    get:
+      operationId: listAgentVaultAwsAppConnections
+      tags:
+      - Agent Vault App Connections
+      description: Lists the AWS connections scoped to Agent Vault
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  appConnections:
+                    type: array
+                    items:
+                      anyOf:
+                      - type: object
+                        properties:
+                          id:
+                            type: string
+                            format: uuid
+                          name:
+                            type: string
+                          description:
+                            type:
+                            - string
+                            - 'null'
+                          version:
+                            type: number
+                            default: 1
+                          orgId:
+                            type: string
+                            format: uuid
+                          createdAt:
+                            type: string
+                            format: date-time
+                          updatedAt:
+                            type: string
+                            format: date-time
+                          isPlatformManagedCredentials:
+                            type:
+                            - boolean
+                            - 'null'
+                            default: false
+                          gatewayId:
+                            type:
+                            - string
+                            - 'null'
+                            format: uuid
+                          isAutoRotationEnabled:
+                            type: boolean
+                            default: false
+                          gatewayPoolId:
+                            type:
+                            - string
+                            - 'null'
+                            format: uuid
+                          rotation:
+                            type: object
+                            properties:
+                              lastRotationMessage:
+                                type:
+                                - string
+                                - 'null'
+                                description: The message from the last rotation attempt.
+                              rotationInterval:
+                                type: number
+                                description: The interval in days between credential rotations.
+                              nextRotationAt:
+                                type:
+                                - string
+                                - 'null'
+                                format: date-time
+                                description: The next scheduled rotation time.
+                              rotationStatus:
+                                type: string
+                                enum:
+                                - success
+                                - failed
+                                description: The status of the last rotation attempt.
+                              rotateAtUtc:
+                                type: object
+                                properties:
+                                  hours:
+                                    type: number
+                                    description: The hour (0-23) at which to rotate.
+                                  minutes:
+                                    type: number
+                                    description: The minute (0-59) at which to rotate.
+                                required:
+                                - hours
+                                - minutes
+                                additionalProperties: false
+                                description: The UTC time of day at which rotation should occur.
+                            required:
+                            - rotationInterval
+                            - rotationStatus
+                            - rotateAtUtc
+                            additionalProperties: false
+                            description: The credential rotation configuration, if configured.
+                          credentialsHash:
+                            type: string
+                          project:
+                            type:
+                            - object
+                            - 'null'
+                            properties:
+                              name:
+                                type: string
+                              id:
+                                type: string
+                              type:
+                                type: string
+                              slug:
+                                type: string
+                            required:
+                            - name
+                            - id
+                            - type
+                            - slug
+                            additionalProperties: false
+                          app:
+                            type: string
+                            enum:
+                            - aws
+                          method:
+                            type: string
+                            enum:
+                            - assume-role
+                          credentials:
+                            type: object
+                            properties:
+                              stsEndpoint:
+                                type: string
+                                format: uri
+                                pattern: ^https\:\/\/
+                                description: An optional custom endpoint URL for the AWS STS API to use when connecting with AWS.
+                            additionalProperties: false
+                        required:
+                        - id
+                        - name
+                        - orgId
+                        - createdAt
+                        - updatedAt
+                        - app
+                        - method
+                        - credentials
+                        additionalProperties: false
+                        title: AWS (Assume Role)
+                      - type: object
+                        properties:
+                          id:
+                            type: string
+                            format: uuid
+                          name:
+                            type: string
+                          description:
+                            type:
+                            - string
+                            - 'null'
+                          version:
+                            type: number
+                            default: 1
+                          orgId:
+                            type: string
+                            format: uuid
+                          createdAt:
+                            type: string
+                            format: date-time
+                          updatedAt:
+                            type: string
+                            format: date-time
+                          isPlatformManagedCredentials:
+                            type:
+                            - boolean
+                            - 'null'
+                            default: false
+                          gatewayId:
+                            type:
+                            - string
+                            - 'null'
+                            format: uuid
+                          isAutoRotationEnabled:
+                            type: boolean
+                            default: false
+                          gatewayPoolId:
+                            type:
+                            - string
+                            - 'null'
+                            format: uuid
+                          rotation:
+                            type: object
+                            properties:
+                              lastRotationMessage:
+                                type:
+                                - string
+                                - 'null'
+                                description: The message from the last rotation attempt.
+                              rotationInterval:
+                                type: number
+                                description: The interval in days between credential rotations.
+                              nextRotationAt:
+                                type:
+                                - string
+                                - 'null'
+                                format: date-time
+                                description: The next scheduled rotation time.
+                              rotationStatus:
+                                type: string
+                                enum:
+                                - success
+                                - failed
+                                description: The status of the last rotation attempt.
+                              rotateAtUtc:
+                                type: object
+                                properties:
+                                  hours:
+                                    type: number
+                                    description: The hour (0-23) at which to rotate.
+                                  minutes:
+                                    type: number
+                                    description: The minute (0-59) at which to rotate.
+                                required:
+                                - hours
+                                - minutes
+                                additionalProperties: false
+                                description: The UTC time of day at which rotation should occur.
+                            required:
+                            - rotationInterval
+                            - rotationStatus
+                            - rotateAtUtc
+                            additionalProperties: false
+                            description: The credential rotation configuration, if configured.
+                          credentialsHash:
+                            type: string
+                          project:
+                            type:
+                            - object
+                            - 'null'
+                            properties:
+                              name:
+                                type: string
+                              id:
+                                type: string
+                              type:
+                                type: string
+                              slug:
+                                type: string
+                            required:
+                            - name
+                            - id
+                            - type
+                            - slug
+                            additionalProperties: false
+                          app:
+                            type: string
+                            enum:
+                            - aws
+                          method:
+                            type: string
+                            enum:
+                            - access-key
+                          credentials:
+                            type: object
+                            properties:
+                              accessKeyId:
+                                type: string
+                                minLength: 1
+                            required:
+                            - accessKeyId
+                            additionalProperties: false
+                        required:
+                        - id
+                        - name
+                        - orgId
+                        - createdAt
+                        - updatedAt
+                        - app
+                        - method
+                        - credentials
+                        additionalProperties: false
+                        title: AWS (Access Key)
+                required:
+                - appConnections
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: List agent vault aws app connections
+      x-summary-source: derived
+    post:
+      operationId: createAgentVaultAwsAppConnection
+      tags:
+      - Agent Vault App Connections
+      description: Creates an AWS connection scoped to Agent Vault. Only Agent Vault can use the connection.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+              - anyOf:
+                - type: object
+                  properties:
+                    method:
+                      type: string
+                      enum:
+                      - assume-role
+                      description: The method used to authenticate with AWS.
+                    credentials:
+                      type: object
+                      properties:
+                        roleArn:
+                          type: string
+                          minLength: 1
+                        stsEndpoint:
+                          type: string
+                          format: uri
+                          pattern: ^https\:\/\/
+                          description: An optional custom endpoint URL for the AWS STS API to use when connecting with AWS.
+                      required:
+                      - roleArn
+                      additionalProperties: false
+                      description: The credentials used to connect with AWS.
+                  required:
+                  - method
+                  - credentials
+                  additionalProperties: false
+                - type: object
+                  properties:
+                    method:
+                      type: string
+                      enum:
+                      - access-key
+                      description: The method used to authenticate with AWS.
+                    credentials:
+                      type: object
+                      properties:
+                        accessKeyId:
+                          type: string
+                          minLength: 1
+                        secretAccessKey:
+                          type: string
+                          minLength: 1
+                      required:
+                      - accessKeyId
+                      - secretAccessKey
+                      additionalProperties: false
+                      description: The credentials used to connect with AWS.
+                  required:
+                  - method
+                  - credentials
+                  additionalProperties: false
+              - type: object
+                properties:
+                  name:
+                    type: string
+                    minLength: 1
+                    maxLength: 64
+                    description: The name of the AWS Connection to create. Must be slug-friendly.
+                  description:
+                    type:
+                    - string
+                    - 'null'
+                    maxLength: 256
+                    description: An optional description for the AWS Connection.
+                required:
+                - name
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  appConnection:
+                    anyOf:
+                    - type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        name:
+                          type: string
+                        description:
+                          type:
+                          - string
+                          - 'null'
+                        version:
+                          type: number
+                          default: 1
+                        orgId:
+                          type: string
+                          format: uuid
+                        createdAt:
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          type: string
+                          format: date-time
+                        isPlatformManagedCredentials:
+                          type:
+                          - boolean
+                          - 'null'
+                          default: false
+                        gatewayId:
+                          type:
+                          - string
+                          - 'null'
+                          format: uuid
+                        isAutoRotationEnabled:
+                          type: boolean
+                          default: false
+                        gatewayPoolId:
+                          type:
+                          - string
+                          - 'null'
+                          format: uuid
+                        rotation:
+                          type: object
+                          properties:
+                            lastRotationMessage:
+                              type:
+                              - string
+                              - 'null'
+                              description: The message from the last rotation attempt.
+                            rotationInterval:
+                              type: number
+                              description: The interval in days between credential rotations.
+                            nextRotationAt:
+                              type:
+                              - string
+                              - 'null'
+                              format: date-time
+                              description: The next scheduled rotation time.
+                            rotationStatus:
+                              type: string
+                              enum:
+                              - success
+                              - failed
+                              description: The status of the last rotation attempt.
+                            rotateAtUtc:
+                              type: object
+                              properties:
+                                hours:
+                                  type: number
+                                  description: The hour (0-23) at which to rotate.
+                                minutes:
+                                  type: number
+                                  description: The minute (0-59) at which to rotate.
+                              required:
+                              - hours
+                              - minutes
+                              additionalProperties: false
+                              description: The UTC time of day at which rotation should occur.
+                          required:
+                          - rotationInterval
+                          - rotationStatus
+                          - rotateAtUtc
+                          additionalProperties: false
+                          description: The credential rotation configuration, if configured.
+                        credentialsHash:
+                          type: string
+                        project:
+                          type:
+                          - object
+                          - 'null'
+                          properties:
+                            name:
+                              type: string
+                            id:
+                              type: string
+                            type:
+                              type: string
+                            slug:
+                              type: string
+                          required:
+                          - name
+                          - id
+                          - type
+                          - slug
+                          additionalProperties: false
+                        app:
+                          type: string
+                          enum:
+                          - aws
+                        method:
+                          type: string
+                          enum:
+                          - assume-role
+                        credentials:
+                          type: object
+                          properties:
+                            stsEndpoint:
+                              type: string
+                              format: uri
+                              pattern: ^https\:\/\/
+                              description: An optional custom endpoint URL for the AWS STS API to use when connecting with AWS.
+                          additionalProperties: false
+                      required:
+                      - id
+                      - name
+                      - orgId
+                      - createdAt
+                      - updatedAt
+                      - app
+                      - method
+                      - credentials
+                      additionalProperties: false
+                      title: AWS (Assume Role)
+                    - type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        name:
+                          type: string
+                        description:
+                          type:
+                          - string
+                          - 'null'
+                        version:
+                          type: number
+                          default: 1
+                        orgId:
+                          type: string
+                          format: uuid
+                        createdAt:
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          type: string
+                          format: date-time
+                        isPlatformManagedCredentials:
+                          type:
+                          - boolean
+                          - 'null'
+                          default: false
+                        gatewayId:
+                          type:
+                          - string
+                          - 'null'
+                          format: uuid
+                        isAutoRotationEnabled:
+                          type: boolean
+                          default: false
+                        gatewayPoolId:
+                          type:
+                          - string
+                          - 'null'
+                          format: uuid
+                        rotation:
+                          type: object
+                          properties:
+                            lastRotationMessage:
+                              type:
+                              - string
+                              - 'null'
+                              description: The message from the last rotation attempt.
+                            rotationInterval:
+                              type: number
+                              description: The interval in days between credential rotations.
+                            nextRotationAt:
+                              type:
+                              - string
+                              - 'null'
+                              format: date-time
+                              description: The next scheduled rotation time.
+                            rotationStatus:
+                              type: string
+                              enum:
+                              - success
+                              - failed
+                              description: The status of the last rotation attempt.
+                            rotateAtUtc:
+                              type: object
+                              properties:
+                                hours:
+                                  type: number
+                                  description: The hour (0-23) at which to rotate.
+                                minutes:
+                                  type: number
+                                  description: The minute (0-59) at which to rotate.
+                              required:
+                              - hours
+                              - minutes
+                              additionalProperties: false
+                              description: The UTC time of day at which rotation should occur.
+                          required:
+                          - rotationInterval
+                          - rotationStatus
+                          - rotateAtUtc
+                          additionalProperties: false
+                          description: The credential rotation configuration, if configured.
+                        credentialsHash:
+                          type: string
+                        project:
+                          type:
+                          - object
+                          - 'null'
+                          properties:
+                            name:
+                              type: string
+                            id:
+                              type: string
+                            type:
+                              type: string
+                            slug:
+                              type: string
+                          required:
+                          - name
+                          - id
+                          - type
+                          - slug
+                          additionalProperties: false
+                        app:
+                          type: string
+                          enum:
+                          - aws
+                        method:
+                          type: string
+                          enum:
+                          - access-key
+                        credentials:
+                          type: object
+                          properties:
+                            accessKeyId:
+                              type: string
+                              minLength: 1
+                          required:
+                          - accessKeyId
+                          additionalProperties: false
+                      required:
+                      - id
+                      - name
+                      - orgId
+                      - createdAt
+                      - updatedAt
+                      - app
+                      - method
+                      - credentials
+                      additionalProperties: false
+                      title: AWS (Access Key)
+                required:
+                - appConnection
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: Create agent vault aws app connection
+      x-summary-source: derived
+  /api/v1/agent-vault/app-connections/aws/{connectionId}:
+    get:
+      operationId: getAgentVaultAwsAppConnection
+      tags:
+      - Agent Vault App Connections
+      description: Gets an AWS connection scoped to Agent Vault
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: connectionId
+        required: true
+        description: The ID of the AWS Connection to retrieve.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  appConnection:
+                    anyOf:
+                    - type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        name:
+                          type: string
+                        description:
+                          type:
+                          - string
+                          - 'null'
+                        version:
+                          type: number
+                          default: 1
+                        orgId:
+                          type: string
+                          format: uuid
+                        createdAt:
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          type: string
+                          format: date-time
+                        isPlatformManagedCredentials:
+                          type:
+                          - boolean
+                          - 'null'
+                          default: false
+                        gatewayId:
+                          type:
+                          - string
+                          - 'null'
+                          format: uuid
+                        isAutoRotationEnabled:
+                          type: boolean
+                          default: false
+                        gatewayPoolId:
+                          type:
+                          - string
+                          - 'null'
+                          format: uuid
+                        rotation:
+                          type: object
+                          properties:
+                            lastRotationMessage:
+                              type:
+                              - string
+                              - 'null'
+                              description: The message from the last rotation attempt.
+                            rotationInterval:
+                              type: number
+                              description: The interval in days between credential rotations.
+                            nextRotationAt:
+                              type:
+                              - string
+                              - 'null'
+                              format: date-time
+                              description: The next scheduled rotation time.
+                            rotationStatus:
+                              type: string
+                              enum:
+                              - success
+                              - failed
+                              description: The status of the last rotation attempt.
+                            rotateAtUtc:
+                              type: object
+                              properties:
+                                hours:
+                                  type: number
+                                  description: The hour (0-23) at which to rotate.
+                                minutes:
+                                  type: number
+                                  description: The minute (0-59) at which to rotate.
+                              required:
+                              - hours
+                              - minutes
+                              additionalProperties: false
+                              description: The UTC time of day at which rotation should occur.
+                          required:
+                          - rotationInterval
+                          - rotationStatus
+                          - rotateAtUtc
+                          additionalProperties: false
+                          description: The credential rotation configuration, if configured.
+                        credentialsHash:
+                          type: string
+                        project:
+                          type:
+                          - object
+                          - 'null'
+                          properties:
+                            name:
+                              type: string
+                            id:
+                              type: string
+                            type:
+                              type: string
+                            slug:
+                              type: string
+                          required:
+                          - name
+                          - id
+                          - type
+                          - slug
+                          additionalProperties: false
+                        app:
+                          type: string
+                          enum:
+                          - aws
+                        method:
+                          type: string
+                          enum:
+                          - assume-role
+                        credentials:
+                          type: object
+                          properties:
+                            stsEndpoint:
+                              type: string
+                              format: uri
+                              pattern: ^https\:\/\/
+                              description: An optional custom endpoint URL for the AWS STS API to use when connecting with AWS.
+                          additionalProperties: false
+                      required:
+                      - id
+                      - name
+                      - orgId
+                      - createdAt
+                      - updatedAt
+                      - app
+                      - method
+                      - credentials
+                      additionalProperties: false
+                      title: AWS (Assume Role)
+                    - type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        name:
+                          type: string
+                        description:
+                          type:
+                          - string
+                          - 'null'
+                        version:
+                          type: number
+                          default: 1
+                        orgId:
+                          type: string
+                          format: uuid
+                        createdAt:
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          type: string
+                          format: date-time
+                        isPlatformManagedCredentials:
+                          type:
+                          - boolean
+                          - 'null'
+                          default: false
+                        gatewayId:
+                          type:
+                          - string
+                          - 'null'
+                          format: uuid
+                        isAutoRotationEnabled:
+                          type: boolean
+                          default: false
+                        gatewayPoolId:
+                          type:
+                          - string
+                          - 'null'
+                          format: uuid
+                        rotation:
+                          type: object
+                          properties:
+                            lastRotationMessage:
+                              type:
+                              - string
+                              - 'null'
+                              description: The message from the last rotation attempt.
+                            rotationInterval:
+                              type: number
+                              description: The interval in days between credential rotations.
+                            nextRotationAt:
+                              type:
+                              - string
+                              - 'null'
+                              format: date-time
+                              description: The next scheduled rotation time.
+                            rotationStatus:
+                              type: string
+                              enum:
+                              - success
+                              - failed
+                              description: The status of the last rotation attempt.
+                            rotateAtUtc:
+                              type: object
+                              properties:
+                                hours:
+                                  type: number
+                                  description: The hour (0-23) at which to rotate.
+                                minutes:
+                                  type: number
+                                  description: The minute (0-59) at which to rotate.
+                              required:
+                              - hours
+                              - minutes
+                              additionalProperties: false
+                              description: The UTC time of day at which rotation should occur.
+                          required:
+                          - rotationInterval
+                          - rotationStatus
+                          - rotateAtUtc
+                          additionalProperties: false
+                          description: The credential rotation configuration, if configured.
+                        credentialsHash:
+                          type: string
+                        project:
+                          type:
+                          - object
+                          - 'null'
+                          properties:
+                            name:
+                              type: string
+                            id:
+                              type: string
+                            type:
+                              type: string
+                            slug:
+                              type: string
+                          required:
+                          - name
+                          - id
+                          - type
+                          - slug
+                          additionalProperties: false
+                        app:
+                          type: string
+                          enum:
+                          - aws
+                        method:
+                          type: string
+                          enum:
+                          - access-key
+                        credentials:
+                          type: object
+                          properties:
+                            accessKeyId:
+                              type: string
+                              minLength: 1
+                          required:
+                          - accessKeyId
+                          additionalProperties: false
+                      required:
+                      - id
+                      - name
+                      - orgId
+                      - createdAt
+                      - updatedAt
+                      - app
+                      - method
+                      - credentials
+                      additionalProperties: false
+                      title: AWS (Access Key)
+                required:
+                - appConnection
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: Get agent vault aws app connection
+      x-summary-source: derived
+    patch:
+      operationId: updateAgentVaultAwsAppConnection
+      tags:
+      - Agent Vault App Connections
+      description: Updates an AWS connection scoped to Agent Vault
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+              - type: object
+                properties:
+                  credentials:
+                    anyOf:
+                    - type: object
+                      properties:
+                        accessKeyId:
+                          type: string
+                          minLength: 1
+                        secretAccessKey:
+                          type: string
+                          minLength: 1
+                      required:
+                      - accessKeyId
+                      - secretAccessKey
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        roleArn:
+                          type: string
+                          minLength: 1
+                        stsEndpoint:
+                          type: string
+                          format: uri
+                          pattern: ^https\:\/\/
+                          description: An optional custom endpoint URL for the AWS STS API to use when connecting with AWS.
+                      required:
+                      - roleArn
+                      additionalProperties: false
+                    description: The credentials used to connect with AWS.
+              - type: object
+                properties:
+                  name:
+                    type: string
+                    minLength: 1
+                    maxLength: 64
+                    description: The updated name of the AWS Connection. Must be slug-friendly.
+                  description:
+                    type:
+                    - string
+                    - 'null'
+                    maxLength: 256
+                    description: The updated description of the AWS Connection.
+                  isPlatformManagedCredentials:
+                    type: boolean
+                    enum:
+                    - false
+                    description: Not supported for AWS Connections.
+                  gatewayId:
+                    anyOf:
+                    - not: {}
+                    - enum:
+                      - 'null'
+                    description: Not supported for AWS Connections.
+                  gatewayPoolId:
+                    anyOf:
+                    - not: {}
+                    - enum:
+                      - 'null'
+                    description: Not supported for AWS Connections.
+                  isAutoRotationEnabled:
+                    type: boolean
+                    enum:
+                    - false
+                    description: Not supported for AWS Connections.
+                  rotation:
+                    anyOf:
+                    - not: {}
+                    - enum:
+                      - 'null'
+                    description: Not supported for AWS Connections.
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: connectionId
+        required: true
+        description: The ID of the AWS Connection to be updated.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  appConnection:
+                    anyOf:
+                    - type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        name:
+                          type: string
+                        description:
+                          type:
+                          - string
+                          - 'null'
+                        version:
+                          type: number
+                          default: 1
+                        orgId:
+                          type: string
+                          format: uuid
+                        createdAt:
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          type: string
+                          format: date-time
+                        isPlatformManagedCredentials:
+                          type:
+                          - boolean
+                          - 'null'
+                          default: false
+                        gatewayId:
+                          type:
+                          - string
+                          - 'null'
+                          format: uuid
+                        isAutoRotationEnabled:
+                          type: boolean
+                          default: false
+                        gatewayPoolId:
+                          type:
+                          - string
+                          - 'null'
+                          format: uuid
+                        rotation:
+                          type: object
+                          properties:
+                            lastRotationMessage:
+                              type:
+                              - string
+                              - 'null'
+                              description: The message from the last rotation attempt.
+                            rotationInterval:
+                              type: number
+                              description: The interval in days between credential rotations.
+                            nextRotationAt:
+                              type:
+                              - string
+                              - 'null'
+                              format: date-time
+                              description: The next scheduled rotation time.
+                            rotationStatus:
+                              type: string
+                              enum:
+                              - success
+                              - failed
+                              description: The status of the last rotation attempt.
+                            rotateAtUtc:
+                              type: object
+                              properties:
+                                hours:
+                                  type: number
+                                  description: The hour (0-23) at which to rotate.
+                                minutes:
+                                  type: number
+                                  description: The minute (0-59) at which to rotate.
+                              required:
+                              - hours
+                              - minutes
+                              additionalProperties: false
+                              description: The UTC time of day at which rotation should occur.
+                          required:
+                          - rotationInterval
+                          - rotationStatus
+                          - rotateAtUtc
+                          additionalProperties: false
+                          description: The credential rotation configuration, if configured.
+                        credentialsHash:
+                          type: string
+                        project:
+                          type:
+                          - object
+                          - 'null'
+                          properties:
+                            name:
+                              type: string
+                            id:
+                              type: string
+                            type:
+                              type: string
+                            slug:
+                              type: string
+                          required:
+                          - name
+                          - id
+                          - type
+                          - slug
+                          additionalProperties: false
+                        app:
+                          type: string
+                          enum:
+                          - aws
+                        method:
+                          type: string
+                          enum:
+                          - assume-role
+                        credentials:
+                          type: object
+                          properties:
+                            stsEndpoint:
+                              type: string
+                              format: uri
+                              pattern: ^https\:\/\/
+                              description: An optional custom endpoint URL for the AWS STS API to use when connecting with AWS.
+                          additionalProperties: false
+                      required:
+                      - id
+                      - name
+                      - orgId
+                      - createdAt
+                      - updatedAt
+                      - app
+                      - method
+                      - credentials
+                      additionalProperties: false
+                      title: AWS (Assume Role)
+                    - type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        name:
+                          type: string
+                        description:
+                          type:
+                          - string
+                          - 'null'
+                        version:
+                          type: number
+                          default: 1
+                        orgId:
+                          type: string
+                          format: uuid
+                        createdAt:
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          type: string
+                          format: date-time
+                        isPlatformManagedCredentials:
+                          type:
+                          - boolean
+                          - 'null'
+                          default: false
+                        gatewayId:
+                          type:
+                          - string
+                          - 'null'
+                          format: uuid
+                        isAutoRotationEnabled:
+                          type: boolean
+                          default: false
+                        gatewayPoolId:
+                          type:
+                          - string
+                          - 'null'
+                          format: uuid
+                        rotation:
+                          type: object
+                          properties:
+                            lastRotationMessage:
+                              type:
+                              - string
+                              - 'null'
+                              description: The message from the last rotation attempt.
+                            rotationInterval:
+                              type: number
+                              description: The interval in days between credential rotations.
+                            nextRotationAt:
+                              type:
+                              - string
+                              - 'null'
+                              format: date-time
+                              description: The next scheduled rotation time.
+                            rotationStatus:
+                              type: string
+                              enum:
+                              - success
+                              - failed
+                              description: The status of the last rotation attempt.
+                            rotateAtUtc:
+                              type: object
+                              properties:
+                                hours:
+                                  type: number
+                                  description: The hour (0-23) at which to rotate.
+                                minutes:
+                                  type: number
+                                  description: The minute (0-59) at which to rotate.
+                              required:
+                              - hours
+                              - minutes
+                              additionalProperties: false
+                              description: The UTC time of day at which rotation should occur.
+                          required:
+                          - rotationInterval
+                          - rotationStatus
+                          - rotateAtUtc
+                          additionalProperties: false
+                          description: The credential rotation configuration, if configured.
+                        credentialsHash:
+                          type: string
+                        project:
+                          type:
+                          - object
+                          - 'null'
+                          properties:
+                            name:
+                              type: string
+                            id:
+                              type: string
+                            type:
+                              type: string
+                            slug:
+                              type: string
+                          required:
+                          - name
+                          - id
+                          - type
+                          - slug
+                          additionalProperties: false
+                        app:
+                          type: string
+                          enum:
+                          - aws
+                        method:
+                          type: string
+                          enum:
+                          - access-key
+                        credentials:
+                          type: object
+                          properties:
+                            accessKeyId:
+                              type: string
+                              minLength: 1
+                          required:
+                          - accessKeyId
+                          additionalProperties: false
+                      required:
+                      - id
+                      - name
+                      - orgId
+                      - createdAt
+                      - updatedAt
+                      - app
+                      - method
+                      - credentials
+                      additionalProperties: false
+                      title: AWS (Access Key)
+                required:
+                - appConnection
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: Update agent vault aws app connection
+      x-summary-source: derived
+    delete:
+      operationId: deleteAgentVaultAwsAppConnection
+      tags:
+      - Agent Vault App Connections
+      description: Deletes an AWS connection scoped to Agent Vault. If session logs use the connection, switch them to another connection or to none first.
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: connectionId
+        required: true
+        description: The ID of the AWS Connection to be deleted.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  appConnection:
+                    anyOf:
+                    - type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        name:
+                          type: string
+                        description:
+                          type:
+                          - string
+                          - 'null'
+                        version:
+                          type: number
+                          default: 1
+                        orgId:
+                          type: string
+                          format: uuid
+                        createdAt:
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          type: string
+                          format: date-time
+                        isPlatformManagedCredentials:
+                          type:
+                          - boolean
+                          - 'null'
+                          default: false
+                        gatewayId:
+                          type:
+                          - string
+                          - 'null'
+                          format: uuid
+                        isAutoRotationEnabled:
+                          type: boolean
+                          default: false
+                        gatewayPoolId:
+                          type:
+                          - string
+                          - 'null'
+                          format: uuid
+                        rotation:
+                          type: object
+                          properties:
+                            lastRotationMessage:
+                              type:
+                              - string
+                              - 'null'
+                              description: The message from the last rotation attempt.
+                            rotationInterval:
+                              type: number
+                              description: The interval in days between credential rotations.
+                            nextRotationAt:
+                              type:
+                              - string
+                              - 'null'
+                              format: date-time
+                              description: The next scheduled rotation time.
+                            rotationStatus:
+                              type: string
+                              enum:
+                              - success
+                              - failed
+                              description: The status of the last rotation attempt.
+                            rotateAtUtc:
+                              type: object
+                              properties:
+                                hours:
+                                  type: number
+                                  description: The hour (0-23) at which to rotate.
+                                minutes:
+                                  type: number
+                                  description: The minute (0-59) at which to rotate.
+                              required:
+                              - hours
+                              - minutes
+                              additionalProperties: false
+                              description: The UTC time of day at which rotation should occur.
+                          required:
+                          - rotationInterval
+                          - rotationStatus
+                          - rotateAtUtc
+                          additionalProperties: false
+                          description: The credential rotation configuration, if configured.
+                        credentialsHash:
+                          type: string
+                        project:
+                          type:
+                          - object
+                          - 'null'
+                          properties:
+                            name:
+                              type: string
+                            id:
+                              type: string
+                            type:
+                              type: string
+                            slug:
+                              type: string
+                          required:
+                          - name
+                          - id
+                          - type
+                          - slug
+                          additionalProperties: false
+                        app:
+                          type: string
+                          enum:
+                          - aws
+                        method:
+                          type: string
+                          enum:
+                          - assume-role
+                        credentials:
+                          type: object
+                          properties:
+                            stsEndpoint:
+                              type: string
+                              format: uri
+                              pattern: ^https\:\/\/
+                              description: An optional custom endpoint URL for the AWS STS API to use when connecting with AWS.
+                          additionalProperties: false
+                      required:
+                      - id
+                      - name
+                      - orgId
+                      - createdAt
+                      - updatedAt
+                      - app
+                      - method
+                      - credentials
+                      additionalProperties: false
+                      title: AWS (Assume Role)
+                    - type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        name:
+                          type: string
+                        description:
+                          type:
+                          - string
+                          - 'null'
+                        version:
+                          type: number
+                          default: 1
+                        orgId:
+                          type: string
+                          format: uuid
+                        createdAt:
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          type: string
+                          format: date-time
+                        isPlatformManagedCredentials:
+                          type:
+                          - boolean
+                          - 'null'
+                          default: false
+                        gatewayId:
+                          type:
+                          - string
+                          - 'null'
+                          format: uuid
+                        isAutoRotationEnabled:
+                          type: boolean
+                          default: false
+                        gatewayPoolId:
+                          type:
+                          - string
+                          - 'null'
+                          format: uuid
+                        rotation:
+                          type: object
+                          properties:
+                            lastRotationMessage:
+                              type:
+                              - string
+                              - 'null'
+                              description: The message from the last rotation attempt.
+                            rotationInterval:
+                              type: number
+                              description: The interval in days between credential rotations.
+                            nextRotationAt:
+                              type:
+                              - string
+                              - 'null'
+                              format: date-time
+                              description: The next scheduled rotation time.
+                            rotationStatus:
+                              type: string
+                              enum:
+                              - success
+                              - failed
+                              description: The status of the last rotation attempt.
+                            rotateAtUtc:
+                              type: object
+                              properties:
+                                hours:
+                                  type: number
+                                  description: The hour (0-23) at which to rotate.
+                                minutes:
+                                  type: number
+                                  description: The minute (0-59) at which to rotate.
+                              required:
+                              - hours
+                              - minutes
+                              additionalProperties: false
+                              description: The UTC time of day at which rotation should occur.
+                          required:
+                          - rotationInterval
+                          - rotationStatus
+                          - rotateAtUtc
+                          additionalProperties: false
+                          description: The credential rotation configuration, if configured.
+                        credentialsHash:
+                          type: string
+                        project:
+                          type:
+                          - object
+                          - 'null'
+                          properties:
+                            name:
+                              type: string
+                            id:
+                              type: string
+                            type:
+                              type: string
+                            slug:
+                              type: string
+                          required:
+                          - name
+                          - id
+                          - type
+                          - slug
+                          additionalProperties: false
+                        app:
+                          type: string
+                          enum:
+                          - aws
+                        method:
+                          type: string
+                          enum:
+                          - access-key
+                        credentials:
+                          type: object
+                          properties:
+                            accessKeyId:
+                              type: string
+                              minLength: 1
+                          required:
+                          - accessKeyId
+                          additionalProperties: false
+                      required:
+                      - id
+                      - name
+                      - orgId
+                      - createdAt
+                      - updatedAt
+                      - app
+                      - method
+                      - credentials
+                      additionalProperties: false
+                      title: AWS (Access Key)
+                required:
+                - appConnection
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: Delete agent vault aws app connection
+      x-summary-source: derived
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: An access token in Infisical

@@ -43,9 +43,10 @@ paths:
                   enum:
                   - encrypt-decrypt
                   - sign-verify
+                  - generate-verify-mac
                   default: encrypt-decrypt
                   description: The type of key to be created, either encrypt-decrypt or sign-verify, based on your intended use for the key.
-                encryptionAlgorithm:
+                algorithm:
                   type: string
                   enum:
                   - aes-256-gcm
@@ -54,11 +55,24 @@ paths:
                   - ECC_NIST_P256
                   - ECC_NIST_P384
                   - ECC_NIST_P521
+                  - ED25519
                   - ML_DSA_44
                   - ML_DSA_65
                   - ML_DSA_87
-                  default: aes-256-gcm
-                  description: The algorithm to use when performing cryptographic operations with the key.
+                  - HMAC_SHA_1
+                  - HMAC_SHA_224
+                  - HMAC_SHA_256
+                  - HMAC_SHA_384
+                  - HMAC_SHA_512
+                  description: The cryptographic algorithm of the key (e.g. aes-256-gcm, RSA_4096, HMAC_SHA_256).
+                isExportable:
+                  type: boolean
+                  default: true
+                  description: Whether the raw key material can be exported after creation. When set to false, the key can never be exported regardless of permissions. This cannot be changed after creation.
+                hasDeleteProtection:
+                  type: boolean
+                  default: false
+                  description: Prevents deletion of the key when enabled.
               required:
               - projectId
               - name
@@ -105,10 +119,16 @@ paths:
                         type: string
                         default: encrypt-decrypt
                       kmipMetadata: {}
+                      isExportable:
+                        type: boolean
+                        default: true
+                      hasDeleteProtection:
+                        type: boolean
+                        default: false
                       version:
                         type: number
                         default: 1
-                      encryptionAlgorithm:
+                      algorithm:
                         type: string
                     required:
                     - id
@@ -116,7 +136,7 @@ paths:
                     - name
                     - createdAt
                     - updatedAt
-                    - encryptionAlgorithm
+                    - algorithm
                     additionalProperties: false
                 required:
                 - key
@@ -359,10 +379,16 @@ paths:
                           type: string
                           default: encrypt-decrypt
                         kmipMetadata: {}
+                        isExportable:
+                          type: boolean
+                          default: true
+                        hasDeleteProtection:
+                          type: boolean
+                          default: false
                         version:
                           type: number
                           default: 1
-                        encryptionAlgorithm:
+                        algorithm:
                           type: string
                       required:
                       - id
@@ -370,7 +396,7 @@ paths:
                       - name
                       - createdAt
                       - updatedAt
-                      - encryptionAlgorithm
+                      - algorithm
                       additionalProperties: false
                   totalCount:
                     type: number
@@ -543,6 +569,9 @@ paths:
                   type: string
                   maxLength: 500
                   description: The updated description of this key.
+                hasDeleteProtection:
+                  type: boolean
+                  description: Enable or disable delete protection for this key.
               additionalProperties: false
       parameters:
       - schema:
@@ -594,10 +623,16 @@ paths:
                         type: string
                         default: encrypt-decrypt
                       kmipMetadata: {}
+                      isExportable:
+                        type: boolean
+                        default: true
+                      hasDeleteProtection:
+                        type: boolean
+                        default: false
                       version:
                         type: number
                         default: 1
-                      encryptionAlgorithm:
+                      algorithm:
                         type: string
                     required:
                     - id
@@ -605,7 +640,7 @@ paths:
                     - name
                     - createdAt
                     - updatedAt
-                    - encryptionAlgorithm
+                    - algorithm
                     additionalProperties: false
                 required:
                 - key
@@ -805,10 +840,16 @@ paths:
                         type: string
                         default: encrypt-decrypt
                       kmipMetadata: {}
+                      isExportable:
+                        type: boolean
+                        default: true
+                      hasDeleteProtection:
+                        type: boolean
+                        default: false
                       version:
                         type: number
                         default: 1
-                      encryptionAlgorithm:
+                      algorithm:
                         type: string
                     required:
                     - id
@@ -816,7 +857,7 @@ paths:
                     - name
                     - createdAt
                     - updatedAt
-                    - encryptionAlgorithm
+                    - algorithm
                     additionalProperties: false
                 required:
                 - key
@@ -1016,10 +1057,16 @@ paths:
                         type: string
                         default: encrypt-decrypt
                       kmipMetadata: {}
+                      isExportable:
+                        type: boolean
+                        default: true
+                      hasDeleteProtection:
+                        type: boolean
+                        default: false
                       version:
                         type: number
                         default: 1
-                      encryptionAlgorithm:
+                      algorithm:
                         type: string
                     required:
                     - id
@@ -1027,7 +1074,7 @@ paths:
                     - name
                     - createdAt
                     - updatedAt
-                    - encryptionAlgorithm
+                    - algorithm
                     additionalProperties: false
                 required:
                 - key
@@ -1172,6 +1219,224 @@ paths:
                 additionalProperties: false
       summary: Get kms key by id
       x-summary-source: derived
+  /api/v1/kms/keys/{keyId}/rotate:
+    post:
+      operationId: rotateKmsKey
+      tags:
+      - KMS Keys
+      description: Rotate KMS key. Generates new key material for the key and increments its version. Previous key material is retained so existing ciphertexts remain decryptable; new encrypt operations use the new material. Only supported for encrypt-decrypt keys.
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: keyId
+        required: true
+        description: The ID of the key to be rotated.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  key:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      description:
+                        type:
+                        - string
+                        - 'null'
+                      isDisabled:
+                        type:
+                        - boolean
+                        - 'null'
+                        default: false
+                      orgId:
+                        type: string
+                        format: uuid
+                      name:
+                        type: string
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                      projectId:
+                        type:
+                        - string
+                        - 'null'
+                      keyUsage:
+                        type: string
+                        default: encrypt-decrypt
+                      kmipMetadata: {}
+                      isExportable:
+                        type: boolean
+                        default: true
+                      hasDeleteProtection:
+                        type: boolean
+                        default: false
+                      version:
+                        type: number
+                        default: 1
+                      algorithm:
+                        type: string
+                    required:
+                    - id
+                    - orgId
+                    - name
+                    - createdAt
+                    - updatedAt
+                    - algorithm
+                    additionalProperties: false
+                required:
+                - key
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: Rotate kms key
+      x-summary-source: derived
   /api/v1/kms/keys/key-name/{keyName}:
     get:
       operationId: getKmsKeyByName
@@ -1236,10 +1501,16 @@ paths:
                         type: string
                         default: encrypt-decrypt
                       kmipMetadata: {}
+                      isExportable:
+                        type: boolean
+                        default: true
+                      hasDeleteProtection:
+                        type: boolean
+                        default: false
                       version:
                         type: number
                         default: 1
-                      encryptionAlgorithm:
+                      algorithm:
                         type: string
                     required:
                     - id
@@ -1247,7 +1518,7 @@ paths:
                     - name
                     - createdAt
                     - updatedAt
-                    - encryptionAlgorithm
+                    - algorithm
                     additionalProperties: false
                 required:
                 - key
@@ -1589,7 +1860,8 @@ paths:
                         enum:
                         - encrypt-decrypt
                         - sign-verify
-                      encryptionAlgorithm:
+                        - generate-verify-mac
+                      algorithm:
                         type: string
                         enum:
                         - aes-256-gcm
@@ -1598,16 +1870,29 @@ paths:
                         - ECC_NIST_P256
                         - ECC_NIST_P384
                         - ECC_NIST_P521
+                        - ED25519
                         - ML_DSA_44
                         - ML_DSA_65
                         - ML_DSA_87
+                        - HMAC_SHA_1
+                        - HMAC_SHA_224
+                        - HMAC_SHA_256
+                        - HMAC_SHA_384
+                        - HMAC_SHA_512
                       keyMaterial:
                         type: string
                         minLength: 1
+                      isExportable:
+                        type: boolean
+                        default: true
+                        description: Whether the raw key material can be exported after creation. When set to false, the key can never be exported regardless of permissions. This cannot be changed after creation.
+                      hasDeleteProtection:
+                        type: boolean
+                        default: false
+                        description: Prevents deletion of the key when enabled.
                     required:
                     - name
                     - keyUsage
-                    - encryptionAlgorithm
                     - keyMaterial
                     additionalProperties: false
                   minItems: 1

@@ -166,6 +166,7 @@ paths:
                             - create
                             - edit
                             - delete
+                            - grant-privileges
                           - type: array
                             items:
                               type: string
@@ -174,6 +175,7 @@ paths:
                               - create
                               - edit
                               - delete
+                              - grant-privileges
                             minItems: 1
                           description: Describe what action an entity can take.
                       required:
@@ -495,6 +497,7 @@ paths:
                             - delete
                             - grant-privileges
                             - revoke-auth
+                            - edit-auth
                             - create-token
                             - get-token
                             - delete-token
@@ -508,6 +511,7 @@ paths:
                               - delete
                               - grant-privileges
                               - revoke-auth
+                              - edit-auth
                               - create-token
                               - get-token
                               - delete-token
@@ -558,11 +562,13 @@ paths:
                           - type: string
                             enum:
                             - read
+                            - edit
                           - type: array
                             items:
                               type: string
                               enum:
                               - read
+                              - edit
                             minItems: 1
                           description: Describe what action an entity can take.
                       required:
@@ -986,6 +992,35 @@ paths:
                               - create
                               - edit
                               - delete
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - secrets-management-insights
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - generate-report
+                            - delete-report
+                            - search-all-secret-values
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - generate-report
+                              - delete-report
+                              - search-all-secret-values
                             minItems: 1
                           description: Describe what action an entity can take.
                       required:
@@ -1777,6 +1812,7 @@ paths:
                             - create
                             - edit
                             - delete
+                            - grant-privileges
                           - type: array
                             items:
                               type: string
@@ -1785,6 +1821,7 @@ paths:
                               - create
                               - edit
                               - delete
+                              - grant-privileges
                             minItems: 1
                           description: Describe what action an entity can take.
                       required:
@@ -2106,6 +2143,7 @@ paths:
                             - delete
                             - grant-privileges
                             - revoke-auth
+                            - edit-auth
                             - create-token
                             - get-token
                             - delete-token
@@ -2119,6 +2157,7 @@ paths:
                               - delete
                               - grant-privileges
                               - revoke-auth
+                              - edit-auth
                               - create-token
                               - get-token
                               - delete-token
@@ -2169,11 +2208,13 @@ paths:
                           - type: string
                             enum:
                             - read
+                            - edit
                           - type: array
                             items:
                               type: string
                               enum:
                               - read
+                              - edit
                             minItems: 1
                           description: Describe what action an entity can take.
                       required:
@@ -2597,6 +2638,35 @@ paths:
                               - create
                               - edit
                               - delete
+                            minItems: 1
+                          description: Describe what action an entity can take.
+                      required:
+                      - subject
+                      - action
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        subject:
+                          type: string
+                          enum:
+                          - secrets-management-insights
+                          description: The entity this permission pertains to.
+                        action:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - read
+                            - generate-report
+                            - delete-report
+                            - search-all-secret-values
+                          - type: array
+                            items:
+                              type: string
+                              enum:
+                              - read
+                              - generate-report
+                              - delete-report
+                              - search-all-secret-values
                             minItems: 1
                           description: Describe what action an entity can take.
                       required:

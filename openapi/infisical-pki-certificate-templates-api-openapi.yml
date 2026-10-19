@@ -229,6 +229,7 @@ paths:
     get:
       tags:
       - PKI Certificate Templates
+      description: 'Deprecated. Use certificate applications instead: https://infisical.com/docs/documentation/platform/pki/applications/overview'
       parameters:
       - schema:
           type: string
@@ -236,6 +237,7 @@ paths:
         name: certificateTemplateId
         required: true
         description: The ID of the certificate template to get.
+      deprecated: true
       responses:
         '200':
           description: Default Response
@@ -434,6 +436,7 @@ paths:
     patch:
       tags:
       - PKI Certificate Templates
+      description: 'Deprecated. Use certificate applications instead: https://infisical.com/docs/documentation/platform/pki/applications/overview'
       requestBody:
         required: true
         content:
@@ -491,6 +494,8 @@ paths:
                     - emailProtection
                     - timeStamping
                     - ocspSigning
+                    - smartCardLogon
+                    - anyExtendedKeyUsage
                   description: The updated extended key usage constraint or default value for when template is used during certificate issuance.
               additionalProperties: false
       parameters:
@@ -500,6 +505,7 @@ paths:
         name: certificateTemplateId
         required: true
         description: The ID of the certificate template to update.
+      deprecated: true
       responses:
         '200':
           description: Default Response
@@ -698,6 +704,7 @@ paths:
     delete:
       tags:
       - PKI Certificate Templates
+      description: 'Deprecated. Use certificate applications instead: https://infisical.com/docs/documentation/platform/pki/applications/overview'
       parameters:
       - schema:
           type: string
@@ -705,6 +712,7 @@ paths:
         name: certificateTemplateId
         required: true
         description: The ID of the certificate template to delete.
+      deprecated: true
       responses:
         '200':
           description: Default Response
@@ -904,6 +912,7 @@ paths:
     post:
       tags:
       - PKI Certificate Templates
+      description: 'Deprecated. Use certificate applications instead: https://infisical.com/docs/documentation/platform/pki/applications/overview'
       requestBody:
         required: true
         content:
@@ -964,6 +973,8 @@ paths:
                     - emailProtection
                     - timeStamping
                     - ocspSigning
+                    - smartCardLogon
+                    - anyExtendedKeyUsage
                   default: []
                   description: The extended key usage constraint or default value for when template is used during certificate issuance.
               required:
@@ -973,6 +984,7 @@ paths:
               - subjectAlternativeName
               - ttl
               additionalProperties: false
+      deprecated: true
       responses:
         '200':
           description: Default Response
@@ -1172,7 +1184,7 @@ paths:
     post:
       tags:
       - PKI Certificate Templates
-      description: Create Certificate Template EST configuration
+      description: 'Create Certificate Template EST configuration. Deprecated, use certificate applications instead: https://infisical.com/docs/documentation/platform/pki/applications/overview'
       requestBody:
         required: true
         content:
@@ -1200,6 +1212,7 @@ paths:
         in: path
         name: certificateTemplateId
         required: true
+      deprecated: true
       responses:
         '200':
           description: Default Response
@@ -1369,7 +1382,7 @@ paths:
     patch:
       tags:
       - PKI Certificate Templates
-      description: Update Certificate Template EST configuration
+      description: 'Update Certificate Template EST configuration. Deprecated, use certificate applications instead: https://infisical.com/docs/documentation/platform/pki/applications/overview'
       requestBody:
         required: true
         content:
@@ -1393,6 +1406,7 @@ paths:
         in: path
         name: certificateTemplateId
         required: true
+      deprecated: true
       responses:
         '200':
           description: Default Response
@@ -1562,13 +1576,14 @@ paths:
     get:
       tags:
       - PKI Certificate Templates
-      description: Get Certificate Template EST configuration
+      description: 'Get Certificate Template EST configuration. Deprecated, use certificate applications instead: https://infisical.com/docs/documentation/platform/pki/applications/overview'
       parameters:
       - schema:
           type: string
         in: path
         name: certificateTemplateId
         required: true
+      deprecated: true
       responses:
         '200':
           description: Default Response
@@ -1743,6 +1758,7 @@ paths:
       operationId: createPkiTemplate
       tags:
       - PKI Certificate Templates
+      description: 'Deprecated. Use certificate applications instead: https://infisical.com/docs/documentation/platform/pki/applications/overview'
       requestBody:
         required: true
         content:
@@ -1798,6 +1814,8 @@ paths:
                     - emailProtection
                     - timeStamping
                     - ocspSigning
+                    - smartCardLogon
+                    - anyExtendedKeyUsage
                   default: []
               required:
               - name
@@ -1807,6 +1825,7 @@ paths:
               - subjectAlternativeName
               - ttl
               additionalProperties: false
+      deprecated: true
       responses:
         '200':
           description: Default Response
@@ -2012,6 +2031,7 @@ paths:
       operationId: listPkiTemplates
       tags:
       - PKI Certificate Templates
+      description: 'Deprecated. Use certificate applications instead: https://infisical.com/docs/documentation/platform/pki/applications/overview'
       parameters:
       - schema:
           type: string
@@ -2030,6 +2050,7 @@ paths:
         in: query
         name: offset
         required: false
+      deprecated: true
       responses:
         '200':
           description: Default Response
@@ -2253,6 +2274,7 @@ paths:
       operationId: updatePkiTemplate
       tags:
       - PKI Certificate Templates
+      description: 'Deprecated. Use certificate applications instead: https://infisical.com/docs/documentation/platform/pki/applications/overview'
       requestBody:
         required: true
         content:
@@ -2308,6 +2330,8 @@ paths:
                     - emailProtection
                     - timeStamping
                     - ocspSigning
+                    - smartCardLogon
+                    - anyExtendedKeyUsage
                   default: []
               required:
               - caName
@@ -2321,6 +2345,7 @@ paths:
         in: path
         name: templateName
         required: true
+      deprecated: true
       responses:
         '200':
           description: Default Response
@@ -2526,6 +2551,7 @@ paths:
       operationId: deletePkiTemplate
       tags:
       - PKI Certificate Templates
+      description: 'Deprecated. Use certificate applications instead: https://infisical.com/docs/documentation/platform/pki/applications/overview'
       requestBody:
         required: true
         content:
@@ -2545,6 +2571,7 @@ paths:
         in: path
         name: templateName
         required: true
+      deprecated: true
       responses:
         '200':
           description: Default Response
@@ -2750,6 +2777,7 @@ paths:
       operationId: getPkiTemplate
       tags:
       - PKI Certificate Templates
+      description: 'Deprecated. Use certificate applications instead: https://infisical.com/docs/documentation/platform/pki/applications/overview'
       parameters:
       - schema:
           type: string
@@ -2763,6 +2791,7 @@ paths:
         in: path
         name: templateName
         required: true
+      deprecated: true
       responses:
         '200':
           description: Default Response
@@ -2981,6 +3010,7 @@ paths:
       operationId: issueCertificateFromTemplate
       tags:
       - PKI Certificate Templates
+      description: 'Deprecated. Use certificate applications instead: https://infisical.com/docs/documentation/platform/pki/applications/overview'
       requestBody:
         required: true
         content:
@@ -3021,6 +3051,8 @@ paths:
                     - emailProtection
                     - timeStamping
                     - ocspSigning
+                    - smartCardLogon
+                    - anyExtendedKeyUsage
                 notBefore:
                   type: string
                 notAfter:
@@ -3041,6 +3073,7 @@ paths:
         in: path
         name: templateName
         required: true
+      deprecated: true
       responses:
         '200':
           description: Default Response
@@ -3211,6 +3244,7 @@ paths:
       operationId: signCertificateFromTemplate
       tags:
       - PKI Certificate Templates
+      description: 'Deprecated. Use certificate applications instead: https://infisical.com/docs/documentation/platform/pki/applications/overview'
       requestBody:
         required: true
         content:
@@ -3239,6 +3273,7 @@ paths:
         in: path
         name: templateName
         required: true
+      deprecated: true
       responses:
         '200':
           description: Default Response

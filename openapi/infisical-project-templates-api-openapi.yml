@@ -25,10 +25,9 @@ paths:
           - secret-manager
           - cert-manager
           - kms
-          - ssh
           - secret-scanning
           - pam
-          - ai
+          - agent-vault
         in: query
         name: type
         required: false
@@ -824,6 +823,7 @@ paths:
                                   - assign-additional-privileges
                                   - assume-privileges
                                   - revoke-auth
+                                  - edit-auth
                                   - create-token
                                   - get-token
                                   - delete-token
@@ -840,6 +840,7 @@ paths:
                                     - assign-additional-privileges
                                     - assume-privileges
                                     - revoke-auth
+                                    - edit-auth
                                     - create-token
                                     - get-token
                                     - delete-token
@@ -921,62 +922,6 @@ paths:
                                         $glob:
                                           type: string
                                           minLength: 1
-                                      additionalProperties: false
-                                additionalProperties: false
-                                description: When specified, only matching conditions will be allowed to access given resource.
-                            required:
-                            - subject
-                            - action
-                            additionalProperties: false
-                          - type: object
-                            properties:
-                              subject:
-                                type: string
-                                enum:
-                                - ssh-hosts
-                                description: The entity this permission pertains to.
-                              action:
-                                anyOf:
-                                - type: string
-                                  enum:
-                                  - read
-                                  - create
-                                  - edit
-                                  - delete
-                                  - issue-host-cert
-                                - type: array
-                                  items:
-                                    type: string
-                                    enum:
-                                    - read
-                                    - create
-                                    - edit
-                                    - delete
-                                    - issue-host-cert
-                                  minItems: 1
-                                description: Describe what action an entity can take.
-                              inverted:
-                                type: boolean
-                                description: Whether rule allows or forbids.
-                              conditions:
-                                type: object
-                                properties:
-                                  hostname:
-                                    anyOf:
-                                    - type: string
-                                    - type: object
-                                      properties:
-                                        $eq:
-                                          type: string
-                                          minLength: 1
-                                        $glob:
-                                          type: string
-                                          minLength: 1
-                                        $in:
-                                          type: array
-                                          items:
-                                            type: string
-                                            minLength: 1
                                       additionalProperties: false
                                 additionalProperties: false
                                 description: When specified, only matching conditions will be allowed to access given resource.
@@ -1322,6 +1267,9 @@ paths:
                                   - sync-certificates
                                   - import-certificates
                                   - remove-certificates
+                                  - set-post-sync-command
+                                  - set-health-check-command
+                                  - set-target-host
                                 - type: array
                                   items:
                                     type: string
@@ -1333,6 +1281,9 @@ paths:
                                     - sync-certificates
                                     - import-certificates
                                     - remove-certificates
+                                    - set-post-sync-command
+                                    - set-health-check-command
+                                    - set-target-host
                                   minItems: 1
                                 description: Describe what action an entity can take.
                               conditions:
@@ -1605,6 +1556,33 @@ paths:
                               subject:
                                 type: string
                                 enum:
+                                - certificate-application
+                                description: The entity this permission pertains to.
+                              action:
+                                anyOf:
+                                - type: string
+                                  enum:
+                                  - read
+                                  - list
+                                  - create
+                                - type: array
+                                  items:
+                                    type: string
+                                    enum:
+                                    - read
+                                    - list
+                                    - create
+                                  minItems: 1
+                                description: Describe what action an entity can take.
+                            required:
+                            - subject
+                            - action
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              subject:
+                                type: string
+                                enum:
                                 - certificate-authorities
                                 description: The entity this permission pertains to.
                               inverted:
@@ -1832,6 +1810,246 @@ paths:
                                     additionalProperties: false
                                 additionalProperties: false
                                 description: When specified, only matching conditions will be allowed to access given resource.
+                            required:
+                            - subject
+                            - action
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              subject:
+                                type: string
+                                enum:
+                                - ssh-certificate-authorities
+                                description: DEPRECATED. The entity belonged to a removed product; accepted for backwards compatibility.
+                              inverted:
+                                type: boolean
+                                description: Whether rule allows or forbids.
+                              action:
+                                anyOf:
+                                - type: string
+                                  minLength: 1
+                                  maxLength: 64
+                                - type: array
+                                  items:
+                                    type: string
+                                    minLength: 1
+                                    maxLength: 64
+                                  minItems: 1
+                                description: DEPRECATED. Accepted for backwards compatibility; grants nothing.
+                              conditions:
+                                type: object
+                                additionalProperties: {}
+                                description: DEPRECATED. Accepted for backwards compatibility; ignored.
+                            required:
+                            - subject
+                            - action
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              subject:
+                                type: string
+                                enum:
+                                - ssh-certificates
+                                description: DEPRECATED. The entity belonged to a removed product; accepted for backwards compatibility.
+                              inverted:
+                                type: boolean
+                                description: Whether rule allows or forbids.
+                              action:
+                                anyOf:
+                                - type: string
+                                  minLength: 1
+                                  maxLength: 64
+                                - type: array
+                                  items:
+                                    type: string
+                                    minLength: 1
+                                    maxLength: 64
+                                  minItems: 1
+                                description: DEPRECATED. Accepted for backwards compatibility; grants nothing.
+                              conditions:
+                                type: object
+                                additionalProperties: {}
+                                description: DEPRECATED. Accepted for backwards compatibility; ignored.
+                            required:
+                            - subject
+                            - action
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              subject:
+                                type: string
+                                enum:
+                                - ssh-certificate-templates
+                                description: DEPRECATED. The entity belonged to a removed product; accepted for backwards compatibility.
+                              inverted:
+                                type: boolean
+                                description: Whether rule allows or forbids.
+                              action:
+                                anyOf:
+                                - type: string
+                                  minLength: 1
+                                  maxLength: 64
+                                - type: array
+                                  items:
+                                    type: string
+                                    minLength: 1
+                                    maxLength: 64
+                                  minItems: 1
+                                description: DEPRECATED. Accepted for backwards compatibility; grants nothing.
+                              conditions:
+                                type: object
+                                additionalProperties: {}
+                                description: DEPRECATED. Accepted for backwards compatibility; ignored.
+                            required:
+                            - subject
+                            - action
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              subject:
+                                type: string
+                                enum:
+                                - ssh-hosts
+                                description: DEPRECATED. The entity belonged to a removed product; accepted for backwards compatibility.
+                              inverted:
+                                type: boolean
+                                description: Whether rule allows or forbids.
+                              action:
+                                anyOf:
+                                - type: string
+                                  minLength: 1
+                                  maxLength: 64
+                                - type: array
+                                  items:
+                                    type: string
+                                    minLength: 1
+                                    maxLength: 64
+                                  minItems: 1
+                                description: DEPRECATED. Accepted for backwards compatibility; grants nothing.
+                              conditions:
+                                type: object
+                                additionalProperties: {}
+                                description: DEPRECATED. Accepted for backwards compatibility; ignored.
+                            required:
+                            - subject
+                            - action
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              subject:
+                                type: string
+                                enum:
+                                - ssh-host-groups
+                                description: DEPRECATED. The entity belonged to a removed product; accepted for backwards compatibility.
+                              inverted:
+                                type: boolean
+                                description: Whether rule allows or forbids.
+                              action:
+                                anyOf:
+                                - type: string
+                                  minLength: 1
+                                  maxLength: 64
+                                - type: array
+                                  items:
+                                    type: string
+                                    minLength: 1
+                                    maxLength: 64
+                                  minItems: 1
+                                description: DEPRECATED. Accepted for backwards compatibility; grants nothing.
+                              conditions:
+                                type: object
+                                additionalProperties: {}
+                                description: DEPRECATED. Accepted for backwards compatibility; ignored.
+                            required:
+                            - subject
+                            - action
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              subject:
+                                type: string
+                                enum:
+                                - mcp-endpoints
+                                description: DEPRECATED. The entity belonged to a removed product; accepted for backwards compatibility.
+                              inverted:
+                                type: boolean
+                                description: Whether rule allows or forbids.
+                              action:
+                                anyOf:
+                                - type: string
+                                  minLength: 1
+                                  maxLength: 64
+                                - type: array
+                                  items:
+                                    type: string
+                                    minLength: 1
+                                    maxLength: 64
+                                  minItems: 1
+                                description: DEPRECATED. Accepted for backwards compatibility; grants nothing.
+                              conditions:
+                                type: object
+                                additionalProperties: {}
+                                description: DEPRECATED. Accepted for backwards compatibility; ignored.
+                            required:
+                            - subject
+                            - action
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              subject:
+                                type: string
+                                enum:
+                                - mcp-servers
+                                description: DEPRECATED. The entity belonged to a removed product; accepted for backwards compatibility.
+                              inverted:
+                                type: boolean
+                                description: Whether rule allows or forbids.
+                              action:
+                                anyOf:
+                                - type: string
+                                  minLength: 1
+                                  maxLength: 64
+                                - type: array
+                                  items:
+                                    type: string
+                                    minLength: 1
+                                    maxLength: 64
+                                  minItems: 1
+                                description: DEPRECATED. Accepted for backwards compatibility; grants nothing.
+                              conditions:
+                                type: object
+                                additionalProperties: {}
+                                description: DEPRECATED. Accepted for backwards compatibility; ignored.
+                            required:
+                            - subject
+                            - action
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              subject:
+                                type: string
+                                enum:
+                                - mcp-activity-logs
+                                description: DEPRECATED. The entity belonged to a removed product; accepted for backwards compatibility.
+                              inverted:
+                                type: boolean
+                                description: Whether rule allows or forbids.
+                              action:
+                                anyOf:
+                                - type: string
+                                  minLength: 1
+                                  maxLength: 64
+                                - type: array
+                                  items:
+                                    type: string
+                                    minLength: 1
+                                    maxLength: 64
+                                  minItems: 1
+                                description: DEPRECATED. Accepted for backwards compatibility; grants nothing.
+                              conditions:
+                                type: object
+                                additionalProperties: {}
+                                description: DEPRECATED. Accepted for backwards compatibility; ignored.
                             required:
                             - subject
                             - action
@@ -2240,6 +2458,35 @@ paths:
                               subject:
                                 type: string
                                 enum:
+                                - secret-validation-rules
+                                description: The entity this permission pertains to.
+                              action:
+                                anyOf:
+                                - type: string
+                                  enum:
+                                  - read
+                                  - create
+                                  - edit
+                                  - delete
+                                - type: array
+                                  items:
+                                    type: string
+                                    enum:
+                                    - read
+                                    - create
+                                    - edit
+                                    - delete
+                                  minItems: 1
+                                description: Describe what action an entity can take.
+                            required:
+                            - subject
+                            - action
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              subject:
+                                type: string
+                                enum:
                                 - environments
                                 description: The entity this permission pertains to.
                               action:
@@ -2305,11 +2552,13 @@ paths:
                                 - type: string
                                   enum:
                                   - read
+                                  - edit
                                 - type: array
                                   items:
                                     type: string
                                     enum:
                                     - read
+                                    - edit
                                   minItems: 1
                                 description: Describe what action an entity can take.
                             required:
@@ -2328,11 +2577,15 @@ paths:
                                 - type: string
                                   enum:
                                   - read
+                                  - generate-report
+                                  - delete-report
                                 - type: array
                                   items:
                                     type: string
                                     enum:
                                     - read
+                                    - generate-report
+                                    - delete-report
                                   minItems: 1
                                 description: Describe what action an entity can take.
                             required:
@@ -2345,122 +2598,6 @@ paths:
                                 type: string
                                 enum:
                                 - ip-allowlist
-                                description: The entity this permission pertains to.
-                              action:
-                                anyOf:
-                                - type: string
-                                  enum:
-                                  - read
-                                  - create
-                                  - edit
-                                  - delete
-                                - type: array
-                                  items:
-                                    type: string
-                                    enum:
-                                    - read
-                                    - create
-                                    - edit
-                                    - delete
-                                  minItems: 1
-                                description: Describe what action an entity can take.
-                            required:
-                            - subject
-                            - action
-                            additionalProperties: false
-                          - type: object
-                            properties:
-                              subject:
-                                type: string
-                                enum:
-                                - ssh-certificate-authorities
-                                description: The entity this permission pertains to.
-                              action:
-                                anyOf:
-                                - type: string
-                                  enum:
-                                  - read
-                                  - create
-                                  - edit
-                                  - delete
-                                - type: array
-                                  items:
-                                    type: string
-                                    enum:
-                                    - read
-                                    - create
-                                    - edit
-                                    - delete
-                                  minItems: 1
-                                description: Describe what action an entity can take.
-                            required:
-                            - subject
-                            - action
-                            additionalProperties: false
-                          - type: object
-                            properties:
-                              subject:
-                                type: string
-                                enum:
-                                - ssh-certificates
-                                description: The entity this permission pertains to.
-                              action:
-                                anyOf:
-                                - type: string
-                                  enum:
-                                  - read
-                                  - create
-                                  - edit
-                                  - delete
-                                - type: array
-                                  items:
-                                    type: string
-                                    enum:
-                                    - read
-                                    - create
-                                    - edit
-                                    - delete
-                                  minItems: 1
-                                description: Describe what action an entity can take.
-                            required:
-                            - subject
-                            - action
-                            additionalProperties: false
-                          - type: object
-                            properties:
-                              subject:
-                                type: string
-                                enum:
-                                - ssh-certificate-templates
-                                description: The entity this permission pertains to.
-                              action:
-                                anyOf:
-                                - type: string
-                                  enum:
-                                  - read
-                                  - create
-                                  - edit
-                                  - delete
-                                - type: array
-                                  items:
-                                    type: string
-                                    enum:
-                                    - read
-                                    - create
-                                    - edit
-                                    - delete
-                                  minItems: 1
-                                description: Describe what action an entity can take.
-                            required:
-                            - subject
-                            - action
-                            additionalProperties: false
-                          - type: object
-                            properties:
-                              subject:
-                                type: string
-                                enum:
-                                - ssh-host-groups
                                 description: The entity this permission pertains to.
                               action:
                                 anyOf:
@@ -2727,6 +2864,9 @@ paths:
                                   - decrypt
                                   - sign
                                   - verify
+                                  - generate-mac
+                                  - verify-mac
+                                  - rotate
                                   - export-private-key
                                 - type: array
                                   items:
@@ -2740,6 +2880,9 @@ paths:
                                     - decrypt
                                     - sign
                                     - verify
+                                    - generate-mac
+                                    - verify-mac
+                                    - rotate
                                     - export-private-key
                                   minItems: 1
                                 description: Describe what action an entity can take.
@@ -2999,666 +3142,28 @@ paths:
                               subject:
                                 type: string
                                 enum:
-                                - pam-folders
+                                - hsm-connectors
                                 description: The entity this permission pertains to.
                               action:
                                 anyOf:
                                 - type: string
                                   enum:
-                                  - read
-                                  - create
-                                  - edit
-                                  - delete
+                                  - read-hsm-connectors
+                                  - create-hsm-connectors
+                                  - edit-hsm-connectors
+                                  - delete-hsm-connectors
+                                  - test-hsm-connectors
+                                  - attach-hsm-connectors
                                 - type: array
                                   items:
                                     type: string
                                     enum:
-                                    - read
-                                    - create
-                                    - edit
-                                    - delete
-                                  minItems: 1
-                                description: Describe what action an entity can take.
-                            required:
-                            - subject
-                            - action
-                            additionalProperties: false
-                          - type: object
-                            properties:
-                              subject:
-                                type: string
-                                enum:
-                                - pam-resources
-                                description: The entity this permission pertains to.
-                              inverted:
-                                type: boolean
-                                description: Whether rule allows or forbids.
-                              action:
-                                anyOf:
-                                - type: string
-                                  enum:
-                                  - read
-                                  - create
-                                  - edit
-                                  - delete
-                                - type: array
-                                  items:
-                                    type: string
-                                    enum:
-                                    - read
-                                    - create
-                                    - edit
-                                    - delete
-                                  minItems: 1
-                                description: Describe what action an entity can take.
-                              conditions:
-                                type: object
-                                properties:
-                                  name:
-                                    anyOf:
-                                    - type: string
-                                    - type: object
-                                      properties:
-                                        $eq:
-                                          type: string
-                                          minLength: 1
-                                        $ne:
-                                          type: string
-                                          minLength: 1
-                                        $in:
-                                          type: array
-                                          items:
-                                            type: string
-                                            minLength: 1
-                                        $glob:
-                                          type: string
-                                          minLength: 1
-                                      additionalProperties: false
-                                  resourceType:
-                                    anyOf:
-                                    - type: string
-                                    - type: object
-                                      properties:
-                                        $eq:
-                                          type: string
-                                          minLength: 1
-                                        $ne:
-                                          type: string
-                                          minLength: 1
-                                        $in:
-                                          type: array
-                                          items:
-                                            type: string
-                                            minLength: 1
-                                        $glob:
-                                          type: string
-                                          minLength: 1
-                                      additionalProperties: false
-                                  metadata:
-                                    type: object
-                                    properties:
-                                      $elemMatch:
-                                        type: object
-                                        properties:
-                                          key:
-                                            type: object
-                                            properties:
-                                              $eq:
-                                                type: string
-                                                minLength: 1
-                                              $ne:
-                                                type: string
-                                                minLength: 1
-                                              $in:
-                                                type: array
-                                                items:
-                                                  type: string
-                                                  minLength: 1
-                                            additionalProperties: false
-                                          value:
-                                            type: object
-                                            properties:
-                                              $eq:
-                                                type: string
-                                                minLength: 1
-                                              $ne:
-                                                type: string
-                                                minLength: 1
-                                              $in:
-                                                type: array
-                                                items:
-                                                  type: string
-                                                  minLength: 1
-                                            additionalProperties: false
-                                        additionalProperties: false
-                                    required:
-                                    - $elemMatch
-                                    additionalProperties: false
-                                additionalProperties: false
-                                description: When specified, only matching conditions will be allowed to access given resource.
-                            required:
-                            - subject
-                            - action
-                            additionalProperties: false
-                          - type: object
-                            properties:
-                              subject:
-                                type: string
-                                enum:
-                                - pam-domains
-                                description: The entity this permission pertains to.
-                              inverted:
-                                type: boolean
-                                description: Whether rule allows or forbids.
-                              action:
-                                anyOf:
-                                - type: string
-                                  enum:
-                                  - read
-                                  - create
-                                  - edit
-                                  - delete
-                                - type: array
-                                  items:
-                                    type: string
-                                    enum:
-                                    - read
-                                    - create
-                                    - edit
-                                    - delete
-                                  minItems: 1
-                                description: Describe what action an entity can take.
-                              conditions:
-                                type: object
-                                properties:
-                                  name:
-                                    anyOf:
-                                    - type: string
-                                    - type: object
-                                      properties:
-                                        $eq:
-                                          type: string
-                                          minLength: 1
-                                        $ne:
-                                          type: string
-                                          minLength: 1
-                                        $in:
-                                          type: array
-                                          items:
-                                            type: string
-                                            minLength: 1
-                                        $glob:
-                                          type: string
-                                          minLength: 1
-                                      additionalProperties: false
-                                  domainType:
-                                    anyOf:
-                                    - type: string
-                                    - type: object
-                                      properties:
-                                        $eq:
-                                          type: string
-                                          minLength: 1
-                                        $ne:
-                                          type: string
-                                          minLength: 1
-                                        $in:
-                                          type: array
-                                          items:
-                                            type: string
-                                            minLength: 1
-                                        $glob:
-                                          type: string
-                                          minLength: 1
-                                      additionalProperties: false
-                                  metadata:
-                                    type: object
-                                    properties:
-                                      $elemMatch:
-                                        type: object
-                                        properties:
-                                          key:
-                                            type: object
-                                            properties:
-                                              $eq:
-                                                type: string
-                                                minLength: 1
-                                              $ne:
-                                                type: string
-                                                minLength: 1
-                                              $in:
-                                                type: array
-                                                items:
-                                                  type: string
-                                                  minLength: 1
-                                            additionalProperties: false
-                                          value:
-                                            type: object
-                                            properties:
-                                              $eq:
-                                                type: string
-                                                minLength: 1
-                                              $ne:
-                                                type: string
-                                                minLength: 1
-                                              $in:
-                                                type: array
-                                                items:
-                                                  type: string
-                                                  minLength: 1
-                                            additionalProperties: false
-                                        additionalProperties: false
-                                    required:
-                                    - $elemMatch
-                                    additionalProperties: false
-                                additionalProperties: false
-                                description: When specified, only matching conditions will be allowed to access given domain.
-                            required:
-                            - subject
-                            - action
-                            additionalProperties: false
-                          - type: object
-                            properties:
-                              subject:
-                                type: string
-                                enum:
-                                - pam-accounts
-                                description: The entity this permission pertains to.
-                              inverted:
-                                type: boolean
-                                description: Whether rule allows or forbids.
-                              action:
-                                anyOf:
-                                - type: string
-                                  enum:
-                                  - access
-                                  - read
-                                  - create
-                                  - edit
-                                  - delete
-                                  - trigger-rotation
-                                  - read-credentials
-                                - type: array
-                                  items:
-                                    type: string
-                                    enum:
-                                    - access
-                                    - read
-                                    - create
-                                    - edit
-                                    - delete
-                                    - trigger-rotation
-                                    - read-credentials
-                                  minItems: 1
-                                description: Describe what action an entity can take.
-                              conditions:
-                                type: object
-                                properties:
-                                  resourceName:
-                                    anyOf:
-                                    - type: string
-                                    - type: object
-                                      properties:
-                                        $eq:
-                                          type: string
-                                          minLength: 1
-                                        $ne:
-                                          type: string
-                                          minLength: 1
-                                        $in:
-                                          type: array
-                                          items:
-                                            type: string
-                                            minLength: 1
-                                        $glob:
-                                          type: string
-                                          minLength: 1
-                                      additionalProperties: false
-                                  accountName:
-                                    anyOf:
-                                    - type: string
-                                    - type: object
-                                      properties:
-                                        $eq:
-                                          type: string
-                                          minLength: 1
-                                        $ne:
-                                          type: string
-                                          minLength: 1
-                                        $in:
-                                          type: array
-                                          items:
-                                            type: string
-                                            minLength: 1
-                                        $glob:
-                                          type: string
-                                          minLength: 1
-                                      additionalProperties: false
-                                  resourceType:
-                                    anyOf:
-                                    - type: string
-                                    - type: object
-                                      properties:
-                                        $eq:
-                                          type: string
-                                          minLength: 1
-                                        $ne:
-                                          type: string
-                                          minLength: 1
-                                        $in:
-                                          type: array
-                                          items:
-                                            type: string
-                                            minLength: 1
-                                        $glob:
-                                          type: string
-                                          minLength: 1
-                                      additionalProperties: false
-                                  domainName:
-                                    anyOf:
-                                    - type: string
-                                    - type: object
-                                      properties:
-                                        $eq:
-                                          type: string
-                                          minLength: 1
-                                        $ne:
-                                          type: string
-                                          minLength: 1
-                                        $in:
-                                          type: array
-                                          items:
-                                            type: string
-                                            minLength: 1
-                                        $glob:
-                                          type: string
-                                          minLength: 1
-                                      additionalProperties: false
-                                  domainType:
-                                    anyOf:
-                                    - type: string
-                                    - type: object
-                                      properties:
-                                        $eq:
-                                          type: string
-                                          minLength: 1
-                                        $ne:
-                                          type: string
-                                          minLength: 1
-                                        $in:
-                                          type: array
-                                          items:
-                                            type: string
-                                            minLength: 1
-                                        $glob:
-                                          type: string
-                                          minLength: 1
-                                      additionalProperties: false
-                                  metadata:
-                                    type: object
-                                    properties:
-                                      $elemMatch:
-                                        type: object
-                                        properties:
-                                          key:
-                                            type: object
-                                            properties:
-                                              $eq:
-                                                type: string
-                                                minLength: 1
-                                              $ne:
-                                                type: string
-                                                minLength: 1
-                                              $in:
-                                                type: array
-                                                items:
-                                                  type: string
-                                                  minLength: 1
-                                            additionalProperties: false
-                                          value:
-                                            type: object
-                                            properties:
-                                              $eq:
-                                                type: string
-                                                minLength: 1
-                                              $ne:
-                                                type: string
-                                                minLength: 1
-                                              $in:
-                                                type: array
-                                                items:
-                                                  type: string
-                                                  minLength: 1
-                                            additionalProperties: false
-                                        additionalProperties: false
-                                    required:
-                                    - $elemMatch
-                                    additionalProperties: false
-                                additionalProperties: false
-                                description: When specified, only matching conditions will be allowed to access given resource.
-                            required:
-                            - subject
-                            - action
-                            additionalProperties: false
-                          - type: object
-                            properties:
-                              subject:
-                                type: string
-                                enum:
-                                - pam-sessions
-                                description: The entity this permission pertains to.
-                              action:
-                                anyOf:
-                                - type: string
-                                  enum:
-                                  - read
-                                  - terminate
-                                - type: array
-                                  items:
-                                    type: string
-                                    enum:
-                                    - read
-                                    - terminate
-                                  minItems: 1
-                                description: Describe what action an entity can take.
-                            required:
-                            - subject
-                            - action
-                            additionalProperties: false
-                          - type: object
-                            properties:
-                              subject:
-                                type: string
-                                enum:
-                                - pam-account-policies
-                                description: The entity this permission pertains to.
-                              action:
-                                anyOf:
-                                - type: string
-                                  enum:
-                                  - read
-                                  - create
-                                  - edit
-                                  - delete
-                                - type: array
-                                  items:
-                                    type: string
-                                    enum:
-                                    - read
-                                    - create
-                                    - edit
-                                    - delete
-                                  minItems: 1
-                                description: Describe what action an entity can take.
-                            required:
-                            - subject
-                            - action
-                            additionalProperties: false
-                          - type: object
-                            properties:
-                              subject:
-                                type: string
-                                enum:
-                                - pam-discovery
-                                description: The entity this permission pertains to.
-                              action:
-                                anyOf:
-                                - type: string
-                                  enum:
-                                  - read
-                                  - create
-                                  - edit
-                                  - delete
-                                  - run-scan
-                                - type: array
-                                  items:
-                                    type: string
-                                    enum:
-                                    - read
-                                    - create
-                                    - edit
-                                    - delete
-                                    - run-scan
-                                  minItems: 1
-                                description: Describe what action an entity can take.
-                            required:
-                            - subject
-                            - action
-                            additionalProperties: false
-                          - type: object
-                            properties:
-                              subject:
-                                type: string
-                                enum:
-                                - pam-insights
-                                description: The entity this permission pertains to.
-                              action:
-                                anyOf:
-                                - type: string
-                                  enum:
-                                  - read
-                                - type: array
-                                  items:
-                                    type: string
-                                    enum:
-                                    - read
-                                  minItems: 1
-                                description: Describe what action an entity can take.
-                            required:
-                            - subject
-                            - action
-                            additionalProperties: false
-                          - type: object
-                            properties:
-                              subject:
-                                type: string
-                                enum:
-                                - mcp-endpoints
-                                description: The entity this permission pertains to.
-                              inverted:
-                                type: boolean
-                                description: Whether rule allows or forbids.
-                              action:
-                                anyOf:
-                                - type: string
-                                  enum:
-                                  - read
-                                  - create
-                                  - edit
-                                  - delete
-                                  - connect
-                                - type: array
-                                  items:
-                                    type: string
-                                    enum:
-                                    - read
-                                    - create
-                                    - edit
-                                    - delete
-                                    - connect
-                                  minItems: 1
-                                description: Describe what action an entity can take.
-                              conditions:
-                                type: object
-                                properties:
-                                  name:
-                                    anyOf:
-                                    - type: string
-                                    - type: object
-                                      properties:
-                                        $eq:
-                                          type: string
-                                          minLength: 1
-                                        $ne:
-                                          type: string
-                                          minLength: 1
-                                        $glob:
-                                          type: string
-                                          minLength: 1
-                                        $in:
-                                          type: array
-                                          items:
-                                            type: string
-                                            minLength: 1
-                                      additionalProperties: false
-                                additionalProperties: false
-                                description: When specified, only matching conditions will be allowed to access given resource.
-                            required:
-                            - subject
-                            - action
-                            additionalProperties: false
-                          - type: object
-                            properties:
-                              subject:
-                                type: string
-                                enum:
-                                - mcp-servers
-                                description: The entity this permission pertains to.
-                              action:
-                                anyOf:
-                                - type: string
-                                  enum:
-                                  - read
-                                  - create
-                                  - edit
-                                  - delete
-                                - type: array
-                                  items:
-                                    type: string
-                                    enum:
-                                    - read
-                                    - create
-                                    - edit
-                                    - delete
-                                  minItems: 1
-                                description: Describe what action an entity can take.
-                            required:
-                            - subject
-                            - action
-                            additionalProperties: false
-                          - type: object
-                            properties:
-                              subject:
-                                type: string
-                                enum:
-                                - mcp-activity-logs
-                                description: The entity this permission pertains to.
-                              action:
-                                anyOf:
-                                - type: string
-                                  enum:
-                                  - read
-                                  - create
-                                  - edit
-                                  - delete
-                                - type: array
-                                  items:
-                                    type: string
-                                    enum:
-                                    - read
-                                    - create
-                                    - edit
-                                    - delete
+                                    - read-hsm-connectors
+                                    - create-hsm-connectors
+                                    - edit-hsm-connectors
+                                    - delete-hsm-connectors
+                                    - test-hsm-connectors
+                                    - attach-hsm-connectors
                                   minItems: 1
                                 description: Describe what action an entity can take.
                             required:
@@ -3751,6 +3256,187 @@ paths:
                               subject:
                                 type: string
                                 enum:
+                                - proxied-services
+                                description: The entity this permission pertains to.
+                              inverted:
+                                type: boolean
+                                description: Whether rule allows or forbids.
+                              action:
+                                anyOf:
+                                - type: string
+                                  enum:
+                                  - read
+                                  - create
+                                  - edit
+                                  - delete
+                                  - proxy
+                                  - report-usage
+                                - type: array
+                                  items:
+                                    type: string
+                                    enum:
+                                    - read
+                                    - create
+                                    - edit
+                                    - delete
+                                    - proxy
+                                    - report-usage
+                                  minItems: 1
+                                description: Describe what action an entity can take.
+                              conditions:
+                                type: object
+                                properties:
+                                  environment:
+                                    anyOf:
+                                    - type: string
+                                    - type: object
+                                      properties:
+                                        $eq:
+                                          type: string
+                                          minLength: 1
+                                        $ne:
+                                          type: string
+                                          minLength: 1
+                                        $in:
+                                          type: array
+                                          items:
+                                            type: string
+                                            minLength: 1
+                                        $glob:
+                                          type: string
+                                          minLength: 1
+                                      additionalProperties: false
+                                  secretPath:
+                                    anyOf:
+                                    - type: string
+                                    - type: object
+                                      properties:
+                                        $eq:
+                                          type: string
+                                          minLength: 1
+                                        $ne:
+                                          type: string
+                                          minLength: 1
+                                        $in:
+                                          type: array
+                                          items:
+                                            type: string
+                                            minLength: 1
+                                        $glob:
+                                          type: string
+                                          minLength: 1
+                                      additionalProperties: false
+                                additionalProperties: false
+                                description: When specified, only matching conditions will be allowed to access given resource.
+                            required:
+                            - subject
+                            - action
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              subject:
+                                type: string
+                                enum:
+                                - agent-vault-access-bundles
+                                description: The entity this permission pertains to.
+                              inverted:
+                                type: boolean
+                                description: Whether rule allows or forbids.
+                              action:
+                                anyOf:
+                                - type: string
+                                  enum:
+                                  - read
+                                  - create
+                                  - edit
+                                  - delete
+                                  - manage-members
+                                - type: array
+                                  items:
+                                    type: string
+                                    enum:
+                                    - read
+                                    - create
+                                    - edit
+                                    - delete
+                                    - manage-members
+                                  minItems: 1
+                                description: Describe what action an entity can take.
+                            required:
+                            - subject
+                            - action
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              subject:
+                                type: string
+                                enum:
+                                - agent-vault-sessions
+                                description: The entity this permission pertains to.
+                              inverted:
+                                type: boolean
+                                description: Whether rule allows or forbids.
+                              action:
+                                anyOf:
+                                - type: string
+                                  enum:
+                                  - read
+                                  - create
+                                  - revoke
+                                - type: array
+                                  items:
+                                    type: string
+                                    enum:
+                                    - read
+                                    - create
+                                    - revoke
+                                  minItems: 1
+                                description: Describe what action an entity can take.
+                            required:
+                            - subject
+                            - action
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              subject:
+                                type: string
+                                enum:
+                                - agent-vault-proxies
+                                description: The entity this permission pertains to.
+                              inverted:
+                                type: boolean
+                                description: Whether rule allows or forbids.
+                              action:
+                                anyOf:
+                                - type: string
+                                  enum:
+                                  - read
+                                  - create
+                                  - edit
+                                  - delete
+                                  - issue-token
+                                  - revoke
+                                - type: array
+                                  items:
+                                    type: string
+                                    enum:
+                                    - read
+                                    - create
+                                    - edit
+                                    - delete
+                                    - issue-token
+                                    - revoke
+                                  minItems: 1
+                                description: Describe what action an entity can take.
+                            required:
+                            - subject
+                            - action
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              subject:
+                                type: string
+                                enum:
                                 - approval-requests
                                 description: The entity this permission pertains to.
                               action:
@@ -3819,6 +3505,81 @@ paths:
                             - subject
                             - action
                             additionalProperties: false
+                          - type: object
+                            properties:
+                              subject:
+                                type: string
+                                enum:
+                                - project-folder-grant
+                                description: The entity this permission pertains to.
+                              inverted:
+                                type: boolean
+                                description: Whether rule allows or forbids.
+                              action:
+                                anyOf:
+                                - type: string
+                                  enum:
+                                  - read-grant
+                                  - create-grant
+                                  - revoke-grant
+                                - type: array
+                                  items:
+                                    type: string
+                                    enum:
+                                    - read-grant
+                                    - create-grant
+                                    - revoke-grant
+                                  minItems: 1
+                                description: Describe what action an entity can take.
+                              conditions:
+                                type: object
+                                properties:
+                                  environment:
+                                    anyOf:
+                                    - type: string
+                                    - type: object
+                                      properties:
+                                        $eq:
+                                          type: string
+                                          minLength: 1
+                                        $ne:
+                                          type: string
+                                          minLength: 1
+                                        $in:
+                                          type: array
+                                          items:
+                                            type: string
+                                            minLength: 1
+                                        $glob:
+                                          type: string
+                                          minLength: 1
+                                      additionalProperties: false
+                                  secretPath:
+                                    anyOf:
+                                    - type: string
+                                    - type: object
+                                      properties:
+                                        $eq:
+                                          type: string
+                                          minLength: 1
+                                        $ne:
+                                          type: string
+                                          minLength: 1
+                                        $in:
+                                          type: array
+                                          items:
+                                            type: string
+                                            minLength: 1
+                                        $glob:
+                                          type: string
+                                          minLength: 1
+                                      additionalProperties: false
+                                additionalProperties: false
+                                description: When specified, only matching conditions will be allowed to access given resource.
+                            required:
+                            - subject
+                            - action
+                            additionalProperties: false
                     required:
                     - name
                     - slug
@@ -3832,10 +3593,9 @@ paths:
                   - secret-manager
                   - cert-manager
                   - kms
-                  - ssh
                   - secret-scanning
                   - pam
-                  - ai
+                  - agent-vault
                   description: The type of project template to be created.
                 environments:
                   type:
@@ -5073,6 +4833,7 @@ paths:
                                   - assign-additional-privileges
                                   - assume-privileges
                                   - revoke-auth
+                                  - edit-auth
                                   - create-token
                                   - get-token
                                   - delete-token
@@ -5089,6 +4850,7 @@ paths:
                                     - assign-additional-privileges
                                     - assume-privileges
                                     - revoke-auth
+                                    - edit-auth
                                     - create-token
                                     - get-token
                                     - delete-token
@@ -5170,62 +4932,6 @@ paths:
                                         $glob:
                                           type: string
                                           minLength: 1
-                                      additionalProperties: false
-                                additionalProperties: false
-                                description: When specified, only matching conditions will be allowed to access given resource.
-                            required:
-                            - subject
-                            - action
-                            additionalProperties: false
-                          - type: object
-                            properties:
-                              subject:
-                                type: string
-                                enum:
-                                - ssh-hosts
-                                description: The entity this permission pertains to.
-                              action:
-                                anyOf:
-                                - type: string
-                                  enum:
-                                  - read
-                                  - create
-                                  - edit
-                                  - delete
-                                  - issue-host-cert
-                                - type: array
-                                  items:
-                                    type: string
-                                    enum:
-                                    - read
-                                    - create
-                                    - edit
-                                    - delete
-                                    - issue-host-cert
-                                  minItems: 1
-                                description: Describe what action an entity can take.
-                              inverted:
-                                type: boolean
-                                description: Whether rule allows or forbids.
-                              conditions:
-                                type: object
-                                properties:
-                                  hostname:
-                                    anyOf:
-                                    - type: string
-                                    - type: object
-                                      properties:
-                                        $eq:
-                                          type: string
-                                          minLength: 1
-                                        $glob:
-                                          type: string
-                                          minLength: 1
-                                        $in:
-                                          type: array
-                                          items:
-                                            type: string
-                                            minLength: 1
                                       additionalProperties: false
                                 additionalProperties: false
                                 description: When specified, only matching conditions will be allowed to access given resource.
@@ -5571,6 +5277,9 @@ paths:
                                   - sync-certificates
                                   - import-certificates
                                   - remove-certificates
+                                  - set-post-sync-command
+                                  - set-health-check-command
+                                  - set-target-host
                                 - type: array
                                   items:
                                     type: string
@@ -5582,6 +5291,9 @@ paths:
                                     - sync-certificates
                                     - import-certificates
                                     - remove-certificates
+                                    - set-post-sync-command
+                                    - set-health-check-command
+                                    - set-target-host
                                   minItems: 1
                                 description: Describe what action an entity can take.
                               conditions:
@@ -5854,6 +5566,33 @@ paths:
                               subject:
                                 type: string
                                 enum:
+                                - certificate-application
+                                description: The entity this permission pertains to.
+                              action:
+                                anyOf:
+                                - type: string
+                                  enum:
+                                  - read
+                                  - list
+                                  - create
+                                - type: array
+                                  items:
+                                    type: string
+                                    enum:
+                                    - read
+                                    - list
+                                    - create
+                                  minItems: 1
+                                description: Describe what action an entity can take.
+                            required:
+                            - subject
+                            - action
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              subject:
+                                type: string
+                                enum:
                                 - certificate-authorities
                                 description: The entity this permission pertains to.
                               inverted:
@@ -6081,6 +5820,246 @@ paths:
                                     additionalProperties: false
                                 additionalProperties: false
                                 description: When specified, only matching conditions will be allowed to access given resource.
+                            required:
+                            - subject
+                            - action
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              subject:
+                                type: string
+                                enum:
+                                - ssh-certificate-authorities
+                                description: DEPRECATED. The entity belonged to a removed product; accepted for backwards compatibility.
+                              inverted:
+                                type: boolean
+                                description: Whether rule allows or forbids.
+                              action:
+                                anyOf:
+                                - type: string
+                                  minLength: 1
+                                  maxLength: 64
+                                - type: array
+                                  items:
+                                    type: string
+                                    minLength: 1
+                                    maxLength: 64
+                                  minItems: 1
+                                description: DEPRECATED. Accepted for backwards compatibility; grants nothing.
+                              conditions:
+                                type: object
+                                additionalProperties: {}
+                                description: DEPRECATED. Accepted for backwards compatibility; ignored.
+                            required:
+                            - subject
+                            - action
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              subject:
+                                type: string
+                                enum:
+                                - ssh-certificates
+                                description: DEPRECATED. The entity belonged to a removed product; accepted for backwards compatibility.
+                              inverted:
+                                type: boolean
+                                description: Whether rule allows or forbids.
+                              action:
+                                anyOf:
+                                - type: string
+                                  minLength: 1
+                                  maxLength: 64
+                                - type: array
+                                  items:
+                                    type: string
+                                    minLength: 1
+                                    maxLength: 64
+                                  minItems: 1
+                                description: DEPRECATED. Accepted for backwards compatibility; grants nothing.
+                              conditions:
+                                type: object
+                                additionalProperties: {}
+                                description: DEPRECATED. Accepted for backwards compatibility; ignored.
+                            required:
+                            - subject
+                            - action
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              subject:
+                                type: string
+                                enum:
+                                - ssh-certificate-templates
+                                description: DEPRECATED. The entity belonged to a removed product; accepted for backwards compatibility.
+                              inverted:
+                                type: boolean
+                                description: Whether rule allows or forbids.
+                              action:
+                                anyOf:
+                                - type: string
+                                  minLength: 1
+                                  maxLength: 64
+                                - type: array
+                                  items:
+                                    type: string
+                                    minLength: 1
+                                    maxLength: 64
+                                  minItems: 1
+                                description: DEPRECATED. Accepted for backwards compatibility; grants nothing.
+                              conditions:
+                                type: object
+                                additionalProperties: {}
+                                description: DEPRECATED. Accepted for backwards compatibility; ignored.
+                            required:
+                            - subject
+                            - action
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              subject:
+                                type: string
+                                enum:
+                                - ssh-hosts
+                                description: DEPRECATED. The entity belonged to a removed product; accepted for backwards compatibility.
+                              inverted:
+                                type: boolean
+                                description: Whether rule allows or forbids.
+                              action:
+                                anyOf:
+                                - type: string
+                                  minLength: 1
+                                  maxLength: 64
+                                - type: array
+                                  items:
+                                    type: string
+                                    minLength: 1
+                                    maxLength: 64
+                                  minItems: 1
+                                description: DEPRECATED. Accepted for backwards compatibility; grants nothing.
+                              conditions:
+                                type: object
+                                additionalProperties: {}
+                                description: DEPRECATED. Accepted for backwards compatibility; ignored.
+                            required:
+                            - subject
+                            - action
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              subject:
+                                type: string
+                                enum:
+                                - ssh-host-groups
+                                description: DEPRECATED. The entity belonged to a removed product; accepted for backwards compatibility.
+                              inverted:
+                                type: boolean
+                                description: Whether rule allows or forbids.
+                              action:
+                                anyOf:
+                                - type: string
+                                  minLength: 1
+                                  maxLength: 64
+                                - type: array
+                                  items:
+                                    type: string
+                                    minLength: 1
+                                    maxLength: 64
+                                  minItems: 1
+                                description: DEPRECATED. Accepted for backwards compatibility; grants nothing.
+                              conditions:
+                                type: object
+                                additionalProperties: {}
+                                description: DEPRECATED. Accepted for backwards compatibility; ignored.
+                            required:
+                            - subject
+                            - action
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              subject:
+                                type: string
+                                enum:
+                                - mcp-endpoints
+                                description: DEPRECATED. The entity belonged to a removed product; accepted for backwards compatibility.
+                              inverted:
+                                type: boolean
+                                description: Whether rule allows or forbids.
+                              action:
+                                anyOf:
+                                - type: string
+                                  minLength: 1
+                                  maxLength: 64
+                                - type: array
+                                  items:
+                                    type: string
+                                    minLength: 1
+                                    maxLength: 64
+                                  minItems: 1
+                                description: DEPRECATED. Accepted for backwards compatibility; grants nothing.
+                              conditions:
+                                type: object
+                                additionalProperties: {}
+                                description: DEPRECATED. Accepted for backwards compatibility; ignored.
+                            required:
+                            - subject
+                            - action
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              subject:
+                                type: string
+                                enum:
+                                - mcp-servers
+                                description: DEPRECATED. The entity belonged to a removed product; accepted for backwards compatibility.
+                              inverted:
+                                type: boolean
+                                description: Whether rule allows or forbids.
+                              action:
+                                anyOf:
+                                - type: string
+                                  minLength: 1
+                                  maxLength: 64
+                                - type: array
+                                  items:
+                                    type: string
+                                    minLength: 1
+                                    maxLength: 64
+                                  minItems: 1
+                                description: DEPRECATED. Accepted for backwards compatibility; grants nothing.
+                              conditions:
+                                type: object
+                                additionalProperties: {}
+                                description: DEPRECATED. Accepted for backwards compatibility; ignored.
+                            required:
+                            - subject
+                            - action
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              subject:
+                                type: string
+                                enum:
+                                - mcp-activity-logs
+                                description: DEPRECATED. The entity belonged to a removed product; accepted for backwards compatibility.
+                              inverted:
+                                type: boolean
+                                description: Whether rule allows or forbids.
+                              action:
+                                anyOf:
+                                - type: string
+                                  minLength: 1
+                                  maxLength: 64
+                                - type: array
+                                  items:
+                                    type: string
+                                    minLength: 1
+                                    maxLength: 64
+                                  minItems: 1
+                                description: DEPRECATED. Accepted for backwards compatibility; grants nothing.
+                              conditions:
+                                type: object
+                                additionalProperties: {}
+                                description: DEPRECATED. Accepted for backwards compatibility; ignored.
                             required:
                             - subject
                             - action
@@ -6489,6 +6468,35 @@ paths:
                               subject:
                                 type: string
                                 enum:
+                                - secret-validation-rules
+                                description: The entity this permission pertains to.
+                              action:
+                                anyOf:
+                                - type: string
+                                  enum:
+                                  - read
+                                  - create
+                                  - edit
+                                  - delete
+                                - type: array
+                                  items:
+                                    type: string
+                                    enum:
+                                    - read
+                                    - create
+                                    - edit
+                                    - delete
+                                  minItems: 1
+                                description: Describe what action an entity can take.
+                            required:
+                            - subject
+                            - action
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              subject:
+                                type: string
+                                enum:
                                 - environments
                                 description: The entity this permission pertains to.
                               action:
@@ -6554,11 +6562,13 @@ paths:
                                 - type: string
                                   enum:
                                   - read
+                                  - edit
                                 - type: array
                                   items:
                                     type: string
                                     enum:
                                     - read
+                                    - edit
                                   minItems: 1
                                 description: Describe what action an entity can take.
                             required:
@@ -6577,11 +6587,15 @@ paths:
                                 - type: string
                                   enum:
                                   - read
+                                  - generate-report
+                                  - delete-report
                                 - type: array
                                   items:
                                     type: string
                                     enum:
                                     - read
+                                    - generate-report
+                                    - delete-report
                                   minItems: 1
                                 description: Describe what action an entity can take.
                             required:
@@ -6594,122 +6608,6 @@ paths:
                                 type: string
                                 enum:
                                 - ip-allowlist
-                                description: The entity this permission pertains to.
-                              action:
-                                anyOf:
-                                - type: string
-                                  enum:
-                                  - read
-                                  - create
-                                  - edit
-                                  - delete
-                                - type: array
-                                  items:
-                                    type: string
-                                    enum:
-                                    - read
-                                    - create
-                                    - edit
-                                    - delete
-                                  minItems: 1
-                                description: Describe what action an entity can take.
-                            required:
-                            - subject
-                            - action
-                            additionalProperties: false
-                          - type: object
-                            properties:
-                              subject:
-                                type: string
-                                enum:
-                                - ssh-certificate-authorities
-                                description: The entity this permission pertains to.
-                              action:
-                                anyOf:
-                                - type: string
-                                  enum:
-                                  - read
-                                  - create
-                                  - edit
-                                  - delete
-                                - type: array
-                                  items:
-                                    type: string
-                                    enum:
-                                    - read
-                                    - create
-                                    - edit
-                                    - delete
-                                  minItems: 1
-                                description: Describe what action an entity can take.
-                            required:
-                            - subject
-                            - action
-                            additionalProperties: false
-                          - type: object
-                            properties:
-                              subject:
-                                type: string
-                                enum:
-                                - ssh-certificates
-                                description: The entity this permission pertains to.
-                              action:
-                                anyOf:
-                                - type: string
-                                  enum:
-                                  - read
-                                  - create
-                                  - edit
-                                  - delete
-                                - type: array
-                                  items:
-                                    type: string
-                                    enum:
-                                    - read
-                                    - create
-                                    - edit
-                                    - delete
-                                  minItems: 1
-                                description: Describe what action an entity can take.
-                            required:
-                            - subject
-                            - action
-                            additionalProperties: false
-                          - type: object
-                            properties:
-                              subject:
-                                type: string
-                                enum:
-                                - ssh-certificate-templates
-                                description: The entity this permission pertains to.
-                              action:
-                                anyOf:
-                                - type: string
-                                  enum:
-                                  - read
-                                  - create
-                                  - edit
-                                  - delete
-                                - type: array
-                                  items:
-                                    type: string
-                                    enum:
-                                    - read
-                                    - create
-                                    - edit
-                                    - delete
-                                  minItems: 1
-                                description: Describe what action an entity can take.
-                            required:
-                            - subject
-                            - action
-                            additionalProperties: false
-                          - type: object
-                            properties:
-                              subject:
-                                type: string
-                                enum:
-                                - ssh-host-groups
                                 description: The entity this permission pertains to.
                               action:
                                 anyOf:
@@ -6976,6 +6874,9 @@ paths:
                                   - decrypt
                                   - sign
                                   - verify
+                                  - generate-mac
+                                  - verify-mac
+                                  - rotate
                                   - export-private-key
                                 - type: array
                                   items:
@@ -6989,6 +6890,9 @@ paths:
                                     - decrypt
                                     - sign
                                     - verify
+                                    - generate-mac
+                                    - verify-mac
+                                    - rotate
                                     - export-private-key
                                   minItems: 1
                                 description: Describe what action an entity can take.
@@ -7248,666 +7152,28 @@ paths:
                               subject:
                                 type: string
                                 enum:
-                                - pam-folders
+                                - hsm-connectors
                                 description: The entity this permission pertains to.
                               action:
                                 anyOf:
                                 - type: string
                                   enum:
-                                  - read
-                                  - create
-                                  - edit
-                                  - delete
+                                  - read-hsm-connectors
+                                  - create-hsm-connectors
+                                  - edit-hsm-connectors
+                                  - delete-hsm-connectors
+                                  - test-hsm-connectors
+                                  - attach-hsm-connectors
                                 - type: array
                                   items:
                                     type: string
                                     enum:
-                                    - read
-                                    - create
-                                    - edit
-                                    - delete
-                                  minItems: 1
-                                description: Describe what action an entity can take.
-                            required:
-                            - subject
-                            - action
-                            additionalProperties: false
-                          - type: object
-                            properties:
-                              subject:
-                                type: string
-                                enum:
-                                - pam-resources
-                                description: The entity this permission pertains to.
-                              inverted:
-                                type: boolean
-                                description: Whether rule allows or forbids.
-                              action:
-                                anyOf:
-                                - type: string
-                                  enum:
-                                  - read
-                                  - create
-                                  - edit
-                                  - delete
-                                - type: array
-                                  items:
-                                    type: string
-                                    enum:
-                                    - read
-                                    - create
-                                    - edit
-                                    - delete
-                                  minItems: 1
-                                description: Describe what action an entity can take.
-                              conditions:
-                                type: object
-                                properties:
-                                  name:
-                                    anyOf:
-                                    - type: string
-                                    - type: object
-                                      properties:
-                                        $eq:
-                                          type: string
-                                          minLength: 1
-                                        $ne:
-                                          type: string
-                                          minLength: 1
-                                        $in:
-                                          type: array
-                                          items:
-                                            type: string
-                                            minLength: 1
-                                        $glob:
-                                          type: string
-                                          minLength: 1
-                                      additionalProperties: false
-                                  resourceType:
-                                    anyOf:
-                                    - type: string
-                                    - type: object
-                                      properties:
-                                        $eq:
-                                          type: string
-                                          minLength: 1
-                                        $ne:
-                                          type: string
-                                          minLength: 1
-                                        $in:
-                                          type: array
-                                          items:
-                                            type: string
-                                            minLength: 1
-                                        $glob:
-                                          type: string
-                                          minLength: 1
-                                      additionalProperties: false
-                                  metadata:
-                                    type: object
-                                    properties:
-                                      $elemMatch:
-                                        type: object
-                                        properties:
-                                          key:
-                                            type: object
-                                            properties:
-                                              $eq:
-                                                type: string
-                                                minLength: 1
-                                              $ne:
-                                                type: string
-                                                minLength: 1
-                                              $in:
-                                                type: array
-                                                items:
-                                                  type: string
-                                                  minLength: 1
-                                            additionalProperties: false
-                                          value:
-                                            type: object
-                                            properties:
-                                              $eq:
-                                                type: string
-                                                minLength: 1
-                                              $ne:
-                                                type: string
-                                                minLength: 1
-                                              $in:
-                                                type: array
-                                                items:
-                                                  type: string
-                                                  minLength: 1
-                                            additionalProperties: false
-                                        additionalProperties: false
-                                    required:
-                                    - $elemMatch
-                                    additionalProperties: false
-                                additionalProperties: false
-                                description: When specified, only matching conditions will be allowed to access given resource.
-                            required:
-                            - subject
-                            - action
-                            additionalProperties: false
-                          - type: object
-                            properties:
-                              subject:
-                                type: string
-                                enum:
-                                - pam-domains
-                                description: The entity this permission pertains to.
-                              inverted:
-                                type: boolean
-                                description: Whether rule allows or forbids.
-                              action:
-                                anyOf:
-                                - type: string
-                                  enum:
-                                  - read
-                                  - create
-                                  - edit
-                                  - delete
-                                - type: array
-                                  items:
-                                    type: string
-                                    enum:
-                                    - read
-                                    - create
-                                    - edit
-                                    - delete
-                                  minItems: 1
-                                description: Describe what action an entity can take.
-                              conditions:
-                                type: object
-                                properties:
-                                  name:
-                                    anyOf:
-                                    - type: string
-                                    - type: object
-                                      properties:
-                                        $eq:
-                                          type: string
-                                          minLength: 1
-                                        $ne:
-                                          type: string
-                                          minLength: 1
-                                        $in:
-                                          type: array
-                                          items:
-                                            type: string
-                                            minLength: 1
-                                        $glob:
-                                          type: string
-                                          minLength: 1
-                                      additionalProperties: false
-                                  domainType:
-                                    anyOf:
-                                    - type: string
-                                    - type: object
-                                      properties:
-                                        $eq:
-                                          type: string
-                                          minLength: 1
-                                        $ne:
-                                          type: string
-                                          minLength: 1
-                                        $in:
-                                          type: array
-                                          items:
-                                            type: string
-                                            minLength: 1
-                                        $glob:
-                                          type: string
-                                          minLength: 1
-                                      additionalProperties: false
-                                  metadata:
-                                    type: object
-                                    properties:
-                                      $elemMatch:
-                                        type: object
-                                        properties:
-                                          key:
-                                            type: object
-                                            properties:
-                                              $eq:
-                                                type: string
-                                                minLength: 1
-                                              $ne:
-                                                type: string
-                                                minLength: 1
-                                              $in:
-                                                type: array
-                                                items:
-                                                  type: string
-                                                  minLength: 1
-                                            additionalProperties: false
-                                          value:
-                                            type: object
-                                            properties:
-                                              $eq:
-                                                type: string
-                                                minLength: 1
-                                              $ne:
-                                                type: string
-                                                minLength: 1
-                                              $in:
-                                                type: array
-                                                items:
-                                                  type: string
-                                                  minLength: 1
-                                            additionalProperties: false
-                                        additionalProperties: false
-                                    required:
-                                    - $elemMatch
-                                    additionalProperties: false
-                                additionalProperties: false
-                                description: When specified, only matching conditions will be allowed to access given domain.
-                            required:
-                            - subject
-                            - action
-                            additionalProperties: false
-                          - type: object
-                            properties:
-                              subject:
-                                type: string
-                                enum:
-                                - pam-accounts
-                                description: The entity this permission pertains to.
-                              inverted:
-                                type: boolean
-                                description: Whether rule allows or forbids.
-                              action:
-                                anyOf:
-                                - type: string
-                                  enum:
-                                  - access
-                                  - read
-                                  - create
-                                  - edit
-                                  - delete
-                                  - trigger-rotation
-                                  - read-credentials
-                                - type: array
-                                  items:
-                                    type: string
-                                    enum:
-                                    - access
-                                    - read
-                                    - create
-                                    - edit
-                                    - delete
-                                    - trigger-rotation
-                                    - read-credentials
-                                  minItems: 1
-                                description: Describe what action an entity can take.
-                              conditions:
-                                type: object
-                                properties:
-                                  resourceName:
-                                    anyOf:
-                                    - type: string
-                                    - type: object
-                                      properties:
-                                        $eq:
-                                          type: string
-                                          minLength: 1
-                                        $ne:
-                                          type: string
-                                          minLength: 1
-                                        $in:
-                                          type: array
-                                          items:
-                                            type: string
-                                            minLength: 1
-                                        $glob:
-                                          type: string
-                                          minLength: 1
-                                      additionalProperties: false
-                                  accountName:
-                                    anyOf:
-                                    - type: string
-                                    - type: object
-                                      properties:
-                                        $eq:
-                                          type: string
-                                          minLength: 1
-                                        $ne:
-                                          type: string
-                                          minLength: 1
-                                        $in:
-                                          type: array
-                                          items:
-                                            type: string
-                                            minLength: 1
-                                        $glob:
-                                          type: string
-                                          minLength: 1
-                                      additionalProperties: false
-                                  resourceType:
-                                    anyOf:
-                                    - type: string
-                                    - type: object
-                                      properties:
-                                        $eq:
-                                          type: string
-                                          minLength: 1
-                                        $ne:
-                                          type: string
-                                          minLength: 1
-                                        $in:
-                                          type: array
-                                          items:
-                                            type: string
-                                            minLength: 1
-                                        $glob:
-                                          type: string
-                                          minLength: 1
-                                      additionalProperties: false
-                                  domainName:
-                                    anyOf:
-                                    - type: string
-                                    - type: object
-                                      properties:
-                                        $eq:
-                                          type: string
-                                          minLength: 1
-                                        $ne:
-                                          type: string
-                                          minLength: 1
-                                        $in:
-                                          type: array
-                                          items:
-                                            type: string
-                                            minLength: 1
-                                        $glob:
-                                          type: string
-                                          minLength: 1
-                                      additionalProperties: false
-                                  domainType:
-                                    anyOf:
-                                    - type: string
-                                    - type: object
-                                      properties:
-                                        $eq:
-                                          type: string
-                                          minLength: 1
-                                        $ne:
-                                          type: string
-                                          minLength: 1
-                                        $in:
-                                          type: array
-                                          items:
-                                            type: string
-                                            minLength: 1
-                                        $glob:
-                                          type: string
-                                          minLength: 1
-                                      additionalProperties: false
-                                  metadata:
-                                    type: object
-                                    properties:
-                                      $elemMatch:
-                                        type: object
-                                        properties:
-                                          key:
-                                            type: object
-                                            properties:
-                                              $eq:
-                                                type: string
-                                                minLength: 1
-                                              $ne:
-                                                type: string
-                                                minLength: 1
-                                              $in:
-                                                type: array
-                                                items:
-                                                  type: string
-                                                  minLength: 1
-                                            additionalProperties: false
-                                          value:
-                                            type: object
-                                            properties:
-                                              $eq:
-                                                type: string
-                                                minLength: 1
-                                              $ne:
-                                                type: string
-                                                minLength: 1
-                                              $in:
-                                                type: array
-                                                items:
-                                                  type: string
-                                                  minLength: 1
-                                            additionalProperties: false
-                                        additionalProperties: false
-                                    required:
-                                    - $elemMatch
-                                    additionalProperties: false
-                                additionalProperties: false
-                                description: When specified, only matching conditions will be allowed to access given resource.
-                            required:
-                            - subject
-                            - action
-                            additionalProperties: false
-                          - type: object
-                            properties:
-                              subject:
-                                type: string
-                                enum:
-                                - pam-sessions
-                                description: The entity this permission pertains to.
-                              action:
-                                anyOf:
-                                - type: string
-                                  enum:
-                                  - read
-                                  - terminate
-                                - type: array
-                                  items:
-                                    type: string
-                                    enum:
-                                    - read
-                                    - terminate
-                                  minItems: 1
-                                description: Describe what action an entity can take.
-                            required:
-                            - subject
-                            - action
-                            additionalProperties: false
-                          - type: object
-                            properties:
-                              subject:
-                                type: string
-                                enum:
-                                - pam-account-policies
-                                description: The entity this permission pertains to.
-                              action:
-                                anyOf:
-                                - type: string
-                                  enum:
-                                  - read
-                                  - create
-                                  - edit
-                                  - delete
-                                - type: array
-                                  items:
-                                    type: string
-                                    enum:
-                                    - read
-                                    - create
-                                    - edit
-                                    - delete
-                                  minItems: 1
-                                description: Describe what action an entity can take.
-                            required:
-                            - subject
-                            - action
-                            additionalProperties: false
-                          - type: object
-                            properties:
-                              subject:
-                                type: string
-                                enum:
-                                - pam-discovery
-                                description: The entity this permission pertains to.
-                              action:
-                                anyOf:
-                                - type: string
-                                  enum:
-                                  - read
-                                  - create
-                                  - edit
-                                  - delete
-                                  - run-scan
-                                - type: array
-                                  items:
-                                    type: string
-                                    enum:
-                                    - read
-                                    - create
-                                    - edit
-                                    - delete
-                                    - run-scan
-                                  minItems: 1
-                                description: Describe what action an entity can take.
-                            required:
-                            - subject
-                            - action
-                            additionalProperties: false
-                          - type: object
-                            properties:
-                              subject:
-                                type: string
-                                enum:
-                                - pam-insights
-                                description: The entity this permission pertains to.
-                              action:
-                                anyOf:
-                                - type: string
-                                  enum:
-                                  - read
-                                - type: array
-                                  items:
-                                    type: string
-                                    enum:
-                                    - read
-                                  minItems: 1
-                                description: Describe what action an entity can take.
-                            required:
-                            - subject
-                            - action
-                            additionalProperties: false
-                          - type: object
-                            properties:
-                              subject:
-                                type: string
-                                enum:
-                                - mcp-endpoints
-                                description: The entity this permission pertains to.
-                              inverted:
-                                type: boolean
-                                description: Whether rule allows or forbids.
-                              action:
-                                anyOf:
-                                - type: string
-                                  enum:
-                                  - read
-                                  - create
-                                  - edit
-                                  - delete
-                                  - connect
-                                - type: array
-                                  items:
-                                    type: string
-                                    enum:
-                                    - read
-                                    - create
-                                    - edit
-                                    - delete
-                                    - connect
-                                  minItems: 1
-                                description: Describe what action an entity can take.
-                              conditions:
-                                type: object
-                                properties:
-                                  name:
-                                    anyOf:
-                                    - type: string
-                                    - type: object
-                                      properties:
-                                        $eq:
-                                          type: string
-                                          minLength: 1
-                                        $ne:
-                                          type: string
-                                          minLength: 1
-                                        $glob:
-                                          type: string
-                                          minLength: 1
-                                        $in:
-                                          type: array
-                                          items:
-                                            type: string
-                                            minLength: 1
-                                      additionalProperties: false
-                                additionalProperties: false
-                                description: When specified, only matching conditions will be allowed to access given resource.
-                            required:
-                            - subject
-                            - action
-                            additionalProperties: false
-                          - type: object
-                            properties:
-                              subject:
-                                type: string
-                                enum:
-                                - mcp-servers
-                                description: The entity this permission pertains to.
-                              action:
-                                anyOf:
-                                - type: string
-                                  enum:
-                                  - read
-                                  - create
-                                  - edit
-                                  - delete
-                                - type: array
-                                  items:
-                                    type: string
-                                    enum:
-                                    - read
-                                    - create
-                                    - edit
-                                    - delete
-                                  minItems: 1
-                                description: Describe what action an entity can take.
-                            required:
-                            - subject
-                            - action
-                            additionalProperties: false
-                          - type: object
-                            properties:
-                              subject:
-                                type: string
-                                enum:
-                                - mcp-activity-logs
-                                description: The entity this permission pertains to.
-                              action:
-                                anyOf:
-                                - type: string
-                                  enum:
-                                  - read
-                                  - create
-                                  - edit
-                                  - delete
-                                - type: array
-                                  items:
-                                    type: string
-                                    enum:
-                                    - read
-                                    - create
-                                    - edit
-                                    - delete
+                                    - read-hsm-connectors
+                                    - create-hsm-connectors
+                                    - edit-hsm-connectors
+                                    - delete-hsm-connectors
+                                    - test-hsm-connectors
+                                    - attach-hsm-connectors
                                   minItems: 1
                                 description: Describe what action an entity can take.
                             required:
@@ -8000,6 +7266,187 @@ paths:
                               subject:
                                 type: string
                                 enum:
+                                - proxied-services
+                                description: The entity this permission pertains to.
+                              inverted:
+                                type: boolean
+                                description: Whether rule allows or forbids.
+                              action:
+                                anyOf:
+                                - type: string
+                                  enum:
+                                  - read
+                                  - create
+                                  - edit
+                                  - delete
+                                  - proxy
+                                  - report-usage
+                                - type: array
+                                  items:
+                                    type: string
+                                    enum:
+                                    - read
+                                    - create
+                                    - edit
+                                    - delete
+                                    - proxy
+                                    - report-usage
+                                  minItems: 1
+                                description: Describe what action an entity can take.
+                              conditions:
+                                type: object
+                                properties:
+                                  environment:
+                                    anyOf:
+                                    - type: string
+                                    - type: object
+                                      properties:
+                                        $eq:
+                                          type: string
+                                          minLength: 1
+                                        $ne:
+                                          type: string
+                                          minLength: 1
+                                        $in:
+                                          type: array
+                                          items:
+                                            type: string
+                                            minLength: 1
+                                        $glob:
+                                          type: string
+                                          minLength: 1
+                                      additionalProperties: false
+                                  secretPath:
+                                    anyOf:
+                                    - type: string
+                                    - type: object
+                                      properties:
+                                        $eq:
+                                          type: string
+                                          minLength: 1
+                                        $ne:
+                                          type: string
+                                          minLength: 1
+                                        $in:
+                                          type: array
+                                          items:
+                                            type: string
+                                            minLength: 1
+                                        $glob:
+                                          type: string
+                                          minLength: 1
+                                      additionalProperties: false
+                                additionalProperties: false
+                                description: When specified, only matching conditions will be allowed to access given resource.
+                            required:
+                            - subject
+                            - action
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              subject:
+                                type: string
+                                enum:
+                                - agent-vault-access-bundles
+                                description: The entity this permission pertains to.
+                              inverted:
+                                type: boolean
+                                description: Whether rule allows or forbids.
+                              action:
+                                anyOf:
+                                - type: string
+                                  enum:
+                                  - read
+                                  - create
+                                  - edit
+                                  - delete
+                                  - manage-members
+                                - type: array
+                                  items:
+                                    type: string
+                                    enum:
+                                    - read
+                                    - create
+                                    - edit
+                                    - delete
+                                    - manage-members
+                                  minItems: 1
+                                description: Describe what action an entity can take.
+                            required:
+                            - subject
+                            - action
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              subject:
+                                type: string
+                                enum:
+                                - agent-vault-sessions
+                                description: The entity this permission pertains to.
+                              inverted:
+                                type: boolean
+                                description: Whether rule allows or forbids.
+                              action:
+                                anyOf:
+                                - type: string
+                                  enum:
+                                  - read
+                                  - create
+                                  - revoke
+                                - type: array
+                                  items:
+                                    type: string
+                                    enum:
+                                    - read
+                                    - create
+                                    - revoke
+                                  minItems: 1
+                                description: Describe what action an entity can take.
+                            required:
+                            - subject
+                            - action
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              subject:
+                                type: string
+                                enum:
+                                - agent-vault-proxies
+                                description: The entity this permission pertains to.
+                              inverted:
+                                type: boolean
+                                description: Whether rule allows or forbids.
+                              action:
+                                anyOf:
+                                - type: string
+                                  enum:
+                                  - read
+                                  - create
+                                  - edit
+                                  - delete
+                                  - issue-token
+                                  - revoke
+                                - type: array
+                                  items:
+                                    type: string
+                                    enum:
+                                    - read
+                                    - create
+                                    - edit
+                                    - delete
+                                    - issue-token
+                                    - revoke
+                                  minItems: 1
+                                description: Describe what action an entity can take.
+                            required:
+                            - subject
+                            - action
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              subject:
+                                type: string
+                                enum:
                                 - approval-requests
                                 description: The entity this permission pertains to.
                               action:
@@ -8064,6 +7511,81 @@ paths:
                                     - read
                                   minItems: 1
                                 description: Describe what action an entity can take.
+                            required:
+                            - subject
+                            - action
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              subject:
+                                type: string
+                                enum:
+                                - project-folder-grant
+                                description: The entity this permission pertains to.
+                              inverted:
+                                type: boolean
+                                description: Whether rule allows or forbids.
+                              action:
+                                anyOf:
+                                - type: string
+                                  enum:
+                                  - read-grant
+                                  - create-grant
+                                  - revoke-grant
+                                - type: array
+                                  items:
+                                    type: string
+                                    enum:
+                                    - read-grant
+                                    - create-grant
+                                    - revoke-grant
+                                  minItems: 1
+                                description: Describe what action an entity can take.
+                              conditions:
+                                type: object
+                                properties:
+                                  environment:
+                                    anyOf:
+                                    - type: string
+                                    - type: object
+                                      properties:
+                                        $eq:
+                                          type: string
+                                          minLength: 1
+                                        $ne:
+                                          type: string
+                                          minLength: 1
+                                        $in:
+                                          type: array
+                                          items:
+                                            type: string
+                                            minLength: 1
+                                        $glob:
+                                          type: string
+                                          minLength: 1
+                                      additionalProperties: false
+                                  secretPath:
+                                    anyOf:
+                                    - type: string
+                                    - type: object
+                                      properties:
+                                        $eq:
+                                          type: string
+                                          minLength: 1
+                                        $ne:
+                                          type: string
+                                          minLength: 1
+                                        $in:
+                                          type: array
+                                          items:
+                                            type: string
+                                            minLength: 1
+                                        $glob:
+                                          type: string
+                                          minLength: 1
+                                      additionalProperties: false
+                                additionalProperties: false
+                                description: When specified, only matching conditions will be allowed to access given resource.
                             required:
                             - subject
                             - action

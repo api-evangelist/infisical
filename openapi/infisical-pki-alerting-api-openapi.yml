@@ -215,7 +215,7 @@ paths:
       operationId: createPkiAlertV1
       tags:
       - PKI Alerting
-      description: Create a new PKI alert
+      description: 'Deprecated: legacy PKI alerts can no longer be created. Use the alerts API (/api/v1/alerts) instead.'
       requestBody:
         required: true
         content:
@@ -359,6 +359,7 @@ paths:
               - filters
               - channels
               additionalProperties: false
+      deprecated: true
       responses:
         '200':
           description: Default Response
@@ -636,7 +637,7 @@ paths:
       operationId: listPkiAlertsV1
       tags:
       - PKI Alerting
-      description: List PKI alerts for a project
+      description: 'Deprecated: application alerts are managed with the alerts API (/api/v1/alerts). List PKI alerts.'
       parameters:
       - schema:
           type: string
@@ -679,6 +680,7 @@ paths:
         in: query
         name: offset
         required: false
+      deprecated: true
       responses:
         '200':
           description: Default Response
@@ -985,7 +987,7 @@ paths:
       operationId: getPkiAlertV1
       tags:
       - PKI Alerting
-      description: Get a PKI alert by ID
+      description: 'Deprecated: application alerts are managed with the alerts API (/api/v1/alerts). Get a PKI alert by ID.'
       parameters:
       - schema:
           type: string
@@ -994,6 +996,7 @@ paths:
         name: alertId
         required: true
         description: Alert ID
+      deprecated: true
       responses:
         '200':
           description: Default Response
@@ -1271,7 +1274,7 @@ paths:
       operationId: updatePkiAlertV1
       tags:
       - PKI Alerting
-      description: Update a PKI alert
+      description: 'Deprecated: legacy PKI alerts can no longer be edited. Use the alerts API (/api/v1/alerts) instead.'
       requestBody:
         required: true
         content:
@@ -1414,6 +1417,7 @@ paths:
         name: alertId
         required: true
         description: Alert ID
+      deprecated: true
       responses:
         '200':
           description: Default Response
@@ -1691,7 +1695,7 @@ paths:
       operationId: deletePkiAlertV1
       tags:
       - PKI Alerting
-      description: Delete a PKI alert
+      description: 'Deprecated: application alerts are managed with the alerts API (/api/v1/alerts). Delete a PKI alert.'
       parameters:
       - schema:
           type: string
@@ -1700,6 +1704,7 @@ paths:
         name: alertId
         required: true
         description: Alert ID
+      deprecated: true
       responses:
         '200':
           description: Default Response

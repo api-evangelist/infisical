@@ -217,11 +217,16 @@ paths:
             schema:
               type: object
               properties:
+                templateId:
+                  type: string
+                  format: uuid
+                  description: The ID of the Kubernetes auth template to source connection settings from. When provided, the host, CA certificate, token reviewer JWT, token review mode, gateway, and allowed audience are taken from the template and cannot be set individually.
                 kubernetesHost:
                   type:
                   - string
                   - 'null'
                   minLength: 1
+                  maxLength: 255
                   description: The host string, host:port pair, or URL to the base of the Kubernetes API server.
                 caCert:
                   type: string
@@ -237,8 +242,7 @@ paths:
                   enum:
                   - api
                   - gateway
-                  default: api
-                  description: 'The mode to use for token review. Must be one of: ''api'', ''gateway''. If gateway is selected, the gateway must be deployed in Kubernetes, and the gateway must have the system:auth-delegator ClusterRole binding.'
+                  description: 'The mode to use for token review. Must be one of: ''api'', ''gateway''. Defaults to ''api'' when omitted. If gateway is selected, the gateway must be deployed in Kubernetes, and the gateway must have the system:auth-delegator ClusterRole binding.'
                 allowedNamespaces:
                   type: string
                   description: The comma-separated list of trusted namespaces that service accounts must belong to authenticate with Infisical.
@@ -247,6 +251,7 @@ paths:
                   description: The comma-separated list of trusted service account names that can authenticate with Infisical.
                 allowedAudience:
                   type: string
+                  maxLength: 1000
                   description: The optional audience claim that the service account JWT token must have to authenticate with Infisical.
                 gatewayId:
                   type:
@@ -292,10 +297,8 @@ paths:
                   default: 0
                   description: The maximum number of times that an access token can be used.
               required:
-              - kubernetesHost
               - allowedNamespaces
               - allowedNames
-              - allowedAudience
               additionalProperties: false
       parameters:
       - schema:
@@ -352,11 +355,6 @@ paths:
                         type: string
                       allowedAudience:
                         type: string
-                      gatewayId:
-                        type:
-                        - string
-                        - 'null'
-                        format: uuid
                       gatewayPoolId:
                         type:
                         - string
@@ -365,12 +363,25 @@ paths:
                       verifyTlsCertificate:
                         type: boolean
                         default: false
+                      templateId:
+                        type:
+                        - string
+                        - 'null'
+                        format: uuid
+                      isTokenReviewerJwtTemplateSourced:
+                        type: boolean
+                        default: false
                       caCert:
                         type: string
                       tokenReviewerJwt:
                         type:
                         - string
                         - 'null'
+                      gatewayId:
+                        type:
+                        - string
+                        - 'null'
+                        format: uuid
                     required:
                     - id
                     - createdAt
@@ -536,11 +547,18 @@ paths:
             schema:
               type: object
               properties:
+                templateId:
+                  type:
+                  - string
+                  - 'null'
+                  format: uuid
+                  description: The ID of the Kubernetes auth template to link. While linked, connection settings are managed by the template and cannot be set individually. Pass null to unlink the template; the settings copied from it are kept.
                 kubernetesHost:
                   type:
                   - string
                   - 'null'
                   minLength: 1
+                  maxLength: 255
                   description: The new host string, host:port pair, or URL to the base of the Kubernetes API server.
                 caCert:
                   type: string
@@ -567,6 +585,7 @@ paths:
                   description: The new comma-separated list of trusted service account names that can authenticate with Infisical.
                 allowedAudience:
                   type: string
+                  maxLength: 1000
                   description: The new optional audience claim that the service account JWT token must have to authenticate with Infisical.
                 gatewayId:
                   type:
@@ -661,11 +680,6 @@ paths:
                         type: string
                       allowedAudience:
                         type: string
-                      gatewayId:
-                        type:
-                        - string
-                        - 'null'
-                        format: uuid
                       gatewayPoolId:
                         type:
                         - string
@@ -674,12 +688,25 @@ paths:
                       verifyTlsCertificate:
                         type: boolean
                         default: false
+                      templateId:
+                        type:
+                        - string
+                        - 'null'
+                        format: uuid
+                      isTokenReviewerJwtTemplateSourced:
+                        type: boolean
+                        default: false
                       caCert:
                         type: string
                       tokenReviewerJwt:
                         type:
                         - string
                         - 'null'
+                      gatewayId:
+                        type:
+                        - string
+                        - 'null'
+                        format: uuid
                     required:
                     - id
                     - createdAt
@@ -893,11 +920,6 @@ paths:
                         type: string
                       allowedAudience:
                         type: string
-                      gatewayId:
-                        type:
-                        - string
-                        - 'null'
-                        format: uuid
                       gatewayPoolId:
                         type:
                         - string
@@ -906,12 +928,25 @@ paths:
                       verifyTlsCertificate:
                         type: boolean
                         default: false
+                      templateId:
+                        type:
+                        - string
+                        - 'null'
+                        format: uuid
+                      isTokenReviewerJwtTemplateSourced:
+                        type: boolean
+                        default: false
                       caCert:
                         type: string
                       tokenReviewerJwt:
                         type:
                         - string
                         - 'null'
+                      gatewayId:
+                        type:
+                        - string
+                        - 'null'
+                        format: uuid
                     required:
                     - id
                     - createdAt
@@ -1125,11 +1160,6 @@ paths:
                         type: string
                       allowedAudience:
                         type: string
-                      gatewayId:
-                        type:
-                        - string
-                        - 'null'
-                        format: uuid
                       gatewayPoolId:
                         type:
                         - string
@@ -1138,6 +1168,19 @@ paths:
                       verifyTlsCertificate:
                         type: boolean
                         default: false
+                      templateId:
+                        type:
+                        - string
+                        - 'null'
+                        format: uuid
+                      isTokenReviewerJwtTemplateSourced:
+                        type: boolean
+                        default: false
+                      gatewayId:
+                        type:
+                        - string
+                        - 'null'
+                        format: uuid
                     required:
                     - id
                     - createdAt

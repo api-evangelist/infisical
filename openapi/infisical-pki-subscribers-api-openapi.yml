@@ -256,7 +256,7 @@ paths:
       operationId: getPkiSubscriber
       tags:
       - PKI Subscribers
-      description: Get PKI Subscriber
+      description: 'Get PKI Subscriber. Deprecated, use certificate applications instead: https://infisical.com/docs/documentation/platform/pki/applications/overview'
       parameters:
       - schema:
           type: string
@@ -270,6 +270,7 @@ paths:
         name: subscriberName
         required: true
         description: The name of the PKI subscriber to get.
+      deprecated: true
       responses:
         '200':
           description: Default Response
@@ -492,7 +493,7 @@ paths:
       operationId: updatePkiSubscriber
       tags:
       - PKI Subscribers
-      description: Update PKI Subscriber
+      description: 'Update PKI Subscriber. Deprecated, use certificate applications instead: https://infisical.com/docs/documentation/platform/pki/applications/overview'
       requestBody:
         required: true
         content:
@@ -557,6 +558,8 @@ paths:
                     - emailProtection
                     - timeStamping
                     - ocspSigning
+                    - smartCardLogon
+                    - anyExtendedKeyUsage
                   description: The extended key usage extension to be used on certificates issued for this subscriber to update to.
                 enableAutoRenewal:
                   type: boolean
@@ -627,6 +630,7 @@ paths:
         name: subscriberName
         required: true
         description: The name of the PKI subscriber to update.
+      deprecated: true
       responses:
         '200':
           description: Default Response
@@ -848,7 +852,7 @@ paths:
     delete:
       tags:
       - PKI Subscribers
-      description: Delete PKI Subscriber
+      description: 'Delete PKI Subscriber. Deprecated, use certificate applications instead: https://infisical.com/docs/documentation/platform/pki/applications/overview'
       requestBody:
         required: true
         content:
@@ -869,6 +873,7 @@ paths:
         name: subscriberName
         required: true
         description: The name of the PKI subscriber to delete.
+      deprecated: true
       responses:
         '200':
           description: Default Response
@@ -1094,7 +1099,7 @@ paths:
       operationId: createPkiSubscriber
       tags:
       - PKI Subscribers
-      description: Create PKI Subscriber
+      description: 'Create PKI Subscriber. Deprecated, use certificate applications instead: https://infisical.com/docs/documentation/platform/pki/applications/overview'
       requestBody:
         required: true
         content:
@@ -1164,6 +1169,8 @@ paths:
                     - emailProtection
                     - timeStamping
                     - ocspSigning
+                    - smartCardLogon
+                    - anyExtendedKeyUsage
                   default: []
                   description: The extended key usage extension to be used on certificates issued for this subscriber.
                 enableAutoRenewal:
@@ -1231,6 +1238,7 @@ paths:
               - name
               - commonName
               additionalProperties: false
+      deprecated: true
       responses:
         '200':
           description: Default Response
@@ -1454,7 +1462,7 @@ paths:
       operationId: orderPkiSubscriberCertificate
       tags:
       - PKI Subscribers
-      description: Order certificate
+      description: 'Order certificate. Deprecated, use certificate applications instead: https://infisical.com/docs/documentation/platform/pki/applications/overview'
       requestBody:
         required: true
         content:
@@ -1475,6 +1483,7 @@ paths:
         name: subscriberName
         required: true
         description: The name of the PKI subscriber to issue the certificate for.
+      deprecated: true
       responses:
         '200':
           description: Default Response
@@ -1633,7 +1642,7 @@ paths:
       operationId: issuePkiSubscriberCertificate
       tags:
       - PKI Subscribers
-      description: Issue certificate
+      description: 'Issue certificate. Deprecated, use certificate applications instead: https://infisical.com/docs/documentation/platform/pki/applications/overview'
       requestBody:
         required: true
         content:
@@ -1654,6 +1663,7 @@ paths:
         name: subscriberName
         required: true
         description: The name of the PKI subscriber to issue the certificate for.
+      deprecated: true
       responses:
         '200':
           description: Default Response
@@ -1829,7 +1839,7 @@ paths:
       operationId: signPkiSubscriberCertificate
       tags:
       - PKI Subscribers
-      description: Sign certificate
+      description: 'Sign certificate. Deprecated, use certificate applications instead: https://infisical.com/docs/documentation/platform/pki/applications/overview'
       requestBody:
         required: true
         content:
@@ -1856,6 +1866,7 @@ paths:
         name: subscriberName
         required: true
         description: The name of the PKI subscriber to sign the certificate for.
+      deprecated: true
       responses:
         '200':
           description: Default Response
@@ -2027,7 +2038,7 @@ paths:
       operationId: getPkiSubscriberLatestCertificateBundle
       tags:
       - PKI Subscribers
-      description: Get latest certificate bundle of a subscriber
+      description: 'Get latest certificate bundle of a subscriber. Deprecated, use certificate applications instead: https://infisical.com/docs/documentation/platform/pki/applications/overview'
       parameters:
       - schema:
           type: string
@@ -2041,6 +2052,7 @@ paths:
         name: subscriberName
         required: true
         description: The name of the PKI subscriber to get the active certificate bundle for.
+      deprecated: true
       responses:
         '200':
           description: Default Response
@@ -2214,7 +2226,7 @@ paths:
       operationId: listPkiSubscriberCertificates
       tags:
       - PKI Subscribers
-      description: List PKI Subscriber certificates
+      description: 'List PKI Subscriber certificates. Deprecated, use certificate applications instead: https://infisical.com/docs/documentation/platform/pki/applications/overview'
       parameters:
       - schema:
           type: string
@@ -2246,6 +2258,7 @@ paths:
         name: subscriberName
         required: true
         description: The name of the PKI subscriber to get.
+      deprecated: true
       responses:
         '200':
           description: Default Response
@@ -2407,6 +2420,28 @@ paths:
                           - string
                           - 'null'
                           format: uuid
+                        keySource:
+                          type: string
+                          default: infisical
+                        hsmConnectorId:
+                          type:
+                          - string
+                          - 'null'
+                          format: uuid
+                        hsmKeyLabel:
+                          type:
+                          - string
+                          - 'null'
+                        hsmPublicKeySpki: {}
+                        subjectDomainComponents:
+                          type:
+                          - string
+                          - 'null'
+                        orderId:
+                          type: string
+                          format: uuid
+                          default: 00000000-0000-0000-0000-000000000000
+                        customExtensions: {}
                       required:
                       - id
                       - createdAt

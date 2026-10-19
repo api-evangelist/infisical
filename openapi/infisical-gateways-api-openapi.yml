@@ -1,0 +1,1599 @@
+openapi: 3.2.0
+info:
+  title: Infisical Gateways API
+  description: List of all available APIs that can be consumed
+  version: 0.0.1
+servers:
+- url: https://us.infisical.com
+  description: Production server (US)
+- url: https://eu.infisical.com
+  description: Production server (EU)
+- url: http://localhost:8080
+  description: Local server
+tags:
+- name: Gateways
+paths:
+  /api/v3/gateways:
+    post:
+      operationId: createGateway
+      tags:
+      - Gateways
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                  description: Name of the gateway.
+                authMethod:
+                  anyOf:
+                  - type: object
+                    properties:
+                      method:
+                        type: string
+                        enum:
+                        - aws
+                      allowedPrincipalArns:
+                        type: string
+                        maxLength: 4096
+                        default: ''
+                        description: The comma-separated list of trusted IAM principal ARNs that are allowed to authenticate with Infisical.
+                      allowedAccountIds:
+                        type: string
+                        maxLength: 4096
+                        default: ''
+                        description: The comma-separated list of trusted AWS account IDs that are allowed to authenticate with Infisical.
+                    required:
+                    - method
+                    additionalProperties: false
+                  - type: object
+                    properties:
+                      method:
+                        type: string
+                        enum:
+                        - gcp
+                      type:
+                        type: string
+                        enum:
+                        - gce
+                        - iam
+                        default: gce
+                        description: How the gateway proves its GCP identity. 'gce' verifies an ID token from the instance metadata server, which covers Compute Engine VMs and GKE workload identity. 'iam' verifies a JWT the service account signed through the IAM Credentials API, for hosts outside Compute Engine.
+                      allowedServiceAccounts:
+                        type: string
+                        maxLength: 1024
+                        default: ''
+                        description: The comma-separated list of GCP service account emails that are allowed to authenticate as this gateway.
+                      allowedProjects:
+                        type: string
+                        maxLength: 1024
+                        default: ''
+                        description: The comma-separated list of GCP project IDs whose Compute Engine instances are allowed to authenticate as this gateway. Only applies to the 'gce' type, and requires a token carrying Compute Engine instance details.
+                      allowedZones:
+                        type: string
+                        maxLength: 1024
+                        default: ''
+                        description: The comma-separated list of GCP zones whose Compute Engine instances are allowed to authenticate as this gateway. Only applies to the 'gce' type, and requires a token carrying Compute Engine instance details.
+                    required:
+                    - method
+                    additionalProperties: false
+                  - type: object
+                    properties:
+                      method:
+                        type: string
+                        enum:
+                        - kubernetes
+                      kubernetesHost:
+                        type: string
+                        minLength: 1
+                        maxLength: 255
+                        description: The URL of the Kubernetes API server that Infisical reviews the gateway's service account token against (e.g. https://my-cluster.example.com:6443). Omit only when tokenReviewMode is 'gateway', where the reviewing gateway calls its own API server.
+                      caCertificate:
+                        type: string
+                        maxLength: 10240
+                        description: The PEM-encoded CA certificate that issued the Kubernetes API server's TLS certificate. Required when the API server uses a certificate the system trust store does not recognise, which is the usual case for a cluster CA.
+                      tokenReviewerJwt:
+                        type: string
+                        maxLength: 8192
+                        description: 'A long-lived service account token with the system:auth-delegator ClusterRole used to submit TokenReview requests. Omit to have the gateway''s own token act as the reviewer. Write-only: never returned by the API.'
+                      tokenReviewMode:
+                        type: string
+                        enum:
+                        - api
+                        - gateway
+                        default: api
+                        description: Who performs the TokenReview. 'api' means Infisical does, using the configured token reviewer JWT. 'gateway' means the selected gateway does, using its own in-cluster service account, which requires no Kubernetes host or reviewer token but requires that gateway to run as a pod in the cluster.
+                      gatewayId:
+                        type:
+                        - string
+                        - 'null'
+                        format: uuid
+                        description: The gateway to route TokenReview traffic through, for clusters whose API server Infisical cannot reach. Must be a different gateway that is already enrolled and connected. Mutually exclusive with gatewayPoolId.
+                      gatewayPoolId:
+                        type:
+                        - string
+                        - 'null'
+                        format: uuid
+                        description: The gateway pool to route TokenReview traffic through. Any healthy member performs the request, so this survives a single gateway going offline. Mutually exclusive with gatewayId.
+                      allowedNamespaces:
+                        type: string
+                        maxLength: 1024
+                        description: The comma-separated list of Kubernetes namespaces whose service accounts are allowed to authenticate as this gateway. Supports `*` wildcards.
+                      allowedNames:
+                        type: string
+                        maxLength: 1024
+                        description: The comma-separated list of Kubernetes service account names that are allowed to authenticate as this gateway. Supports `*` wildcards.
+                      allowedAudience:
+                        type: string
+                        maxLength: 255
+                        default: ''
+                        description: The audience the gateway's service account token must carry. Leave empty to skip the audience check.
+                      verifyTlsCertificate:
+                        type: boolean
+                        default: true
+                        description: Whether to verify the Kubernetes API server's TLS certificate. Verified against the CA certificate when one is configured, otherwise against the system trust store.
+                    required:
+                    - method
+                    - allowedNamespaces
+                    - allowedNames
+                    additionalProperties: false
+                  - type: object
+                    properties:
+                      method:
+                        type: string
+                        enum:
+                        - token
+                    required:
+                    - method
+                    additionalProperties: false
+                  description: Auth method to configure on the gateway. `aws` carries the AWS allowlists; `gcp` carries the GCP token type and service account/project/zone allowlists; `kubernetes` carries the cluster host and namespace/service account allowlists; `token` is configurationless and requires a separate POST /v3/gateways/:id/token call to mint the bootstrap token.
+              required:
+              - name
+              - authMethod
+              additionalProperties: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  identityId:
+                    type:
+                    - string
+                    - 'null'
+                    format: uuid
+                  relayId:
+                    type:
+                    - string
+                    - 'null'
+                    format: uuid
+                  name:
+                    type: string
+                  createdAt:
+                    type: string
+                    format: date-time
+                  updatedAt:
+                    type: string
+                    format: date-time
+                  heartbeat:
+                    type:
+                    - string
+                    - 'null'
+                    format: date-time
+                  heartbeatTTL:
+                    type:
+                    - number
+                    - 'null'
+                  directAddress:
+                    type:
+                    - string
+                    - 'null'
+                  directHeartbeat:
+                    type:
+                    - string
+                    - 'null'
+                    format: date-time
+                  canRevoke:
+                    type: boolean
+                  authMethod:
+                    anyOf:
+                    - type: object
+                      properties:
+                        method:
+                          type: string
+                          enum:
+                          - aws
+                        config:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              format: uuid
+                            allowedPrincipalArns:
+                              type: string
+                            allowedAccountIds:
+                              type: string
+                            createdAt:
+                              type: string
+                              format: date-time
+                            updatedAt:
+                              type: string
+                              format: date-time
+                          required:
+                          - id
+                          - allowedPrincipalArns
+                          - allowedAccountIds
+                          - createdAt
+                          - updatedAt
+                          additionalProperties: false
+                      required:
+                      - method
+                      - config
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        method:
+                          type: string
+                          enum:
+                          - gcp
+                        config:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              format: uuid
+                            type:
+                              type: string
+                            allowedServiceAccounts:
+                              type: string
+                            allowedProjects:
+                              type: string
+                            allowedZones:
+                              type: string
+                            createdAt:
+                              type: string
+                              format: date-time
+                            updatedAt:
+                              type: string
+                              format: date-time
+                          required:
+                          - id
+                          - type
+                          - allowedServiceAccounts
+                          - allowedProjects
+                          - allowedZones
+                          - createdAt
+                          - updatedAt
+                          additionalProperties: false
+                      required:
+                      - method
+                      - config
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        method:
+                          type: string
+                          enum:
+                          - kubernetes
+                        config:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              format: uuid
+                            kubernetesHost:
+                              type: string
+                            tokenReviewMode:
+                              type: string
+                            gatewayId:
+                              type:
+                              - string
+                              - 'null'
+                            gatewayPoolId:
+                              type:
+                              - string
+                              - 'null'
+                            allowedNamespaces:
+                              type: string
+                            allowedNames:
+                              type: string
+                            allowedAudience:
+                              type: string
+                            verifyTlsCertificate:
+                              type: boolean
+                            caCertificate:
+                              type: string
+                            hasTokenReviewerJwt:
+                              type: boolean
+                            createdAt:
+                              type: string
+                              format: date-time
+                            updatedAt:
+                              type: string
+                              format: date-time
+                          required:
+                          - id
+                          - kubernetesHost
+                          - tokenReviewMode
+                          - gatewayId
+                          - gatewayPoolId
+                          - allowedNamespaces
+                          - allowedNames
+                          - allowedAudience
+                          - verifyTlsCertificate
+                          - caCertificate
+                          - hasTokenReviewerJwt
+                          - createdAt
+                          - updatedAt
+                          additionalProperties: false
+                      required:
+                      - method
+                      - config
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        method:
+                          type: string
+                          enum:
+                          - token
+                        config:
+                          type: object
+                          properties: {}
+                          additionalProperties: false
+                      required:
+                      - method
+                      - config
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        method:
+                          type: string
+                          enum:
+                          - identity
+                        config:
+                          type: object
+                          properties:
+                            identityId:
+                              type: string
+                            identityName:
+                              type:
+                              - string
+                              - 'null'
+                          required:
+                          - identityId
+                          - identityName
+                          additionalProperties: false
+                      required:
+                      - method
+                      - config
+                      additionalProperties: false
+                required:
+                - id
+                - name
+                - createdAt
+                - updatedAt
+                - canRevoke
+                - authMethod
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: Create gateway
+      x-summary-source: derived
+  /api/v3/gateways/{gatewayId}:
+    get:
+      operationId: getGateway
+      tags:
+      - Gateways
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: gatewayId
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  identityId:
+                    type:
+                    - string
+                    - 'null'
+                    format: uuid
+                  relayId:
+                    type:
+                    - string
+                    - 'null'
+                    format: uuid
+                  name:
+                    type: string
+                  createdAt:
+                    type: string
+                    format: date-time
+                  updatedAt:
+                    type: string
+                    format: date-time
+                  heartbeat:
+                    type:
+                    - string
+                    - 'null'
+                    format: date-time
+                  heartbeatTTL:
+                    type:
+                    - number
+                    - 'null'
+                  directAddress:
+                    type:
+                    - string
+                    - 'null'
+                  directHeartbeat:
+                    type:
+                    - string
+                    - 'null'
+                    format: date-time
+                  canRevoke:
+                    type: boolean
+                  authMethod:
+                    anyOf:
+                    - type: object
+                      properties:
+                        method:
+                          type: string
+                          enum:
+                          - aws
+                        config:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              format: uuid
+                            allowedPrincipalArns:
+                              type: string
+                            allowedAccountIds:
+                              type: string
+                            createdAt:
+                              type: string
+                              format: date-time
+                            updatedAt:
+                              type: string
+                              format: date-time
+                          required:
+                          - id
+                          - allowedPrincipalArns
+                          - allowedAccountIds
+                          - createdAt
+                          - updatedAt
+                          additionalProperties: false
+                      required:
+                      - method
+                      - config
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        method:
+                          type: string
+                          enum:
+                          - gcp
+                        config:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              format: uuid
+                            type:
+                              type: string
+                            allowedServiceAccounts:
+                              type: string
+                            allowedProjects:
+                              type: string
+                            allowedZones:
+                              type: string
+                            createdAt:
+                              type: string
+                              format: date-time
+                            updatedAt:
+                              type: string
+                              format: date-time
+                          required:
+                          - id
+                          - type
+                          - allowedServiceAccounts
+                          - allowedProjects
+                          - allowedZones
+                          - createdAt
+                          - updatedAt
+                          additionalProperties: false
+                      required:
+                      - method
+                      - config
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        method:
+                          type: string
+                          enum:
+                          - kubernetes
+                        config:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              format: uuid
+                            kubernetesHost:
+                              type: string
+                            tokenReviewMode:
+                              type: string
+                            gatewayId:
+                              type:
+                              - string
+                              - 'null'
+                            gatewayPoolId:
+                              type:
+                              - string
+                              - 'null'
+                            allowedNamespaces:
+                              type: string
+                            allowedNames:
+                              type: string
+                            allowedAudience:
+                              type: string
+                            verifyTlsCertificate:
+                              type: boolean
+                            caCertificate:
+                              type: string
+                            hasTokenReviewerJwt:
+                              type: boolean
+                            createdAt:
+                              type: string
+                              format: date-time
+                            updatedAt:
+                              type: string
+                              format: date-time
+                          required:
+                          - id
+                          - kubernetesHost
+                          - tokenReviewMode
+                          - gatewayId
+                          - gatewayPoolId
+                          - allowedNamespaces
+                          - allowedNames
+                          - allowedAudience
+                          - verifyTlsCertificate
+                          - caCertificate
+                          - hasTokenReviewerJwt
+                          - createdAt
+                          - updatedAt
+                          additionalProperties: false
+                      required:
+                      - method
+                      - config
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        method:
+                          type: string
+                          enum:
+                          - token
+                        config:
+                          type: object
+                          properties: {}
+                          additionalProperties: false
+                      required:
+                      - method
+                      - config
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        method:
+                          type: string
+                          enum:
+                          - identity
+                        config:
+                          type: object
+                          properties:
+                            identityId:
+                              type: string
+                            identityName:
+                              type:
+                              - string
+                              - 'null'
+                          required:
+                          - identityId
+                          - identityName
+                          additionalProperties: false
+                      required:
+                      - method
+                      - config
+                      additionalProperties: false
+                required:
+                - id
+                - name
+                - createdAt
+                - updatedAt
+                - canRevoke
+                - authMethod
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: Get gateway
+      x-summary-source: derived
+    patch:
+      operationId: updateGateway
+      tags:
+      - Gateways
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                  description: New name for the gateway. Renaming does not affect the gateway's ID, so resources referencing it keep working.
+                authMethod:
+                  anyOf:
+                  - type: object
+                    properties:
+                      method:
+                        type: string
+                        enum:
+                        - aws
+                      allowedPrincipalArns:
+                        type: string
+                        maxLength: 4096
+                        default: ''
+                        description: The comma-separated list of trusted IAM principal ARNs that are allowed to authenticate with Infisical.
+                      allowedAccountIds:
+                        type: string
+                        maxLength: 4096
+                        default: ''
+                        description: The comma-separated list of trusted AWS account IDs that are allowed to authenticate with Infisical.
+                    required:
+                    - method
+                    additionalProperties: false
+                  - type: object
+                    properties:
+                      method:
+                        type: string
+                        enum:
+                        - gcp
+                      type:
+                        type: string
+                        enum:
+                        - gce
+                        - iam
+                        default: gce
+                        description: How the gateway proves its GCP identity. 'gce' verifies an ID token from the instance metadata server, which covers Compute Engine VMs and GKE workload identity. 'iam' verifies a JWT the service account signed through the IAM Credentials API, for hosts outside Compute Engine.
+                      allowedServiceAccounts:
+                        type: string
+                        maxLength: 1024
+                        default: ''
+                        description: The comma-separated list of GCP service account emails that are allowed to authenticate as this gateway.
+                      allowedProjects:
+                        type: string
+                        maxLength: 1024
+                        default: ''
+                        description: The comma-separated list of GCP project IDs whose Compute Engine instances are allowed to authenticate as this gateway. Only applies to the 'gce' type, and requires a token carrying Compute Engine instance details.
+                      allowedZones:
+                        type: string
+                        maxLength: 1024
+                        default: ''
+                        description: The comma-separated list of GCP zones whose Compute Engine instances are allowed to authenticate as this gateway. Only applies to the 'gce' type, and requires a token carrying Compute Engine instance details.
+                    required:
+                    - method
+                    additionalProperties: false
+                  - type: object
+                    properties:
+                      method:
+                        type: string
+                        enum:
+                        - kubernetes
+                      kubernetesHost:
+                        type: string
+                        minLength: 1
+                        maxLength: 255
+                        description: The URL of the Kubernetes API server that Infisical reviews the gateway's service account token against (e.g. https://my-cluster.example.com:6443). Omit only when tokenReviewMode is 'gateway', where the reviewing gateway calls its own API server.
+                      caCertificate:
+                        type: string
+                        maxLength: 10240
+                        description: The PEM-encoded CA certificate that issued the Kubernetes API server's TLS certificate. Required when the API server uses a certificate the system trust store does not recognise, which is the usual case for a cluster CA.
+                      tokenReviewerJwt:
+                        type: string
+                        maxLength: 8192
+                        description: 'A long-lived service account token with the system:auth-delegator ClusterRole used to submit TokenReview requests. Omit to have the gateway''s own token act as the reviewer. Write-only: never returned by the API.'
+                      tokenReviewMode:
+                        type: string
+                        enum:
+                        - api
+                        - gateway
+                        default: api
+                        description: Who performs the TokenReview. 'api' means Infisical does, using the configured token reviewer JWT. 'gateway' means the selected gateway does, using its own in-cluster service account, which requires no Kubernetes host or reviewer token but requires that gateway to run as a pod in the cluster.
+                      gatewayId:
+                        type:
+                        - string
+                        - 'null'
+                        format: uuid
+                        description: The gateway to route TokenReview traffic through, for clusters whose API server Infisical cannot reach. Must be a different gateway that is already enrolled and connected. Mutually exclusive with gatewayPoolId.
+                      gatewayPoolId:
+                        type:
+                        - string
+                        - 'null'
+                        format: uuid
+                        description: The gateway pool to route TokenReview traffic through. Any healthy member performs the request, so this survives a single gateway going offline. Mutually exclusive with gatewayId.
+                      allowedNamespaces:
+                        type: string
+                        maxLength: 1024
+                        description: The comma-separated list of Kubernetes namespaces whose service accounts are allowed to authenticate as this gateway. Supports `*` wildcards.
+                      allowedNames:
+                        type: string
+                        maxLength: 1024
+                        description: The comma-separated list of Kubernetes service account names that are allowed to authenticate as this gateway. Supports `*` wildcards.
+                      allowedAudience:
+                        type: string
+                        maxLength: 255
+                        default: ''
+                        description: The audience the gateway's service account token must carry. Leave empty to skip the audience check.
+                      verifyTlsCertificate:
+                        type: boolean
+                        default: true
+                        description: Whether to verify the Kubernetes API server's TLS certificate. Verified against the CA certificate when one is configured, otherwise against the system trust store.
+                    required:
+                    - method
+                    - allowedNamespaces
+                    - allowedNames
+                    additionalProperties: false
+                  - type: object
+                    properties:
+                      method:
+                        type: string
+                        enum:
+                        - token
+                    required:
+                    - method
+                    additionalProperties: false
+                  description: 'Replacement auth method. Same shape as in create: `aws` with allowlists, `gcp` with GCP allowlists, `kubernetes` with cluster config, or `token` with no config. Existing gateways keep working until they restart and re-authenticate via the new method.'
+              additionalProperties: false
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: gatewayId
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  identityId:
+                    type:
+                    - string
+                    - 'null'
+                    format: uuid
+                  relayId:
+                    type:
+                    - string
+                    - 'null'
+                    format: uuid
+                  name:
+                    type: string
+                  createdAt:
+                    type: string
+                    format: date-time
+                  updatedAt:
+                    type: string
+                    format: date-time
+                  heartbeat:
+                    type:
+                    - string
+                    - 'null'
+                    format: date-time
+                  heartbeatTTL:
+                    type:
+                    - number
+                    - 'null'
+                  directAddress:
+                    type:
+                    - string
+                    - 'null'
+                  directHeartbeat:
+                    type:
+                    - string
+                    - 'null'
+                    format: date-time
+                  canRevoke:
+                    type: boolean
+                  authMethod:
+                    anyOf:
+                    - type: object
+                      properties:
+                        method:
+                          type: string
+                          enum:
+                          - aws
+                        config:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              format: uuid
+                            allowedPrincipalArns:
+                              type: string
+                            allowedAccountIds:
+                              type: string
+                            createdAt:
+                              type: string
+                              format: date-time
+                            updatedAt:
+                              type: string
+                              format: date-time
+                          required:
+                          - id
+                          - allowedPrincipalArns
+                          - allowedAccountIds
+                          - createdAt
+                          - updatedAt
+                          additionalProperties: false
+                      required:
+                      - method
+                      - config
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        method:
+                          type: string
+                          enum:
+                          - gcp
+                        config:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              format: uuid
+                            type:
+                              type: string
+                            allowedServiceAccounts:
+                              type: string
+                            allowedProjects:
+                              type: string
+                            allowedZones:
+                              type: string
+                            createdAt:
+                              type: string
+                              format: date-time
+                            updatedAt:
+                              type: string
+                              format: date-time
+                          required:
+                          - id
+                          - type
+                          - allowedServiceAccounts
+                          - allowedProjects
+                          - allowedZones
+                          - createdAt
+                          - updatedAt
+                          additionalProperties: false
+                      required:
+                      - method
+                      - config
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        method:
+                          type: string
+                          enum:
+                          - kubernetes
+                        config:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              format: uuid
+                            kubernetesHost:
+                              type: string
+                            tokenReviewMode:
+                              type: string
+                            gatewayId:
+                              type:
+                              - string
+                              - 'null'
+                            gatewayPoolId:
+                              type:
+                              - string
+                              - 'null'
+                            allowedNamespaces:
+                              type: string
+                            allowedNames:
+                              type: string
+                            allowedAudience:
+                              type: string
+                            verifyTlsCertificate:
+                              type: boolean
+                            caCertificate:
+                              type: string
+                            hasTokenReviewerJwt:
+                              type: boolean
+                            createdAt:
+                              type: string
+                              format: date-time
+                            updatedAt:
+                              type: string
+                              format: date-time
+                          required:
+                          - id
+                          - kubernetesHost
+                          - tokenReviewMode
+                          - gatewayId
+                          - gatewayPoolId
+                          - allowedNamespaces
+                          - allowedNames
+                          - allowedAudience
+                          - verifyTlsCertificate
+                          - caCertificate
+                          - hasTokenReviewerJwt
+                          - createdAt
+                          - updatedAt
+                          additionalProperties: false
+                      required:
+                      - method
+                      - config
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        method:
+                          type: string
+                          enum:
+                          - token
+                        config:
+                          type: object
+                          properties: {}
+                          additionalProperties: false
+                      required:
+                      - method
+                      - config
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        method:
+                          type: string
+                          enum:
+                          - identity
+                        config:
+                          type: object
+                          properties:
+                            identityId:
+                              type: string
+                            identityName:
+                              type:
+                              - string
+                              - 'null'
+                          required:
+                          - identityId
+                          - identityName
+                          additionalProperties: false
+                      required:
+                      - method
+                      - config
+                      additionalProperties: false
+                required:
+                - id
+                - name
+                - createdAt
+                - updatedAt
+                - canRevoke
+                - authMethod
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: Update gateway
+      x-summary-source: derived
+  /api/v3/gateways/{gatewayId}/token-auth/generate-enrollment-token:
+    post:
+      operationId: mintGatewayEnrollmentToken
+      tags:
+      - Gateways
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: gatewayId
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                  expiresAt:
+                    type: string
+                    format: date-time
+                required:
+                - token
+                - expiresAt
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: Mint gateway enrollment token
+      x-summary-source: derived
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: An access token in Infisical

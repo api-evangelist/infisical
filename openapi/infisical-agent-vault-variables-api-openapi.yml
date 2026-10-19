@@ -1,0 +1,1163 @@
+openapi: 3.2.0
+info:
+  title: Infisical Agent Vault Variables API
+  description: List of all available APIs that can be consumed
+  version: 0.0.1
+servers:
+- url: https://us.infisical.com
+  description: Production server (US)
+- url: https://eu.infisical.com
+  description: Production server (EU)
+- url: http://localhost:8080
+  description: Local server
+tags:
+- name: Agent Vault Variables
+paths:
+  /api/v1/agent-vault/variables:
+    get:
+      operationId: listAgentVaultVariables
+      tags:
+      - Agent Vault Variables
+      description: List the variables in Agent Vault
+      parameters:
+      - schema:
+          type: string
+          enum:
+          - key
+          - serviceCount
+          default: key
+        in: query
+        name: orderBy
+        required: false
+        description: 'What to sort variables by: key, or serviceCount for how many services use each one.'
+      - schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          default: asc
+        in: query
+        name: orderDirection
+        required: false
+        description: 'Which way to sort: asc or desc.'
+      - schema:
+          allOf:
+          - type: string
+            maxLength: 6500
+          - type: array
+            items:
+              type: string
+              minLength: 1
+              maxLength: 64
+              pattern: ^[A-Z][A-Z0-9_]*$
+            minItems: 1
+            maxItems: 100
+        in: query
+        name: keys
+        required: false
+        description: Return only the variables with these exact keys, comma-separated. Every one that exists is returned unless limit is set.
+      - schema:
+          type: string
+          maxLength: 255
+          pattern: ^[^\x00-\x1f\x7f]*$
+        in: query
+        name: search
+        required: false
+        description: Match variables whose key contains this text.
+      - schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+        in: query
+        name: limit
+        required: false
+        description: The maximum number of variables to return. Defaults to 20, or to the number of keys when keys is given.
+      - schema:
+          type: integer
+          minimum: 0
+          maximum: 10000
+          default: 0
+        in: query
+        name: offset
+        required: false
+        description: How many variables to skip.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  variables:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                          description: The ID of the variable.
+                        key:
+                          type: string
+                          description: The name services use to refer to the variable, as `{{KEY}}`. Starts with a letter and uses only upper case letters, numbers and underscores.
+                        usedByServices:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                                format: uuid
+                                description: The ID of a service that uses this variable.
+                              name:
+                                type: string
+                                description: The name of the service.
+                              hostPattern:
+                                type: string
+                                description: The host pattern of the service.
+                              accessBundleId:
+                                type: string
+                                format: uuid
+                                description: The ID of the access bundle the service belongs to.
+                              accessBundleName:
+                                type: string
+                                description: The name of the access bundle the service belongs to.
+                            required:
+                            - id
+                            - name
+                            - hostPattern
+                            - accessBundleId
+                            - accessBundleName
+                            additionalProperties: false
+                          description: The services that use this variable, across every access bundle, ordered by access bundle name and then service name. A variable in use can't be deleted.
+                        createdAt:
+                          type: string
+                          format: date-time
+                          description: When the variable was added.
+                        updatedAt:
+                          type: string
+                          format: date-time
+                          description: When the variable was last changed.
+                      required:
+                      - id
+                      - key
+                      - usedByServices
+                      - createdAt
+                      - updatedAt
+                      additionalProperties: false
+                  totalCount:
+                    type: number
+                    description: How many variables match the search, across every page.
+                required:
+                - variables
+                - totalCount
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: List agent vault variables
+      x-summary-source: derived
+    post:
+      operationId: createAgentVaultVariable
+      tags:
+      - Agent Vault Variables
+      description: Create a variable in Agent Vault
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                key:
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                  pattern: ^[A-Z][A-Z0-9_]*$
+                  description: The name services use to refer to the variable, as `{{KEY}}`. Starts with a letter and uses only upper case letters, numbers and underscores.
+                value:
+                  type: string
+                  minLength: 1
+                  maxLength: 8192
+                  pattern: ^[^\x00-\x1f\x7f]*$
+                  description: The value the proxy puts in place of each `{{KEY}}`.
+              required:
+              - key
+              - value
+              additionalProperties: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  variable:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                        description: The ID of the variable.
+                      key:
+                        type: string
+                        description: The name services use to refer to the variable, as `{{KEY}}`. Starts with a letter and uses only upper case letters, numbers and underscores.
+                      usedByServices:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              format: uuid
+                              description: The ID of a service that uses this variable.
+                            name:
+                              type: string
+                              description: The name of the service.
+                            hostPattern:
+                              type: string
+                              description: The host pattern of the service.
+                            accessBundleId:
+                              type: string
+                              format: uuid
+                              description: The ID of the access bundle the service belongs to.
+                            accessBundleName:
+                              type: string
+                              description: The name of the access bundle the service belongs to.
+                          required:
+                          - id
+                          - name
+                          - hostPattern
+                          - accessBundleId
+                          - accessBundleName
+                          additionalProperties: false
+                        description: The services that use this variable, across every access bundle, ordered by access bundle name and then service name. A variable in use can't be deleted.
+                      createdAt:
+                        type: string
+                        format: date-time
+                        description: When the variable was added.
+                      updatedAt:
+                        type: string
+                        format: date-time
+                        description: When the variable was last changed.
+                    required:
+                    - id
+                    - key
+                    - usedByServices
+                    - createdAt
+                    - updatedAt
+                    additionalProperties: false
+                required:
+                - variable
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: Create agent vault variable
+      x-summary-source: derived
+  /api/v1/agent-vault/variables/{variableId}:
+    patch:
+      operationId: updateAgentVaultVariable
+      tags:
+      - Agent Vault Variables
+      description: Update a variable in Agent Vault
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                key:
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                  pattern: ^[A-Z][A-Z0-9_]*$
+                  description: The name services use to refer to the variable, as `{{KEY}}`. Starts with a letter and uses only upper case letters, numbers and underscores.
+                value:
+                  type: string
+                  minLength: 1
+                  maxLength: 8192
+                  pattern: ^[^\x00-\x1f\x7f]*$
+                  description: The value the proxy puts in place of each `{{KEY}}`. Omit to keep the stored value.
+              additionalProperties: false
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: variableId
+        required: true
+        description: The ID of the variable.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  variable:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                        description: The ID of the variable.
+                      key:
+                        type: string
+                        description: The name services use to refer to the variable, as `{{KEY}}`. Starts with a letter and uses only upper case letters, numbers and underscores.
+                      usedByServices:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              format: uuid
+                              description: The ID of a service that uses this variable.
+                            name:
+                              type: string
+                              description: The name of the service.
+                            hostPattern:
+                              type: string
+                              description: The host pattern of the service.
+                            accessBundleId:
+                              type: string
+                              format: uuid
+                              description: The ID of the access bundle the service belongs to.
+                            accessBundleName:
+                              type: string
+                              description: The name of the access bundle the service belongs to.
+                          required:
+                          - id
+                          - name
+                          - hostPattern
+                          - accessBundleId
+                          - accessBundleName
+                          additionalProperties: false
+                        description: The services that use this variable, across every access bundle, ordered by access bundle name and then service name. A variable in use can't be deleted.
+                      createdAt:
+                        type: string
+                        format: date-time
+                        description: When the variable was added.
+                      updatedAt:
+                        type: string
+                        format: date-time
+                        description: When the variable was last changed.
+                    required:
+                    - id
+                    - key
+                    - usedByServices
+                    - createdAt
+                    - updatedAt
+                    additionalProperties: false
+                required:
+                - variable
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: Update agent vault variable
+      x-summary-source: derived
+    delete:
+      operationId: deleteAgentVaultVariable
+      tags:
+      - Agent Vault Variables
+      description: Delete a variable from Agent Vault. A variable a service uses can't be deleted.
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: variableId
+        required: true
+        description: The ID of the variable.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  variable:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                        description: The ID of the variable.
+                      key:
+                        type: string
+                        description: The name services use to refer to the variable, as `{{KEY}}`. Starts with a letter and uses only upper case letters, numbers and underscores.
+                      usedByServices:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              format: uuid
+                              description: The ID of a service that uses this variable.
+                            name:
+                              type: string
+                              description: The name of the service.
+                            hostPattern:
+                              type: string
+                              description: The host pattern of the service.
+                            accessBundleId:
+                              type: string
+                              format: uuid
+                              description: The ID of the access bundle the service belongs to.
+                            accessBundleName:
+                              type: string
+                              description: The name of the access bundle the service belongs to.
+                          required:
+                          - id
+                          - name
+                          - hostPattern
+                          - accessBundleId
+                          - accessBundleName
+                          additionalProperties: false
+                        description: The services that use this variable, across every access bundle, ordered by access bundle name and then service name. A variable in use can't be deleted.
+                      createdAt:
+                        type: string
+                        format: date-time
+                        description: When the variable was added.
+                      updatedAt:
+                        type: string
+                        format: date-time
+                        description: When the variable was last changed.
+                    required:
+                    - id
+                    - key
+                    - usedByServices
+                    - createdAt
+                    - updatedAt
+                    additionalProperties: false
+                required:
+                - variable
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: Delete agent vault variable
+      x-summary-source: derived
+  /api/v1/agent-vault/variables/{variableId}/value:
+    get:
+      operationId: getAgentVaultVariableValue
+      tags:
+      - Agent Vault Variables
+      description: Get the value of a variable in Agent Vault
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+        in: path
+        name: variableId
+        required: true
+        description: The ID of the variable.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: string
+                    description: The variable's value.
+                required:
+                - value
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: Get agent vault variable value
+      x-summary-source: derived
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: An access token in Infisical

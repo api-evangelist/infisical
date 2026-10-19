@@ -1,0 +1,463 @@
+openapi: 3.2.0
+info:
+  title: Infisical Agent Vault Settings API
+  description: List of all available APIs that can be consumed
+  version: 0.0.1
+servers:
+- url: https://us.infisical.com
+  description: Production server (US)
+- url: https://eu.infisical.com
+  description: Production server (EU)
+- url: http://localhost:8080
+  description: Local server
+tags:
+- name: Agent Vault Settings
+paths:
+  /api/v1/agent-vault/settings/session-logs:
+    get:
+      operationId: getAgentVaultSessionLogSettings
+      tags:
+      - Agent Vault Settings
+      description: Gets the session log settings
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  settings:
+                    type: object
+                    properties:
+                      enabled:
+                        type: boolean
+                        description: Whether session logs are on. Turning them off stops recording but keeps what's already recorded.
+                      appConnectionId:
+                        type:
+                        - string
+                        - 'null'
+                        format: uuid
+                        description: The ID of the AWS connection Infisical uses to write to and read from the bucket.
+                      bucket:
+                        type:
+                        - string
+                        - 'null'
+                        description: 'The name of the S3 bucket. 3 to 63 characters: lowercase letters, numbers, dots and hyphens, starting and ending with a letter or number.'
+                      region:
+                        type:
+                        - string
+                        - 'null'
+                        description: The AWS region of the bucket.
+                      keyPrefix:
+                        type:
+                        - string
+                        - 'null'
+                        description: 'The folder in the bucket to store session logs in, such as `logs/agent-vault`. Up to 512 characters: letters, numbers and `! - _ . '' ( ) /`, with no slash at the start or end, no empty folder name, and no folder named `.` or `..`.'
+                    required:
+                    - enabled
+                    - appConnectionId
+                    - bucket
+                    - region
+                    - keyPrefix
+                    additionalProperties: false
+                required:
+                - settings
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: Get agent vault session log settings
+      x-summary-source: derived
+    patch:
+      operationId: updateAgentVaultSessionLogSettings
+      tags:
+      - Agent Vault Settings
+      description: Updates the session log settings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                enabled:
+                  type: boolean
+                  description: Whether session logs are on. Turning them off stops recording but keeps what's already recorded.
+                appConnectionId:
+                  type:
+                  - string
+                  - 'null'
+                  format: uuid
+                  description: The ID of the AWS connection Infisical uses to write to and read from the bucket.
+                bucket:
+                  type: string
+                  maxLength: 63
+                  pattern: ^[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$
+                  description: 'The name of the S3 bucket. 3 to 63 characters: lowercase letters, numbers, dots and hyphens, starting and ending with a letter or number.'
+                region:
+                  type: string
+                  enum:
+                  - us-east-1
+                  - us-east-2
+                  - us-west-1
+                  - us-west-2
+                  - us-gov-east-1
+                  - us-gov-west-1
+                  - af-south-1
+                  - ap-east-1
+                  - ap-south-1
+                  - ap-south-2
+                  - ap-northeast-1
+                  - ap-northeast-2
+                  - ap-northeast-3
+                  - ap-southeast-1
+                  - ap-southeast-2
+                  - ap-southeast-3
+                  - ap-southeast-4
+                  - ca-central-1
+                  - eu-central-1
+                  - eu-central-2
+                  - eu-west-1
+                  - eu-west-2
+                  - eu-west-3
+                  - eu-south-1
+                  - eu-south-2
+                  - eu-north-1
+                  - me-south-1
+                  - me-central-1
+                  - sa-east-1
+                  description: The AWS region of the bucket.
+                keyPrefix:
+                  type: string
+                  maxLength: 512
+                  pattern: ^[A-Za-z0-9!\-_.'()/]*$
+                  description: 'The folder in the bucket to store session logs in, such as `logs/agent-vault`. Up to 512 characters: letters, numbers and `! - _ . '' ( ) /`, with no slash at the start or end, no empty folder name, and no folder named `.` or `..`.'
+              additionalProperties: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  settings:
+                    type: object
+                    properties:
+                      enabled:
+                        type: boolean
+                        description: Whether session logs are on. Turning them off stops recording but keeps what's already recorded.
+                      appConnectionId:
+                        type:
+                        - string
+                        - 'null'
+                        format: uuid
+                        description: The ID of the AWS connection Infisical uses to write to and read from the bucket.
+                      bucket:
+                        type:
+                        - string
+                        - 'null'
+                        description: 'The name of the S3 bucket. 3 to 63 characters: lowercase letters, numbers, dots and hyphens, starting and ending with a letter or number.'
+                      region:
+                        type:
+                        - string
+                        - 'null'
+                        description: The AWS region of the bucket.
+                      keyPrefix:
+                        type:
+                        - string
+                        - 'null'
+                        description: 'The folder in the bucket to store session logs in, such as `logs/agent-vault`. Up to 512 characters: letters, numbers and `! - _ . '' ( ) /`, with no slash at the start or end, no empty folder name, and no folder named `.` or `..`.'
+                    required:
+                    - enabled
+                    - appConnectionId
+                    - bucket
+                    - region
+                    - keyPrefix
+                    additionalProperties: false
+                required:
+                - settings
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: Update agent vault session log settings
+      x-summary-source: derived
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: An access token in Infisical

@@ -4935,6 +4935,7 @@ paths:
                         enum:
                         - static
                         - dynamic
+                        - microsoft-intune
                       includeCaCertInResponse:
                         type: boolean
                       allowCertBasedRenewal:
@@ -4958,6 +4959,13 @@ paths:
                       raCertExpiresAt:
                         type: string
                         format: date-time
+                      validationConnectionId:
+                        type:
+                        - string
+                        - 'null'
+                        format: uuid
+                      signRaWithCa:
+                        type: boolean
                     required:
                     - id
                     - challengeType
@@ -4969,7 +4977,21 @@ paths:
                     - challengeEndpointUrl
                     - raCertificatePem
                     - raCertExpiresAt
+                    - validationConnectionId
+                    - signRaWithCa
                     additionalProperties: false
+                  caType:
+                    type: string
+                    enum:
+                    - internal
+                    - acme
+                    - azure-ad-cs
+                    - adcs
+                    - aws-pca
+                    - digicert
+                    - aws-acm-public-ca
+                    - venafi-tpp
+                    - godaddy
                   estConfigured:
                     type: boolean
                   acmeConfigured:
@@ -4983,6 +5005,7 @@ paths:
                 - est
                 - acme
                 - scep
+                - caType
                 - estConfigured
                 - acmeConfigured
                 - scepConfigured
@@ -6658,6 +6681,7 @@ paths:
                   enum:
                   - static
                   - dynamic
+                  - microsoft-intune
                 challengePassword:
                   type: string
                 includeCaCertInResponse:
@@ -6665,7 +6689,6 @@ paths:
                   default: true
                 allowCertBasedRenewal:
                   type: boolean
-                  default: true
                 dynamicChallengeExpiryMinutes:
                   type: integer
                   minimum: 5
@@ -6674,6 +6697,11 @@ paths:
                   type: integer
                   minimum: 1
                   maximum: 1000
+                validationConnectionId:
+                  type: string
+                  format: uuid
+                signRaWithCa:
+                  type: boolean
               additionalProperties: false
       parameters:
       - schema:
@@ -6713,6 +6741,7 @@ paths:
                         enum:
                         - static
                         - dynamic
+                        - microsoft-intune
                     required:
                     - id
                     - challengeType
@@ -7043,7 +7072,7 @@ paths:
       operationId: listPkiApplicationAlerts
       tags:
       - PKI Applications
-      description: List alerts for an application.
+      description: 'Deprecated: application alerts are managed with the alerts API (/api/v1/alerts). List legacy alerts for an application.'
       parameters:
       - schema:
           type: string
@@ -7086,6 +7115,7 @@ paths:
         in: path
         name: applicationId
         required: true
+      deprecated: true
       responses:
         '200':
           description: Default Response
@@ -7391,7 +7421,7 @@ paths:
       operationId: createPkiApplicationAlert
       tags:
       - PKI Applications
-      description: Create an alert on an application.
+      description: 'Deprecated: legacy application alerts can no longer be created. Use the alerts API (/api/v1/alerts) instead.'
       requestBody:
         required: true
         content:
@@ -7538,6 +7568,7 @@ paths:
         in: path
         name: applicationId
         required: true
+      deprecated: true
       responses:
         '200':
           description: Default Response
@@ -7838,7 +7869,7 @@ paths:
       operationId: updatePkiApplicationAlert
       tags:
       - PKI Applications
-      description: Update an alert on an application.
+      description: 'Deprecated: legacy application alerts can no longer be edited. Use the alerts API (/api/v1/alerts) instead.'
       requestBody:
         required: true
         content:
@@ -7986,6 +8017,7 @@ paths:
         in: path
         name: alertId
         required: true
+      deprecated: true
       responses:
         '200':
           description: Default Response
@@ -8285,7 +8317,7 @@ paths:
       operationId: deletePkiApplicationAlert
       tags:
       - PKI Applications
-      description: Delete an alert from an application.
+      description: 'Deprecated: application alerts are managed with the alerts API (/api/v1/alerts). Delete a legacy alert from an application.'
       parameters:
       - schema:
           type: string
@@ -8299,6 +8331,7 @@ paths:
         in: path
         name: alertId
         required: true
+      deprecated: true
       responses:
         '200':
           description: Default Response

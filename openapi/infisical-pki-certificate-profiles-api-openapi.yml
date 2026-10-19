@@ -38,7 +38,7 @@ paths:
                   pattern: ^[a-z0-9-]+$
                 description:
                   type: string
-                  maxLength: 1000
+                  maxLength: 255
                 issuerType:
                   type: string
                   enum:
@@ -53,6 +53,15 @@ paths:
                         type: string
                         minLength: 1
                         description: Certificate template name for Azure AD CS
+                    required:
+                    - template
+                    additionalProperties: false
+                  - type: object
+                    properties:
+                      template:
+                        type: string
+                        minLength: 1
+                        description: Certificate template name for Active Directory Certificate Service
                     required:
                     - template
                     additionalProperties: false
@@ -87,6 +96,7 @@ paths:
                       exclusiveMinimum: 0
                     commonName:
                       type: string
+                      maxLength: 255
                     keyAlgorithm:
                       type: string
                       enum:
@@ -159,7 +169,9 @@ paths:
                         - code_signing
                         - email_protection
                         - ocsp_signing
+                        - smart_card_logon
                         - time_stamping
+                        - any_purpose
                     basicConstraints:
                       type: object
                       properties:
@@ -173,14 +185,68 @@ paths:
                       additionalProperties: false
                     organization:
                       type: string
+                      maxLength: 255
                     organizationalUnit:
                       type: string
+                      maxLength: 255
                     country:
                       type: string
+                      maxLength: 255
                     state:
                       type: string
+                      maxLength: 255
                     locality:
                       type: string
+                      maxLength: 255
+                    subjectAltNames:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - dns_name
+                            - ip_address
+                            - email
+                            - uri
+                            - upn
+                          value:
+                            type: string
+                            minLength: 1
+                        required:
+                        - type
+                        - value
+                        additionalProperties: false
+                    domainComponents:
+                      type: array
+                      items:
+                        type: string
+                        minLength: 1
+                        maxLength: 255
+                      maxItems: 50
+                    customExtensions:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          oid:
+                            type: string
+                            maxLength: 64
+                          label:
+                            type: string
+                            minLength: 1
+                            maxLength: 64
+                          critical:
+                            type: boolean
+                          value:
+                            type: string
+                            minLength: 1
+                            maxLength: 4096
+                        required:
+                        - oid
+                        additionalProperties: false
+                      maxItems: 10
                   additionalProperties: false
               required:
               - certificatePolicyId
@@ -248,6 +314,15 @@ paths:
                               type: string
                               minLength: 1
                               description: Certificate template name for Azure AD CS
+                          required:
+                          - template
+                          additionalProperties: false
+                        - type: object
+                          properties:
+                            template:
+                              type: string
+                              minLength: 1
+                              description: Certificate template name for Active Directory Certificate Service
                           required:
                           - template
                           additionalProperties: false
@@ -353,7 +428,9 @@ paths:
                               - code_signing
                               - email_protection
                               - ocsp_signing
+                              - smart_card_logon
                               - time_stamping
+                              - any_purpose
                           basicConstraints:
                             type: object
                             properties:
@@ -374,6 +451,52 @@ paths:
                             type: string
                           locality:
                             type: string
+                          subjectAltNames:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                type:
+                                  type: string
+                                  enum:
+                                  - dns_name
+                                  - ip_address
+                                  - email
+                                  - uri
+                                  - upn
+                                value:
+                                  type: string
+                                  minLength: 1
+                              required:
+                              - type
+                              - value
+                              additionalProperties: false
+                          domainComponents:
+                            type: array
+                            items:
+                              type: string
+                          customExtensions:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                oid:
+                                  type: string
+                                  maxLength: 64
+                                label:
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 64
+                                critical:
+                                  type: boolean
+                                value:
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 4096
+                              required:
+                              - oid
+                              additionalProperties: false
+                            maxItems: 10
                         additionalProperties: false
                       scepConfigId:
                         type:
@@ -654,6 +777,15 @@ paths:
                             - template
                             additionalProperties: false
                           - type: object
+                            properties:
+                              template:
+                                type: string
+                                minLength: 1
+                                description: Certificate template name for Active Directory Certificate Service
+                            required:
+                            - template
+                            additionalProperties: false
+                          - type: object
                             properties: {}
                             additionalProperties: false
                           - type: object
@@ -755,7 +887,9 @@ paths:
                                 - code_signing
                                 - email_protection
                                 - ocsp_signing
+                                - smart_card_logon
                                 - time_stamping
+                                - any_purpose
                             basicConstraints:
                               type: object
                               properties:
@@ -776,6 +910,52 @@ paths:
                               type: string
                             locality:
                               type: string
+                            subjectAltNames:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  type:
+                                    type: string
+                                    enum:
+                                    - dns_name
+                                    - ip_address
+                                    - email
+                                    - uri
+                                    - upn
+                                  value:
+                                    type: string
+                                    minLength: 1
+                                required:
+                                - type
+                                - value
+                                additionalProperties: false
+                            domainComponents:
+                              type: array
+                              items:
+                                type: string
+                            customExtensions:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  oid:
+                                    type: string
+                                    maxLength: 64
+                                  label:
+                                    type: string
+                                    minLength: 1
+                                    maxLength: 64
+                                  critical:
+                                    type: boolean
+                                  value:
+                                    type: string
+                                    minLength: 1
+                                    maxLength: 4096
+                                required:
+                                - oid
+                                additionalProperties: false
+                              maxItems: 10
                           additionalProperties: false
                         scepConfigId:
                           type:
@@ -794,6 +974,14 @@ paths:
                             isExternal:
                               type: boolean
                             externalType:
+                              type:
+                              - string
+                              - 'null'
+                            productNameId:
+                              type:
+                              - string
+                              - 'null'
+                            keyAlgorithm:
                               type:
                               - string
                               - 'null'
@@ -1133,6 +1321,15 @@ paths:
                           - template
                           additionalProperties: false
                         - type: object
+                          properties:
+                            template:
+                              type: string
+                              minLength: 1
+                              description: Certificate template name for Active Directory Certificate Service
+                          required:
+                          - template
+                          additionalProperties: false
+                        - type: object
                           properties: {}
                           additionalProperties: false
                         - type: object
@@ -1234,7 +1431,9 @@ paths:
                               - code_signing
                               - email_protection
                               - ocsp_signing
+                              - smart_card_logon
                               - time_stamping
+                              - any_purpose
                           basicConstraints:
                             type: object
                             properties:
@@ -1255,6 +1454,52 @@ paths:
                             type: string
                           locality:
                             type: string
+                          subjectAltNames:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                type:
+                                  type: string
+                                  enum:
+                                  - dns_name
+                                  - ip_address
+                                  - email
+                                  - uri
+                                  - upn
+                                value:
+                                  type: string
+                                  minLength: 1
+                              required:
+                              - type
+                              - value
+                              additionalProperties: false
+                          domainComponents:
+                            type: array
+                            items:
+                              type: string
+                          customExtensions:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                oid:
+                                  type: string
+                                  maxLength: 64
+                                label:
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 64
+                                critical:
+                                  type: boolean
+                                value:
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 4096
+                              required:
+                              - oid
+                              additionalProperties: false
+                            maxItems: 10
                         additionalProperties: false
                       scepConfigId:
                         type:
@@ -1273,6 +1518,14 @@ paths:
                           isExternal:
                             type: boolean
                           externalType:
+                            type:
+                            - string
+                            - 'null'
+                          productNameId:
+                            type:
+                            - string
+                            - 'null'
+                          keyAlgorithm:
                             type:
                             - string
                             - 'null'
@@ -1539,7 +1792,7 @@ paths:
                   type:
                   - string
                   - 'null'
-                  maxLength: 1000
+                  maxLength: 255
                 issuerType:
                   type: string
                   enum:
@@ -1553,6 +1806,15 @@ paths:
                         type: string
                         minLength: 1
                         description: Certificate template name for Azure AD CS
+                    required:
+                    - template
+                    additionalProperties: false
+                  - type: object
+                    properties:
+                      template:
+                        type: string
+                        minLength: 1
+                        description: Certificate template name for Active Directory Certificate Service
                     required:
                     - template
                     additionalProperties: false
@@ -1587,6 +1849,7 @@ paths:
                       exclusiveMinimum: 0
                     commonName:
                       type: string
+                      maxLength: 255
                     keyAlgorithm:
                       type: string
                       enum:
@@ -1659,7 +1922,9 @@ paths:
                         - code_signing
                         - email_protection
                         - ocsp_signing
+                        - smart_card_logon
                         - time_stamping
+                        - any_purpose
                     basicConstraints:
                       type: object
                       properties:
@@ -1673,14 +1938,68 @@ paths:
                       additionalProperties: false
                     organization:
                       type: string
+                      maxLength: 255
                     organizationalUnit:
                       type: string
+                      maxLength: 255
                     country:
                       type: string
+                      maxLength: 255
                     state:
                       type: string
+                      maxLength: 255
                     locality:
                       type: string
+                      maxLength: 255
+                    subjectAltNames:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - dns_name
+                            - ip_address
+                            - email
+                            - uri
+                            - upn
+                          value:
+                            type: string
+                            minLength: 1
+                        required:
+                        - type
+                        - value
+                        additionalProperties: false
+                    domainComponents:
+                      type: array
+                      items:
+                        type: string
+                        minLength: 1
+                        maxLength: 255
+                      maxItems: 50
+                    customExtensions:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          oid:
+                            type: string
+                            maxLength: 64
+                          label:
+                            type: string
+                            minLength: 1
+                            maxLength: 64
+                          critical:
+                            type: boolean
+                          value:
+                            type: string
+                            minLength: 1
+                            maxLength: 4096
+                        required:
+                        - oid
+                        additionalProperties: false
+                      maxItems: 10
                   additionalProperties: false
               additionalProperties: false
       parameters:
@@ -1752,6 +2071,15 @@ paths:
                               type: string
                               minLength: 1
                               description: Certificate template name for Azure AD CS
+                          required:
+                          - template
+                          additionalProperties: false
+                        - type: object
+                          properties:
+                            template:
+                              type: string
+                              minLength: 1
+                              description: Certificate template name for Active Directory Certificate Service
                           required:
                           - template
                           additionalProperties: false
@@ -1857,7 +2185,9 @@ paths:
                               - code_signing
                               - email_protection
                               - ocsp_signing
+                              - smart_card_logon
                               - time_stamping
+                              - any_purpose
                           basicConstraints:
                             type: object
                             properties:
@@ -1878,6 +2208,52 @@ paths:
                             type: string
                           locality:
                             type: string
+                          subjectAltNames:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                type:
+                                  type: string
+                                  enum:
+                                  - dns_name
+                                  - ip_address
+                                  - email
+                                  - uri
+                                  - upn
+                                value:
+                                  type: string
+                                  minLength: 1
+                              required:
+                              - type
+                              - value
+                              additionalProperties: false
+                          domainComponents:
+                            type: array
+                            items:
+                              type: string
+                          customExtensions:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                oid:
+                                  type: string
+                                  maxLength: 64
+                                label:
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 64
+                                critical:
+                                  type: boolean
+                                value:
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 4096
+                              required:
+                              - oid
+                              additionalProperties: false
+                            maxItems: 10
                         additionalProperties: false
                       scepConfigId:
                         type:
@@ -2112,6 +2488,15 @@ paths:
                           - template
                           additionalProperties: false
                         - type: object
+                          properties:
+                            template:
+                              type: string
+                              minLength: 1
+                              description: Certificate template name for Active Directory Certificate Service
+                          required:
+                          - template
+                          additionalProperties: false
+                        - type: object
                           properties: {}
                           additionalProperties: false
                         - type: object
@@ -2213,7 +2598,9 @@ paths:
                               - code_signing
                               - email_protection
                               - ocsp_signing
+                              - smart_card_logon
                               - time_stamping
+                              - any_purpose
                           basicConstraints:
                             type: object
                             properties:
@@ -2234,6 +2621,52 @@ paths:
                             type: string
                           locality:
                             type: string
+                          subjectAltNames:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                type:
+                                  type: string
+                                  enum:
+                                  - dns_name
+                                  - ip_address
+                                  - email
+                                  - uri
+                                  - upn
+                                value:
+                                  type: string
+                                  minLength: 1
+                              required:
+                              - type
+                              - value
+                              additionalProperties: false
+                          domainComponents:
+                            type: array
+                            items:
+                              type: string
+                          customExtensions:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                oid:
+                                  type: string
+                                  maxLength: 64
+                                label:
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 64
+                                critical:
+                                  type: boolean
+                                value:
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 4096
+                              required:
+                              - oid
+                              additionalProperties: false
+                            maxItems: 10
                         additionalProperties: false
                       scepConfigId:
                         type:
@@ -2469,6 +2902,15 @@ paths:
                           - template
                           additionalProperties: false
                         - type: object
+                          properties:
+                            template:
+                              type: string
+                              minLength: 1
+                              description: Certificate template name for Active Directory Certificate Service
+                          required:
+                          - template
+                          additionalProperties: false
+                        - type: object
                           properties: {}
                           additionalProperties: false
                         - type: object
@@ -2570,7 +3012,9 @@ paths:
                               - code_signing
                               - email_protection
                               - ocsp_signing
+                              - smart_card_logon
                               - time_stamping
+                              - any_purpose
                           basicConstraints:
                             type: object
                             properties:
@@ -2591,6 +3035,52 @@ paths:
                             type: string
                           locality:
                             type: string
+                          subjectAltNames:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                type:
+                                  type: string
+                                  enum:
+                                  - dns_name
+                                  - ip_address
+                                  - email
+                                  - uri
+                                  - upn
+                                value:
+                                  type: string
+                                  minLength: 1
+                              required:
+                              - type
+                              - value
+                              additionalProperties: false
+                          domainComponents:
+                            type: array
+                            items:
+                              type: string
+                          customExtensions:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                oid:
+                                  type: string
+                                  maxLength: 64
+                                label:
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 64
+                                critical:
+                                  type: boolean
+                                value:
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 4096
+                              required:
+                              - oid
+                              additionalProperties: false
+                            maxItems: 10
                         additionalProperties: false
                       scepConfigId:
                         type:
@@ -2775,6 +3265,7 @@ paths:
           - active
           - expired
           - revoked
+          - renewed
         in: query
         name: status
         required: false
@@ -3351,7 +3842,7 @@ paths:
                   pattern: ^[a-z0-9-]+$
                 description:
                   type: string
-                  maxLength: 1000
+                  maxLength: 255
                 issuerType:
                   type: string
                   enum:
@@ -3366,6 +3857,15 @@ paths:
                         type: string
                         minLength: 1
                         description: Certificate template name for Azure AD CS
+                    required:
+                    - template
+                    additionalProperties: false
+                  - type: object
+                    properties:
+                      template:
+                        type: string
+                        minLength: 1
+                        description: Certificate template name for Active Directory Certificate Service
                     required:
                     - template
                     additionalProperties: false
@@ -3400,6 +3900,7 @@ paths:
                       exclusiveMinimum: 0
                     commonName:
                       type: string
+                      maxLength: 255
                     keyAlgorithm:
                       type: string
                       enum:
@@ -3472,7 +3973,9 @@ paths:
                         - code_signing
                         - email_protection
                         - ocsp_signing
+                        - smart_card_logon
                         - time_stamping
+                        - any_purpose
                     basicConstraints:
                       type: object
                       properties:
@@ -3486,14 +3989,68 @@ paths:
                       additionalProperties: false
                     organization:
                       type: string
+                      maxLength: 255
                     organizationalUnit:
                       type: string
+                      maxLength: 255
                     country:
                       type: string
+                      maxLength: 255
                     state:
                       type: string
+                      maxLength: 255
                     locality:
                       type: string
+                      maxLength: 255
+                    subjectAltNames:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - dns_name
+                            - ip_address
+                            - email
+                            - uri
+                            - upn
+                          value:
+                            type: string
+                            minLength: 1
+                        required:
+                        - type
+                        - value
+                        additionalProperties: false
+                    domainComponents:
+                      type: array
+                      items:
+                        type: string
+                        minLength: 1
+                        maxLength: 255
+                      maxItems: 50
+                    customExtensions:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          oid:
+                            type: string
+                            maxLength: 64
+                          label:
+                            type: string
+                            minLength: 1
+                            maxLength: 64
+                          critical:
+                            type: boolean
+                          value:
+                            type: string
+                            minLength: 1
+                            maxLength: 4096
+                        required:
+                        - oid
+                        additionalProperties: false
+                      maxItems: 10
                   additionalProperties: false
               required:
               - certificatePolicyId
@@ -3563,6 +4120,15 @@ paths:
                               type: string
                               minLength: 1
                               description: Certificate template name for Azure AD CS
+                          required:
+                          - template
+                          additionalProperties: false
+                        - type: object
+                          properties:
+                            template:
+                              type: string
+                              minLength: 1
+                              description: Certificate template name for Active Directory Certificate Service
                           required:
                           - template
                           additionalProperties: false
@@ -3668,7 +4234,9 @@ paths:
                               - code_signing
                               - email_protection
                               - ocsp_signing
+                              - smart_card_logon
                               - time_stamping
+                              - any_purpose
                           basicConstraints:
                             type: object
                             properties:
@@ -3689,6 +4257,52 @@ paths:
                             type: string
                           locality:
                             type: string
+                          subjectAltNames:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                type:
+                                  type: string
+                                  enum:
+                                  - dns_name
+                                  - ip_address
+                                  - email
+                                  - uri
+                                  - upn
+                                value:
+                                  type: string
+                                  minLength: 1
+                              required:
+                              - type
+                              - value
+                              additionalProperties: false
+                          domainComponents:
+                            type: array
+                            items:
+                              type: string
+                          customExtensions:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                oid:
+                                  type: string
+                                  maxLength: 64
+                                label:
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 64
+                                critical:
+                                  type: boolean
+                                value:
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 4096
+                              required:
+                              - oid
+                              additionalProperties: false
+                            maxItems: 10
                         additionalProperties: false
                       scepConfigId:
                         type:
@@ -3973,6 +4587,15 @@ paths:
                             - template
                             additionalProperties: false
                           - type: object
+                            properties:
+                              template:
+                                type: string
+                                minLength: 1
+                                description: Certificate template name for Active Directory Certificate Service
+                            required:
+                            - template
+                            additionalProperties: false
+                          - type: object
                             properties: {}
                             additionalProperties: false
                           - type: object
@@ -4074,7 +4697,9 @@ paths:
                                 - code_signing
                                 - email_protection
                                 - ocsp_signing
+                                - smart_card_logon
                                 - time_stamping
+                                - any_purpose
                             basicConstraints:
                               type: object
                               properties:
@@ -4095,6 +4720,52 @@ paths:
                               type: string
                             locality:
                               type: string
+                            subjectAltNames:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  type:
+                                    type: string
+                                    enum:
+                                    - dns_name
+                                    - ip_address
+                                    - email
+                                    - uri
+                                    - upn
+                                  value:
+                                    type: string
+                                    minLength: 1
+                                required:
+                                - type
+                                - value
+                                additionalProperties: false
+                            domainComponents:
+                              type: array
+                              items:
+                                type: string
+                            customExtensions:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  oid:
+                                    type: string
+                                    maxLength: 64
+                                  label:
+                                    type: string
+                                    minLength: 1
+                                    maxLength: 64
+                                  critical:
+                                    type: boolean
+                                  value:
+                                    type: string
+                                    minLength: 1
+                                    maxLength: 4096
+                                required:
+                                - oid
+                                additionalProperties: false
+                              maxItems: 10
                           additionalProperties: false
                         scepConfigId:
                           type:
@@ -4113,6 +4784,14 @@ paths:
                             isExternal:
                               type: boolean
                             externalType:
+                              type:
+                              - string
+                              - 'null'
+                            productNameId:
+                              type:
+                              - string
+                              - 'null'
+                            keyAlgorithm:
                               type:
                               - string
                               - 'null'
@@ -4456,6 +5135,15 @@ paths:
                           - template
                           additionalProperties: false
                         - type: object
+                          properties:
+                            template:
+                              type: string
+                              minLength: 1
+                              description: Certificate template name for Active Directory Certificate Service
+                          required:
+                          - template
+                          additionalProperties: false
+                        - type: object
                           properties: {}
                           additionalProperties: false
                         - type: object
@@ -4557,7 +5245,9 @@ paths:
                               - code_signing
                               - email_protection
                               - ocsp_signing
+                              - smart_card_logon
                               - time_stamping
+                              - any_purpose
                           basicConstraints:
                             type: object
                             properties:
@@ -4578,6 +5268,52 @@ paths:
                             type: string
                           locality:
                             type: string
+                          subjectAltNames:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                type:
+                                  type: string
+                                  enum:
+                                  - dns_name
+                                  - ip_address
+                                  - email
+                                  - uri
+                                  - upn
+                                value:
+                                  type: string
+                                  minLength: 1
+                              required:
+                              - type
+                              - value
+                              additionalProperties: false
+                          domainComponents:
+                            type: array
+                            items:
+                              type: string
+                          customExtensions:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                oid:
+                                  type: string
+                                  maxLength: 64
+                                label:
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 64
+                                critical:
+                                  type: boolean
+                                value:
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 4096
+                              required:
+                              - oid
+                              additionalProperties: false
+                            maxItems: 10
                         additionalProperties: false
                       scepConfigId:
                         type:
@@ -4598,6 +5334,14 @@ paths:
                           isExternal:
                             type: boolean
                           externalType:
+                            type:
+                            - string
+                            - 'null'
+                          productNameId:
+                            type:
+                            - string
+                            - 'null'
+                          keyAlgorithm:
                             type:
                             - string
                             - 'null'
@@ -4870,7 +5614,7 @@ paths:
                   type:
                   - string
                   - 'null'
-                  maxLength: 1000
+                  maxLength: 255
                 issuerType:
                   type: string
                   enum:
@@ -4884,6 +5628,15 @@ paths:
                         type: string
                         minLength: 1
                         description: Certificate template name for Azure AD CS
+                    required:
+                    - template
+                    additionalProperties: false
+                  - type: object
+                    properties:
+                      template:
+                        type: string
+                        minLength: 1
+                        description: Certificate template name for Active Directory Certificate Service
                     required:
                     - template
                     additionalProperties: false
@@ -4918,6 +5671,7 @@ paths:
                       exclusiveMinimum: 0
                     commonName:
                       type: string
+                      maxLength: 255
                     keyAlgorithm:
                       type: string
                       enum:
@@ -4990,7 +5744,9 @@ paths:
                         - code_signing
                         - email_protection
                         - ocsp_signing
+                        - smart_card_logon
                         - time_stamping
+                        - any_purpose
                     basicConstraints:
                       type: object
                       properties:
@@ -5004,14 +5760,68 @@ paths:
                       additionalProperties: false
                     organization:
                       type: string
+                      maxLength: 255
                     organizationalUnit:
                       type: string
+                      maxLength: 255
                     country:
                       type: string
+                      maxLength: 255
                     state:
                       type: string
+                      maxLength: 255
                     locality:
                       type: string
+                      maxLength: 255
+                    subjectAltNames:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - dns_name
+                            - ip_address
+                            - email
+                            - uri
+                            - upn
+                          value:
+                            type: string
+                            minLength: 1
+                        required:
+                        - type
+                        - value
+                        additionalProperties: false
+                    domainComponents:
+                      type: array
+                      items:
+                        type: string
+                        minLength: 1
+                        maxLength: 255
+                      maxItems: 50
+                    customExtensions:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          oid:
+                            type: string
+                            maxLength: 64
+                          label:
+                            type: string
+                            minLength: 1
+                            maxLength: 64
+                          critical:
+                            type: boolean
+                          value:
+                            type: string
+                            minLength: 1
+                            maxLength: 4096
+                        required:
+                        - oid
+                        additionalProperties: false
+                      maxItems: 10
                   additionalProperties: false
               additionalProperties: false
       parameters:
@@ -5085,6 +5895,15 @@ paths:
                               type: string
                               minLength: 1
                               description: Certificate template name for Azure AD CS
+                          required:
+                          - template
+                          additionalProperties: false
+                        - type: object
+                          properties:
+                            template:
+                              type: string
+                              minLength: 1
+                              description: Certificate template name for Active Directory Certificate Service
                           required:
                           - template
                           additionalProperties: false
@@ -5190,7 +6009,9 @@ paths:
                               - code_signing
                               - email_protection
                               - ocsp_signing
+                              - smart_card_logon
                               - time_stamping
+                              - any_purpose
                           basicConstraints:
                             type: object
                             properties:
@@ -5211,6 +6032,52 @@ paths:
                             type: string
                           locality:
                             type: string
+                          subjectAltNames:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                type:
+                                  type: string
+                                  enum:
+                                  - dns_name
+                                  - ip_address
+                                  - email
+                                  - uri
+                                  - upn
+                                value:
+                                  type: string
+                                  minLength: 1
+                              required:
+                              - type
+                              - value
+                              additionalProperties: false
+                          domainComponents:
+                            type: array
+                            items:
+                              type: string
+                          customExtensions:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                oid:
+                                  type: string
+                                  maxLength: 64
+                                label:
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 64
+                                critical:
+                                  type: boolean
+                                value:
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 4096
+                              required:
+                              - oid
+                              additionalProperties: false
+                            maxItems: 10
                         additionalProperties: false
                       scepConfigId:
                         type:
@@ -5449,6 +6316,15 @@ paths:
                           - template
                           additionalProperties: false
                         - type: object
+                          properties:
+                            template:
+                              type: string
+                              minLength: 1
+                              description: Certificate template name for Active Directory Certificate Service
+                          required:
+                          - template
+                          additionalProperties: false
+                        - type: object
                           properties: {}
                           additionalProperties: false
                         - type: object
@@ -5550,7 +6426,9 @@ paths:
                               - code_signing
                               - email_protection
                               - ocsp_signing
+                              - smart_card_logon
                               - time_stamping
+                              - any_purpose
                           basicConstraints:
                             type: object
                             properties:
@@ -5571,6 +6449,52 @@ paths:
                             type: string
                           locality:
                             type: string
+                          subjectAltNames:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                type:
+                                  type: string
+                                  enum:
+                                  - dns_name
+                                  - ip_address
+                                  - email
+                                  - uri
+                                  - upn
+                                value:
+                                  type: string
+                                  minLength: 1
+                              required:
+                              - type
+                              - value
+                              additionalProperties: false
+                          domainComponents:
+                            type: array
+                            items:
+                              type: string
+                          customExtensions:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                oid:
+                                  type: string
+                                  maxLength: 64
+                                label:
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 64
+                                critical:
+                                  type: boolean
+                                value:
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 4096
+                              required:
+                              - oid
+                              additionalProperties: false
+                            maxItems: 10
                         additionalProperties: false
                       scepConfigId:
                         type:
@@ -5810,6 +6734,15 @@ paths:
                           - template
                           additionalProperties: false
                         - type: object
+                          properties:
+                            template:
+                              type: string
+                              minLength: 1
+                              description: Certificate template name for Active Directory Certificate Service
+                          required:
+                          - template
+                          additionalProperties: false
+                        - type: object
                           properties: {}
                           additionalProperties: false
                         - type: object
@@ -5911,7 +6844,9 @@ paths:
                               - code_signing
                               - email_protection
                               - ocsp_signing
+                              - smart_card_logon
                               - time_stamping
+                              - any_purpose
                           basicConstraints:
                             type: object
                             properties:
@@ -5932,6 +6867,52 @@ paths:
                             type: string
                           locality:
                             type: string
+                          subjectAltNames:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                type:
+                                  type: string
+                                  enum:
+                                  - dns_name
+                                  - ip_address
+                                  - email
+                                  - uri
+                                  - upn
+                                value:
+                                  type: string
+                                  minLength: 1
+                              required:
+                              - type
+                              - value
+                              additionalProperties: false
+                          domainComponents:
+                            type: array
+                            items:
+                              type: string
+                          customExtensions:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                oid:
+                                  type: string
+                                  maxLength: 64
+                                label:
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 64
+                                critical:
+                                  type: boolean
+                                value:
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 4096
+                              required:
+                              - oid
+                              additionalProperties: false
+                            maxItems: 10
                         additionalProperties: false
                       scepConfigId:
                         type:
@@ -6118,6 +7099,7 @@ paths:
           - active
           - expired
           - revoked
+          - renewed
         in: query
         name: status
         required: false

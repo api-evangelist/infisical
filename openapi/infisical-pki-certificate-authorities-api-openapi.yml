@@ -141,6 +141,12 @@ paths:
                         disableManagedCrlDistributionPointUrl:
                           type: boolean
                           default: false
+                        isOcspEnabled:
+                          type: boolean
+                          default: false
+                        ocspGeneration:
+                          type: number
+                          default: 0
                         requireTemplateForIssuance:
                           type: boolean
                         notAfter:
@@ -352,29 +358,36 @@ paths:
                           description: The type of CA to create.
                         friendlyName:
                           type: string
+                          maxLength: 255
                           description: A friendly name for the CA.
                         commonName:
                           type: string
+                          maxLength: 255
                           default: ''
                           description: The common name (CN) for the CA.
                         organization:
                           type: string
+                          maxLength: 255
                           default: ''
                           description: The organization (O) for the CA.
                         ou:
                           type: string
+                          maxLength: 255
                           default: ''
                           description: The organization unit (OU) for the CA.
                         country:
                           type: string
+                          maxLength: 255
                           default: ''
                           description: The country name (C) for the CA.
                         province:
                           type: string
+                          maxLength: 255
                           default: ''
                           description: The state of province name for the CA.
                         locality:
                           type: string
+                          maxLength: 255
                           default: ''
                           description: The locality name for the CA.
                         notBefore:
@@ -414,10 +427,72 @@ paths:
                           - SLH-DSA-SHAKE-256f
                           - SLH-DSA-SHAKE-256s
                           description: The type of public key algorithm and size, in bits, of the key pair for the CA; when you create an intermediate CA, you must use a key algorithm supported by the parent CA.
+                        keySource:
+                          type: string
+                          enum:
+                          - infisical
+                          - hsm
+                          - aws-kms
+                          description: Where the CA's signing key is generated and stored. 'infisical' keeps the key in Infisical's KMS; 'hsm' generates and stores the key in the HSM reached through the specified HSM Connector; 'aws-kms' generates the key in AWS KMS through the specified AWS connection, and every signature is made by AWS KMS.
+                        hsmConnectorId:
+                          type: string
+                          format: uuid
+                          description: The ID of the HSM Connector to generate and store the CA's signing key in. Required when keySource is 'hsm'.
+                        hsmKeyLabel:
+                          type: string
+                          description: 'Deprecated: use externalKeyId, which holds the same key label for HSM-backed CAs. The label of the CA''s signing key on the HSM.'
+                          deprecated: true
+                        appConnectionId:
+                          type: string
+                          format: uuid
+                          description: The ID of the AWS connection used to create the CA's signing key in AWS KMS and to sign with it. Required when keySource is 'aws-kms'.
+                        appConnectionName:
+                          type: string
+                          description: The name of the AWS connection the CA's signing key is reached through. Not user-supplied.
+                        hsmConnectorName:
+                          type: string
+                          description: The name of the HSM Connector the CA's signing key is reached through. Not user-supplied.
+                        region:
+                          type: string
+                          enum:
+                          - us-east-1
+                          - us-east-2
+                          - us-west-1
+                          - us-west-2
+                          - us-gov-east-1
+                          - us-gov-west-1
+                          - af-south-1
+                          - ap-east-1
+                          - ap-south-1
+                          - ap-south-2
+                          - ap-northeast-1
+                          - ap-northeast-2
+                          - ap-northeast-3
+                          - ap-southeast-1
+                          - ap-southeast-2
+                          - ap-southeast-3
+                          - ap-southeast-4
+                          - ca-central-1
+                          - eu-central-1
+                          - eu-central-2
+                          - eu-west-1
+                          - eu-west-2
+                          - eu-west-3
+                          - eu-south-1
+                          - eu-south-2
+                          - eu-north-1
+                          - me-south-1
+                          - me-central-1
+                          - sa-east-1
+                          description: The AWS region the CA's signing key is created in. Required when keySource is 'aws-kms', and returned when reading the CA.
+                        externalKeyId:
+                          type: string
+                          description: 'The identifier of the CA''s signing key in its key source: the key ARN for AWS KMS, or the key label for HSM. Not user-supplied: the key is created when the CA is created.'
                         dn:
                           type:
                           - string
                           - 'null'
+                          maxLength: 255
                         parentCaId:
                           type:
                           - string
@@ -444,6 +519,9 @@ paths:
                           type: boolean
                           default: false
                           description: When set to true, the Infisical-managed CRL endpoint URL will not be embedded in certificates issued by this CA. Only custom CRL Distribution Point URLs (if any) will be included.
+                        isOcspEnabled:
+                          type: boolean
+                          description: When set to true, certificates issued by this CA carry the Infisical-managed OCSP responder URL in their Authority Information Access extension, and that responder answers revocation status queries for them. Applies to certificates issued after it is enabled.
                       required:
                       - type
                       - keyAlgorithm
@@ -629,29 +707,36 @@ paths:
                       description: The type of CA to create.
                     friendlyName:
                       type: string
+                      maxLength: 255
                       description: A friendly name for the CA.
                     commonName:
                       type: string
+                      maxLength: 255
                       default: ''
                       description: The common name (CN) for the CA.
                     organization:
                       type: string
+                      maxLength: 255
                       default: ''
                       description: The organization (O) for the CA.
                     ou:
                       type: string
+                      maxLength: 255
                       default: ''
                       description: The organization unit (OU) for the CA.
                     country:
                       type: string
+                      maxLength: 255
                       default: ''
                       description: The country name (C) for the CA.
                     province:
                       type: string
+                      maxLength: 255
                       default: ''
                       description: The state of province name for the CA.
                     locality:
                       type: string
+                      maxLength: 255
                       default: ''
                       description: The locality name for the CA.
                     notBefore:
@@ -691,10 +776,72 @@ paths:
                       - SLH-DSA-SHAKE-256f
                       - SLH-DSA-SHAKE-256s
                       description: The type of public key algorithm and size, in bits, of the key pair for the CA; when you create an intermediate CA, you must use a key algorithm supported by the parent CA.
+                    keySource:
+                      type: string
+                      enum:
+                      - infisical
+                      - hsm
+                      - aws-kms
+                      description: Where the CA's signing key is generated and stored. 'infisical' keeps the key in Infisical's KMS; 'hsm' generates and stores the key in the HSM reached through the specified HSM Connector; 'aws-kms' generates the key in AWS KMS through the specified AWS connection, and every signature is made by AWS KMS.
+                    hsmConnectorId:
+                      type: string
+                      format: uuid
+                      description: The ID of the HSM Connector to generate and store the CA's signing key in. Required when keySource is 'hsm'.
+                    hsmKeyLabel:
+                      type: string
+                      description: 'Deprecated: use externalKeyId, which holds the same key label for HSM-backed CAs. The label of the CA''s signing key on the HSM.'
+                      deprecated: true
+                    appConnectionId:
+                      type: string
+                      format: uuid
+                      description: The ID of the AWS connection used to create the CA's signing key in AWS KMS and to sign with it. Required when keySource is 'aws-kms'.
+                    appConnectionName:
+                      type: string
+                      description: The name of the AWS connection the CA's signing key is reached through. Not user-supplied.
+                    hsmConnectorName:
+                      type: string
+                      description: The name of the HSM Connector the CA's signing key is reached through. Not user-supplied.
+                    region:
+                      type: string
+                      enum:
+                      - us-east-1
+                      - us-east-2
+                      - us-west-1
+                      - us-west-2
+                      - us-gov-east-1
+                      - us-gov-west-1
+                      - af-south-1
+                      - ap-east-1
+                      - ap-south-1
+                      - ap-south-2
+                      - ap-northeast-1
+                      - ap-northeast-2
+                      - ap-northeast-3
+                      - ap-southeast-1
+                      - ap-southeast-2
+                      - ap-southeast-3
+                      - ap-southeast-4
+                      - ca-central-1
+                      - eu-central-1
+                      - eu-central-2
+                      - eu-west-1
+                      - eu-west-2
+                      - eu-west-3
+                      - eu-south-1
+                      - eu-south-2
+                      - eu-north-1
+                      - me-south-1
+                      - me-central-1
+                      - sa-east-1
+                      description: The AWS region the CA's signing key is created in. Required when keySource is 'aws-kms', and returned when reading the CA.
+                    externalKeyId:
+                      type: string
+                      description: 'The identifier of the CA''s signing key in its key source: the key ARN for AWS KMS, or the key label for HSM. Not user-supplied: the key is created when the CA is created.'
                     dn:
                       type:
                       - string
                       - 'null'
+                      maxLength: 255
                     parentCaId:
                       type:
                       - string
@@ -721,6 +868,9 @@ paths:
                       type: boolean
                       default: false
                       description: When set to true, the Infisical-managed CRL endpoint URL will not be embedded in certificates issued by this CA. Only custom CRL Distribution Point URLs (if any) will be included.
+                    isOcspEnabled:
+                      type: boolean
+                      description: When set to true, certificates issued by this CA carry the Infisical-managed OCSP responder URL in their Authority Information Access extension, and that responder answers revocation status queries for them. Applies to certificates issued after it is enabled.
                   required:
                   - type
                   - keyAlgorithm
@@ -767,29 +917,36 @@ paths:
                         description: The type of CA to create.
                       friendlyName:
                         type: string
+                        maxLength: 255
                         description: A friendly name for the CA.
                       commonName:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The common name (CN) for the CA.
                       organization:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The organization (O) for the CA.
                       ou:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The organization unit (OU) for the CA.
                       country:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The country name (C) for the CA.
                       province:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The state of province name for the CA.
                       locality:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The locality name for the CA.
                       notBefore:
@@ -829,10 +986,72 @@ paths:
                         - SLH-DSA-SHAKE-256f
                         - SLH-DSA-SHAKE-256s
                         description: The type of public key algorithm and size, in bits, of the key pair for the CA; when you create an intermediate CA, you must use a key algorithm supported by the parent CA.
+                      keySource:
+                        type: string
+                        enum:
+                        - infisical
+                        - hsm
+                        - aws-kms
+                        description: Where the CA's signing key is generated and stored. 'infisical' keeps the key in Infisical's KMS; 'hsm' generates and stores the key in the HSM reached through the specified HSM Connector; 'aws-kms' generates the key in AWS KMS through the specified AWS connection, and every signature is made by AWS KMS.
+                      hsmConnectorId:
+                        type: string
+                        format: uuid
+                        description: The ID of the HSM Connector to generate and store the CA's signing key in. Required when keySource is 'hsm'.
+                      hsmKeyLabel:
+                        type: string
+                        description: 'Deprecated: use externalKeyId, which holds the same key label for HSM-backed CAs. The label of the CA''s signing key on the HSM.'
+                        deprecated: true
+                      appConnectionId:
+                        type: string
+                        format: uuid
+                        description: The ID of the AWS connection used to create the CA's signing key in AWS KMS and to sign with it. Required when keySource is 'aws-kms'.
+                      appConnectionName:
+                        type: string
+                        description: The name of the AWS connection the CA's signing key is reached through. Not user-supplied.
+                      hsmConnectorName:
+                        type: string
+                        description: The name of the HSM Connector the CA's signing key is reached through. Not user-supplied.
+                      region:
+                        type: string
+                        enum:
+                        - us-east-1
+                        - us-east-2
+                        - us-west-1
+                        - us-west-2
+                        - us-gov-east-1
+                        - us-gov-west-1
+                        - af-south-1
+                        - ap-east-1
+                        - ap-south-1
+                        - ap-south-2
+                        - ap-northeast-1
+                        - ap-northeast-2
+                        - ap-northeast-3
+                        - ap-southeast-1
+                        - ap-southeast-2
+                        - ap-southeast-3
+                        - ap-southeast-4
+                        - ca-central-1
+                        - eu-central-1
+                        - eu-central-2
+                        - eu-west-1
+                        - eu-west-2
+                        - eu-west-3
+                        - eu-south-1
+                        - eu-south-2
+                        - eu-north-1
+                        - me-south-1
+                        - me-central-1
+                        - sa-east-1
+                        description: The AWS region the CA's signing key is created in. Required when keySource is 'aws-kms', and returned when reading the CA.
+                      externalKeyId:
+                        type: string
+                        description: 'The identifier of the CA''s signing key in its key source: the key ARN for AWS KMS, or the key label for HSM. Not user-supplied: the key is created when the CA is created.'
                       dn:
                         type:
                         - string
                         - 'null'
+                        maxLength: 255
                       parentCaId:
                         type:
                         - string
@@ -859,6 +1078,9 @@ paths:
                         type: boolean
                         default: false
                         description: When set to true, the Infisical-managed CRL endpoint URL will not be embedded in certificates issued by this CA. Only custom CRL Distribution Point URLs (if any) will be included.
+                      isOcspEnabled:
+                        type: boolean
+                        description: When set to true, certificates issued by this CA carry the Infisical-managed OCSP responder URL in their Authority Information Access extension, and that responder answers revocation status queries for them. Applies to certificates issued after it is enabled.
                     required:
                     - type
                     - keyAlgorithm
@@ -1058,29 +1280,36 @@ paths:
                         description: The type of CA to create.
                       friendlyName:
                         type: string
+                        maxLength: 255
                         description: A friendly name for the CA.
                       commonName:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The common name (CN) for the CA.
                       organization:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The organization (O) for the CA.
                       ou:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The organization unit (OU) for the CA.
                       country:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The country name (C) for the CA.
                       province:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The state of province name for the CA.
                       locality:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The locality name for the CA.
                       notBefore:
@@ -1120,10 +1349,72 @@ paths:
                         - SLH-DSA-SHAKE-256f
                         - SLH-DSA-SHAKE-256s
                         description: The type of public key algorithm and size, in bits, of the key pair for the CA; when you create an intermediate CA, you must use a key algorithm supported by the parent CA.
+                      keySource:
+                        type: string
+                        enum:
+                        - infisical
+                        - hsm
+                        - aws-kms
+                        description: Where the CA's signing key is generated and stored. 'infisical' keeps the key in Infisical's KMS; 'hsm' generates and stores the key in the HSM reached through the specified HSM Connector; 'aws-kms' generates the key in AWS KMS through the specified AWS connection, and every signature is made by AWS KMS.
+                      hsmConnectorId:
+                        type: string
+                        format: uuid
+                        description: The ID of the HSM Connector to generate and store the CA's signing key in. Required when keySource is 'hsm'.
+                      hsmKeyLabel:
+                        type: string
+                        description: 'Deprecated: use externalKeyId, which holds the same key label for HSM-backed CAs. The label of the CA''s signing key on the HSM.'
+                        deprecated: true
+                      appConnectionId:
+                        type: string
+                        format: uuid
+                        description: The ID of the AWS connection used to create the CA's signing key in AWS KMS and to sign with it. Required when keySource is 'aws-kms'.
+                      appConnectionName:
+                        type: string
+                        description: The name of the AWS connection the CA's signing key is reached through. Not user-supplied.
+                      hsmConnectorName:
+                        type: string
+                        description: The name of the HSM Connector the CA's signing key is reached through. Not user-supplied.
+                      region:
+                        type: string
+                        enum:
+                        - us-east-1
+                        - us-east-2
+                        - us-west-1
+                        - us-west-2
+                        - us-gov-east-1
+                        - us-gov-west-1
+                        - af-south-1
+                        - ap-east-1
+                        - ap-south-1
+                        - ap-south-2
+                        - ap-northeast-1
+                        - ap-northeast-2
+                        - ap-northeast-3
+                        - ap-southeast-1
+                        - ap-southeast-2
+                        - ap-southeast-3
+                        - ap-southeast-4
+                        - ca-central-1
+                        - eu-central-1
+                        - eu-central-2
+                        - eu-west-1
+                        - eu-west-2
+                        - eu-west-3
+                        - eu-south-1
+                        - eu-south-2
+                        - eu-north-1
+                        - me-south-1
+                        - me-central-1
+                        - sa-east-1
+                        description: The AWS region the CA's signing key is created in. Required when keySource is 'aws-kms', and returned when reading the CA.
+                      externalKeyId:
+                        type: string
+                        description: 'The identifier of the CA''s signing key in its key source: the key ARN for AWS KMS, or the key label for HSM. Not user-supplied: the key is created when the CA is created.'
                       dn:
                         type:
                         - string
                         - 'null'
+                        maxLength: 255
                       parentCaId:
                         type:
                         - string
@@ -1150,6 +1441,9 @@ paths:
                         type: boolean
                         default: false
                         description: When set to true, the Infisical-managed CRL endpoint URL will not be embedded in certificates issued by this CA. Only custom CRL Distribution Point URLs (if any) will be included.
+                      isOcspEnabled:
+                        type: boolean
+                        description: When set to true, certificates issued by this CA carry the Infisical-managed OCSP responder URL in their Authority Information Access extension, and that responder answers revocation status queries for them. Applies to certificates issued after it is enabled.
                     required:
                     - type
                     - keyAlgorithm
@@ -1338,6 +1632,9 @@ paths:
                     disableManagedCrlDistributionPointUrl:
                       type: boolean
                       description: When set to true, the Infisical-managed CRL endpoint URL will not be embedded in certificates issued by this CA. Only custom CRL Distribution Point URLs (if any) will be included.
+                    isOcspEnabled:
+                      type: boolean
+                      description: When set to true, certificates issued by this CA carry the Infisical-managed OCSP responder URL in their Authority Information Access extension, and that responder answers revocation status queries for them. Applies to certificates issued after it is enabled.
                   additionalProperties: false
               additionalProperties: false
       parameters:
@@ -1383,29 +1680,36 @@ paths:
                         description: The type of CA to create.
                       friendlyName:
                         type: string
+                        maxLength: 255
                         description: A friendly name for the CA.
                       commonName:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The common name (CN) for the CA.
                       organization:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The organization (O) for the CA.
                       ou:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The organization unit (OU) for the CA.
                       country:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The country name (C) for the CA.
                       province:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The state of province name for the CA.
                       locality:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The locality name for the CA.
                       notBefore:
@@ -1445,10 +1749,72 @@ paths:
                         - SLH-DSA-SHAKE-256f
                         - SLH-DSA-SHAKE-256s
                         description: The type of public key algorithm and size, in bits, of the key pair for the CA; when you create an intermediate CA, you must use a key algorithm supported by the parent CA.
+                      keySource:
+                        type: string
+                        enum:
+                        - infisical
+                        - hsm
+                        - aws-kms
+                        description: Where the CA's signing key is generated and stored. 'infisical' keeps the key in Infisical's KMS; 'hsm' generates and stores the key in the HSM reached through the specified HSM Connector; 'aws-kms' generates the key in AWS KMS through the specified AWS connection, and every signature is made by AWS KMS.
+                      hsmConnectorId:
+                        type: string
+                        format: uuid
+                        description: The ID of the HSM Connector to generate and store the CA's signing key in. Required when keySource is 'hsm'.
+                      hsmKeyLabel:
+                        type: string
+                        description: 'Deprecated: use externalKeyId, which holds the same key label for HSM-backed CAs. The label of the CA''s signing key on the HSM.'
+                        deprecated: true
+                      appConnectionId:
+                        type: string
+                        format: uuid
+                        description: The ID of the AWS connection used to create the CA's signing key in AWS KMS and to sign with it. Required when keySource is 'aws-kms'.
+                      appConnectionName:
+                        type: string
+                        description: The name of the AWS connection the CA's signing key is reached through. Not user-supplied.
+                      hsmConnectorName:
+                        type: string
+                        description: The name of the HSM Connector the CA's signing key is reached through. Not user-supplied.
+                      region:
+                        type: string
+                        enum:
+                        - us-east-1
+                        - us-east-2
+                        - us-west-1
+                        - us-west-2
+                        - us-gov-east-1
+                        - us-gov-west-1
+                        - af-south-1
+                        - ap-east-1
+                        - ap-south-1
+                        - ap-south-2
+                        - ap-northeast-1
+                        - ap-northeast-2
+                        - ap-northeast-3
+                        - ap-southeast-1
+                        - ap-southeast-2
+                        - ap-southeast-3
+                        - ap-southeast-4
+                        - ca-central-1
+                        - eu-central-1
+                        - eu-central-2
+                        - eu-west-1
+                        - eu-west-2
+                        - eu-west-3
+                        - eu-south-1
+                        - eu-south-2
+                        - eu-north-1
+                        - me-south-1
+                        - me-central-1
+                        - sa-east-1
+                        description: The AWS region the CA's signing key is created in. Required when keySource is 'aws-kms', and returned when reading the CA.
+                      externalKeyId:
+                        type: string
+                        description: 'The identifier of the CA''s signing key in its key source: the key ARN for AWS KMS, or the key label for HSM. Not user-supplied: the key is created when the CA is created.'
                       dn:
                         type:
                         - string
                         - 'null'
+                        maxLength: 255
                       parentCaId:
                         type:
                         - string
@@ -1475,6 +1841,9 @@ paths:
                         type: boolean
                         default: false
                         description: When set to true, the Infisical-managed CRL endpoint URL will not be embedded in certificates issued by this CA. Only custom CRL Distribution Point URLs (if any) will be included.
+                      isOcspEnabled:
+                        type: boolean
+                        description: When set to true, certificates issued by this CA carry the Infisical-managed OCSP responder URL in their Authority Information Access extension, and that responder answers revocation status queries for them. Applies to certificates issued after it is enabled.
                     required:
                     - type
                     - keyAlgorithm
@@ -1673,29 +2042,36 @@ paths:
                         description: The type of CA to create.
                       friendlyName:
                         type: string
+                        maxLength: 255
                         description: A friendly name for the CA.
                       commonName:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The common name (CN) for the CA.
                       organization:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The organization (O) for the CA.
                       ou:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The organization unit (OU) for the CA.
                       country:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The country name (C) for the CA.
                       province:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The state of province name for the CA.
                       locality:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The locality name for the CA.
                       notBefore:
@@ -1735,10 +2111,72 @@ paths:
                         - SLH-DSA-SHAKE-256f
                         - SLH-DSA-SHAKE-256s
                         description: The type of public key algorithm and size, in bits, of the key pair for the CA; when you create an intermediate CA, you must use a key algorithm supported by the parent CA.
+                      keySource:
+                        type: string
+                        enum:
+                        - infisical
+                        - hsm
+                        - aws-kms
+                        description: Where the CA's signing key is generated and stored. 'infisical' keeps the key in Infisical's KMS; 'hsm' generates and stores the key in the HSM reached through the specified HSM Connector; 'aws-kms' generates the key in AWS KMS through the specified AWS connection, and every signature is made by AWS KMS.
+                      hsmConnectorId:
+                        type: string
+                        format: uuid
+                        description: The ID of the HSM Connector to generate and store the CA's signing key in. Required when keySource is 'hsm'.
+                      hsmKeyLabel:
+                        type: string
+                        description: 'Deprecated: use externalKeyId, which holds the same key label for HSM-backed CAs. The label of the CA''s signing key on the HSM.'
+                        deprecated: true
+                      appConnectionId:
+                        type: string
+                        format: uuid
+                        description: The ID of the AWS connection used to create the CA's signing key in AWS KMS and to sign with it. Required when keySource is 'aws-kms'.
+                      appConnectionName:
+                        type: string
+                        description: The name of the AWS connection the CA's signing key is reached through. Not user-supplied.
+                      hsmConnectorName:
+                        type: string
+                        description: The name of the HSM Connector the CA's signing key is reached through. Not user-supplied.
+                      region:
+                        type: string
+                        enum:
+                        - us-east-1
+                        - us-east-2
+                        - us-west-1
+                        - us-west-2
+                        - us-gov-east-1
+                        - us-gov-west-1
+                        - af-south-1
+                        - ap-east-1
+                        - ap-south-1
+                        - ap-south-2
+                        - ap-northeast-1
+                        - ap-northeast-2
+                        - ap-northeast-3
+                        - ap-southeast-1
+                        - ap-southeast-2
+                        - ap-southeast-3
+                        - ap-southeast-4
+                        - ca-central-1
+                        - eu-central-1
+                        - eu-central-2
+                        - eu-west-1
+                        - eu-west-2
+                        - eu-west-3
+                        - eu-south-1
+                        - eu-south-2
+                        - eu-north-1
+                        - me-south-1
+                        - me-central-1
+                        - sa-east-1
+                        description: The AWS region the CA's signing key is created in. Required when keySource is 'aws-kms', and returned when reading the CA.
+                      externalKeyId:
+                        type: string
+                        description: 'The identifier of the CA''s signing key in its key source: the key ARN for AWS KMS, or the key label for HSM. Not user-supplied: the key is created when the CA is created.'
                       dn:
                         type:
                         - string
                         - 'null'
+                        maxLength: 255
                       parentCaId:
                         type:
                         - string
@@ -1765,6 +2203,9 @@ paths:
                         type: boolean
                         default: false
                         description: When set to true, the Infisical-managed CRL endpoint URL will not be embedded in certificates issued by this CA. Only custom CRL Distribution Point URLs (if any) will be included.
+                      isOcspEnabled:
+                        type: boolean
+                        description: When set to true, certificates issued by this CA carry the Infisical-managed OCSP responder URL in their Authority Information Access extension, and that responder answers revocation status queries for them. Applies to certificates issued after it is enabled.
                     required:
                     - type
                     - keyAlgorithm
@@ -2494,6 +2935,7 @@ paths:
       parameters:
       - schema:
           type: string
+          format: uuid
         in: path
         name: caId
         required: true
@@ -2673,6 +3115,7 @@ paths:
       parameters:
       - schema:
           type: string
+          format: uuid
         in: path
         name: caId
         required: true
@@ -2857,12 +3300,14 @@ paths:
       parameters:
       - schema:
           type: string
+          format: uuid
         in: path
         name: caId
         required: true
         description: The ID of the CA to get the certificate body and certificate chain from.
       - schema:
           type: string
+          format: uuid
         in: path
         name: certId
         required: true
@@ -3959,7 +4404,7 @@ paths:
       operationId: installCaCertificateAdcs
       tags:
       - PKI Certificate Authorities
-      description: Install a CA certificate via Azure AD CS
+      description: Install a CA certificate via Azure AD CS (Web Enrollment)
       requestBody:
         required: true
         content:
@@ -4135,6 +4580,187 @@ paths:
                 additionalProperties: false
       summary: Install ca certificate adcs
       x-summary-source: derived
+  /api/v1/cert-manager/ca/internal/{caId}/install-certificate-microsoft-adcs:
+    post:
+      operationId: installCaCertificateAdcsNative
+      tags:
+      - PKI Certificate Authorities
+      description: Install a CA certificate via ADCS
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                maxPathLength:
+                  type: number
+                  minimum: -1
+                  default: -1
+              additionalProperties: false
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: caId
+        required: true
+        description: The ID of the CA to install the certificate for via ADCS.
+      responses:
+        '202':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  caId:
+                    type: string
+                required:
+                - message
+                - caId
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: Install ca certificate adcs native
+      x-summary-source: derived
   /api/v1/cert-manager/ca/internal/{caId}/signing-config:
     post:
       operationId: createCaSigningConfig
@@ -4216,6 +4842,32 @@ paths:
                       validityPeriod:
                         type: integer
                         exclusiveMinimum: 0
+                    required:
+                    - template
+                    additionalProperties: false
+                required:
+                - type
+                - appConnectionId
+                - destinationConfig
+                additionalProperties: false
+              - type: object
+                properties:
+                  type:
+                    type: string
+                    enum:
+                    - adcs
+                  appConnectionId:
+                    type: string
+                    format: uuid
+                  destinationConfig:
+                    type: object
+                    properties:
+                      template:
+                        type: string
+                        minLength: 1
+                      caName:
+                        type: string
+                        minLength: 1
                     required:
                     - template
                     additionalProperties: false
@@ -4656,6 +5308,17 @@ paths:
                       validityPeriod:
                         type: integer
                         exclusiveMinimum: 0
+                    required:
+                    - template
+                    additionalProperties: false
+                  - type: object
+                    properties:
+                      template:
+                        type: string
+                        minLength: 1
+                      caName:
+                        type: string
+                        minLength: 1
                     required:
                     - template
                     additionalProperties: false
@@ -5288,11 +5951,14 @@ paths:
                               - cloudflare
                               - dns-made-easy
                               - azure-dns
+                              - powerdns
+                              - gcp-cloud-dns
+                              - ultradns
                               description: The DNS provider for the ACME Certificate Authority.
                             hostedZoneId:
                               type: string
                               minLength: 1
-                              description: The hosted zone ID for the ACME Certificate Authority.
+                              description: The hosted zone ID for the ACME Certificate Authority. For Google Cloud DNS, use the managed zone resource name in the format projects/{projectId}/managedZones/{zoneName}.
                           required:
                           - provider
                           - hostedZoneId
@@ -5509,11 +6175,14 @@ paths:
                           - cloudflare
                           - dns-made-easy
                           - azure-dns
+                          - powerdns
+                          - gcp-cloud-dns
+                          - ultradns
                           description: The DNS provider for the ACME Certificate Authority.
                         hostedZoneId:
                           type: string
                           minLength: 1
-                          description: The hosted zone ID for the ACME Certificate Authority.
+                          description: The hosted zone ID for the ACME Certificate Authority. For Google Cloud DNS, use the managed zone resource name in the format projects/{projectId}/managedZones/{zoneName}.
                       required:
                       - provider
                       - hostedZoneId
@@ -5595,11 +6264,14 @@ paths:
                             - cloudflare
                             - dns-made-easy
                             - azure-dns
+                            - powerdns
+                            - gcp-cloud-dns
+                            - ultradns
                             description: The DNS provider for the ACME Certificate Authority.
                           hostedZoneId:
                             type: string
                             minLength: 1
-                            description: The hosted zone ID for the ACME Certificate Authority.
+                            description: The hosted zone ID for the ACME Certificate Authority. For Google Cloud DNS, use the managed zone resource name in the format projects/{projectId}/managedZones/{zoneName}.
                         required:
                         - provider
                         - hostedZoneId
@@ -5830,11 +6502,14 @@ paths:
                             - cloudflare
                             - dns-made-easy
                             - azure-dns
+                            - powerdns
+                            - gcp-cloud-dns
+                            - ultradns
                             description: The DNS provider for the ACME Certificate Authority.
                           hostedZoneId:
                             type: string
                             minLength: 1
-                            description: The hosted zone ID for the ACME Certificate Authority.
+                            description: The hosted zone ID for the ACME Certificate Authority. For Google Cloud DNS, use the managed zone resource name in the format projects/{projectId}/managedZones/{zoneName}.
                         required:
                         - provider
                         - hostedZoneId
@@ -6051,11 +6726,14 @@ paths:
                           - cloudflare
                           - dns-made-easy
                           - azure-dns
+                          - powerdns
+                          - gcp-cloud-dns
+                          - ultradns
                           description: The DNS provider for the ACME Certificate Authority.
                         hostedZoneId:
                           type: string
                           minLength: 1
-                          description: The hosted zone ID for the ACME Certificate Authority.
+                          description: The hosted zone ID for the ACME Certificate Authority. For Google Cloud DNS, use the managed zone resource name in the format projects/{projectId}/managedZones/{zoneName}.
                       required:
                       - provider
                       - hostedZoneId
@@ -6139,11 +6817,14 @@ paths:
                             - cloudflare
                             - dns-made-easy
                             - azure-dns
+                            - powerdns
+                            - gcp-cloud-dns
+                            - ultradns
                             description: The DNS provider for the ACME Certificate Authority.
                           hostedZoneId:
                             type: string
                             minLength: 1
-                            description: The hosted zone ID for the ACME Certificate Authority.
+                            description: The hosted zone ID for the ACME Certificate Authority. For Google Cloud DNS, use the managed zone resource name in the format projects/{projectId}/managedZones/{zoneName}.
                         required:
                         - provider
                         - hostedZoneId
@@ -6373,11 +7054,14 @@ paths:
                             - cloudflare
                             - dns-made-easy
                             - azure-dns
+                            - powerdns
+                            - gcp-cloud-dns
+                            - ultradns
                             description: The DNS provider for the ACME Certificate Authority.
                           hostedZoneId:
                             type: string
                             minLength: 1
-                            description: The hosted zone ID for the ACME Certificate Authority.
+                            description: The hosted zone ID for the ACME Certificate Authority. For Google Cloud DNS, use the managed zone resource name in the format projects/{projectId}/managedZones/{zoneName}.
                         required:
                         - provider
                         - hostedZoneId
@@ -7574,6 +8258,1055 @@ paths:
                 - error
                 additionalProperties: false
       summary: Delete azure ad cs certificate authority V1
+      x-summary-source: derived
+  /api/v1/cert-manager/ca/adcs:
+    get:
+      operationId: listAdcsCertificateAuthoritiesV1
+      tags:
+      - PKI Certificate Authorities
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    enableDirectIssuance:
+                      type: boolean
+                      default: true
+                    name:
+                      type: string
+                    id:
+                      type: string
+                      format: uuid
+                    status:
+                      type: string
+                      enum:
+                      - active
+                      - disabled
+                      - pending-certificate
+                    type:
+                      type: string
+                      enum:
+                      - adcs
+                    configuration:
+                      type: object
+                      properties:
+                        appConnectionId:
+                          type: string
+                          format: uuid
+                          description: The ADCS App Connection ID.
+                        caName:
+                          type: string
+                          minLength: 1
+                          description: 'The AD CS certification authority name. Optional: discovered automatically from the CA host when omitted.'
+                      required:
+                      - appConnectionId
+                      additionalProperties: false
+                  required:
+                  - name
+                  - id
+                  - status
+                  - type
+                  - configuration
+                  additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: List adcs certificate authorities V1
+      x-summary-source: derived
+    post:
+      operationId: createAdcsCertificateAuthorityV1
+      tags:
+      - PKI Certificate Authorities
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                  description: The name of the Microsoft ADCS Certificate Authority to create. Must be slug-friendly.
+                status:
+                  type: string
+                  enum:
+                  - active
+                  - disabled
+                  - pending-certificate
+                  description: The status of the Microsoft ADCS Certificate Authority.
+                configuration:
+                  type: object
+                  properties:
+                    appConnectionId:
+                      type: string
+                      format: uuid
+                      description: The ADCS App Connection ID.
+                    caName:
+                      type: string
+                      minLength: 1
+                      description: 'The AD CS certification authority name. Optional: discovered automatically from the CA host when omitted.'
+                  required:
+                  - appConnectionId
+                  additionalProperties: false
+              required:
+              - name
+              - status
+              - configuration
+              additionalProperties: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  enableDirectIssuance:
+                    type: boolean
+                    default: true
+                  name:
+                    type: string
+                  id:
+                    type: string
+                    format: uuid
+                  status:
+                    type: string
+                    enum:
+                    - active
+                    - disabled
+                    - pending-certificate
+                  type:
+                    type: string
+                    enum:
+                    - adcs
+                  configuration:
+                    type: object
+                    properties:
+                      appConnectionId:
+                        type: string
+                        format: uuid
+                        description: The ADCS App Connection ID.
+                      caName:
+                        type: string
+                        minLength: 1
+                        description: 'The AD CS certification authority name. Optional: discovered automatically from the CA host when omitted.'
+                    required:
+                    - appConnectionId
+                    additionalProperties: false
+                required:
+                - name
+                - id
+                - status
+                - type
+                - configuration
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: Create adcs certificate authority V1
+      x-summary-source: derived
+  /api/v1/cert-manager/ca/adcs/{id}:
+    get:
+      operationId: getAdcsCertificateAuthorityV1
+      tags:
+      - PKI Certificate Authorities
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: id
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  enableDirectIssuance:
+                    type: boolean
+                    default: true
+                  name:
+                    type: string
+                  id:
+                    type: string
+                    format: uuid
+                  status:
+                    type: string
+                    enum:
+                    - active
+                    - disabled
+                    - pending-certificate
+                  type:
+                    type: string
+                    enum:
+                    - adcs
+                  configuration:
+                    type: object
+                    properties:
+                      appConnectionId:
+                        type: string
+                        format: uuid
+                        description: The ADCS App Connection ID.
+                      caName:
+                        type: string
+                        minLength: 1
+                        description: 'The AD CS certification authority name. Optional: discovered automatically from the CA host when omitted.'
+                    required:
+                    - appConnectionId
+                    additionalProperties: false
+                required:
+                - name
+                - id
+                - status
+                - type
+                - configuration
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: Get adcs certificate authority V1
+      x-summary-source: derived
+    patch:
+      operationId: updateAdcsCertificateAuthorityV1
+      tags:
+      - PKI Certificate Authorities
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                  description: The updated name of the Microsoft ADCS Certificate Authority. Must be slug-friendly.
+                status:
+                  type: string
+                  enum:
+                  - active
+                  - disabled
+                  - pending-certificate
+                  description: The updated status of the Microsoft ADCS Certificate Authority.
+                configuration:
+                  type: object
+                  properties:
+                    appConnectionId:
+                      type: string
+                      format: uuid
+                      description: The ADCS App Connection ID.
+                    caName:
+                      type: string
+                      minLength: 1
+                      description: 'The AD CS certification authority name. Optional: discovered automatically from the CA host when omitted.'
+                  required:
+                  - appConnectionId
+                  additionalProperties: false
+              additionalProperties: false
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: id
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  enableDirectIssuance:
+                    type: boolean
+                    default: true
+                  name:
+                    type: string
+                  id:
+                    type: string
+                    format: uuid
+                  status:
+                    type: string
+                    enum:
+                    - active
+                    - disabled
+                    - pending-certificate
+                  type:
+                    type: string
+                    enum:
+                    - adcs
+                  configuration:
+                    type: object
+                    properties:
+                      appConnectionId:
+                        type: string
+                        format: uuid
+                        description: The ADCS App Connection ID.
+                      caName:
+                        type: string
+                        minLength: 1
+                        description: 'The AD CS certification authority name. Optional: discovered automatically from the CA host when omitted.'
+                    required:
+                    - appConnectionId
+                    additionalProperties: false
+                required:
+                - name
+                - id
+                - status
+                - type
+                - configuration
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: Update adcs certificate authority V1
+      x-summary-source: derived
+    delete:
+      operationId: deleteAdcsCertificateAuthorityV1
+      tags:
+      - PKI Certificate Authorities
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: id
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  enableDirectIssuance:
+                    type: boolean
+                    default: true
+                  name:
+                    type: string
+                  id:
+                    type: string
+                    format: uuid
+                  status:
+                    type: string
+                    enum:
+                    - active
+                    - disabled
+                    - pending-certificate
+                  type:
+                    type: string
+                    enum:
+                    - adcs
+                  configuration:
+                    type: object
+                    properties:
+                      appConnectionId:
+                        type: string
+                        format: uuid
+                        description: The ADCS App Connection ID.
+                      caName:
+                        type: string
+                        minLength: 1
+                        description: 'The AD CS certification authority name. Optional: discovered automatically from the CA host when omitted.'
+                    required:
+                    - appConnectionId
+                    additionalProperties: false
+                required:
+                - name
+                - id
+                - status
+                - type
+                - configuration
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 400
+                  message:
+                    type: string
+                  error:
+                    type: string
+                  details: {}
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 401
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '403':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 403
+                  message:
+                    type: string
+                  details: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 404
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+        '422':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 422
+                  message: {}
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - error
+                additionalProperties: false
+        '500':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reqId:
+                    type: string
+                  statusCode:
+                    type: number
+                    enum:
+                    - 500
+                  message:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - reqId
+                - statusCode
+                - message
+                - error
+                additionalProperties: false
+      summary: Delete adcs certificate authority V1
       x-summary-source: derived
   /api/v1/cert-manager/ca/aws-pca:
     get:
@@ -8916,7 +10649,44 @@ paths:
                         productNameId:
                           type: string
                           minLength: 1
-                          description: The DigiCert product name_id used for issuance (e.g. ssl_plus, ssl_ev_plus). Fetch available products from GET /app-connections/digicert/:id/products.
+                          description: The DigiCert product name_id used for issuance (e.g. ssl_plus, code_signing, code_signing_ev). Fetch available products from GET /app-connections/digicert/:id/products.
+                        purpose:
+                          type: string
+                          enum:
+                          - ssl
+                          - code_signing
+                          description: Whether this CA issues SSL/TLS or code-signing certificates (defaults to ssl)
+                        verifiedContact:
+                          type: object
+                          properties:
+                            firstName:
+                              type: string
+                              minLength: 1
+                              maxLength: 128
+                            lastName:
+                              type: string
+                              minLength: 1
+                              maxLength: 128
+                            email:
+                              type: string
+                              format: email
+                              maxLength: 255
+                            jobTitle:
+                              type: string
+                              minLength: 1
+                              maxLength: 64
+                            telephone:
+                              type: string
+                              minLength: 1
+                              maxLength: 32
+                          required:
+                          - firstName
+                          - lastName
+                          - email
+                          - jobTitle
+                          - telephone
+                          additionalProperties: false
+                          description: Contact info for the user who approves first-time code signing orders for the organization
                       required:
                       - appConnectionId
                       - organizationId
@@ -9106,7 +10876,44 @@ paths:
                     productNameId:
                       type: string
                       minLength: 1
-                      description: The DigiCert product name_id used for issuance (e.g. ssl_plus, ssl_ev_plus). Fetch available products from GET /app-connections/digicert/:id/products.
+                      description: The DigiCert product name_id used for issuance (e.g. ssl_plus, code_signing, code_signing_ev). Fetch available products from GET /app-connections/digicert/:id/products.
+                    purpose:
+                      type: string
+                      enum:
+                      - ssl
+                      - code_signing
+                      description: Whether this CA issues SSL/TLS or code-signing certificates (defaults to ssl)
+                    verifiedContact:
+                      type: object
+                      properties:
+                        firstName:
+                          type: string
+                          minLength: 1
+                          maxLength: 128
+                        lastName:
+                          type: string
+                          minLength: 1
+                          maxLength: 128
+                        email:
+                          type: string
+                          format: email
+                          maxLength: 255
+                        jobTitle:
+                          type: string
+                          minLength: 1
+                          maxLength: 64
+                        telephone:
+                          type: string
+                          minLength: 1
+                          maxLength: 32
+                      required:
+                      - firstName
+                      - lastName
+                      - email
+                      - jobTitle
+                      - telephone
+                      additionalProperties: false
+                      description: Contact info for the user who approves first-time code signing orders for the organization
                   required:
                   - appConnectionId
                   - organizationId
@@ -9157,7 +10964,44 @@ paths:
                       productNameId:
                         type: string
                         minLength: 1
-                        description: The DigiCert product name_id used for issuance (e.g. ssl_plus, ssl_ev_plus). Fetch available products from GET /app-connections/digicert/:id/products.
+                        description: The DigiCert product name_id used for issuance (e.g. ssl_plus, code_signing, code_signing_ev). Fetch available products from GET /app-connections/digicert/:id/products.
+                      purpose:
+                        type: string
+                        enum:
+                        - ssl
+                        - code_signing
+                        description: Whether this CA issues SSL/TLS or code-signing certificates (defaults to ssl)
+                      verifiedContact:
+                        type: object
+                        properties:
+                          firstName:
+                            type: string
+                            minLength: 1
+                            maxLength: 128
+                          lastName:
+                            type: string
+                            minLength: 1
+                            maxLength: 128
+                          email:
+                            type: string
+                            format: email
+                            maxLength: 255
+                          jobTitle:
+                            type: string
+                            minLength: 1
+                            maxLength: 64
+                          telephone:
+                            type: string
+                            minLength: 1
+                            maxLength: 32
+                        required:
+                        - firstName
+                        - lastName
+                        - email
+                        - jobTitle
+                        - telephone
+                        additionalProperties: false
+                        description: Contact info for the user who approves first-time code signing orders for the organization
                     required:
                     - appConnectionId
                     - organizationId
@@ -9361,7 +11205,44 @@ paths:
                       productNameId:
                         type: string
                         minLength: 1
-                        description: The DigiCert product name_id used for issuance (e.g. ssl_plus, ssl_ev_plus). Fetch available products from GET /app-connections/digicert/:id/products.
+                        description: The DigiCert product name_id used for issuance (e.g. ssl_plus, code_signing, code_signing_ev). Fetch available products from GET /app-connections/digicert/:id/products.
+                      purpose:
+                        type: string
+                        enum:
+                        - ssl
+                        - code_signing
+                        description: Whether this CA issues SSL/TLS or code-signing certificates (defaults to ssl)
+                      verifiedContact:
+                        type: object
+                        properties:
+                          firstName:
+                            type: string
+                            minLength: 1
+                            maxLength: 128
+                          lastName:
+                            type: string
+                            minLength: 1
+                            maxLength: 128
+                          email:
+                            type: string
+                            format: email
+                            maxLength: 255
+                          jobTitle:
+                            type: string
+                            minLength: 1
+                            maxLength: 64
+                          telephone:
+                            type: string
+                            minLength: 1
+                            maxLength: 32
+                        required:
+                        - firstName
+                        - lastName
+                        - email
+                        - jobTitle
+                        - telephone
+                        additionalProperties: false
+                        description: Contact info for the user who approves first-time code signing orders for the organization
                     required:
                     - appConnectionId
                     - organizationId
@@ -9551,7 +11432,44 @@ paths:
                     productNameId:
                       type: string
                       minLength: 1
-                      description: The DigiCert product name_id used for issuance (e.g. ssl_plus, ssl_ev_plus). Fetch available products from GET /app-connections/digicert/:id/products.
+                      description: The DigiCert product name_id used for issuance (e.g. ssl_plus, code_signing, code_signing_ev). Fetch available products from GET /app-connections/digicert/:id/products.
+                    purpose:
+                      type: string
+                      enum:
+                      - ssl
+                      - code_signing
+                      description: Whether this CA issues SSL/TLS or code-signing certificates (defaults to ssl)
+                    verifiedContact:
+                      type: object
+                      properties:
+                        firstName:
+                          type: string
+                          minLength: 1
+                          maxLength: 128
+                        lastName:
+                          type: string
+                          minLength: 1
+                          maxLength: 128
+                        email:
+                          type: string
+                          format: email
+                          maxLength: 255
+                        jobTitle:
+                          type: string
+                          minLength: 1
+                          maxLength: 64
+                        telephone:
+                          type: string
+                          minLength: 1
+                          maxLength: 32
+                      required:
+                      - firstName
+                      - lastName
+                      - email
+                      - jobTitle
+                      - telephone
+                      additionalProperties: false
+                      description: Contact info for the user who approves first-time code signing orders for the organization
                   required:
                   - appConnectionId
                   - organizationId
@@ -9604,7 +11522,44 @@ paths:
                       productNameId:
                         type: string
                         minLength: 1
-                        description: The DigiCert product name_id used for issuance (e.g. ssl_plus, ssl_ev_plus). Fetch available products from GET /app-connections/digicert/:id/products.
+                        description: The DigiCert product name_id used for issuance (e.g. ssl_plus, code_signing, code_signing_ev). Fetch available products from GET /app-connections/digicert/:id/products.
+                      purpose:
+                        type: string
+                        enum:
+                        - ssl
+                        - code_signing
+                        description: Whether this CA issues SSL/TLS or code-signing certificates (defaults to ssl)
+                      verifiedContact:
+                        type: object
+                        properties:
+                          firstName:
+                            type: string
+                            minLength: 1
+                            maxLength: 128
+                          lastName:
+                            type: string
+                            minLength: 1
+                            maxLength: 128
+                          email:
+                            type: string
+                            format: email
+                            maxLength: 255
+                          jobTitle:
+                            type: string
+                            minLength: 1
+                            maxLength: 64
+                          telephone:
+                            type: string
+                            minLength: 1
+                            maxLength: 32
+                        required:
+                        - firstName
+                        - lastName
+                        - email
+                        - jobTitle
+                        - telephone
+                        additionalProperties: false
+                        description: Contact info for the user who approves first-time code signing orders for the organization
                     required:
                     - appConnectionId
                     - organizationId
@@ -9807,7 +11762,44 @@ paths:
                       productNameId:
                         type: string
                         minLength: 1
-                        description: The DigiCert product name_id used for issuance (e.g. ssl_plus, ssl_ev_plus). Fetch available products from GET /app-connections/digicert/:id/products.
+                        description: The DigiCert product name_id used for issuance (e.g. ssl_plus, code_signing, code_signing_ev). Fetch available products from GET /app-connections/digicert/:id/products.
+                      purpose:
+                        type: string
+                        enum:
+                        - ssl
+                        - code_signing
+                        description: Whether this CA issues SSL/TLS or code-signing certificates (defaults to ssl)
+                      verifiedContact:
+                        type: object
+                        properties:
+                          firstName:
+                            type: string
+                            minLength: 1
+                            maxLength: 128
+                          lastName:
+                            type: string
+                            minLength: 1
+                            maxLength: 128
+                          email:
+                            type: string
+                            format: email
+                            maxLength: 255
+                          jobTitle:
+                            type: string
+                            minLength: 1
+                            maxLength: 64
+                          telephone:
+                            type: string
+                            minLength: 1
+                            maxLength: 32
+                        required:
+                        - firstName
+                        - lastName
+                        - email
+                        - jobTitle
+                        - telephone
+                        additionalProperties: false
+                        description: Contact info for the user who approves first-time code signing orders for the organization
                     required:
                     - appConnectionId
                     - organizationId
@@ -13457,29 +15449,36 @@ paths:
                                 description: The type of CA to create.
                               friendlyName:
                                 type: string
+                                maxLength: 255
                                 description: A friendly name for the CA.
                               commonName:
                                 type: string
+                                maxLength: 255
                                 default: ''
                                 description: The common name (CN) for the CA.
                               organization:
                                 type: string
+                                maxLength: 255
                                 default: ''
                                 description: The organization (O) for the CA.
                               ou:
                                 type: string
+                                maxLength: 255
                                 default: ''
                                 description: The organization unit (OU) for the CA.
                               country:
                                 type: string
+                                maxLength: 255
                                 default: ''
                                 description: The country name (C) for the CA.
                               province:
                                 type: string
+                                maxLength: 255
                                 default: ''
                                 description: The state of province name for the CA.
                               locality:
                                 type: string
+                                maxLength: 255
                                 default: ''
                                 description: The locality name for the CA.
                               notBefore:
@@ -13519,10 +15518,72 @@ paths:
                                 - SLH-DSA-SHAKE-256f
                                 - SLH-DSA-SHAKE-256s
                                 description: The type of public key algorithm and size, in bits, of the key pair for the CA; when you create an intermediate CA, you must use a key algorithm supported by the parent CA.
+                              keySource:
+                                type: string
+                                enum:
+                                - infisical
+                                - hsm
+                                - aws-kms
+                                description: Where the CA's signing key is generated and stored. 'infisical' keeps the key in Infisical's KMS; 'hsm' generates and stores the key in the HSM reached through the specified HSM Connector; 'aws-kms' generates the key in AWS KMS through the specified AWS connection, and every signature is made by AWS KMS.
+                              hsmConnectorId:
+                                type: string
+                                format: uuid
+                                description: The ID of the HSM Connector to generate and store the CA's signing key in. Required when keySource is 'hsm'.
+                              hsmKeyLabel:
+                                type: string
+                                description: 'Deprecated: use externalKeyId, which holds the same key label for HSM-backed CAs. The label of the CA''s signing key on the HSM.'
+                                deprecated: true
+                              appConnectionId:
+                                type: string
+                                format: uuid
+                                description: The ID of the AWS connection used to create the CA's signing key in AWS KMS and to sign with it. Required when keySource is 'aws-kms'.
+                              appConnectionName:
+                                type: string
+                                description: The name of the AWS connection the CA's signing key is reached through. Not user-supplied.
+                              hsmConnectorName:
+                                type: string
+                                description: The name of the HSM Connector the CA's signing key is reached through. Not user-supplied.
+                              region:
+                                type: string
+                                enum:
+                                - us-east-1
+                                - us-east-2
+                                - us-west-1
+                                - us-west-2
+                                - us-gov-east-1
+                                - us-gov-west-1
+                                - af-south-1
+                                - ap-east-1
+                                - ap-south-1
+                                - ap-south-2
+                                - ap-northeast-1
+                                - ap-northeast-2
+                                - ap-northeast-3
+                                - ap-southeast-1
+                                - ap-southeast-2
+                                - ap-southeast-3
+                                - ap-southeast-4
+                                - ca-central-1
+                                - eu-central-1
+                                - eu-central-2
+                                - eu-west-1
+                                - eu-west-2
+                                - eu-west-3
+                                - eu-south-1
+                                - eu-south-2
+                                - eu-north-1
+                                - me-south-1
+                                - me-central-1
+                                - sa-east-1
+                                description: The AWS region the CA's signing key is created in. Required when keySource is 'aws-kms', and returned when reading the CA.
+                              externalKeyId:
+                                type: string
+                                description: 'The identifier of the CA''s signing key in its key source: the key ARN for AWS KMS, or the key label for HSM. Not user-supplied: the key is created when the CA is created.'
                               dn:
                                 type:
                                 - string
                                 - 'null'
+                                maxLength: 255
                               parentCaId:
                                 type:
                                 - string
@@ -13549,6 +15610,9 @@ paths:
                                 type: boolean
                                 default: false
                                 description: When set to true, the Infisical-managed CRL endpoint URL will not be embedded in certificates issued by this CA. Only custom CRL Distribution Point URLs (if any) will be included.
+                              isOcspEnabled:
+                                type: boolean
+                                description: When set to true, certificates issued by this CA carry the Infisical-managed OCSP responder URL in their Authority Information Access extension, and that responder answers revocation status queries for them. Applies to certificates issued after it is enabled.
                             required:
                             - type
                             - keyAlgorithm
@@ -13597,11 +15661,14 @@ paths:
                                     - cloudflare
                                     - dns-made-easy
                                     - azure-dns
+                                    - powerdns
+                                    - gcp-cloud-dns
+                                    - ultradns
                                     description: The DNS provider for the ACME Certificate Authority.
                                   hostedZoneId:
                                     type: string
                                     minLength: 1
-                                    description: The hosted zone ID for the ACME Certificate Authority.
+                                    description: The hosted zone ID for the ACME Certificate Authority. For Google Cloud DNS, use the managed zone resource name in the format projects/{projectId}/managedZones/{zoneName}.
                                 required:
                                 - provider
                                 - hostedZoneId
@@ -13667,6 +15734,47 @@ paths:
                                 description: Azure ADCS Connection ID
                             required:
                             - azureAdcsConnectionId
+                            additionalProperties: false
+                        required:
+                        - name
+                        - id
+                        - status
+                        - type
+                        - configuration
+                        additionalProperties: false
+                      - type: object
+                        properties:
+                          enableDirectIssuance:
+                            type: boolean
+                            default: true
+                          name:
+                            type: string
+                          id:
+                            type: string
+                            format: uuid
+                          status:
+                            type: string
+                            enum:
+                            - active
+                            - disabled
+                            - pending-certificate
+                          type:
+                            type: string
+                            enum:
+                            - adcs
+                          configuration:
+                            type: object
+                            properties:
+                              appConnectionId:
+                                type: string
+                                format: uuid
+                                description: The ADCS App Connection ID.
+                              caName:
+                                type: string
+                                minLength: 1
+                                description: 'The AD CS certification authority name. Optional: discovered automatically from the CA host when omitted.'
+                            required:
+                            - appConnectionId
                             additionalProperties: false
                         required:
                         - name
@@ -13785,7 +15893,44 @@ paths:
                               productNameId:
                                 type: string
                                 minLength: 1
-                                description: The DigiCert product name_id used for issuance (e.g. ssl_plus, ssl_ev_plus). Fetch available products from GET /app-connections/digicert/:id/products.
+                                description: The DigiCert product name_id used for issuance (e.g. ssl_plus, code_signing, code_signing_ev). Fetch available products from GET /app-connections/digicert/:id/products.
+                              purpose:
+                                type: string
+                                enum:
+                                - ssl
+                                - code_signing
+                                description: Whether this CA issues SSL/TLS or code-signing certificates (defaults to ssl)
+                              verifiedContact:
+                                type: object
+                                properties:
+                                  firstName:
+                                    type: string
+                                    minLength: 1
+                                    maxLength: 128
+                                  lastName:
+                                    type: string
+                                    minLength: 1
+                                    maxLength: 128
+                                  email:
+                                    type: string
+                                    format: email
+                                    maxLength: 255
+                                  jobTitle:
+                                    type: string
+                                    minLength: 1
+                                    maxLength: 64
+                                  telephone:
+                                    type: string
+                                    minLength: 1
+                                    maxLength: 32
+                                required:
+                                - firstName
+                                - lastName
+                                - email
+                                - jobTitle
+                                - telephone
+                                additionalProperties: false
+                                description: Contact info for the user who approves first-time code signing orders for the organization
                             required:
                             - appConnectionId
                             - organizationId
@@ -14131,24 +16276,31 @@ paths:
                   description: The type of CA to create.
                 friendlyName:
                   type: string
+                  maxLength: 255
                   description: A friendly name for the CA.
                 commonName:
                   type: string
+                  maxLength: 255
                   description: The common name (CN) for the CA.
                 organization:
                   type: string
+                  maxLength: 255
                   description: The organization (O) for the CA.
                 ou:
                   type: string
+                  maxLength: 255
                   description: The organization unit (OU) for the CA.
                 country:
                   type: string
+                  maxLength: 255
                   description: The country name (C) for the CA.
                 province:
                   type: string
+                  maxLength: 255
                   description: The state of province name for the CA.
                 locality:
                   type: string
+                  maxLength: 255
                   description: The locality name for the CA.
                 notBefore:
                   type: string
@@ -14277,6 +16429,12 @@ paths:
                       disableManagedCrlDistributionPointUrl:
                         type: boolean
                         default: false
+                      isOcspEnabled:
+                        type: boolean
+                        default: false
+                      ocspGeneration:
+                        type: number
+                        default: 0
                       requireTemplateForIssuance:
                         type: boolean
                       notAfter:
@@ -14533,6 +16691,12 @@ paths:
                       disableManagedCrlDistributionPointUrl:
                         type: boolean
                         default: false
+                      isOcspEnabled:
+                        type: boolean
+                        default: false
+                      ocspGeneration:
+                        type: number
+                        default: 0
                       requireTemplateForIssuance:
                         type: boolean
                       notAfter:
@@ -14805,6 +16969,12 @@ paths:
                       disableManagedCrlDistributionPointUrl:
                         type: boolean
                         default: false
+                      isOcspEnabled:
+                        type: boolean
+                        default: false
+                      ocspGeneration:
+                        type: number
+                        default: 0
                       requireTemplateForIssuance:
                         type: boolean
                       notAfter:
@@ -15060,6 +17230,12 @@ paths:
                       disableManagedCrlDistributionPointUrl:
                         type: boolean
                         default: false
+                      isOcspEnabled:
+                        type: boolean
+                        default: false
+                      ocspGeneration:
+                        type: number
+                        default: 0
                       requireTemplateForIssuance:
                         type: boolean
                       notAfter:
@@ -16552,29 +18728,36 @@ paths:
                           description: The type of CA to create.
                         friendlyName:
                           type: string
+                          maxLength: 255
                           description: A friendly name for the CA.
                         commonName:
                           type: string
+                          maxLength: 255
                           default: ''
                           description: The common name (CN) for the CA.
                         organization:
                           type: string
+                          maxLength: 255
                           default: ''
                           description: The organization (O) for the CA.
                         ou:
                           type: string
+                          maxLength: 255
                           default: ''
                           description: The organization unit (OU) for the CA.
                         country:
                           type: string
+                          maxLength: 255
                           default: ''
                           description: The country name (C) for the CA.
                         province:
                           type: string
+                          maxLength: 255
                           default: ''
                           description: The state of province name for the CA.
                         locality:
                           type: string
+                          maxLength: 255
                           default: ''
                           description: The locality name for the CA.
                         notBefore:
@@ -16614,10 +18797,72 @@ paths:
                           - SLH-DSA-SHAKE-256f
                           - SLH-DSA-SHAKE-256s
                           description: The type of public key algorithm and size, in bits, of the key pair for the CA; when you create an intermediate CA, you must use a key algorithm supported by the parent CA.
+                        keySource:
+                          type: string
+                          enum:
+                          - infisical
+                          - hsm
+                          - aws-kms
+                          description: Where the CA's signing key is generated and stored. 'infisical' keeps the key in Infisical's KMS; 'hsm' generates and stores the key in the HSM reached through the specified HSM Connector; 'aws-kms' generates the key in AWS KMS through the specified AWS connection, and every signature is made by AWS KMS.
+                        hsmConnectorId:
+                          type: string
+                          format: uuid
+                          description: The ID of the HSM Connector to generate and store the CA's signing key in. Required when keySource is 'hsm'.
+                        hsmKeyLabel:
+                          type: string
+                          description: 'Deprecated: use externalKeyId, which holds the same key label for HSM-backed CAs. The label of the CA''s signing key on the HSM.'
+                          deprecated: true
+                        appConnectionId:
+                          type: string
+                          format: uuid
+                          description: The ID of the AWS connection used to create the CA's signing key in AWS KMS and to sign with it. Required when keySource is 'aws-kms'.
+                        appConnectionName:
+                          type: string
+                          description: The name of the AWS connection the CA's signing key is reached through. Not user-supplied.
+                        hsmConnectorName:
+                          type: string
+                          description: The name of the HSM Connector the CA's signing key is reached through. Not user-supplied.
+                        region:
+                          type: string
+                          enum:
+                          - us-east-1
+                          - us-east-2
+                          - us-west-1
+                          - us-west-2
+                          - us-gov-east-1
+                          - us-gov-west-1
+                          - af-south-1
+                          - ap-east-1
+                          - ap-south-1
+                          - ap-south-2
+                          - ap-northeast-1
+                          - ap-northeast-2
+                          - ap-northeast-3
+                          - ap-southeast-1
+                          - ap-southeast-2
+                          - ap-southeast-3
+                          - ap-southeast-4
+                          - ca-central-1
+                          - eu-central-1
+                          - eu-central-2
+                          - eu-west-1
+                          - eu-west-2
+                          - eu-west-3
+                          - eu-south-1
+                          - eu-south-2
+                          - eu-north-1
+                          - me-south-1
+                          - me-central-1
+                          - sa-east-1
+                          description: The AWS region the CA's signing key is created in. Required when keySource is 'aws-kms', and returned when reading the CA.
+                        externalKeyId:
+                          type: string
+                          description: 'The identifier of the CA''s signing key in its key source: the key ARN for AWS KMS, or the key label for HSM. Not user-supplied: the key is created when the CA is created.'
                         dn:
                           type:
                           - string
                           - 'null'
+                          maxLength: 255
                         parentCaId:
                           type:
                           - string
@@ -16644,6 +18889,9 @@ paths:
                           type: boolean
                           default: false
                           description: When set to true, the Infisical-managed CRL endpoint URL will not be embedded in certificates issued by this CA. Only custom CRL Distribution Point URLs (if any) will be included.
+                        isOcspEnabled:
+                          type: boolean
+                          description: When set to true, certificates issued by this CA carry the Infisical-managed OCSP responder URL in their Authority Information Access extension, and that responder answers revocation status queries for them. Applies to certificates issued after it is enabled.
                       required:
                       - type
                       - keyAlgorithm
@@ -16838,29 +19086,36 @@ paths:
                       description: The type of CA to create.
                     friendlyName:
                       type: string
+                      maxLength: 255
                       description: A friendly name for the CA.
                     commonName:
                       type: string
+                      maxLength: 255
                       default: ''
                       description: The common name (CN) for the CA.
                     organization:
                       type: string
+                      maxLength: 255
                       default: ''
                       description: The organization (O) for the CA.
                     ou:
                       type: string
+                      maxLength: 255
                       default: ''
                       description: The organization unit (OU) for the CA.
                     country:
                       type: string
+                      maxLength: 255
                       default: ''
                       description: The country name (C) for the CA.
                     province:
                       type: string
+                      maxLength: 255
                       default: ''
                       description: The state of province name for the CA.
                     locality:
                       type: string
+                      maxLength: 255
                       default: ''
                       description: The locality name for the CA.
                     notBefore:
@@ -16900,10 +19155,72 @@ paths:
                       - SLH-DSA-SHAKE-256f
                       - SLH-DSA-SHAKE-256s
                       description: The type of public key algorithm and size, in bits, of the key pair for the CA; when you create an intermediate CA, you must use a key algorithm supported by the parent CA.
+                    keySource:
+                      type: string
+                      enum:
+                      - infisical
+                      - hsm
+                      - aws-kms
+                      description: Where the CA's signing key is generated and stored. 'infisical' keeps the key in Infisical's KMS; 'hsm' generates and stores the key in the HSM reached through the specified HSM Connector; 'aws-kms' generates the key in AWS KMS through the specified AWS connection, and every signature is made by AWS KMS.
+                    hsmConnectorId:
+                      type: string
+                      format: uuid
+                      description: The ID of the HSM Connector to generate and store the CA's signing key in. Required when keySource is 'hsm'.
+                    hsmKeyLabel:
+                      type: string
+                      description: 'Deprecated: use externalKeyId, which holds the same key label for HSM-backed CAs. The label of the CA''s signing key on the HSM.'
+                      deprecated: true
+                    appConnectionId:
+                      type: string
+                      format: uuid
+                      description: The ID of the AWS connection used to create the CA's signing key in AWS KMS and to sign with it. Required when keySource is 'aws-kms'.
+                    appConnectionName:
+                      type: string
+                      description: The name of the AWS connection the CA's signing key is reached through. Not user-supplied.
+                    hsmConnectorName:
+                      type: string
+                      description: The name of the HSM Connector the CA's signing key is reached through. Not user-supplied.
+                    region:
+                      type: string
+                      enum:
+                      - us-east-1
+                      - us-east-2
+                      - us-west-1
+                      - us-west-2
+                      - us-gov-east-1
+                      - us-gov-west-1
+                      - af-south-1
+                      - ap-east-1
+                      - ap-south-1
+                      - ap-south-2
+                      - ap-northeast-1
+                      - ap-northeast-2
+                      - ap-northeast-3
+                      - ap-southeast-1
+                      - ap-southeast-2
+                      - ap-southeast-3
+                      - ap-southeast-4
+                      - ca-central-1
+                      - eu-central-1
+                      - eu-central-2
+                      - eu-west-1
+                      - eu-west-2
+                      - eu-west-3
+                      - eu-south-1
+                      - eu-south-2
+                      - eu-north-1
+                      - me-south-1
+                      - me-central-1
+                      - sa-east-1
+                      description: The AWS region the CA's signing key is created in. Required when keySource is 'aws-kms', and returned when reading the CA.
+                    externalKeyId:
+                      type: string
+                      description: 'The identifier of the CA''s signing key in its key source: the key ARN for AWS KMS, or the key label for HSM. Not user-supplied: the key is created when the CA is created.'
                     dn:
                       type:
                       - string
                       - 'null'
+                      maxLength: 255
                     parentCaId:
                       type:
                       - string
@@ -16930,6 +19247,9 @@ paths:
                       type: boolean
                       default: false
                       description: When set to true, the Infisical-managed CRL endpoint URL will not be embedded in certificates issued by this CA. Only custom CRL Distribution Point URLs (if any) will be included.
+                    isOcspEnabled:
+                      type: boolean
+                      description: When set to true, certificates issued by this CA carry the Infisical-managed OCSP responder URL in their Authority Information Access extension, and that responder answers revocation status queries for them. Applies to certificates issued after it is enabled.
                   required:
                   - type
                   - keyAlgorithm
@@ -16980,29 +19300,36 @@ paths:
                         description: The type of CA to create.
                       friendlyName:
                         type: string
+                        maxLength: 255
                         description: A friendly name for the CA.
                       commonName:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The common name (CN) for the CA.
                       organization:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The organization (O) for the CA.
                       ou:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The organization unit (OU) for the CA.
                       country:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The country name (C) for the CA.
                       province:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The state of province name for the CA.
                       locality:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The locality name for the CA.
                       notBefore:
@@ -17042,10 +19369,72 @@ paths:
                         - SLH-DSA-SHAKE-256f
                         - SLH-DSA-SHAKE-256s
                         description: The type of public key algorithm and size, in bits, of the key pair for the CA; when you create an intermediate CA, you must use a key algorithm supported by the parent CA.
+                      keySource:
+                        type: string
+                        enum:
+                        - infisical
+                        - hsm
+                        - aws-kms
+                        description: Where the CA's signing key is generated and stored. 'infisical' keeps the key in Infisical's KMS; 'hsm' generates and stores the key in the HSM reached through the specified HSM Connector; 'aws-kms' generates the key in AWS KMS through the specified AWS connection, and every signature is made by AWS KMS.
+                      hsmConnectorId:
+                        type: string
+                        format: uuid
+                        description: The ID of the HSM Connector to generate and store the CA's signing key in. Required when keySource is 'hsm'.
+                      hsmKeyLabel:
+                        type: string
+                        description: 'Deprecated: use externalKeyId, which holds the same key label for HSM-backed CAs. The label of the CA''s signing key on the HSM.'
+                        deprecated: true
+                      appConnectionId:
+                        type: string
+                        format: uuid
+                        description: The ID of the AWS connection used to create the CA's signing key in AWS KMS and to sign with it. Required when keySource is 'aws-kms'.
+                      appConnectionName:
+                        type: string
+                        description: The name of the AWS connection the CA's signing key is reached through. Not user-supplied.
+                      hsmConnectorName:
+                        type: string
+                        description: The name of the HSM Connector the CA's signing key is reached through. Not user-supplied.
+                      region:
+                        type: string
+                        enum:
+                        - us-east-1
+                        - us-east-2
+                        - us-west-1
+                        - us-west-2
+                        - us-gov-east-1
+                        - us-gov-west-1
+                        - af-south-1
+                        - ap-east-1
+                        - ap-south-1
+                        - ap-south-2
+                        - ap-northeast-1
+                        - ap-northeast-2
+                        - ap-northeast-3
+                        - ap-southeast-1
+                        - ap-southeast-2
+                        - ap-southeast-3
+                        - ap-southeast-4
+                        - ca-central-1
+                        - eu-central-1
+                        - eu-central-2
+                        - eu-west-1
+                        - eu-west-2
+                        - eu-west-3
+                        - eu-south-1
+                        - eu-south-2
+                        - eu-north-1
+                        - me-south-1
+                        - me-central-1
+                        - sa-east-1
+                        description: The AWS region the CA's signing key is created in. Required when keySource is 'aws-kms', and returned when reading the CA.
+                      externalKeyId:
+                        type: string
+                        description: 'The identifier of the CA''s signing key in its key source: the key ARN for AWS KMS, or the key label for HSM. Not user-supplied: the key is created when the CA is created.'
                       dn:
                         type:
                         - string
                         - 'null'
+                        maxLength: 255
                       parentCaId:
                         type:
                         - string
@@ -17072,6 +19461,9 @@ paths:
                         type: boolean
                         default: false
                         description: When set to true, the Infisical-managed CRL endpoint URL will not be embedded in certificates issued by this CA. Only custom CRL Distribution Point URLs (if any) will be included.
+                      isOcspEnabled:
+                        type: boolean
+                        description: When set to true, certificates issued by this CA carry the Infisical-managed OCSP responder URL in their Authority Information Access extension, and that responder answers revocation status queries for them. Applies to certificates issued after it is enabled.
                     required:
                     - type
                     - keyAlgorithm
@@ -17281,29 +19673,36 @@ paths:
                         description: The type of CA to create.
                       friendlyName:
                         type: string
+                        maxLength: 255
                         description: A friendly name for the CA.
                       commonName:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The common name (CN) for the CA.
                       organization:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The organization (O) for the CA.
                       ou:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The organization unit (OU) for the CA.
                       country:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The country name (C) for the CA.
                       province:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The state of province name for the CA.
                       locality:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The locality name for the CA.
                       notBefore:
@@ -17343,10 +19742,72 @@ paths:
                         - SLH-DSA-SHAKE-256f
                         - SLH-DSA-SHAKE-256s
                         description: The type of public key algorithm and size, in bits, of the key pair for the CA; when you create an intermediate CA, you must use a key algorithm supported by the parent CA.
+                      keySource:
+                        type: string
+                        enum:
+                        - infisical
+                        - hsm
+                        - aws-kms
+                        description: Where the CA's signing key is generated and stored. 'infisical' keeps the key in Infisical's KMS; 'hsm' generates and stores the key in the HSM reached through the specified HSM Connector; 'aws-kms' generates the key in AWS KMS through the specified AWS connection, and every signature is made by AWS KMS.
+                      hsmConnectorId:
+                        type: string
+                        format: uuid
+                        description: The ID of the HSM Connector to generate and store the CA's signing key in. Required when keySource is 'hsm'.
+                      hsmKeyLabel:
+                        type: string
+                        description: 'Deprecated: use externalKeyId, which holds the same key label for HSM-backed CAs. The label of the CA''s signing key on the HSM.'
+                        deprecated: true
+                      appConnectionId:
+                        type: string
+                        format: uuid
+                        description: The ID of the AWS connection used to create the CA's signing key in AWS KMS and to sign with it. Required when keySource is 'aws-kms'.
+                      appConnectionName:
+                        type: string
+                        description: The name of the AWS connection the CA's signing key is reached through. Not user-supplied.
+                      hsmConnectorName:
+                        type: string
+                        description: The name of the HSM Connector the CA's signing key is reached through. Not user-supplied.
+                      region:
+                        type: string
+                        enum:
+                        - us-east-1
+                        - us-east-2
+                        - us-west-1
+                        - us-west-2
+                        - us-gov-east-1
+                        - us-gov-west-1
+                        - af-south-1
+                        - ap-east-1
+                        - ap-south-1
+                        - ap-south-2
+                        - ap-northeast-1
+                        - ap-northeast-2
+                        - ap-northeast-3
+                        - ap-southeast-1
+                        - ap-southeast-2
+                        - ap-southeast-3
+                        - ap-southeast-4
+                        - ca-central-1
+                        - eu-central-1
+                        - eu-central-2
+                        - eu-west-1
+                        - eu-west-2
+                        - eu-west-3
+                        - eu-south-1
+                        - eu-south-2
+                        - eu-north-1
+                        - me-south-1
+                        - me-central-1
+                        - sa-east-1
+                        description: The AWS region the CA's signing key is created in. Required when keySource is 'aws-kms', and returned when reading the CA.
+                      externalKeyId:
+                        type: string
+                        description: 'The identifier of the CA''s signing key in its key source: the key ARN for AWS KMS, or the key label for HSM. Not user-supplied: the key is created when the CA is created.'
                       dn:
                         type:
                         - string
                         - 'null'
+                        maxLength: 255
                       parentCaId:
                         type:
                         - string
@@ -17373,6 +19834,9 @@ paths:
                         type: boolean
                         default: false
                         description: When set to true, the Infisical-managed CRL endpoint URL will not be embedded in certificates issued by this CA. Only custom CRL Distribution Point URLs (if any) will be included.
+                      isOcspEnabled:
+                        type: boolean
+                        description: When set to true, certificates issued by this CA carry the Infisical-managed OCSP responder URL in their Authority Information Access extension, and that responder answers revocation status queries for them. Applies to certificates issued after it is enabled.
                     required:
                     - type
                     - keyAlgorithm
@@ -17604,29 +20068,36 @@ paths:
                         description: The type of CA to create.
                       friendlyName:
                         type: string
+                        maxLength: 255
                         description: A friendly name for the CA.
                       commonName:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The common name (CN) for the CA.
                       organization:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The organization (O) for the CA.
                       ou:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The organization unit (OU) for the CA.
                       country:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The country name (C) for the CA.
                       province:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The state of province name for the CA.
                       locality:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The locality name for the CA.
                       notBefore:
@@ -17666,10 +20137,72 @@ paths:
                         - SLH-DSA-SHAKE-256f
                         - SLH-DSA-SHAKE-256s
                         description: The type of public key algorithm and size, in bits, of the key pair for the CA; when you create an intermediate CA, you must use a key algorithm supported by the parent CA.
+                      keySource:
+                        type: string
+                        enum:
+                        - infisical
+                        - hsm
+                        - aws-kms
+                        description: Where the CA's signing key is generated and stored. 'infisical' keeps the key in Infisical's KMS; 'hsm' generates and stores the key in the HSM reached through the specified HSM Connector; 'aws-kms' generates the key in AWS KMS through the specified AWS connection, and every signature is made by AWS KMS.
+                      hsmConnectorId:
+                        type: string
+                        format: uuid
+                        description: The ID of the HSM Connector to generate and store the CA's signing key in. Required when keySource is 'hsm'.
+                      hsmKeyLabel:
+                        type: string
+                        description: 'Deprecated: use externalKeyId, which holds the same key label for HSM-backed CAs. The label of the CA''s signing key on the HSM.'
+                        deprecated: true
+                      appConnectionId:
+                        type: string
+                        format: uuid
+                        description: The ID of the AWS connection used to create the CA's signing key in AWS KMS and to sign with it. Required when keySource is 'aws-kms'.
+                      appConnectionName:
+                        type: string
+                        description: The name of the AWS connection the CA's signing key is reached through. Not user-supplied.
+                      hsmConnectorName:
+                        type: string
+                        description: The name of the HSM Connector the CA's signing key is reached through. Not user-supplied.
+                      region:
+                        type: string
+                        enum:
+                        - us-east-1
+                        - us-east-2
+                        - us-west-1
+                        - us-west-2
+                        - us-gov-east-1
+                        - us-gov-west-1
+                        - af-south-1
+                        - ap-east-1
+                        - ap-south-1
+                        - ap-south-2
+                        - ap-northeast-1
+                        - ap-northeast-2
+                        - ap-northeast-3
+                        - ap-southeast-1
+                        - ap-southeast-2
+                        - ap-southeast-3
+                        - ap-southeast-4
+                        - ca-central-1
+                        - eu-central-1
+                        - eu-central-2
+                        - eu-west-1
+                        - eu-west-2
+                        - eu-west-3
+                        - eu-south-1
+                        - eu-south-2
+                        - eu-north-1
+                        - me-south-1
+                        - me-central-1
+                        - sa-east-1
+                        description: The AWS region the CA's signing key is created in. Required when keySource is 'aws-kms', and returned when reading the CA.
+                      externalKeyId:
+                        type: string
+                        description: 'The identifier of the CA''s signing key in its key source: the key ARN for AWS KMS, or the key label for HSM. Not user-supplied: the key is created when the CA is created.'
                       dn:
                         type:
                         - string
                         - 'null'
+                        maxLength: 255
                       parentCaId:
                         type:
                         - string
@@ -17696,6 +20229,9 @@ paths:
                         type: boolean
                         default: false
                         description: When set to true, the Infisical-managed CRL endpoint URL will not be embedded in certificates issued by this CA. Only custom CRL Distribution Point URLs (if any) will be included.
+                      isOcspEnabled:
+                        type: boolean
+                        description: When set to true, certificates issued by this CA carry the Infisical-managed OCSP responder URL in their Authority Information Access extension, and that responder answers revocation status queries for them. Applies to certificates issued after it is enabled.
                     required:
                     - type
                     - keyAlgorithm
@@ -17911,29 +20447,36 @@ paths:
                         description: The type of CA to create.
                       friendlyName:
                         type: string
+                        maxLength: 255
                         description: A friendly name for the CA.
                       commonName:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The common name (CN) for the CA.
                       organization:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The organization (O) for the CA.
                       ou:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The organization unit (OU) for the CA.
                       country:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The country name (C) for the CA.
                       province:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The state of province name for the CA.
                       locality:
                         type: string
+                        maxLength: 255
                         default: ''
                         description: The locality name for the CA.
                       notBefore:
@@ -17973,10 +20516,72 @@ paths:
                         - SLH-DSA-SHAKE-256f
                         - SLH-DSA-SHAKE-256s
                         description: The type of public key algorithm and size, in bits, of the key pair for the CA; when you create an intermediate CA, you must use a key algorithm supported by the parent CA.
+                      keySource:
+                        type: string
+                        enum:
+                        - infisical
+                        - hsm
+                        - aws-kms
+                        description: Where the CA's signing key is generated and stored. 'infisical' keeps the key in Infisical's KMS; 'hsm' generates and stores the key in the HSM reached through the specified HSM Connector; 'aws-kms' generates the key in AWS KMS through the specified AWS connection, and every signature is made by AWS KMS.
+                      hsmConnectorId:
+                        type: string
+                        format: uuid
+                        description: The ID of the HSM Connector to generate and store the CA's signing key in. Required when keySource is 'hsm'.
+                      hsmKeyLabel:
+                        type: string
+                        description: 'Deprecated: use externalKeyId, which holds the same key label for HSM-backed CAs. The label of the CA''s signing key on the HSM.'
+                        deprecated: true
+                      appConnectionId:
+                        type: string
+                        format: uuid
+                        description: The ID of the AWS connection used to create the CA's signing key in AWS KMS and to sign with it. Required when keySource is 'aws-kms'.
+                      appConnectionName:
+                        type: string
+                        description: The name of the AWS connection the CA's signing key is reached through. Not user-supplied.
+                      hsmConnectorName:
+                        type: string
+                        description: The name of the HSM Connector the CA's signing key is reached through. Not user-supplied.
+                      region:
+                        type: string
+                        enum:
+                        - us-east-1
+                        - us-east-2
+                        - us-west-1
+                        - us-west-2
+                        - us-gov-east-1
+                        - us-gov-west-1
+                        - af-south-1
+                        - ap-east-1
+                        - ap-south-1
+                        - ap-south-2
+                        - ap-northeast-1
+                        - ap-northeast-2
+                        - ap-northeast-3
+                        - ap-southeast-1
+                        - ap-southeast-2
+                        - ap-southeast-3
+                        - ap-southeast-4
+                        - ca-central-1
+                        - eu-central-1
+                        - eu-central-2
+                        - eu-west-1
+                        - eu-west-2
+                        - eu-west-3
+                        - eu-south-1
+                        - eu-south-2
+                        - eu-north-1
+                        - me-south-1
+                        - me-central-1
+                        - sa-east-1
+                        description: The AWS region the CA's signing key is created in. Required when keySource is 'aws-kms', and returned when reading the CA.
+                      externalKeyId:
+                        type: string
+                        description: 'The identifier of the CA''s signing key in its key source: the key ARN for AWS KMS, or the key label for HSM. Not user-supplied: the key is created when the CA is created.'
                       dn:
                         type:
                         - string
                         - 'null'
+                        maxLength: 255
                       parentCaId:
                         type:
                         - string
@@ -18003,6 +20608,9 @@ paths:
                         type: boolean
                         default: false
                         description: When set to true, the Infisical-managed CRL endpoint URL will not be embedded in certificates issued by this CA. Only custom CRL Distribution Point URLs (if any) will be included.
+                      isOcspEnabled:
+                        type: boolean
+                        description: When set to true, certificates issued by this CA carry the Infisical-managed OCSP responder URL in their Authority Information Access extension, and that responder answers revocation status queries for them. Applies to certificates issued after it is enabled.
                     required:
                     - type
                     - keyAlgorithm
@@ -18215,11 +20823,14 @@ paths:
                               - cloudflare
                               - dns-made-easy
                               - azure-dns
+                              - powerdns
+                              - gcp-cloud-dns
+                              - ultradns
                               description: The DNS provider for the ACME Certificate Authority.
                             hostedZoneId:
                               type: string
                               minLength: 1
-                              description: The hosted zone ID for the ACME Certificate Authority.
+                              description: The hosted zone ID for the ACME Certificate Authority. For Google Cloud DNS, use the managed zone resource name in the format projects/{projectId}/managedZones/{zoneName}.
                           required:
                           - provider
                           - hostedZoneId
@@ -18445,11 +21056,14 @@ paths:
                           - cloudflare
                           - dns-made-easy
                           - azure-dns
+                          - powerdns
+                          - gcp-cloud-dns
+                          - ultradns
                           description: The DNS provider for the ACME Certificate Authority.
                         hostedZoneId:
                           type: string
                           minLength: 1
-                          description: The hosted zone ID for the ACME Certificate Authority.
+                          description: The hosted zone ID for the ACME Certificate Authority. For Google Cloud DNS, use the managed zone resource name in the format projects/{projectId}/managedZones/{zoneName}.
                       required:
                       - provider
                       - hostedZoneId
@@ -18535,11 +21149,14 @@ paths:
                             - cloudflare
                             - dns-made-easy
                             - azure-dns
+                            - powerdns
+                            - gcp-cloud-dns
+                            - ultradns
                             description: The DNS provider for the ACME Certificate Authority.
                           hostedZoneId:
                             type: string
                             minLength: 1
-                            description: The hosted zone ID for the ACME Certificate Authority.
+                            description: The hosted zone ID for the ACME Certificate Authority. For Google Cloud DNS, use the managed zone resource name in the format projects/{projectId}/managedZones/{zoneName}.
                         required:
                         - provider
                         - hostedZoneId
@@ -18780,11 +21397,14 @@ paths:
                             - cloudflare
                             - dns-made-easy
                             - azure-dns
+                            - powerdns
+                            - gcp-cloud-dns
+                            - ultradns
                             description: The DNS provider for the ACME Certificate Authority.
                           hostedZoneId:
                             type: string
                             minLength: 1
-                            description: The hosted zone ID for the ACME Certificate Authority.
+                            description: The hosted zone ID for the ACME Certificate Authority. For Google Cloud DNS, use the managed zone resource name in the format projects/{projectId}/managedZones/{zoneName}.
                         required:
                         - provider
                         - hostedZoneId
@@ -19010,11 +21630,14 @@ paths:
                           - cloudflare
                           - dns-made-easy
                           - azure-dns
+                          - powerdns
+                          - gcp-cloud-dns
+                          - ultradns
                           description: The DNS provider for the ACME Certificate Authority.
                         hostedZoneId:
                           type: string
                           minLength: 1
-                          description: The hosted zone ID for the ACME Certificate Authority.
+                          description: The hosted zone ID for the ACME Certificate Authority. For Google Cloud DNS, use the managed zone resource name in the format projects/{projectId}/managedZones/{zoneName}.
                       required:
                       - provider
                       - hostedZoneId
@@ -19102,11 +21725,14 @@ paths:
                             - cloudflare
                             - dns-made-easy
                             - azure-dns
+                            - powerdns
+                            - gcp-cloud-dns
+                            - ultradns
                             description: The DNS provider for the ACME Certificate Authority.
                           hostedZoneId:
                             type: string
                             minLength: 1
-                            description: The hosted zone ID for the ACME Certificate Authority.
+                            description: The hosted zone ID for the ACME Certificate Authority. For Google Cloud DNS, use the managed zone resource name in the format projects/{projectId}/managedZones/{zoneName}.
                         required:
                         - provider
                         - hostedZoneId
@@ -19353,11 +21979,14 @@ paths:
                             - cloudflare
                             - dns-made-easy
                             - azure-dns
+                            - powerdns
+                            - gcp-cloud-dns
+                            - ultradns
                             description: The DNS provider for the ACME Certificate Authority.
                           hostedZoneId:
                             type: string
                             minLength: 1
-                            description: The hosted zone ID for the ACME Certificate Authority.
+                            description: The hosted zone ID for the ACME Certificate Authority. For Google Cloud DNS, use the managed zone resource name in the format projects/{projectId}/managedZones/{zoneName}.
                         required:
                         - provider
                         - hostedZoneId
@@ -20673,29 +23302,36 @@ paths:
                                 description: The type of CA to create.
                               friendlyName:
                                 type: string
+                                maxLength: 255
                                 description: A friendly name for the CA.
                               commonName:
                                 type: string
+                                maxLength: 255
                                 default: ''
                                 description: The common name (CN) for the CA.
                               organization:
                                 type: string
+                                maxLength: 255
                                 default: ''
                                 description: The organization (O) for the CA.
                               ou:
                                 type: string
+                                maxLength: 255
                                 default: ''
                                 description: The organization unit (OU) for the CA.
                               country:
                                 type: string
+                                maxLength: 255
                                 default: ''
                                 description: The country name (C) for the CA.
                               province:
                                 type: string
+                                maxLength: 255
                                 default: ''
                                 description: The state of province name for the CA.
                               locality:
                                 type: string
+                                maxLength: 255
                                 default: ''
                                 description: The locality name for the CA.
                               notBefore:
@@ -20735,10 +23371,72 @@ paths:
                                 - SLH-DSA-SHAKE-256f
                                 - SLH-DSA-SHAKE-256s
                                 description: The type of public key algorithm and size, in bits, of the key pair for the CA; when you create an intermediate CA, you must use a key algorithm supported by the parent CA.
+                              keySource:
+                                type: string
+                                enum:
+                                - infisical
+                                - hsm
+                                - aws-kms
+                                description: Where the CA's signing key is generated and stored. 'infisical' keeps the key in Infisical's KMS; 'hsm' generates and stores the key in the HSM reached through the specified HSM Connector; 'aws-kms' generates the key in AWS KMS through the specified AWS connection, and every signature is made by AWS KMS.
+                              hsmConnectorId:
+                                type: string
+                                format: uuid
+                                description: The ID of the HSM Connector to generate and store the CA's signing key in. Required when keySource is 'hsm'.
+                              hsmKeyLabel:
+                                type: string
+                                description: 'Deprecated: use externalKeyId, which holds the same key label for HSM-backed CAs. The label of the CA''s signing key on the HSM.'
+                                deprecated: true
+                              appConnectionId:
+                                type: string
+                                format: uuid
+                                description: The ID of the AWS connection used to create the CA's signing key in AWS KMS and to sign with it. Required when keySource is 'aws-kms'.
+                              appConnectionName:
+                                type: string
+                                description: The name of the AWS connection the CA's signing key is reached through. Not user-supplied.
+                              hsmConnectorName:
+                                type: string
+                                description: The name of the HSM Connector the CA's signing key is reached through. Not user-supplied.
+                              region:
+                                type: string
+                                enum:
+                                - us-east-1
+                                - us-east-2
+                                - us-west-1
+                                - us-west-2
+                                - us-gov-east-1
+                                - us-gov-west-1
+                                - af-south-1
+                                - ap-east-1
+                                - ap-south-1
+                                - ap-south-2
+                                - ap-northeast-1
+                                - ap-northeast-2
+                                - ap-northeast-3
+                                - ap-southeast-1
+                                - ap-southeast-2
+                                - ap-southeast-3
+                                - ap-southeast-4
+                                - ca-central-1
+                                - eu-central-1
+                                - eu-central-2
+                                - eu-west-1
+                                - eu-west-2
+                                - eu-west-3
+                                - eu-south-1
+                                - eu-south-2
+                                - eu-north-1
+                                - me-south-1
+                                - me-central-1
+                                - sa-east-1
+                                description: The AWS region the CA's signing key is created in. Required when keySource is 'aws-kms', and returned when reading the CA.
+                              externalKeyId:
+                                type: string
+                                description: 'The identifier of the CA''s signing key in its key source: the key ARN for AWS KMS, or the key label for HSM. Not user-supplied: the key is created when the CA is created.'
                               dn:
                                 type:
                                 - string
                                 - 'null'
+                                maxLength: 255
                               parentCaId:
                                 type:
                                 - string
@@ -20765,6 +23463,9 @@ paths:
                                 type: boolean
                                 default: false
                                 description: When set to true, the Infisical-managed CRL endpoint URL will not be embedded in certificates issued by this CA. Only custom CRL Distribution Point URLs (if any) will be included.
+                              isOcspEnabled:
+                                type: boolean
+                                description: When set to true, certificates issued by this CA carry the Infisical-managed OCSP responder URL in their Authority Information Access extension, and that responder answers revocation status queries for them. Applies to certificates issued after it is enabled.
                             required:
                             - type
                             - keyAlgorithm
@@ -20816,11 +23517,14 @@ paths:
                                     - cloudflare
                                     - dns-made-easy
                                     - azure-dns
+                                    - powerdns
+                                    - gcp-cloud-dns
+                                    - ultradns
                                     description: The DNS provider for the ACME Certificate Authority.
                                   hostedZoneId:
                                     type: string
                                     minLength: 1
-                                    description: The hosted zone ID for the ACME Certificate Authority.
+                                    description: The hosted zone ID for the ACME Certificate Authority. For Google Cloud DNS, use the managed zone resource name in the format projects/{projectId}/managedZones/{zoneName}.
                                 required:
                                 - provider
                                 - hostedZoneId
@@ -20889,6 +23593,50 @@ paths:
                                 description: Azure ADCS Connection ID
                             required:
                             - azureAdcsConnectionId
+                            additionalProperties: false
+                        required:
+                        - projectId
+                        - name
+                        - id
+                        - status
+                        - type
+                        - configuration
+                        additionalProperties: false
+                      - type: object
+                        properties:
+                          projectId:
+                            type: string
+                          enableDirectIssuance:
+                            type: boolean
+                            default: true
+                          name:
+                            type: string
+                          id:
+                            type: string
+                            format: uuid
+                          status:
+                            type: string
+                            enum:
+                            - active
+                            - disabled
+                            - pending-certificate
+                          type:
+                            type: string
+                            enum:
+                            - adcs
+                          configuration:
+                            type: object
+                            properties:
+                              appConnectionId:
+                                type: string
+                                format: uuid
+                                description: The ADCS App Connection ID.
+                              caName:
+                                type: string
+                                minLength: 1
+                                description: 'The AD CS certification authority name. Optional: discovered automatically from the CA host when omitted.'
+                            required:
+                            - appConnectionId
                             additionalProperties: false
                         required:
                         - projectId
@@ -21013,7 +23761,44 @@ paths:
                               productNameId:
                                 type: string
                                 minLength: 1
-                                description: The DigiCert product name_id used for issuance (e.g. ssl_plus, ssl_ev_plus). Fetch available products from GET /app-connections/digicert/:id/products.
+                                description: The DigiCert product name_id used for issuance (e.g. ssl_plus, code_signing, code_signing_ev). Fetch available products from GET /app-connections/digicert/:id/products.
+                              purpose:
+                                type: string
+                                enum:
+                                - ssl
+                                - code_signing
+                                description: Whether this CA issues SSL/TLS or code-signing certificates (defaults to ssl)
+                              verifiedContact:
+                                type: object
+                                properties:
+                                  firstName:
+                                    type: string
+                                    minLength: 1
+                                    maxLength: 128
+                                  lastName:
+                                    type: string
+                                    minLength: 1
+                                    maxLength: 128
+                                  email:
+                                    type: string
+                                    format: email
+                                    maxLength: 255
+                                  jobTitle:
+                                    type: string
+                                    minLength: 1
+                                    maxLength: 64
+                                  telephone:
+                                    type: string
+                                    minLength: 1
+                                    maxLength: 32
+                                required:
+                                - firstName
+                                - lastName
+                                - email
+                                - jobTitle
+                                - telephone
+                                additionalProperties: false
+                                description: Contact info for the user who approves first-time code signing orders for the organization
                             required:
                             - appConnectionId
                             - organizationId
@@ -21475,6 +24260,12 @@ paths:
                         disableManagedCrlDistributionPointUrl:
                           type: boolean
                           default: false
+                        isOcspEnabled:
+                          type: boolean
+                          default: false
+                        ocspGeneration:
+                          type: number
+                          default: 0
                         requireTemplateForIssuance:
                           type: boolean
                         notAfter:
