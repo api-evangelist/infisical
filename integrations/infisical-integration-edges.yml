@@ -8,6 +8,7 @@ checked:
 - stripe/integrations/stripe-integration-edges.yml
 - digital-ocean/integrations/digital-ocean-integration-edges.yml
 - backstage/integrations/backstage-integration-edges.yml
+- ansible/integrations/ansible-integration-edges.yml
 marketplace_apps: []
 edges:
 - partner_name: Microsoft Azure Marketplace
@@ -108,5 +109,23 @@ edges:
   detected: '2026-10-22'
   detected_by: mirror-platform-listings.py
   category: Security
+- partner_name: Ansible (ansible-galaxy)
+  partner: ansible
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: ansible-galaxy
+  evidence: https://galaxy.ansible.com/ui/repo/published/infisical/vault/
+  mirror_of: ansible/integrations/ansible-integration-edges.yml
+  apps:
+  - infisical.vault
+  - infisical.infisical_core_ha_deployment
+  listing_count: 1
+  detected: '2026-10-22'
+  detected_by: mirror-platform-listings.py
+  category: configuration-management content listing (Ansible collection)
 source:
 - stripe/integrations/stripe-integration-edges.yml
